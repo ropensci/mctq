@@ -10,82 +10,100 @@ A data frame with 10 rows and 18 variables:
 \describe{
 \item{\strong{regular_work_schedule} (\code{logical})}{
 A logical value indicating if the subject have a regular work schedule.
+
 Statement (EN): "I have a regular work schedule (this includes being, for
 example, a housewife or househusband)").}
 
 \item{\strong{wd} (\code{integer})}{
 Number of workdays per week.
+
 Statement (EN): "I have a regular work schedule and work ___ days per
 week").}
 
 \item{\strong{bt_w} (\code{hms})}{
 Local time of going to bed on workdays.
+
 Statement (EN): "I go to bed at ___ o'clock'".}
 
 \item{\strong{s_prep_w} (\code{hms})}{
 Local time of preparing to sleep on workdays.
+
 Statement (EN): "I actually get ready to fall asleep at ___ o'clock".}
 
 \item{\strong{s_lat_w} (\code{Duration})}{
 Sleep latency on workdays.
+
 Statement (EN): "I need ___ minutes to fall asleep".}
 
 \item{\strong{se_w} (\code{hms})}{
 Sleep end on workdays.
+
 Statement (EN): "I wake up at ___ o'clock".}
 
 \item{\strong{si_w} (\code{Duration})}{
 Sleep inertia on workdays.
+
 Statement (EN): "After ___ minutes, I get up".}
 
 \item{\strong{alarm_w} (\code{logical})}{
 A logical value indicating if the subject use an alarm clock on workdays.
+
 Statement (EN): "I use an alarm clock on workdays".}
 
 \item{\strong{wake_before_alarm_w} (\code{logical})}{
 A logical value indicating if the subject regularly wake up BEFORE the
 alarm rings.
+
 Statement (EN): "I regularly wake up BEFORE the alarm rings".}
 
 \item{\strong{le_w} (\code{Duration})}{
 Light exposure on workdays.
+
 Statement (EN): "On average, I spend the following amount of time outdoors
 in daylight (without a roof above my head)".}
 
 \item{\strong{bt_f} (\code{hms})}{
 Local time of going to bed on work-free days.
+
 Statement (EN): "I go to bed at ___ o'clock'".}
 
 \item{\strong{s_prep_f} (\code{hms})}{
 Local time of preparing to sleep on work-free days
+
 Statement (EN): "I actually get ready to fall asleep at ___ o'clock".}
 
 \item{\strong{s_lat_f} (\code{Duration})}{
 Sleep latency on work-free days.
+
 Statement (EN): "I need ___ minutes to fall asleep".}
 
 \item{\strong{se_f} (\code{hms})}{
 Sleep end on work-free days.
+
 Statement (EN): "I wake up at ___ o'clock".}
 
 \item{\strong{si_f} (\code{Duration})}{
 Sleep inertia on work-free days.
+
 Statement \strong{(EN)}: "After ___ minutes, I get up".}
 
 \item{\strong{alarm_f} (\code{logical})}{
 A logical value indicating if the subject use an alarm clock on work-free
 days.
+
 Statement (EN): "My wake-up time is due to the use of an alarm
 clock".}
 
 \item{\strong{reasons_f} (\code{character})}{
 Particular reasons why the subject cannot freely choose his sleep times on
 work-free days.
+
 Statement (EN): "There are particular reasons why I cannot freely choose my
 sleep times on free days".}
 
 \item{\strong{le_f} (\code{Duration})}{
 Light exposure on work-free days.
+
 Statement (EN): "On average, I spend the following amount of time outdoors
 in daylight (without a roof above my head)".}
 }

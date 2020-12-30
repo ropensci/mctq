@@ -50,82 +50,100 @@ tidy_mctq <- function(raw_data = build_mctq()) {
 #' \describe{
 #'   \item{__regular_work_schedule__ (`logical`)}{
 #'   A logical value indicating if the subject have a regular work schedule.
+#'
 #'   Statement (EN): "I have a regular work schedule (this includes being, for
 #'   example, a housewife or househusband)").}
 #'
 #'   \item{__wd__ (`integer`)}{
 #'   Number of workdays per week.
+#'
 #'   Statement (EN): "I have a regular work schedule and work ___ days per
 #'   week").}
 #'
 #'   \item{__bt_w__ (`hms`)}{
 #'   Local time of going to bed on workdays.
+#'
 #'   Statement (EN): "I go to bed at ___ o'clock'".}
 #'
 #'   \item{__s_prep_w__ (`hms`)}{
 #'   Local time of preparing to sleep on workdays.
+#'
 #'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".}
 #'
 #'   \item{__s_lat_w__ (`Duration`)}{
 #'   Sleep latency on workdays.
+#'
 #'   Statement (EN): "I need ___ minutes to fall asleep".}
 #'
 #'   \item{__se_w__ (`hms`)}{
 #'   Sleep end on workdays.
+#'
 #'   Statement (EN): "I wake up at ___ o'clock".}
 #'
 #'   \item{__si_w__ (`Duration`)}{
 #'   Sleep inertia on workdays.
+#'
 #'   Statement (EN): "After ___ minutes, I get up".}
 #'
 #'   \item{__alarm_w__ (`logical`)}{
 #'   A logical value indicating if the subject use an alarm clock on workdays.
+#'
 #'   Statement (EN): "I use an alarm clock on workdays".}
 #'
 #'   \item{__wake_before_alarm_w__ (`logical`)}{
 #'   A logical value indicating if the subject regularly wake up BEFORE the
 #'   alarm rings.
+#'
 #'   Statement (EN): "I regularly wake up BEFORE the alarm rings".}
 #'
 #'   \item{__le_w__ (`Duration`)}{
 #'   Light exposure on workdays.
+#'
 #'   Statement (EN): "On average, I spend the following amount of time outdoors
 #'   in daylight (without a roof above my head)".}
 #'
 #'   \item{__bt_f__ (`hms`)}{
 #'   Local time of going to bed on work-free days.
+#'
 #'   Statement (EN): "I go to bed at ___ o'clock'".}
 #'
 #'   \item{__s_prep_f__ (`hms`)}{
 #'   Local time of preparing to sleep on work-free days
+#'
 #'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".}
 #'
 #'   \item{__s_lat_f__ (`Duration`)}{
 #'   Sleep latency on work-free days.
+#'
 #'   Statement (EN): "I need ___ minutes to fall asleep".}
 #'
 #'   \item{__se_f__ (`hms`)}{
 #'   Sleep end on work-free days.
+#'
 #'   Statement (EN): "I wake up at ___ o'clock".}
 #'
 #'   \item{__si_f__ (`Duration`)}{
 #'   Sleep inertia on work-free days.
+#'
 #'   Statement __(EN)__: "After ___ minutes, I get up".}
 #'
 #'   \item{__alarm_f__ (`logical`)}{
 #'   A logical value indicating if the subject use an alarm clock on work-free
 #'   days.
+#'
 #'   Statement (EN): "My wake-up time is due to the use of an alarm
 #'   clock".}
 #'
 #'   \item{__reasons_f__ (`character`)}{
 #'   Particular reasons why the subject cannot freely choose his sleep times on
 #'   work-free days.
+#'
 #'   Statement (EN): "There are particular reasons why I cannot freely choose my
 #'   sleep times on free days".}
 #'
 #'   \item{__le_f__ (`Duration`)}{
 #'   Light exposure on work-free days.
+#'
 #'   Statement (EN): "On average, I spend the following amount of time outdoors
 #'   in daylight (without a roof above my head)".}
 #' }

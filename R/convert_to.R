@@ -191,7 +191,7 @@ convert_to_date_time <- function(x, class, orders = c("HMS", "HM", "H"),
 
     # Check arguments --------------------
 
-    assert_custom_1(x)
+    assert_custom_1(x, any.missing = TRUE)
     checkmate::assert_string(class)
     checkmate::assert_character(orders, any.missing = FALSE)
     checkmate::assert_string(tz)
@@ -248,7 +248,9 @@ convert_to_date_time.character <- function(x, class,
     x_bkp <- x
 
     if (!(class %in% c("date", "posixct", "posixlt"))) {
-        if (all(stringr::str_detect(x, "^2[4-9]|^[3-9]\\d|\\d{3,}")) &&
+        if (any(is.na(x)) & length(x) == 1) {
+            # do nothing
+        } else if (all(stringr::str_detect(x, "^2[4-9]|^[3-9]\\d|\\d{3,}")) &&
             (any(orders == "H") && length(orders) == 1)) {
             x <- hms::as_hms(as.numeric(lubridate::dhours(as.numeric(x))))
         } else {
@@ -258,18 +260,15 @@ convert_to_date_time.character <- function(x, class,
         x <- lubridate::parse_date_time(x, orders, tz = tz)
     }
 
-    if (all(is.na(x))) return(x)
-
     for (i in seq_along(x)){
-        if (any(stringr::str_detect(orders, "Op"))) {
+        if (any(is.na(x)) & length(x) == 1) {
+            # do nothing
+        } else if (any(stringr::str_detect(orders, "Op"))) {
             next
-        }
-
-        if (stringr::str_detect(x_bkp[i], stringr::regex("pm",
+        } else if (stringr::str_detect(x_bkp[i], stringr::regex("pm",
                                                      ignore_case = TRUE))) {
             x[i] <- x[i] + lubridate::dhours(12)
         }
-
     }
 
     if (class == "character") {

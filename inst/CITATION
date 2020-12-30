@@ -6,7 +6,7 @@ citEntry(entry = "Unpublished",
                    as.person("Ana Amélia Benedito-Silva"),
                    as.person("Mario Pedrazzoli")),
   year         = "2020",
-  url          = "https://github.com/gipsousp/mctq",
+  url          = "https://gipsousp.github.io/mctq",
   note         = "A R package",
 
   textVersion  =

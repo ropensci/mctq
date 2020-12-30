@@ -1,5 +1,7 @@
 fd <- function(wd) {
 
+    assert_number(wd, lower = 0, upper = 7)
+
     as.integer(7 - wd)
 
 }
@@ -8,8 +10,10 @@ fd <- function(wd) {
 
 so <- function(s_prep, s_lat){
 
-    output <- convert_to_posixct(s_prep + s_lat)
-    hms::as_hms(output)
+    s_prep <- convert_to_date_time(s_prep, "POSIXct")
+    s_lat <- convert_to_date_time(s_lat, "Duration")
+
+    hms::as_hms(s_prep + s_lat)
 
 }
 
@@ -19,50 +23,71 @@ so <- function(s_prep, s_lat){
 
 gu <- function(se, si){
 
-    output <- convert_to_posixct(se + si)
-    hms::as_hms(output)
+    se <- convert_to_date_time(se, "POSIXct")
+    si <- convert_to_date_time(si, "Duration")
+
+    hms::as_hms(se + si)
 
 }
 
-mctq_core %>%
-    dplyr::select(se_f, si_f) %>%
-    dplyr::mutate(gu_f = gu(se_f, si_f))
+# mctq_core %>%
+#     dplyr::select(se_f, si_f) %>%
+#     dplyr::mutate(gu_f = gu(se_f, si_f))
 
 sd <- function(se, so){
 
-    output <- convert_to_posixct(se + si)
+    se <- convert_to_date_time(se, "POSIXct")
+    so <- convert_to_date_time(so, "POSIXct")
+
     lubridate::as.duration(se - so)
 
 }
 
 tbt <- function(gu, bt){
 
-    gu - bt
+    # Add add_time_origin
+
+    gu <- convert_to_date_time(gu, "POSIXct")
+    bt <- convert_to_date_time(bt, "POSIXct")
+
+    hms::as_hms(gu - bt)
 
 }
 
 ms <- function(so, sd){
 
-    so + (sd / 2)
+    so <- convert_to_date_time(so, "POSIXct")
+    sd <- convert_to_date_time(sd, "Duration")
+
+    hms:as_hms(so + (sd / 2))
 
 }
 
 sd_week <- function(wd, sd_w, sd_f){
 
-    ((sd_w * wd) + (sd_f * fd(wd))) / 7
+    assert_number(wd, lower = 0, upper = 7)
+
+    sd_w <- convert_to_date_time(sd_w, "Duration")
+    sd_f <- convert_to_date_time(sd_f, "Duration")
+
+    hms::as_hms(((sd_w * wd) + (sd_f * fd(wd))) / 7)
 
 }
 
 msf_sc <- function(msf, sd_w, sd_f, sd_week){
 
+    msf <- convert_to_date_time(msf, "POSIXct")
+    sd_w <- convert_to_date_time(sd_w, "Duration")
+    sd_f <- convert_to_date_time(sd_f, "Duration")
+    sd_week <- convert_to_date_time(sd_week, "Duration")
 
     if (sd_f <= sd_w){
-        output <- msf
+        # msf <- msf
     } else {
-        output <- msf - ((sd_f - sd_week) / 2)
+        msf <- msf - ((sd_f - sd_week) / 2)
     }
 
-    output
+    hms::as_hms(msf)
 
 }
 
@@ -74,14 +99,17 @@ chronotype <- function(msf, sd_w, sd_f, sd_week) {
 
 sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
+    assert_number(wd, lower = 0, upper = 7)
+
+    sd_w <- convert_to_date_time(sd_w, "Duration")
+    sd_f <- convert_to_date_time(sd_f, "Duration")
+    sd_week <- convert_to_date_time(sd_week, "Duration")
 
     if (sd_week > sd_w){
-        output <- (sd_week - sd_w) * wd
-    } else {
-        output <- (sd_week - sd_f) * fd(wd)
+        (sd_week - sd_w) * wd
+    } else { # sd_week <= sd_w
+        (sd_week - sd_f) * fd(wd)
     }
-
-    output
 
 }
 
@@ -98,6 +126,18 @@ sjl <- function(msw, msf){
 }
 
 le_week <- function(wd, le_w, le_f){
+
+    if (any(stringr::str_detect(wd, "^\\d+$"))) {
+        wd <- as.integer(wd)
+    }
+
+    assert_integerish(wd, lower = 0, upper = 7)
+
+    le_w <- convert_to_date_time(le_w, "Duration")
+    le_f <- convert_to_date_time(le_f, "Duration")
+
+    if (le_w > lubridate::dhours(24) |
+        le_f > lubridate::dhours(24))
 
     ((le_w * wd) +  (le_f * fd(wd))) / 7
 
