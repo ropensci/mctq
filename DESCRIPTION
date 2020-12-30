@@ -1,0 +1,49 @@
+Package: mctq
+Title: A Set of Tools for MCTQ Data Manipulation
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Daniel",
+             family = "Vartanian",
+             role = c("aut", "cre"),
+             email = "danvartan@gmail.com",
+             comment = c(ORCID = "0000-0001-7782-759X")),
+      person(given = "Ana Amélia",
+             family = "Benedito-Silva",
+             email = "aamelia@usp.br",
+             role = c("aut", "exp", "sad")),
+      person(given = "Mario",
+             family = "Pedrazzoli",
+             email = "pedrazzo@usp.br",
+             role = c("aut", "exp", "sad"),
+             comment = c(ORCID = "0000-0002-5257-591X")),
+      person(given = "GIPSO",
+             role = c("cph", "fnd")),
+      person(given = "USP",
+             role = c("fnd")))
+Description: Open source package of applications for processing, analyzing 
+    and visualizing Munich ChronoType Questionnaire (MCTQ) data.
+License: MIT + file LICENSE
+URL: https://github.com/gipsousp/mctq
+BugReports: https://github.com/gipsousp/mctq/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends:
+    R (>= 4.0)
+Imports: 
+    checkmate,
+    dplyr,
+    glue,
+    hms,
+    lubridate,
+    magrittr,
+    rlang,
+    stringr,
+    utils
+Suggests: 
+    testthat (>= 2.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 2
+VignetteBuilder: knitr

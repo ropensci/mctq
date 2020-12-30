@@ -1,0 +1,16 @@
+citHeader("To cite mctq in publications use:")
+
+citEntry(entry = "Unpublished",
+  title        = "A Set of Tools for MCTQ Data Manipulation",
+  author       = personList(as.person("Daniel Vartanian"),
+                   as.person("Ana Amélia Benedito-Silva"),
+                   as.person("Mario Pedrazzoli")),
+  year         = "2020",
+  url          = "https://github.com/gipsousp/mctq",
+  note         = "A R package",
+
+  textVersion  =
+  paste("Daniel Vartanian, Ana Amélia Benedito-Silva, Mario Pedrazzoli (2020).",
+        "A Set of Tools for MCTQ Data Manipulation.",
+        "URL https://github.com/gipsousp/mctq.")
+)
