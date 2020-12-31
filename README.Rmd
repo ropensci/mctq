@@ -17,13 +17,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
-
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
-
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+
 <!-- badges: end -->
 
 The goal of mctq is to provide a fast and friendly way to process, analyze and visualise data from the Munich ChronoType Questionnaire (MCTQ) data.

@@ -1,11 +1,9 @@
 url: https://gipsousp.github.io/mctq
 
 home:
-  title: An R package for the Munich Chronotype Questionnaire (MCTQ)
-  description: >
-    An open source package of applications in the R programming
-    language for processing, analyzing and visualizing Munich ChronoType
-    Questionnaire (MCTQ) data.
+  title: A R package for the Munich Chronotype Questionnaire (MCTQ)
+  description: A R package for processing, analyzing and visualizing Munich
+  ChronoType Questionnaire (MCTQ) data.
 
 development:
   mode: auto

@@ -69,7 +69,8 @@ Conversions to decimal time and radians are also possible by using other
 functions of the \code{convert_to} family. Check the details section to learn how.
 }
 \details{
-\code{convert_to_date_time} is heavily based on tidyverse's \link[lubridate:lubridate-package]{lubridate::lubridate}
+\code{convert_to_date_time} is heavily based on tidyverse's
+\link[lubridate:lubridate-package]{lubridate::lubridate-package}
 package. Its main objective is to group together several parse methods for
 the main date/time classes.
 
@@ -99,7 +100,7 @@ want to parse a character to a \code{duration} object of 35 hours and 30 minutes
 A exception was made to \code{character} and \code{numeric} objects with \code{order = "H"}.
 
 To go around this limitation, learn about how to use the
-\link[lubridate:lubridate-package]{lubridate::lubridate} package.
+\link[lubridate:lubridate-package]{lubridate::lubridate-package} package.
 }
 
 \subsection{AM/PM signaling}{

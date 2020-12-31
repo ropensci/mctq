@@ -20,8 +20,8 @@ Authors@R:
              role = c("cph", "fnd")),
       person(given = "USP",
              role = c("fnd")))
-Description: Open source package of applications for processing, analyzing 
-    and visualizing Munich ChronoType Questionnaire (MCTQ) data.
+Description: A package of applications for processing, analyzing and 
+    visualizing Munich ChronoType Questionnaire (MCTQ) data.
 License: MIT + file LICENSE
 URL: https://gipsousp.github.io/mctq, https://github.com/gipsousp/mctq
 BugReports: https://github.com/gipsousp/mctq/issues
@@ -42,8 +42,8 @@ Imports:
     readr,
     rlang,
     stringr,
-    utils,
-    tibble
+    tibble,
+    utils
 Suggests: 
     testthat (>= 2.0.0),
     knitr,

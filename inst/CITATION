@@ -1,16 +1,18 @@
 citHeader("To cite mctq in publications use:")
 
-citEntry(entry = "Unpublished",
-  title        = "A Set of Tools for MCTQ Data Manipulation",
-  author       = personList(as.person("Daniel Vartanian"),
-                   as.person("Ana Amélia Benedito-Silva"),
-                   as.person("Mario Pedrazzoli")),
-  year         = "2020",
-  url          = "https://gipsousp.github.io/mctq",
-  note         = "A R package",
-
-  textVersion  =
-  paste("Daniel Vartanian, Ana Amélia Benedito-Silva, Mario Pedrazzoli (2020).",
-        "A Set of Tools for MCTQ Data Manipulation.",
-        "URL https://github.com/gipsousp/mctq.")
+citEntry(
+  entry       = "Unpublished",
+  title       = paste0("A R package for processing, analyzing and ",
+                       "visualizing Munich ChronoType Questionnaire ",
+                       "(MCTQ) data"),
+  author      = personList(as.person("Daniel Vartanian"),
+                           as.person("Ana Amélia Benedito-Silva"),
+                           as.person("Mario Pedrazzoli")),
+  year        = "2021",
+  url         = "http://gipsousp.github.io/mctq",
+  textVersion = paste0("Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. ",
+                        "(2021). A R package for processing, analyzing and ",
+                        "visualizing Munich ChronoType Questionnaire ",
+                        "(MCTQ) data. Retrieved from ",
+                        "http://github.com/gipsousp/mctq.")
 )
