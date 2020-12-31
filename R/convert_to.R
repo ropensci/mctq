@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `convert_to_date_time` converts a date/time value to a predefined object
 #' class in a fast and easy way. It can be use to convert/parse objects of class
 #' `character`, `numeric`, `difftime`, `Duration`, `hms`, `Period`, `Date`,
@@ -12,7 +14,8 @@
 #'
 #' @details
 #'
-#' `convert_to_date_time` is heavily based on tidyverse's [lubridate::lubridate]
+#' `convert_to_date_time` is heavily based on tidyverse's
+#' [lubridate::lubridate-package]
 #' package. Its main objective is to group together several parse methods for
 #' the main date/time classes.
 #'
@@ -42,7 +45,7 @@
 #' A exception was made to `character` and `numeric` objects with `order = "H"`.
 #'
 #' To go around this limitation, learn about how to use the
-#' [lubridate::lubridate] package.
+#' [lubridate::lubridate-package] package.
 #'
 #' ## AM/PM signaling
 #'
@@ -538,6 +541,8 @@ convert_to_date_time.Interval <- function(x, class,
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `convert_to_decimal` converts date/time objects __or__ `numeric` objects with
 #' radian values to decimal time.
 #'
@@ -819,6 +824,8 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
 #' Convert date/time or decimal hours to radians
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `convert_to_rad` converts date/time objects __or__ `numeric` objects with
 #' decimal hours to radians.

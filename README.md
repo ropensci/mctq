@@ -11,6 +11,11 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
 
+[![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
+
+[![Contributor
+Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+
 <!-- badges: end -->
 
 The goal of mctq is to provide a fast and friendly way to process,
@@ -24,5 +29,11 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("gipsousp/actstudio")
+devtools::install_github("gipsousp/mctq")
 ```
+
+## Code of Conduct
+
+Please note that the mctq project is released with a [Contributor Code
+of Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.

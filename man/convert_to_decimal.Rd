@@ -48,6 +48,8 @@ the number of seconds equivalent to the year length (optional) (see topic
 A numeric vector with decimal times.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{convert_to_decimal} converts date/time objects \strong{or} \code{numeric} objects with
 radian values to decimal time.
 }

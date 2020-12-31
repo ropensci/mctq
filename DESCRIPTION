@@ -23,7 +23,7 @@ Authors@R:
 Description: Open source package of applications for processing, analyzing 
     and visualizing Munich ChronoType Questionnaire (MCTQ) data.
 License: MIT + file LICENSE
-URL: https://github.com/gipsousp/mctq
+URL: https://gipsousp.github.io/mctq, https://github.com/gipsousp/mctq
 BugReports: https://github.com/gipsousp/mctq/issues
 Encoding: UTF-8
 LazyData: true
@@ -36,11 +36,14 @@ Imports:
     dplyr,
     glue,
     hms,
+    lifecycle,
     lubridate,
     magrittr,
+    readr,
     rlang,
     stringr,
-    utils
+    utils,
+    tibble
 Suggests: 
     testthat (>= 2.0.0),
     knitr,

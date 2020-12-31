@@ -1,7 +1,12 @@
 #' @keywords internal
 "_PACKAGE"
 
+# The following block is used by usethis to automatically manage
+# roxygen namespace tags. Modify with care!
+## usethis namespace: start
+#' @importFrom tibble tibble
+## usethis namespace: end
 #' @importFrom magrittr %>%
 #' @importFrom lubridate %within%
-#' @importFrom rlang := .data is_true
+#' @importFrom rlang := .data
 NULL

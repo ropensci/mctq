@@ -58,6 +58,8 @@ convert/parse \code{x}. Time zones are used only if \code{class} is set to \code
 A date/time object of the indicated class.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{convert_to_date_time} converts a date/time value to a predefined object
 class in a fast and easy way. It can be use to convert/parse objects of class
 \code{character}, \code{numeric}, \code{difftime}, \code{Duration}, \code{hms}, \code{Period}, \code{Date},

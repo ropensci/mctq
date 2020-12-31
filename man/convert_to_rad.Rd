@@ -22,6 +22,8 @@ know more) (only required when \code{round = TRUE}) (default: \code{3}).}
 A numeric vector with radians.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{convert_to_rad} converts date/time objects \strong{or} \code{numeric} objects with
 decimal hours to radians.
 }

@@ -1,0 +1,31 @@
+url: https://gipsousp.github.io/mctq
+
+home:
+  title: An R package for the Munich Chronotype Questionnaire (MCTQ)
+  description: >
+    An open source package of applications in the R programming
+    language for processing, analyzing and visualizing Munich ChronoType
+    Questionnaire (MCTQ) data.
+
+development:
+  mode: auto
+  destination: doc
+  version_label: warning
+
+template:
+  opengraph:
+     twitter:
+       creator: "@danielvartan"
+       site: "@gipsousp"
+  params:
+    bootswatch: cosmo
+    ganalytics: G-CQHJT6E3K1
+    noindex: true
+
+authors:
+  Daniel Vartanian:
+    href: https://github.com/danielvartan
+  GIPSO:
+    href: http://each.usp.br/gipso
+  USP:
+    href: https://www5.usp.br

@@ -12,6 +12,7 @@ Open source package of applications for processing, analyzing
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://gipsousp.github.io/mctq}
   \item \url{https://github.com/gipsousp/mctq}
   \item Report bugs at \url{https://github.com/gipsousp/mctq/issues}
 }
