@@ -14,6 +14,7 @@
 #'
 #' @family Utility functions
 #' @export
+#'
 #' @examples
 #' data_example()
 #' \dontrun{data_example("mctq_core.txt")}
@@ -43,6 +44,7 @@ data_example <- function(path = NULL) {
 #' @return A tibble with the model data.
 #' @family Utility functions
 #' @export
+#'
 #' @examples
 #' model_data()
 #' model_data("core")
@@ -72,6 +74,7 @@ model_data <- function(model = "core") {
 #'
 #' @family Utility functions
 #' @export
+#'
 #' @examples
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32")
 #' flat_posixt(x)
@@ -106,6 +109,7 @@ flat_posixt = function(x) {
 #'
 #' @family Utility functions
 #' @export
+#'
 #' @examples
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 #' midday_change(x)
@@ -145,6 +149,7 @@ midday_change = function(x) {
 #'
 #' @family Utility functions
 #' @export
+#'
 #' @examples
 #' is_time(lubridate::dhours())
 #' #> [1] TRUE

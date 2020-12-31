@@ -14,5 +14,6 @@ citEntry(
                         "(2021). A R package for processing, analyzing and ",
                         "visualizing Munich ChronoType Questionnaire ",
                         "(MCTQ) data. Retrieved from ",
-                        "http://github.com/gipsousp/mctq.")
+                        "http://github.com/gipsousp/mctq."),
+  note        = "Not yet released"
 )
