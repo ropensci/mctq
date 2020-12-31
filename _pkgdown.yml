@@ -1,11 +1,5 @@
 url: https://gipsousp.github.io/mctq
 
-home:
-  title: mctq
-  description: >
-    A R package for processing, analyzing and visualizing Munich
-    ChronoType Questionnaire (MCTQ) data.
-
 development:
   mode: auto
   destination: doc

@@ -34,6 +34,6 @@ devtools::install_github("gipsousp/mctq")
 
 ## Code of Conduct
 
-Please note that the mctq project is released with a [Contributor Code
+Please note that the `mctq` project is released with a [Contributor Code
 of Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.

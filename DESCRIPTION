@@ -1,5 +1,5 @@
 Package: mctq
-Title: A Set of Tools for MCTQ Data Manipulation
+Title: Process MCTQ data
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Daniel",
@@ -20,8 +20,8 @@ Authors@R:
              role = c("cph", "fnd")),
       person(given = "USP",
              role = c("fnd")))
-Description: A package of applications for processing, analyzing and 
-    visualizing Munich ChronoType Questionnaire (MCTQ) data.
+Description: A set of tools for processing Munich ChronoType Questionnaire 
+    (MCTQ) data.
 License: MIT + file LICENSE
 URL: https://gipsousp.github.io/mctq, https://github.com/gipsousp/mctq
 BugReports: https://github.com/gipsousp/mctq/issues
