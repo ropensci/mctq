@@ -6,8 +6,8 @@
 \alias{mctq-package}
 \title{mctq: A Set of Tools for MCTQ Data Manipulation}
 \description{
-Open source package of applications for processing, analyzing 
-    and visualizing Munich ChronoType Questionnaire (MCTQ) data.
+A package of applications for processing, analyzing and 
+    visualizing Munich ChronoType Questionnaire (MCTQ) data.
 }
 \seealso{
 Useful links:

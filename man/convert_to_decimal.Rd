@@ -164,6 +164,7 @@ to a decimal value.
 }
 }
 \examples{
+\dontrun{
 ## ** conversion of date/time objects to decimal time **
 x <- hms::as_hms("01:00:00")
 convert_to_decimal(x, "S")
@@ -214,6 +215,7 @@ convert_to_decimal(x, "H")
 #> [1] 23.5083
 convert_to_date_time(lubridate::dhours(convert_to_decimal(x, "H")), "hms")
 #> 23:30:30
+}
 }
 \seealso{
 Other Convert to date/time functions: 

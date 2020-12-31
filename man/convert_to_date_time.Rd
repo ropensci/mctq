@@ -97,7 +97,9 @@ greater than 24 hours.
 
 That limits the set of \code{convert_to_date_time} applications (\emph{e.g} when you
 want to parse a character to a \code{duration} object of 35 hours and 30 minutes).
-A exception was made to \code{character} and \code{numeric} objects with \code{order = "H"}.
+A exception was made to \code{character} and \code{numeric} integerish objects with
+\code{order = "H"}, \code{order = "M"}, and \code{order = "S"} (\emph{e.g}
+\code{convert_to_date_time(c(10, 45, 100), "duration", "M")}.
 
 To go around this limitation, learn about how to use the
 \link[lubridate:lubridate-package]{lubridate::lubridate-package} package.
@@ -204,6 +206,7 @@ Garrett Grolemund.
 }
 
 \examples{
+\dontrun{
 ## ** conversion of character or numeric values to date/time objects **
 convert_to_date_time("10:00 PM", "hms")
 #> [1] 22:00:00
@@ -228,6 +231,7 @@ convert_to_date_time(lubridate::period(60), "POSIXct")
 convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
                      "POSIXct")
 #> [1] "2020-01-01 12:31:05 UTC"
+}
 }
 \seealso{
 Other Convert to date/time functions: 

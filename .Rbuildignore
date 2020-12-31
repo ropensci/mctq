@@ -6,4 +6,5 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^\.archive$
 ^CODE_OF_CONDUCT\.md$

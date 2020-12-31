@@ -4,23 +4,24 @@
 \alias{model_data}
 \title{Return a model data for the MCTQ}
 \usage{
-model_data(model = "core")
+model_data(model = "standard")
 }
 \arguments{
 \item{model}{A \code{character} string indicating the data model to return. Valid
-values at the moment are: \code{"core"} (default: \code{"core"}).}
+values are: \code{"standard"}, "\verb{shift"}, \code{"micro"},  (default: \code{"standard"}).}
 }
 \value{
 A tibble with the model data.
 }
 \description{
 The \code{mctq} package comes bundled with fictional datasets for different
-versions of the Munich Chronotype Questionnaire (core and shift-work).
-\code{model_data} make it easy to access them.
+versions of the Munich Chronotype Questionnaire (mctq core, mctq shift, and
+\strong{\eqn{\mu}}mctq). \code{model_data} make it easy to access them.
+
+At the moment, \strong{only the standard MCTQ is available}.
 }
 \examples{
-model_data()
-model_data("core")
+\dontrun{model_data()}
 }
 \seealso{
 Other Utility functions: 

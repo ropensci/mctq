@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' data_example()
-#' \dontrun{data_example("mctq_core.txt")}
+#' \dontrun{data_example("mctq_std.txt")}
 data_example <- function(path = NULL) {
 
     checkmate::assert_string(path, null.ok = TRUE)
@@ -35,30 +35,33 @@ data_example <- function(path = NULL) {
 #' @description
 #'
 #' The `mctq` package comes bundled with fictional datasets for different
-#' versions of the Munich Chronotype Questionnaire (core and shift-work).
-#' `model_data` make it easy to access them.
+#' versions of the Munich Chronotype Questionnaire (mctq core, mctq shift, and
+#' \strong{\eqn{\mu}}mctq). `model_data` make it easy to access them.
+#'
+#' At the moment, __only the standard MCTQ is available__.
 #'
 #' @param model A `character` string indicating the data model to return. Valid
-#'   values at the moment are: `"core"` (default: `"core"`).
+#'   values are: `"standard"`, "`shift"`, `"micro"`,  (default: `"standard"`).
 #'
 #' @return A tibble with the model data.
 #' @family Utility functions
 #' @export
 #'
 #' @examples
-#' model_data()
-#' model_data("core")
-model_data <- function(model = "core") {
-
-    checkmate::assert_choice(model, c("core"))
+#' \dontrun{model_data()}
+model_data <- function(model = "standard") {
 
     model <- stringr::str_to_lower(model)
-    checkmate::assert_choice(model, c("core"))
+    checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 
-    if (model == "core") {
-        mctq::mctq_core
+    if (model == "std" || model == "standard") {
+        mctq::mctq_std
+    } else if (model == "shift") {
+        NA # mctq::mctq_shift
+    } else if (model == "micro") {
+        NA # mctq::micro_mctq
     } else {
-        stop("Critical error", call. = FALSE)
+        rlang::abort("Critical error")
     }
 
 }
@@ -76,9 +79,11 @@ model_data <- function(model = "core") {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32")
 #' flat_posixt(x)
 #' #> [1] "0000-01-01 07:45:32"
+#' }
 flat_posixt = function(x) {
 
     assert_posixt(x, null.ok = FALSE)
@@ -111,6 +116,7 @@ flat_posixt = function(x) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 #' midday_change(x)
 #' #> [1] "0000-01-01 20:02:01"
@@ -118,6 +124,7 @@ flat_posixt = function(x) {
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 #' midday_change(x)
 #' #> [1] "0000-01-02 10:25:00"
+#' }
 midday_change = function(x) {
 
     assert_posixt(x, null.ok = FALSE)
@@ -151,6 +158,7 @@ midday_change = function(x) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' is_time(lubridate::dhours())
 #' #> [1] TRUE
 #' is_time(as.Date("2020-01-01"))
@@ -161,6 +169,7 @@ midday_change = function(x) {
 #' #> [1] FALSE
 #' is_time(letters)
 #' #> [1] FALSE
+#' }
 is_time <- function(x, rm_date = FALSE) {
 
     checkmate::check_logical(rm_date, any.missing = FALSE, len = 1)

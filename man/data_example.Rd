@@ -21,7 +21,7 @@ directory. This function make it easy to access their paths.
 }
 \examples{
 data_example()
-\dontrun{data_example("mctq_core.txt")}
+\dontrun{data_example("mctq_std.txt")}
 }
 \seealso{
 Other Utility functions: 

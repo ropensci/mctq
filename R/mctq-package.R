@@ -5,8 +5,8 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @importFrom tibble tibble
-## usethis namespace: end
 #' @importFrom magrittr %>%
 #' @importFrom lubridate %within%
 #' @importFrom rlang := .data
+## usethis namespace: end
 NULL

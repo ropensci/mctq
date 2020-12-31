@@ -42,7 +42,9 @@
 #'
 #' That limits the set of `convert_to_date_time` applications (_e.g_ when you
 #' want to parse a character to a `duration` object of 35 hours and 30 minutes).
-#' A exception was made to `character` and `numeric` objects with `order = "H"`.
+#' A exception was made to `character` and `numeric` integerish objects with
+#' `order = "H"`, `order = "M"`, and `order = "S"` (_e.g_
+#' `convert_to_date_time(c(10, 45, 100), "duration", "M")`.
 #'
 #' To go around this limitation, learn about how to use the
 #' [lubridate::lubridate-package] package.
@@ -165,6 +167,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ## ** conversion of character or numeric values to date/time objects **
 #' convert_to_date_time("10:00 PM", "hms")
 #' #> [1] 22:00:00
@@ -189,6 +192,7 @@
 #' convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
 #'                      "POSIXct")
 #' #> [1] "2020-01-01 12:31:05 UTC"
+#' }
 convert_to_date_time <- function(x, class, orders = c("HMS", "HM", "H"),
                        tz = "UTC") {
 
@@ -237,6 +241,11 @@ convert_to_date_time <- function(x, class, orders = c("HMS", "HM", "H"),
         return(convert_to_date_time.POSIXt(x, class, orders, tz))
     }
 
+    if (any(is.na(x)) && length(x) == 1) {
+        x <- as.character(NA)
+        return(convert_to_date_time.character(x, class, orders, tz))
+    }
+
     UseMethod("convert_to_date_time")
 
 }
@@ -250,23 +259,28 @@ convert_to_date_time.character <- function(x, class,
     class <- stringr::str_to_lower(class)
     x_bkp <- x
 
-    if (!(class %in% c("date", "posixct", "posixlt"))) {
-        if (any(is.na(x)) & length(x) == 1) {
-            # do nothing
-        } else if (all(stringr::str_detect(x, "^2[4-9]|^[3-9]\\d|\\d{3,}")) &&
-            (any(orders == "H") && length(orders) == 1)) {
-            x <- hms::as_hms(as.numeric(lubridate::dhours(as.numeric(x))))
+    if (is.character(x)) {
+        for (i in seq_along(x)) {
+            if(x[i] %in% c("", "NA")) x[i] <- NA
+        }
+    }
+
+    if (any(is.na(x)) & length(x) == 1) {
+        # do nothing
+    } else if (all(stringr::str_detect(x, "^\\d+$")) &&
+               any(orders %in% c("H", "M", "S")) && length(orders) == 1) {
+        if (class %in% c("date", "posixct", "posixlt")) {
+            x <- NA
         } else {
-            x <- lubridate::parse_date_time(x, orders, tz = tz)
+            x <- paste(x, orders)
+            x <- hms::as_hms(as.numeric(lubridate::duration(x)))
         }
     } else {
         x <- lubridate::parse_date_time(x, orders, tz = tz)
     }
 
     for (i in seq_along(x)){
-        if (any(is.na(x)) & length(x) == 1) {
-            # do nothing
-        } else if (any(stringr::str_detect(orders, "Op"))) {
+        if (any(stringr::str_detect(orders, "Op")) || any(is.na(x[i]))) {
             next
         } else if (stringr::str_detect(x_bkp[i], stringr::regex("pm",
                                                      ignore_case = TRUE))) {
@@ -309,7 +323,9 @@ convert_to_date_time.character <- function(x, class,
     } else if (class == "date") {
         output <- as.Date(NULL)
         for (i in seq_along(x)) {
-            if (lubridate::year(x[i]) == 0) {
+            if (is.na(x[i])) {
+                output[i] <- NA
+            } else if (lubridate::year(x[i]) == 0) {
                 rlang::warn(
                     glue::glue("There's no date to parse in {x[i]}"))
                 output[i] <- NA
@@ -687,6 +703,7 @@ convert_to_date_time.Interval <- function(x, class,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ## ** conversion of date/time objects to decimal time **
 #' x <- hms::as_hms("01:00:00")
 #' convert_to_decimal(x, "S")
@@ -737,6 +754,7 @@ convert_to_date_time.Interval <- function(x, class,
 #' #> [1] 23.5083
 #' convert_to_date_time(lubridate::dhours(convert_to_decimal(x, "H")), "hms")
 #' #> 23:30:30
+#' }
 convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
                                custom_unit = NULL,
                                month_length = lubridate::dmonths(),
@@ -854,6 +872,7 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
 #' @family Convert to date/time functions
 #' @export
 #' @examples
+#' \dontrun{
 #' ## ** conversion of date/time objects to radian values **
 #' x <- lubridate::ymd_hms("2020-01-01 05:25:00")
 #' convert_to_rad(x)
@@ -879,6 +898,7 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
 #' x <- c(24, 1)
 #' convert_to_rad(x)
 #' #> [1] 6.2831853 0.2617994
+#' }
 convert_to_rad <- function(x, round = FALSE, digits = 3) {
 
     # Check arguments --------------------

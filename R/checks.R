@@ -114,7 +114,8 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
         glue::glue("{backtick(name)} cannot have missing values")
     } else if (any(is.null(x)) && isFALSE(null.ok)) {
         glue::glue("{backtick(name)} cannot have `NULL` values")
-    } else if (!(is.character(x) || is.numeric(x) || is_time(x))) {
+    } else if (!(is.character(x) || is.numeric(x) || is_time(x) ||
+               (any(is.na(x)) && length(x) == 1))) {
         glue::glue("Check function documentation")
     } else {
         TRUE
