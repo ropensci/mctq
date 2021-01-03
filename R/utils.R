@@ -149,11 +149,9 @@ load_data <- function(file = file.choose(),
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32")
 #' flat_posixt(x)
 #' #> [1] "0000-01-01 07:45:32" # Expected
-#' }
 flat_posixt = function(x) {
 
     assert_posixt(x, null.ok = FALSE)
@@ -186,7 +184,6 @@ flat_posixt = function(x) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 #' midday_change(x)
 #' #> [1] "0000-01-01 20:02:01" # Expected
@@ -194,7 +191,6 @@ flat_posixt = function(x) {
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 #' midday_change(x)
 #' #> [1] "0000-01-02 10:25:00" # Expected
-#' }
 midday_change = function(x) {
 
     assert_posixt(x, null.ok = FALSE)
@@ -228,7 +224,6 @@ midday_change = function(x) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' is_time(lubridate::dhours())
 #' #> [1] TRUE # Expected
 #' is_time(as.Date("2020-01-01"))
@@ -239,7 +234,6 @@ midday_change = function(x) {
 #' #> [1] FALSE # Expected
 #' is_time(letters)
 #' #> [1] FALSE # Expected
-#' }
 is_time <- function(x, rm_date = FALSE) {
 
     checkmate::assert_flag(rm_date)

@@ -20,7 +20,6 @@ this method can only be used to this matter if the sleep duration have a too
 high value.
 }
 \examples{
-\dontrun{
 x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 midday_change(x)
 #> [1] "0000-01-01 20:02:01" # Expected
@@ -28,7 +27,6 @@ midday_change(x)
 x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 midday_change(x)
 #> [1] "0000-01-02 10:25:00" # Expected
-}
 }
 \seealso{
 Other Utility functions: 

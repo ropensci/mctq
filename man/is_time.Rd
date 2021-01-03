@@ -17,7 +17,6 @@ from the check (default: \code{FALSE})}
 \code{hms}, \code{Period}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, and \code{Interval}.
 }
 \examples{
-\dontrun{
 is_time(lubridate::dhours())
 #> [1] TRUE # Expected
 is_time(as.Date("2020-01-01"))
@@ -28,7 +27,6 @@ is_time(iris)
 #> [1] FALSE # Expected
 is_time(letters)
 #> [1] FALSE # Expected
-}
 }
 \seealso{
 Other Utility functions: 

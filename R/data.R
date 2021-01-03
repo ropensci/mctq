@@ -403,22 +403,22 @@ build_std_mctq <- function(write = FALSE) {
 #' @details
 #'
 #' Here the process of `tiding` a dataset is understood as transforming it in
-#' input data, like described in Loo and Jonge ([2018](https://bit.ly/3pVuUdt).
+#' input data, like described in Loo and Jonge ([2018](https://bit.ly/3pVuUdt)).
 #'
 #' Please note that input data is not the same as valid data. To get a valid
 #' `std_mctq` data, run [mctq::validate_std_mctq()].
 #'
 #' To learn more about the concept of tidy data, _c.f._ Wickham
-#' ([2014](https://bit.ly/3hBTE7g) and Wickham and Grolemund
-#' ([n.d.](https://r4ds.had.co.nz).
+#' ([2014](https://bit.ly/3hBTE7g)) and Wickham and Grolemund
+#' ([n.d.](https://r4ds.had.co.nz)).
 #'
-#' @param write A logical value indicating if `tidy_std_mctq` must write a
+#' @param write A logical value indicating if the function must write a
 #'   `std_mctq.rda` file to `"./data/"` (optional) (default: `FALSE`).
 #'
 #' @return An invisible tibble.
 #' @family Data functions
 #' @importFrom magrittr %>%
-#' @importFrom rlang !!
+#' @importFrom rlang .data !!
 #' @export
 #'
 #' @references
@@ -432,7 +432,7 @@ build_std_mctq <- function(write = FALSE) {
 #' 1-23. doi: [10.18637/jss.v059.i10](http://dx.doi.org/10.18637/jss.v059.i10).
 #'
 #' Wickham, H, & Grolemund. (n.d.). _R for data science_. Sebastopol, CA:
-#' O'Reilly Media. <https://r4ds.had.co.nz>.
+#' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
 #' \dontrun{
@@ -443,22 +443,15 @@ tidy_std_mctq <- function(write = FALSE) {
 
     # Clean NULL cases --------------------
 
-    ## dplyr method (uses Rccp - more efficient)
+    ## dplyr method (uses Rccp -> more efficient)
 
     std_mctq <- build_std_mctq() %>%
-        dplyr::mutate(dplyr::across(dplyr::where(is.character),
-                                    ~ dplyr::na_if(.x, ""))) %>%
+        dplyr::mutate(dplyr::across(.fns = ~ dplyr::na_if(.x, ""))) %>%
         dplyr::rowwise() %>%
         dplyr::mutate(length = dplyr::n_distinct(dplyr::c_across())) %>%
-        dplyr::ungroup()
-
-    for(i in names(std_mctq)) {
-        std_mctq <- std_mctq %>%
-            dplyr::mutate(!!as.symbol(i) := ifelse(
-                length <= 2, NA, .data[[i]]))
-    }
-
-    std_mctq <- std_mctq %>% dplyr::select(-length)
+        dplyr::mutate(dplyr::across(.fns = ~ ifelse(length <= 2, NA, .x))) %>%
+        dplyr::ungroup() %>%
+        dplyr::select(-length)
 
     # ## Loop method (not efficient for large datasets)
     #
@@ -468,45 +461,88 @@ tidy_std_mctq <- function(write = FALSE) {
     #     }
     # }
 
-    # Clean or fix class invalid values --------------------
+    # Fix ambiguous cases impossible to parse when using vectorised
+    # operations --------------------
 
     pattern_1 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?"
     pattern_2 <- "^\\d{1,3}$"
+    pattern_3 <- "^\\d+$"
+    pattern_4 <- "[^A-Za-z]$"
 
-
+    std_mctq <- std_mctq %>% dplyr::mutate(
+        `W SLEEP LAT` = dplyr::case_when(
+            stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
+                stringr::str_remove(.data$`W SLEEP LAT`, "^00(:)?"),
+            TRUE ~ .data$`W SLEEP LAT`),
+        `F SLEEP LAT` = dplyr::case_when(
+            stringr::str_detect(.data$`F SLEEP LAT`, pattern_4) ~
+                .data$`F SLEEP LAT`),
+    )
 
     # Convert variables --------------------
 
-    test <- std_mctq %>% dplyr::transmute(
+    ## Note 1: `ifelse`, `if_else`, and `case_when` are vectorised if/else
+    ## functions that don't do lazy evaluation, _i.e_ all parts of the statement
+    ## are evaluated and then the condition is used to splice together the
+    ## results to be returned. This can results in erroneous warnings. That's
+    ## why you see some `suppressWarnings()` functions below. You must be very
+    ## careful while using this kind of evaluations. __c.f.__
+    ## <http://bit.ly/2X1J4x0> and <http://bit.ly/2X5MUFC>.
+
+    ## Note 2: "ifelse does evaluate both possible responses, except in cases
+    ## where the test is either all `TRUE` or all `FALSE`". __c.f__.
+    ## <http://bit.ly/2X1J4x0>.
+
+    ## Note 3: Some if/else functions, like `data.table::fcase()`, do lazy
+    ## evaluation, but that still produces a warning if some of the conditions
+    ## are `TRUE` and the true value contain a vectorised function. That's
+    ## because the function is evaluated once and, due to the vectorised nature,
+    ## it evaluates all values of the object.
+
+    ## Note 4: It appears that no one have a way to go around some of this
+    ## situations (last Stack Overflow search: 2021-01-03).
+
+    std_mctq <- std_mctq %>% dplyr::transmute(
         regular_work_schedule = dplyr::case_when(
             .data$`WORK REGULAR` == "Yes" ~ TRUE,
             .data$`WORK REGULAR` == "true" ~ TRUE,
             .data$`WORK REGULAR` == "No" ~ FALSE),
-        wd = as.numeric(.data$`WORK DAYS`),
+        wd = as.integer(.data$`WORK DAYS`),
         bt_w = suppressWarnings(dplyr::case_when(
             stringr::str_detect(.data$`W BED TIME`, pattern_1) ~
                 convert_to_date_time(.data$`W BED TIME`, "hms"))),
-        s_prep_w = dplyr::case_when(
-            stringr::str_detect(.data$`W SLEEP PREP`, pattern_1) ~
-                convert_to_date_time(.data$`W SLEEP PREP`, "hms")),
-        s_lat_w = dplyr::case_when(
+        s_prep_w = convert_to_date_time(.data$`W SLEEP PREP`, "hms"),
+        s_lat_w = suppressWarnings(dplyr::case_when(
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_2) ~
-                convert_to_date_time(.data$`W SLEEP LAT`, "duration", "M"),
+                convert_to_date_time(.data$`W SLEEP LAT`, "Duration", "M"),
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
-                convert_to_date_time(.data$`W SLEEP LAT`, "duration")),
-        se_w = "",
-        si_w = "",
-        alarm_w = "",
-        wake_before_alarm_w = "",
-        le_w = "",
-        bt_f = "",
-        s_prep_f = "",
-        s_lat_f = "",
-        se_f = "",
-        si_f = "",
-        alarm_f = "",
-        reasons_f = "",
-        le_f = ""
+                convert_to_date_time(.data$`W SLEEP LAT`, "Duration"))),
+        se_w = convert_to_date_time(.data$`W SLEEP END`, "hms"),
+        si_w = convert_to_date_time(.data$`W SLEEP INERTIA`, "Duration", "M"),
+        alarm_w = dplyr::case_when(
+            .data$`W ALARM` == "Yes" ~ TRUE,
+            .data$`W ALARM` == "No" ~ FALSE),
+        wake_before_alarm_w = dplyr::case_when(
+            .data$`W WAKE BEFORE ALARM` == "Yes" ~ TRUE,
+            .data$`W WAKE BEFORE ALARM` == "No" ~ FALSE),
+        le_w = convert_to_date_time(.data$`W LIGHT EXPOSURE`, "Duration"),
+        bt_f = suppressWarnings(dplyr::case_when(
+            stringr::str_detect(.data$`F BED TIME`, pattern_1) ~
+                convert_to_date_time(.data$`F BED TIME`, "hms"))),
+        s_prep_f = convert_to_date_time(.data$`F SLEEP PREP`, "hms"),
+        s_lat_f = suppressWarnings(
+            convert_to_date_time(.data$`F SLEEP LAT`, "Duration", "M")),
+        se_f = convert_to_date_time(.data$`F SLEEP END`, "hms"),
+        si_f = suppressWarnings(dplyr::case_when(
+            stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_2) ~
+                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration", "M"),
+            stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_1) ~
+                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration"))),
+        alarm_f = dplyr::case_when(
+            .data$`F ALARM` == "Yes" ~ TRUE,
+            .data$`F ALARM` == "No" ~ FALSE),
+        reasons_f = .data$`F REASONS` ,
+        le_f = convert_to_date_time(.data$`F LIGHT EXPOSURE`, "Duration")
     )
 
     # Write and output dataset --------------------
@@ -516,20 +552,38 @@ tidy_std_mctq <- function(write = FALSE) {
             dir.create("./data/")
         }
 
-        std_mctq %>%
-            save(file = paste0("./data/", "std_mctq", ".rda"),
-                 envir = parent.frame(),
-                 compress = "bzip2",
-                 version = 2)
+        save(std_mctq, file = paste0("./data/", "std_mctq", ".rda"),
+             envir = parent.frame(), compress = "bzip2", version = 2)
     }
 
     invisible(std_mctq)
 
 }
 
+#' Validate [mctq::tidy_std_mctq()] output
+#'
+#' @description
+#'
+#' __UNDER DEVELOPMENT__
+#'
+#' @inheritParams tidy_std_mctq
+#' @return An invisible tibble.
 #' @family Data functions
-#' @expoxt
-validate_str_mctq <- function(tidy_data = tidy_std_mctq()) {
+#' @export
+#'
+#' @references
+#'
+#' Van der Loo, M., & De Jonge, E. (2018).
+#' _Statistical data cleaning with applications in R_. Hooboken, NJ: John
+#' Wiley & Sons. doi:
+#' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
+#'
+#' @examples
+#' \dontrun{
+#' utils::View(validate_std_mctq())
+#' validate_std_mctq(write = TRUE)
+#' }
+validate_std_mctq <- function(write = FALSE) {
 
 
 

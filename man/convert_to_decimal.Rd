@@ -164,7 +164,6 @@ to a decimal value.
 }
 }
 \examples{
-\dontrun{
 ## ** conversion of date/time objects to decimal time **
 x <- hms::as_hms("01:00:00")
 convert_to_decimal(x, "S")
@@ -203,19 +202,18 @@ convert_to_decimal(x, "custom_unit", custom_unit = 3600 * 2)
 ## ** conversion of date/time objects to decimal dates **
 x <- lubridate::ymd("2020-02-01")
 convert_to_decimal(x, "date_decimal")
-#> [1] 2020.085
+#> [1] 2020.085 # Expected
 lubridate::date_decimal(convert_to_decimal(x, "date_decimal"))
-#> [1] "2020-02-01 00:00:17 UTC" # Note the imprecision
+#> [1] "2020-02-01 00:00:17 UTC"  # Expected (note the imprecision)
 
 ## ** conversion of radian values to decimal time **
 x <- convert_to_rad(hms::as_hms("23:30:30"))
 convert_to_rad(hms::as_hms("23:30:30"))
-#> [1] 6.154467
+#> [1] 6.154467 # Expected
 convert_to_decimal(x, "H")
-#> [1] 23.5083
+#> [1] 23.5083 # Expected
 convert_to_date_time(lubridate::dhours(convert_to_decimal(x, "H")), "hms")
-#> 23:30:30
-}
+#> 23:30:30 # Expected
 }
 \seealso{
 Other Convert to date/time functions: 

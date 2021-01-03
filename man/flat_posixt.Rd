@@ -14,11 +14,9 @@ flat_posixt(x)
 be use to standardizing a point origin to time values.
 }
 \examples{
-\dontrun{
 x <- lubridate::ymd_hms("1987-12-24 07:45:32")
 flat_posixt(x)
 #> [1] "0000-01-01 07:45:32" # Expected
-}
 }
 \seealso{
 Other Utility functions: 

@@ -167,7 +167,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' ## ** conversion of character or numeric values to date/time objects **
 #' convert_to_date_time("10:00 PM", "hms")
 #' #> [1] 22:00:00 # Expected
@@ -192,7 +191,6 @@
 #' convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
 #'                      "POSIXct")
 #' #> [1] "2020-01-01 12:31:05 UTC" # Expected
-#' }
 convert_to_date_time <- function(x, class, orders = c("HMS", "HM", "H"),
                        tz = "UTC") {
 
@@ -267,7 +265,7 @@ convert_to_date_time.character <- function(x, class,
 
     if (any(is.na(x)) & length(x) == 1) {
         # do nothing
-    } else if (all(stringr::str_detect(x, "^\\d+$")) &&
+    } else if (all(stringr::str_detect(x, "^\\d+$") | is.na(x)) &&
                any(orders %in% c("H", "M", "S")) && length(orders) == 1) {
         if (class %in% c("date", "posixct", "posixlt")) {
             x <- NA
@@ -703,7 +701,6 @@ convert_to_date_time.Interval <- function(x, class,
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' ## ** conversion of date/time objects to decimal time **
 #' x <- hms::as_hms("01:00:00")
 #' convert_to_decimal(x, "S")
@@ -742,19 +739,18 @@ convert_to_date_time.Interval <- function(x, class,
 #' ## ** conversion of date/time objects to decimal dates **
 #' x <- lubridate::ymd("2020-02-01")
 #' convert_to_decimal(x, "date_decimal")
-#' #> [1] 2020.085
+#' #> [1] 2020.085 # Expected
 #' lubridate::date_decimal(convert_to_decimal(x, "date_decimal"))
-#' #> [1] "2020-02-01 00:00:17 UTC" # Note the imprecision
+#' #> [1] "2020-02-01 00:00:17 UTC"  # Expected (note the imprecision)
 #'
 #' ## ** conversion of radian values to decimal time **
 #' x <- convert_to_rad(hms::as_hms("23:30:30"))
 #' convert_to_rad(hms::as_hms("23:30:30"))
-#' #> [1] 6.154467
+#' #> [1] 6.154467 # Expected
 #' convert_to_decimal(x, "H")
-#' #> [1] 23.5083
+#' #> [1] 23.5083 # Expected
 #' convert_to_date_time(lubridate::dhours(convert_to_decimal(x, "H")), "hms")
-#' #> 23:30:30
-#' }
+#' #> 23:30:30 # Expected
 convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
                                custom_unit = NULL,
                                month_length = lubridate::dmonths(),
@@ -872,7 +868,6 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
 #' @family Convert to date/time functions
 #' @export
 #' @examples
-#' \dontrun{
 #' ## ** conversion of date/time objects to radian values **
 #' x <- lubridate::ymd_hms("2020-01-01 05:25:00")
 #' convert_to_rad(x)
@@ -898,7 +893,6 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
 #' x <- c(24, 1)
 #' convert_to_rad(x)
 #' #> [1] 6.2831853 0.2617994 # Expected
-#' }
 convert_to_rad <- function(x, round = FALSE, digits = 3) {
 
     # Check arguments --------------------

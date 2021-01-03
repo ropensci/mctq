@@ -26,6 +26,7 @@ build_std_mctq(write = TRUE)
 }
 \seealso{
 Other Data functions: 
-\code{\link{tidy_std_mctq}()}
+\code{\link{tidy_std_mctq}()},
+\code{\link{validate_std_mctq}()}
 }
 \concept{Data functions}

@@ -42,7 +42,6 @@ precise transformation, \code{convert_to_rad} may not attend you.
 }
 }
 \examples{
-\dontrun{
 ## ** conversion of date/time objects to radian values **
 x <- lubridate::ymd_hms("2020-01-01 05:25:00")
 convert_to_rad(x)
@@ -68,7 +67,6 @@ convert_to_rad(x, round = TRUE, digits = 2)
 x <- c(24, 1)
 convert_to_rad(x)
 #> [1] 6.2831853 0.2617994 # Expected
-}
 }
 \seealso{
 Other Convert to date/time functions: 

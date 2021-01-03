@@ -6,7 +6,7 @@
 ## usethis namespace: start
 #' @importFrom lubridate %within%
 #' @importFrom magrittr %>%
-#' @importFrom rlang := !! !!! .data
+#' @importFrom rlang .data := !! !!!
 ## usethis namespace: end
 NULL
 

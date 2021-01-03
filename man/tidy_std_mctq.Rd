@@ -7,7 +7,7 @@
 tidy_std_mctq(write = FALSE)
 }
 \arguments{
-\item{write}{A logical value indicating if \code{tidy_std_mctq} must write a
+\item{write}{A logical value indicating if the function must write a
 \code{std_mctq.rda} file to \code{"./data/"} (optional) (default: \code{FALSE}).}
 }
 \value{
@@ -18,14 +18,14 @@ An invisible tibble.
 }
 \details{
 Here the process of \code{tiding} a dataset is understood as transforming it in
-input data, like described in Loo and Jonge (\href{https://bit.ly/3pVuUdt}{2018}.
+input data, like described in Loo and Jonge (\href{https://bit.ly/3pVuUdt}{2018}).
 
 Please note that input data is not the same as valid data. To get a valid
 \code{std_mctq} data, run \code{\link[=validate_std_mctq]{validate_std_mctq()}}.
 
 To learn more about the concept of tidy data, \emph{c.f.} Wickham
-(\href{https://bit.ly/3hBTE7g}{2014} and Wickham and Grolemund
-(\href{https://r4ds.had.co.nz}{n.d.}.
+(\href{https://bit.ly/3hBTE7g}{2014}) and Wickham and Grolemund
+(\href{https://r4ds.had.co.nz}{n.d.}).
 }
 \examples{
 \dontrun{
@@ -43,10 +43,11 @@ Wickham, H. (2014). Tidy Data. \emph{Journal of Statistical Software}, \emph{59}
 1-23. doi: \href{http://dx.doi.org/10.18637/jss.v059.i10}{10.18637/jss.v059.i10}.
 
 Wickham, H, & Grolemund. (n.d.). \emph{R for data science}. Sebastopol, CA:
-O'Reilly Media. \url{https://r4ds.had.co.nz}.
+O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
 \seealso{
 Other Data functions: 
-\code{\link{build_std_mctq}()}
+\code{\link{build_std_mctq}()},
+\code{\link{validate_std_mctq}()}
 }
 \concept{Data functions}

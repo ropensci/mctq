@@ -206,7 +206,6 @@ Garrett Grolemund.
 }
 
 \examples{
-\dontrun{
 ## ** conversion of character or numeric values to date/time objects **
 convert_to_date_time("10:00 PM", "hms")
 #> [1] 22:00:00 # Expected
@@ -231,7 +230,6 @@ convert_to_date_time(lubridate::period(60), "POSIXct")
 convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
                      "POSIXct")
 #> [1] "2020-01-01 12:31:05 UTC" # Expected
-}
 }
 \seealso{
 Other Convert to date/time functions: 
