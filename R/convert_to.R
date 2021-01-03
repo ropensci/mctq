@@ -170,28 +170,28 @@
 #' \dontrun{
 #' ## ** conversion of character or numeric values to date/time objects **
 #' convert_to_date_time("10:00 PM", "hms")
-#' #> [1] 22:00:00
+#' #> [1] 22:00:00 # Expected
 #' convert_to_date_time("21:00 AM", "Period")
-#' #> [1] "21H 0M 0S"
+#' #> [1] "21H 0M 0S" # Expected
 #' convert_to_date_time("2020-01-01 10:00:00", "Date", "ymd HMS")
-#' #> [1] "2020-01-01"
+#' #> [1] "2020-01-01" # Expected
 #' convert_to_date_time(13, "POSIXct", "H")
-#' #> [1] "0000-01-01 13:00:00 UTC"
+#' #> [1] "0000-01-01 13:00:00 UTC" # Expected
 #' convert_to_date_time("2020-01-01 12:31:05", "POSIXct", "ymd HMS", tz = "EST")
-#' #> [1] "2020-01-01 12:31:05 EST"
+#' #> [1] "2020-01-01 12:31:05 EST" # Expected
 #' convert_to_date_time("03/07/1982 13:00", "POSIXlt", "dmy HM")
-#' #> [1] "1982-07-03 13:00:00 UTC"
+#' #> [1] "1982-07-03 13:00:00 UTC" # Expected
 #'
 #' ## ** conversion between date/time objects **
 #' convert_to_date_time(lubridate::duration(120), "hms")
-#' #> 00:02:00
+#' #> 00:02:00 # Expected
 #' convert_to_date_time(hms::as_hms("13:45:05"), "POSIXct")
-#' #> [1] "0000-01-01 13:45:05 UTC"
+#' #> [1] "0000-01-01 13:45:05 UTC" # Expected
 #' convert_to_date_time(lubridate::period(60), "POSIXct")
-#' #> [1] "0000-01-01 00:01:00 UTC"
+#' #> [1] "0000-01-01 00:01:00 UTC" # Expected
 #' convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
 #'                      "POSIXct")
-#' #> [1] "2020-01-01 12:31:05 UTC"
+#' #> [1] "2020-01-01 12:31:05 UTC" # Expected
 #' }
 convert_to_date_time <- function(x, class, orders = c("HMS", "HM", "H"),
                        tz = "UTC") {
@@ -707,37 +707,37 @@ convert_to_date_time.Interval <- function(x, class,
 #' ## ** conversion of date/time objects to decimal time **
 #' x <- hms::as_hms("01:00:00")
 #' convert_to_decimal(x, "S")
-#' #> [1] 3600
+#' #> [1] 3600 # Expected
 #' convert_to_decimal(x, "M")
-#' #> [1] 60
+#' #> [1] 60 # Expected
 #' convert_to_decimal(x)
-#' #> [1] 1
+#' #> [1] 1 # Expected
 #' convert_to_decimal(x, "d")
-#' #> [1] 0.04166667
+#' #> [1] 0.04166667 # Expected
 #' convert_to_decimal(x, "d", round = TRUE, digits = 3)
-#' #> [1] 0.042
+#' #> [1] 0.042 # Expected
 #' convert_to_decimal(x, "W", round = TRUE, digits = 3)
-#' #> [1] 0.006
+#' #> [1] 0.006 # Expected
 #' convert_to_decimal(x, "W")
-#' #> [1] 0.005952381
+#' #> [1] 0.005952381 # Expected
 #' convert_to_decimal(x, "m")
-#' #> [1] 0.001368925
+#' #> [1] 0.001368925 # Expected
 #' convert_to_decimal(x, "m", month_length = lubridate::ddays(30.4375))
-#' #> [1] 0.001368925
+#' #> [1] 0.001368925 # Expected
 #' convert_to_decimal(x, "m", month_length = lubridate::ddays(30))
-#' #> [1] 0.001388889
+#' #> [1] 0.001388889 # Expected
 #' convert_to_decimal(x, "y")
-#' #> [1] 0.0001140771
+#' #> [1] 0.0001140771 # Expected
 #' convert_to_decimal(x, "y", year_length = lubridate::ddays(365.25))
-#' #> [1] 0.0001140771
+#' #> [1] 0.0001140771 # Expected
 #' convert_to_decimal(x, "y", year_length = lubridate::ddays(365))
-#' #> [1] 0.0001141553
+#' #> [1] 0.0001141553 # Expected
 #' convert_to_decimal(x, "custom_unit", custom_unit = lubridate::dhours())
-#' #> [1] 1
+#' #> [1] 1 # Expected
 #' convert_to_decimal(x, "custom_unit", custom_unit = 3600)
-#' #> [1] 1
+#' #> [1] 1 # Expected
 #' convert_to_decimal(x, "custom_unit", custom_unit = 3600 * 2)
-#' #> [1] 0.5
+#' #> [1] 0.5 # Expected
 #'
 #' ## ** conversion of date/time objects to decimal dates **
 #' x <- lubridate::ymd("2020-02-01")
@@ -767,7 +767,7 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
     }
 
     assert_custom_3(x)
-    checkmate::assert_logical(round, any.missing = FALSE, len = 1)
+    checkmate::assert_flag(round)
     checkmate::assert_int(digits, null.ok = TRUE)
 
     custom_unit <- check(custom_unit)
@@ -782,7 +782,7 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
                                      "date_decimal", "custom_unit"))
 
     if (isTRUE(round) && is.null(digits)) {
-        rlang::abort(glue::glue("When `round = TRUE`, the `digits` variable",
+        rlang::abort(glue::glue("When `round = TRUE`, digits` variable",
                                 "cannot be `NULL`"))
     }
 
@@ -876,39 +876,39 @@ convert_to_decimal <- function(x, unit = "H", round = FALSE, digits = 3,
 #' ## ** conversion of date/time objects to radian values **
 #' x <- lubridate::ymd_hms("2020-01-01 05:25:00")
 #' convert_to_rad(x)
-#' #> [1] 1.41808
+#' #> [1] 1.41808 # Expected
 #' convert_to_rad(x, round = TRUE, digits = 4)
-#' #> [1] 1.4181
+#' #> [1] 1.4181 # Expected
 #'
 #' x <- c(lubridate::dhours(1), lubridate::dhours(23))
 #' convert_to_rad(x)
-#' #> [1] 0.2617994 6.0213859
+#' #> [1] 0.2617994 6.0213859 # Expected
 #'
 #' x <- hms::as_hms("03:45:23")
 #' convert_to_rad(x)
-#' #> [1] 0.9834203
+#' #> [1] 0.9834203 # Expected
 #'
 #' ## ** conversion of decimal hours to radian value **
 #' x <- 1
 #' convert_to_rad(x)
-#' #> [1] 0.2617994
+#' #> [1] 0.2617994 # Expected
 #' convert_to_rad(x, round = TRUE, digits = 2)
-#' #> [1] 0.26
+#' #> [1] 0.26 # Expected
 #'
 #' x <- c(24, 1)
 #' convert_to_rad(x)
-#' #> [1] 6.2831853 0.2617994
+#' #> [1] 6.2831853 0.2617994 # Expected
 #' }
 convert_to_rad <- function(x, round = FALSE, digits = 3) {
 
     # Check arguments --------------------
 
     assert_custom_2(x)
-    checkmate::assert_logical(round, any.missing = FALSE, len = 1)
+    checkmate::assert_flag(round)
     checkmate::assert_int(digits, null.ok = TRUE)
 
     if (isTRUE(round) && is.null(digits)) {
-        rlang::abort(glue::glue("When `round = TRUE`, the `digits` variable ",
+        rlang::abort(glue::glue("When `round = TRUE`, `digits` variable ",
                                 "cannot be `NULL`"))
     }
 

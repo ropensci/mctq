@@ -209,28 +209,28 @@ Garrett Grolemund.
 \dontrun{
 ## ** conversion of character or numeric values to date/time objects **
 convert_to_date_time("10:00 PM", "hms")
-#> [1] 22:00:00
+#> [1] 22:00:00 # Expected
 convert_to_date_time("21:00 AM", "Period")
-#> [1] "21H 0M 0S"
+#> [1] "21H 0M 0S" # Expected
 convert_to_date_time("2020-01-01 10:00:00", "Date", "ymd HMS")
-#> [1] "2020-01-01"
+#> [1] "2020-01-01" # Expected
 convert_to_date_time(13, "POSIXct", "H")
-#> [1] "0000-01-01 13:00:00 UTC"
+#> [1] "0000-01-01 13:00:00 UTC" # Expected
 convert_to_date_time("2020-01-01 12:31:05", "POSIXct", "ymd HMS", tz = "EST")
-#> [1] "2020-01-01 12:31:05 EST"
+#> [1] "2020-01-01 12:31:05 EST" # Expected
 convert_to_date_time("03/07/1982 13:00", "POSIXlt", "dmy HM")
-#> [1] "1982-07-03 13:00:00 UTC"
+#> [1] "1982-07-03 13:00:00 UTC" # Expected
 
 ## ** conversion between date/time objects **
 convert_to_date_time(lubridate::duration(120), "hms")
-#> 00:02:00
+#> 00:02:00 # Expected
 convert_to_date_time(hms::as_hms("13:45:05"), "POSIXct")
-#> [1] "0000-01-01 13:45:05 UTC"
+#> [1] "0000-01-01 13:45:05 UTC" # Expected
 convert_to_date_time(lubridate::period(60), "POSIXct")
-#> [1] "0000-01-01 00:01:00 UTC"
+#> [1] "0000-01-01 00:01:00 UTC" # Expected
 convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
                      "POSIXct")
-#> [1] "2020-01-01 12:31:05 UTC"
+#> [1] "2020-01-01 12:31:05 UTC" # Expected
 }
 }
 \seealso{

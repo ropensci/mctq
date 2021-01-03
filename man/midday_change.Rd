@@ -23,18 +23,19 @@ high value.
 \dontrun{
 x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 midday_change(x)
-#> [1] "0000-01-01 20:02:01"
+#> [1] "0000-01-01 20:02:01" # Expected
 
 x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 midday_change(x)
-#> [1] "0000-01-02 10:25:00"
+#> [1] "0000-01-02 10:25:00" # Expected
 }
 }
 \seealso{
 Other Utility functions: 
-\code{\link{data_example}()},
 \code{\link{flat_posixt}()},
 \code{\link{is_time}()},
-\code{\link{model_data}()}
+\code{\link{load_data}()},
+\code{\link{model_data}()},
+\code{\link{raw_data}()}
 }
 \concept{Utility functions}

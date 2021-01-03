@@ -19,22 +19,23 @@ from the check (default: \code{FALSE})}
 \examples{
 \dontrun{
 is_time(lubridate::dhours())
-#> [1] TRUE
+#> [1] TRUE # Expected
 is_time(as.Date("2020-01-01"))
-#> [1] TRUE
+#> [1] TRUE # Expected
 is_time(as.Date("2020-01-01"), rm_date = TRUE)
-#> [1] FALSE
+#> [1] FALSE # Expected
 is_time(iris)
-#> [1] FALSE
+#> [1] FALSE # Expected
 is_time(letters)
-#> [1] FALSE
+#> [1] FALSE # Expected
 }
 }
 \seealso{
 Other Utility functions: 
-\code{\link{data_example}()},
 \code{\link{flat_posixt}()},
+\code{\link{load_data}()},
 \code{\link{midday_change}()},
-\code{\link{model_data}()}
+\code{\link{model_data}()},
+\code{\link{raw_data}()}
 }
 \concept{Utility functions}

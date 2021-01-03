@@ -4,10 +4,10 @@
 \name{mctq-package}
 \alias{mctq}
 \alias{mctq-package}
-\title{mctq: A Set of Tools for MCTQ Data Manipulation}
+\title{mctq: The R package for MCTQ data}
 \description{
-A package of applications for processing, analyzing and 
-    visualizing Munich ChronoType Questionnaire (MCTQ) data.
+A set of tools for processing Munich ChronoType Questionnaire 
+    (MCTQ) data.
 }
 \seealso{
 Useful links:

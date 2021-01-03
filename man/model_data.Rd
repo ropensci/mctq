@@ -11,11 +11,11 @@ model_data(model = "standard")
 values are: \code{"standard"}, "\verb{shift"}, \code{"micro"},  (default: \code{"standard"}).}
 }
 \value{
-A tibble with the model data.
+A tibble with a MCTQ model data.
 }
 \description{
-The \code{mctq} package comes bundled with fictional datasets for different
-versions of the Munich Chronotype Questionnaire (mctq core, mctq shift, and
+\code{mctq} package comes bundled with fictional datasets for different versions
+of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
 \strong{\eqn{\mu}}mctq). \code{model_data} make it easy to access them.
 
 At the moment, \strong{only the standard MCTQ is available}.
@@ -25,9 +25,10 @@ At the moment, \strong{only the standard MCTQ is available}.
 }
 \seealso{
 Other Utility functions: 
-\code{\link{data_example}()},
 \code{\link{flat_posixt}()},
 \code{\link{is_time}()},
-\code{\link{midday_change}()}
+\code{\link{load_data}()},
+\code{\link{midday_change}()},
+\code{\link{raw_data}()}
 }
 \concept{Utility functions}

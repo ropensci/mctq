@@ -1,0 +1,23 @@
+---
+title: "time_arithmetic"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{time_arithmetic}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mctq)
+```
+
+__UNDER DEVELOPMENT_
+
+Shows how time arithmetic can be tricky and possible ways to go around problems.

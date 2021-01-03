@@ -6,7 +6,9 @@ fd <- function(wd) {
 
 }
 
-# mctq_core %>% dplyr::select(wd) %>% dplyr::mutate(fd = fd(wd))
+# std_mctq %>%
+#     dplyr::select(wd) %>%
+#     dplyr::mutate(fd = fd(wd))
 
 so <- function(s_prep, s_lat){
 
@@ -17,7 +19,7 @@ so <- function(s_prep, s_lat){
 
 }
 
-# mctq_core %>%
+# std_mctq %>%
 #     dplyr::select(s_prep_f, s_lat_f) %>%
 #     dplyr::mutate(so_f = so(s_prep_f, s_lat_f))
 
@@ -30,7 +32,7 @@ gu <- function(se, si){
 
 }
 
-# mctq_core %>%
+# std_mctq %>%
 #     dplyr::select(se_f, si_f) %>%
 #     dplyr::mutate(gu_f = gu(se_f, si_f))
 
@@ -115,6 +117,12 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
 sjl_rel <- function(msw, msf) {
 
+    assert_custom_1(msw)
+    assert_custom_1(msf)
+
+    msw <- convert_to_date_time(msf, "POSIXct")
+    msf <- convert_to_date_time(msf, "POSIXct")
+
     lubridate::as.duration(msf - msw)
 
 }
@@ -142,25 +150,3 @@ le_week <- function(wd, le_w, le_f){
     ((le_w * wd) +  (le_f * fd(wd))) / 7
 
 }
-
-
-# Adicionar verificador e conversor de valor (caractere, posixct, hms)
-
-# Adicionar conversor de resultado: hms, posixct, horas decimais, radianos,
-# fração de dia
-
-# Adicionar conversor de valores de duração
-
-
-mctq <- readRDS("C:/Midia/GitHub/genetica_do_sono/data/valid/mctq/mctq.RData")
-
-library(tidyverse)
-library(anytime)
-library(hms)
-library(testthat)
-
-test_that("MSW is valid", {
-    expect_equal(sjl(as.POSIXct("2020-01-01 02:00:00"),
-                     as.POSIXct("2020-01-01 04:00:00")),
-                 lubridate::as.duration("3 hours"))
-})

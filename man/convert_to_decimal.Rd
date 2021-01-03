@@ -168,37 +168,37 @@ to a decimal value.
 ## ** conversion of date/time objects to decimal time **
 x <- hms::as_hms("01:00:00")
 convert_to_decimal(x, "S")
-#> [1] 3600
+#> [1] 3600 # Expected
 convert_to_decimal(x, "M")
-#> [1] 60
+#> [1] 60 # Expected
 convert_to_decimal(x)
-#> [1] 1
+#> [1] 1 # Expected
 convert_to_decimal(x, "d")
-#> [1] 0.04166667
+#> [1] 0.04166667 # Expected
 convert_to_decimal(x, "d", round = TRUE, digits = 3)
-#> [1] 0.042
+#> [1] 0.042 # Expected
 convert_to_decimal(x, "W", round = TRUE, digits = 3)
-#> [1] 0.006
+#> [1] 0.006 # Expected
 convert_to_decimal(x, "W")
-#> [1] 0.005952381
+#> [1] 0.005952381 # Expected
 convert_to_decimal(x, "m")
-#> [1] 0.001368925
+#> [1] 0.001368925 # Expected
 convert_to_decimal(x, "m", month_length = lubridate::ddays(30.4375))
-#> [1] 0.001368925
+#> [1] 0.001368925 # Expected
 convert_to_decimal(x, "m", month_length = lubridate::ddays(30))
-#> [1] 0.001388889
+#> [1] 0.001388889 # Expected
 convert_to_decimal(x, "y")
-#> [1] 0.0001140771
+#> [1] 0.0001140771 # Expected
 convert_to_decimal(x, "y", year_length = lubridate::ddays(365.25))
-#> [1] 0.0001140771
+#> [1] 0.0001140771 # Expected
 convert_to_decimal(x, "y", year_length = lubridate::ddays(365))
-#> [1] 0.0001141553
+#> [1] 0.0001141553 # Expected
 convert_to_decimal(x, "custom_unit", custom_unit = lubridate::dhours())
-#> [1] 1
+#> [1] 1 # Expected
 convert_to_decimal(x, "custom_unit", custom_unit = 3600)
-#> [1] 1
+#> [1] 1 # Expected
 convert_to_decimal(x, "custom_unit", custom_unit = 3600 * 2)
-#> [1] 0.5
+#> [1] 0.5 # Expected
 
 ## ** conversion of date/time objects to decimal dates **
 x <- lubridate::ymd("2020-02-01")

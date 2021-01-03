@@ -1,31 +1,33 @@
-#' Get path to data example
+#' Get paths to MCTQ raw datasets
 #'
 #' @description
 #'
-#' `mctq` comes bundled with a raw fictional dataset in its `inst/extdata`
-#' directory. This function make it easy to access their paths.
+#' `mctq` comes bundled with raw fictional datasets for testing and learning.
+#' This function make it easy to access their paths.
 #'
-#' @param path A character string with the file name. If `NULL`, the example
-#'   file will be listed (default: `NULL`).
+#' @param file A character string with the raw dataset file name. If `NULL`,
+#'   all raw dataset file names will be listed (default: `NULL`).
 #'
-#' @return If path is equal to `NULL`, returns a character vector with all
-#'   the example file names. Else, returns the full path where the file is
-#'   located.
+#' @return If `path = NULL`, returns a character vector with all raw dataset
+#'   file names available. Else, returns `file` path.
 #'
 #' @family Utility functions
 #' @export
 #'
 #' @examples
-#' data_example()
-#' \dontrun{data_example("mctq_std.txt")}
-data_example <- function(path = NULL) {
+#' \dontrun{
+#' raw_data()
+#' raw_data(raw_data()[1])
+#' raw_data("std_mctq.csv")
+#' }
+raw_data <- function(file = NULL) {
 
-    checkmate::assert_string(path, null.ok = TRUE)
+    checkmate::assert_string(file, null.ok = TRUE)
 
-    if (is.null(path)) {
+    if (is.null(file)) {
         dir(system.file("extdata", package = "mctq"))
     } else {
-        system.file("extdata", path, package = "mctq", mustWork = TRUE)
+        system.file("extdata", file, package = "mctq", mustWork = TRUE)
     }
 
 }
@@ -34,8 +36,8 @@ data_example <- function(path = NULL) {
 #'
 #' @description
 #'
-#' The `mctq` package comes bundled with fictional datasets for different
-#' versions of the Munich Chronotype Questionnaire (mctq core, mctq shift, and
+#' `mctq` package comes bundled with fictional datasets for different versions
+#' of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
 #' \strong{\eqn{\mu}}mctq). `model_data` make it easy to access them.
 #'
 #' At the moment, __only the standard MCTQ is available__.
@@ -43,7 +45,7 @@ data_example <- function(path = NULL) {
 #' @param model A `character` string indicating the data model to return. Valid
 #'   values are: `"standard"`, "`shift"`, `"micro"`,  (default: `"standard"`).
 #'
-#' @return A tibble with the model data.
+#' @return A tibble with a MCTQ model data.
 #' @family Utility functions
 #' @export
 #'
@@ -55,7 +57,7 @@ model_data <- function(model = "standard") {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 
     if (model == "std" || model == "standard") {
-        mctq::mctq_std
+        mctq::std_mctq
     } else if (model == "shift") {
         NA # mctq::mctq_shift
     } else if (model == "micro") {
@@ -63,6 +65,74 @@ model_data <- function(model = "standard") {
     } else {
         rlang::abort("Critical error")
     }
+
+}
+
+#' Load a delimited file to R
+#'
+#' @description
+#'
+#' `load_data` is a wrapper function for [readr::read_delim()] to help simple
+#' data loading. You don't need to use this function if your file is already
+#' loaded on R.
+#'
+#' If this function doesn't work for your file, we recommend using the
+#' [readr::readr] package to load it. If you're using [RStudio
+#' IDE](https://rstudio.com/), you can also go to `Import Dataset`, on the
+#' environment tab, to load your data.
+#'
+#' @param file A character string indicating the file address to load. If
+#'   unassigned, a dialog window will open allowing browsing.
+#' @param delim A character string containing the field separator in `file`
+#'   (default: `","`).
+#' @param na A character vector indicating values that must be interpreted
+#'   as `NA` (default: `c("", " ", "NA")`).
+#' @param col_types A `NULL` value or a [readr::cols()] specification to set
+#'   how `file` columns must be treated. Check [readr::read_delim()] to learn
+#'   more (default: `readr::cols(.default = "c")`, which imports all columns
+#'   as `character`).
+#' @param trim_ws A logical value indicating if leading and/or trailing
+#'   whitespaces must be trimmed from each field (default: `TRUE`).
+#' @param skip An integerish value, greater than 0, indicating the number of
+#'   rows to skip when reading `file` (default: `0`).
+#' @param skip_empty_rows A logical value indicating if blank rows must be
+#'   ignored altogether. If this option is `TRUE`, then blank rows will
+#'   not be represented at all. If it is `FALSE` then they will be represented
+#'   by `NA` values in all the columns (default: `TRUE`).
+#'
+#' @return An invisible tibble.
+#' @family Utility functions
+#' @importFrom magrittr %>%
+#' @export
+#'
+#' @examples
+#' \dontrun{load_data(raw_data()[1])}
+load_data <- function(file = file.choose(),
+                      delim = ",",
+                      na = c("", " ", "NA"),
+                      col_types = readr::cols(.default = "c"),
+                      trim_ws = TRUE,
+                      skip = 0,
+                      skip_empty_rows = TRUE) {
+
+    checkmate::assert_string(file)
+    checkmate::assert_file_exists(file)
+    checkmate::assert_string(delim)
+    checkmate::assert_character(na, any.missing = FALSE)
+    checkmate::assert_class(col_types, "col_spec", null.ok = TRUE)
+    checkmate::assert_flag(trim_ws)
+    checkmate::assert_count(skip)
+    checkmate::assert_flag(skip_empty_rows)
+
+    invisible(
+        file %>%
+        readr::read_delim(delim = delim,
+                          na = na,
+                          col_types = col_types,
+                          trim_ws = trim_ws,
+                          skip = skip,
+                          skip_empty_rows = skip_empty_rows) %>%
+        dplyr::as_tibble())
 
 }
 
@@ -82,7 +152,7 @@ model_data <- function(model = "standard") {
 #' \dontrun{
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32")
 #' flat_posixt(x)
-#' #> [1] "0000-01-01 07:45:32"
+#' #> [1] "0000-01-01 07:45:32" # Expected
 #' }
 flat_posixt = function(x) {
 
@@ -119,11 +189,11 @@ flat_posixt = function(x) {
 #' \dontrun{
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 #' midday_change(x)
-#' #> [1] "0000-01-01 20:02:01"
+#' #> [1] "0000-01-01 20:02:01" # Expected
 #'
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 #' midday_change(x)
-#' #> [1] "0000-01-02 10:25:00"
+#' #> [1] "0000-01-02 10:25:00" # Expected
 #' }
 midday_change = function(x) {
 
@@ -160,30 +230,29 @@ midday_change = function(x) {
 #' @examples
 #' \dontrun{
 #' is_time(lubridate::dhours())
-#' #> [1] TRUE
+#' #> [1] TRUE # Expected
 #' is_time(as.Date("2020-01-01"))
-#' #> [1] TRUE
+#' #> [1] TRUE # Expected
 #' is_time(as.Date("2020-01-01"), rm_date = TRUE)
-#' #> [1] FALSE
+#' #> [1] FALSE # Expected
 #' is_time(iris)
-#' #> [1] FALSE
+#' #> [1] FALSE # Expected
 #' is_time(letters)
-#' #> [1] FALSE
+#' #> [1] FALSE # Expected
 #' }
 is_time <- function(x, rm_date = FALSE) {
 
-    checkmate::check_logical(rm_date, any.missing = FALSE, len = 1)
+    checkmate::assert_flag(rm_date)
 
-    check <- stringr::str_to_lower(
+    classes <-
         c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
-          "POSIXlt", "Interval"))
+          "POSIXlt", "Interval")
 
     if (isTRUE(rm_date)) {
-        check <- stringr::str_subset(check, "^(?!date)")
+        classes <- stringr::str_subset(classes, "^Date$", negate = TRUE)
     }
 
-    any(stringr::str_to_lower(class(x)) %in% check) &&
-            !any("numeric" %in% class(x))
+    checkmate::test_multi_class(x, classes)
 
 }
 

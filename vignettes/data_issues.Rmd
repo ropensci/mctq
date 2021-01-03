@@ -1,0 +1,23 @@
+---
+title: "common_data_issues"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{common_data_issues}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mctq)
+```
+
+__UNDER DEVELOPMENT__
+
+Shows commons issues when dealing with raw MCTQ data and how to fix them.

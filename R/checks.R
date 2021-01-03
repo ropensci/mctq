@@ -101,6 +101,14 @@ check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
     }
 
 }
+
+#' @noRd
+test_time <- function(x, rm_date = FALSE) {
+
+    is_time(x, rm_date)
+
+}
+
 #' @noRd
 assert_time <- checkmate::makeAssertionFunction(check_time)
 

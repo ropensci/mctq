@@ -46,28 +46,28 @@ precise transformation, \code{convert_to_rad} may not attend you.
 ## ** conversion of date/time objects to radian values **
 x <- lubridate::ymd_hms("2020-01-01 05:25:00")
 convert_to_rad(x)
-#> [1] 1.41808
+#> [1] 1.41808 # Expected
 convert_to_rad(x, round = TRUE, digits = 4)
-#> [1] 1.4181
+#> [1] 1.4181 # Expected
 
 x <- c(lubridate::dhours(1), lubridate::dhours(23))
 convert_to_rad(x)
-#> [1] 0.2617994 6.0213859
+#> [1] 0.2617994 6.0213859 # Expected
 
 x <- hms::as_hms("03:45:23")
 convert_to_rad(x)
-#> [1] 0.9834203
+#> [1] 0.9834203 # Expected
 
 ## ** conversion of decimal hours to radian value **
 x <- 1
 convert_to_rad(x)
-#> [1] 0.2617994
+#> [1] 0.2617994 # Expected
 convert_to_rad(x, round = TRUE, digits = 2)
-#> [1] 0.26
+#> [1] 0.26 # Expected
 
 x <- c(24, 1)
 convert_to_rad(x)
-#> [1] 6.2831853 0.2617994
+#> [1] 6.2831853 0.2617994 # Expected
 }
 }
 \seealso{

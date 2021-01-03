@@ -1,5 +1,5 @@
 Package: mctq
-Title: Process MCTQ data
+Title: The R package for MCTQ data
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Daniel",
@@ -42,7 +42,6 @@ Imports:
     readr,
     rlang,
     stringr,
-    tibble,
     utils
 Suggests: 
     testthat (>= 2.0.0),
