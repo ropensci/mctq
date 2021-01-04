@@ -31,7 +31,7 @@ test_that("convert_to_date_time() | character objects", {
     object <- convert_to_date_time("30:03", "difftime", "MS")
     expect_equal(object, as.difftime(lubridate::duration(1803), units = "secs"))
 
-    object <- convert_to_date_time("10:00 PM", "hms")
+    object <- convert_to_date_time("10:00 PM", "hms", "IMp")
     expect_equal(object, hms::as_hms("22:00:00"))
 
     expect_warning(convert_to_date_time("1045", "Date"))

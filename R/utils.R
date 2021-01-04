@@ -141,9 +141,12 @@ load_data <- function(file = file.choose(),
 #' @description
 #'
 #' `flat_posixt` changes the dates of `POSIXt` objects to `0000-01-01`. This can
-#' be use to standardizing a point origin to time values.
+#' be use to standardizing a point of origin to time values.
 #'
 #' @param x A `POSIXt` vector.
+#'
+#' @return A vector of the same `POSIXt` class type as `x` with `0000-01-01` as
+#'   date.
 #'
 #' @family Utility functions
 #' @export
@@ -151,7 +154,7 @@ load_data <- function(file = file.choose(),
 #' @examples
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32")
 #' flat_posixt(x)
-#' #> [1] "0000-01-01 07:45:32" # Expected
+#' #> [1] "0000-01-01 07:45:32 UTC" # Expected
 flat_posixt = function(x) {
 
     assert_posixt(x, null.ok = FALSE)
@@ -180,17 +183,20 @@ flat_posixt = function(x) {
 #'
 #' @param x A `POSIXt` vector.
 #'
+#' @return A vector of the same `POSIXt` class type as `x` with date
+#'   `0000-01-01` or `0000-01-02`.
+#'
 #' @family Utility functions
 #' @export
 #'
 #' @examples
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 #' midday_change(x)
-#' #> [1] "0000-01-01 20:02:01" # Expected
+#' #> [1] "0000-01-01 20:02:01 UTC" # Expected
 #'
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 #' midday_change(x)
-#' #> [1] "0000-01-02 10:25:00" # Expected
+#' #> [1] "0000-01-02 07:45:32 UTC" # Expected
 midday_change = function(x) {
 
     assert_posixt(x, null.ok = FALSE)
@@ -220,6 +226,7 @@ midday_change = function(x) {
 #' @param rm_date A logical value indicating if `Date` objects should be removed
 #'   from the check (default: `FALSE`)
 #'
+#' @return TRUE or FALSE depending on whether its argument is of character type or not.
 #' @family Utility functions
 #' @export
 #'
@@ -254,5 +261,16 @@ is_time <- function(x, rm_date = FALSE) {
 class_collapse <- function(x) {
 
     glue::single_quote(glue::glue_collapse(class(x), sep = '/'))
+
+}
+
+#' @noRd
+shush <- function(x, quiet = TRUE){
+
+    if (quiet) {
+        suppressMessages(suppressWarnings(x))
+    } else {
+        x
+    }
 
 }

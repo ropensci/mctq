@@ -19,7 +19,7 @@ significant digits to be used when \code{round = TRUE} (see \link[base:Round]{ba
 know more) (only required when \code{round = TRUE}) (default: \code{3}).}
 }
 \value{
-A numeric vector with radians.
+A numeric vector with radian values.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}

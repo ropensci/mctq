@@ -13,25 +13,85 @@
 \alias{convert_to_date_time.Interval}
 \title{Convert values to date/time}
 \usage{
-convert_to_date_time(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+convert_to_date_time(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{character}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{character}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{numeric}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{numeric}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{difftime}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{difftime}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{Duration}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{Duration}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{hms}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{hms}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{Period}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{Period}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{Date}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{Date}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{POSIXt}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{POSIXt}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 
-\method{convert_to_date_time}{Interval}(x, class, orders = c("HMS", "HM", "H"), tz = "UTC")
+\method{convert_to_date_time}{Interval}(
+  x,
+  class,
+  orders = c("HMS", "HM", "H"),
+  tz = "UTC",
+  quiet = FALSE
+)
 }
 \arguments{
 \item{x}{A \code{character} or \code{numeric} vector to parse to a date/time object
@@ -53,9 +113,12 @@ your input (default: \code{c("HMS", "HM", "H")}).}
 convert/parse \code{x}. Time zones are used only if \code{class} is set to \code{"Date"},
 \code{"POSIXct"}, or \code{"POSIXlt"} (see \link[base:timezones]{base::timezones} to know more) (default:
 \code{"UTC"}).}
+
+\item{quiet}{A logical value indicating if warnings or messages are
+allowed with the output (default: FALSE).}
 }
 \value{
-A date/time object of the indicated class.
+A vector of date/time objects of the indicated class.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -91,26 +154,22 @@ patterns of data collection for the Munich Chronotype Questionnaire (MCTQ),
 \subsection{Limitations}{
 
 \code{convert_to_date_time} uses \code{\link[lubridate:parse_date_time]{lubridate::parse_date_time()}} to convert
-\code{character} and \code{numeric} objects. Since parse_date_time() output a \code{POSIXt}
+\code{character} and \code{numeric} objects. Since parse_date_time() outputs a \code{POSIXt}
 object, \code{character} and \code{numeric} inputs cannot have time values equal or
 greater than 24 hours.
 
 That limits the set of \code{convert_to_date_time} applications (\emph{e.g} when you
-want to parse a character to a \code{duration} object of 35 hours and 30 minutes).
-A exception was made to \code{character} and \code{numeric} integerish objects with
-\code{order = "H"}, \code{order = "M"}, and \code{order = "S"} (\emph{e.g}
-\code{convert_to_date_time(c(10, 45, 100), "duration", "M")}.
+want to parse a \code{character} to a \code{duration} object of 35 minutes and 30
+seconds). Some exceptions were made to \code{character} and \code{numeric} objects with
+\code{order} \strong{equal} to \code{"H"}, \code{"M"}, \code{"S"}, \code{HM}, or \code{HMS} (\emph{e.g}
+\code{convert_to_date_time(c(10, 45, 100), "duration", "M")}).
+
+For \code{HM} and \code{HMS} exception, minutes and seconds are limited to \verb{[0-59]}
+and when hours exceeds 2 digits a \code{:} must be allocated between hours and the
+minutes.
 
 To go around this limitation, learn about how to use the
 \link[lubridate:lubridate-package]{lubridate::lubridate-package} package.
-}
-
-\subsection{AM/PM signaling}{
-
-If your value have an AM/PM signal in your value, \code{convert_to_date_time} will
-try to fix it for you. You can also use the \code{"Op"} format on the \code{orders}
-variable to match this indicators (check \code{\link[lubridate:parse_date_time]{lubridate::parse_date_time()}} to
-know more about it).
 }
 
 \subsection{Converting date/time objects to decimal time or radians (or the reverse)}{
@@ -182,14 +241,6 @@ Class \code{interval} objects are treated like \code{difftime} objects. That is,
 \code{interval} objects will be converted to the time difference of the interval.
 }
 }
-\note{
-To do:
-\itemize{
-\item Fix conversion for hours equal or greater to 24 for \code{character} and
-\code{numeric} variables.
-\item Fix time attribution to \code{Periods} (remove functionality?).
-}
-}
 \section{Time zone warning}{
 
 
@@ -200,9 +251,10 @@ It's unlike that you going to have to worry about time zone while working
 with the MCTQ. Because of that, \code{convert_to_date_time} is set to \code{"UTC"} by
 default for \code{Date}, \code{POSIXct}, and \code{POSIXlt} outputs.
 
-To know more about how to handle date and time objects, check the chapter
-"Dates and Times" from the book \href{https://r4ds.had.co.nz/dates-and-times.html}{R for Data Science} of Hadley Wickham &
-Garrett Grolemund.
+To know more about how to handle date and time objects, check chapter "Dates
+and Times" from Wickham and Grolemund (\href{https://r4ds.had.co.nz}{n.d.}) and
+chapter "Technical Representation of Data" from Loo and Jonge
+(\href{https://bit.ly/3pVuUdt}{2018}).
 }
 
 \examples{
@@ -230,6 +282,15 @@ convert_to_date_time(lubridate::period(60), "POSIXct")
 convert_to_date_time(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
                      "POSIXct")
 #> [1] "2020-01-01 12:31:05 UTC" # Expected
+}
+\references{
+Van der Loo, M., & De Jonge, E. (2018).
+\emph{Statistical data cleaning with applications in R}. Hooboken, NJ: John
+Wiley & Sons. doi:
+\href{http://dx.doi.org/10.1002/9781118897126}{10.1002/9781118897126}.
+
+Wickham, H, & Grolemund. (n.d.). \emph{R for data science}. Sebastopol, CA:
+O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
 \seealso{
 Other Convert to date/time functions: 

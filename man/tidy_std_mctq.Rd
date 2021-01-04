@@ -28,10 +28,7 @@ To learn more about the concept of tidy data, \emph{c.f.} Wickham
 (\href{https://r4ds.had.co.nz}{n.d.}).
 }
 \examples{
-\dontrun{
-utils::View(tidy_std_mctq())
-tidy_std_mctq(write = TRUE)
-}
+\dontrun{utils::View(tidy_std_mctq())}
 }
 \references{
 Van der Loo, M., & De Jonge, E. (2018).

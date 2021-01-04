@@ -19,10 +19,7 @@ version) basic/measurable variables for testing and learning purposes.
 See \link{std_mctq} to learn more.
 }
 \examples{
-\dontrun{
-utils::View(build_std_mctq())
-build_std_mctq(write = TRUE)
-}
+\dontrun{utils::View(build_std_mctq())}
 }
 \seealso{
 Other Data functions: 

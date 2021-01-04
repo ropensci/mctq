@@ -84,8 +84,8 @@ lengths.
 To address this problem, \code{convert_to_decimal} use as default the mean of
 possible values for months and years, used to calculate month and year
 durations on the lubridate package (see: \code{\link[lubridate:duration]{lubridate::dmonths()}} and
-\code{\link[lubridate:duration]{lubridate::dyears()}}). However, if you like, you can reset this values
-assigning other values to the arguments \code{month_length} and \code{year_length}.
+\code{\link[lubridate:duration]{lubridate::dyears()}}). If you like, you can reset this assigning other
+values to the arguments \code{month_length} and \code{year_length}.
 
 \code{month_length} and \code{year_length} values must be assigned with the number of
 seconds equivalent to the unit duration.
@@ -204,14 +204,14 @@ x <- lubridate::ymd("2020-02-01")
 convert_to_decimal(x, "date_decimal")
 #> [1] 2020.085 # Expected
 lubridate::date_decimal(convert_to_decimal(x, "date_decimal"))
-#> [1] "2020-02-01 00:00:17 UTC"  # Expected (note the imprecision)
+#> [1] "2020-01-31 23:59:59 UTC"  # Expected (note the imprecision)
 
 ## ** conversion of radian values to decimal time **
 x <- convert_to_rad(hms::as_hms("23:30:30"))
 convert_to_rad(hms::as_hms("23:30:30"))
 #> [1] 6.154467 # Expected
 convert_to_decimal(x, "H")
-#> [1] 23.5083 # Expected
+#> [1] 23.50833 # Expected
 convert_to_date_time(lubridate::dhours(convert_to_decimal(x, "H")), "hms")
 #> 23:30:30 # Expected
 }

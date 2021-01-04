@@ -17,10 +17,7 @@ An invisible tibble.
 \strong{UNDER DEVELOPMENT}
 }
 \examples{
-\dontrun{
-utils::View(validate_std_mctq())
-validate_std_mctq(write = TRUE)
-}
+\dontrun{utils::View(validate_std_mctq())}
 }
 \references{
 Van der Loo, M., & De Jonge, E. (2018).

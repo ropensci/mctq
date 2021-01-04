@@ -12,6 +12,9 @@ is_time(x, rm_date = FALSE)
 \item{rm_date}{A logical value indicating if \code{Date} objects should be removed
 from the check (default: \code{FALSE})}
 }
+\value{
+TRUE or FALSE depending on whether its argument is of character type or not.
+}
 \description{
 \code{is_time} is a logical checker for objects of class \code{difftime}, \code{Duration},
 \code{hms}, \code{Period}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, and \code{Interval}.

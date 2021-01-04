@@ -15,10 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' utils::View(build_std_mctq())
-#' build_std_mctq(write = TRUE)
-#' }
+#' \dontrun{utils::View(build_std_mctq())}
 build_std_mctq <- function(write = FALSE) {
 
     # Create arguments --------------------
@@ -435,10 +432,7 @@ build_std_mctq <- function(write = FALSE) {
 #' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
-#' \dontrun{
-#' utils::View(tidy_std_mctq())
-#' tidy_std_mctq(write = TRUE)
-#' }
+#' \dontrun{utils::View(tidy_std_mctq())}
 tidy_std_mctq <- function(write = FALSE) {
 
     # Clean NULL cases --------------------
@@ -461,36 +455,19 @@ tidy_std_mctq <- function(write = FALSE) {
     #     }
     # }
 
-    # Fix ambiguous cases impossible to parse when using vectorised
-    # operations --------------------
-
-    pattern_1 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_2 <- "^\\d{1,3}$"
-    pattern_3 <- "^\\d+$"
-    pattern_4 <- "[^A-Za-z]$"
-
-    std_mctq <- std_mctq %>% dplyr::mutate(
-        `W SLEEP LAT` = dplyr::case_when(
-            stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
-                stringr::str_remove(.data$`W SLEEP LAT`, "^00(:)?"),
-            TRUE ~ .data$`W SLEEP LAT`),
-        `F SLEEP LAT` = dplyr::case_when(
-            stringr::str_detect(.data$`F SLEEP LAT`, pattern_4) ~
-                .data$`F SLEEP LAT`),
-    )
-
     # Convert variables --------------------
 
-    ## Note 1: `ifelse`, `if_else`, and `case_when` are vectorised if/else
-    ## functions that don't do lazy evaluation, _i.e_ all parts of the statement
-    ## are evaluated and then the condition is used to splice together the
-    ## results to be returned. This can results in erroneous warnings. That's
-    ## why you see some `suppressWarnings()` functions below. You must be very
-    ## careful while using this kind of evaluations. __c.f.__
-    ## <http://bit.ly/2X1J4x0> and <http://bit.ly/2X5MUFC>.
+    ## Note 1: `base::ifelse`, `dplyr::if_else`, and `dplyr::case_when` do
+    ## vectorised if/else operations, but don't do lazy evaluation, _i.e_ all
+    ## parts of the statement are evaluated and then the condition is used to
+    ## splice together the results to be returned. This can results in erroneous
+    ## warnings. That's why you may see some `suppressWarnings()` or `quiet
+    ## arguments` below. You must be very careful while using this kind of
+    ## evaluations. __c.f.__ <http://bit.ly/2X1J4x0> and
+    ## <http://bit.ly/2X5MUFC>.
 
-    ## Note 2: "ifelse does evaluate both possible responses, except in cases
-    ## where the test is either all `TRUE` or all `FALSE`". __c.f__.
+    ## Note 2: "base::ifelse does evaluate both possible responses, except in
+    ## cases where the test is either all `TRUE` or all `FALSE`". __c.f__.
     ## <http://bit.ly/2X1J4x0>.
 
     ## Note 3: Some if/else functions, like `data.table::fcase()`, do lazy
@@ -502,21 +479,35 @@ tidy_std_mctq <- function(write = FALSE) {
     ## Note 4: It appears that no one have a way to go around some of this
     ## situations (last Stack Overflow search: 2021-01-03).
 
+    pattern_1 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?"
+    pattern_2 <- "^\\d{1,3}$"
+    pattern_3 <- "[^A-Za-z]$"
+    pattern_4 <- "^([-+])?(2[4-9]|[3-9]\\d|\\d{3,})(:)?[0-5]\\d((:)?[0-5]\\d)?"
+    pattern_5 <- "^([-+])?\\d+(:)?[0-5]\\d((:)?[0-5]\\d)?"
+    pattern_6 <- "^[0-1][0-2](:)?[0-5]\\d(AM|PM)"
+    pattern_7 <- "(AM|PM)$"
+
     std_mctq <- std_mctq %>% dplyr::transmute(
         regular_work_schedule = dplyr::case_when(
             .data$`WORK REGULAR` == "Yes" ~ TRUE,
             .data$`WORK REGULAR` == "true" ~ TRUE,
             .data$`WORK REGULAR` == "No" ~ FALSE),
         wd = as.integer(.data$`WORK DAYS`),
-        bt_w = suppressWarnings(dplyr::case_when(
+        bt_w = dplyr::case_when(
             stringr::str_detect(.data$`W BED TIME`, pattern_1) ~
-                convert_to_date_time(.data$`W BED TIME`, "hms"))),
+                convert_to_date_time(.data$`W BED TIME`, "hms",
+                                     c("HM", "IMp"), quiet = TRUE),
+            stringr::str_detect(.data$`W BED TIME`, pattern_4) ~
+                convert_to_date_time(.data$`W BED TIME`, "hms", "HM",
+                                     quiet = TRUE)),
         s_prep_w = convert_to_date_time(.data$`W SLEEP PREP`, "hms"),
-        s_lat_w = suppressWarnings(dplyr::case_when(
+        s_lat_w = dplyr::case_when(
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_2) ~
-                convert_to_date_time(.data$`W SLEEP LAT`, "Duration", "M"),
+                convert_to_date_time(.data$`W SLEEP LAT`, "Duration", "M",
+                                     quiet = TRUE),
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
-                convert_to_date_time(.data$`W SLEEP LAT`, "Duration"))),
+                convert_to_date_time(.data$`W SLEEP LAT`, "Duration",
+                                     quiet = TRUE)),
         se_w = convert_to_date_time(.data$`W SLEEP END`, "hms"),
         si_w = convert_to_date_time(.data$`W SLEEP INERTIA`, "Duration", "M"),
         alarm_w = dplyr::case_when(
@@ -526,23 +517,28 @@ tidy_std_mctq <- function(write = FALSE) {
             .data$`W WAKE BEFORE ALARM` == "Yes" ~ TRUE,
             .data$`W WAKE BEFORE ALARM` == "No" ~ FALSE),
         le_w = convert_to_date_time(.data$`W LIGHT EXPOSURE`, "Duration"),
-        bt_f = suppressWarnings(dplyr::case_when(
+        bt_f = dplyr::case_when(
             stringr::str_detect(.data$`F BED TIME`, pattern_1) ~
-                convert_to_date_time(.data$`F BED TIME`, "hms"))),
+                convert_to_date_time(.data$`F BED TIME`, "hms", quiet = TRUE),
+            stringr::str_detect(.data$`F BED TIME`, pattern_4) ~
+                convert_to_date_time(.data$`F BED TIME`, "hms", "HM",
+                                     quiet = TRUE)),
         s_prep_f = convert_to_date_time(.data$`F SLEEP PREP`, "hms"),
-        s_lat_f = suppressWarnings(
-            convert_to_date_time(.data$`F SLEEP LAT`, "Duration", "M")),
+        s_lat_f = convert_to_date_time(.data$`F SLEEP LAT`, "Duration", "M",
+                                       quiet = TRUE),
         se_f = convert_to_date_time(.data$`F SLEEP END`, "hms"),
-        si_f = suppressWarnings(dplyr::case_when(
+        si_f = dplyr::case_when(
             stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_2) ~
-                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration", "M"),
+                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration", "M",
+                                     quiet = TRUE),
             stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_1) ~
-                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration"))),
+                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration",
+                                     quiet = TRUE)),
         alarm_f = dplyr::case_when(
             .data$`F ALARM` == "Yes" ~ TRUE,
             .data$`F ALARM` == "No" ~ FALSE),
         reasons_f = .data$`F REASONS` ,
-        le_f = convert_to_date_time(.data$`F LIGHT EXPOSURE`, "Duration")
+        le_f = convert_to_date_time(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
     )
 
     # Write and output dataset --------------------
@@ -579,10 +575,7 @@ tidy_std_mctq <- function(write = FALSE) {
 #' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
 #'
 #' @examples
-#' \dontrun{
-#' utils::View(validate_std_mctq())
-#' validate_std_mctq(write = TRUE)
-#' }
+#' \dontrun{utils::View(validate_std_mctq())}
 validate_std_mctq <- function(write = FALSE) {
 
 

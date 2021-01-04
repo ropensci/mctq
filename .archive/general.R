@@ -12,8 +12,16 @@ fd <- function(wd) {
 
 so <- function(s_prep, s_lat){
 
-    s_prep <- convert_to_date_time(s_prep, "POSIXct")
-    s_lat <- convert_to_date_time(s_lat, "Duration")
+    # convert_if_not
+
+    if (!lubridate::is.POSIXct(s_prep)){
+        rlang::warn()
+        s_prep <- convert_to_date_time(s_prep, "POSIXct")
+    }
+
+    if (!lubridate::is.POSIXct(s_lat)){
+        s_lat <- convert_to_date_time(s_lat, "Duration")
+    }
 
     hms::as_hms(s_prep + s_lat)
 

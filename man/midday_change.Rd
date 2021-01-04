@@ -9,6 +9,10 @@ midday_change(x)
 \arguments{
 \item{x}{A \code{POSIXt} vector.}
 }
+\value{
+A vector of the same \code{POSIXt} class type as \code{x} with date
+\code{0000-01-01} or \code{0000-01-02}.
+}
 \description{
 \code{midday_change} changes the dates of \code{POSIXt} objects accordingly to the time
 of day registered in the object values. The function do this by flatting the
@@ -22,11 +26,11 @@ high value.
 \examples{
 x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 midday_change(x)
-#> [1] "0000-01-01 20:02:01" # Expected
+#> [1] "0000-01-01 20:02:01 UTC" # Expected
 
 x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 midday_change(x)
-#> [1] "0000-01-02 10:25:00" # Expected
+#> [1] "0000-01-02 07:45:32 UTC" # Expected
 }
 \seealso{
 Other Utility functions: 
