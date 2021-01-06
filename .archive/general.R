@@ -1,3 +1,6 @@
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 fd <- function(wd) {
 
     assert_number(wd, lower = 0, upper = 7)
@@ -10,6 +13,9 @@ fd <- function(wd) {
 #     dplyr::select(wd) %>%
 #     dplyr::mutate(fd = fd(wd))
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 so <- function(s_prep, s_lat){
 
     # convert_if_not
@@ -31,6 +37,9 @@ so <- function(s_prep, s_lat){
 #     dplyr::select(s_prep_f, s_lat_f) %>%
 #     dplyr::mutate(so_f = so(s_prep_f, s_lat_f))
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 gu <- function(se, si){
 
     se <- convert_to_date_time(se, "POSIXct")
@@ -44,6 +53,9 @@ gu <- function(se, si){
 #     dplyr::select(se_f, si_f) %>%
 #     dplyr::mutate(gu_f = gu(se_f, si_f))
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 sd <- function(se, so){
 
     se <- convert_to_date_time(se, "POSIXct")
@@ -53,6 +65,9 @@ sd <- function(se, so){
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 tbt <- function(gu, bt){
 
     # Add add_time_origin
@@ -64,6 +79,9 @@ tbt <- function(gu, bt){
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 ms <- function(so, sd){
 
     so <- convert_to_date_time(so, "POSIXct")
@@ -73,6 +91,9 @@ ms <- function(so, sd){
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 sd_week <- function(wd, sd_w, sd_f){
 
     assert_number(wd, lower = 0, upper = 7)
@@ -84,6 +105,9 @@ sd_week <- function(wd, sd_w, sd_f){
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 msf_sc <- function(msf, sd_w, sd_f, sd_week){
 
     msf <- convert_to_date_time(msf, "POSIXct")
@@ -101,12 +125,18 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week){
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 chronotype <- function(msf, sd_w, sd_f, sd_week) {
 
     msf_sc(msf, sd_f, sd_w, sd_week)
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
     assert_number(wd, lower = 0, upper = 7)
@@ -123,6 +153,9 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 sjl_rel <- function(msw, msf) {
 
     assert_custom_1(msw)
@@ -135,12 +168,18 @@ sjl_rel <- function(msw, msf) {
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 sjl <- function(msw, msf){
 
     abs(sjl_rel(msw, msf))
 
 }
 
+#' __UNDER DEVELOPMENT__
+#'
+#' @export
 le_week <- function(wd, le_w, le_f){
 
     if (any(stringr::str_detect(wd, "^\\d+$"))) {

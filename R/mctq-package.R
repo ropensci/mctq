@@ -7,6 +7,7 @@
 #' @importFrom lubridate %within%
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !! !!!
+#' @importFrom crayon %+%
 ## usethis namespace: end
 NULL
 

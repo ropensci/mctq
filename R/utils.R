@@ -265,12 +265,45 @@ class_collapse <- function(x) {
 }
 
 #' @noRd
+inline_collapse <- function(x, serial_comma = TRUE) {
+
+    for (i in seq_along(x)) {
+        x[i] <- glue::single_quote(x[i])
+    }
+
+    if (length(x) <= 2 || isFALSE(serial_comma)) {
+        glue::glue_collapse(x, sep = ", ", last = " and ")
+    } else {
+        glue::glue_collapse(x, sep = ", ", last = ", and ")
+    }
+
+}
+
+#' @noRd
 shush <- function(x, quiet = TRUE){
 
     if (quiet) {
         suppressMessages(suppressWarnings(x))
     } else {
         x
+    }
+
+}
+
+#' @noRd
+message_generator <- function(type = "ok", funny = FALSE) {
+
+    type <- stringr::str_to_lower(type)
+
+    if (type == "ok") {
+        if (isTRUE(funny)) {
+            ok_messages <- c("Noice!", "Everything's A-OK",
+                             "Good job (yay!)",
+                             "Everything appears to be in order, Sr.!")
+        } else {
+            ok_messages <- c("Success", "All in order")
+        }
+        rlang::inform(sample(ok_messages, 1))
     }
 
 }

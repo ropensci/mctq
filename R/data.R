@@ -543,13 +543,15 @@ tidy_std_mctq <- function(write = FALSE) {
 
     # Write and output dataset --------------------
 
+    file <- paste0("./data/", "std_mctq", ".rda")
+
     if (write) {
         if(!(dir.exists("./data/"))) {
             dir.create("./data/")
         }
 
-        save(std_mctq, file = paste0("./data/", "std_mctq", ".rda"),
-             envir = parent.frame(), compress = "bzip2", version = 2)
+        save(std_mctq, file = file,
+             envir = environment(), compress = "bzip2", version = 2)
     }
 
     invisible(std_mctq)
@@ -578,7 +580,7 @@ tidy_std_mctq <- function(write = FALSE) {
 #' \dontrun{utils::View(validate_std_mctq())}
 validate_std_mctq <- function(write = FALSE) {
 
-
+    # __UNDER DEVELOPMENT__
 
 }
 

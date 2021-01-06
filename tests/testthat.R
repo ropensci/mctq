@@ -4,7 +4,7 @@ library(lubridate)
 library(hms)
 
 test_check("mctq")
-
+#
 # # For development use only
 # # (don't forget to comment the code after use (Ctrl + Shift + C))
 # library(checkmate)
@@ -15,9 +15,9 @@ test_check("mctq")
 # library(magrittr)
 # library(rlang)
 # library(tidyverse)
+# library(validate)
 #
 # library(devtools)
-# library(rlang)
 # load_all()
 # document()
 

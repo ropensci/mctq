@@ -33,6 +33,7 @@ Depends:
     R (>= 4.0)
 Imports: 
     checkmate,
+    crayon,
     dplyr,
     glue,
     hms,
@@ -42,7 +43,8 @@ Imports:
     readr,
     rlang,
     stringr,
-    utils
+    utils,
+    validate
 Suggests: 
     testthat (>= 2.0.0),
     knitr,

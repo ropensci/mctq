@@ -259,7 +259,7 @@ chapter "Technical Representation of Data" from Loo and Jonge
 
 \examples{
 ## ** conversion of character or numeric values to date/time objects **
-convert_to_date_time("10:00 PM", "hms")
+convert_to_date_time("10:00 PM", "hms", "IMp")
 #> [1] 22:00:00 # Expected
 convert_to_date_time("21:00 AM", "Period")
 #> [1] "21H 0M 0S" # Expected
