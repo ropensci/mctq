@@ -33,6 +33,7 @@ Depends:
     R (>= 4.0)
 Imports: 
     checkmate,
+    circular,
     crayon,
     dplyr,
     glue,

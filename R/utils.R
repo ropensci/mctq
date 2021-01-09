@@ -12,7 +12,7 @@
 #'   file names available. Else, returns `file` path.
 #'
 #' @family Utility functions
-#' @export
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -56,7 +56,7 @@ model_data <- function(model = "standard") {
     model <- stringr::str_to_lower(model)
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 
-    if (model == "std" || model == "standard") {
+    if (model %in% c("std", "standard")) {
         mctq::std_mctq
     } else if (model == "shift") {
         NA # mctq::mctq_shift
@@ -215,6 +215,126 @@ midday_change = function(x) {
 
 }
 
+#' Assign dates to 2 sequential hours
+#'
+#' __UNDER DEVELOPMENT__
+#'
+#' `assign_date` is a simple utility function to assign dates to two sequential
+#' hours. It can facilitate time arithmetic.
+#'
+#' @details
+#'
+#' `assign_date` can also be use for vectorized operations.
+#'
+#' `POSIXt` values passed as argument will be strip of their dates in favor
+#' for the new date assignment.
+#'
+#' @param anterior,posterior A `hms` or `POSIXt` vector.
+#'
+#' @return A named list with `anterior` and `posterior` values transformed.
+#'
+#' @export
+#'
+#' @examples
+#' x <- lubridate::ymd_hms("2000-01-01 10:00:00")
+#' y <- hms::parse_hm("22:00")
+#' assign_date()
+assign_date <- function(anterior, posterior) {
+
+    checkmate::check_multi_class(anterior, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::check_multi_class(posterior, c("hms", "POSIXct", "POSIXlt"))
+    check_identical(anterior, posterior, "length")
+
+    out <- dplyr::tibble(anterior = anterior, posterior = posterior)
+
+    if (lubridate::is.POSIXt(anterior)) anterior <- hms::as_hms(anterior)
+    if (lubridate::is.POSIXt(posterior)) posterior <- hms::as_hms(posterior)
+
+    out <- out %>%
+        mutate(dummy = case_when(
+            anterior < posterior ~ 11,
+            anterior > posterior ~ 12,
+            TRUE, 11))
+
+    # INCOMPLETE
+
+}
+
+#' Find the shortest interval between 2 hours
+#'
+#' @description
+#'
+#' __UNDER DEVELOPMENT__
+#'
+#' `POSIXt` values passed as argument will be strip of their dates in favor
+#' for the new date assignment.
+#'
+#' @details
+#'
+#' __UNDER DEVELOPMENT__
+#'
+#' ```
+#'    y                 x          y                x
+#'  13:00            08:00      13:00            08:00
+#' --|----------------|----------|----------------|---->
+#'  19h            5h            19h
+#'    [(24 - 13) + 8]   (13 - 8)    [(24 - 13) + 8]
+#'      2nd interval  1st interval  2nd interval
+#' ```
+#'
+#' @param x a
+#'
+#' @noRd
+shortest_interval <- function(x, y, ambiguous_value = 0) {
+
+    checkmate::check_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::check_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
+    check_identical(x, y, "length")
+    checkmate::assert_choice(ambiguous_value, c(0, 24))
+
+    if (lubridate::is.POSIXt(x) || lubridate::is.POSIXt(y)) {
+        x_start <- flat_posixt(x)
+        y_start <- flat_posixt(y)
+    } else {
+        x_start <- convert_to_date_time(x, "POSIXct")
+        y_start <- convert_to_date_time(y, "POSIXct")
+    }
+
+    x_start <- convert_to_date_time(x, "POSIXct")
+    y_start <- convert_to_date_time(y, "POSIXct")
+    x_duration <- lubridate::dhours(convert_to_decimal(x))
+    y_duration <- lubridate::dhours(convert_to_decimal(y))
+
+    x_y_interval <- lubridate::as.interval(y_duration, x_start)
+    y_x_interval <- lubridate::as.interval(x_duration, y_start)
+
+    if (x_y_interval == y_x_interval) {
+
+    }
+
+
+
+}
+
+#' __UNDER DEVELOPMENT__
+#'
+#' @noRd
+greater_interval <- function(anterior, posterior) {
+
+    out <- shortest_distance(anterior, posterior)
+    out <- convert_to_date_time(out, "POSIXct")
+    out <- convert_to_date_time(out - dhours(24), "hms")
+    out
+
+}
+
+#' __UNDER DEVELOPMENT__
+#'
+#' @noRd
+sum_hms <- function(...) {
+
+}
+
 #' Check if a object is a date/time type
 #'
 #' @description
@@ -247,10 +367,14 @@ is_time <- function(x, rm_date = FALSE) {
 
     classes <-
         c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
-          "POSIXlt", "Interval")
+          "POSIXlt", "Interval", "Circular")
 
     if (isTRUE(rm_date)) {
         classes <- stringr::str_subset(classes, "^Date$", negate = TRUE)
+    }
+
+    if (circular::is.circular(x)) {
+        return(TRUE)
     }
 
     checkmate::test_multi_class(x, classes)

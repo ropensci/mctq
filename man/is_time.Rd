@@ -36,7 +36,6 @@ Other Utility functions:
 \code{\link{flat_posixt}()},
 \code{\link{load_data}()},
 \code{\link{midday_change}()},
-\code{\link{model_data}()},
-\code{\link{raw_data}()}
+\code{\link{model_data}()}
 }
 \concept{Utility functions}

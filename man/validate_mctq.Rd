@@ -34,6 +34,8 @@ When run in interactive mode and with \code{remove_breaks = FALSE},
 \code{validate_mctq} offers a way to export the results.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \strong{UNDER DEVELOPMENT}
 }
 \details{

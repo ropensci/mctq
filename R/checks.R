@@ -1,3 +1,5 @@
+# Copyright free functions, copy as you wish.
+
 #' @noRd
 check_not_na <- function(x, name = deparse(substitute(x))) {
 
@@ -31,6 +33,8 @@ assert_not_nnn <- checkmate::makeAssertionFunction(check_not_nnn)
 check_length_one <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
 
+    checkmate::assert_flag(any.missing)
+
     if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
     } else if (!(length(x) == 1)) {
@@ -49,6 +53,8 @@ assert_length_one <- checkmate::makeAssertionFunction(check_length_one)
 check_has_length <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
 
+    checkmate::assert_flag(any.missing)
+
     if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
     } else if (length(x) < 1) {
@@ -65,6 +71,9 @@ assert_has_length <- checkmate::makeAssertionFunction(check_has_length)
 #' @noRd
 check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
 
     if (any(is.null(x)) && isTRUE(null.ok)) {
         TRUE
@@ -83,9 +92,19 @@ check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
 #' @noRd
 assert_posixt <- checkmate::makeAssertionFunction(check_posixt)
 
+test_time <- function(x, any.missing = TRUE, null.ok = FALSE) {
+
+    out <- check_time(x, any.missing, null.ok)
+    if (isTRUE(out)) TRUE else FALSE
+
+}
+
 #' @noRd
 check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
                        name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
 
     if (any(is.null(x)) && isTRUE(null.ok)) {
         TRUE
@@ -104,10 +123,53 @@ check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
 #' @noRd
 assert_time <- checkmate::makeAssertionFunction(check_time)
 
-#' Used on convert_to_date_time()
+#' @noRd
+check_identical <- function(x, y, type = "value", any.missing = TRUE,
+                            null.ok = FALSE,
+                            x_name = deparse(substitute(x)),
+                            y_name = deparse(substitute(y))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
+    checkmate::assert_choice(type, c("value", "length"))
+
+    if (type == "length") {
+        error_message <- glue::glue("{glue::backtick(x_name)} and ",
+                                    "{glue::backtick(y_name)} ",
+                                    "must have identical lengths")
+        x <- length(x)
+        y <- length(y)
+    } else {
+        error_message <- glue::glue("{glue::backtick(x_name)} and ",
+                                    "{glue::backtick(y_name)} ",
+                                    "must be identical")
+    }
+
+    if (any(is.null(x)) && any(is.null(y)) && isTRUE(null.ok)) {
+        TRUE
+    } else if (any(is.na(x)) && any(is.na(y)) && isFALSE(any.missing)) {
+        glue::glue("{glue::backtick(x_name)} and {glue::backtick(y_name)} ",
+                   "cannot have missing values")
+    } else if (any(is.null(x)) && any(is.null(y)) && isFALSE(null.ok)) {
+        glue::glue("{glue::backtick(x_name)} and {glue::backtick(y_name)} ",
+                   "cannot have `NULL` values")
+    } else if (!identical(x, y)) {
+        error_message
+    } else {
+        TRUE
+    }
+
+}
+
+#' @noRd
+assert_identical <- checkmate::makeAssertionFunction(check_identical)
+
 #' @noRd
 check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
 
     if (any(is.null(x)) && isTRUE(null.ok)) {
         TRUE
@@ -124,7 +186,6 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
 
 }
 
-#' Used on convert_to_date_time()
 #' @noRd
 assert_custom_1 <- checkmate::makeAssertionFunction(check_custom_1)
 
@@ -132,6 +193,9 @@ assert_custom_1 <- checkmate::makeAssertionFunction(check_custom_1)
 #' @noRd
 check_custom_2 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
 
     if (any(is.null(x)) && isTRUE(null.ok)) {
         TRUE
@@ -157,6 +221,9 @@ assert_custom_2 <- checkmate::makeAssertionFunction(check_custom_2)
 check_custom_3 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
 
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
+
     if (any(is.null(x)) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
@@ -179,6 +246,9 @@ assert_custom_3 <- checkmate::makeAssertionFunction(check_custom_3)
 #' @noRd
 check_custom_4 <- function(x, choices, any.missing = FALSE, null.ok = TRUE,
                            name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
 
     if (any(is.null(x)) && isTRUE(null.ok)) {
         TRUE

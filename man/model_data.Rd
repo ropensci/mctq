@@ -28,7 +28,6 @@ Other Utility functions:
 \code{\link{flat_posixt}()},
 \code{\link{is_time}()},
 \code{\link{load_data}()},
-\code{\link{midday_change}()},
-\code{\link{raw_data}()}
+\code{\link{midday_change}()}
 }
 \concept{Utility functions}

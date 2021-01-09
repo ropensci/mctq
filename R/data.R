@@ -24,13 +24,13 @@ build_std_mctq <- function(write = FALSE) {
 
     # Create raw dataset --------------------
 
-    std_mctq <- dplyr::tibble(
-
     # Subject 1: Sleeps less than recommended for an adult on workdays and
     #            stretches during work-free days.
 
+    std_mctq <- dplyr::tibble(
+        `ID` = "1", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "5", # numeric | [0-7]
+        `WORK DAYS` = "5", # integer | [0-7]
         `W BED TIME` = "00:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "01:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "15", # duration | M
@@ -52,8 +52,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 2: Inverted values for bed time and sleep preparing on workdays.
 
     dplyr::add_row(
+        `ID` = "2", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "4", # numeric | [0-7]
+        `WORK DAYS` = "4", # integer | [0-7]
         `W BED TIME` = "00:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "23:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "10", # duration | M
@@ -76,8 +77,9 @@ build_std_mctq <- function(write = FALSE) {
     #            days.
 
     dplyr::add_row(
+        `ID` = "3", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "5", # numeric | [0-7]
+        `WORK DAYS` = "5", # integer | [0-7]
         `W BED TIME` = "22:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "23:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "30", # duration | M
@@ -99,8 +101,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 4: Presence of invalid values.
 
     dplyr::add_row(
+        `ID` = "4", # integer | [auto-increment]
         `WORK REGULAR` = "No", # character | Yes/No
-        `WORK DAYS` = "10", # numeric | [0-7] # INVALID
+        `WORK DAYS` = "10", # integer | [0-7] # INVALID
         `W BED TIME` = "27:00", # time of day (0-24h) | HMS, HM, H # INVALID
         `W SLEEP PREP` = "02:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "30", # duration | M
@@ -122,8 +125,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 5: Sleeps more on workdays than work-free days.
 
     dplyr::add_row(
+        `ID` = "5", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character (Yes/No)
-        `WORK DAYS` = "2", # numeric | [0-7]
+        `WORK DAYS` = "2", # integer | [0-7]
         `W BED TIME` = "20:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "2030", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "15", # duration | M
@@ -145,8 +149,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 6: Uses alarm clock on work-free days.
 
     dplyr::add_row(
+        `ID` = "6", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "5", # numeric | [0-7]
+        `WORK DAYS` = "5", # integer | [0-7]
         `W BED TIME` = "00:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "00:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "15", # duration | M
@@ -168,8 +173,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 7: Null MCTQ (invalid case).
 
     dplyr::add_row(
+        `ID` = "7", # integer | [auto-increment]
         `WORK REGULAR` = "", # character | Yes/No
-        `WORK DAYS` = "", # numeric | [0-7]
+        `WORK DAYS` = "", # integer | [0-7]
         `W BED TIME` = "", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "", # duration | M
@@ -191,8 +197,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 8: Did not answer workdays questions.
 
     dplyr::add_row(
+        `ID` = "8", # integer | [auto-increment]
         `WORK REGULAR` = "No", # character | Yes/No
-        `WORK DAYS` = "0", # numeric | [0-7]
+        `WORK DAYS` = "0", # integer | [0-7]
         `W BED TIME` = "", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "", # duration | M
@@ -214,8 +221,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 9: All basic variables have the same values (invalid case).
 
     dplyr::add_row(
+        `ID` = "9", # integer | [auto-increment]
         `WORK REGULAR` = "0", # character | Yes/No
-        `WORK DAYS` = "0", # numeric | [0-7]
+        `WORK DAYS` = "0", # integer | [0-7]
         `W BED TIME` = "0", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "0", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "0", # duration | M
@@ -237,8 +245,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 10: Works 7 days a week and didn't answer work-free days section.
 
     dplyr::add_row(
+        `ID` = "10", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "7", # numeric | [0-7]
+        `WORK DAYS` = "7", # integer | [0-7]
         `W BED TIME` = "23:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "23:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "10", # duration | M
@@ -260,8 +269,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 11: Suspicious values.
 
     dplyr::add_row(
+        `ID` = "11", # integer | [auto-increment]
         `WORK REGULAR` = "No", # character | Yes/No
-        `WORK DAYS` = "6", # numeric | [0-7]
+        `WORK DAYS` = "6", # integer | [0-7]
         `W BED TIME` = "00:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "00:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "120", # duration | M
@@ -283,8 +293,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 12: Ambiguous values.
 
     dplyr::add_row(
+        `ID` = "12", # integer | [auto-increment]
         `WORK REGULAR` = "true", # character | Yes/No # AMBIGUOUS
-        `WORK DAYS` = "5", # numeric | [0-7]
+        `WORK DAYS` = "5", # integer | [0-7]
         `W BED TIME` = "11:00 PM", # time of day (0-24h) | HMS, HM, H # AMBIGUOUS
         `W SLEEP PREP` = "0000", # time of day (0-24h) | HMS, HM, H # AMBIGUOUS
         `W SLEEP LAT` = "00:15", # duration | M #AMBIGUOUS
@@ -306,8 +317,9 @@ build_std_mctq <- function(write = FALSE) {
     # Subject 13: Possible filling error.
 
     dplyr::add_row(
+        `ID` = "13", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "6", # numeric | [0-7]
+        `WORK DAYS` = "6", # integer | [0-7]
         `W BED TIME` = "", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "", # duration | M
@@ -330,8 +342,9 @@ build_std_mctq <- function(write = FALSE) {
     #             carryover effect).
 
     dplyr::add_row(
+        `ID` = "14", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "5", # numeric | [0-7]
+        `WORK DAYS` = "5", # integer | [0-7]
         `W BED TIME` = "22:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "23:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "10", # duration | M
@@ -354,8 +367,9 @@ build_std_mctq <- function(write = FALSE) {
     #             [(s_prep + s_lat) >= se].
 
     dplyr::add_row(
+        `ID` = "15", # integer | [auto-increment]
         `WORK REGULAR` = "Yes", # character | Yes/No
-        `WORK DAYS` = "2", # numeric | [0-7]
+        `WORK DAYS` = "2", # integer | [0-7]
         `W BED TIME` = "22:30", # time of day (0-24h) | HMS, HM, H
         `W SLEEP PREP` = "00:00", # time of day (0-24h) | HMS, HM, H
         `W SLEEP LAT` = "60", # duration | M
@@ -488,6 +502,7 @@ tidy_std_mctq <- function(write = FALSE) {
     pattern_7 <- "(AM|PM)$"
 
     std_mctq <- std_mctq %>% dplyr::transmute(
+        id = as.integer(.data$`ID`),
         regular_work_schedule = dplyr::case_when(
             .data$`WORK REGULAR` == "Yes" ~ TRUE,
             .data$`WORK REGULAR` == "true" ~ TRUE,
