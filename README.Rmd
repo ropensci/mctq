@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The goal of `mctq` is to provide a fast and friendly way to process, analyze and visualize data from the Munich ChronoType Questionnaire (MCTQ).
+The goal of `mctq` is to provide a fast and friendly way to process Munich ChronoType Questionnaire (MCTQ) data on R.
 
 So far, only the standard MCTQ is covered. Future versions will also include tools for MCTQ Shift and µMCTQ.
 
@@ -36,6 +36,11 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("gipsousp/mctq")
 ```
+
+## Contributing
+
+`mctq` is a community project. We invite your participation through issues and pull requests!
+
 ## Code of Conduct
 
 Please note that the `mctq` project is released with a [Contributor Code of Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

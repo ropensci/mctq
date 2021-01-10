@@ -15,9 +15,8 @@ Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff6
 
 <!-- badges: end -->
 
-The goal of `mctq` is to provide a fast and friendly way to process,
-analyze and visualize data from the Munich ChronoType Questionnaire
-(MCTQ).
+The goal of `mctq` is to provide a fast and friendly way to process
+Munich ChronoType Questionnaire (MCTQ) data on R.
 
 So far, only the standard MCTQ is covered. Future versions will also
 include tools for MCTQ Shift and µMCTQ.
@@ -31,6 +30,11 @@ You can install the development version from
 # install.packages("devtools")
 devtools::install_github("gipsousp/mctq")
 ```
+
+## Contributing
+
+`mctq` is a community project. We invite your participation through
+issues and pull requests\!
 
 ## Code of Conduct
 

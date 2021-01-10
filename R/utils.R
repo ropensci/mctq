@@ -241,20 +241,20 @@ midday_change = function(x) {
 #' assign_date()
 assign_date <- function(anterior, posterior) {
 
-    checkmate::check_multi_class(anterior, c("hms", "POSIXct", "POSIXlt"))
-    checkmate::check_multi_class(posterior, c("hms", "POSIXct", "POSIXlt"))
-    check_identical(anterior, posterior, "length")
-
-    out <- dplyr::tibble(anterior = anterior, posterior = posterior)
-
-    if (lubridate::is.POSIXt(anterior)) anterior <- hms::as_hms(anterior)
-    if (lubridate::is.POSIXt(posterior)) posterior <- hms::as_hms(posterior)
-
-    out <- out %>%
-        mutate(dummy = case_when(
-            anterior < posterior ~ 11,
-            anterior > posterior ~ 12,
-            TRUE, 11))
+    # checkmate::check_multi_class(anterior, c("hms", "POSIXct", "POSIXlt"))
+    # checkmate::check_multi_class(posterior, c("hms", "POSIXct", "POSIXlt"))
+    # check_identical(anterior, posterior, "length")
+    #
+    # out <- dplyr::tibble(anterior = anterior, posterior = posterior)
+    #
+    # if (lubridate::is.POSIXt(anterior)) anterior <- hms::as_hms(anterior)
+    # if (lubridate::is.POSIXt(posterior)) posterior <- hms::as_hms(posterior)
+    #
+    # out <- out %>%
+    #     mutate(dummy = case_when(
+    #         anterior < posterior ~ 11,
+    #         anterior > posterior ~ 12,
+    #         TRUE, 11))
 
     # INCOMPLETE
 
@@ -287,32 +287,30 @@ assign_date <- function(anterior, posterior) {
 #' @noRd
 shortest_interval <- function(x, y, ambiguous_value = 0) {
 
-    checkmate::check_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
-    checkmate::check_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
-    check_identical(x, y, "length")
-    checkmate::assert_choice(ambiguous_value, c(0, 24))
-
-    if (lubridate::is.POSIXt(x) || lubridate::is.POSIXt(y)) {
-        x_start <- flat_posixt(x)
-        y_start <- flat_posixt(y)
-    } else {
-        x_start <- convert_to_date_time(x, "POSIXct")
-        y_start <- convert_to_date_time(y, "POSIXct")
-    }
-
-    x_start <- convert_to_date_time(x, "POSIXct")
-    y_start <- convert_to_date_time(y, "POSIXct")
-    x_duration <- lubridate::dhours(convert_to_decimal(x))
-    y_duration <- lubridate::dhours(convert_to_decimal(y))
-
-    x_y_interval <- lubridate::as.interval(y_duration, x_start)
-    y_x_interval <- lubridate::as.interval(x_duration, y_start)
-
-    if (x_y_interval == y_x_interval) {
-
-    }
-
-
+    # checkmate::check_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
+    # checkmate::check_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
+    # check_identical(x, y, "length")
+    # checkmate::assert_choice(ambiguous_value, c(0, 24))
+    #
+    # if (lubridate::is.POSIXt(x) || lubridate::is.POSIXt(y)) {
+    #     x_start <- flat_posixt(x)
+    #     y_start <- flat_posixt(y)
+    # } else {
+    #     x_start <- convert_to_date_time(x, "POSIXct")
+    #     y_start <- convert_to_date_time(y, "POSIXct")
+    # }
+    #
+    # x_start <- convert_to_date_time(x, "POSIXct")
+    # y_start <- convert_to_date_time(y, "POSIXct")
+    # x_duration <- lubridate::dhours(convert_to_decimal(x))
+    # y_duration <- lubridate::dhours(convert_to_decimal(y))
+    #
+    # x_y_interval <- lubridate::as.interval(y_duration, x_start)
+    # y_x_interval <- lubridate::as.interval(x_duration, y_start)
+    #
+    # if (x_y_interval == y_x_interval) {
+    #
+    # }
 
 }
 
@@ -321,10 +319,10 @@ shortest_interval <- function(x, y, ambiguous_value = 0) {
 #' @noRd
 greater_interval <- function(anterior, posterior) {
 
-    out <- shortest_distance(anterior, posterior)
-    out <- convert_to_date_time(out, "POSIXct")
-    out <- convert_to_date_time(out - dhours(24), "hms")
-    out
+    # out <- shortest_distance(anterior, posterior)
+    # out <- convert_to_date_time(out, "POSIXct")
+    # out <- convert_to_date_time(out - dhours(24), "hms")
+    # out
 
 }
 
@@ -428,6 +426,21 @@ message_generator <- function(type = "ok", funny = FALSE) {
             ok_messages <- c("Success", "All in order")
         }
         rlang::inform(sample(ok_messages, 1))
+    }
+
+}
+
+#' @noRd
+close_round <- function(x, digits = 5) {
+
+    pattern_9 <- paste0("\\.", paste(rep(9, digits), collapse = ""))
+    pattern_0 <- paste0("\\.", paste(rep(0, digits), collapse = ""))
+
+    if (stringr::str_detect(x, pattern_9) ||
+        stringr::str_detect(x, pattern_0)) {
+        round(x)
+    } else {
+        x
     }
 
 }

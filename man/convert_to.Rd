@@ -2,8 +2,6 @@
 % Please edit documentation in R/convert_to.R
 \name{convert_to}
 \alias{convert_to}
-\alias{convert_to_}
-\alias{convert_to__}
 \alias{convert_to.character}
 \alias{convert_to.numeric}
 \alias{convert_to.Duration}
@@ -14,7 +12,11 @@
 \alias{convert_to.POSIXt}
 \alias{convert_to.Interval}
 \alias{convert_to_tu}
+\alias{convert_to_ut}
+\alias{convert_to_tt}
 \alias{convert_to_uu}
+\alias{convert_to_pt}
+\alias{convert_to_pu}
 \title{Converts a R object to another}
 \usage{
 convert_to(x, class, ..., quiet = FALSE)
@@ -22,28 +24,30 @@ convert_to(x, class, ..., quiet = FALSE)
 \method{convert_to}{character}(
   x,
   class,
-  orders = c("HMS", "HM", "H"),
   ...,
+  orders = NULL,
   tz = "UTC",
   input_unit = NULL,
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
   ignore_date = TRUE,
+  close_round = TRUE,
   quiet = FALSE
 )
 
 \method{convert_to}{numeric}(
   x,
   class,
-  orders = c("HMS", "HM", "H"),
   ...,
+  orders = NULL,
   tz = "UTC",
   input_unit = NULL,
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
   ignore_date = TRUE,
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -55,6 +59,7 @@ convert_to(x, class, ..., quiet = FALSE)
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -66,6 +71,7 @@ convert_to(x, class, ..., quiet = FALSE)
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -77,6 +83,7 @@ convert_to(x, class, ..., quiet = FALSE)
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -88,6 +95,7 @@ convert_to(x, class, ..., quiet = FALSE)
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -99,7 +107,7 @@ convert_to(x, class, ..., quiet = FALSE)
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
-  ignore_date = TRUE,
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -112,6 +120,7 @@ convert_to(x, class, ..., quiet = FALSE)
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
   ignore_date = TRUE,
+  close_round = TRUE,
   quiet = FALSE
 )
 
@@ -123,44 +132,56 @@ convert_to(x, class, ..., quiet = FALSE)
   output_unit = NULL,
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
+  close_round = TRUE,
   quiet = FALSE
 )
 
 convert_to_tu(x, output_unit, ...)
 
+convert_to_ut(x, class, input_unit, ...)
+
+convert_to_tt(x, class, ...)
+
 convert_to_uu(x, input_unit, output_unit, ...)
+
+convert_to_pt(x, class, orders, ...)
+
+convert_to_pu(x, orders, output_unit, ...)
 }
 \arguments{
 \item{x}{Any R object, provided that it has an assigned method.}
 
 \item{class}{A string indicating the class of the output.}
 
+\item{...}{Additional arguments to be passed to or from methods.}
+
 \item{quiet}{(optional) A logical value indicating if warnings or messages
 are allowed with the output (default: \code{FALSE}).}
 
 \item{orders}{(optional) A character vector of date/time formats to parse a
-\code{x} value of class \code{character} or \code{numeric} (default:
-\code{c("HMS", "HM", "H")}).}
+\code{x} value of class \code{character} or \code{numeric}.}
 
 \item{tz}{(optional) A string indicating the time zone with which to
-convert/parse \code{x}.}
+convert/parse \code{x} (defaul: \code{"UTC"}).}
 
 \item{input_unit}{(optional) A string indicating the unit of \code{x}.}
 
 \item{output_unit}{(optional) A string indicating the desire output unit.}
 
 \item{month_length}{(optional) A \code{duration} object or a non negative numeric
-value with the number of seconds equivalent to the month length. See topic
-"Year and month lengths" in the details section to learn more (default:
+value with the number of seconds equivalent to the month length (default:
 \code{lubridate::dmonths()}, which is equivalent to 30.4375 days).}
 
 \item{year_length}{(optional) A \code{duration} object or a non negative numeric
-value with the number of seconds equivalent to the year length. Ssee topic
-"Year and month lengths" in the details section to know more (default:
+value with the number of seconds equivalent to the year length (default:
 \code{lubridate::dyears()}, which is equivalent to 365.25 days).}
 
 \item{ignore_date}{(optional) A logical value indicating if dates must be
-ignored from \code{Date} or \code{POSIXt} objects, when converting they to \code{numeric}.}
+ignored from \code{Date} or \code{POSIXt} objects when converting they to \code{numeric}.}
+
+\item{close_round}{(optional) A logical value indicating if numbers with
+decimals starting with five leading 0s or 9s must be rounded
+(\emph{e.g.} 1.99999) (default: \code{TRUE}).}
 }
 \value{
 A R object of the indicated class.
@@ -168,12 +189,12 @@ A R object of the indicated class.
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{convert_to} converts a R object to another object of a predefined class. It
-have the mission to facilitate conversions between any kind of R object in a
+\code{convert_to} converts a R object to another object of a predefined class. Its
+mission is to facilitate conversions between any kind of R object in a
 simple and fast way.
 
 This function also supports date/time parsing and value transformations.
-Check the details section to learn more.
+Check Details section to learn more.
 }
 \details{
 \code{convert_to} was designed to be a simple to use function with powerful
@@ -186,51 +207,57 @@ chapter "Technical Representation of Data" from Loo and Jonge
 (\href{https://bit.ly/3pVuUdt}{2018}).
 \subsection{Wrappers}{
 
-\code{convert_to} has two wrappers functions for convenience.
+\code{convert_to} have some wrappers functions for convenience.
 
-\code{convert_to_tu} was made to help make transformations from date/time objects
-to units more easily.\preformatted{convert_to_tu <- function(x, output_unit, ...)
-}
+\code{convert_to_tu} help make conversions from date/time objects to units.
 
-\code{convert_to_uu} was made to help make transformations from unit to unit
-more easily.\preformatted{convert_to_uu <- function(x, input_unit, output_unit, ...)
-}
+\code{convert_to_ut} help make conversions from units to date/time objects.
+
+\code{convert_to_tt} help make conversions from date/time objects to other
+date/time objects.
+
+\code{convert_to_uu} help make conversions from unit to other units.
+
+\code{convert_to_pt} help make conversions from \code{character} or \code{numeric} objects
+to date/time objects.
+
+\code{convert_to_pu} help make conversions from \code{character} or \code{numeric} objects
+to units.
 }
 
 \subsection{\code{class} argument}{
 
-The \code{class} argument indicates the desired class of the output object . At
-the moment, it accepts the following values: \code{"character"}, \code{"integer"},
-\code{"double"}, \code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, \code{"hms"},
-\code{"Date"}, \code{"POSIXct"}, and \code{"POSIXlt"} (case insensitive).
+The \code{class} argument indicates the desired class of the output object . It
+accepts the following values: \code{"character"}, \code{"integer"}, \code{"double"},
+\code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, \code{"hms"}, \code{"Date"},
+\code{"POSIXct"}, and \code{"POSIXlt"} (case insensitive).
 }
 
 \subsection{\code{orders} argument}{
 
 \code{orders} is an optional argument to indicate date/time formats for
-parsing \code{character} and \code{numeric} objects. This kind of parsing is mainly
-based on \code{\link[lubridate:parse_date_time]{lubridate::parse_date_time()}}. Please check it documentation
-to set the right formats for your input (default: \code{c("HMS", "HM", "H")}).
+parsing \code{character} or \code{numeric} objects. This parsing is mainly
+based on \code{\link[lubridate:parse_date_time]{lubridate::parse_date_time()}}, please check it documentation
+to set the right formats for your input.
 }
 
 \subsection{\code{input_unit} and \code{output_unit} arguments}{
 
-To be able to transform date/time objects and numeric values to decimal time,
-radians, and degrees, \code{convert_to} need to know the \code{input_unit}
-(default: \code{NULL}) of \code{x} and the \code{output_unit} (default: \code{NULL}).
-Transformations of Date/time objects only need the latter.
+To be able to convert date/time objects and \code{numeric} objects to decimal
+time, radians, or degrees, \code{convert_to} need to know the unit of \code{x} and the
+output unit. Conversions of date/time objects only need the latter.
 
-At the moment, valid values for this two variables are:
+Valid values for this two arguments are:
 \itemize{
-\item \code{"S"}: for decimal seconds.
-\item \code{"M"}: for decimal minutes.
-\item \code{"H"}: for decimal hours.
-\item \code{"d"}: for decimal days.
-\item \code{"W"}: for decimal weeks.
-\item \code{"m"}: for decimal months.
-\item \code{"y"}: for decimal years.
-\item \code{"date_decimal"}: for decimal dates
-\item \code{"rad"}: for radians.
+\item \code{"S"}: for decimal seconds;
+\item \code{"M"}: for decimal minutes;
+\item \code{"H"}: for decimal hours;
+\item \code{"d"}: for decimal days;
+\item \code{"W"}: for decimal weeks;
+\item \code{"m"}: for decimal months;
+\item \code{"y"}: for decimal years;
+\item \code{"date_decimal"}: for decimal dates;
+\item \code{"rad"}: for radians;
 \item \code{"deg"}: for degrees.
 }
 }
@@ -269,19 +296,18 @@ Your output can change according to your settings. Here are some examples.
 indication of year, \code{convert_to} will return only a character string with a
 \code{hms} time.
 
-You can also parse a \code{character} value and transform it direct to an unit.
-See examples section to learn more.
+You can also parse a \code{character} object and transform it direct to an unit.
+See Examples section to know how.
 \itemize{
 \item When \code{class = "numeric"}
 }
 
-\code{convert_to} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class}
-is set to \code{"numeric"}. For dates or date-time objects, the output will be the
-total of seconds from the UNIX origin date (\verb{1970-01-01 00:00:00 UTC}) (See
-\href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to know more). For time
+\code{convert_to} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class} is set to
+\code{"numeric"}. For dates or date-time objects, the output will be the total of
+seconds from the UNIX origin (\verb{1970-01-01 00:00:00 UTC}) (See \href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to know more). For time
 values, the output will be the total of seconds.
 
-The output for \code{class = "numeric"} can also be different if \code{input_unit} and
+The output \code{class = "numeric"} can also be different if \code{input_unit} and
 \code{output_unit} are assigned.
 \itemize{
 \item \code{Interval} objects
@@ -307,7 +333,7 @@ To address this problem, \code{convert_to} use as default the mean of
 possible values for months and years, used to calculate month and year
 durations in the lubridate package (see: \code{\link[lubridate:duration]{lubridate::dmonths()}} and
 \code{\link[lubridate:duration]{lubridate::dyears()}}). If you like, you can reset this assigning other
-values to the arguments \code{month_length} and \code{year_length}.
+values to \code{month_length} and \code{year_length}.
 
 \code{month_length} and \code{year_length} values must be assigned with the number of
 seconds equivalent to unit duration. You can also assign a lubridate duration
@@ -329,25 +355,35 @@ to store time data.
 }
 }
 \examples{
-## ** conversion of character or numeric values to date/time objects **
-convert_to("10:00 PM", "hms", "IMp")
-#> [1] 22:00:00 # Expected
-convert_to("21:00 AM", "Period")
-#> [1] "21H 0M 0S" # Expected
-convert_to("2020-01-01 10:00:00", "Date", "ymd HMS")
-#> [1] "2020-01-01" # Expected
-convert_to(13, "POSIXct", "H")
-#> [1] "0000-01-01 13:00:00 UTC" # Expected
-convert_to("2020-01-01 12:31:05", "POSIXct", "ymd HMS", tz = "EST")
-#> [1] "2020-01-01 12:31:05 EST" # Expected
-convert_to("03/07/1982 13:00", "POSIXlt", "dmy HM")
-#> [1] "1982-07-03 13:00:00 UTC" # Expected
+## ** conversion from date/time objects to units **
+convert_to(lubridate::dhours(), "numeric", output_unit = "M")
+#> [1] 60 # Expected
+convert_to(lubridate::days(), "numeric", output_unit = "rad")
+#> [1] 6.283185 # Expected
+x <- lubridate::as_datetime("1985-10-20 12:00:00")
+convert_to(x, "numeric", output_unit = "d")
+#> [1] 0.5 # Expected
+x <- lubridate::as_datetime("1985-10-20 12:00:00")
+convert_to(x, "numeric", output_unit = "d", ignore_date = FALSE)
+#> [1] 5771.5 # Expected (days since UNIX origin)
+convert_to(hms::parse_hm("15:45:00"), "numeric", output_unit = "H")
+#> [1] 15.75 # Expected
+convert_to_tu(hms::parse_hm("15:45:00"), "H") # Wrapper function
+#> [1] 15.75 # Expected
 
-## ** conversion of date/time objects to decimal time, radians or degrees **
-convert_to("1015", "numeric", output_unit = "rad")
-#> [1] 2.683444
+## ** conversion from units to date/time objects **
+convert_to(360, "period", input_unit = "deg")
+#> [1] "1d 0H 0M 0S" # Expected
+convert_to(6.5, "posixct", input_unit = "H")
+#> [1] "0000-01-01 06:30:00 UTC" # Expected
+convert_to(365.25, "hms", input_unit = "d")
+#> 8766:00:00 # Expected
+convert_to(1, "posixlt", input_unit = "W")
+#> "0000-01-08 UTC" # Expected
 convert_to(1.308997, "duration", input_unit = "rad")
-#> [1] "18000.0432s (~5 hours)"
+#> [1] "18000s (~5 hours)" # Expected
+convert_to_ut(1.308997, "duration", "rad") # Wrapper function
+#> [1] "18000s (~5 hours)" # Expected
 
 ## ** conversion between date/time objects **
 convert_to(lubridate::duration(120), "hms")
@@ -356,13 +392,61 @@ convert_to(hms::as_hms("13:45:05"), "POSIXct")
 #> [1] "0000-01-01 13:45:05 UTC" # Expected
 convert_to(lubridate::period(60), "POSIXct")
 #> [1] "0000-01-01 00:01:00 UTC" # Expected
-convert_to(as.POSIXct("2020-01-01 12:31:05", tz = "EST"),
-                     "POSIXct")
+convert_to(lubridate::as_date("1765-10-05"), "POSIXct")
+#> [1] "1765-10-05 UTC" # Expected
+x <- lubridate::ymd_hms("2020-01-01 12:31:05", tz = "EST")
+convert_to(x, "POSIXct")
+#> [1] "2020-01-01 12:31:05 UTC" # Expected
+convert_to_tt(x, "POSIXct") # Wrapper function
 #> [1] "2020-01-01 12:31:05 UTC" # Expected
 
-## ** transformation between numeric units **
+## ** conversion between units **
 convert_to(1.308997, "numeric", input_unit = "rad", output_unit = "H")
 #> [1] 5 # Expected
+convert_to(60, "numeric", input_unit = "deg", output_unit = "rad")
+#> [1] 1.047198 # Expected
+convert_to(1, "numeric", input_unit = "m", output_unit = "y")
+#> [1] 0.08333333 # Expected
+convert_to(0.2617994, "numeric", input_unit = "rad", output_unit = "H")
+#> [1] 1 # Expected
+convert_to(40, "numeric", input_unit = "d", output_unit = "deg")
+#> [1] 14400 # Expected
+convert_to_uu(40, "d", "deg") # Wrapper function
+#> [1] 14400 # Expected
+
+## ** conversion from character or numeric objects to date/time objects **
+convert_to("19:55:17", "duration", orders = "HMS")
+#> [1] "71717s (~19.92 hours)" # Expected
+convert_to("21:00", "Period", orders = "HM")
+#> [1] "21H 0M 0S" # Expected
+convert_to(1, "difftime", orders = "H")
+#> Time difference of 3600 secs # Expected
+convert_to("10:00 PM", "hms", orders = "IMp")
+#> [1] 22:00:00 # Expected
+convert_to("2020-01-01 10:00:00", "Date", orders = "ymd HMS")
+#> [1] "2020-01-01" # Expected
+convert_to(13, "POSIXct", orders = "H")
+#> [1] "0000-01-01 13:00:00 UTC" # Expected
+convert_to("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS", tz = "EST")
+#> [1] "2020-01-01 12:31:05 EST" # Expected
+convert_to("03/07/1982 13:00", "POSIXlt", orders = "dmy HM")
+#> [1] "1982-07-03 13:00:00 UTC" # Expected
+convert_to_pt("03/07/1982 13:00", "POSIXlt", "dmy HM") # Wrapper function
+#> [1] "1982-07-03 13:00:00 UTC" # Expected
+
+## ** conversion from character or numeric objects to units **
+convert_to("0145", "numeric", orders = "HM", output_unit = "M")
+#> [1] 105 # Expected
+convert_to(45, "numeric", orders = "M", output_unit = "H")
+#> [1] 0.75 # Expected
+convert_to(4500, "numeric", orders = "HM", output_unit = "d")
+#> [1] 1.875 # Expected
+convert_to("2020-03-15 02", "numeric", orders = "ymd H", output_unit = "H")
+#> [1] 2 # Expected
+convert_to("01:00", "numeric", orders = "HM", output_unit = "rad")
+#> [1] 0.261799 # Expected
+convert_to_pu("01:00", "HM", "rad") # Wrapper function
+#> [1] 0.2617994 # Expected
 }
 \references{
 Van der Loo, M., & De Jonge, E. (2018).

@@ -475,8 +475,8 @@ tidy_std_mctq <- function(write = FALSE) {
     ## vectorised if/else operations, but don't do lazy evaluation, _i.e_ all
     ## parts of the statement are evaluated and then the condition is used to
     ## splice together the results to be returned. This can results in erroneous
-    ## warnings. That's why you may see some `suppressWarnings()` or `quiet
-    ## arguments` below. You must be very careful while using this kind of
+    ## warnings. That's why you may see some `suppressWarnings()` or `quiet`
+    ## arguments below. You must be very careful while using this kind of
     ## evaluations. __c.f.__ <http://bit.ly/2X1J4x0> and
     ## <http://bit.ly/2X5MUFC>.
 

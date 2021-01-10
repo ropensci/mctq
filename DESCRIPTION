@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Daniel",
              family = "Vartanian",
-             role = c("aut", "cre"),
+             role = c("aut", "cre", "cph"),
              email = "danvartan@gmail.com",
              comment = c(ORCID = "0000-0001-7782-759X")),
       person(given = "Ana Amélia",
@@ -20,6 +20,7 @@ Authors@R:
              role = c("cph", "fnd")),
       person(given = "USP",
              role = c("fnd")))
+Maintainer: Daniel Vartanian <danvartan@gmail.com>
 Description: A set of tools for processing Munich ChronoType Questionnaire 
     (MCTQ) data.
 License: MIT + file LICENSE
