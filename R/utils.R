@@ -1,138 +1,43 @@
-#' Get paths to MCTQ raw datasets
+#' Change dates by time of day
 #'
 #' @description
 #'
-#' `mctq` comes bundled with raw fictional datasets for testing and learning.
-#' This function make it easy to access their paths.
+#' `midday_change()` changes the dates of `POSIXt` objects accordingly to the
+#' time of day registered in the object values. The function do this by flatting
+#' the date to `0000-01-01` and them adding a day if the hour is lower than 12.
 #'
-#' @param file A character string with the raw dataset file name. If `NULL`,
-#'   all raw dataset file names will be listed (default: `NULL`).
+#' This can be use to help determine when a subject's sleep episode started and
+#' ended, if all that you have is the time of sleep onset and offset. Note that
+#' this method can only be used to this matter if the sleep duration have a too
+#' high value.
 #'
-#' @return If `path = NULL`, returns a character vector with all raw dataset
-#'   file names available. Else, returns `file` path.
+#' @param x A `POSIXt` vector.
 #'
-#' @family Utility functions
-#' @noRd
+#' @return A vector of the same `POSIXt` class type as `x`.
 #'
-#' @examples
-#' \dontrun{
-#' raw_data()
-#' raw_data(raw_data()[1])
-#' raw_data("std_mctq.csv")
-#' }
-raw_data <- function(file = NULL) {
-
-    checkmate::assert_string(file, null.ok = TRUE)
-
-    if (is.null(file)) {
-        dir(system.file("extdata", package = "mctq"))
-    } else {
-        system.file("extdata", file, package = "mctq", mustWork = TRUE)
-    }
-
-}
-
-#' Return a model data for the MCTQ
-#'
-#' @description
-#'
-#' `mctq` package comes bundled with fictional datasets for different versions
-#' of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
-#' \strong{\eqn{\mu}}mctq). `model_data` make it easy to access them.
-#'
-#' At the moment, __only the standard MCTQ is available__.
-#'
-#' @param model A `character` string indicating the data model to return. Valid
-#'   values are: `"standard"`, "`shift"`, `"micro"`,  (default: `"standard"`).
-#'
-#' @return A tibble with a MCTQ model data.
 #' @family Utility functions
 #' @export
 #'
 #' @examples
-#' \dontrun{model_data()}
-model_data <- function(model = "standard") {
-
-    model <- stringr::str_to_lower(model)
-    checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
-
-    if (model %in% c("std", "standard")) {
-        mctq::std_mctq
-    } else if (model == "shift") {
-        NA # mctq::mctq_shift
-    } else if (model == "micro") {
-        NA # mctq::micro_mctq
-    } else {
-        rlang::abort("Critical error")
-    }
-
-}
-
-#' Load a delimited file to R
+#' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
+#' midday_change(x)
+#' #> [1] "0000-01-01 20:02:01 UTC" # Expected
 #'
-#' @description
-#'
-#' `load_data` is a wrapper function for [readr::read_delim()] to help simple
-#' data loading. You don't need to use this function if your file is already
-#' loaded on R.
-#'
-#' If this function doesn't work for your file, we recommend using the
-#' [readr::readr] package to load it. If you're using [RStudio
-#' IDE](https://rstudio.com/), you can also go to `Import Dataset`, on the
-#' environment tab, to load your data.
-#'
-#' @param file A character string indicating the file address to load. If
-#'   unassigned, a dialog window will open allowing browsing.
-#' @param delim A character string containing the field separator in `file`
-#'   (default: `","`).
-#' @param na A character vector indicating values that must be interpreted
-#'   as `NA` (default: `c("", " ", "NA")`).
-#' @param col_types A `NULL` value or a [readr::cols()] specification to set
-#'   how `file` columns must be treated. Check [readr::read_delim()] to learn
-#'   more (default: `readr::cols(.default = "c")`, which imports all columns
-#'   as `character`).
-#' @param trim_ws A logical value indicating if leading and/or trailing
-#'   whitespaces must be trimmed from each field (default: `TRUE`).
-#' @param skip An integerish value, greater than 0, indicating the number of
-#'   rows to skip when reading `file` (default: `0`).
-#' @param skip_empty_rows A logical value indicating if blank rows must be
-#'   ignored altogether. If this option is `TRUE`, then blank rows will
-#'   not be represented at all. If it is `FALSE` then they will be represented
-#'   by `NA` values in all the columns (default: `TRUE`).
-#'
-#' @return An invisible tibble.
-#' @family Utility functions
-#' @importFrom magrittr %>%
-#' @export
-#'
-#' @examples
-#' \dontrun{load_data(raw_data()[1])}
-load_data <- function(file = file.choose(),
-                      delim = ",",
-                      na = c("", " ", "NA"),
-                      col_types = readr::cols(.default = "c"),
-                      trim_ws = TRUE,
-                      skip = 0,
-                      skip_empty_rows = TRUE) {
+#' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
+#' midday_change(x)
+#' #> [1] "0000-01-02 07:45:32 UTC" # Expected
+midday_change = function(x) {
 
-    checkmate::assert_string(file)
-    checkmate::assert_file_exists(file)
-    checkmate::assert_string(delim)
-    checkmate::assert_character(na, any.missing = FALSE)
-    checkmate::assert_class(col_types, "col_spec", null.ok = TRUE)
-    checkmate::assert_flag(trim_ws)
-    checkmate::assert_count(skip)
-    checkmate::assert_flag(skip_empty_rows)
+    assert_posixt(x, null.ok = FALSE)
 
-    invisible(
-        file %>%
-        readr::read_delim(delim = delim,
-                          na = na,
-                          col_types = col_types,
-                          trim_ws = trim_ws,
-                          skip = skip,
-                          skip_empty_rows = skip_empty_rows) %>%
-        dplyr::as_tibble())
+    x <- flat_posixt(x)
+
+    x <- dplyr::case_when(
+        lubridate::hour(x) < 12 ~ change_day(x, 2),
+        TRUE ~ x
+    )
+
+    x
 
 }
 
@@ -140,13 +45,12 @@ load_data <- function(file = file.choose(),
 #'
 #' @description
 #'
-#' `flat_posixt` changes the dates of `POSIXt` objects to `0000-01-01`. This can
-#' be use to standardizing a point of origin to time values.
+#' `flat_posixt()` changes the dates of `POSIXt` objects to `0000-01-01`. This
+#' can be use to standardizing a point of origin to time values.
 #'
 #' @param x A `POSIXt` vector.
 #'
-#' @return A vector of the same `POSIXt` class type as `x` with `0000-01-01` as
-#'   date.
+#' @return A vector of the same `POSIXt` class type as `x`.
 #'
 #' @family Utility functions
 #' @export
@@ -168,109 +72,36 @@ flat_posixt = function(x) {
 
 }
 
-#' Change dates by time of day
+#' Change day of a `Date` or `POSIXt` object
 #'
 #' @description
 #'
-#' `midday_change` changes the dates of `POSIXt` objects accordingly to the time
-#' of day registered in the object values. The function do this by flatting the
-#' date to `0000-01-01` and them adding a day if the hour is lower than 12.
+#' `change_day()` is a utility function that help change days of `Date` or
+#' `POSIXt` objects.
 #'
-#' This can be use to help determine when a subject's sleep episode started and
-#' ended, if all that you have is the time of sleep onset and offset. Note that
-#' this method can only be used to this matter if the sleep duration have a too
-#' high value.
+#' @param x A `Date` or `POSIXt` vector.
+#' @param day A number, between 1-31 indicating the new day of `x`.
 #'
-#' @param x A `POSIXt` vector.
-#'
-#' @return A vector of the same `POSIXt` class type as `x` with date
-#'   `0000-01-01` or `0000-01-02`.
+#' @return A `Date` or `POSIXt` vector.
 #'
 #' @family Utility functions
-#' @export
+#' @noRd
 #'
 #' @examples
-#' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
-#' midday_change(x)
-#' #> [1] "0000-01-01 20:02:01 UTC" # Expected
-#'
-#' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
-#' midday_change(x)
-#' #> [1] "0000-01-02 07:45:32 UTC" # Expected
-midday_change = function(x) {
+#' change_day(lubridate::as_date("1888-02-07"), 20)
+#' #> [1] "1888-02-20" # Expected
+#' change_day(lubridate::ymd_hms("1987-12-24 07:45:32"), 15)
+#' #> [1] "1987-12-15 07:45:32 UTC" # Expected
+change_day <- function(x, day) {
 
-    assert_posixt(x, null.ok = FALSE)
+    classes <- c("Date", "POSIXct", "POSIXlt")
 
-    x <- flat_posixt(x)
+    checkmate::assert_multi_class(x, classes, null.ok = FALSE)
+    checkmate::assert_number(day, lower = 1, upper = 31)
 
-    for (i in seq_along(x)) {
-        if (!(is.na(x[i]))) {
-            if (lubridate::hour(x[i]) < 12) {
-                lubridate::day(x[i]) <- 2
-            }
-        }
-    }
+    lubridate::day(x) <- day
 
     x
-
-}
-
-#' Assign dates to 2 sequential hours
-#'
-#' __UNDER DEVELOPMENT__
-#'
-#' `assign_date` is a simple utility function to assign dates to two sequential
-#' hours. It can facilitate time arithmetic.
-#'
-#' @details
-#'
-#' `assign_date` can also be use for vectorized operations.
-#'
-#' `POSIXt` values passed as argument will be strip of their dates in favor
-#' for the new date assignment.
-#'
-#' @param anterior,posterior A `hms` or `POSIXt` vector.
-#'
-#' @return A named list with `anterior` and `posterior` values transformed.
-#'
-#' @export
-#'
-#' @examples
-#' x <- lubridate::ymd_hms("2000-01-01 10:00:00")
-#' y <- hms::parse_hm("22:00")
-#' assign_date()
-assign_date <- function(anterior, posterior) {
-
-    # checkmate::check_multi_class(anterior, c("hms", "POSIXct", "POSIXlt"))
-    # checkmate::check_multi_class(posterior, c("hms", "POSIXct", "POSIXlt"))
-    # check_identical(anterior, posterior, "length")
-    #
-    # out <- dplyr::tibble(anterior = anterior, posterior = posterior)
-    #
-    # if (lubridate::is.POSIXt(anterior)) anterior <- hms::as_hms(anterior)
-    # if (lubridate::is.POSIXt(posterior)) posterior <- hms::as_hms(posterior)
-    #
-    # out <- out %>%
-    #     mutate(dummy = case_when(
-    #         anterior < posterior ~ 11,
-    #         anterior > posterior ~ 12,
-    #         TRUE, 11))
-
-    # INCOMPLETE
-
-}
-
-#' __UNDER DEVELOPMENT__
-#'
-#' @noRd
-sum_hms <- function(anterior, posterior) {
-
-}
-
-#' __UNDER DEVELOPMENT__
-#'
-#' @noRd
-diff_hms <- function(anterior, posterior) {
 
 }
 
@@ -278,14 +109,14 @@ diff_hms <- function(anterior, posterior) {
 #'
 #' @description
 #'
-#' `is_time` is a logical checker for objects of class `difftime`, `Duration`,
-#' `hms`, `Period`, `Date`, `POSIXct`, `POSIXlt`, and `Interval`.
+#' `is_time()` is a logical checker for objects of class `Duration`, `Period`,
+#' `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, and `Circular`.
 #'
 #' @param x Any kind of object.
 #' @param rm_date A logical value indicating if `Date` objects should be removed
 #'   from the check (default: `FALSE`)
 #'
-#' @return TRUE or FALSE depending on whether its argument is of character type or not.
+#' @return A logical value.
 #' @family Utility functions
 #' @export
 #'
@@ -317,6 +148,20 @@ is_time <- function(x, rm_date = FALSE) {
     }
 
     checkmate::test_multi_class(x, classes)
+
+}
+
+#' __UNDER DEVELOPMENT__
+#'
+#' @noRd
+sum_hms <- function(anterior, posterior) {
+
+}
+
+#' __UNDER DEVELOPMENT__
+#'
+#' @noRd
+diff_hms <- function(anterior, posterior) {
 
 }
 
@@ -403,5 +248,12 @@ swap_if <- function(x, y, condition = "x > y") {
     y <- dplyr::if_else(eval(parse(text = condition)), a, b)
 
     list(x = x, y = y)
+
+}
+
+#' @noRd
+count_na <- function(x) {
+
+    length(which(is.na(x)))
 
 }

@@ -3,7 +3,7 @@
 \name{shortest_interval}
 \alias{shortest_interval}
 \alias{longer_interval}
-\title{Find the shortest interval between two hours}
+\title{Return the shortest interval between two hours}
 \usage{
 shortest_interval(x, y, class = "hms", inverse = FALSE)
 
@@ -14,24 +14,27 @@ longer_interval(x, y, class = "hms")
 
 \item{class}{A string indicating the object class of the output.}
 
-\item{inverse}{A logical value indicating if the function must return the
+\item{inverse}{A logical value indicating if the function must return a
 inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
 }
+\value{
+A \code{hms} object or a type of object indicated on \code{class}.
+}
 \description{
-\code{shortest_interval()} finds the shortest interval between two \code{hms} or
-\code{POSIXt} objects. This is useful for linear time arithmetic, because there
-is always two possible intervals between two hour values with no date
+\code{shortest_interval()} finds and return the shortest interval between two
+\code{hms} or \code{POSIXt} objects. This is useful for time arithmetic, because
+there's always two possible intervals between two hour values with no date
 reference.
 }
 \details{
-\subsection{Two intervals problem}{
+\subsection{The two intervals problem}{
 
-Given two hours, \code{x} and \code{y}, without date references, there always will be
+Given two hours, \code{x} and \code{y}, without date references, there will be always
 two possible intervals between them, as illustrated below.
 
 To figure out what interval is the  shortest or longer, \code{shortest_interval()}
-checks two scenarios: 1. When \code{x} comes before \code{y}; and 2. when \code{x}
-comes after \code{y}. This only works if \code{x} value is smaller than \code{y}. This
+checks two scenarios: 1. When \code{x} comes before \code{y}; and 2. when \code{x} comes
+after \code{y}. This only works if \code{x} value is smaller than \code{y}, therefore, the
 function will make sure to swap \code{x} and \code{y} values if the latter assumption
 is not true.
 
@@ -44,17 +47,18 @@ interval with 24 hours of length (from \code{x} to \code{x} + 1 day).\preformatt
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->
               16h           8h             16h
-           2nd int.      1st int.        2nd int.
+          longer int.   shorter int.    longer int.
 
               day 1                      day 2
      y                   x       y                   x
    13:00               08:00   13:00               08:00
 -----|-------------------|-------|-------------------|----->
               19h           5h            19h
-            2nd int.     1st int.       2nd int.
+          longer int.   shorter int.   longer int.
 
-    x,y            x,y            x,y            x,y
-   10:00          10:00          10:00          10:00
+    x,y             x,y             x,y             x,y
+     x               y               x               y
+   10:00           10:00           10:00           10:00
 -----|---------------|---------------|---------------|----->
     0h              0h              0h              0h
             24h             24h             24h
@@ -76,6 +80,11 @@ Valid \code{class} values are: \code{"Duration"}, \code{"Period"}, \code{"hms"},
 dates. Only the hours will be considered.
 }
 
+\subsection{\code{NA} values}{
+
+\code{shortest_interval()} will return \code{NA} if \code{x} or \code{y} are \code{NA}.
+}
+
 \subsection{\code{longer_interval()} function}{
 
 \code{longer_interval()} do the inverse of \code{shortest_interval()}, \emph{i.e}
@@ -84,15 +93,41 @@ finds the longer interval between two hours. It's just a wrapper for
 }
 }
 \examples{
+## ** finding the shortest interval between two hour values **
 x <- hms::parse_hms("23:00:00")
 y <- hms::parse_hms("01:00:00")
 shortest_interval(x, y)
 #> 02:00:00 # Expected
+x <- lubridate::as_datetime("1985-01-15 12:00:00")
+y <- lubridate::as_datetime("2020-09-10 12:00:00")
+shortest_interval(x, y)
+#> 00:00:00 # Expected
+
+## ** finding the longer interval between two hour values **
+x <- lubridate::parse_date_time("01:10:00", "HMS")
+y <- lubridate::parse_date_time("11:45:00", "HMS")
 longer_interval(x, y)
-#> 22:00:00 # Expected
+#> 10:35:00 # Expected
+
+x <- lubridate::as_datetime("1915-02-14 05:00:00")
+y <- lubridate::as_datetime("1970-07-01 05:00:00")
+longer_interval(x, y)
+#> 24:00:00 # Expected
+
+## ** changing the output object class **
+x <- as.POSIXct("1988-10-05 02:00:00")
+y <- as.POSIXlt("2100-05-07 13:30:00")
 shortest_interval(x, y, "Interval")
-#> [1] 0000-01-01 23:00:00 UTC--0000-01-02 01:00:00 UTC # Expected
-longer_interval(x, y, "Interval")
-#> [1] 0000-01-01 01:00:00 UTC--0000-01-01 23:00:00 UTC # Expected
+#> [1] 0000-01-01 02:00:00 UTC--0000-01-01 13:30:00 UTC # Expected
+longer_interval(x, y, "Duration")
+#> [1] "45000s (~12.5 hours)" # Expected
+shortest_interval(x, y, "Period")
+#> [1] "11H 30M 0S" # Expected
+longer_interval(x, y, "POSIXct")
+#> [1] "0000-01-01 12:30:00 UTC" # Expected
+}
+\seealso{
+Other Time arithmetic: 
+\code{\link{assign_date}()}
 }
 \concept{Time arithmetic}

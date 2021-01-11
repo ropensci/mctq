@@ -10,13 +10,12 @@ midday_change(x)
 \item{x}{A \code{POSIXt} vector.}
 }
 \value{
-A vector of the same \code{POSIXt} class type as \code{x} with date
-\code{0000-01-01} or \code{0000-01-02}.
+A vector of the same \code{POSIXt} class type as \code{x}.
 }
 \description{
-\code{midday_change} changes the dates of \code{POSIXt} objects accordingly to the time
-of day registered in the object values. The function do this by flatting the
-date to \code{0000-01-01} and them adding a day if the hour is lower than 12.
+\code{midday_change()} changes the dates of \code{POSIXt} objects accordingly to the
+time of day registered in the object values. The function do this by flatting
+the date to \code{0000-01-01} and them adding a day if the hour is lower than 12.
 
 This can be use to help determine when a subject's sleep episode started and
 ended, if all that you have is the time of sleep onset and offset. Note that

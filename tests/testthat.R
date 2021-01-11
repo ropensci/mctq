@@ -1,4 +1,5 @@
 library(testthat)
+library(checkmate)
 library(mctq)
 library(lubridate)
 library(hms)

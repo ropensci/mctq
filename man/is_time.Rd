@@ -13,11 +13,11 @@ is_time(x, rm_date = FALSE)
 from the check (default: \code{FALSE})}
 }
 \value{
-TRUE or FALSE depending on whether its argument is of character type or not.
+A logical value.
 }
 \description{
-\code{is_time} is a logical checker for objects of class \code{difftime}, \code{Duration},
-\code{hms}, \code{Period}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, and \code{Interval}.
+\code{is_time()} is a logical checker for objects of class \code{Duration}, \code{Period},
+\code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, \code{Interval}, and \code{Circular}.
 }
 \examples{
 is_time(lubridate::dhours())

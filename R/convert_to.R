@@ -339,13 +339,24 @@ convert_to.character <- function(x, class, ..., orders = NULL, tz = "UTC",
 
     class <- tolower(class)
 
+    # Remove extra whitespaces and assign NA -----
+
+    if (is.character(x)) {
+        x <- stringr::str_squish(x)
+        for (i in c("", "NA")) {
+            x <- dplyr::na_if(x, i)
+        }
+    }
+
     # Parse and/or transform values -----
 
+    check <- identical(count_na(x), count_na(shush(as.numeric(x))))
+
     if (is.null(orders)) {
-        if (!is.null(input_unit) && !is.null(output_unit) &&
-            !any((is.na(shush(as.numeric(x))))) &&
+        if (!is.null(input_unit) && !is.null(output_unit) && check &&
             class %in% c("integer", "double", "numeric")) {
-            x <- convert_to_unit(as.numeric(x), input_unit = input_unit,
+            x <- convert_to_unit(shush(as.numeric(x)),
+                                 input_unit = input_unit,
                                  output_unit = output_unit,
                                  month_length = month_length,
                                  year_length = year_length,
@@ -355,10 +366,10 @@ convert_to.character <- function(x, class, ..., orders = NULL, tz = "UTC",
 
             if (class %in% "integer") return(as.integer(x))
             if (class %in% c("double", "numeric")) return(x)
-        } else if (!is.null(input_unit) &&
-                   !any((is.na(shush(as.numeric(x))))) &&
+        } else if (!is.null(input_unit) && check &&
                    !(class %in% c("integer", "double", "numeric"))) {
-            return(convert_to_date_time(as.numeric(x), class = class,
+            return(convert_to_date_time(shush(as.numeric(x)),
+                                        class = class,
                                         input_unit = input_unit,
                                         month_length = month_length,
                                         year_length = year_length,
@@ -397,7 +408,7 @@ convert_to.character <- function(x, class, ..., orders = NULL, tz = "UTC",
 
     # Check inconsistencies -----
 
-    if (is.null(orders) &&
+    if (is.null(orders) && !all(is.na(x)) &&
         !(class %in% c("character", "integer", "double", "numeric"))) {
         shush(rlang::abort(glue::glue(
             "Non-parsed character or numeric vectors cannot be converted to ",
@@ -778,11 +789,11 @@ convert_to.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         shush(rlang::warn("There is no date to parse."), quiet)
         lubridate::as_date(NA)
     } else if (class == "posixct") {
-        x <- as.POSIXct(hms::as_hms(x))
+        x <- as.POSIXct(hms::as_hms(as.numeric(x)))
         lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else if (class == "posixlt") {
-        x <- as.POSIXlt(hms::as_hms(x))
+        x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
         lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else {
@@ -875,7 +886,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
 
     out <- x
 
-    # Remove whitespaces and assign NA -----
+    # Remove extra whitespaces and assign NA -----
 
     if (is.character(out)) {
         out <- stringr::str_squish(out)

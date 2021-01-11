@@ -456,8 +456,9 @@ tidy_std_mctq <- function(write = FALSE) {
     std_mctq <- build_std_mctq() %>%
         dplyr::mutate(dplyr::across(.fns = ~ dplyr::na_if(.x, ""))) %>%
         dplyr::rowwise() %>%
-        dplyr::mutate(length = dplyr::n_distinct(dplyr::c_across())) %>%
-        dplyr::mutate(dplyr::across(.fns = ~ ifelse(length <= 2, NA, .x))) %>%
+        dplyr::mutate(length = dplyr::n_distinct(dplyr::c_across(-.data$ID))) %>%
+        dplyr::mutate(dplyr::across(-.data$ID, .fns = ~ ifelse(length <= 2,
+                                                         NA, .x))) %>%
         dplyr::ungroup() %>%
         dplyr::select(-length)
 
@@ -503,57 +504,61 @@ tidy_std_mctq <- function(write = FALSE) {
 
     std_mctq <- std_mctq %>% dplyr::transmute(
         id = as.integer(.data$`ID`),
-        regular_work_schedule = dplyr::case_when(
+        work = dplyr::case_when(
             .data$`WORK REGULAR` == "Yes" ~ TRUE,
             .data$`WORK REGULAR` == "true" ~ TRUE,
             .data$`WORK REGULAR` == "No" ~ FALSE),
         wd = as.integer(.data$`WORK DAYS`),
         bt_w = dplyr::case_when(
             stringr::str_detect(.data$`W BED TIME`, pattern_1) ~
-                convert_to_date_time(.data$`W BED TIME`, "hms",
-                                     c("HM", "IMp"), quiet = TRUE),
+                convert_to_pt(.data$`W BED TIME`, "hms",
+                              c("HM", "IMp"), quiet = TRUE),
             stringr::str_detect(.data$`W BED TIME`, pattern_4) ~
-                convert_to_date_time(.data$`W BED TIME`, "hms", "HM",
-                                     quiet = TRUE)),
-        s_prep_w = convert_to_date_time(.data$`W SLEEP PREP`, "hms"),
-        s_lat_w = dplyr::case_when(
+                convert_to_pt(.data$`W BED TIME`, "hms", "HM",
+                              quiet = TRUE)),
+        sprep_w = convert_to_pt(.data$`W SLEEP PREP`, "hms",
+                                c("HMS", "HM", "H")),
+        slat_w = dplyr::case_when(
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_2) ~
-                convert_to_date_time(.data$`W SLEEP LAT`, "Duration", "M",
-                                     quiet = TRUE),
+                convert_to_pt(.data$`W SLEEP LAT`, "Duration", "M",
+                              quiet = TRUE),
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
-                convert_to_date_time(.data$`W SLEEP LAT`, "Duration",
-                                     quiet = TRUE)),
-        se_w = convert_to_date_time(.data$`W SLEEP END`, "hms"),
-        si_w = convert_to_date_time(.data$`W SLEEP INERTIA`, "Duration", "M"),
+                convert_to_pt(.data$`W SLEEP LAT`, "Duration",
+                              c("HMS", "HM", "H"), quiet = TRUE)),
+        se_w = convert_to_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
+        si_w = convert_to_pt(.data$`W SLEEP INERTIA`, "Duration", "M"),
         alarm_w = dplyr::case_when(
             .data$`W ALARM` == "Yes" ~ TRUE,
             .data$`W ALARM` == "No" ~ FALSE),
-        wake_before_alarm_w = dplyr::case_when(
+        wake_before_w = dplyr::case_when(
             .data$`W WAKE BEFORE ALARM` == "Yes" ~ TRUE,
             .data$`W WAKE BEFORE ALARM` == "No" ~ FALSE),
-        le_w = convert_to_date_time(.data$`W LIGHT EXPOSURE`, "Duration"),
+        le_w = convert_to_pt(.data$`W LIGHT EXPOSURE`, "Duration",
+                             c("HMS", "HM", "H")),
         bt_f = dplyr::case_when(
             stringr::str_detect(.data$`F BED TIME`, pattern_1) ~
-                convert_to_date_time(.data$`F BED TIME`, "hms", quiet = TRUE),
+                convert_to_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
+                              quiet = TRUE),
             stringr::str_detect(.data$`F BED TIME`, pattern_4) ~
-                convert_to_date_time(.data$`F BED TIME`, "hms", "HM",
-                                     quiet = TRUE)),
-        s_prep_f = convert_to_date_time(.data$`F SLEEP PREP`, "hms"),
-        s_lat_f = convert_to_date_time(.data$`F SLEEP LAT`, "Duration", "M",
-                                       quiet = TRUE),
-        se_f = convert_to_date_time(.data$`F SLEEP END`, "hms"),
+                convert_to_pt(.data$`F BED TIME`, "hms", "HM",
+                              quiet = TRUE)),
+        sprep_f = convert_to_pt(.data$`F SLEEP PREP`, "hms",
+                                c("HMS", "HM", "H")),
+        slat_f = convert_to_pt(.data$`F SLEEP LAT`, "Duration", "M",
+                               quiet = TRUE),
+        se_f = convert_to_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
         si_f = dplyr::case_when(
             stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_2) ~
-                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration", "M",
-                                     quiet = TRUE),
+                convert_to_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
+                              quiet = TRUE),
             stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_1) ~
-                convert_to_date_time(.data$`F SLEEP INERTIA`, "Duration",
-                                     quiet = TRUE)),
+                convert_to_pt(.data$`F SLEEP INERTIA`, "Duration",
+                              c("HMS", "HM", "H"), quiet = TRUE)),
         alarm_f = dplyr::case_when(
             .data$`F ALARM` == "Yes" ~ TRUE,
             .data$`F ALARM` == "No" ~ FALSE),
-        reasons_f = .data$`F REASONS` ,
-        le_f = convert_to_date_time(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
+        reasons_f = .data$`F REASONS`,
+        le_f = convert_to_pt(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
     )
 
     # Write and output dataset --------------------
@@ -640,7 +645,13 @@ validate_std_mctq <- function(write = FALSE) {
 #' @format A data frame with 10 rows and 18 variables:
 #'
 #' \describe{
-#'   \item{regular_work_schedule}{
+#'   \item{id}{
+#'   A unique numeric value for the purpose of identifying each subject in the
+#'   dataset.
+#'
+#'   Class: `integer`.}
+#'
+#'   \item{work}{
 #'   A logical value indicating if the subject have a regular work schedule.
 #'
 #'   Statement (EN): "I have a regular work schedule (this includes being, for
@@ -663,14 +674,14 @@ validate_std_mctq <- function(write = FALSE) {
 #'
 #'   Class: `hms`.}
 #'
-#'   \item{s_prep_w}{
+#'   \item{sprep_w}{
 #'   Local time of preparing to sleep on workdays.
 #'
 #'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
 #'
 #'   Class: `hms`.}
 #'
-#'   \item{s_lat_w}{
+#'   \item{slat_w}{
 #'   Sleep latency on workdays.
 #'
 #'   Statement (EN): "I need ___ minutes to fall asleep".
@@ -698,7 +709,7 @@ validate_std_mctq <- function(write = FALSE) {
 #'
 #'   Class: `logical`.}
 #'
-#'   \item{wake_before_alarm_w}{
+#'   \item{wake_before_w}{
 #'   A logical value indicating if the subject regularly wake up BEFORE the
 #'   alarm rings.
 #'
@@ -721,14 +732,14 @@ validate_std_mctq <- function(write = FALSE) {
 #'
 #'   Class: `hms`.}
 #'
-#'   \item{s_prep_f}{
+#'   \item{sprep_f}{
 #'   Local time of preparing to sleep on work-free days
 #'
 #'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
 #'
 #'   Class: `hms`.}
 #'
-#'   \item{s_lat_f}{
+#'   \item{slat_f}{
 #'   Sleep latency on work-free days.
 #'
 #'   Statement (EN): "I need ___ minutes to fall asleep".

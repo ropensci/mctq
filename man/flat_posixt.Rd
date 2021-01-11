@@ -10,12 +10,11 @@ flat_posixt(x)
 \item{x}{A \code{POSIXt} vector.}
 }
 \value{
-A vector of the same \code{POSIXt} class type as \code{x} with \code{0000-01-01} as
-date.
+A vector of the same \code{POSIXt} class type as \code{x}.
 }
 \description{
-\code{flat_posixt} changes the dates of \code{POSIXt} objects to \code{0000-01-01}. This can
-be use to standardizing a point of origin to time values.
+\code{flat_posixt()} changes the dates of \code{POSIXt} objects to \code{0000-01-01}. This
+can be use to standardizing a point of origin to time values.
 }
 \examples{
 x <- lubridate::ymd_hms("1987-12-24 07:45:32")

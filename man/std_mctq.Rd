@@ -8,7 +8,13 @@
 A data frame with 10 rows and 18 variables:
 
 \describe{
-\item{regular_work_schedule}{
+\item{id}{
+A unique numeric value for the purpose of identifying each subject in the
+dataset.
+
+Class: \code{integer}.}
+
+\item{work}{
 A logical value indicating if the subject have a regular work schedule.
 
 Statement (EN): "I have a regular work schedule (this includes being, for
@@ -31,14 +37,14 @@ Statement (EN): "I go to bed at ___ o'clock'".
 
 Class: \code{hms}.}
 
-\item{s_prep_w}{
+\item{sprep_w}{
 Local time of preparing to sleep on workdays.
 
 Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
 
 Class: \code{hms}.}
 
-\item{s_lat_w}{
+\item{slat_w}{
 Sleep latency on workdays.
 
 Statement (EN): "I need ___ minutes to fall asleep".
@@ -66,7 +72,7 @@ Statement (EN): "I use an alarm clock on workdays".
 
 Class: \code{logical}.}
 
-\item{wake_before_alarm_w}{
+\item{wake_before_w}{
 A logical value indicating if the subject regularly wake up BEFORE the
 alarm rings.
 
@@ -89,14 +95,14 @@ Statement (EN): "I go to bed at ___ o'clock'".
 
 Class: \code{hms}.}
 
-\item{s_prep_f}{
+\item{sprep_f}{
 Local time of preparing to sleep on work-free days
 
 Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
 
 Class: \code{hms}.}
 
-\item{s_lat_f}{
+\item{slat_f}{
 Sleep latency on work-free days.
 
 Statement (EN): "I need ___ minutes to fall asleep".

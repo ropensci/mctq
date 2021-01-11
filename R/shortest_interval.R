@@ -1,22 +1,22 @@
-#' Find the shortest interval between two hours
+#' Return the shortest interval between two hours
 #'
 #' @description
 #'
-#' `shortest_interval()` finds the shortest interval between two `hms` or
-#' `POSIXt` objects. This is useful for linear time arithmetic, because there
-#' is always two possible intervals between two hour values with no date
+#' `shortest_interval()` finds and return the shortest interval between two
+#' `hms` or `POSIXt` objects. This is useful for time arithmetic, because
+#' there's always two possible intervals between two hour values with no date
 #' reference.
 #'
 #' @details
 #'
-#' ## Two intervals problem
+#' ## The two intervals problem
 #'
-#' Given two hours, `x` and `y`, without date references, there always will be
+#' Given two hours, `x` and `y`, without date references, there will be always
 #' two possible intervals between them, as illustrated below.
 #'
 #' To figure out what interval is the  shortest or longer, `shortest_interval()`
-#' checks two scenarios: 1. When `x` comes before `y`; and 2. when `x`
-#' comes after `y`. This only works if `x` value is smaller than `y`. This
+#' checks two scenarios: 1. When `x` comes before `y`; and 2. when `x` comes
+#' after `y`. This only works if `x` value is smaller than `y`, therefore, the
 #' function will make sure to swap `x` and `y` values if the latter assumption
 #' is not true.
 #'
@@ -32,17 +32,18 @@
 #'    06:00              22:00     06:00              22:00
 #' -----|------------------|---------|------------------|----->
 #'               16h           8h             16h
-#'            2nd int.      1st int.        2nd int.
+#'           longer int.   shorter int.    longer int.
 #'
 #'               day 1                      day 2
 #'      y                   x       y                   x
 #'    13:00               08:00   13:00               08:00
 #' -----|-------------------|-------|-------------------|----->
 #'               19h           5h            19h
-#'             2nd int.     1st int.       2nd int.
+#'           longer int.   shorter int.   longer int.
 #'
-#'     x,y            x,y            x,y            x,y
-#'    10:00          10:00          10:00          10:00
+#'     x,y             x,y             x,y             x,y
+#'      x               y               x               y
+#'    10:00           10:00           10:00           10:00
 #' -----|---------------|---------------|---------------|----->
 #'     0h              0h              0h              0h
 #'             24h             24h             24h
@@ -61,6 +62,10 @@
 #' `POSIXt` values passed as argument to `x` or `y` will be strip of their
 #' dates. Only the hours will be considered.
 #'
+#' ## `NA` values
+#'
+#' `shortest_interval()` will return `NA` if `x` or `y` are `NA`.
+#'
 #' ## `longer_interval()` function
 #'
 #' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_
@@ -69,24 +74,49 @@
 #'
 #' @param x,y A `hms` or `POSIXt` vector.
 #' @param class A string indicating the object class of the output.
-#' @param inverse A logical value indicating if the function must return the
+#' @param inverse A logical value indicating if the function must return a
 #' inverse output, _i.e_ the longer interval between `x` and `y`.
 #'
+#' @return A `hms` object or a type of object indicated on `class`.
 #' @family Time arithmetic
 #' @export
 #'
 #' @examples
+#' ## ** finding the shortest interval between two hour values **
 #' x <- hms::parse_hms("23:00:00")
 #' y <- hms::parse_hms("01:00:00")
 #' shortest_interval(x, y)
 #' #> 02:00:00 # Expected
+#' x <- lubridate::as_datetime("1985-01-15 12:00:00")
+#' y <- lubridate::as_datetime("2020-09-10 12:00:00")
+#' shortest_interval(x, y)
+#' #> 00:00:00 # Expected
+#'
+#' ## ** finding the longer interval between two hour values **
+#' x <- lubridate::parse_date_time("01:10:00", "HMS")
+#' y <- lubridate::parse_date_time("11:45:00", "HMS")
 #' longer_interval(x, y)
-#' #> 22:00:00 # Expected
+#' #> 10:35:00 # Expected
+#'
+#' x <- lubridate::as_datetime("1915-02-14 05:00:00")
+#' y <- lubridate::as_datetime("1970-07-01 05:00:00")
+#' longer_interval(x, y)
+#' #> 24:00:00 # Expected
+#'
+#' ## ** changing the output object class **
+#' x <- as.POSIXct("1988-10-05 02:00:00")
+#' y <- as.POSIXlt("2100-05-07 13:30:00")
 #' shortest_interval(x, y, "Interval")
-#' #> [1] 0000-01-01 23:00:00 UTC--0000-01-02 01:00:00 UTC # Expected
-#' longer_interval(x, y, "Interval")
-#' #> [1] 0000-01-01 01:00:00 UTC--0000-01-01 23:00:00 UTC # Expected
+#' #> [1] 0000-01-01 02:00:00 UTC--0000-01-01 13:30:00 UTC # Expected
+#' longer_interval(x, y, "Duration")
+#' #> [1] "45000s (~12.5 hours)" # Expected
+#' shortest_interval(x, y, "Period")
+#' #> [1] "11H 30M 0S" # Expected
+#' longer_interval(x, y, "POSIXct")
+#' #> [1] "0000-01-01 12:30:00 UTC" # Expected
 shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
+
+    # Check arguments -----
 
     choices <- c("Duration", "Period", "hms", "POSIXct", "POSIXlt", "Interval")
 
@@ -98,28 +128,41 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
     checkmate::assert_choice(tolower(class), tolower(choices))
     checkmate::assert_flag(inverse)
 
+    # Set values -----
+
     class <- tolower(class)
+
+    # Convert `x` and `y` -----
+
     x <- flat_posixt(convert_to(x, "posixct"))
     y <- flat_posixt(convert_to(y, "posixct"))
 
     list2env(swap_if(x, y, "x > y"), envir = environment())
 
+    # Create intervals -----
+
     x1_y1_interval <- lubridate::interval(x, y)
     y1_x2_interval <- lubridate::interval(y, x + lubridate::days())
 
+    # Find shortest interval -----
+
     if (isFALSE(inverse)) {
         out <- dplyr::case_when(
+            any(is.na(c(x, y))) ~ lubridate::as.interval(NA),
+            x == y ~ lubridate::as.interval(lubridate::hours(0), x),
             x1_y1_interval < y1_x2_interval ~ x1_y1_interval,
-            y1_x2_interval < x1_y1_interval ~ y1_x2_interval,
-            TRUE ~ lubridate::as.interval(lubridate::days(0), x)
+            x1_y1_interval > y1_x2_interval ~ y1_x2_interval,
         )
     } else {
         out <- dplyr::case_when(
+            any(is.na(c(x, y))) ~ lubridate::as.interval(NA),
+            x == y ~ lubridate::as.interval(lubridate::hours(24), x),
             x1_y1_interval > y1_x2_interval ~ x1_y1_interval,
-            y1_x2_interval > x1_y1_interval ~ y1_x2_interval,
-            TRUE ~ lubridate::as.interval(lubridate::days(24), x)
+            x1_y1_interval < y1_x2_interval ~ y1_x2_interval,
         )
     }
+
+    # Return output -----
 
     if (class == "interval") {
         out

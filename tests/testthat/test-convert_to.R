@@ -61,6 +61,9 @@ test_that("convert_to() | conversion between date/time objects", {
     expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
                                                     "ymd HMS"))
 
+    object <- convert_to(as.POSIXct(NA), "POSIXct")
+    expect_equal(object, lubridate::force_tz(as.POSIXct(NA), "UTC"))
+
     object <- convert_to_tt(lubridate::ymd_hms("2020-01-01 12:31:05",
                                                tz = "EST"), "POSIXct")
     expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
