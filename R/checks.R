@@ -131,7 +131,7 @@ check_identical <- function(x, y, type = "value", any.missing = TRUE,
 
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
-    checkmate::assert_choice(type, c("value", "length"))
+    checkmate::assert_choice(type, c("value", "length", "class"))
 
     if (type == "length") {
         error_message <- glue::glue("{glue::backtick(x_name)} and ",
@@ -139,6 +139,13 @@ check_identical <- function(x, y, type = "value", any.missing = TRUE,
                                     "must have identical lengths")
         x <- length(x)
         y <- length(y)
+    } else if (type == "class") {
+        error_message <- glue::glue("{glue::backtick(x_name)} and ",
+                                    "{glue::backtick(y_name)} ",
+                                    "must have identical classes")
+
+        x <- class(x)
+        y <- class(y)
     } else {
         error_message <- glue::glue("{glue::backtick(x_name)} and ",
                                     "{glue::backtick(y_name)} ",

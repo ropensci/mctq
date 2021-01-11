@@ -82,7 +82,7 @@
 #'
 #' ## Parsing limitations
 #'
-#' `convert_to` uses [lubridate::parse_date_time()] to convert `character` and
+#' `convert_to` uses [lubridate::parse_date_time()] to parse `character` and
 #' `numeric` objects to date/time. Since parse_date_time() outputs a `POSIXt`
 #' object, `character` and `numeric` inputs cannot have time values equal or
 #' greater than 24 hours.
@@ -90,10 +90,9 @@
 #' That limits the set of `convert_to` applications (_e.g_ when you want to
 #' parse a `character` to a `duration` object of 35 minutes and 30 seconds). To
 #' get around this, some exceptions were made to orders __equal__ to `"H"`,
-#' `"M"`, `"S"`, `HM`, or `HMS` (_e.g_ `convert_to(c(10, 45, 100), "duration",
-#' "M")`). For `HM` and `HMS` exceptions, minutes and seconds are limited to
-#' `[0-59]`, and, when hours exceeds 2 digits, a `:` must be allocated between
-#' hours and minutes.
+#' `"M"`, `"S"`, `HM`, or `HMS`. For `HM` and `HMS` exceptions, minutes and
+#' seconds are limited to `[0-59]`, and, when hours exceeds 2 digits, a `:` must
+#' be allocated between hours and minutes.
 #'
 #' ## Different outputs
 #'
@@ -220,7 +219,7 @@
 #' convert_to(365.25, "hms", input_unit = "d")
 #' #> 8766:00:00 # Expected
 #' convert_to(1, "posixlt", input_unit = "W")
-#' #> "0000-01-08 UTC" # Expected
+#' #> [1] "0000-01-08 UTC" # Expected
 #' convert_to(1.308997, "duration", input_unit = "rad")
 #' #> [1] "18000s (~5 hours)" # Expected
 #' convert_to_ut(1.308997, "duration", "rad") # Wrapper function
@@ -263,7 +262,7 @@
 #' convert_to(1, "difftime", orders = "H")
 #' #> Time difference of 3600 secs # Expected
 #' convert_to("10:00 PM", "hms", orders = "IMp")
-#' #> [1] 22:00:00 # Expected
+#' #> 22:00:00 # Expected
 #' convert_to("2020-01-01 10:00:00", "Date", orders = "ymd HMS")
 #' #> [1] "2020-01-01" # Expected
 #' convert_to(13, "POSIXct", orders = "H")

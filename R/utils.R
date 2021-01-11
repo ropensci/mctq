@@ -260,76 +260,17 @@ assign_date <- function(anterior, posterior) {
 
 }
 
-#' Find the shortest interval between 2 hours
-#'
-#' @description
-#'
 #' __UNDER DEVELOPMENT__
-#'
-#' `POSIXt` values passed as argument will be strip of their dates in favor
-#' for the new date assignment.
-#'
-#' @details
-#'
-#' __UNDER DEVELOPMENT__
-#'
-#' ```
-#'    y                 x          y                x
-#'  13:00            08:00      13:00            08:00
-#' --|----------------|----------|----------------|---->
-#'  19h            5h            19h
-#'    [(24 - 13) + 8]   (13 - 8)    [(24 - 13) + 8]
-#'      2nd interval  1st interval  2nd interval
-#' ```
-#'
-#' @param x a
 #'
 #' @noRd
-shortest_interval <- function(x, y, ambiguous_value = 0) {
-
-    # checkmate::check_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
-    # checkmate::check_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
-    # check_identical(x, y, "length")
-    # checkmate::assert_choice(ambiguous_value, c(0, 24))
-    #
-    # if (lubridate::is.POSIXt(x) || lubridate::is.POSIXt(y)) {
-    #     x_start <- flat_posixt(x)
-    #     y_start <- flat_posixt(y)
-    # } else {
-    #     x_start <- convert_to_date_time(x, "POSIXct")
-    #     y_start <- convert_to_date_time(y, "POSIXct")
-    # }
-    #
-    # x_start <- convert_to_date_time(x, "POSIXct")
-    # y_start <- convert_to_date_time(y, "POSIXct")
-    # x_duration <- lubridate::dhours(convert_to_decimal(x))
-    # y_duration <- lubridate::dhours(convert_to_decimal(y))
-    #
-    # x_y_interval <- lubridate::as.interval(y_duration, x_start)
-    # y_x_interval <- lubridate::as.interval(x_duration, y_start)
-    #
-    # if (x_y_interval == y_x_interval) {
-    #
-    # }
+sum_hms <- function(anterior, posterior) {
 
 }
 
 #' __UNDER DEVELOPMENT__
 #'
 #' @noRd
-greater_interval <- function(anterior, posterior) {
-
-    # out <- shortest_distance(anterior, posterior)
-    # out <- convert_to_date_time(out, "POSIXct")
-    # out <- convert_to_date_time(out - dhours(24), "hms")
-    # out
-
-}
-
-#' __UNDER DEVELOPMENT__
-#'
-#' @noRd
-sum_hms <- function(...) {
+diff_hms <- function(anterior, posterior) {
 
 }
 
@@ -413,24 +354,6 @@ shush <- function(x, quiet = TRUE){
 }
 
 #' @noRd
-message_generator <- function(type = "ok", funny = FALSE) {
-
-    type <- stringr::str_to_lower(type)
-
-    if (type == "ok") {
-        if (isTRUE(funny)) {
-            ok_messages <- c("Noice!", "Everything's A-OK",
-                             "Good job (yay!)",
-                             "Everything appears to be in order, Sr.!")
-        } else {
-            ok_messages <- c("Success", "All in order")
-        }
-        rlang::inform(sample(ok_messages, 1))
-    }
-
-}
-
-#' @noRd
 close_round <- function(x, digits = 5) {
 
     pattern_9 <- paste0("\\.", paste(rep(9, digits), collapse = ""))
@@ -442,5 +365,43 @@ close_round <- function(x, digits = 5) {
     } else {
         x
     }
+
+}
+
+#' @noRd
+swap <- function(x, y) {
+
+    check_identical(x, y, "length")
+    check_identical(x, y, "class")
+
+    a <- x
+    b <- y
+
+    x <- b
+    y <- a
+
+    list(x = x, y = y)
+
+}
+
+#' @noRd
+swap_if <- function(x, y, condition = "x > y") {
+
+    choices <- c("x == y", "x < y", "x <= y", "x > y", "x >= y")
+
+    assert_identical(x, y, "length")
+    assert_identical(x, y, "class")
+    assert_choice(condition, choices)
+
+     condition <- stringr::str_replace(condition, "x", "a")
+     condition <- stringr::str_replace(condition, "y", "b")
+
+    a <- x
+    b <- y
+
+    x <- dplyr::if_else(eval(parse(text = condition)), b, a)
+    y <- dplyr::if_else(eval(parse(text = condition)), a, b)
+
+    list(x = x, y = y)
 
 }

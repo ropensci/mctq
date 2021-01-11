@@ -19,7 +19,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Daniel Vartanian \email{danvartan@gmail.com} (\href{https://orcid.org/0000-0001-7782-759X}{ORCID})
+\strong{Maintainer}: Daniel Vartanian \email{danvartan@gmail.com} (\href{https://orcid.org/0000-0001-7782-759X}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
