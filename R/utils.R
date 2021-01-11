@@ -391,7 +391,7 @@ swap_if <- function(x, y, condition = "x > y") {
 
     assert_identical(x, y, "length")
     assert_identical(x, y, "class")
-    assert_choice(condition, choices)
+    checkmate::assert_choice(condition, choices)
 
      condition <- stringr::str_replace(condition, "x", "a")
      condition <- stringr::str_replace(condition, "y", "b")

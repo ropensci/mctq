@@ -4,7 +4,7 @@
 #'
 #' `shortest_interval()` finds the shortest interval between two `hms` or
 #' `POSIXt` objects. This is useful for linear time arithmetic, because there
-#' always be two possible intervals between two hour values with no date
+#' is always two possible intervals between two hour values with no date
 #' reference.
 #'
 #' @details
@@ -21,9 +21,10 @@
 #' is not true.
 #'
 #' Because `shortest_interval()` objective is to find the shortest interval, if
-#' `x` and `y` are equal, the shortest interval will always have a length of 0h.
-#' But, if `inverse = TRUE` or `longer_interval()` is use instead, the latter
-#' condition will return a interval of 24h of length.
+#' `x` and `y` are equal, the shortest interval will have a length of 0 hours,
+#' resulting in a interval from `x` to `x`. But, if `inverse = TRUE` or
+#' `longer_interval()` is use instead, the latter condition will return a
+#' interval with 24 hours of length (from `x` to `x` + 1 day).
 #'
 #' ```
 #'              day 1                        day 2

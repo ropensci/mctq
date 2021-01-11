@@ -20,7 +20,7 @@ inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
 \description{
 \code{shortest_interval()} finds the shortest interval between two \code{hms} or
 \code{POSIXt} objects. This is useful for linear time arithmetic, because there
-always be two possible intervals between two hour values with no date
+is always two possible intervals between two hour values with no date
 reference.
 }
 \details{
@@ -36,9 +36,10 @@ function will make sure to swap \code{x} and \code{y} values if the latter assum
 is not true.
 
 Because \code{shortest_interval()} objective is to find the shortest interval, if
-\code{x} and \code{y} are equal, the shortest interval will always have a length of 0h.
-But, if \code{inverse = TRUE} or \code{longer_interval()} is use instead, the latter
-condition will return a interval of 24h of length.\preformatted{             day 1                        day 2
+\code{x} and \code{y} are equal, the shortest interval will have a length of 0 hours,
+resulting in a interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
+\code{longer_interval()} is use instead, the latter condition will return a
+interval with 24 hours of length (from \code{x} to \code{x} + 1 day).\preformatted{             day 1                        day 2
      x                  y         x                  y
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->
