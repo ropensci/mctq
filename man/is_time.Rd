@@ -2,29 +2,33 @@
 % Please edit documentation in R/utils.R
 \name{is_time}
 \alias{is_time}
-\title{Check if a object is a date/time type}
+\title{Check if a object inherits a set of date/time classes}
 \usage{
-is_time(x, rm_date = FALSE)
+is_time(x, rm = NULL)
 }
 \arguments{
-\item{x}{Any kind of object.}
+\item{x}{Any kind of R object.}
 
-\item{rm_date}{A logical value indicating if \code{Date} objects should be removed
-from the check (default: \code{FALSE})}
+\item{rm}{(optional) A character vector indicating names of object classes to
+remove from the check (case sensitive) (default: \code{NULL}).}
 }
 \value{
-A logical value.
+If \code{rm} is \code{NULL}, a boolean flag checking if \code{x} inherits a
+\code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt},
+\code{Interval}, or \code{Circular} class. Else, the same as the previous, but
+without the classes indicated in \code{rm}.
 }
 \description{
-\code{is_time()} is a logical checker for objects of class \code{Duration}, \code{Period},
-\code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, \code{Interval}, and \code{Circular}.
+\code{is_time()} returns a boolean flag checking for objects of class \code{Duration},
+\code{Period}, \code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, \code{Interval}, or
+\code{Circular}.
 }
 \examples{
 is_time(lubridate::dhours())
 #> [1] TRUE # Expected
 is_time(as.Date("2020-01-01"))
 #> [1] TRUE # Expected
-is_time(as.Date("2020-01-01"), rm_date = TRUE)
+is_time(as.Date("2020-01-01"), rm = "Date")
 #> [1] FALSE # Expected
 is_time(iris)
 #> [1] FALSE # Expected
@@ -32,10 +36,13 @@ is_time(letters)
 #> [1] FALSE # Expected
 }
 \seealso{
-Other Utility functions: 
+Other utility functions: 
 \code{\link{flat_posixt}()},
 \code{\link{load_data}()},
 \code{\link{midday_change}()},
-\code{\link{model_data}()}
+\code{\link{model_data}()},
+\code{\link{raw_data}()},
+\code{\link{swap_decimal}()},
+\code{\link{write_data}()}
 }
-\concept{Utility functions}
+\concept{utility functions}

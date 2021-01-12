@@ -10,7 +10,8 @@ flat_posixt(x)
 \item{x}{A \code{POSIXt} vector.}
 }
 \value{
-A vector of the same \code{POSIXt} class type as \code{x}.
+A vector of the same \code{POSIXt} class type as \code{x} with \code{0000-01-01} as
+date.
 }
 \description{
 \code{flat_posixt()} changes the dates of \code{POSIXt} objects to \code{0000-01-01}. This
@@ -22,10 +23,13 @@ flat_posixt(x)
 #> [1] "0000-01-01 07:45:32 UTC" # Expected
 }
 \seealso{
-Other Utility functions: 
+Other utility functions: 
 \code{\link{is_time}()},
 \code{\link{load_data}()},
 \code{\link{midday_change}()},
-\code{\link{model_data}()}
+\code{\link{model_data}()},
+\code{\link{raw_data}()},
+\code{\link{swap_decimal}()},
+\code{\link{write_data}()}
 }
-\concept{Utility functions}
+\concept{utility functions}

@@ -208,21 +208,17 @@ chapter "Technical Representation of Data" from Loo and Jonge
 \subsection{Wrappers}{
 
 \code{convert_to} have some wrappers functions for convenience.
-
-\code{convert_to_tu} help make conversions from date/time objects to units.
-
-\code{convert_to_ut} help make conversions from units to date/time objects.
-
-\code{convert_to_tt} help make conversions from date/time objects to other
+\itemize{
+\item \code{convert_to_tu} help make conversions from date/time objects to units.
+\item \code{convert_to_ut} help make conversions from units to date/time objects.
+\item \code{convert_to_tt} help make conversions from date/time objects to other
 date/time objects.
-
-\code{convert_to_uu} help make conversions from unit to other units.
-
-\code{convert_to_pt} help make conversions from \code{character} or \code{numeric} objects
+\item \code{convert_to_uu} help make conversions from unit to other units.
+\item \code{convert_to_pt} help make conversions from \code{character} or \code{numeric} objects
 to date/time objects.
-
-\code{convert_to_pu} help make conversions from \code{character} or \code{numeric} objects
+\item \code{convert_to_pu} help make conversions from \code{character} or \code{numeric} objects
 to units.
+}
 }
 
 \subsection{\code{class} argument}{
@@ -249,15 +245,15 @@ output unit. Conversions of date/time objects only need the latter.
 
 Valid values for this two arguments are:
 \itemize{
-\item \code{"S"}: for decimal seconds;
-\item \code{"M"}: for decimal minutes;
-\item \code{"H"}: for decimal hours;
-\item \code{"d"}: for decimal days;
-\item \code{"W"}: for decimal weeks;
-\item \code{"m"}: for decimal months;
-\item \code{"y"}: for decimal years;
-\item \code{"date_decimal"}: for decimal dates;
-\item \code{"rad"}: for radians;
+\item \code{"S"}: for decimal seconds.
+\item \code{"M"}: for decimal minutes.
+\item \code{"H"}: for decimal hours.
+\item \code{"d"}: for decimal days.
+\item \code{"W"}: for decimal weeks.
+\item \code{"m"}: for decimal months.
+\item \code{"y"}: for decimal years.
+\item \code{"date_decimal"}: for decimal dates.
+\item \code{"rad"}: for radians.
 \item \code{"deg"}: for degrees.
 }
 }
@@ -457,3 +453,4 @@ Wiley & Sons. doi:
 Wickham, H, & Grolemund. (n.d.). \emph{R for data science}. Sebastopol, CA:
 O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
+\concept{convert_to functions}

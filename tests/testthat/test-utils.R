@@ -23,5 +23,5 @@ test_that("is_time()", {
     expect_false(is_time(letters))
     expect_false(is_time(iris))
     expect_true(is_time(as.Date("2000-01-01")))
-    expect_false(is_time(as.Date("2000-01-01"), rm_date = TRUE))
+    expect_false(is_time(as.Date("2000-01-01"), rm = "Date"))
 })

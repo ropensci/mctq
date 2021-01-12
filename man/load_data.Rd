@@ -2,10 +2,10 @@
 % Please edit documentation in R/load_data.R
 \name{load_data}
 \alias{load_data}
-\title{Load a delimited file to R}
+\title{Load a data file to R}
 \usage{
 load_data(
-  file = file.choose(),
+  file = as.character(tcltk::tkgetOpenFile()),
   delim = ",",
   na = c("", " ", "NA"),
   col_types = readr::cols(.default = "c"),
@@ -15,51 +15,73 @@ load_data(
 )
 }
 \arguments{
-\item{file}{A character string indicating the file address to load. If
-unassigned, a dialog window will open allowing browsing.}
+\item{file}{A string indicating the file address to load. If unassigned, a
+dialog window will open allowing browsing (may not work in some OSs).}
 
-\item{delim}{A character string containing the field separator in \code{file}
+\item{delim}{(optional) A string containing the field separator in \code{file}
 (default: \code{","}).}
 
-\item{na}{A character vector indicating values that must be interpreted
-as \code{NA} (default: \code{c("", " ", "NA")}).}
+\item{na}{(optional) A character vector indicating values that must be
+interpreted as \code{NA} (default: \code{c("", " ", "NA")}).}
 
-\item{col_types}{A \code{NULL} value or a \code{\link[readr:cols]{readr::cols()}} specification to set
-how \code{file} columns must be treated. Check \code{\link[readr:read_delim]{readr::read_delim()}} to learn
-more (default: \code{readr::cols(.default = "c")}, which imports all columns
-as \code{character}).}
+\item{col_types}{(optional) A \code{NULL} value or a \code{\link[readr:cols]{readr::cols()}} specification
+to set how \code{file} columns must be treated. Check \code{\link[readr:read_delim]{readr::read_delim()}} to
+learn more (default: \code{readr::cols(.default = "c")}, which imports all
+columns as \code{character}).}
 
-\item{trim_ws}{A logical value indicating if leading and/or trailing
-whitespaces must be trimmed from each field (default: \code{TRUE}).}
+\item{trim_ws}{(optional) A logical value indicating if leading and/or
+trailing whitespaces must be trimmed from each field (default: \code{TRUE}).}
 
-\item{skip}{An integerish value, greater than 0, indicating the number of
-rows to skip when reading \code{file} (default: \code{0}).}
+\item{skip}{(optional) An integerish value, equal or greater than \code{0},
+indicating the number of rows to skip when reading \code{file} (default: \code{0}).}
 
-\item{skip_empty_rows}{A logical value indicating if blank rows must be
-ignored altogether. If this option is \code{TRUE}, then blank rows will
+\item{skip_empty_rows}{(optional) A logical value indicating if blank rows
+must be ignored altogether. If this option is \code{TRUE}, then blank rows will
 not be represented at all. If it is \code{FALSE} then they will be represented
 by \code{NA} values in all the columns (default: \code{TRUE}).}
 }
 \value{
-An invisible tibble.
+An invisible tibble with data imported from \code{file}.
 }
 \description{
 \code{load_data()} is a wrapper function for \code{\link[readr:read_delim]{readr::read_delim()}} to help simple
-data loading. You don't need to use this function if your file is already
-loaded on R.
+data loading. It can read any kind of delimited data in addition to \code{.RData}
+files.
 
 If this function doesn't work for your file, we recommend using the
-\link[readr:readr-package]{readr::readr} package to load it. If you're using \href{https://rstudio.com/}{RStudio IDE}, you can also go to \verb{Import Dataset}, on the
-environment tab, to load your data.
+\link[readr:readr-package]{readr::readr} package to load it. If you're using
+\href{https://rstudio.com/}{RStudio IDE}, you can also go to \verb{Import Dataset},
+on the environment tab, to load your data.
+}
+\details{
+\subsection{\code{.csv} and \code{.tsv} files}{
+
+Common delimiters for \code{.csv}
+(\href{http://bit.ly/3qby909}{Comma-Separated Values}) are \verb{,} and \verb{;}. For
+\code{.tsv} (\href{http://bit.ly/3oGCXu8}{Tab-Separated Values}) use \code{"\\t"}.
+}
+
+\subsection{\code{.RData} files}{
+
+\code{load_data()} can also read \code{.RData} files. In this case, only the \code{file}
+argument is needed, all other arguments are ignored.
+
+If you need to read \code{.rda} files, use the \code{\link[base:load]{base::load()}} function.
+}
 }
 \examples{
-\dontrun{load_data(raw_data()[1])}
+\dontrun{
+data <- load_data(raw_data("std_mctq.csv"))
+}
 }
 \seealso{
-Other Utility functions: 
+Other utility functions: 
 \code{\link{flat_posixt}()},
 \code{\link{is_time}()},
 \code{\link{midday_change}()},
-\code{\link{model_data}()}
+\code{\link{model_data}()},
+\code{\link{raw_data}()},
+\code{\link{swap_decimal}()},
+\code{\link{write_data}()}
 }
-\concept{Utility functions}
+\concept{utility functions}

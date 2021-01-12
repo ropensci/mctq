@@ -10,7 +10,7 @@
 #'   `std_mctq.csv` file to `"./inst/extdata/"` (optional) (default: `FALSE`).
 #'
 #' @return An invisible tibble.
-#' @family Data functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @export
 #'
@@ -427,7 +427,7 @@ build_std_mctq <- function(write = FALSE) {
 #'   `std_mctq.rda` file to `"./data/"` (optional) (default: `FALSE`).
 #'
 #' @return An invisible tibble.
-#' @family Data functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data !!
 #' @export
@@ -585,8 +585,10 @@ tidy_std_mctq <- function(write = FALSE) {
 #' __UNDER DEVELOPMENT__
 #'
 #' @inheritParams tidy_std_mctq
+#'
 #' @return An invisible tibble.
-#' @family Data functions
+#'
+#' @family data functions
 #' @export
 #'
 #' @references
@@ -608,8 +610,8 @@ validate_std_mctq <- function(write = FALSE) {
 #'
 #' @description
 #'
-#' A fictional dataset composed by MCTQ (standard version) basic/measurable
-#' variables for testing and learning purposes.
+#' A fictional dataset composed by basic/measurable variables of the MCTQ
+#' (standard version) for testing and learning purposes.
 #'
 #' This data was created according to Roenneberg, Wirz-Justice & Merrow
 #' ([2003](https://bit.ly/3rLu195)) and guidelines of The World Wide
@@ -617,15 +619,14 @@ validate_std_mctq <- function(write = FALSE) {
 #' and Details sections to learn more.
 #'
 #' The naming of the variables took into account the standard names used by
-#' theWeP and guidelines of the
+#' the theWeP and guidelines of the
 #' [tidyverse style guide](https://style.tidyverse.org/).
 #'
 #' @details
 #'
-#' `std_mctq` is a tidy and valid version of [mctq::build_std_mctq()], which
-#' output is the raw data for `std_mctq`. This dataset was created to
-#' demonstrate common cases and data issues that researchers may find in their
-#' MCTQ data.
+#' `std_mctq` is a tidy and valid version of [mctq::build_std_mctq()]. This
+#' dataset was created to demonstrate common cases and data issues that
+#' researchers may find in their MCTQ data.
 #'
 #' You can learn more about the `std_mctq` data cleaning process in
 #' `vignette("data_issues")`.
@@ -648,148 +649,148 @@ validate_std_mctq <- function(write = FALSE) {
 #'   \item{id}{
 #'   A unique numeric value for the purpose of identifying each subject in the
 #'   dataset.
-#'
+#'   \cr \cr
 #'   Class: `integer`.}
 #'
 #'   \item{work}{
 #'   A logical value indicating if the subject have a regular work schedule.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I have a regular work schedule (this includes being, for
 #'   example, a housewife or househusband)").
-#'
+#'   \cr \cr
 #'   Class: `logical`.}
 #'
 #'   \item{wd}{
 #'   Number of workdays per week.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I have a regular work schedule and work ___ days per
 #'   week").
-#'
+#'   \cr \cr
 #'   Class: `integer`.}
 #'
 #'   \item{bt_w}{
 #'   Local time of going to bed on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I go to bed at ___ o'clock'".
-#'
+#'   \cr \cr
 #'   Class: `hms`.}
 #'
 #'   \item{sprep_w}{
 #'   Local time of preparing to sleep on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
-#'
+#'   \cr \cr
 #'   Class: `hms`.}
 #'
 #'   \item{slat_w}{
 #'   Sleep latency on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I need ___ minutes to fall asleep".
-#'
+#'   \cr \cr
 #'   Class: `Duration`.}
 #'
 #'   \item{se_w}{
 #'   Sleep end on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I wake up at ___ o'clock".
-#'
+#'   \cr \cr
 #'   Class: `hms`.}
 #'
 #'   \item{si_w}{
 #'   Sleep inertia on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "After ___ minutes, I get up".
-#'
+#'   \cr \cr
 #'   Class: `Duration`.}
 #'
 #'   \item{alarm_w}{
 #'   A logical value indicating if the subject use an alarm clock on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I use an alarm clock on workdays".
-#'
+#'   \cr \cr
 #'   Class: `logical`.}
 #'
 #'   \item{wake_before_w}{
 #'   A logical value indicating if the subject regularly wake up BEFORE the
 #'   alarm rings.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I regularly wake up BEFORE the alarm rings".
-#'
+#'   \cr \cr
 #'   Class: `logical`.}
 #'
 #'   \item{le_w}{
 #'   Light exposure on workdays.
-#'
+#'   \cr \cr
 #'   Statement (EN): "On average, I spend the following amount of time outdoors
 #'   in daylight (without a roof above my head)".
-#'
+#'   \cr \cr
 #'   Class: `Duration`.}
 #'
 #'   \item{bt_f}{
 #'   Local time of going to bed on work-free days.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I go to bed at ___ o'clock'".
-#'
+#'   \cr \cr
 #'   Class: `hms`.}
 #'
 #'   \item{sprep_f}{
 #'   Local time of preparing to sleep on work-free days
-#'
+#'   \cr \cr
 #'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
-#'
+#'   \cr \cr
 #'   Class: `hms`.}
 #'
 #'   \item{slat_f}{
 #'   Sleep latency on work-free days.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I need ___ minutes to fall asleep".
-#'
+#'   \cr \cr
 #'   Class: `Duration`.}
 #'
 #'   \item{se_f}{
 #'   Sleep end on work-free days.
-#'
+#'   \cr \cr
 #'   Statement (EN): "I wake up at ___ o'clock".
-#'
+#'   \cr \cr
 #'   Class: `hms`.}
 #'
 #'   \item{si_f}{
 #'   Sleep inertia on work-free days.
-#'
+#'   \cr \cr
 #'   Statement __(EN)__: "After ___ minutes, I get up".
-#'
+#'   \cr \cr
 #'   Class: `Duration`.}
 #'
 #'   \item{alarm_f}{
 #'   A logical value indicating if the subject use an alarm clock on work-free
 #'   days.
-#'
+#'   \cr \cr
 #'   Statement (EN): "My wake-up time is due to the use of an alarm
 #'   clock".
-#'
+#'   \cr \cr
 #'   Class: `logical`.}
 #'
 #'   \item{reasons_f}{
 #'   Particular reasons why the subject cannot freely choose his sleep times on
 #'   work-free days.
-#'
+#'   \cr \cr
 #'   Statement (EN): "There are particular reasons why I cannot freely choose my
 #'   sleep times on free days".
-#'
+#'   \cr \cr
 #'   Class: `character`.}
 #'
 #'   \item{le_f}{
 #'   Light exposure on work-free days.
-#'
+#'   \cr \cr
 #'   Statement (EN): "On average, I spend the following amount of time outdoors
 #'   in daylight (without a roof above my head)".
-#'
+#'   \cr \cr
 #'   Class: `Duration`.}
 #' }
 #'
 #' @usage data(std_mctq)
 #' @source Prepared by Daniel Vartanian (package's author).
-#' @family Datasets
+#' @family datasets
 #'
 #' @references
 #'

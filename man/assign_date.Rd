@@ -17,26 +17,25 @@ assign_date(
 \item{start, end}{A \code{hms} or \code{POSIXt} vector indicating the start or end
 hour.}
 
-\item{ambiguity}{(optional) A numeric value or \code{NA} that instruct
-\code{assign_date()} on how to deal with ambiguities (see Details)
-(default: \code{0}).}
+\item{ambiguity}{(optional) A numeric value to instruct \code{assign_date()} on
+how to deal with ambiguities (see Details) (default: \code{0}).}
 
 \item{return}{(optional) A string indicating the type of output (see Details)
-(default: "list").}
+(default: \code{"list"}).}
 
 \item{start_name, end_name}{(optional) a string indicating a name associated
 with the \code{start} and \code{end} argument.}
 }
 \value{
 \itemize{
-\item If \code{return = "list"}, a named list with \code{start} and \code{end} outputs;
-\item If \verb{return = "start}, only the \code{start} output;
+\item If \code{return = "list"}, a named list with \code{start} and \code{end} outputs.
+\item If \verb{return = "start}, only the \code{start} output.
 \item If \code{return = "end"}, only the \code{end} output.
 }
 }
 \description{
 \code{assign_date()} assign dates to two sequential hour values. It can facilitate
-time arithmetic, locating time values, without date reference, on a
+time arithmetic by locating time values without date reference on a
 timeline.
 }
 \details{
@@ -45,7 +44,7 @@ timeline.
 In cases when \code{start} is equal to \code{end}, there are two possibilities of
 intervals between the two hours, which results in a ambiguity. That's
 because \code{start} and \code{end} can be at the same point in time or they can
-distance themselves by one day, as illustrated below.\preformatted{ start,end       start,end     start,end         start,end
+distance themselves by one day, as illustrated below.\preformatted{ start,end       start,end       start,end       start,end
    start            end            start            end
    10:00           10:00           10:00           10:00
 -----|---------------|---------------|---------------|----->
@@ -58,9 +57,9 @@ occurs. There are three options to choose.
 \itemize{
 \item \code{ambiguity = 0}: to consider the interval between \code{start} and \code{end} as 0
 hours, \emph{i.e} \code{start} and \code{end} are located at the same point in time
-(default);
+(default).
 \item \code{ambiguity = 24}: to consider the interval between \code{start} and \code{end} as 24
-hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day;
+hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day.
 \item \code{ambiguity = NA}: to disregard this cases, assigning \code{NA} as value.
 }
 }
@@ -70,8 +69,8 @@ hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day;
 \code{assign_date()} can return three different outputs:
 \itemize{
 \item \code{return = "list"}: returns a \code{list} object with two named elements
-corresponding to \code{start} and \code{end} output;
-\item \code{return = "start"}: returns only the \code{start} output;
+corresponding to \code{start} and \code{end} output.
+\item \code{return = "start"}: returns only the \code{start} output.
 \item \code{return = "end"}: returns only the \code{end} output.
 }
 }
@@ -120,14 +119,15 @@ assign_date(start, end, return = "start")
 start <- lubridate::as_datetime("1985-01-15 12:00:00")
 end <- lubridate::as_datetime("2020-09-10 12:00:00")
 assign_date(start, end, ambiguity = 24)
-#> $start
+#> $start # Expected
 #> [1] "0000-01-01 12:00:00 UTC"
 #>
 #> $end
 #> [1] "0000-01-02 12:00:00 UTC"
 }
 \seealso{
-Other Time arithmetic: 
-\code{\link{shortest_interval}()}
+Other time arithmetic functions: 
+\code{\link{shortest_interval}()},
+\code{\link{sum_time}()}
 }
-\concept{Time arithmetic}
+\concept{time arithmetic functions}

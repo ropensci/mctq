@@ -1,4 +1,4 @@
-#' Return the shortest interval between two hours
+#' Find the shortest interval between two hours
 #'
 #' @description
 #'
@@ -77,8 +77,9 @@
 #' @param inverse A logical value indicating if the function must return a
 #' inverse output, _i.e_ the longer interval between `x` and `y`.
 #'
-#' @return A `hms` object or a type of object indicated on `class`.
-#' @family Time arithmetic
+#' @return A `hms` object, or a type of object indicated on `class`, with the
+#'   shortest interval between `x` and `y`.
+#' @family time arithmetic functions
 #' @export
 #'
 #' @examples
@@ -96,7 +97,7 @@
 #' x <- lubridate::parse_date_time("01:10:00", "HMS")
 #' y <- lubridate::parse_date_time("11:45:00", "HMS")
 #' longer_interval(x, y)
-#' #> 10:35:00 # Expected
+#' #> 13:25:00 # Expected
 #'
 #' x <- lubridate::as_datetime("1915-02-14 05:00:00")
 #' y <- lubridate::as_datetime("1970-07-01 05:00:00")

@@ -3,7 +3,7 @@
 #' @description
 #'
 #' `assign_date()` assign dates to two sequential hour values. It can facilitate
-#' time arithmetic, locating time values, without date reference, on a
+#' time arithmetic by locating time values without date reference on a
 #' timeline.
 #'
 #' @details
@@ -16,7 +16,7 @@
 #' distance themselves by one day, as illustrated below.
 #'
 #' ```
-#'  start,end       start,end     start,end         start,end
+#'  start,end       start,end       start,end       start,end
 #'    start            end            start            end
 #'    10:00           10:00           10:00           10:00
 #' -----|---------------|---------------|---------------|----->
@@ -29,9 +29,9 @@
 #'
 #' * `ambiguity = 0`: to consider the interval between `start` and `end` as 0
 #' hours, _i.e_ `start` and `end` are located at the same point in time
-#' (default);
+#' (default).
 #' * `ambiguity = 24`: to consider the interval between `start` and `end` as 24
-#' hours, _i.e._ `start` and `end` distance themselves by one day;
+#' hours, _i.e._ `start` and `end` distance themselves by one day.
 #' * `ambiguity = NA`: to disregard this cases, assigning `NA` as value.
 #'
 #' ## `return` argument
@@ -39,8 +39,8 @@
 #' `assign_date()` can return three different outputs:
 #'
 #' * `return = "list"`: returns a `list` object with two named elements
-#' corresponding to `start` and `end` output;
-#' * `return = "start"`: returns only the `start` output;
+#' corresponding to `start` and `end` output.
+#' * `return = "start"`: returns only the `start` output.
 #' * `return = "end"`: returns only the `end` output.
 #'
 #' ## `start_name` and `end_name` arguments
@@ -65,21 +65,20 @@
 #'
 #' @param start,end A `hms` or `POSIXt` vector indicating the start or end
 #'   hour.
-#' @param ambiguity (optional) A numeric value or `NA` that instruct
-#'   `assign_date()` on how to deal with ambiguities (see Details)
-#'   (default: `0`).
+#' @param ambiguity (optional) A numeric value to instruct `assign_date()` on
+#'   how to deal with ambiguities (see Details) (default: `0`).
 #' @param return (optional) A string indicating the type of output (see Details)
-#'   (default: "list").
+#'   (default: `"list"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
 #'   with the `start` and `end` argument.
 #'
 #' @return
 #'
-#' * If `return = "list"`, a named list with `start` and `end` outputs;
-#' * If `return = "start`, only the `start` output;
+#' * If `return = "list"`, a named list with `start` and `end` outputs.
+#' * If `return = "start`, only the `start` output.
 #' * If `return = "end"`, only the `end` output.
 #'
-#' @family Time arithmetic
+#' @family time arithmetic functions
 #' @export
 #'
 #' @examples
@@ -103,7 +102,7 @@
 #' start <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)
-#' #> $start
+#' #> $start # Expected
 #' #> [1] "0000-01-01 12:00:00 UTC"
 #' #>
 #' #> $end

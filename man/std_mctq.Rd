@@ -11,142 +11,142 @@ A data frame with 10 rows and 18 variables:
 \item{id}{
 A unique numeric value for the purpose of identifying each subject in the
 dataset.
-
+\cr \cr
 Class: \code{integer}.}
 
 \item{work}{
 A logical value indicating if the subject have a regular work schedule.
-
+\cr \cr
 Statement (EN): "I have a regular work schedule (this includes being, for
 example, a housewife or househusband)").
-
+\cr \cr
 Class: \code{logical}.}
 
 \item{wd}{
 Number of workdays per week.
-
+\cr \cr
 Statement (EN): "I have a regular work schedule and work ___ days per
 week").
-
+\cr \cr
 Class: \code{integer}.}
 
 \item{bt_w}{
 Local time of going to bed on workdays.
-
+\cr \cr
 Statement (EN): "I go to bed at ___ o'clock'".
-
+\cr \cr
 Class: \code{hms}.}
 
 \item{sprep_w}{
 Local time of preparing to sleep on workdays.
-
+\cr \cr
 Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
-
+\cr \cr
 Class: \code{hms}.}
 
 \item{slat_w}{
 Sleep latency on workdays.
-
+\cr \cr
 Statement (EN): "I need ___ minutes to fall asleep".
-
+\cr \cr
 Class: \code{Duration}.}
 
 \item{se_w}{
 Sleep end on workdays.
-
+\cr \cr
 Statement (EN): "I wake up at ___ o'clock".
-
+\cr \cr
 Class: \code{hms}.}
 
 \item{si_w}{
 Sleep inertia on workdays.
-
+\cr \cr
 Statement (EN): "After ___ minutes, I get up".
-
+\cr \cr
 Class: \code{Duration}.}
 
 \item{alarm_w}{
 A logical value indicating if the subject use an alarm clock on workdays.
-
+\cr \cr
 Statement (EN): "I use an alarm clock on workdays".
-
+\cr \cr
 Class: \code{logical}.}
 
 \item{wake_before_w}{
 A logical value indicating if the subject regularly wake up BEFORE the
 alarm rings.
-
+\cr \cr
 Statement (EN): "I regularly wake up BEFORE the alarm rings".
-
+\cr \cr
 Class: \code{logical}.}
 
 \item{le_w}{
 Light exposure on workdays.
-
+\cr \cr
 Statement (EN): "On average, I spend the following amount of time outdoors
 in daylight (without a roof above my head)".
-
+\cr \cr
 Class: \code{Duration}.}
 
 \item{bt_f}{
 Local time of going to bed on work-free days.
-
+\cr \cr
 Statement (EN): "I go to bed at ___ o'clock'".
-
+\cr \cr
 Class: \code{hms}.}
 
 \item{sprep_f}{
 Local time of preparing to sleep on work-free days
-
+\cr \cr
 Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
-
+\cr \cr
 Class: \code{hms}.}
 
 \item{slat_f}{
 Sleep latency on work-free days.
-
+\cr \cr
 Statement (EN): "I need ___ minutes to fall asleep".
-
+\cr \cr
 Class: \code{Duration}.}
 
 \item{se_f}{
 Sleep end on work-free days.
-
+\cr \cr
 Statement (EN): "I wake up at ___ o'clock".
-
+\cr \cr
 Class: \code{hms}.}
 
 \item{si_f}{
 Sleep inertia on work-free days.
-
+\cr \cr
 Statement \strong{(EN)}: "After ___ minutes, I get up".
-
+\cr \cr
 Class: \code{Duration}.}
 
 \item{alarm_f}{
 A logical value indicating if the subject use an alarm clock on work-free
 days.
-
+\cr \cr
 Statement (EN): "My wake-up time is due to the use of an alarm
 clock".
-
+\cr \cr
 Class: \code{logical}.}
 
 \item{reasons_f}{
 Particular reasons why the subject cannot freely choose his sleep times on
 work-free days.
-
+\cr \cr
 Statement (EN): "There are particular reasons why I cannot freely choose my
 sleep times on free days".
-
+\cr \cr
 Class: \code{character}.}
 
 \item{le_f}{
 Light exposure on work-free days.
-
+\cr \cr
 Statement (EN): "On average, I spend the following amount of time outdoors
 in daylight (without a roof above my head)".
-
+\cr \cr
 Class: \code{Duration}.}
 }
 }
@@ -157,8 +157,8 @@ Prepared by Daniel Vartanian (package's author).
 data(std_mctq)
 }
 \description{
-A fictional dataset composed by MCTQ (standard version) basic/measurable
-variables for testing and learning purposes.
+A fictional dataset composed by basic/measurable variables of the MCTQ
+(standard version) for testing and learning purposes.
 
 This data was created according to Roenneberg, Wirz-Justice & Merrow
 (\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
@@ -166,14 +166,13 @@ Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See Referenc
 and Details sections to learn more.
 
 The naming of the variables took into account the standard names used by
-theWeP and guidelines of the
+the theWeP and guidelines of the
 \href{https://style.tidyverse.org/}{tidyverse style guide}.
 }
 \details{
-\code{std_mctq} is a tidy and valid version of \code{\link[=build_std_mctq]{build_std_mctq()}}, which
-output is the raw data for \code{std_mctq}. This dataset was created to
-demonstrate common cases and data issues that researchers may find in their
-MCTQ data.
+\code{std_mctq} is a tidy and valid version of \code{\link[=build_std_mctq]{build_std_mctq()}}. This
+dataset was created to demonstrate common cases and data issues that
+researchers may find in their MCTQ data.
 
 You can learn more about the \code{std_mctq} data cleaning process in
 \code{vignette("data_issues")}.
@@ -216,5 +215,5 @@ daily temporal patterns of human chronotypes.
 The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
-\concept{Datasets}
+\concept{datasets}
 \keyword{datasets}

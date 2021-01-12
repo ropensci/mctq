@@ -43,8 +43,8 @@ Wickham, H, & Grolemund. (n.d.). \emph{R for data science}. Sebastopol, CA:
 O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
 \seealso{
-Other Data functions: 
+Other data functions: 
 \code{\link{build_std_mctq}()},
 \code{\link{validate_std_mctq}()}
 }
-\concept{Data functions}
+\concept{data functions}

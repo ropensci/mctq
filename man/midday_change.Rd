@@ -32,10 +32,13 @@ midday_change(x)
 #> [1] "0000-01-02 07:45:32 UTC" # Expected
 }
 \seealso{
-Other Utility functions: 
+Other utility functions: 
 \code{\link{flat_posixt}()},
 \code{\link{is_time}()},
 \code{\link{load_data}()},
-\code{\link{model_data}()}
+\code{\link{model_data}()},
+\code{\link{raw_data}()},
+\code{\link{swap_decimal}()},
+\code{\link{write_data}()}
 }
-\concept{Utility functions}
+\concept{utility functions}

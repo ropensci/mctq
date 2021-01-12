@@ -24,6 +24,9 @@ test_check("mctq")
 # load_all()
 # document()
 
+# Helpers:
+# normalizePath(readClipboard(), "/", mustWork = FALSE)
+
 # Plan vignettes
 # * About the MCTQ and it's variants
 # * Converting values

@@ -22,8 +22,8 @@ See \link{std_mctq} to learn more.
 \dontrun{utils::View(build_std_mctq())}
 }
 \seealso{
-Other Data functions: 
+Other data functions: 
 \code{\link{tidy_std_mctq}()},
 \code{\link{validate_std_mctq}()}
 }
-\concept{Data functions}
+\concept{data functions}

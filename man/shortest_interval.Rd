@@ -3,7 +3,7 @@
 \name{shortest_interval}
 \alias{shortest_interval}
 \alias{longer_interval}
-\title{Return the shortest interval between two hours}
+\title{Find the shortest interval between two hours}
 \usage{
 shortest_interval(x, y, class = "hms", inverse = FALSE)
 
@@ -18,7 +18,8 @@ longer_interval(x, y, class = "hms")
 inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
 }
 \value{
-A \code{hms} object or a type of object indicated on \code{class}.
+A \code{hms} object, or a type of object indicated on \code{class}, with the
+shortest interval between \code{x} and \code{y}.
 }
 \description{
 \code{shortest_interval()} finds and return the shortest interval between two
@@ -107,7 +108,7 @@ shortest_interval(x, y)
 x <- lubridate::parse_date_time("01:10:00", "HMS")
 y <- lubridate::parse_date_time("11:45:00", "HMS")
 longer_interval(x, y)
-#> 10:35:00 # Expected
+#> 13:25:00 # Expected
 
 x <- lubridate::as_datetime("1915-02-14 05:00:00")
 y <- lubridate::as_datetime("1970-07-01 05:00:00")
@@ -127,7 +128,8 @@ longer_interval(x, y, "POSIXct")
 #> [1] "0000-01-01 12:30:00 UTC" # Expected
 }
 \seealso{
-Other Time arithmetic: 
-\code{\link{assign_date}()}
+Other time arithmetic functions: 
+\code{\link{assign_date}()},
+\code{\link{sum_time}()}
 }
-\concept{Time arithmetic}
+\concept{time arithmetic functions}

@@ -26,19 +26,19 @@
 #'
 #' `convert_to` have some wrappers functions for convenience.
 #'
-#' `convert_to_tu` help make conversions from date/time objects to units.
+#' * `convert_to_tu` help make conversions from date/time objects to units.
 #'
-#' `convert_to_ut` help make conversions from units to date/time objects.
+#' * `convert_to_ut` help make conversions from units to date/time objects.
 #'
-#' `convert_to_tt` help make conversions from date/time objects to other
+#' * `convert_to_tt` help make conversions from date/time objects to other
 #' date/time objects.
 #'
-#' `convert_to_uu` help make conversions from unit to other units.
+#' * `convert_to_uu` help make conversions from unit to other units.
 #'
-#' `convert_to_pt` help make conversions from `character` or `numeric` objects
+#' * `convert_to_pt` help make conversions from `character` or `numeric` objects
 #' to date/time objects.
 #'
-#' `convert_to_pu` help make conversions from `character` or `numeric` objects
+#' * `convert_to_pu` help make conversions from `character` or `numeric` objects
 #' to units.
 #'
 #' ## `class` argument
@@ -63,15 +63,15 @@
 #'
 #' Valid values for this two arguments are:
 #'
-#' * `"S"`: for decimal seconds;
-#' * `"M"`: for decimal minutes;
-#' * `"H"`: for decimal hours;
-#' * `"d"`: for decimal days;
-#' * `"W"`: for decimal weeks;
-#' * `"m"`: for decimal months;
-#' * `"y"`: for decimal years;
-#' * `"date_decimal"`: for decimal dates;
-#' * `"rad"`: for radians;
+#' * `"S"`: for decimal seconds.
+#' * `"M"`: for decimal minutes.
+#' * `"H"`: for decimal hours.
+#' * `"d"`: for decimal days.
+#' * `"W"`: for decimal weeks.
+#' * `"m"`: for decimal months.
+#' * `"y"`: for decimal years.
+#' * `"date_decimal"`: for decimal dates.
+#' * `"rad"`: for radians.
 #' * `"deg"`: for degrees.
 #'
 #' ## `tz` argument
@@ -182,6 +182,8 @@
 #'   are allowed with the output (default: `FALSE`).
 #'
 #' @return A R object of the indicated class.
+#'
+#' @family convert_to functions
 #' @export
 #'
 #' @references
@@ -408,10 +410,19 @@ convert_to.character <- function(x, class, ..., orders = NULL, tz = "UTC",
 
     # Check inconsistencies -----
 
-    if (is.null(orders) && !all(is.na(x)) &&
+    if (is.null(orders) && !all(is.na(x)) && is.character(x) &&
         !(class %in% c("character", "integer", "double", "numeric"))) {
         shush(rlang::abort(glue::glue(
-            "Non-parsed character or numeric vectors cannot be converted to ",
+            "Non-parsed character vectors cannot be converted to ",
+            "{class}. Did you forget to assign values to `orders`?")),
+            quiet)
+    }
+
+    if (is.null(orders) && !all(is.na(x)) && is.numeric(x) &&
+        !(class %in% c("character", "integer", "double", "numeric",
+                       "duration", "period", "difftime", "hms"))) {
+        shush(rlang::abort(glue::glue(
+            "Non-parsed numeric vectors cannot be converted to ",
             "{class}. Did you forget to assign values to `orders`?")),
             quiet)
     }
@@ -870,6 +881,7 @@ convert_to_pu <- function(x, orders, output_unit, ...) {
 
 # HELPERS =====
 
+#' @family convert_to functions
 #' @noRd
 parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                                quiet = FALSE) {
@@ -993,6 +1005,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
 
 }
 
+#' @family convert_to functions
 #' @noRd
 convert_to_seconds <- function(x, input_unit = NULL,
                                month_length = lubridate::dmonths(),
@@ -1092,6 +1105,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
 
 }
 
+#' @family convert_to functions
 #' @noRd
 convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
                             month_length = lubridate::dmonths(),
@@ -1158,6 +1172,7 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
 
 }
 
+#' @family convert_to functions
 #' @noRd
 convert_to_date_time <- function(x, class, input_unit = NULL,
                                  month_length = lubridate::dmonths(),

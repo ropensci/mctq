@@ -26,8 +26,8 @@ Wiley & Sons. doi:
 \href{http://dx.doi.org/10.1002/9781118897126}{10.1002/9781118897126}.
 }
 \seealso{
-Other Data functions: 
+Other data functions: 
 \code{\link{build_std_mctq}()},
 \code{\link{tidy_std_mctq}()}
 }
-\concept{Data functions}
+\concept{data functions}

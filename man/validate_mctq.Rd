@@ -3,7 +3,7 @@
 \name{validate_mctq}
 \alias{validate_mctq}
 \alias{is_valid}
-\title{Validate values from a MCTQ dataset}
+\title{Validate values from a standard MCTQ dataset}
 \usage{
 validate_mctq(data, check = NULL, flag = FALSE, custom = NULL, breaks = TRUE)
 
@@ -48,7 +48,7 @@ When run in interactive mode and with \code{remove_breaks = FALSE},
 }
 
 \examples{
-\dontrun{validate_mctq(std_mctq, bt_w)}
+\dontrun{validate_mctq(std_mctq, "bt_w")}
 }
 \references{
 Van der Loo, M., & De Jonge, E. (2018).
@@ -56,3 +56,4 @@ Van der Loo, M., & De Jonge, E. (2018).
 Wiley & Sons. doi:
 \href{http://dx.doi.org/10.1002/9781118897126}{10.1002/9781118897126}.
 }
+\concept{validation functions}

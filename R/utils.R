@@ -15,7 +15,7 @@
 #'
 #' @return A vector of the same `POSIXt` class type as `x`.
 #'
-#' @family Utility functions
+#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -50,9 +50,10 @@ midday_change = function(x) {
 #'
 #' @param x A `POSIXt` vector.
 #'
-#' @return A vector of the same `POSIXt` class type as `x`.
+#' @return A vector of the same `POSIXt` class type as `x` with `0000-01-01` as
+#'   date.
 #'
-#' @family Utility functions
+#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -77,14 +78,15 @@ flat_posixt = function(x) {
 #' @description
 #'
 #' `change_day()` is a utility function that help change days of `Date` or
-#' `POSIXt` objects.
+#' `POSIXt` objects with the need for a direct reassignment.
+#'
+#' Note that, if your add a day that surpasses the days in  the monthy
 #'
 #' @param x A `Date` or `POSIXt` vector.
 #' @param day A number, between 1-31 indicating the new day of `x`.
+#' @return A `Date` or `POSIXt` vector with the indicated day.
 #'
-#' @return A `Date` or `POSIXt` vector.
-#'
-#' @family Utility functions
+#' @family utility functions
 #' @noRd
 #'
 #' @examples
@@ -105,19 +107,24 @@ change_day <- function(x, day) {
 
 }
 
-#' Check if a object is a date/time type
+#' Check if a object inherits a set of date/time classes
 #'
 #' @description
 #'
-#' `is_time()` is a logical checker for objects of class `Duration`, `Period`,
-#' `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, and `Circular`.
+#' `is_time()` returns a boolean flag checking for objects of class `Duration`,
+#' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, or
+#' `Circular`.
 #'
-#' @param x Any kind of object.
-#' @param rm_date A logical value indicating if `Date` objects should be removed
-#'   from the check (default: `FALSE`)
+#' @param x Any kind of R object.
+#' @param rm (optional) A character vector indicating names of object classes to
+#'   remove from the check (case sensitive) (default: `NULL`).
 #'
-#' @return A logical value.
-#' @family Utility functions
+#' @return If `rm` is `NULL`, a boolean flag checking if `x` inherits a
+#'   `Duration`, `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`,
+#'   `Interval`, or `Circular` class. Else, the same as the previous, but
+#'   without the classes indicated in `rm`.
+#'
+#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -125,25 +132,28 @@ change_day <- function(x, day) {
 #' #> [1] TRUE # Expected
 #' is_time(as.Date("2020-01-01"))
 #' #> [1] TRUE # Expected
-#' is_time(as.Date("2020-01-01"), rm_date = TRUE)
+#' is_time(as.Date("2020-01-01"), rm = "Date")
 #' #> [1] FALSE # Expected
 #' is_time(iris)
 #' #> [1] FALSE # Expected
 #' is_time(letters)
 #' #> [1] FALSE # Expected
-is_time <- function(x, rm_date = FALSE) {
+is_time <- function(x, rm = NULL) {
 
-    checkmate::assert_flag(rm_date)
+    checkmate::assert_character(rm, any.missing = FALSE, min.len = 1,
+                                null.ok = TRUE)
 
     classes <-
         c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
           "POSIXlt", "Interval", "Circular")
 
-    if (isTRUE(rm_date)) {
-        classes <- stringr::str_subset(classes, "^Date$", negate = TRUE)
+    if (!is.null(rm)) {
+        for (i in paste0("^", rm, "$")){
+            classes <- stringr::str_subset(classes, i, negate = TRUE)
+        }
     }
 
-    if (circular::is.circular(x)) {
+    if (circular::is.circular(x) && !("circular" %in% rm)) {
         return(TRUE)
     }
 
@@ -151,27 +161,42 @@ is_time <- function(x, rm_date = FALSE) {
 
 }
 
-#' __UNDER DEVELOPMENT__
+#' Collapse class names
 #'
-#' @noRd
-sum_hms <- function(anterior, posterior) {
-
-}
-
-#' __UNDER DEVELOPMENT__
+#' @description
 #'
+#' `class_collapse()` is a utility function to help build return messages with
+#' [glue::glue()]. It collapses the value of `class(x)` with a `/` and single
+#' quote it.
+#'
+#' @param x Any kind of R object.
+#'
+#' @return A string with `class(x)` value collapsed with `/` encapsulated with
+#'   single quotes.
+#'
+#' @family utility functions
 #' @noRd
-diff_hms <- function(anterior, posterior) {
-
-}
-
-#' @noRd
+#'
+#' @examples
+#' class_collapse("")
+#' #> [1] "'character'" # Expected
+#' class_collapse(1)
+#' #> [1] "'numeric'" # Expected
 class_collapse <- function(x) {
 
     glue::single_quote(glue::glue_collapse(class(x), sep = '/'))
 
 }
 
+#' @family utility functions
+#' @noRd
+is_numeric_ <- function(x) {
+
+    any(class(x) %in% c("integer", "double", "numeric"))
+
+}
+
+#' @family utility functions
 #' @noRd
 inline_collapse <- function(x, serial_comma = TRUE) {
 
@@ -187,6 +212,7 @@ inline_collapse <- function(x, serial_comma = TRUE) {
 
 }
 
+#' @family utility functions
 #' @noRd
 shush <- function(x, quiet = TRUE){
 
@@ -198,6 +224,7 @@ shush <- function(x, quiet = TRUE){
 
 }
 
+#' @family utility functions
 #' @noRd
 close_round <- function(x, digits = 5) {
 
@@ -213,6 +240,7 @@ close_round <- function(x, digits = 5) {
 
 }
 
+#' @family utility functions
 #' @noRd
 swap <- function(x, y) {
 
@@ -229,6 +257,7 @@ swap <- function(x, y) {
 
 }
 
+#' @family utility functions
 #' @noRd
 swap_if <- function(x, y, condition = "x > y") {
 
@@ -238,8 +267,8 @@ swap_if <- function(x, y, condition = "x > y") {
     assert_identical(x, y, "class")
     checkmate::assert_choice(condition, choices)
 
-     condition <- stringr::str_replace(condition, "x", "a")
-     condition <- stringr::str_replace(condition, "y", "b")
+    condition <- stringr::str_replace(condition, "x", "a")
+    condition <- stringr::str_replace(condition, "y", "b")
 
     a <- x
     b <- y
@@ -251,9 +280,16 @@ swap_if <- function(x, y, condition = "x > y") {
 
 }
 
+#' @family utility functions
 #' @noRd
 count_na <- function(x) {
 
     length(which(is.na(x)))
 
+}
+
+#' @family utility functions
+#' @noRd
+escape_regex <- function(x) {
+    gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
 }

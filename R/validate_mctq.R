@@ -1,4 +1,4 @@
-#' Validate values from a MCTQ dataset
+#' Validate values from a standard MCTQ dataset
 #'
 #' @description
 #'
@@ -33,6 +33,7 @@
 #'   When run in interactive mode and with `remove_breaks = FALSE`,
 #'   `validate_mctq` offers a way to export the results.
 #'
+#' @family validation functions
 #' @importFrom validate in_range is_complete all_complete
 #' @importFrom lubridate is.duration
 #' @export
@@ -45,7 +46,7 @@
 #' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
 #'
 #' @examples
-#' \dontrun{validate_mctq(std_mctq, bt_w)}
+#' \dontrun{validate_mctq(std_mctq, "bt_w")}
 validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
                           breaks = TRUE) {
 
@@ -289,6 +290,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 }
 
 #' @rdname validate_mctq
+#' @family validation functions
 #' @export
 is_valid <- function(data, check = NULL, custom = NULL) {
 
@@ -296,6 +298,7 @@ is_valid <- function(data, check = NULL, custom = NULL) {
 
 }
 
+#' @family validation functions
 #' @noRd
 is_valid_test <- function(summary) {
 
@@ -308,6 +311,7 @@ is_valid_test <- function(summary) {
 
 }
 
+#' @family validation functions
 #' @noRd
 export_validation <- function(data, rules, check, name = NULL) {
 
@@ -345,11 +349,14 @@ export_validation <- function(data, rules, check, name = NULL) {
 
 # Wrappers
 
+#' @family validation functions
 #' @noRd
-is.time <- function(x, rm_date = FALSE) is_time(x, rm_date = FALSE)
+is.time <- function(x, rm = NULL) is_time(x, rm)
 
+#' @family validation functions
 #' @noRd
 is.hms <- function(x) hms::is_hms(x)
 
+#' @family validation functions
 #' @noRd
 is.integrish <- function(x) rlang::is_integerish(x)

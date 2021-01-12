@@ -1,3 +1,4 @@
+#' @family dialog functions
 #' @noRd
 dialog_menu <- function(abort = FALSE, title = "Do you wish to continue?",
                         space_above = TRUE, space_below = TRUE) {
@@ -24,6 +25,7 @@ dialog_menu <- function(abort = FALSE, title = "Do you wish to continue?",
 
 }
 
+#' @family dialog functions
 #' @noRd
 dialog_line <- function(abort = FALSE,
                         line = paste0("Insert `quit` to exit or press any key ",
@@ -48,6 +50,7 @@ dialog_line <- function(abort = FALSE,
 
 }
 
+#' @family dialog functions
 #' @noRd
 crayon_message <- function(text = NULL, title = NULL, tag = NULL,
                            space_above = TRUE, space_below = TRUE) {
@@ -95,6 +98,7 @@ crayon_message <- function(text = NULL, title = NULL, tag = NULL,
 
 }
 
+#' @family dialog functions
 #' @noRd
 message_generator <- function(type = "ok", funny = FALSE) {
 
