@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `load_data()` is a wrapper function for [readr::read_delim()] to help simple
 #' data loading. It can read any kind of delimited data in addition to `.RData`
 #' files.
@@ -96,6 +98,8 @@ load_data <- function(file = as.character(tcltk::tkgetOpenFile()),
 #' Write a delimited or a `.RData` file
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `write_data()` is a wrapper function for [readr::write_delim()] to help with
 #' simple data exporting. It can write any kind of delimited data in addition to
@@ -248,6 +252,8 @@ write_data <- function(data,
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `mctq` package comes bundled with fictional datasets for different versions
 #' of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
 #' \strong{\eqn{\mu}}mctq). `model_data()` make it easy to access them.
@@ -285,6 +291,8 @@ model_data <- function(model = "standard") {
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `mctq` comes bundled with raw fictional datasets for testing and learning.
 #' `raw_data()` make it easy to access their paths.
 #'
@@ -320,6 +328,8 @@ raw_data <- function(file = NULL) {
 #' Swap decimal separators
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `swap_decimal` swaps
 #' [decimal separators](https://en.wikipedia.org/wiki/Decimal_separator)

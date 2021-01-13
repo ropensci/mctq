@@ -15,6 +15,8 @@ If \code{path = NULL}, returns a character vector with all raw dataset
 file names available. Else, returns the \code{file} path.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{mctq} comes bundled with raw fictional datasets for testing and learning.
 \code{raw_data()} make it easy to access their paths.
 }

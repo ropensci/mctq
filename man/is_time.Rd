@@ -19,6 +19,8 @@ If \code{rm} is \code{NULL}, a boolean flag checking if \code{x} inherits a
 without the classes indicated in \code{rm}.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{is_time()} returns a boolean flag checking for objects of class \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, \code{Interval}, or
 \code{Circular}.

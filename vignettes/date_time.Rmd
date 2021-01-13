@@ -1,5 +1,5 @@
 ---
-title: "Dealing with dates and time"
+title: "Dealing with dates and time inn R"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{time_arithmetic}
@@ -20,4 +20,4 @@ library(mctq)
 
 __UNDER DEVELOPMENT__
 
-Shows how time arithmetic can be tricky and possible ways to go around problems.
+Shows how time arithmetic can be tricky, possible ways to go around problems, and how the `mctq` package can help with this.

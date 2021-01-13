@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `build_std_mctq` builds a fictional raw dataset composed by MCTQ (standard
 #' version) basic/measurable variables for testing and learning purposes.
 #' See [mctq::std_mctq] to learn more.
@@ -409,6 +411,8 @@ build_std_mctq <- function(write = FALSE) {
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `tidy_std_mctq` tidy the output of [mctq::build_std_mctq()].
 #'
 #' @details
@@ -582,6 +586,8 @@ tidy_std_mctq <- function(write = FALSE) {
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' __UNDER DEVELOPMENT__
 #'
 #' @inheritParams tidy_std_mctq
@@ -610,6 +616,8 @@ validate_std_mctq <- function(write = FALSE) {
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' A fictional dataset composed by basic/measurable variables of the MCTQ
 #' (standard version) for testing and learning purposes.
 #'
@@ -629,7 +637,7 @@ validate_std_mctq <- function(write = FALSE) {
 #' researchers may find in their MCTQ data.
 #'
 #' You can learn more about the `std_mctq` data cleaning process in
-#' `vignette("data_issues")`.
+#' `vignette("data_wrangling", package = "mctq")`.
 #'
 #' To learn more about the Munich Chronotype Questionnaire (MCTQ), _cf._
 #' Roenneberg, Wirz-Justice & Merrow ([2003](https://bit.ly/3rLu195)) and

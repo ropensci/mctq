@@ -18,6 +18,7 @@ test_check("mctq")
 # library(magrittr)
 # library(rlang)
 # library(tidyverse)
+# library(tcltk)
 # library(validate)
 #
 # library(devtools)

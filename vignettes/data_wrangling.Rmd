@@ -1,5 +1,5 @@
 ---
-title: "Common Data Issues"
+title: "MCTQ data wrangling"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{common_data_issues}
@@ -20,4 +20,4 @@ library(mctq)
 
 __UNDER DEVELOPMENT__
 
-Shows commons issues when dealing with raw MCTQ data and how to fix them.
+Shows commons issues when dealing with raw MCTQ data, how to fix them, and how `mctq` can make it easy for researcher while dealing with this problems.

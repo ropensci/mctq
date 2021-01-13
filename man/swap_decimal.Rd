@@ -23,6 +23,8 @@ A \code{character} or \code{numeric} vector with the new decimal separator.
 without any coercion.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{swap_decimal} swaps
 \href{https://en.wikipedia.org/wiki/Decimal_separator}{decimal separators}
 from \code{numeric} or \code{character} objects with numbers.

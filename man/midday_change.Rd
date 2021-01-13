@@ -13,6 +13,8 @@ midday_change(x)
 A vector of the same \code{POSIXt} class type as \code{x}.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{midday_change()} changes the dates of \code{POSIXt} objects accordingly to the
 time of day registered in the object values. The function do this by flatting
 the date to \code{0000-01-01} and them adding a day if the hour is lower than 12.

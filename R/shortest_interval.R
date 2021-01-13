@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `shortest_interval()` finds and return the shortest interval between two
 #' `hms` or `POSIXt` objects. This is useful for time arithmetic, because
 #' there's always two possible intervals between two hour values with no date
@@ -121,9 +123,9 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
 
     choices <- c("Duration", "Period", "hms", "POSIXct", "POSIXlt", "Interval")
 
-    checkmate::check_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
-    checkmate::check_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
-    check_identical(x, y, "length")
+    checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::assert_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
+    assert_identical(x, y, type = "length")
     checkmate::assert_numeric(lubridate::hours(x), lower = 0, max.len = 23)
     checkmate::assert_numeric(lubridate::hours(y), lower = 0, max.len = 23)
     checkmate::assert_choice(tolower(class), tolower(choices))

@@ -14,6 +14,8 @@ A vector of the same \code{POSIXt} class type as \code{x} with \code{0000-01-01}
 date.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{flat_posixt()} changes the dates of \code{POSIXt} objects to \code{0000-01-01}. This
 can be use to standardizing a point of origin to time values.
 }

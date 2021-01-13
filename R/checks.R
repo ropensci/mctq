@@ -101,6 +101,32 @@ assert_numeric_ <- checkmate::makeAssertionFunction(check_numeric_)
 
 #' @family check functions
 #' @noRd
+check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
+                           name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
+
+    if (any(is.null(x)) && isTRUE(null.ok)) {
+        TRUE
+    } else if (any(is.na(x)) && isFALSE(any.missing)) {
+        glue::glue("{glue::backtick(name)} cannot have missing values")
+    } else if (any(is.null(x)) && isFALSE(null.ok)) {
+        glue::glue("{glue::backtick(name)} cannot have `NULL` values")
+    } else  if (!lubridate::is.duration(x)) {
+        glue::glue("Must be of type 'Duration', not {class_collapse(x)}")
+    } else {
+        TRUE
+    }
+
+}
+
+#' @family check functions
+#' @noRd
+assert_duration <- checkmate::makeAssertionFunction(check_duration)
+
+#' @family check functions
+#' @noRd
 check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
 
@@ -161,53 +187,50 @@ assert_time <- checkmate::makeAssertionFunction(check_time)
 
 #' @family check functions
 #' @noRd
-check_identical <- function(x, y, type = "value", any.missing = TRUE,
-                            null.ok = FALSE,
-                            x_name = deparse(substitute(x)),
-                            y_name = deparse(substitute(y))) {
+assert_identical <- function(..., type = "value", any.missing = TRUE,
+                            null.ok = FALSE) {
 
+    checkmate::assert_list(list(...), min.len = 2)
+    checkmate::assert_choice(type, c("value", "length", "class"))
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
-    checkmate::assert_choice(type, c("value", "length", "class"))
+
+    names <- get_names(...)
+    out <- list(...)
 
     if (type == "length") {
-        error_message <- glue::glue("{glue::backtick(x_name)} and ",
-                                    "{glue::backtick(y_name)} ",
-                                    "must have identical lengths")
-        x <- length(x)
-        y <- length(y)
+        error_message <- glue::glue("Assertion failed: ",
+                                    "{inline_collapse(names)} ",
+                                    "must have identical lengths.")
+        check <- length(unique(sapply(out, length))) == 1
     } else if (type == "class") {
-        error_message <- glue::glue("{glue::backtick(x_name)} and ",
-                                    "{glue::backtick(y_name)} ",
-                                    "must have identical classes")
+        error_message <- glue::glue("Assertion failed: ",
+                                    "{inline_collapse(names)} ",
+                                    "must have identical classes.")
 
-        x <- class(x)
-        y <- class(y)
+        check <- length(unique(lapply(out, class))) == 1
     } else {
-        error_message <- glue::glue("{glue::backtick(x_name)} and ",
-                                    "{glue::backtick(y_name)} ",
-                                    "must be identical")
+        error_message <- glue::glue("Assertion failed: ",
+                                    "{inline_collapse(names)} ",
+                                    "must be identical.")
+        check <- length(unique(out)) == 1
     }
 
-    if (any(is.null(x)) && any(is.null(y)) && isTRUE(null.ok)) {
-        TRUE
-    } else if (any(is.na(x)) && any(is.na(y)) && isFALSE(any.missing)) {
-        glue::glue("{glue::backtick(x_name)} and {glue::backtick(y_name)} ",
-                   "cannot have missing values")
-    } else if (any(is.null(x)) && any(is.null(y)) && isFALSE(null.ok)) {
-        glue::glue("{glue::backtick(x_name)} and {glue::backtick(y_name)} ",
-                   "cannot have `NULL` values")
-    } else if (!identical(x, y)) {
-        error_message
+    if (any(is.null(unlist(out))) && isTRUE(null.ok)) {
+        invisible(TRUE)
+    } else if (any(is.na(unlist(out))) && isFALSE(any.missing)) {
+        rlang::abort(glue::glue("{inline_collapse(names)} cannot have ",
+                                "missing values"))
+    } else if (any(is.null(unlist(out))) && isFALSE(null.ok)) {
+        rlang::abort(glue::glue("{inline_collapse(names)} cannot have ",
+                                 "`NULL` values"))
+    } else if (isFALSE(check)) {
+        rlang::abort(error_message)
     } else {
-        TRUE
+       invisible(TRUE)
     }
 
 }
-
-#' @family check functions
-#' @noRd
-assert_identical <- checkmate::makeAssertionFunction(check_identical)
 
 #' Used in swap_decimal()
 #' @family check functions

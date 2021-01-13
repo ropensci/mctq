@@ -2,9 +2,13 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `sum_time()` returns the sum of the time from different kinds of date/time
-#' objects. The sum can also be set to roll on a 24 hours clock basis, helping
-#' with time arithmetic issues.
+#' objects.
+#'
+#' This function supports vectorized operations and can also be set to roll the
+#' sum on a 24 hours clock basis, helping with time arithmetic issues.
 #'
 #' @details
 #'
@@ -12,6 +16,17 @@
 #'
 #' `sum_time()` is integrated with [mctq::convert_to()]. That way you can choose
 #' what class of object will prefer for output.
+#'
+#' ## `vectorize` argument
+#'
+#' If `vectorize = FALSE` (default), `sum_time` will combine and sum all values
+#' in `...`. In other words, in this setting, `sum_time(c(x, y), z)` will have
+#' the same output as `sum_time(x, y, z)`.
+#'
+#' However, if `vectorize = TRUE`, `sum_time()` will require that all objects in
+#' `...` have the same length, and will perform a paired sum between elements.
+#' In other words, in this setting, `sum_time(c(x, y), c(w, z))` will return a
+#' vector like c(sum_time(x, w,), sum_time(y, z)).
 #'
 #' ## `POSIXt` objects
 #'
@@ -34,36 +49,73 @@
 #' leap years, DST, leap seconds). This may not be a issue for most people, but
 #' it must be considered when doing time arithmetic.
 #'
+#' ## `NA` values
+#'
+#' `sum_time()` only return `NA` values when `vectorize = TRUE`.
+#'
 #' @param ... Vectors belonging to one or more of the following classes:
 #'   `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or
 #'   `Interval`.
 #' @param class (optional) A string indicating the output class (default:
 #'   `"hms"`).
 #' @param clock (optional) A logical value indicating whether the sum should
-#'   roll over on a 24 hour clock basis (default: `TRUE`).
+#'   roll over on a 24 hour clock basis (default: `FALSE`).
+#' @param vectorize (optional) A logical value indicating if the function must
+#'   operate in a vectorized fashion (default: `FALSE`).
 #'
-#' @return If `clock = TRUE` (default), an object of the indicated class in
-#'   `class` (default: `"hms"`) with the sum of the time from objects in `...`
-#'   rolled over on a 24 hour clock basis. Else, the same as previous, but
-#'   __not__ rolled over on a 24 hours clock basis (accumulative).
+#' @return
+#'
+#' * If `clock = TRUE` (default) and `vectorize = FALSE` (default), an object of
+#' the indicated class in `class` (default: `"hms"`) with the sum of the time
+#' from objects in `...` rolled over on a 24 hour clock basis.
+#'
+#' * If `clock = FALSE` and `vectorize = FALSE` (default), an object of the
+#' indicated class in `class` (default: `"hms"`) with the cumulative sum of the
+#' time from objects in `...`.
+#'
+#' * If `clock = TRUE` (default) and `vectorize = TRUE`, an object of the
+#' indicated class in `class` (default: `"hms"`) with a vectorized sum of the
+#' time from objects in `...` rolled over on a 24 hour clock basis.
+#'
+#' * If `clock = FALSE` and `vectorize = TRUE`, an object of the indicated class
+#' in `class` (default: `"hms"`) with a vectorized and cumulative sum of the
+#' time from objects in `...`.
 #'
 #' @family time arithmetic functions
 #' @export
 #'
 #' @examples
-#' sum_time(hms::parse_hm("11:45"), lubridate::dhours(5))
-#' #> 16:45:00 # Expected
-#' sum_time(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
-#' #> 06:50:00 # Expected
-#' sum_time(lubridate::days(), lubridate::dhours(8), clock = FALSE)
-#' #> 32:00:00 # Expected
+#' ## ** Cumulative non-vectorized sum **
 #' x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 #' y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
-#' sum_time(x, y, clock = FALSE, class = "duration")
+#' sum_time(x, y, class = "duration")
 #' #> [1] "142200s (~1.65 days)" # Expected
-sum_time <- function(..., class = "hms", clock = TRUE) {
+#'
+#' ## ** Non-vectorized sum rolled over on a 24 hour clock basis **
+#' x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
+#' sum_time(x, clock = TRUE)
+#' #> 06:50:00 # Expected
+#'
+#' ## ** Cumulative vectorized sum **
+#' x <- c(lubridate::dhours(6), NA)
+#' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
+#' sum_time(x, y, vectorize = TRUE)
+#' #> 29:00:00 # Expected
+#' #> NA
+#'
+#' ## ** Vectorized sum rolled over on a 24 hour clock basis **
+#' x <- c(lubridate::dhours(6), NA)
+#' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
+#' sum_time(x, y, clock = TRUE, vectorize = TRUE)
+#' #> 05:00:00 # Expected
+#' #> NA
+sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
+
+    # List `...` -----
 
     out <- list(...)
+
+    # Check arguments -----
 
     check <- function(x) {
         classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
@@ -72,19 +124,42 @@ sum_time <- function(..., class = "hms", clock = TRUE) {
         checkmate::assert_multi_class(x, classes)
     }
 
-    fix <- function(x) {
-
-        x <- ifelse(sapply(x, lubridate::is.POSIXt),
-                    as.numeric(hms::as_hms(x)), as.numeric(x))
-        ifelse(is.na(x), 0, x)
-    }
-
+    checkmate::assert_string(class)
+    checkmate::assert_flag(clock)
+    checkmate::assert_flag(vectorize)
     lapply(out, check)
 
-    out <- lapply(out, fix)
-    out <- do.call("c", out)
-    out <- sum(out)
-    if (isTRUE(clock)) out <- lubridate::as_datetime(out)
+    if (isTRUE(vectorize) && !(length(unique(sapply(out, length))) == 1)) {
+        rlang::abort(paste0(
+            "When 'vetorize' is 'TRUE', all values in '...' must have the ",
+            "the same length.")
+            )
+    }
+
+    # Normalize values -----
+
+    normalize <- function(x) {
+        ifelse(sapply(x, lubridate::is.POSIXt),
+               as.numeric(hms::as_hms(x)), as.numeric(x))
+    }
+
+    out <- lapply(out, normalize)
+
+    # Sum time -----
+
+    if (isTRUE(vectorize)) {
+        out <- Reduce("+", out)
+    } else {
+        out <- do.call("c", out)
+        out <- sum(out, na.rm = TRUE)
+    }
+
+    # Roll time -----
+
+    if (isTRUE(clock)) out <- flat_posixt(lubridate::as_datetime(out))
+
+    # Return output -----
+
     convert_to(out, class)
 
 }

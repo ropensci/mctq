@@ -49,6 +49,8 @@ files (default: \code{"."}).}
 Write \code{data} in an address indicated in \code{file}. No value is returned.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{write_data()} is a wrapper function for \code{\link[readr:write_delim]{readr::write_delim()}} to help with
 simple data exporting. It can write any kind of delimited data in addition to
 \code{.RData} files.

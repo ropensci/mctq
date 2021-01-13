@@ -1,5 +1,5 @@
 ---
-title: "Social Jet Lag Signal"
+title: "The social jet lag signal"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Social Jetlag Signal}
@@ -19,3 +19,5 @@ library(mctq)
 ```
 
 __UNDER DEVELOPMENT__
+
+Shows the rationale behind the social jet lag concept and computation, and how its signal must be interpreted.

@@ -4,7 +4,7 @@
 \alias{sum_time}
 \title{Sum time values}
 \usage{
-sum_time(..., class = "hms", clock = TRUE)
+sum_time(..., class = "hms", clock = FALSE, vectorize = FALSE)
 }
 \arguments{
 \item{...}{Vectors belonging to one or more of the following classes:
@@ -15,24 +15,53 @@ sum_time(..., class = "hms", clock = TRUE)
 \code{"hms"}).}
 
 \item{clock}{(optional) A logical value indicating whether the sum should
-roll over on a 24 hour clock basis (default: \code{TRUE}).}
+roll over on a 24 hour clock basis (default: \code{FALSE}).}
+
+\item{vectorize}{(optional) A logical value indicating if the function must
+operate in a vectorized fashion (default: \code{FALSE}).}
 }
 \value{
-If \code{clock = TRUE} (default), an object of the indicated class in
-\code{class} (default: \code{"hms"}) with the sum of the time from objects in \code{...}
-rolled over on a 24 hour clock basis. Else, the same as previous, but
-\strong{not} rolled over on a 24 hours clock basis (accumulative).
+\itemize{
+\item If \code{clock = TRUE} (default) and \code{vectorize = FALSE} (default), an object of
+the indicated class in \code{class} (default: \code{"hms"}) with the sum of the time
+from objects in \code{...} rolled over on a 24 hour clock basis.
+\item If \code{clock = FALSE} and \code{vectorize = FALSE} (default), an object of the
+indicated class in \code{class} (default: \code{"hms"}) with the cumulative sum of the
+time from objects in \code{...}.
+\item If \code{clock = TRUE} (default) and \code{vectorize = TRUE}, an object of the
+indicated class in \code{class} (default: \code{"hms"}) with a vectorized sum of the
+time from objects in \code{...} rolled over on a 24 hour clock basis.
+\item If \code{clock = FALSE} and \code{vectorize = TRUE}, an object of the indicated class
+in \code{class} (default: \code{"hms"}) with a vectorized and cumulative sum of the
+time from objects in \code{...}.
+}
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{sum_time()} returns the sum of the time from different kinds of date/time
-objects. The sum can also be set to roll on a 24 hours clock basis, helping
-with time arithmetic issues.
+objects.
+
+This function supports vectorized operations and can also be set to roll the
+sum on a 24 hours clock basis, helping with time arithmetic issues.
 }
 \details{
 \subsection{\code{class} argument}{
 
 \code{sum_time()} is integrated with \code{\link[=convert_to]{convert_to()}}. That way you can choose
 what class of object will prefer for output.
+}
+
+\subsection{\code{vectorize} argument}{
+
+If \code{vectorize = FALSE} (default), \code{sum_time} will combine and sum all values
+in \code{...}. In other words, in this setting, \code{sum_time(c(x, y), z)} will have
+the same output as \code{sum_time(x, y, z)}.
+
+However, if \code{vectorize = TRUE}, \code{sum_time()} will require that all objects in
+\code{...} have the same length, and will perform a paired sum between elements.
+In other words, in this setting, \code{sum_time(c(x, y), c(w, z))} will return a
+vector like c(sum_time(x, w,), sum_time(y, z)).
 }
 
 \subsection{\code{POSIXt} objects}{
@@ -58,18 +87,37 @@ This function does not take into account time line irregularities (\emph{e.g.}
 leap years, DST, leap seconds). This may not be a issue for most people, but
 it must be considered when doing time arithmetic.
 }
+
+\subsection{\code{NA} values}{
+
+\code{sum_time()} only return \code{NA} values when \code{vectorize = TRUE}.
+}
 }
 \examples{
-sum_time(hms::parse_hm("11:45"), lubridate::dhours(5))
-#> 16:45:00 # Expected
-sum_time(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
-#> 06:50:00 # Expected
-sum_time(lubridate::days(), lubridate::dhours(8), clock = FALSE)
-#> 32:00:00 # Expected
+## ** Cumulative non-vectorized sum **
 x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
-sum_time(x, y, clock = FALSE, class = "duration")
+sum_time(x, y, class = "duration")
 #> [1] "142200s (~1.65 days)" # Expected
+
+## ** Non-vectorized sum rolled over on a 24 hour clock basis **
+x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
+sum_time(x, clock = TRUE)
+#> 06:50:00 # Expected
+
+## ** Cumulative vectorized sum **
+x <- c(lubridate::dhours(6), NA)
+y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
+sum_time(x, y, vectorize = TRUE)
+#> 29:00:00 # Expected
+#> NA
+
+## ** Vectorized sum rolled over on a 24 hour clock basis **
+x <- c(lubridate::dhours(6), NA)
+y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
+sum_time(x, y, clock = TRUE, vectorize = TRUE)
+#> 05:00:00 # Expected
+#> NA
 }
 \seealso{
 Other time arithmetic functions: 

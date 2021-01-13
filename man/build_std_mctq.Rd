@@ -14,6 +14,8 @@ build_std_mctq(write = FALSE)
 An invisible tibble.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{build_std_mctq} builds a fictional raw dataset composed by MCTQ (standard
 version) basic/measurable variables for testing and learning purposes.
 See \link{std_mctq} to learn more.

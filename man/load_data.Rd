@@ -44,6 +44,8 @@ by \code{NA} values in all the columns (default: \code{TRUE}).}
 An invisible tibble with data imported from \code{file}.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{load_data()} is a wrapper function for \code{\link[readr:read_delim]{readr::read_delim()}} to help simple
 data loading. It can read any kind of delimited data in addition to \code{.RData}
 files.

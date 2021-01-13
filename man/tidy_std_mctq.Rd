@@ -14,6 +14,8 @@ tidy_std_mctq(write = FALSE)
 An invisible tibble.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{tidy_std_mctq} tidy the output of \code{\link[=build_std_mctq]{build_std_mctq()}}.
 }
 \details{

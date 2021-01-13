@@ -11,7 +11,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
 [![Contributor
-Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
 
 <!-- badges: end -->
 
@@ -35,7 +35,7 @@ devtools::install_github("gipsousp/mctq")
 
 `mctq` is a community project, anyone and everyone is welcome to
 contribute. Please take a moment to review the [Guidelines for
-Contributing](CONTRIBUTING.md).
+Contributing](https://gipsousp.github.io/mctq/CONTRIBUTING.html).
 
 Please note that the `mctq` project is released with a [Contributor Code
 of Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By

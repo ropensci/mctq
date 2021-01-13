@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `assign_date()` assign dates to two sequential hour values. It can facilitate
 #' time arithmetic by locating time values without date reference on a
 #' timeline.
@@ -115,7 +117,7 @@ assign_date <- function(start, end, ambiguity = 0, return = "list",
 
     checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
     checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
-    check_identical(start, end, "length")
+    assert_identical(start, end, type = "length")
     checkmate::assert_numeric(lubridate::hours(start), lower = 0, max.len = 23)
     checkmate::assert_numeric(lubridate::hours(end), lower = 0, max.len = 23)
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))

@@ -34,6 +34,8 @@ with the \code{start} and \code{end} argument.}
 }
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{assign_date()} assign dates to two sequential hour values. It can facilitate
 time arithmetic by locating time values without date reference on a
 timeline.

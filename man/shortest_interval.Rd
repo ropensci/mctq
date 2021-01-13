@@ -22,6 +22,8 @@ A \code{hms} object, or a type of object indicated on \code{class}, with the
 shortest interval between \code{x} and \code{y}.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{shortest_interval()} finds and return the shortest interval between two
 \code{hms} or \code{POSIXt} objects. This is useful for time arithmetic, because
 there's always two possible intervals between two hour values with no date

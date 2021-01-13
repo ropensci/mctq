@@ -1,8 +1,8 @@
 ---
-title: "About MCTQ"
+title: "How to convert your data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{mctq}
+  %\VignetteIndexEntry{converting}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,4 +20,4 @@ library(mctq)
 
 __UNDER DEVELOPMENT__
 
-Shows the rationale behind the MCTQ, its different versions, and how to handle them with the `mctq` package.
+Shows how to convert time data from decimals or radians to lubridate objects, as the inverse.

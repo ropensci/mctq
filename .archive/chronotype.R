@@ -613,7 +613,7 @@ chronotype <- function(data) {
 
                 ##' CONDITION 3:
                 ##'
-                ##' This condition below refers to the situation below:
+                ##' This condition refers to the situation below:
                 ##'
                 ##'     23:00 |------ 3h -------| 02:00
                 ##' ------|-------------------------|--------> = + sjl_rel
@@ -641,7 +641,7 @@ chronotype <- function(data) {
 
                 ##' CONDITION 4:
                 ##'
-                ##' This condition below refers to the situation below:
+                ##' This condition refers to the situation below:
                 ##'
                 ##' 	23:00 |------- 3h ------| 02:00
                 ##' ------|-------------------------|--------> = - sjlrel
@@ -680,7 +680,7 @@ chronotype <- function(data) {
                 ##' 	  msf                       msw
                 ##'     0.0833...        -        0.166... = - 0.0833... (< 0 AND > 0.5)
                 ##'
-                ##' If none of the conditions above were true, the signal of the
+                ##' If none of the conditions above was true, the signal of the
                 ##' difference is maintained.
                 ##'
                 ##' NOTE 1: date_time_ref_1 <- abs(as.duration(msf_ref - msw_ref))

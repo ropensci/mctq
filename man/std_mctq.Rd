@@ -157,6 +157,8 @@ Prepared by Daniel Vartanian (package's author).
 data(std_mctq)
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 A fictional dataset composed by basic/measurable variables of the MCTQ
 (standard version) for testing and learning purposes.
 
@@ -175,7 +177,7 @@ dataset was created to demonstrate common cases and data issues that
 researchers may find in their MCTQ data.
 
 You can learn more about the \code{std_mctq} data cleaning process in
-\code{vignette("data_issues")}.
+\code{vignette("data_wrangling", package = "mctq")}.
 
 To learn more about the Munich Chronotype Questionnaire (MCTQ), \emph{cf.}
 Roenneberg, Wirz-Justice & Merrow (\href{https://bit.ly/3rLu195}{2003}) and

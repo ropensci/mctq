@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `midday_change()` changes the dates of `POSIXt` objects accordingly to the
 #' time of day registered in the object values. The function do this by flatting
 #' the date to `0000-01-01` and them adding a day if the hour is lower than 12.
@@ -44,6 +46,8 @@ midday_change = function(x) {
 #' Flat dates of `POSIXt` objects
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `flat_posixt()` changes the dates of `POSIXt` objects to `0000-01-01`. This
 #' can be use to standardizing a point of origin to time values.
@@ -110,6 +114,8 @@ change_day <- function(x, day) {
 #' Check if a object inherits a set of date/time classes
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `is_time()` returns a boolean flag checking for objects of class `Duration`,
 #' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, or
@@ -198,11 +204,13 @@ is_numeric_ <- function(x) {
 
 #' @family utility functions
 #' @noRd
-inline_collapse <- function(x, serial_comma = TRUE) {
+inline_collapse <- function(x, single_quote = TRUE, serial_comma = TRUE) {
 
-    for (i in seq_along(x)) {
-        x[i] <- glue::single_quote(x[i])
-    }
+    checkmate::assert_character(x)
+    checkmate::assert_flag(single_quote)
+    checkmate::assert_flag(serial_comma)
+
+    if (isTRUE(single_quote)) x <- glue::single_quote(x)
 
     if (length(x) <= 2 || isFALSE(serial_comma)) {
         glue::glue_collapse(x, sep = ", ", last = " and ")
@@ -244,8 +252,8 @@ close_round <- function(x, digits = 5) {
 #' @noRd
 swap <- function(x, y) {
 
-    check_identical(x, y, "length")
-    check_identical(x, y, "class")
+    assert_identical(x, y, type = "length")
+    assert_identical(x, y, type = "class")
 
     a <- x
     b <- y
@@ -263,8 +271,8 @@ swap_if <- function(x, y, condition = "x > y") {
 
     choices <- c("x == y", "x < y", "x <= y", "x > y", "x >= y")
 
-    assert_identical(x, y, "length")
-    assert_identical(x, y, "class")
+    assert_identical(x, y, type = "length")
+    assert_identical(x, y, type = "class")
     checkmate::assert_choice(condition, choices)
 
     condition <- stringr::str_replace(condition, "x", "a")
@@ -291,5 +299,18 @@ count_na <- function(x) {
 #' @family utility functions
 #' @noRd
 escape_regex <- function(x) {
+
     gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
+
+}
+
+get_names <- function(...) {
+
+    out <- lapply(substitute(list(...))[-1], deparse)
+    out <- sapply(out, unlist)
+    out <- noquote(out)
+    out <- gsub("\\\"","", out)
+
+    out
+
 }

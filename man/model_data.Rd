@@ -14,6 +14,8 @@ model_data(model = "standard")
 An invisible tibble with a MCTQ model data.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{mctq} package comes bundled with fictional datasets for different versions
 of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
 \strong{\eqn{\mu}}mctq). \code{model_data()} make it easy to access them.
