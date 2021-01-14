@@ -19,6 +19,8 @@ A \code{hms} vector corresponding to the difference between \code{gu} and \code{
 rolled on a 24 hours clock basis.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{tbt()} computes the \strong{total time in bed} for the standard Munich Chronotype
 Questionnaire (MCTQ).
 }
@@ -47,9 +49,10 @@ tbt(hms::parse_hms("01:20:00"), hms::parse_hms("14:00:00"))
 #> 12:40:00 # Expected
 tbt(hms::as_hms(NA), hms::parse_hms("07:20:00"))
 #> NA # Expected
-x <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
-y <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
-tbt(x, y)
+
+bt <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
+gu <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
+tbt(bt, gu)
 #> [1] 09:40:00 # Expected
 #> [1] 08:55:00 # Expected
 }

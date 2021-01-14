@@ -17,7 +17,7 @@ Authors@R:
              role = c("aut", "exp", "sad"),
              comment = c(ORCID = "0000-0002-5257-591X")),
       person(given = "GIPSO",
-             role = c("cph", "fnd")),
+             role = c("fnd", "cph")),
       person(given = "USP",
              role = c("fnd")))
 Maintainer: Daniel Vartanian <danvartan@gmail.com>

@@ -23,6 +23,8 @@ A \code{Duration} vector corresponding to the average weekly sleep
 duration.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{sd_week()} computes the \strong{average weekly sleep duration} for the standard
 Munich Chronotype Questionnaire (MCTQ).
 }
@@ -45,13 +47,14 @@ sd_week(4, lubridate::dhours(7), lubridate::dhours(7))
 #> [1] "25200s (~7 hours)" # Expected
 sd_week(6, lubridate::as.duration(NA), lubridate::dhours(10))
 #> [1] NA # Expected
-x <- c(3, 7)
-y <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
-z <- c(lubridate::dhours(8), lubridate::dhours(7.3))
-sd_week(x, y, z)
+
+wd <- c(3, 7)
+sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
+sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
+sd_week(wd, sd_w, sd_f)
 #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 
-## ** converting the output to `hms` **
+## ** converting the output to hms **
 x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
 convert_to(x, "hms")
 #> 06:36:25.714286 # Expected

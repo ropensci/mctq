@@ -2,6 +2,8 @@
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `fd()` computes the __number of work-free days per week__ for the standard
 #' Munich Chronotype Questionnaire (MCTQ).
 #'
@@ -39,6 +41,8 @@ fd <- function(wd) {
 #' Compute MCTQ sleep onset
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `so()` computes the __time of sleep onset__ for the standard Munich
 #' Chronotype Questionnaire (MCTQ).
@@ -89,9 +93,10 @@ fd <- function(wd) {
 #' #> 00:15:00 # Expected
 #' so(hms::parse_hms("20:45:00"), lubridate::as.duration(NA))
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("21:30:00"), hms::parse_hms("22:15:00"))
-#' y <- c(lubridate::dminutes(45), lubridate::dminutes(5))
-#' so(x, y)
+#'
+#' sprep <- c(hms::parse_hms("21:30:00"), hms::parse_hms("22:15:00"))
+#' slat <- c(lubridate::dminutes(45), lubridate::dminutes(5))
+#' so(sprep, slat)
 #' #> 22:15:00 # Expected
 #' #> 22:20:00 # Expected
 so <- function(sprep, slat){
@@ -107,6 +112,8 @@ so <- function(sprep, slat){
 #' Compute MCTQ local time of getting out of bed
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `gu()` computes the __local time of getting out of bed__ for the standard
 #' Munich Chronotype Questionnaire (MCTQ).
@@ -130,9 +137,10 @@ so <- function(sprep, slat){
 #' #> 13:15:00 # Expected
 #' gu(hms::as_hms(NA), lubridate::dminutes(90))
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
-#' y <- c(lubridate::dminutes(10), lubridate::dminutes(10))
-#' gu(x, y)
+#'
+#' se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
+#' si <- c(lubridate::dminutes(10), lubridate::dminutes(10))
+#' gu(se, si)
 #' #> 12:40:00 # Expected
 #' #> 06:50:00 # Expected
 gu <- function(se, si){
@@ -148,6 +156,8 @@ gu <- function(se, si){
 #' Compute MCTQ sleep duration
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `sd()` computes the __sleep duration__ for the standard Munich Chronotype
 #' Questionnaire (MCTQ).
@@ -171,9 +181,10 @@ gu <- function(se, si){
 #' #> [1] "37800s (~10.5 hours)" # Expected
 #' sd(hms::parse_hms("03:15:00"), hms::as_hms(NA))
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
-#' y <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
-#' sd(x, y)
+#'
+#' so <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
+#' se <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
+#' sd(so, se)
 #' #> [1] "37080s (~10.3 hours)" "23100s (~6.42 hours)" # Expected
 sd <- function(so, se){
 
@@ -188,6 +199,8 @@ sd <- function(so, se){
 #' Compute MCTQ total time in bed
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `tbt()` computes the __total time in bed__ for the standard Munich Chronotype
 #' Questionnaire (MCTQ).
@@ -212,9 +225,10 @@ sd <- function(so, se){
 #' #> 12:40:00 # Expected
 #' tbt(hms::as_hms(NA), hms::parse_hms("07:20:00"))
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
-#' y <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
-#' tbt(x, y)
+#'
+#' bt <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
+#' gu <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
+#' tbt(bt, gu)
 #' #> [1] 09:40:00 # Expected
 #' #> [1] 08:55:00 # Expected
 tbt <- function(bt, gu){
@@ -230,6 +244,8 @@ tbt <- function(bt, gu){
 #' Compute MCTQ mid-sleep
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `ms()` computes the __mid-sleep__ for the standard Munich Chronotype
 #' Questionnaire (MCTQ).
@@ -253,9 +269,10 @@ tbt <- function(bt, gu){
 #' #> 06:00:00 # Expected
 #' ms(hms::as_hms(NA), lubridate::dhours(7.5))
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
-#' y <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
-#' ms(x, y)
+#'
+#' so <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
+#' sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
+#' ms(so, sd)
 #' #> [1] 04:47:30 # Expected
 #' #> [1] 03:58:30 # Expected
 ms <- function(so, sd){
@@ -271,6 +288,8 @@ ms <- function(so, sd){
 #' Compute MCTQ average weekly sleep duration
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `sd_week()` computes the __average weekly sleep duration__ for the standard
 #' Munich Chronotype Questionnaire (MCTQ).
@@ -310,13 +329,14 @@ ms <- function(so, sd){
 #' #> [1] "25200s (~7 hours)" # Expected
 #' sd_week(6, lubridate::as.duration(NA), lubridate::dhours(10))
 #' #> [1] NA # Expected
-#' x <- c(3, 7)
-#' y <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
-#' z <- c(lubridate::dhours(8), lubridate::dhours(7.3))
-#' sd_week(x, y, z)
+#'
+#' wd <- c(3, 7)
+#' sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
+#' sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
+#' sd_week(wd, sd_w, sd_f)
 #' #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 #'
-#' ## ** converting the output to `hms` **
+#' ## ** converting the output to hms **
 #' x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
 #' convert_to(x, "hms")
 #' #> 06:36:25.714286 # Expected
@@ -336,6 +356,8 @@ sd_week <- function(wd, sd_w, sd_f){
 #' Compute MCTQ chronotype/corrected midsleep on free days
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `msf_sc()` computes the __chronotype/corrected midsleep on free days__ for
 #' the standard Munich Chronotype Questionnaire (MCTQ).
@@ -372,14 +394,17 @@ sd_week <- function(wd, sd_w, sd_f){
 #' msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(7.5),
 #'        lubridate::dhours(10), lubridate::dhours(8.5), TRUE)
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
-#' y <- c(lubridate::dhours(5), lubridate::dhours(6.45))
-#' v <- c(lubridate::dhours(9), lubridate::dhours(10))
-#' w <- c(lubridate::dhours(8.5), lubridate::dhours(9.2))
-#' z <- c(TRUE, TRUE)
-#' msf_sc(x, y, v, w, z)
+#'
+#' msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
+#' sd_w <- c(lubridate::dhours(5), lubridate::dhours(6.45))
+#' sd_f <- c(lubridate::dhours(9), lubridate::dhours(10))
+#' sd_week <- c(lubridate::dhours(8.5), lubridate::dhours(9.2))
+#' alarm_f <- c(TRUE, TRUE)
+#' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 03:30:00 # Expected
 #' #> 04:21:00 # Expected
+#'
+#' ## ** wrapper for msf_sc() **
 #' chronotype(hms::parse_hms("07:00:00"), lubridate::dhours(6),
 #'            lubridate::dhours(12), lubridate::dhours(9.45), FALSE)
 #' #> 05:43:30 # Expected
@@ -402,7 +427,6 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f){
 }
 
 #' @rdname msf_sc
-#' @family standard MCTQ functions
 #' @export
 chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 
@@ -413,6 +437,8 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' Compute MCTQ weekly sleep loss
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `sloss_week()` computes the __weekly sleep loss__ for the standard Munich
 #' Chronotype Questionnaire (MCTQ).
@@ -435,11 +461,12 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' sloss_week(7, lubridate::dhours(4.5), lubridate::dhours(9.45),
 #'            lubridate::as.duration(NA))
 #' #> [1] NA # Expected
-#' x <- c(2, 0)
-#' y <- c(lubridate::dhours(7), lubridate::dhours(8))
-#' w <- c(lubridate::dhours(6.5), lubridate::dhours(8))
-#' z <- c(lubridate::dhours(6.75), lubridate::dhours(8))
-#' sloss_week(x, y, w, z)
+#'
+#' wd <- c(2, 0)
+#' sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
+#' sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
+#' sd_week <- c(lubridate::dhours(6.75), lubridate::dhours(8))
+#' sloss_week(wd, sd_w, sd_f, sd_week)
 #' #> [1] "4500s (~1.25 hours)" "0s"  # Expected
 sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
@@ -459,6 +486,8 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' Compute MCTQ Social Jet Lag
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `sjl()` computes the __relative social jetlag__ or the __absolute social
 #' jetlag__ for the standard Munich Chronotype Questionnaire (MCTQ).
@@ -504,14 +533,15 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' #> [1] "9000s (~2.5 hours)" # Expected
 #' sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))
 #' #> NA # Expected
-#' x <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
-#' y <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
-#' sjl(x, y, abs = FALSE)
+#'
+#' msw <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
+#' msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
+#' sjl(msw, msf, abs = FALSE)
 #' #> [1] "-3600s (~-1 hours)" "0s" # Expected
 #' sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
 #' #> [1] "-300s (~-5 minutes)" # Expected
 #'
-#' ## ** converting the output to `hms` **
+#' ## ** converting the output to hms **
 #' x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
 #' convert_to(x, "hms")
 #' #> 02:10:05 # Expected
@@ -551,6 +581,8 @@ sjl_rel <- function(msw, msf){
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `le_week()` computes the __average weekly light exposure__ for the standard
 #' Munich Chronotype Questionnaire (MCTQ).
 #'
@@ -574,14 +606,15 @@ sjl_rel <- function(msw, msf){
 #' #> [1] "10028.5714285714s (~2.79 hours)" # Expected
 #' le_week(3, lubridate::dhours(5.6), lubridate::as.duration(NA))
 #' #> [1] NA # Expected
-#' x <- c(4, 5)
-#' y <- c(lubridate::dhours(3), lubridate::dhours(2.45))
-#' z <- c(lubridate::dhours(3), lubridate::dhours(3.75))
-#' le_week(x, y, z)
+#'
+#' wd <- c(4, 5)
+#' le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
+#' le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
+#' le_week(wd, le_w, le_f)
 #' #> [1] "10800s (~3 hours)" # Expected
 #' #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 #'
-#' ## ** converting the output to `hms` **
+#' ## ** converting the output to hms **
 #' x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))
 #' convert_to(x, "hms")
 #' #> 04:05:44.571429 # Expected

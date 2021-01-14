@@ -1,5 +1,5 @@
 ---
-title: "How to convert your data"
+title: "How to convert your MCTQ data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{converting}

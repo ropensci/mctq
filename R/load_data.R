@@ -166,7 +166,9 @@ load_data <- function(file = as.character(tcltk::tkgetOpenFile()),
 #' @export
 #'
 #' @examples
-#' \dontrun{write_data(std_mctq)}
+#' \dontrun{
+#' write_data(std_mctq)
+#' }
 write_data <- function(data,
                        file = as.character(tcltk::tkgetSaveFile()),
                        type = "csv",
@@ -269,7 +271,9 @@ write_data <- function(data,
 #' @export
 #'
 #' @examples
-#' \dontrun{model_data()}
+#' \dontrun{
+#' data <- model_data()
+#' }
 model_data <- function(model = "standard") {
 
     model <- stringr::str_to_lower(model)

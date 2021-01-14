@@ -18,6 +18,8 @@ A \code{hms} vector corresponding to the sum of \code{sprep} and \code{slat} rol
 on a 24 hours clock basis.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{so()} computes the \strong{time of sleep onset} for the standard Munich
 Chronotype Questionnaire (MCTQ).
 }
@@ -46,9 +48,10 @@ so(hms::parse_hms("23:30:00"), lubridate::dminutes(45))
 #> 00:15:00 # Expected
 so(hms::parse_hms("20:45:00"), lubridate::as.duration(NA))
 #> NA # Expected
-x <- c(hms::parse_hms("21:30:00"), hms::parse_hms("22:15:00"))
-y <- c(lubridate::dminutes(45), lubridate::dminutes(5))
-so(x, y)
+
+sprep <- c(hms::parse_hms("21:30:00"), hms::parse_hms("22:15:00"))
+slat <- c(lubridate::dminutes(45), lubridate::dminutes(5))
+so(sprep, slat)
 #> 22:15:00 # Expected
 #> 22:20:00 # Expected
 }

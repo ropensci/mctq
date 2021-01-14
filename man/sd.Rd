@@ -18,6 +18,8 @@ A \code{Duration} vector corresponding to the difference between \code{se} and
 \code{so} rolled on a 24 hours clock basis.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{sd()} computes the \strong{sleep duration} for the standard Munich Chronotype
 Questionnaire (MCTQ).
 }
@@ -46,9 +48,10 @@ sd(hms::parse_hms("02:00:00"), hms::parse_hms("12:30:00"))
 #> [1] "37800s (~10.5 hours)" # Expected
 sd(hms::parse_hms("03:15:00"), hms::as_hms(NA))
 #> NA # Expected
-x <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
-y <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
-sd(x, y)
+
+so <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
+se <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
+sd(so, se)
 #> [1] "37080s (~10.3 hours)" "23100s (~6.42 hours)" # Expected
 }
 \references{

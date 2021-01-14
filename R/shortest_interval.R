@@ -90,6 +90,7 @@
 #' y <- hms::parse_hms("01:00:00")
 #' shortest_interval(x, y)
 #' #> 02:00:00 # Expected
+#'
 #' x <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' y <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' shortest_interval(x, y)
@@ -111,6 +112,7 @@
 #' y <- as.POSIXlt("2100-05-07 13:30:00")
 #' shortest_interval(x, y, "Interval")
 #' #> [1] 0000-01-01 02:00:00 UTC--0000-01-01 13:30:00 UTC # Expected
+#'
 #' longer_interval(x, y, "Duration")
 #' #> [1] "45000s (~12.5 hours)" # Expected
 #' shortest_interval(x, y, "Period")

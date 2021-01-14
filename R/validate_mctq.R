@@ -46,7 +46,9 @@
 #' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
 #'
 #' @examples
-#' \dontrun{validate_mctq(std_mctq, "bt_w")}
+#' \dontrun{
+#' validate_mctq(std_mctq, "bt_w")
+#' }
 validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
                           breaks = TRUE) {
 
@@ -290,7 +292,6 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 }
 
 #' @rdname validate_mctq
-#' @family validation functions
 #' @export
 is_valid <- function(data, check = NULL, custom = NULL) {
 

@@ -18,6 +18,8 @@ A \code{hms} vector corresponding to the sum between \code{so} and (\code{sd} / 
 rolled on a 24 hours clock basis.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{ms()} computes the \strong{mid-sleep} for the standard Munich Chronotype
 Questionnaire (MCTQ).
 }
@@ -46,9 +48,10 @@ ms(hms::parse_hms("01:00:00"), lubridate::dhours(10))
 #> 06:00:00 # Expected
 ms(hms::as_hms(NA), lubridate::dhours(7.5))
 #> NA # Expected
-x <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
-y <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
-ms(x, y)
+
+so <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
+sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
+ms(so, sd)
 #> [1] 04:47:30 # Expected
 #> [1] 03:58:30 # Expected
 }

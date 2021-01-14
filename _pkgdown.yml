@@ -1,10 +1,5 @@
 url: https://gipsousp.github.io/mctq
 
-development:
-  mode: auto
-  destination: doc
-  version_label: warning
-
 template:
   opengraph:
      twitter:
@@ -14,6 +9,77 @@ template:
     bootswatch: cosmo
     ganalytics: G-CQHJT6E3K1
     noindex: true
+
+reference:
+- title: Standard MCTQ
+  desc: >
+    At the moment, only the standard MCTQ is supported. Future versions will
+    also include tools for MCTQ Shift and µMCTQ.
+  contents:
+  - fd
+  - so
+  - gu
+  - sd
+  - tbt
+  - ms
+  - sd_week
+  - msf_sc
+  - sloss_week
+  - sjl
+  - le_week
+
+- title: MCTQ validation
+  desc: >
+    `mctq` provides a extense list of validation parameters to ensure that
+    common MCTQ data issues do not go unnoticed.
+  contents:
+  - validate_mctq
+
+- title: Time arithmetic
+  desc: >
+    Dealing with date/time objects can be tricky. `mctq` offers some especial
+    tools to help with this subject.
+  contents:
+  - sum_time
+  - shortest_interval
+  - assign_date
+
+- title: Datasets
+  desc: >
+    This package also includes a fictional standard MCTQ dataset for testing
+    and learning purposes.
+  contents:
+  - std_mctq
+
+- title: Data wrangling
+  desc: >
+    This are some tools used on vignettes to illustrate possible processes
+    for MCTQ data wrangling.
+  contents:
+  - build_std_mctq
+  - tidy_std_mctq
+  - validate_std_mctq
+
+- title: Utilities
+  desc: >
+    Some utilities tools can really make a difference in your workflow.
+    `mctq` provides simple and fast ways to deal with common problems and
+    routines.
+  contents:
+  - convert_to
+  - midday_change
+  - flat_posixt
+  - is_time
+  - load_data
+  - write_data
+  - raw_data
+  - model_data
+  - swap_decimal
+
+development:
+  mode: auto
+  destination: doc
+  version_label: warning
 
 authors:
   Daniel Vartanian:

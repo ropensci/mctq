@@ -81,6 +81,8 @@ flat_posixt = function(x) {
 #'
 #' @description
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' `change_day()` is a utility function that help change days of `Date` or
 #' `POSIXt` objects with the need for a direct reassignment.
 #'
@@ -170,6 +172,8 @@ is_time <- function(x, rm = NULL) {
 #' Collapse class names
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' `class_collapse()` is a utility function to help build return messages with
 #' [glue::glue()]. It collapses the value of `class(x)` with a `/` and single
@@ -304,6 +308,8 @@ escape_regex <- function(x) {
 
 }
 
+#' @family utility functions
+#' @noRd
 get_names <- function(...) {
 
     out <- lapply(substitute(list(...))[-1], deparse)

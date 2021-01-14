@@ -34,10 +34,12 @@ A \code{hms} vector corresponding to the chronotype/corrected midsleep on
 free days.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{msf_sc()} computes the \strong{chronotype/corrected midsleep on free days} for
 the standard Munich Chronotype Questionnaire (MCTQ).
 
-\code{chronotype()} is just a wrapper for \code{msf_sc()}
+\code{chronotype()} is just a wrapper for \code{msf_sc()}.
 }
 \details{
 This function was created according to Roenneberg, Wirz-Justice & Merrow
@@ -64,14 +66,17 @@ msf_sc(hms::parse_hm("01:00:00"), lubridate::dhours(5.5),
 msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(7.5),
        lubridate::dhours(10), lubridate::dhours(8.5), TRUE)
 #> NA # Expected
-x <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
-y <- c(lubridate::dhours(5), lubridate::dhours(6.45))
-v <- c(lubridate::dhours(9), lubridate::dhours(10))
-w <- c(lubridate::dhours(8.5), lubridate::dhours(9.2))
-z <- c(TRUE, TRUE)
-msf_sc(x, y, v, w, z)
+
+msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
+sd_w <- c(lubridate::dhours(5), lubridate::dhours(6.45))
+sd_f <- c(lubridate::dhours(9), lubridate::dhours(10))
+sd_week <- c(lubridate::dhours(8.5), lubridate::dhours(9.2))
+alarm_f <- c(TRUE, TRUE)
+msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 03:30:00 # Expected
 #> 04:21:00 # Expected
+
+## ** wrapper for msf_sc() **
 chronotype(hms::parse_hms("07:00:00"), lubridate::dhours(6),
            lubridate::dhours(12), lubridate::dhours(9.45), FALSE)
 #> 05:43:30 # Expected
@@ -86,18 +91,6 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
-\code{\link{fd}()},
-\code{\link{gu}()},
-\code{\link{le_week}()},
-\code{\link{ms}()},
-\code{\link{sd_week}()},
-\code{\link{sd}()},
-\code{\link{sjl}()},
-\code{\link{sloss_week}()},
-\code{\link{so}()},
-\code{\link{tbt}()}
-
 Other standard MCTQ functions: 
 \code{\link{fd}()},
 \code{\link{gu}()},

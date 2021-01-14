@@ -1,5 +1,5 @@
 ---
-title: "About MCTQ"
+title: "Introduction to mctq"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{mctq}

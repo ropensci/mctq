@@ -27,10 +27,3 @@ test_check("mctq")
 
 # Helpers:
 # normalizePath(readClipboard(), "/", mustWork = FALSE)
-
-# Plan vignettes
-# * About the MCTQ and it's variants
-# * Converting values
-# * Common MCTQ data issues
-# * Social jet lag signal
-# * Time arithmetic and summary measures

@@ -29,6 +29,8 @@ social jetlag.
 }
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{sjl()} computes the \strong{relative social jetlag} or the \strong{absolute social
 jetlag} for the standard Munich Chronotype Questionnaire (MCTQ).
 }
@@ -54,14 +56,15 @@ sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:45:00"))
 #> [1] "9000s (~2.5 hours)" # Expected
 sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))
 #> NA # Expected
-x <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
-y <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
-sjl(x, y, abs = FALSE)
+
+msw <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
+msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
+sjl(msw, msf, abs = FALSE)
 #> [1] "-3600s (~-1 hours)" "0s" # Expected
 sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
 #> [1] "-300s (~-5 minutes)" # Expected
 
-## ** converting the output to `hms` **
+## ** converting the output to hms **
 x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
 convert_to(x, "hms")
 #> 02:10:05 # Expected

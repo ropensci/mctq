@@ -23,7 +23,9 @@ of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
 At the moment, \strong{only the standard MCTQ is available}.
 }
 \examples{
-\dontrun{model_data()}
+\dontrun{
+data <- model_data()
+}
 }
 \seealso{
 Other utility functions: 

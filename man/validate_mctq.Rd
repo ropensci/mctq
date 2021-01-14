@@ -48,7 +48,9 @@ When run in interactive mode and with \code{remove_breaks = FALSE},
 }
 
 \examples{
-\dontrun{validate_mctq(std_mctq, "bt_w")}
+\dontrun{
+validate_mctq(std_mctq, "bt_w")
+}
 }
 \references{
 Van der Loo, M., & De Jonge, E. (2018).

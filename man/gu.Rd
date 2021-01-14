@@ -18,6 +18,8 @@ A \code{hms} vector corresponding to the sum of \code{se} and \code{si} rolled o
 24 hours clock basis.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{gu()} computes the \strong{local time of getting out of bed} for the standard
 Munich Chronotype Questionnaire (MCTQ).
 }
@@ -46,9 +48,10 @@ gu(hms::parse_hms("11:45:00"), lubridate::dminutes(90))
 #> 13:15:00 # Expected
 gu(hms::as_hms(NA), lubridate::dminutes(90))
 #> NA # Expected
-x <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
-y <- c(lubridate::dminutes(10), lubridate::dminutes(10))
-gu(x, y)
+
+se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
+si <- c(lubridate::dminutes(10), lubridate::dminutes(10))
+gu(se, si)
 #> 12:40:00 # Expected
 #> 06:50:00 # Expected
 }

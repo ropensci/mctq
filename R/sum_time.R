@@ -101,14 +101,14 @@
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, vectorize = TRUE)
 #' #> 29:00:00 # Expected
-#' #> NA
+#' #> NA # Expected
 #'
 #' ## ** Vectorized sum rolled over on a 24 hour clock basis **
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, clock = TRUE, vectorize = TRUE)
 #' #> 05:00:00 # Expected
-#' #> NA
+#' #> NA # Expected
 sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
 
     # List `...` -----

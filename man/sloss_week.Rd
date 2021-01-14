@@ -26,6 +26,8 @@ sleep duration} of a standard MCTQ questionnaire (you can use
 A \code{Duration} vector corresponding to the weekly sleep loss.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{sloss_week()} computes the \strong{weekly sleep loss} for the standard Munich
 Chronotype Questionnaire (MCTQ).
 }
@@ -51,11 +53,12 @@ sloss_week(5, lubridate::dhours(7), lubridate::dhours(8),
 sloss_week(7, lubridate::dhours(4.5), lubridate::dhours(9.45),
            lubridate::as.duration(NA))
 #> [1] NA # Expected
-x <- c(2, 0)
-y <- c(lubridate::dhours(7), lubridate::dhours(8))
-w <- c(lubridate::dhours(6.5), lubridate::dhours(8))
-z <- c(lubridate::dhours(6.75), lubridate::dhours(8))
-sloss_week(x, y, w, z)
+
+wd <- c(2, 0)
+sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
+sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
+sd_week <- c(lubridate::dhours(6.75), lubridate::dhours(8))
+sloss_week(wd, sd_w, sd_f, sd_week)
 #> [1] "4500s (~1.25 hours)" "0s"  # Expected
 }
 \references{

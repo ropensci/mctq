@@ -21,6 +21,8 @@ A \code{Duration} vector corresponding to the average weekly light
 exposure.
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+
 \code{le_week()} computes the \strong{average weekly light exposure} for the standard
 Munich Chronotype Questionnaire (MCTQ).
 }
@@ -43,14 +45,15 @@ le_week(6, lubridate::dhours(3), lubridate::dhours(1.5))
 #> [1] "10028.5714285714s (~2.79 hours)" # Expected
 le_week(3, lubridate::dhours(5.6), lubridate::as.duration(NA))
 #> [1] NA # Expected
-x <- c(4, 5)
-y <- c(lubridate::dhours(3), lubridate::dhours(2.45))
-z <- c(lubridate::dhours(3), lubridate::dhours(3.75))
-le_week(x, y, z)
+
+wd <- c(4, 5)
+le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
+le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
+le_week(wd, le_w, le_f)
 #> [1] "10800s (~3 hours)" # Expected
 #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 
-## ** converting the output to `hms` **
+## ** converting the output to hms **
 x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))
 convert_to(x, "hms")
 #> 04:05:44.571429 # Expected

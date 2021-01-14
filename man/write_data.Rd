@@ -89,7 +89,9 @@ If you need to write \code{.rda} files, use the \code{\link[base:save]{base::sav
 }
 }
 \examples{
-\dontrun{write_data(std_mctq)}
+\dontrun{
+write_data(std_mctq)
+}
 }
 \seealso{
 Other utility functions: 

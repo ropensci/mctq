@@ -29,7 +29,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item GIPSO [copyright holder, funder]
+  \item GIPSO [funder, copyright holder]
   \item USP [funder]
 }
 
