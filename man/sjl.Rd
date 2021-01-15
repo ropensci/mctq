@@ -61,6 +61,7 @@ msw <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
 msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
 sjl(msw, msf, abs = FALSE)
 #> [1] "-3600s (~-1 hours)" "0s" # Expected
+
 sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
 #> [1] "-300s (~-5 minutes)" # Expected
 

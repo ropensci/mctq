@@ -12,9 +12,6 @@ template:
 
 reference:
 - title: Standard MCTQ
-  desc: >
-    At the moment, only the standard MCTQ is supported. Future versions will
-    also include tools for MCTQ Shift and µMCTQ.
   contents:
   - fd
   - so
@@ -29,42 +26,27 @@ reference:
   - le_week
 
 - title: MCTQ validation
-  desc: >
-    `mctq` provides a extense list of validation parameters to ensure that
-    common MCTQ data issues do not go unnoticed.
   contents:
   - validate_mctq
 
 - title: Time arithmetic
-  desc: >
-    Dealing with date/time objects can be tricky. `mctq` offers some especial
-    tools to help with this subject.
   contents:
   - sum_time
   - shortest_interval
   - assign_date
 
 - title: Datasets
-  desc: >
-    This package also includes a fictional standard MCTQ dataset for testing
-    and learning purposes.
   contents:
   - std_mctq
 
 - title: Data wrangling
-  desc: >
-    This are some tools used on vignettes to illustrate possible processes
-    for MCTQ data wrangling.
   contents:
   - build_std_mctq
   - tidy_std_mctq
   - validate_std_mctq
+  - analyze_std_mctq
 
 - title: Utilities
-  desc: >
-    Some utilities tools can really make a difference in your workflow.
-    `mctq` provides simple and fast ways to deal with common problems and
-    routines.
   contents:
   - convert_to
   - midday_change

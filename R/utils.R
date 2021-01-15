@@ -53,6 +53,8 @@ midday_change = function(x) {
 #' can be use to standardizing a point of origin to time values.
 #'
 #' @param x A `POSIXt` vector.
+#' @param tz (optional) A `logical` value indicating if the time zone of `x`
+#'   must be forced to `"UTC"` (default: `TRUE`).
 #'
 #' @return A vector of the same `POSIXt` class type as `x` with `0000-01-01` as
 #'   date.
@@ -61,35 +63,75 @@ midday_change = function(x) {
 #' @export
 #'
 #' @examples
-#' x <- lubridate::ymd_hms("1987-12-24 07:45:32")
-#' flat_posixt(x)
+#' flat_posixt(lubridate::ymd_hms("1987-12-24 07:45:32"))
 #' #> [1] "0000-01-01 07:45:32 UTC" # Expected
-flat_posixt = function(x) {
+#' flat_posixt(lubridate::ymd_hms("2001-09-15 11:15:05", tz = "EST"), FALSE)
+#' #> [1] "0000-01-01 11:15:05 EST"" # Expected
+flat_posixt = function(x, tz = TRUE) {
 
     assert_posixt(x, null.ok = FALSE)
+    checkmate::assert_flag(tz)
 
-    if (!(any(is.na(x)))) {
+    lubridate::date(x) <- "0000-01-01"
+
+    if (isTRUE(tz)) {
         x <- lubridate::force_tz(x, "UTC")
-        lubridate::date(x) <- "0000-01-01"
     }
 
     x
 
 }
 
-#' Change day of a `Date` or `POSIXt` object
+#' Change date of `Date` or `POSIXt` objects
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `change_day()` is a utility function that help change days of `Date` or
-#' `POSIXt` objects with the need for a direct reassignment.
-#'
-#' Note that, if your add a day that surpasses the days in  the monthy
+#' `change_date()` help you change dates of `Date` or `POSIXt` objects without
+#' the need for a direct assignment.
 #'
 #' @param x A `Date` or `POSIXt` vector.
-#' @param day A number, between 1-31 indicating the new day of `x`.
+#' @param date A `Date` or `character` vector of length 1 indicating the date
+#'   for `x`.
+#'
+#' @return A `Date` or `POSIXt` vector with the indicated date.
+#'
+#' @family utility functions
+#' @noRd
+#'
+#' @examples
+#' change_date(lubridate::as_date("1888-02-07"), "2020-01-01")
+#' #> [1] "2020-01-01" # Expected
+#' change_date(lubridate::ymd_hms("1987-12-24 07:45:32"), as.Date("1999-02-25"))
+#' #> [1] "1999-02-25 07:45:32 UTC" # Expected
+change_date <- function(x, date) {
+
+    classes <- c("Date", "POSIXct", "POSIXlt")
+    checkmate::assert_multi_class(x, classes, null.ok = FALSE)
+
+    classes <- c("character", "Date")
+    checkmate::assert_multi_class(date, classes, null.ok = FALSE)
+    assert_length_one(date)
+
+    lubridate::date(x) <- date
+
+    x
+
+}
+
+#' Change day of `Date` or `POSIXt` objects
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `change_day()` help you change days of `Date` or `POSIXt` objects without the
+#' need for a direct assignment.
+#'
+#' @param x A `Date` or `POSIXt` vector.
+#' @param day A number, between 1-31 indicating the new day for `x`.
+#'
 #' @return A `Date` or `POSIXt` vector with the indicated day.
 #'
 #' @family utility functions
@@ -106,6 +148,26 @@ change_day <- function(x, day) {
 
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
     checkmate::assert_number(day, lower = 1, upper = 31)
+
+    if (any(lubridate::month(x) %in% c(4, 6, 9, 11)) && day > 30) {
+        rlang::abort(paste0(
+            "You can't assign more than 30 days to April, June, ",
+            "September, or November."
+            ))
+    }
+
+    if (any(lubridate::month(x) == 2 & !lubridate::leap_year(x)) && day > 28) {
+        rlang::abort(paste0(
+            "You can't assign more than 28 days to February in ",
+            "non-leap years."
+        ))
+    }
+
+    if (any(lubridate::month(x) == 2 & lubridate::leap_year(x)) && day > 29) {
+        rlang::abort(paste0(
+            "You can't assign more than 29 days to February in a leap year"
+        ))
+    }
 
     lubridate::day(x) <- day
 
@@ -195,6 +257,20 @@ is_time <- function(x, rm = NULL) {
 class_collapse <- function(x) {
 
     glue::single_quote(glue::glue_collapse(class(x), sep = '/'))
+
+}
+
+#' @family utility functions
+#' @noRd
+hms_interval <- function(start, end, tz = "UTC") {
+
+    checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
+
+    start <- flat_posixt(convert_to(start, "posixct", tz = tz), FALSE)
+    end <- flat_posixt(convert_to(end, "posixct", tz = tz), FALSE)
+
+    lubridate::interval(start, end)
 
 }
 
@@ -318,5 +394,15 @@ get_names <- function(...) {
     out <- gsub("\\\"","", out)
 
     out
+
+}
+#' @family utility functions
+#' @noRd
+check_that_ <- function(data, ...) {
+
+    checkmate::assert_data_frame(data)
+
+    confront <- validate::check_that(data, ...)
+    validate::summary(confront)
 
 }

@@ -13,9 +13,9 @@
 #' ## `ambiguity` argument
 #'
 #' In cases when `start` is equal to `end`, there are two possibilities of
-#' intervals between the two hours, which results in a ambiguity. That's
-#' because `start` and `end` can be at the same point in time or they can
-#' distance themselves by one day, as illustrated below.
+#' intervals between the two hours (ambiguity). That's because `start` and `end`
+#' can be at the same point in time or they can distance themselves by one day,
+#' as illustrated below.
 #'
 #' ```
 #'  start,end       start,end       start,end       start,end
@@ -38,8 +38,9 @@
 #'
 #' ## `return` argument
 #'
-#' `assign_date()` can return three different outputs:
+#' `assign_date()` can return different outputs:
 #'
+#' * `return = "interval"`: returns a `start`---`end` `interval` object.
 #' * `return = "list"`: returns a `list` object with two named elements
 #' corresponding to `start` and `end` output.
 #' * `return = "start"`: returns only the `start` output.
@@ -52,7 +53,7 @@
 #' this elements with the names of the variables assigned to `start` and `end`
 #' arguments.
 #'
-#' If the number of characters (nchar) of `start_name` or `end_name` are equal
+#' If the number of characters (`nchar`) of `start_name` or `end_name` are equal
 #' or greater than 30, `assign_date()` will name the list elements as `start`
 #' and `end`.
 #'
@@ -67,15 +68,16 @@
 #'
 #' @param start,end A `hms` or `POSIXt` vector indicating the start or end
 #'   hour.
-#' @param ambiguity (optional) A numeric value to instruct `assign_date()` on
+#' @param ambiguity (optional) A `numeric` value to instruct `assign_date()` on
 #'   how to deal with ambiguities (see Details) (default: `0`).
 #' @param return (optional) A string indicating the type of output (see Details)
-#'   (default: `"list"`).
+#'   (default: `"interval"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
 #'   with the `start` and `end` argument.
 #'
 #' @return
 #'
+#' * If `return = "interval"`, a `start`---`end` `interval` object.
 #' * If `return = "list"`, a named list with `start` and `end` outputs.
 #' * If `return = "start`, only the `start` output.
 #' * If `return = "end"`, only the `end` output.
@@ -84,15 +86,21 @@
 #' @export
 #'
 #' @examples
-#' ## ** To return `start` and `end` outputs **
+#' ## ** To return `start` and `end` as interval **
+#' start <- hms::parse_hms("12:34:00")
+#' end <- hms::parse_hms("01:25:00")
+#' assign_date(start, end)
+#' #> [1] 0000-01-01 12:34:00 UTC--0000-01-02 01:25:00 UTC # Expected
+#'
+#' ## ** To return `start` and `end` as list **
 #' start <- hms::parse_hms("22:15:00")
 #' end <- hms::parse_hms("00:00:00")
-#' assign_date(start, end)
+#' assign_date(start, end, return = "list")
 #' #> $start # Expected
-#' #> [1] "0000-01-01 22:15:00 UTC"
-#' #>
-#' #> $end
-#' #> [1] "0000-01-02 UTC"
+#' #> [1] "0000-01-01 22:15:00 UTC" # Expected
+#' #> # Expected
+#' #> $end # Expected
+#' #> [1] "0000-01-02 UTC" # Expected
 #'
 #' ## ** To return only the `start` output **
 #' start <- lubridate::parse_date_time("01:10:00", "HMS")
@@ -104,12 +112,8 @@
 #' start <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)
-#' #> $start # Expected
-#' #> [1] "0000-01-01 12:00:00 UTC"
-#' #>
-#' #> $end
-#' #> [1] "0000-01-02 12:00:00 UTC"
-assign_date <- function(start, end, ambiguity = 0, return = "list",
+#' #> [1] 0000-01-01 12:00:00 UTC--0000-01-02 12:00:00 UTC # Expected
+assign_date <- function(start, end, ambiguity = 0, return = "interval",
                         start_name = deparse(substitute(start)),
                         end_name = deparse(substitute(end))) {
 
@@ -121,7 +125,7 @@ assign_date <- function(start, end, ambiguity = 0, return = "list",
     checkmate::assert_numeric(lubridate::hours(start), lower = 0, max.len = 23)
     checkmate::assert_numeric(lubridate::hours(end), lower = 0, max.len = 23)
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
-    checkmate::assert_choice(return, c("list", "start", "end"))
+    checkmate::assert_choice(return, c("list", "interval", "start", "end"))
     checkmate::assert_string(start_name)
     checkmate::assert_string(end_name)
 
@@ -138,7 +142,7 @@ assign_date <- function(start, end, ambiguity = 0, return = "list",
     # Create intervals -----
 
     out <- dplyr::case_when(
-        any(is.na(c(start, end))) ~ lubridate::as.interval(NA),
+        is.na(start) | is.na(end) ~ lubridate::as.interval(NA),
         start < end ~ lubridate::interval(start, end),
         start > end ~ lubridate::interval(start, end + lubridate::days()),
         TRUE ~ lubridate::as.interval(lubridate::hours(ambiguity), start)
@@ -146,18 +150,20 @@ assign_date <- function(start, end, ambiguity = 0, return = "list",
 
     # Return output -----
 
-    out <- list(start = lubridate::int_start(out),
-                end = lubridate::int_end(out))
-
-    if (nchar(start_name) < 30 && nchar(end_name) < 30) {
-        names(out) <- c(start_name, end_name)
-    }
-
-    if (return == "start") {
-        return(out[[1]])
+    if (return == "interval") {
+        return(out)
+    } else if (return == "start") {
+        return(lubridate::int_start(out))
     } else if (return == "end") {
-        return(out[[2]])
+        return(lubridate::int_end(out))
     } else {
+        out <- list(start = lubridate::int_start(out),
+                    end = lubridate::int_end(out))
+
+        if (nchar(start_name) < 30 && nchar(end_name) < 30) {
+            names(out) <- c(start_name, end_name)
+        }
+
         out
     }
 

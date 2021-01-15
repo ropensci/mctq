@@ -153,14 +153,14 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
 
     if (isFALSE(inverse)) {
         out <- dplyr::case_when(
-            any(is.na(c(x, y))) ~ lubridate::as.interval(NA),
+            is.na(x) | is.na(y) ~ lubridate::as.interval(NA),
             x == y ~ lubridate::as.interval(lubridate::hours(0), x),
             x1_y1_interval < y1_x2_interval ~ x1_y1_interval,
             x1_y1_interval > y1_x2_interval ~ y1_x2_interval,
         )
     } else {
         out <- dplyr::case_when(
-            any(is.na(c(x, y))) ~ lubridate::as.interval(NA),
+            is.na(x) | is.na(y) ~ lubridate::as.interval(NA),
             x == y ~ lubridate::as.interval(lubridate::hours(24), x),
             x1_y1_interval > y1_x2_interval ~ x1_y1_interval,
             x1_y1_interval < y1_x2_interval ~ y1_x2_interval,

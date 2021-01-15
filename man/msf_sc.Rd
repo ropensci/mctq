@@ -3,7 +3,7 @@
 \name{msf_sc}
 \alias{msf_sc}
 \alias{chronotype}
-\title{Compute MCTQ chronotype/corrected midsleep on free days}
+\title{Compute MCTQ chronotype/corrected midsleep on work-free days}
 \usage{
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 

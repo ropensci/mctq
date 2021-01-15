@@ -57,7 +57,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     # * Give the user a option to choose types of validation
     # * Use ellipsis to assign types for validations
 
-    # Check arguments --------------------
+    # Check arguments -----
 
     checkmate::assert_data_frame(data, all.missing = FALSE, min.rows = 1,
                                  min.cols = 1)
@@ -85,12 +85,12 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
         if(isTRUE(flag)) return(FALSE)
     }
 
-    # R CMD Check variable bindings fix --------------------
+    # R CMD Check variable bindings fix -----
 
     ## See: <http://bit.ly/3bliuam>
 
-    regular_work_schedule <- wd <- bt <- bt_w <- bt_f <- s_prep <- NULL
-    s_prep_w <- s_prep_f <- s_lat <- s_lat_w <- s_lat_f <- se <- NULL
+    regular_work_schedule <- wd <- bt <- bt_w <- bt_f <- sprep <- NULL
+    sprep_w <- sprep_f <- slat <- slat_w <- slat_f <- se <- NULL
     se_w <- se_f <- si <- si_w <- si_f <- alarm_w <- alarm_f <- NULL
     wake_before_alarm_w <- le <- le_w <- le_f <- reasons_f <- NULL
     fd <- so <- so_w <- so_f <- gu <- gu_w <- gu_f <- sd <- sd_w <- NULL
@@ -98,7 +98,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     sd_week <- msf_sc <- chronotype <- sloss_week <- sjl_rel <- NULL
     sjl <- le_week <- NULL
 
-    # Rename `data` variables --------------------
+    # Rename `data` variables -----
 
     data_names <- names(data)
 
@@ -112,7 +112,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
         }
     }
 
-    # Set values --------------------
+    # Set values -----
 
     if (is.null(check)) {
         check <- names(data)[which(names(data) %in% choices)]
@@ -128,22 +128,22 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     dialog_line(!breaks)
     out <- vector(mode = "list")
 
-    # Do class checks (critical!)  --------------------
+    # Do class checks (critical!) -----
 
     rules <- validate::validator(
         regular_work_schedule = is.logical(regular_work_schedule),
         wd = is.integrish(wd),
         bt_w = is.hms(bt_w),
-        s_prep_w = is.hms(s_prep_w),
-        s_lat_w = is.duration(s_lat_w),
+        sprep_w = is.hms(sprep_w),
+        slat_w = is.duration(slat_w),
         se_w = is.hms(se_w),
         si_w = is.duration(si_w),
         alarm_w = is.logical(alarm_w),
         wake_before_alarm_w = is.logical(wake_before_alarm_w),
         le_w = is.duration(le_w),
         bt_f = is.hms(bt_f),
-        s_prep_f = is.hms(s_prep_f),
-        s_lat_f = is.duration(s_lat_f),
+        sprep_f = is.hms(sprep_f),
+        slat_f = is.duration(slat_f),
         se_f = is.hms(se_f),
         si_f = is.duration(si_f),
         alarm_f = is.logical(alarm_f),
@@ -173,15 +173,15 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     if (!is_valid_test(export$summary)) return(invisible(out))
     if (dialog_line(!breaks) == 1) return(invisible(out))
 
-    # Do univariate checks (critical!) --------------------
+    # Do univariate checks (critical!) -----
 
     rules <- validate::validator(
         wd = in_range(wd, min = 0, max = 7),
         bt_w = in_range(bt_w, min = hms::parse_hm("00:00"),
                         max = hms::parse_hm("24:00")),
-        s_prep_w = in_range(s_prep_w, min = hms::parse_hm("00:00"),
+        sprep_w = in_range(sprep_w, min = hms::parse_hm("00:00"),
                             max = hms::parse_hm("24:00")),
-        s_lat_w = in_range(s_lat_w, min = lubridate::dhours(0),
+        slat_w = in_range(slat_w, min = lubridate::dhours(0),
                            max = lubridate::dhours(6)),
         se_w = in_range(se_w, min = hms::parse_hm("00:00"),
                         max = hms::parse_hm("24:00")),
@@ -191,9 +191,9 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
                         max = lubridate::dhours(24)),
         bt_f = in_range(bt_f, min = hms::parse_hm("00:00"),
                         max = hms::parse_hm("24:00")),
-        s_prep_f = in_range(s_prep_f, min = hms::parse_hm("00:00"),
+        sprep_f = in_range(sprep_f, min = hms::parse_hm("00:00"),
                             max = hms::parse_hm("24:00")),
-        s_lat_f = in_range(s_lat_f, min = lubridate::dhours(0),
+        slat_f = in_range(slat_f, min = lubridate::dhours(0),
                            max = lubridate::dhours(6)),
         se_f = in_range(se_f, min = hms::parse_hm("00:00"),
                         max = hms::parse_hm("24:00")),
@@ -212,21 +212,24 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     crayon_message(
         tag = "Results",
         title = "Univariate checks",
-        text = paste0("Verifying if all values are within the limits")
+        text = paste0("Verifying if all values are within limits.")
     )
 
     print(export$summary)
 
     if (dialog_line(!breaks) == 1) return(invisible(out))
 
-    ## Do multivariate checks (critical!) --------------------
+    ## Do multivariate checks (critical!) -----
 
     rules <- validate::validator(
-        "wd | x_w" = if(!is.na(wd)) is_complete(bt_w, s_prep_w, s_lat_w,
+        "wd | x_w" = if(!is.na(wd)) is_complete(bt_w, sprep_w, slat_w,
                                                 se_w, si_w),
-        "fd(wd) | x_f" = if(fd(wd) > 0) is_complete(bt_f, s_prep_f, s_lat_f,
+        "fd(wd) | x_f" = if(fd(wd) > 0) is_complete(bt_f, sprep_f, slat_f,
                                                     se_f, si_f),
-        "bt_w | s_prep_w inversion" = !is.na(bt_w), # incomplete
+        "bt_w | sprep_w inversion" =
+            assign_date(bt_w, sprep_w) < lubridate::dhours(12),
+        "bt_f | sprep_f inversion" =
+            assign_date(bt_f, sprep_f) < lubridate::dhours(12)
     )
 
     export <- export_validation(data, rules, check,
@@ -237,8 +240,8 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 
     crayon_message(
         tag = "Results",
-        title = "Univariate checks",
-        text = paste0("Verifying if all values are within the limits")
+        title = "Multivariate checks",
+        text = paste0("Verifying if all values are within limits")
     )
 
     print(export$summary)
@@ -246,46 +249,46 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     if (dialog_line(!breaks) == 1) return(invisible(out))
     if (isTRUE(flag)) return(TRUE)
 
-    ## Check indicators (critical!) --------------------
-
-    rules <- validate::indicator(
-        so_w = so(s_prep_w, s_lat_w)
-    )
-
-    export <- export_validation(data, rules, check,
-                                name = "Indicators checks (critical!)")
-    out <- append(out, list(export))
-
-    if (isTRUE(flag) && !is_valid_test(export$summary)) return(FALSE)
-
-    crayon_message(
-        tag = "Results",
-        title = "Univariate checks",
-        text = paste0("Verifying if all values are within the limits")
-    )
-
-    print(export$summary)
-
-    if (dialog_line(!breaks) == 1) return(invisible(out))
-    if (isTRUE(flag)) return(TRUE)
-
-    # Check for missing values --------------------
-
-    rules <- validate::validator(
-        wd = !is.na(wd),
-        bt_w = !is.na(bt_w),
-        s_prep_w = !is.na(s_prep_w)
-    )
-
-    export <- export_validation(data, rules, check)
-
-    rules <- validate::validator(
-        wd = all_complete(wd),
-        bt_w = all_complete(bt_w),
-        s_prep_w = all_complete(s_prep_w)
-    )
-
-    ## Check for suspicious values --------------------
+    # ## Check indicators (critical -----
+    #
+    # rules <- validate::indicator(
+    #     so_w = so(sprep_w, slat_w)
+    # )
+    #
+    # export <- export_validation(data, rules, check,
+    #                             name = "Indicators checks (critical!)")
+    # out <- append(out, list(export))
+    #
+    # if (isTRUE(flag) && !is_valid_test(export$summary)) return(FALSE)
+    #
+    # crayon_message(
+    #     tag = "Results",
+    #     title = "Univariate checks",
+    #     text = paste0("Verifying if all values are within the limits")
+    # )
+    #
+    # print(export$summary)
+    #
+    # if (dialog_line(!breaks) == 1) return(invisible(out))
+    # if (isTRUE(flag)) return(TRUE)
+    #
+    # # Check for missing values -----
+    #
+    # rules <- validate::validator(
+    #     wd = !is.na(wd),
+    #     bt_w = !is.na(bt_w),
+    #     s_prep_w = !is.na(s_prep_w)
+    # )
+    #
+    # export <- export_validation(data, rules, check)
+    #
+    # rules <- validate::validator(
+    #     wd = all_complete(wd),
+    #     bt_w = all_complete(bt_w),
+    #     s_prep_w = all_complete(s_prep_w)
+    # )
+    #
+    # ## Check for suspicious values -----
 
 
 

@@ -4,10 +4,13 @@
 \alias{flat_posixt}
 \title{Flat dates of \code{POSIXt} objects}
 \usage{
-flat_posixt(x)
+flat_posixt(x, tz = TRUE)
 }
 \arguments{
 \item{x}{A \code{POSIXt} vector.}
+
+\item{tz}{(optional) A \code{logical} value indicating if the time zone of \code{x}
+must be forced to \code{"UTC"} (default: \code{TRUE}).}
 }
 \value{
 A vector of the same \code{POSIXt} class type as \code{x} with \code{0000-01-01} as
@@ -20,9 +23,10 @@ date.
 can be use to standardizing a point of origin to time values.
 }
 \examples{
-x <- lubridate::ymd_hms("1987-12-24 07:45:32")
-flat_posixt(x)
+flat_posixt(lubridate::ymd_hms("1987-12-24 07:45:32"))
 #> [1] "0000-01-01 07:45:32 UTC" # Expected
+flat_posixt(lubridate::ymd_hms("2001-09-15 11:15:05", tz = "EST"), FALSE)
+#> [1] "0000-01-01 11:15:05 EST"" # Expected
 }
 \seealso{
 Other utility functions: 

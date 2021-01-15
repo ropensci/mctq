@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 The goal of `mctq` is to provide a fast and friendly way to process Munich ChronoType Questionnaire (MCTQ) data in R.
 
-At the moment, only the standard MCTQ is supported. Future versions will also include tools for MCTQ Shift and µMCTQ.
+At the moment, only the standard and micro (µ) MCTQ are supported. Future versions will also include tools for MCTQ Shift.
 
 ## Installation
 

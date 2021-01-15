@@ -19,8 +19,8 @@
 #' @return A numeric value equivalent to 7 - `wd`, _i.e._ the difference between
 #'   the number of days in a week and the number of work days.
 #'
-#' @inherit so references
 #' @family standard MCTQ functions
+#' @inherit so references
 #' @export
 #'
 #' @examples
@@ -126,8 +126,8 @@ so <- function(sprep, slat){
 #' @return A `hms` vector corresponding to the sum of `se` and `si` rolled on a
 #'   24 hours clock basis.
 #'
-#' @inherit so details references
 #' @family standard MCTQ functions
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -170,8 +170,8 @@ gu <- function(se, si){
 #' @return A `Duration` vector corresponding to the difference between `se` and
 #'   `so` rolled on a 24 hours clock basis.
 #'
-#' @inherit so details references
 #' @family standard MCTQ functions
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -214,8 +214,8 @@ sd <- function(so, se){
 #' @return A `hms` vector corresponding to the difference between `gu` and `bt`
 #'   rolled on a 24 hours clock basis.
 #'
-#' @inherit so details references
 #' @family standard MCTQ functions
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -237,7 +237,7 @@ tbt <- function(bt, gu){
     checkmate::assert_class(gu, "hms")
     assert_identical(bt, gu, type = "length")
 
-    sum_time(gu, - bt, class = "hms", clock = TRUE, vectorize = TRUE)
+    sum_time(gu, - bt, class = "Duration", clock = TRUE, vectorize = TRUE)
 
 }
 
@@ -258,8 +258,8 @@ tbt <- function(bt, gu){
 #' @return A `hms` vector corresponding to the sum between `so` and (`sd` / 2)
 #'   rolled on a 24 hours clock basis.
 #'
-#' @inherit so details references
 #' @family standard MCTQ functions
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -317,9 +317,9 @@ ms <- function(so, sd){
 #' @return A `Duration` vector corresponding to the average weekly sleep
 #'   duration.
 #'
+#' @family standard MCTQ functions
 #' @inheritParams fd
 #' @inherit so references
-#' @family standard MCTQ functions
 #' @export
 #'
 #' @examples
@@ -353,7 +353,7 @@ sd_week <- function(wd, sd_w, sd_f){
 
 }
 
-#' Compute MCTQ chronotype/corrected midsleep on free days
+#' Compute MCTQ chronotype/corrected midsleep on work-free days
 #'
 #' @description
 #'
@@ -376,9 +376,9 @@ sd_week <- function(wd, sd_w, sd_f){
 #' @return A `hms` vector corresponding to the chronotype/corrected midsleep on
 #'   free days.
 #'
+#' @family standard MCTQ functions
 #' @inheritParams sd_week
 #' @inherit sd_week details references
-#' @family standard MCTQ functions
 #' @export
 #'
 #' @examples
@@ -445,10 +445,10 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #'
 #' @return A `Duration` vector corresponding to the weekly sleep loss.
 #'
+#' @family standard MCTQ functions
 #' @inheritParams sd_week
 #' @inheritParams msf_sc
 #' @inherit sd_week details references
-#' @family standard MCTQ functions
 #' @export
 #'
 #' @examples
@@ -519,9 +519,9 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' * If `abs = FALSE`, a `Duration` vector corresponding to the relative
 #' social jetlag.
 #'
+#' @family standard MCTQ functions
 #' @inheritParams msf_sc
 #' @inherit sd_week references
-#' @family standard MCTQ functions
 #' @export
 #'
 #' @examples
@@ -538,6 +538,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
 #' sjl(msw, msf, abs = FALSE)
 #' #> [1] "-3600s (~-1 hours)" "0s" # Expected
+#'
 #' sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
 #' #> [1] "-300s (~-5 minutes)" # Expected
 #'
@@ -594,9 +595,9 @@ sjl_rel <- function(msw, msf){
 #' @return A `Duration` vector corresponding to the average weekly light
 #'   exposure.
 #'
+#' @family standard MCTQ functions
 #' @inheritParams fd
 #' @inherit sd_week details references
-#' @family standard MCTQ functions
 #' @export
 #'
 #' @examples

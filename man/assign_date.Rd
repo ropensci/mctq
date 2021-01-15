@@ -8,7 +8,7 @@ assign_date(
   start,
   end,
   ambiguity = 0,
-  return = "list",
+  return = "interval",
   start_name = deparse(substitute(start)),
   end_name = deparse(substitute(end))
 )
@@ -17,17 +17,18 @@ assign_date(
 \item{start, end}{A \code{hms} or \code{POSIXt} vector indicating the start or end
 hour.}
 
-\item{ambiguity}{(optional) A numeric value to instruct \code{assign_date()} on
+\item{ambiguity}{(optional) A \code{numeric} value to instruct \code{assign_date()} on
 how to deal with ambiguities (see Details) (default: \code{0}).}
 
 \item{return}{(optional) A string indicating the type of output (see Details)
-(default: \code{"list"}).}
+(default: \code{"interval"}).}
 
 \item{start_name, end_name}{(optional) a string indicating a name associated
 with the \code{start} and \code{end} argument.}
 }
 \value{
 \itemize{
+\item If \code{return = "interval"}, a \code{start}---\code{end} \code{interval} object.
 \item If \code{return = "list"}, a named list with \code{start} and \code{end} outputs.
 \item If \verb{return = "start}, only the \code{start} output.
 \item If \code{return = "end"}, only the \code{end} output.
@@ -44,9 +45,9 @@ timeline.
 \subsection{\code{ambiguity} argument}{
 
 In cases when \code{start} is equal to \code{end}, there are two possibilities of
-intervals between the two hours, which results in a ambiguity. That's
-because \code{start} and \code{end} can be at the same point in time or they can
-distance themselves by one day, as illustrated below.\preformatted{ start,end       start,end       start,end       start,end
+intervals between the two hours (ambiguity). That's because \code{start} and \code{end}
+can be at the same point in time or they can distance themselves by one day,
+as illustrated below.\preformatted{ start,end       start,end       start,end       start,end
    start            end            start            end
    10:00           10:00           10:00           10:00
 -----|---------------|---------------|---------------|----->
@@ -68,8 +69,9 @@ hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day.
 
 \subsection{\code{return} argument}{
 
-\code{assign_date()} can return three different outputs:
+\code{assign_date()} can return different outputs:
 \itemize{
+\item \code{return = "interval"}: returns a \code{start}---\code{end} \code{interval} object.
 \item \code{return = "list"}: returns a \code{list} object with two named elements
 corresponding to \code{start} and \code{end} output.
 \item \code{return = "start"}: returns only the \code{start} output.
@@ -84,7 +86,7 @@ list elements when \code{return == "list"}. As default, the function will name
 this elements with the names of the variables assigned to \code{start} and \code{end}
 arguments.
 
-If the number of characters (nchar) of \code{start_name} or \code{end_name} are equal
+If the number of characters (\code{nchar}) of \code{start_name} or \code{end_name} are equal
 or greater than 30, \code{assign_date()} will name the list elements as \code{start}
 and \code{end}.
 }
@@ -101,15 +103,21 @@ dates. Only the hours will be considered.
 }
 }
 \examples{
-## ** To return `start` and `end` outputs **
+## ** To return `start` and `end` as interval **
+start <- hms::parse_hms("12:34:00")
+end <- hms::parse_hms("01:25:00")
+assign_date(start, end)
+#> [1] 0000-01-01 12:34:00 UTC--0000-01-02 01:25:00 UTC # Expected
+
+## ** To return `start` and `end` as list **
 start <- hms::parse_hms("22:15:00")
 end <- hms::parse_hms("00:00:00")
-assign_date(start, end)
+assign_date(start, end, return = "list")
 #> $start # Expected
-#> [1] "0000-01-01 22:15:00 UTC"
-#>
-#> $end
-#> [1] "0000-01-02 UTC"
+#> [1] "0000-01-01 22:15:00 UTC" # Expected
+#> # Expected
+#> $end # Expected
+#> [1] "0000-01-02 UTC" # Expected
 
 ## ** To return only the `start` output **
 start <- lubridate::parse_date_time("01:10:00", "HMS")
@@ -121,11 +129,7 @@ assign_date(start, end, return = "start")
 start <- lubridate::as_datetime("1985-01-15 12:00:00")
 end <- lubridate::as_datetime("2020-09-10 12:00:00")
 assign_date(start, end, ambiguity = 24)
-#> $start # Expected
-#> [1] "0000-01-01 12:00:00 UTC"
-#>
-#> $end
-#> [1] "0000-01-02 12:00:00 UTC"
+#> [1] 0000-01-01 12:00:00 UTC--0000-01-02 12:00:00 UTC # Expected
 }
 \seealso{
 Other time arithmetic functions: 
