@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_data.R
 \name{raw_data}
 \alias{raw_data}
-\title{Get paths to MCTQ raw datasets}
+\title{Get paths to \code{mctq} raw datasets}
 \usage{
 raw_data(file = NULL)
 }

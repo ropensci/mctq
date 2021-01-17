@@ -13,7 +13,7 @@ swap_decimal(x, new_decimal = ",", quiet = FALSE)
 decimal separator for \code{x} (default: \code{","}).}
 
 \item{quiet}{(optional) A logical value indicating if warnings or messages
-are allowed with the output (default: \code{FALSE}).}
+must be suppressed (default: \code{FALSE}).}
 }
 \value{
 A \code{character} or \code{numeric} vector with the new decimal separator.

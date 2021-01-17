@@ -133,6 +133,7 @@ assign_date(start, end, ambiguity = 24)
 }
 \seealso{
 Other time arithmetic functions: 
+\code{\link{round_time}()},
 \code{\link{shortest_interval}()},
 \code{\link{sum_time}()}
 }

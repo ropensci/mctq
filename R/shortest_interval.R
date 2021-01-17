@@ -128,8 +128,8 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
     checkmate::assert_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
     assert_identical(x, y, type = "length")
-    checkmate::assert_numeric(lubridate::hours(x), lower = 0, max.len = 23)
-    checkmate::assert_numeric(lubridate::hours(y), lower = 0, max.len = 23)
+    checkmate::assert_numeric(lubridate::hour(x), lower = 0, max.len = 23)
+    checkmate::assert_numeric(lubridate::hour(y), lower = 0, max.len = 23)
     checkmate::assert_choice(tolower(class), tolower(choices))
     checkmate::assert_flag(inverse)
 

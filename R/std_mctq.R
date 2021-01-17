@@ -1133,7 +1133,7 @@ validate_std_mctq <- function(write = FALSE) {
 
 }
 
-#' Analyze [mctq::tidy_std_mctq()] output
+#' Analyze [mctq::validate_std_mctq()] output
 #'
 #' @description
 #'
@@ -1150,6 +1150,12 @@ validate_std_mctq <- function(write = FALSE) {
 #' It is also a part of the process of transforming data, described in the
 #' workflow proposed by Wickham and Grolemund ([n.d.](https://r4ds.had.co.nz)).
 #'
+#' @param round (optional) A logical value indicating if date/time objects must
+#'   be rounded at the level of seconds after all variable computations are done
+#'   (default: `TRUE`).
+#' @param hms (optional) A logical value indicating if all time values must
+#'   be presented as `hms` (default: `TRUE`).
+#'
 #' @return An invisible tibble with all the variables proposed for a standard
 #'   MCTQ dataset.
 #'
@@ -1162,7 +1168,7 @@ validate_std_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' utils::View(analyze_std_mctq())
 #' }
-analyze_std_mctq <- function(write = FALSE) {
+analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
 
     # Check arguments -----
 
@@ -1198,13 +1204,15 @@ analyze_std_mctq <- function(write = FALSE) {
             msf_sc = msf_sc(msf, sd_w, sd_f, sd_week, alarm_f),
             sloss_week = sloss_week(wd, sd_w, sd_f, sd_week),
             sjl_rel = sjl_rel(msw, msf),
-            sjl = sjl(msw, msf),
+            sjl = abs(sjl_rel),
             le_week = le_week(wd, le_w, le_f)) %>%
         dplyr::relocate(
             id, work, wd, fd, bt_w, sprep_w, slat_w, so_w, se_w, si_w, gu_w,
             alarm_w, wake_before_w, le_w, sd_w, tbt_w, msw, bt_f, sprep_f,
             slat_f, so_f, se_f, si_f, gu_f, alarm_f, reasons_f, le_f, sd_f,
             tbt_f, msf, sd_week, msf_sc, sloss_week, sjl_rel, sjl, le_week)
+
+    std_mctq <- std_mctq %>% pretty_mctq(round = round, hms = hms)
 
     # Write and output dataset -----
 

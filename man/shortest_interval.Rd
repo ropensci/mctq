@@ -134,6 +134,7 @@ longer_interval(x, y, "POSIXct")
 \seealso{
 Other time arithmetic functions: 
 \code{\link{assign_date}()},
+\code{\link{round_time}()},
 \code{\link{sum_time}()}
 }
 \concept{time arithmetic functions}

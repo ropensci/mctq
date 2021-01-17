@@ -19,7 +19,7 @@
 #' @return A numeric value equivalent to 7 - `wd`, _i.e._ the difference between
 #'   the number of days in a week and the number of work days.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inherit so references
 #' @export
 #'
@@ -60,10 +60,15 @@ fd <- function(wd) {
 #' [lubridate::lubridate-package]. If your data do not conform to the object
 #' classes required, you can use [mctq::convert_to()] to convert it.
 #'
-#' ## Work days and work-free days
+#' ## Rounding fractional time
 #'
-#' The computation is the same for work and work-free days. Use the appropriated
-#' value entered on the section you are working on.
+#' Some operations may produce an output with fractional time (_e.g._
+#' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
+#' can round it with [mctq::round_time()].
+#'
+#' We recommend rounding values only after all computations are done, that way
+#' you can avoid
+#' [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
 #'
 #' @param sprep A `hms` vector corresponding to the __local time of getting out
 #'   of bed__ of a standard MCTQ questionnaire.
@@ -73,7 +78,7 @@ fd <- function(wd) {
 #' @return A `hms` vector corresponding to the sum of `sprep` and `slat` rolled
 #'   on a 24 hours clock basis.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @export
 #'
 #' @references
@@ -126,7 +131,7 @@ so <- function(sprep, slat){
 #' @return A `hms` vector corresponding to the sum of `se` and `si` rolled on a
 #'   24 hours clock basis.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inherit so details references
 #' @export
 #'
@@ -170,7 +175,7 @@ gu <- function(se, si){
 #' @return A `Duration` vector corresponding to the difference between `se` and
 #'   `so` rolled on a 24 hours clock basis.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inherit so details references
 #' @export
 #'
@@ -214,7 +219,7 @@ sd <- function(so, se){
 #' @return A `hms` vector corresponding to the difference between `gu` and `bt`
 #'   rolled on a 24 hours clock basis.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inherit so details references
 #' @export
 #'
@@ -258,7 +263,7 @@ tbt <- function(bt, gu){
 #' @return A `hms` vector corresponding to the sum between `so` and (`sd` / 2)
 #'   rolled on a 24 hours clock basis.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inherit so details references
 #' @export
 #'
@@ -307,6 +312,16 @@ ms <- function(so, sd){
 #' [lubridate::lubridate-package]. If your data do not conform to the object
 #' classes required, you can use [mctq::convert_to()] to convert it.
 #'
+#' ## Rounding fractional time
+#'
+#' Some operations may produce an output with fractional time (_e.g._
+#' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
+#' can round it with [mctq::round_time()].
+#'
+#' We recommend rounding values only after all computations are done, that way
+#' you can avoid
+#' [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
+#'
 #' @param sd_w A `Duration` vector corresponding to the __sleep duration on work
 #'   days__ of a standard MCTQ questionnaire (you can use [mctq::sd()] to
 #'   compute it).
@@ -317,7 +332,7 @@ ms <- function(so, sd){
 #' @return A `Duration` vector corresponding to the average weekly sleep
 #'   duration.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inheritParams fd
 #' @inherit so references
 #' @export
@@ -342,6 +357,13 @@ ms <- function(so, sd){
 #' #> 06:36:25.714286 # Expected
 #' convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
 #' #> 06:36:25 # Expected
+#'
+#' ## ** rounding the output at the seconds level **
+#' x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
+#' x
+#' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
+#' round_time(x)
+#' #> [1] "22989s (~6.39 hours)" # Expected
 sd_week <- function(wd, sd_w, sd_f){
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
@@ -376,7 +398,7 @@ sd_week <- function(wd, sd_w, sd_f){
 #' @return A `hms` vector corresponding to the chronotype/corrected midsleep on
 #'   free days.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inheritParams sd_week
 #' @inherit sd_week details references
 #' @export
@@ -408,6 +430,14 @@ sd_week <- function(wd, sd_w, sd_f){
 #' chronotype(hms::parse_hms("07:00:00"), lubridate::dhours(6),
 #'            lubridate::dhours(12), lubridate::dhours(9.45), FALSE)
 #' #> 05:43:30 # Expected
+#'
+#' ## ** rounding the output at the seconds level **
+#' x <- msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(5.43678),
+#'             lubridate::dhours(9.345111), lubridate::dhours(7.5453), FALSE)
+#' x
+#' #> 04:46:02.340202 # Expected
+#' round_time(x)
+#' #> 04:46:02 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f){
 
     checkmate::assert_class(msf, "hms")
@@ -445,7 +475,7 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #'
 #' @return A `Duration` vector corresponding to the weekly sleep loss.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inheritParams sd_week
 #' @inheritParams msf_sc
 #' @inherit sd_week details references
@@ -468,6 +498,14 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' sd_week <- c(lubridate::dhours(6.75), lubridate::dhours(8))
 #' sloss_week(wd, sd_w, sd_f, sd_week)
 #' #> [1] "4500s (~1.25 hours)" "0s"  # Expected
+#'
+#' ## ** rounding the output at the seconds level **
+#' x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324),
+#'                lubridate::dhours(6.1452))
+#' x
+#' #> [1] "5851.44000000001s (~1.63 hours)" # Expected
+#' round_time(x)
+#' #> [1] "5851s (~1.63 hours)" # Expected
 sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
@@ -511,15 +549,10 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' @param abs A `logical` value indicating if the function must return an
 #' absolute SJL (always positive) or a relative SJL (the SJL with no changes).
 #'
-#' @return
+#' @return A `Duration` vector corresponding to the relative or absolute
+#' (if `abs = TRUE`) social jetlag.
 #'
-#' * If `abs = TRUE`, a `Duration` vector corresponding to the absolute social
-#' jetlag.
-#'
-#' * If `abs = FALSE`, a `Duration` vector corresponding to the relative
-#' social jetlag.
-#'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inheritParams msf_sc
 #' @inherit sd_week references
 #' @export
@@ -546,11 +579,19 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
 #' convert_to(x, "hms")
 #' #> 02:10:05 # Expected
+#'
+#' ## ** rounding the output at the seconds level **
+#' x <- sjl(hms::parse_hms("04:19:33.1234"), hms::parse_hms("2:55:05"))
+#' x
+#' #> [1] "5071.12339782715s (~1.41 hours)" # Expected
+#' round_time(x)
+#' #> [1] "5071s (~1.41 hours)" # Expected
 sjl <- function(msw, msf, abs = TRUE) {
 
     checkmate::assert_class(msw, "hms")
     checkmate::assert_class(msf, "hms")
     checkmate::assert_flag(abs)
+    assert_identical(msw, msf, type = "length")
 
     shortest_interval <- shortest_interval(msw, msf, class = "Interval")
     int_start <- convert_to(lubridate::int_start(shortest_interval), "hms")
@@ -562,11 +603,7 @@ sjl <- function(msw, msf, abs = TRUE) {
         int_start == msf ~ - out
     )
 
-    if (isTRUE(abs)) {
-        abs(out)
-    } else {
-        out
-    }
+    if (isTRUE(abs)) abs(out) else out
 
 }
 
@@ -595,7 +632,7 @@ sjl_rel <- function(msw, msf){
 #' @return A `Duration` vector corresponding to the average weekly light
 #'   exposure.
 #'
-#' @family standard MCTQ functions
+#' @family MCTQ functions
 #' @inheritParams fd
 #' @inherit sd_week details references
 #' @export
@@ -621,6 +658,13 @@ sjl_rel <- function(msw, msf){
 #' #> 04:05:44.571429 # Expected
 #' convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
 #' #> 04:05:44 # Expected
+#'
+#' ## ** rounding the output at the seconds level **
+#' x <- le_week(2, lubridate::dhours(3.4094), lubridate::dhours(6.2345))
+#' x
+#' #> [1] "19538.3828571429s (~5.43 hours)" # Expected
+#' round_time(x)
+#' #> [1] "19538s (~5.43 hours)" # Expected
 le_week <- function(wd, le_w, le_f){
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)

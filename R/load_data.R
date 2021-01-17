@@ -1,4 +1,4 @@
-#' Load a data file to R
+#' Load a delimited or a `.RData` file to R
 #'
 #' @description
 #'
@@ -250,7 +250,7 @@ write_data <- function(data,
 
 }
 
-#' Return a model data for the MCTQ
+#' Return a model MCTQ data
 #'
 #' @description
 #'
@@ -291,7 +291,7 @@ model_data <- function(model = "standard") {
 
 }
 
-#' Get paths to MCTQ raw datasets
+#' Get paths to `mctq` raw datasets
 #'
 #' @description
 #'
@@ -343,7 +343,7 @@ raw_data <- function(file = NULL) {
 #' @param new_decimal (optional) A `"."` or `","` string, indicating the new
 #'   decimal separator for `x` (default: `","`).
 #' @param quiet (optional) A logical value indicating if warnings or messages
-#'   are allowed with the output (default: `FALSE`).
+#'   must be suppressed (default: `FALSE`).
 #'
 #' @return A `character` or `numeric` vector with the new decimal separator.
 #'

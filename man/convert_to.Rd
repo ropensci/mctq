@@ -11,13 +11,14 @@
 \alias{convert_to.Date}
 \alias{convert_to.POSIXt}
 \alias{convert_to.Interval}
+\alias{convert_to.data.frame}
 \alias{convert_to_tu}
 \alias{convert_to_ut}
 \alias{convert_to_tt}
 \alias{convert_to_uu}
 \alias{convert_to_pt}
 \alias{convert_to_pu}
-\title{Converts a R object to another}
+\title{Convert a R object to another}
 \usage{
 convert_to(x, class, ..., quiet = FALSE)
 
@@ -136,6 +137,22 @@ convert_to(x, class, ..., quiet = FALSE)
   quiet = FALSE
 )
 
+\method{convert_to}{data.frame}(
+  x,
+  class,
+  ...,
+  cols = NULL,
+  where = NULL,
+  orders = NULL,
+  tz = "UTC",
+  input_unit = NULL,
+  output_unit = NULL,
+  month_length = lubridate::dmonths(),
+  year_length = lubridate::dyears(),
+  close_round = TRUE,
+  quiet = FALSE
+)
+
 convert_to_tu(x, output_unit, ...)
 
 convert_to_ut(x, class, input_unit, ...)
@@ -156,7 +173,7 @@ convert_to_pu(x, orders, output_unit, ...)
 \item{...}{Additional arguments to be passed to or from methods.}
 
 \item{quiet}{(optional) A logical value indicating if warnings or messages
-are allowed with the output (default: \code{FALSE}).}
+must be suppressed (default: \code{FALSE}).}
 
 \item{orders}{(optional) A character vector of date/time formats to parse a
 \code{x} value of class \code{character} or \code{numeric}.}
@@ -182,6 +199,12 @@ ignored from \code{Date} or \code{POSIXt} objects when converting they to \code{
 \item{close_round}{(optional) A logical value indicating if numbers with
 decimals starting with five leading 0s or 9s must be rounded
 (\emph{e.g.} 1.99999) (default: \code{TRUE}).}
+
+\item{cols}{(optional) A character vector indicating the column names in \code{x}
+to transform (default: \code{NULL}).}
+
+\item{where}{(optional) A function to apply in a \code{\link[tidyselect:where]{tidyselect::where()}} call
+(default: \code{NULL}).}
 }
 \value{
 A R object of the indicated class.
@@ -278,6 +301,24 @@ get around this, some exceptions were made to orders \strong{equal} to \code{"H"
 \code{"M"}, \code{"S"}, \code{HM}, or \code{HMS}. For \code{HM} and \code{HMS} exceptions, minutes and
 seconds are limited to \verb{[0-59]}, and, when hours exceeds 2 digits, a \code{:} must
 be allocated between hours and minutes.
+}
+
+\subsection{Converting columns of a data frame}{
+
+\code{convert_to} also allow conversions of data frame variables. This is made
+with the help of \code{\link[dplyr:mutate]{dplyr::mutate()}}.
+
+Operations with data frames are only column-wise and can be made by
+selecting individual columns (using the \code{col} argument) or group of columns
+(by applying a flag function (\emph{e.g} \code{is.numeric}) in the \code{where} argument).
+\itemize{
+\item When \code{class = "character"}
+}
+
+\code{convert_to} will return a \code{\link[base:character]{base::as.character()}} output if \code{class} is set to
+\code{"character"}. When \code{x} is parsed for date/time, and there's no
+indication of year, \code{convert_to} will return only a character string with a
+\code{hms} time.
 }
 
 \subsection{Different outputs}{
@@ -443,6 +484,17 @@ convert_to("01:00", "numeric", orders = "HM", output_unit = "rad")
 #> [1] 0.261799 # Expected
 convert_to_pu("01:00", "HM", "rad") # Wrapper function
 #> [1] 0.2617994 # Expected
+
+## ** conversion of columns of a data frame **
+\dontrun{
+out <- convert_to(datasets::mtcars, "posixct", cols = c("cyl", "carb"),
+                  orders = "H")
+head(out)
+
+out <- convert_to(datasets::iris, "duration", where = is.numeric,
+                  input_unit = "H")
+head(out)
+}
 }
 \references{
 Van der Loo, M., & De Jonge, E. (2018).

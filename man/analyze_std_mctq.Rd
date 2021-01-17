@@ -2,13 +2,20 @@
 % Please edit documentation in R/std_mctq.R
 \name{analyze_std_mctq}
 \alias{analyze_std_mctq}
-\title{Analyze \code{\link[=tidy_std_mctq]{tidy_std_mctq()}} output}
+\title{Analyze \code{\link[=validate_std_mctq]{validate_std_mctq()}} output}
 \usage{
-analyze_std_mctq(write = FALSE)
+analyze_std_mctq(write = FALSE, round = TRUE, hms = TRUE)
 }
 \arguments{
 \item{write}{(optional) A logical value indicating if the function must write
 a \code{std_mctq.rda} file to \code{"./data/"} (default: \code{FALSE}).}
+
+\item{round}{(optional) A logical value indicating if date/time objects must
+be rounded at the level of seconds after all variable computations are done
+(default: \code{TRUE}).}
+
+\item{hms}{(optional) A logical value indicating if all time values must
+be presented as \code{hms} (default: \code{TRUE}).}
 }
 \value{
 An invisible tibble with all the variables proposed for a standard

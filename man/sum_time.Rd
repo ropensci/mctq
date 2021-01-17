@@ -122,6 +122,7 @@ sum_time(x, y, clock = TRUE, vectorize = TRUE)
 \seealso{
 Other time arithmetic functions: 
 \code{\link{assign_date}()},
+\code{\link{round_time}()},
 \code{\link{shortest_interval}()}
 }
 \concept{time arithmetic functions}

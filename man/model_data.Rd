@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_data.R
 \name{model_data}
 \alias{model_data}
-\title{Return a model data for the MCTQ}
+\title{Return a model MCTQ data}
 \usage{
 model_data(model = "standard")
 }

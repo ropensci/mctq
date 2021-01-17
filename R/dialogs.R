@@ -28,7 +28,7 @@ dialog_menu <- function(abort = FALSE, title = "Do you wish to continue?",
 #' @family dialog functions
 #' @noRd
 dialog_line <- function(abort = FALSE,
-                        line = paste0("Insert `quit` to exit or press any key ",
+                        line = paste0("Insert `quit` to exit or press enter ",
                                       "to continue: "),
                         space_above = TRUE, space_below = TRUE) {
 

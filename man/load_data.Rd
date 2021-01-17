@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_data.R
 \name{load_data}
 \alias{load_data}
-\title{Load a data file to R}
+\title{Load a delimited or a \code{.RData} file to R}
 \usage{
 load_data(
   file = as.character(tcltk::tkgetOpenFile()),

@@ -163,3 +163,54 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
     convert_to(out, class)
 
 }
+
+#' Round time values
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `round_time()` takes a time object and round it to the nearest value at
+#' the seconds level.
+#'
+#' @param x A vector belonging to one of the following classes: `Duration`,
+#'   `Period`, `difftime`, `hms`.
+#'
+#' @return An date/time object with the time rounded at the seconds level.
+#'
+#' @family time arithmetic functions
+#' @export
+#'
+#' @examples
+#' lubridate::dhours(1.45678696454)
+#' #> [1] "5244.433072344s (~1.46 hours)" # Expected
+#' round_time(lubridate::dhours(1.45678696454))
+#' #> [1] "5244s (~1.46 hours)" # Expected
+#'
+#' lubridate::microseconds(2454876956)
+#' #> [1] "2454.876956S" # Expected
+#' hms::as_hms(as.numeric(lubridate::microseconds(2454876956)))
+#' #> 00:40:54.876956
+#' round_time(lubridate::microseconds(2454876956))
+#' #> [1] "40M 55S" # Expected
+#'
+#' hms::as_hms(12345.6789)
+#' #> 03:25:45.6789 # Expected
+#' round_time(hms::as_hms(12345.6789))
+#' #> 03:25:46 # Expected
+round_time <- function(x) {
+
+    # Check arguments -----
+
+    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
+                 "POSIXlt", "Interval")
+
+    checkmate::assert_multi_class(x, classes)
+
+    # Compute and return output -----
+
+    class <- class(x)[1]
+    x <- round(as.numeric(x))
+    convert_to(x, class)
+
+}

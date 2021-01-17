@@ -1,17 +1,3 @@
-#' @noRd
-build_mctq_shift <- function(){
-
-
-
-}
-
-#' @noRd
-tidy_mctq_shift <- function(raw_data = build_mctq_shift()){
-
-
-
-}
-
 #' A MCTQ Shift dataset
 #'
 #' @description
@@ -70,20 +56,6 @@ tidy_mctq_shift <- function(raw_data = build_mctq_shift()){
 #' <https://www.thewep.org/documentations/mctq/>.
 "mctq_shift"
 
-#' @noRd
-build_micro_mctq <- function(){
-
-
-
-}
-
-#' @noRd
-tidy_micro_mctq <- function(raw_data = build_micro_mctq()){
-
-
-
-}
-
 #' A \strong{\eqn{\mu}}MCTQ dataset
 #'
 #' @description
@@ -138,4 +110,3 @@ tidy_micro_mctq <- function(raw_data = build_micro_mctq()){
 #' The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 #' <https://www.thewep.org/documentations/mctq/>.
 "micro_mctq"
-

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{is_time}
 \alias{is_time}
-\title{Check if a object inherits a set of date/time classes}
+\title{Test if a object inherits a set of date/time classes}
 \usage{
 is_time(x, rm = NULL)
 }
@@ -10,31 +10,27 @@ is_time(x, rm = NULL)
 \item{x}{Any kind of R object.}
 
 \item{rm}{(optional) A character vector indicating names of object classes to
-remove from the check (case sensitive) (default: \code{NULL}).}
+remove from the test (case sensitive) (default: \code{NULL}).}
 }
 \value{
 If \code{rm} is \code{NULL}, a boolean flag checking if \code{x} inherits a
 \code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt},
-\code{Interval}, or \code{Circular} class. Else, the same as the previous, but
-without the classes indicated in \code{rm}.
+\code{Interval}, or \code{Circular} class. Else, the same as previous, but without
+the classes indicated in \code{rm}.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{is_time()} returns a boolean flag checking for objects of class \code{Duration},
+\code{is_time()} returns a boolean flag testing for objects of class \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}, \code{Date}, \code{POSIXct}, \code{POSIXlt}, \code{Interval}, or
 \code{Circular}.
 }
 \examples{
-is_time(lubridate::dhours())
-#> [1] TRUE # Expected
 is_time(as.Date("2020-01-01"))
 #> [1] TRUE # Expected
 is_time(as.Date("2020-01-01"), rm = "Date")
 #> [1] FALSE # Expected
-is_time(iris)
-#> [1] FALSE # Expected
-is_time(letters)
+is_time(datasets::iris)
 #> [1] FALSE # Expected
 }
 \seealso{

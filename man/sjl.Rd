@@ -21,12 +21,8 @@ compute it).}
 absolute SJL (always positive) or a relative SJL (the SJL with no changes).}
 }
 \value{
-\itemize{
-\item If \code{abs = TRUE}, a \code{Duration} vector corresponding to the absolute social
-jetlag.
-\item If \code{abs = FALSE}, a \code{Duration} vector corresponding to the relative
-social jetlag.
-}
+A \code{Duration} vector corresponding to the relative or absolute
+(if \code{abs = TRUE}) social jetlag.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}

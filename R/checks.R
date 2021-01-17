@@ -216,7 +216,7 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
         check <- length(unique(out)) == 1
     }
 
-    if (any(is.null(unlist(out))) && isTRUE(null.ok)) {
+    if (any(unlist(lapply(out, is.null))) && isTRUE(null.ok)) {
         invisible(TRUE)
     } else if (any(is.na(unlist(out))) && isFALSE(any.missing)) {
         rlang::abort(glue::glue("{inline_collapse(names)} cannot have ",

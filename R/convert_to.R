@@ -1,4 +1,4 @@
-#' Converts a R object to another
+#' Convert a R object to another
 #'
 #' @description
 #'
@@ -94,6 +94,22 @@
 #' seconds are limited to `[0-59]`, and, when hours exceeds 2 digits, a `:` must
 #' be allocated between hours and minutes.
 #'
+#' ## Converting columns of a data frame
+#'
+#' `convert_to` also allow conversions of data frame variables. This is made
+#' with the help of [dplyr::mutate()].
+#'
+#' Operations with data frames are only column-wise and can be made by
+#' selecting individual columns (using the `col` argument) or group of columns
+#' (by applying a flag function (_e.g_ `is.numeric`) in the `where` argument).
+#'
+#' * When `class = "character"`
+#'
+#' `convert_to` will return a [base::as.character()] output if `class` is set to
+#' `"character"`. When `x` is parsed for date/time, and there's no
+#' indication of year, `convert_to` will return only a character string with a
+#' `hms` time.
+#'
 #' ## Different outputs
 #'
 #' Your output can change according to your settings. Here are some examples.
@@ -178,8 +194,12 @@
 #' @param close_round (optional) A logical value indicating if numbers with
 #' decimals starting with five leading 0s or 9s must be rounded
 #' (_e.g._ 1.99999) (default: `TRUE`).
+#' @param cols (optional) A character vector indicating the column names in `x`
+#'   to transform (default: `NULL`).
+#' @param where (optional) A function to apply in a [tidyselect::where()] call
+#'   (default: `NULL`).
 #' @param quiet (optional) A logical value indicating if warnings or messages
-#'   are allowed with the output (default: `FALSE`).
+#'   must be suppressed (default: `FALSE`).
 #'
 #' @return A R object of the indicated class.
 #'
@@ -289,11 +309,22 @@
 #' #> [1] 0.261799 # Expected
 #' convert_to_pu("01:00", "HM", "rad") # Wrapper function
 #' #> [1] 0.2617994 # Expected
+#'
+#' ## ** conversion of columns of a data frame **
+#' \dontrun{
+#' out <- convert_to(datasets::mtcars, "posixct", cols = c("cyl", "carb"),
+#'                   orders = "H")
+#' head(out)
+#'
+#' out <- convert_to(datasets::iris, "duration", where = is.numeric,
+#'                   input_unit = "H")
+#' head(out)
+#' }
 convert_to <- function(x, class, ..., quiet = FALSE) {
 
     # Check arguments -----
 
-    choices <- stringr::str_to_lower(
+    choices <- tolower(
         c("character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
@@ -302,19 +333,9 @@ convert_to <- function(x, class, ..., quiet = FALSE) {
 
     # Set method -----
 
-    ## ah, the little hacks we have to do...
-
     if (any(is.na(x)) && length(x) == 1) {
         x <- as.character(NA)
         return(convert_to.character(x, class, ... = ..., quiet = quiet))
-    } else if (lubridate::is.difftime(x)) {
-        return(convert_to.difftime(x, class, ... = ..., quiet = quiet))
-    } else if (hms::is_hms(x)) {
-        return(convert_to.hms(x, class, ... = ..., quiet = quiet))
-    } else if (lubridate::is.Date(x)) {
-        return(convert_to.Date(x, class, ... = ..., quiet = quiet))
-    } else if (lubridate::is.POSIXt(x)) {
-        return(convert_to.POSIXt(x, class, ... = ..., quiet = quiet))
     } else {
         UseMethod("convert_to")
     }
@@ -813,6 +834,53 @@ convert_to.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 
 }
 
+#' @rdname convert_to
+#' @export
+convert_to.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
+                                  orders = NULL, tz = "UTC",
+                                  input_unit = NULL, output_unit = NULL,
+                                  month_length = lubridate::dmonths(),
+                                  year_length = lubridate::dyears(),
+                                  close_round = TRUE, quiet = FALSE) {
+
+    # Check arguments -----
+
+    checkmate::assert_function(where, null.ok = TRUE)
+    checkmate::assert_string(tz)
+
+    if (!is.null(cols)) {
+        checkmate::assert_names(cols, "unique", subset.of = names(x))
+    }
+
+    if (is.null(cols) & is.null(where)) {
+        rlang::abort("`cols` and `where` cannot both be `NULL`.")
+    }
+
+    # Set values -----
+
+    call <- function(x) {
+        convert_to(x, class, orders = orders, tz = tz, input_unit = input_unit,
+                   output_unit = output_unit, month_length = month_length,
+                   year_length = year_length, close_round = close_round,
+                   quiet = quiet)
+    }
+
+    where_function <- function(x) where(x)
+
+    # Convert to class and return output -----
+
+    if (!is.null(where)) {
+        out <- x %>% dplyr::mutate(dplyr::across(where(where_function), call))
+        invisible(out)
+    } else if (!is.null(cols)) {
+        out <- x %>% dplyr::mutate(dplyr::across(cols, call))
+        invisible(out)
+    } else {
+        rlang::abort("Critical error.")
+    }
+
+}
+
 
 # WRAPPERS =====
 
@@ -888,7 +956,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
 
     # Check arguments -----
 
-    checkmate::assert_multi_class(x, c("character", "numeric"))
+    checkmate::assert_multi_class(x, c("character", "integer", "numeric"))
     checkmate::assert_character(orders, min.chars = 1, any.missing = FALSE,
                                 all.missing = FALSE, min.len = 1, unique = TRUE)
     checkmate::assert_string(tz)

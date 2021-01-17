@@ -175,52 +175,45 @@ change_day <- function(x, day) {
 
 }
 
-#' Check if a object inherits a set of date/time classes
+#' Test if a object inherits a set of date/time classes
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `is_time()` returns a boolean flag checking for objects of class `Duration`,
+#' `is_time()` returns a boolean flag testing for objects of class `Duration`,
 #' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, or
 #' `Circular`.
 #'
 #' @param x Any kind of R object.
 #' @param rm (optional) A character vector indicating names of object classes to
-#'   remove from the check (case sensitive) (default: `NULL`).
+#'   remove from the test (case sensitive) (default: `NULL`).
 #'
 #' @return If `rm` is `NULL`, a boolean flag checking if `x` inherits a
 #'   `Duration`, `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`,
-#'   `Interval`, or `Circular` class. Else, the same as the previous, but
-#'   without the classes indicated in `rm`.
+#'   `Interval`, or `Circular` class. Else, the same as previous, but without
+#'   the classes indicated in `rm`.
 #'
 #' @family utility functions
 #' @export
 #'
 #' @examples
-#' is_time(lubridate::dhours())
-#' #> [1] TRUE # Expected
 #' is_time(as.Date("2020-01-01"))
 #' #> [1] TRUE # Expected
 #' is_time(as.Date("2020-01-01"), rm = "Date")
 #' #> [1] FALSE # Expected
-#' is_time(iris)
-#' #> [1] FALSE # Expected
-#' is_time(letters)
+#' is_time(datasets::iris)
 #' #> [1] FALSE # Expected
 is_time <- function(x, rm = NULL) {
 
-    checkmate::assert_character(rm, any.missing = FALSE, min.len = 1,
-                                null.ok = TRUE)
+    checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
 
-    classes <-
-        c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
-          "POSIXlt", "Interval", "Circular")
+    classes <- c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
+                 "POSIXlt", "Interval", "Circular")
 
     if (!is.null(rm)) {
-        for (i in paste0("^", rm, "$")){
-            classes <- stringr::str_subset(classes, i, negate = TRUE)
-        }
+        rm <- paste0("^", rm, "$", collapse = "|")
+        classes <- stringr::str_subset(classes, rm, negate = TRUE)
     }
 
     if (circular::is.circular(x) && !("circular" %in% rm)) {
@@ -304,7 +297,7 @@ inline_collapse <- function(x, single_quote = TRUE, serial_comma = TRUE) {
 #' @noRd
 shush <- function(x, quiet = TRUE){
 
-    if (quiet) {
+    if (isTRUE(quiet)) {
         suppressMessages(suppressWarnings(x))
     } else {
         x
@@ -396,6 +389,7 @@ get_names <- function(...) {
     out
 
 }
+
 #' @family utility functions
 #' @noRd
 check_that_ <- function(data, ...) {
@@ -404,5 +398,27 @@ check_that_ <- function(data, ...) {
 
     confront <- validate::check_that(data, ...)
     validate::summary(confront)
+
+}
+
+#' @family utility functions
+#' @noRd
+pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
+
+    test <- function(x) {
+        classes <- c("Duration", "Period", "difftime", "hms")
+
+        checkmate::test_multi_class(x, classes)
+    }
+
+    if (isTRUE(round)) {
+        data <- data %>% dplyr::mutate(dplyr::across(where(test), round_time))
+    }
+
+    if (isTRUE(hms)) {
+        data <- convert_to(data, "hms", where = test)
+    }
+
+    data
 
 }
