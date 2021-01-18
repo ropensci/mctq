@@ -203,7 +203,7 @@
 #'
 #' @return A R object of the indicated class.
 #'
-#' @family convert_to functions
+#' @family utility functions
 #' @export
 #'
 #' @references
@@ -217,7 +217,7 @@
 #' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
-#' ## ** conversion from date/time objects to units **
+#' ## __ Conversion from date/time objects to units __
 #' convert_to(lubridate::dhours(), "numeric", output_unit = "M")
 #' #> [1] 60 # Expected
 #' convert_to(lubridate::days(), "numeric", output_unit = "rad")
@@ -233,7 +233,7 @@
 #' convert_to_tu(hms::parse_hm("15:45:00"), "H") # Wrapper function
 #' #> [1] 15.75 # Expected
 #'
-#' ## ** conversion from units to date/time objects **
+#' ## __ Conversion from units to date/time objects __
 #' convert_to(360, "period", input_unit = "deg")
 #' #> [1] "1d 0H 0M 0S" # Expected
 #' convert_to(6.5, "posixct", input_unit = "H")
@@ -247,7 +247,7 @@
 #' convert_to_ut(1.308997, "duration", "rad") # Wrapper function
 #' #> [1] "18000s (~5 hours)" # Expected
 #'
-#' ## ** conversion between date/time objects **
+#' ## __ Conversion between date/time objects __
 #' convert_to(lubridate::duration(120), "hms")
 #' #> 00:02:00 # Expected
 #' convert_to(hms::as_hms("13:45:05"), "POSIXct")
@@ -262,7 +262,7 @@
 #' convert_to_tt(x, "POSIXct") # Wrapper function
 #' #> [1] "2020-01-01 12:31:05 UTC" # Expected
 #'
-#' ## ** conversion between units **
+#' ## __ Conversion between units __
 #' convert_to(1.308997, "numeric", input_unit = "rad", output_unit = "H")
 #' #> [1] 5 # Expected
 #' convert_to(60, "numeric", input_unit = "deg", output_unit = "rad")
@@ -276,7 +276,7 @@
 #' convert_to_uu(40, "d", "deg") # Wrapper function
 #' #> [1] 14400 # Expected
 #'
-#' ## ** conversion from character or numeric objects to date/time objects **
+#' ## __ Conversion from character or numeric objects to date/time objects __
 #' convert_to("19:55:17", "duration", orders = "HMS")
 #' #> [1] "71717s (~19.92 hours)" # Expected
 #' convert_to("21:00", "Period", orders = "HM")
@@ -296,7 +296,7 @@
 #' convert_to_pt("03/07/1982 13:00", "POSIXlt", "dmy HM") # Wrapper function
 #' #> [1] "1982-07-03 13:00:00 UTC" # Expected
 #'
-#' ## ** conversion from character or numeric objects to units **
+#' ## __ Conversion from character or numeric objects to units __
 #' convert_to("0145", "numeric", orders = "HM", output_unit = "M")
 #' #> [1] 105 # Expected
 #' convert_to(45, "numeric", orders = "M", output_unit = "H")
@@ -310,7 +310,7 @@
 #' convert_to_pu("01:00", "HM", "rad") # Wrapper function
 #' #> [1] 0.2617994 # Expected
 #'
-#' ## ** conversion of columns of a data frame **
+#' ## __ Conversion of columns of a data frame __
 #' \dontrun{
 #' out <- convert_to(datasets::mtcars, "posixct", cols = c("cyl", "carb"),
 #'                   orders = "H")
@@ -949,7 +949,7 @@ convert_to_pu <- function(x, orders, output_unit, ...) {
 
 # HELPERS =====
 
-#' @family convert_to functions
+#' @family utility functions
 #' @noRd
 parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                                quiet = FALSE) {
@@ -1073,7 +1073,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
 
 }
 
-#' @family convert_to functions
+#' @family utility functions
 #' @noRd
 convert_to_seconds <- function(x, input_unit = NULL,
                                month_length = lubridate::dmonths(),
@@ -1083,8 +1083,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
     # Check arguments -----
 
     classes <- c("integer", "double", "numeric", "Duration",  "Period",
-                 "difftime", "hms", "Date", "POSIXct", "POSIXlt", "Interval",
-                 "Circular")
+                 "difftime", "hms", "Date", "POSIXct", "POSIXlt", "Interval")
 
     choices <- c("S", "M", "H", "d", "W", "m", "y", "date_decimal",
                  "rad", "deg")
@@ -1109,8 +1108,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
 
     # Compute output -----
 
-    if (any(class(x) %in% c("integer", "double", "numeric")) &&
-        !circular::is.circular(x)) {
+    if (any(class(x) %in% c("integer", "double", "numeric"))) {
         if (input_unit == "S") {
             x
         } else if (input_unit == "M") {
@@ -1155,16 +1153,6 @@ convert_to_seconds <- function(x, input_unit = NULL,
             }
         } else if (lubridate::is.interval(x)) {
             as.numeric(x)
-        } else if (circular::is.circular(x)) {
-            circular_units <- attr(x, "circularp")$units
-
-            if (circular_units == "hours") {
-                lubridate::dhours(as.numeric(x))
-            } else if (circular_units == "radians") {
-                as.numeric(x) / rad_second
-            } else if (circular_units == "degrees") {
-                as.numeric(x) / deg_second
-            }
         }
     } else {
         shush(rlang::warn("NAs introduced by coercion."), quiet)
@@ -1173,7 +1161,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
 
 }
 
-#' @family convert_to functions
+#' @family utility functions
 #' @noRd
 convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
                             month_length = lubridate::dmonths(),
@@ -1240,7 +1228,7 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
 
 }
 
-#' @family convert_to functions
+#' @family utility functions
 #' @noRd
 convert_to_date_time <- function(x, class, input_unit = NULL,
                                  month_length = lubridate::dmonths(),

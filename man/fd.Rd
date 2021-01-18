@@ -11,7 +11,7 @@ fd(wd)
 week} of a standard MCTQ questionnaire.}
 }
 \value{
-A numeric value equivalent to 7 - \code{wd}, \emph{i.e.} the difference between
+A numeric value equivalent to \code{7 - wd}, \emph{i.e.} the difference between
 the number of days in a week and the number of work days.
 }
 \description{
@@ -43,7 +43,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
+Other MCTQ functions: 
 \code{\link{gu}()},
 \code{\link{le_week}()},
 \code{\link{msf_sc}()},
@@ -55,4 +55,4 @@ Other standard MCTQ functions:
 \code{\link{so}()},
 \code{\link{tbt}()}
 }
-\concept{standard MCTQ functions}
+\concept{MCTQ functions}

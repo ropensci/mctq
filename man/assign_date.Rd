@@ -103,13 +103,13 @@ dates. Only the hours will be considered.
 }
 }
 \examples{
-## ** To return `start` and `end` as interval **
+## __ To return `start` and `end` as interval __
 start <- hms::parse_hms("12:34:00")
 end <- hms::parse_hms("01:25:00")
 assign_date(start, end)
 #> [1] 0000-01-01 12:34:00 UTC--0000-01-02 01:25:00 UTC # Expected
 
-## ** To return `start` and `end` as list **
+## __ To return `start` and `end` as list __
 start <- hms::parse_hms("22:15:00")
 end <- hms::parse_hms("00:00:00")
 assign_date(start, end, return = "list")
@@ -119,22 +119,26 @@ assign_date(start, end, return = "list")
 #> $end # Expected
 #> [1] "0000-01-02 UTC" # Expected
 
-## ** To return only the `start` output **
+## __ To return only the `start` output __
 start <- lubridate::parse_date_time("01:10:00", "HMS")
 end <- lubridate::parse_date_time("11:45:00", "HMS")
 assign_date(start, end, return = "start")
 #> [1] "0000-01-01 01:10:00 UTC" # Expected
 
-## ** To assign a 24h interval to ambiguities **
+## __ To assign a 24h interval to ambiguities __
 start <- lubridate::as_datetime("1985-01-15 12:00:00")
 end <- lubridate::as_datetime("2020-09-10 12:00:00")
 assign_date(start, end, ambiguity = 24)
 #> [1] 0000-01-01 12:00:00 UTC--0000-01-02 12:00:00 UTC # Expected
 }
 \seealso{
-Other time arithmetic functions: 
+Other utility functions: 
+\code{\link{convert_to}()},
+\code{\link{pretty_mctq}()},
+\code{\link{qplot_mctq}()},
+\code{\link{random_mctq}()},
 \code{\link{round_time}()},
 \code{\link{shortest_interval}()},
-\code{\link{sum_time}()}
+\code{\link{validate_mctq}()}
 }
-\concept{time arithmetic functions}
+\concept{utility functions}

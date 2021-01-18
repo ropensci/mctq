@@ -1,25 +1,24 @@
 #' @family dialog functions
 #' @noRd
 dialog_menu <- function(abort = FALSE, title = "Do you wish to continue?",
-                        space_above = TRUE, space_below = TRUE) {
+                        choices = c("Yes", "No"), space_above = TRUE) {
 
     checkmate::assert_flag(abort)
     checkmate::assert_string(title, min.chars = 3)
+    checkmate::assert_character(choices, any.missing = FALSE, unique = TRUE,
+                                min.len = 1)
     checkmate::assert_flag(space_above)
-    checkmate::assert_flag(space_below)
 
     if (!rlang::is_interactive()) return(invisible(999))
     if (isTRUE(abort)) return(invisible(999))
 
     if(isTRUE(space_above)) space_above <- "\n" else space_above <- ""
-    if(isTRUE(space_below)) space_below <- "\n\n" else space_below <- ""
 
-    choices <- c("Yes", "No")
     for (i in seq_along(choices)) {
         choices[i] <- crayon::black$bold(choices[i])
     }
 
-    title <- crayon::green$bold(paste0(space_above, title, space_below))
+    title <- crayon::green$bold(paste0(space_above, title))
 
     utils::menu(choices, title = title)
 

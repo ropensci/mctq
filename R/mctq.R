@@ -16,7 +16,7 @@
 #' @param wd A integerish number corresponding to the __number of work days per
 #'   week__ of a standard MCTQ questionnaire.
 #'
-#' @return A numeric value equivalent to 7 - `wd`, _i.e._ the difference between
+#' @return A numeric value equivalent to `7 - wd`, _i.e._ the difference between
 #'   the number of days in a week and the number of work days.
 #'
 #' @family MCTQ functions
@@ -60,7 +60,7 @@ fd <- function(wd) {
 #' [lubridate::lubridate-package]. If your data do not conform to the object
 #' classes required, you can use [mctq::convert_to()] to convert it.
 #'
-#' ## Rounding fractional time
+#' ## Rounding and fractional time
 #'
 #' Some operations may produce an output with fractional time (_e.g._
 #' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
@@ -69,6 +69,10 @@ fd <- function(wd) {
 #' We recommend rounding values only after all computations are done, that way
 #' you can avoid
 #' [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
+#'
+#' Please keep in mind that this package don't assume as true a level of
+#' accuracy beyond the seconds level. That is not needed for computing MCTQ
+#' variables.
 #'
 #' @param sprep A `hms` vector corresponding to the __local time of getting out
 #'   of bed__ of a standard MCTQ questionnaire.
@@ -92,6 +96,7 @@ fd <- function(wd) {
 #' <https://www.thewep.org/documentations/mctq/>.
 #'
 #' @examples
+#' ## __ Scalar example __
 #' so(hms::parse_hms("22:00:00"), lubridate::dminutes(15))
 #' #> 22:15:00 # Expected
 #' so(hms::parse_hms("23:30:00"), lubridate::dminutes(45))
@@ -99,6 +104,7 @@ fd <- function(wd) {
 #' so(hms::parse_hms("20:45:00"), lubridate::as.duration(NA))
 #' #> NA # Expected
 #'
+#' ## __ Vectorized example __
 #' sprep <- c(hms::parse_hms("21:30:00"), hms::parse_hms("22:15:00"))
 #' slat <- c(lubridate::dminutes(45), lubridate::dminutes(5))
 #' so(sprep, slat)
@@ -136,6 +142,7 @@ so <- function(sprep, slat){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' gu(hms::parse_hms("08:00:00"), lubridate::dminutes(10))
 #' #> 08:10:00 # Expected
 #' gu(hms::parse_hms("11:45:00"), lubridate::dminutes(90))
@@ -143,6 +150,7 @@ so <- function(sprep, slat){
 #' gu(hms::as_hms(NA), lubridate::dminutes(90))
 #' #> NA # Expected
 #'
+#' ## __ Vectorized example __
 #' se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
 #' si <- c(lubridate::dminutes(10), lubridate::dminutes(10))
 #' gu(se, si)
@@ -180,6 +188,7 @@ gu <- function(se, si){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' sd(hms::parse_hms("23:00:00"), hms::parse_hms("08:00:00"))
 #' #> [1] "32400s (~9 hours)" # Expected
 #' sd(hms::parse_hms("02:00:00"), hms::parse_hms("12:30:00"))
@@ -187,6 +196,7 @@ gu <- function(se, si){
 #' sd(hms::parse_hms("03:15:00"), hms::as_hms(NA))
 #' #> NA # Expected
 #'
+#' ## __ Vectorized example __
 #' so <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
 #' se <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
 #' sd(so, se)
@@ -224,6 +234,7 @@ sd <- function(so, se){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' tbt(hms::parse_hms("22:10:00"), hms::parse_hms("06:15:00"))
 #' #> 08:05:00 # Expected
 #' tbt(hms::parse_hms("01:20:00"), hms::parse_hms("14:00:00"))
@@ -231,6 +242,7 @@ sd <- function(so, se){
 #' tbt(hms::as_hms(NA), hms::parse_hms("07:20:00"))
 #' #> NA # Expected
 #'
+#' ## __ Vectorized example __
 #' bt <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
 #' gu <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
 #' tbt(bt, gu)
@@ -268,6 +280,7 @@ tbt <- function(bt, gu){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' ms(hms::parse_hms("23:30:00"), lubridate::dhours(8))
 #' #> 03:30:00 # Expected
 #' ms(hms::parse_hms("01:00:00"), lubridate::dhours(10))
@@ -275,6 +288,7 @@ tbt <- function(bt, gu){
 #' ms(hms::as_hms(NA), lubridate::dhours(7.5))
 #' #> NA # Expected
 #'
+#' ## __ Vectorized example __
 #' so <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
 #' sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
 #' ms(so, sd)
@@ -338,6 +352,7 @@ ms <- function(so, sd){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' sd_week(5, lubridate::dhours(4), lubridate::dhours(8))
 #' #> [1] "18514.2857142857s (~5.14 hours)" # Expected
 #' sd_week(4, lubridate::dhours(7), lubridate::dhours(7))
@@ -345,20 +360,21 @@ ms <- function(so, sd){
 #' sd_week(6, lubridate::as.duration(NA), lubridate::dhours(10))
 #' #> [1] NA # Expected
 #'
+#' ## __ Vectorized example __
 #' wd <- c(3, 7)
 #' sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 #' sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
 #' sd_week(wd, sd_w, sd_f)
 #' #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 #'
-#' ## ** converting the output to hms **
+#' ## __ Converting the output to hms __
 #' x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
 #' convert_to(x, "hms")
 #' #> 06:36:25.714286 # Expected
 #' convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
 #' #> 06:36:25 # Expected
 #'
-#' ## ** rounding the output at the seconds level **
+#' ## __ Rounding the output at the seconds level __
 #' x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
 #' x
 #' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
@@ -404,6 +420,7 @@ sd_week <- function(wd, sd_w, sd_f){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' msf_sc(hms::parse_hms("04:00:00"), lubridate::dhours(6),
 #'        lubridate::dhours(7), lubridate::dhours(6.29), FALSE)
 #' #> 03:38:42 # Expected
@@ -415,8 +432,9 @@ sd_week <- function(wd, sd_w, sd_f){
 #' #> 23:52:30 # Expected
 #' msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(7.5),
 #'        lubridate::dhours(10), lubridate::dhours(8.5), TRUE)
-#' #> NA # Expected
+#' #> NA # Expected (chronotype cannot be computed if `alarm_w == TRUE`)
 #'
+#' ## __ Vectorized example __
 #' msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
 #' sd_w <- c(lubridate::dhours(5), lubridate::dhours(6.45))
 #' sd_f <- c(lubridate::dhours(9), lubridate::dhours(10))
@@ -426,12 +444,12 @@ sd_week <- function(wd, sd_w, sd_f){
 #' #> 03:30:00 # Expected
 #' #> 04:21:00 # Expected
 #'
-#' ## ** wrapper for msf_sc() **
+#' ## __ A wrapper for msf_sc() __
 #' chronotype(hms::parse_hms("07:00:00"), lubridate::dhours(6),
 #'            lubridate::dhours(12), lubridate::dhours(9.45), FALSE)
 #' #> 05:43:30 # Expected
 #'
-#' ## ** rounding the output at the seconds level **
+#' ## __ Rounding the output at the seconds level __
 #' x <- msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(5.43678),
 #'             lubridate::dhours(9.345111), lubridate::dhours(7.5453), FALSE)
 #' x
@@ -482,6 +500,7 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7),
 #'           lubridate::dhours(6.75))
 #' #> [1] "3600s (~1 hours)" # Expected
@@ -492,6 +511,7 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #'            lubridate::as.duration(NA))
 #' #> [1] NA # Expected
 #'
+#' ## __ Vectorized example __
 #' wd <- c(2, 0)
 #' sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 #' sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
@@ -499,7 +519,13 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' sloss_week(wd, sd_w, sd_f, sd_week)
 #' #> [1] "4500s (~1.25 hours)" "0s"  # Expected
 #'
-#' ## ** rounding the output at the seconds level **
+#' ## __ Converting the output to `hms` __
+#' x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5),
+#'                lubridate::dhours(4.2))
+#' convert_to(x, "hms")
+#' #> 00:36:00 # Expected
+#'
+#' ## __ Rounding the output at the seconds level __
 #' x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324),
 #'                lubridate::dhours(6.1452))
 #' x
@@ -558,6 +584,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' sjl(hms::parse_hms("03:30:00"), hms::parse_hms("05:00:00"))
 #' #> [1] "5400s (~1.5 hours)" # Expected
 #' sjl(hms::parse_hms("23:30:00"), hms::parse_hms("04:30:00"), abs = FALSE)
@@ -567,6 +594,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))
 #' #> NA # Expected
 #'
+#' ## __ Vectorized example __
 #' msw <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
 #' msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
 #' sjl(msw, msf, abs = FALSE)
@@ -575,12 +603,12 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
 #' #> [1] "-300s (~-5 minutes)" # Expected
 #'
-#' ## ** converting the output to hms **
+#' ## __ Converting the output to `hms` __
 #' x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
 #' convert_to(x, "hms")
 #' #> 02:10:05 # Expected
 #'
-#' ## ** rounding the output at the seconds level **
+#' ## __ Rounding the output at the seconds level __
 #' x <- sjl(hms::parse_hms("04:19:33.1234"), hms::parse_hms("2:55:05"))
 #' x
 #' #> [1] "5071.12339782715s (~1.41 hours)" # Expected
@@ -638,6 +666,7 @@ sjl_rel <- function(msw, msf){
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' le_week(5, lubridate::dhours(1.5), lubridate::dhours(3.7))
 #' #> [1] "7662.85714285714s (~2.13 hours)" # Expected
 #' le_week(6, lubridate::dhours(3), lubridate::dhours(1.5))
@@ -645,6 +674,7 @@ sjl_rel <- function(msw, msf){
 #' le_week(3, lubridate::dhours(5.6), lubridate::as.duration(NA))
 #' #> [1] NA # Expected
 #'
+#' ## __ Vectorized example __
 #' wd <- c(4, 5)
 #' le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
 #' le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
@@ -652,14 +682,14 @@ sjl_rel <- function(msw, msf){
 #' #> [1] "10800s (~3 hours)" # Expected
 #' #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 #'
-#' ## ** converting the output to hms **
+#' ## __ Converting the output to `hms` __
 #' x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))
 #' convert_to(x, "hms")
 #' #> 04:05:44.571429 # Expected
 #' convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
 #' #> 04:05:44 # Expected
 #'
-#' ## ** rounding the output at the seconds level **
+#' ## __ Rounding the output at the seconds level __
 #' x <- le_week(2, lubridate::dhours(3.4094), lubridate::dhours(6.2345))
 #' x
 #' #> [1] "19538.3828571429s (~5.43 hours)" # Expected

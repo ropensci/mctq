@@ -42,8 +42,20 @@ hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-p
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
 }
+
+\subsection{Rounding fractional time}{
+
+Some operations may produce an output with fractional time (\emph{e.g.}
+\code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
+can round it with \code{\link[=round_time]{round_time()}}.
+
+We recommend rounding values only after all computations are done, that way
+you can avoid
+\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+}
 }
 \examples{
+## __ Scalar example __
 sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7),
           lubridate::dhours(6.75))
 #> [1] "3600s (~1 hours)" # Expected
@@ -54,12 +66,27 @@ sloss_week(7, lubridate::dhours(4.5), lubridate::dhours(9.45),
            lubridate::as.duration(NA))
 #> [1] NA # Expected
 
+## __ Vectorized example __
 wd <- c(2, 0)
 sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
 sd_week <- c(lubridate::dhours(6.75), lubridate::dhours(8))
 sloss_week(wd, sd_w, sd_f, sd_week)
 #> [1] "4500s (~1.25 hours)" "0s"  # Expected
+
+## __ Converting the output to `hms` __
+x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5),
+               lubridate::dhours(4.2))
+convert_to(x, "hms")
+#> 00:36:00 # Expected
+
+## __ Rounding the output at the seconds level __
+x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324),
+               lubridate::dhours(6.1452))
+x
+#> [1] "5851.44000000001s (~1.63 hours)" # Expected
+round_time(x)
+#> [1] "5851s (~1.63 hours)" # Expected
 }
 \references{
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
@@ -71,7 +98,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
+Other MCTQ functions: 
 \code{\link{fd}()},
 \code{\link{gu}()},
 \code{\link{le_week}()},
@@ -83,4 +110,4 @@ Other standard MCTQ functions:
 \code{\link{so}()},
 \code{\link{tbt}()}
 }
-\concept{standard MCTQ functions}
+\concept{MCTQ functions}

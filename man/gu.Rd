@@ -35,13 +35,23 @@ hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-p
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
 }
 
-\subsection{Work days and work-free days}{
+\subsection{Rounding and fractional time}{
 
-The computation is the same for work and work-free days. Use the appropriated
-value entered on the section you are working on.
+Some operations may produce an output with fractional time (\emph{e.g.}
+\code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
+can round it with \code{\link[=round_time]{round_time()}}.
+
+We recommend rounding values only after all computations are done, that way
+you can avoid
+\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+
+Please keep in mind that this package don't assume as true a level of
+accuracy beyond the seconds level. That is not needed for computing MCTQ
+variables.
 }
 }
 \examples{
+## __ Scalar example __
 gu(hms::parse_hms("08:00:00"), lubridate::dminutes(10))
 #> 08:10:00 # Expected
 gu(hms::parse_hms("11:45:00"), lubridate::dminutes(90))
@@ -49,6 +59,7 @@ gu(hms::parse_hms("11:45:00"), lubridate::dminutes(90))
 gu(hms::as_hms(NA), lubridate::dminutes(90))
 #> NA # Expected
 
+## __ Vectorized example __
 se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
 si <- c(lubridate::dminutes(10), lubridate::dminutes(10))
 gu(se, si)
@@ -65,7 +76,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
+Other MCTQ functions: 
 \code{\link{fd}()},
 \code{\link{le_week}()},
 \code{\link{msf_sc}()},
@@ -77,4 +88,4 @@ Other standard MCTQ functions:
 \code{\link{so}()},
 \code{\link{tbt}()}
 }
-\concept{standard MCTQ functions}
+\concept{MCTQ functions}

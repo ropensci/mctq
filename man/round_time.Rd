@@ -38,9 +38,15 @@ round_time(hms::as_hms(12345.6789))
 #> 03:25:46 # Expected
 }
 \seealso{
-Other time arithmetic functions: 
+\code{\link[hms:round_hms]{hms::round_hms()}} \code{\link[lubridate:round_date]{lubridate::round_date()}}
+
+Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{convert_to}()},
+\code{\link{pretty_mctq}()},
+\code{\link{qplot_mctq}()},
+\code{\link{random_mctq}()},
 \code{\link{shortest_interval}()},
-\code{\link{sum_time}()}
+\code{\link{validate_mctq}()}
 }
-\concept{time arithmetic functions}
+\concept{utility functions}

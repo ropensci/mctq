@@ -82,17 +82,17 @@
 #' * If `return = "start`, only the `start` output.
 #' * If `return = "end"`, only the `end` output.
 #'
-#' @family time arithmetic functions
+#' @family utility functions
 #' @export
 #'
 #' @examples
-#' ## ** To return `start` and `end` as interval **
+#' ## __ To return `start` and `end` as interval __
 #' start <- hms::parse_hms("12:34:00")
 #' end <- hms::parse_hms("01:25:00")
 #' assign_date(start, end)
 #' #> [1] 0000-01-01 12:34:00 UTC--0000-01-02 01:25:00 UTC # Expected
 #'
-#' ## ** To return `start` and `end` as list **
+#' ## __ To return `start` and `end` as list __
 #' start <- hms::parse_hms("22:15:00")
 #' end <- hms::parse_hms("00:00:00")
 #' assign_date(start, end, return = "list")
@@ -102,13 +102,13 @@
 #' #> $end # Expected
 #' #> [1] "0000-01-02 UTC" # Expected
 #'
-#' ## ** To return only the `start` output **
+#' ## __ To return only the `start` output __
 #' start <- lubridate::parse_date_time("01:10:00", "HMS")
 #' end <- lubridate::parse_date_time("11:45:00", "HMS")
 #' assign_date(start, end, return = "start")
 #' #> [1] "0000-01-01 01:10:00 UTC" # Expected
 #'
-#' ## ** To assign a 24h interval to ambiguities **
+#' ## __ To assign a 24h interval to ambiguities __
 #' start <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)
@@ -122,8 +122,8 @@ assign_date <- function(start, end, ambiguity = 0, return = "interval",
     checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
     checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
     assert_identical(start, end, type = "length")
-    checkmate::assert_numeric(lubridate::hours(start), lower = 0, max.len = 23)
-    checkmate::assert_numeric(lubridate::hours(end), lower = 0, max.len = 23)
+    checkmate::assert_numeric(lubridate::hour(start), lower = 0, upper = 23)
+    checkmate::assert_numeric(lubridate::hour(end), lower = 0, upper = 23)
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     checkmate::assert_choice(return, c("list", "interval", "start", "end"))
     checkmate::assert_string(start_name)

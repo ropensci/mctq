@@ -1,3 +1,126 @@
+#' Transform a MCTQ dataset
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `pretty_mctq()` helps you to transform your MCTQ data in many ways. See
+#' parameters to learn more.
+#'
+#' @param data A data frame.
+#' @param round (optional) A logical value indicating if date/time objects must
+#'   be rounded at the level of seconds (default: `TRUE`).
+#' @param hms (optional) A logical value indicating if all time values must
+#'   be converted to `hms` (default: `TRUE`).
+#'
+#' @return A transformed data frame, as indicated in parameters.
+#'
+#' @family utility functions
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' pretty_mctq(mctq:::analyze_std_mctq(round = FALSE, hms = FALSE))
+#' }
+pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
+
+    where <- NULL # R CMD Check variable bindings fix
+
+    test <- function(x) {
+        classes <- c("Duration", "Period", "difftime", "hms")
+
+        checkmate::test_multi_class(x, classes)
+    }
+
+    if (isTRUE(round)) {
+        data <- data %>% dplyr::mutate(dplyr::across(where(test), round_time))
+    }
+
+    if (isTRUE(hms)) {
+        data <- convert_to(data, "hms", where = test)
+    }
+
+    data
+
+}
+
+#' Return a model MCTQ data
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `mctq` package comes bundled with fictional datasets for different versions
+#' of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
+#' \strong{\eqn{\mu}}mctq). `model_data()` make it easy to access them.
+#'
+#' At the moment, __only the standard MCTQ is available__.
+#'
+#' @param model A string indicating the data model to return. Valid values are:
+#'   `"standard"`, "`shift"`, `"micro"`,  (default: `"standard"`).
+#'
+#' @return An invisible tibble with a MCTQ model data.
+#'
+#' @family utility functions
+#' @noRd
+#'
+#' @examples
+#' \dontrun{
+#' data <- model_data()
+#' }
+model_data <- function(model = "standard") {
+
+    model <- stringr::str_to_lower(model)
+    checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
+
+    if (model %in% c("std", "standard")) {
+        invisible(mctq::std_mctq)
+    } else if (model == "shift") {
+        NA # invisible(mctq::mctq_shift)
+    } else if (model == "micro") {
+        NA # invisible(mctq::micro_mctq)
+    } else {
+        rlang::abort("Critical error")
+    }
+
+}
+
+#' Get paths to `mctq` raw datasets
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `mctq` comes bundled with raw fictional datasets for testing and learning.
+#' `raw_data()` make it easy to access their paths.
+#'
+#' @param file A string indicating the file name of the raw dataset. If `NULL`,
+#'   all raw dataset file names will be listed (default: `NULL`).
+#'
+#' @return If `path = NULL`, returns a character vector with all raw dataset
+#'   file names available. Else, returns the `file` path.
+#'
+#' @family utility functions
+#' @noRd
+#'
+#' @examples
+#' \dontrun{
+#' raw_data()
+#' raw_data(raw_data()[1])
+#' raw_data("std_mctq.csv")
+#' }
+raw_data <- function(file = NULL) {
+
+    checkmate::assert_string(file, null.ok = TRUE)
+
+    if (is.null(file)) {
+        dir(system.file("extdata", package = "mctq"))
+    } else {
+        system.file("extdata", file, package = "mctq", mustWork = TRUE)
+    }
+
+}
+
 #' Change dates by time of day
 #'
 #' @description
@@ -8,17 +131,20 @@
 #' time of day registered in the object values. The function do this by flatting
 #' the date to `0000-01-01` and them adding a day if the hour is lower than 12.
 #'
-#' This can be use to help determine when a subject's sleep episode started and
-#' ended, if all that you have is the time of sleep onset and offset. Note that
-#' this method can only be used to this matter if the sleep duration have a too
-#' high value.
+#' `hms` objects are also allowed. In this case `midday_change()` will convert
+#' all values to `POSIXct` and do the same operations described above.
 #'
-#' @param x A `POSIXt` vector.
+#' This method can help with time charting, allowing a continuity after the
+#' midnight hour.
+#'
+#' `mdc()` is just a shorter version of `midday_change()` for convenience.
+#'
+#' @param x A `hms` or `POSIXt` vector.
 #'
 #' @return A vector of the same `POSIXt` class type as `x`.
 #'
 #' @family utility functions
-#' @export
+#' @noRd
 #'
 #' @examples
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
@@ -30,9 +156,9 @@
 #' #> [1] "0000-01-02 07:45:32 UTC" # Expected
 midday_change = function(x) {
 
-    assert_posixt(x, null.ok = FALSE)
+    checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
 
-    x <- flat_posixt(x)
+    x <- flat_posixt(convert_to(x, "posixct"))
 
     x <- dplyr::case_when(
         lubridate::hour(x) < 12 ~ change_day(x, 2),
@@ -42,6 +168,10 @@ midday_change = function(x) {
     x
 
 }
+
+#' @rdname midday_change
+#' @noRd
+mdc <- function(x) midday_change(x)
 
 #' Flat dates of `POSIXt` objects
 #'
@@ -60,7 +190,7 @@ midday_change = function(x) {
 #'   date.
 #'
 #' @family utility functions
-#' @export
+#' @noRd
 #'
 #' @examples
 #' flat_posixt(lubridate::ymd_hms("1987-12-24 07:45:32"))
@@ -175,11 +305,11 @@ change_day <- function(x, day) {
 
 }
 
-#' Test if a object inherits a set of date/time classes
+#' Test if an object inherits a class from a set of date/time classes
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("deprecated")`
 #'
 #' `is_time()` returns a boolean flag testing for objects of class `Duration`,
 #' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, or
@@ -195,7 +325,7 @@ change_day <- function(x, day) {
 #'   the classes indicated in `rm`.
 #'
 #' @family utility functions
-#' @export
+#' @noRd
 #'
 #' @examples
 #' is_time(as.Date("2020-01-01"))
@@ -209,16 +339,16 @@ is_time <- function(x, rm = NULL) {
     checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
 
     classes <- c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
-                 "POSIXlt", "Interval", "Circular")
+                 "POSIXlt", "Interval")
 
     if (!is.null(rm)) {
         rm <- paste0("^", rm, "$", collapse = "|")
         classes <- stringr::str_subset(classes, rm, negate = TRUE)
     }
 
-    if (circular::is.circular(x) && !("circular" %in% rm)) {
-        return(TRUE)
-    }
+    # if (circular::is.circular(x) && !("circular" %in% rm)) {
+    #     return(TRUE)
+    # }
 
     checkmate::test_multi_class(x, classes)
 
@@ -403,22 +533,45 @@ check_that_ <- function(data, ...) {
 
 #' @family utility functions
 #' @noRd
-pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
+sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
+                        max = hms::parse_hms("23:59:59"),
+                        by = lubridate::dminutes(5), size = 1,
+                        replace = FALSE, prob = NULL) {
 
-    test <- function(x) {
-        classes <- c("Duration", "Period", "difftime", "hms")
+    classes <- c("Duration", "Period", "difftime", "hms", "integer", "numeric")
 
-        checkmate::test_multi_class(x, classes)
+    checkmate::assert_choice(tolower(class), tolower(classes))
+    checkmate::assert_multi_class(min, classes)
+    checkmate::assert_multi_class(max, classes)
+    checkmate::assert_multi_class(by, classes)
+    assert_length_one(min)
+    assert_length_one(max)
+    assert_length_one(by)
+    checkmate::assert_flag(replace)
+    checkmate::assert_number(size, lower = 0)
+    checkmate::assert_numeric(prob, null.ok = TRUE)
+
+    min <- as.numeric(min)
+    max <- as.numeric(max)
+    by <- as.numeric(by)
+
+    if (size > length(seq(min, max, by)) && isFALSE(replace)) {
+        rlang::abort("You cannot take a sample larger than the population ",
+                     "when 'replace = FALSE'.")
     }
 
-    if (isTRUE(round)) {
-        data <- data %>% dplyr::mutate(dplyr::across(where(test), round_time))
-    }
+    sample <- sample(seq(min, max, by), size = size, replace = replace,
+                     prob = prob)
 
-    if (isTRUE(hms)) {
-        data <- convert_to(data, "hms", where = test)
-    }
+    convert_to(sample, class)
 
-    data
+}
+
+#' @family utility functions
+#' @noRd
+clock_roll <- function(x, class = "hms") {
+
+    out <- flat_posixt(lubridate::as_datetime(x))
+    convert_to(out, class)
 
 }

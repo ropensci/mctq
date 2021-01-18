@@ -51,7 +51,7 @@
 #'
 #' @family utility functions
 #' @importFrom magrittr %>%
-#' @export
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -163,7 +163,7 @@ load_data <- function(file = as.character(tcltk::tkgetOpenFile()),
 #' @family utility functions
 #' @importFrom dplyr across
 #' @importFrom magrittr %>%
-#' @export
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -250,83 +250,6 @@ write_data <- function(data,
 
 }
 
-#' Return a model MCTQ data
-#'
-#' @description
-#'
-#' `r lifecycle::badge("experimental")`
-#'
-#' `mctq` package comes bundled with fictional datasets for different versions
-#' of the Munich Chronotype Questionnaire (mctq standard, mctq shift, and
-#' \strong{\eqn{\mu}}mctq). `model_data()` make it easy to access them.
-#'
-#' At the moment, __only the standard MCTQ is available__.
-#'
-#' @param model A string indicating the data model to return. Valid values are:
-#'   `"standard"`, "`shift"`, `"micro"`,  (default: `"standard"`).
-#'
-#' @return An invisible tibble with a MCTQ model data.
-#'
-#' @family utility functions
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' data <- model_data()
-#' }
-model_data <- function(model = "standard") {
-
-    model <- stringr::str_to_lower(model)
-    checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
-
-    if (model %in% c("std", "standard")) {
-        invisible(mctq::std_mctq)
-    } else if (model == "shift") {
-        NA # invisible(mctq::mctq_shift)
-    } else if (model == "micro") {
-        NA # invisible(mctq::micro_mctq)
-    } else {
-        rlang::abort("Critical error")
-    }
-
-}
-
-#' Get paths to `mctq` raw datasets
-#'
-#' @description
-#'
-#' `r lifecycle::badge("experimental")`
-#'
-#' `mctq` comes bundled with raw fictional datasets for testing and learning.
-#' `raw_data()` make it easy to access their paths.
-#'
-#' @param file A string indicating the file name of the raw dataset. If `NULL`,
-#'   all raw dataset file names will be listed (default: `NULL`).
-#'
-#' @return If `path = NULL`, returns a character vector with all raw dataset
-#'   file names available. Else, returns the `file` path.
-#'
-#' @family utility functions
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' raw_data()
-#' raw_data(raw_data()[1])
-#' raw_data("std_mctq.csv")
-#' }
-raw_data <- function(file = NULL) {
-
-    checkmate::assert_string(file, null.ok = TRUE)
-
-    if (is.null(file)) {
-        dir(system.file("extdata", package = "mctq"))
-    } else {
-        system.file("extdata", file, package = "mctq", mustWork = TRUE)
-    }
-
-}
-
 # HELPERS =====
 
 #' Swap decimal separators
@@ -352,7 +275,7 @@ raw_data <- function(file = NULL) {
 #' without any coercion.
 #'
 #' @family utility functions
-#' @export
+#' @noRd
 #'
 #' @examples
 #' swap_decimal(c(1.1, 2, 3.33))

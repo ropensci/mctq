@@ -12,18 +12,19 @@ is_valid(data, check = NULL, custom = NULL)
 \arguments{
 \item{data}{A data frame.}
 
-\item{check}{A character vector indicating the variables to check. See
-Details section for possible values. If \code{NULL} the function will validate
-all MCTQ variables it can find on data (default: \code{NULL}).}
+\item{check}{(optional) A character vector indicating the variables to check.
+See Details section for possible values. If \code{NULL} the function will
+validate all MCTQ variables it can find on data (default: \code{NULL}).}
 
-\item{flag}{A logical value indicating if the function must return only a
-logical value indicating if critical errors was found (default: \code{FALSE}).}
+\item{flag}{(optional) A logical value indicating if the function must return
+only a logical value indicating if critical errors was found (default:
+\code{FALSE}).}
 
-\item{custom}{A named list with characters values indicating the equivalent
-names for the MCTQ variables. See Custom variables section to learn more
-(\strong{optional}) (default: \code{NULL})}
+\item{custom}{(optional) A named list with characters values indicating the
+equivalent names for the MCTQ variables. See Custom variables section to
+learn more (default: \code{NULL}).}
 
-\item{breaks}{A logical value indicating if the function must stop
+\item{breaks}{(optional) A logical value indicating if the function must stop
 and ask to continue between each validation. This option only works in
 interactive mode and when \code{flag = FALSE} (default: \code{TRUE}).}
 }
@@ -49,7 +50,7 @@ When run in interactive mode and with \code{remove_breaks = FALSE},
 
 \examples{
 \dontrun{
-validate_mctq(std_mctq, "bt_w")
+validate_mctq(mctq::std_mctq)
 }
 }
 \references{
@@ -58,4 +59,14 @@ Van der Loo, M., & De Jonge, E. (2018).
 Wiley & Sons. doi:
 \href{http://dx.doi.org/10.1002/9781118897126}{10.1002/9781118897126}.
 }
-\concept{validation functions}
+\seealso{
+Other utility functions: 
+\code{\link{assign_date}()},
+\code{\link{convert_to}()},
+\code{\link{pretty_mctq}()},
+\code{\link{qplot_mctq}()},
+\code{\link{random_mctq}()},
+\code{\link{round_time}()},
+\code{\link{shortest_interval}()}
+}
+\concept{utility functions}

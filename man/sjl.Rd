@@ -44,6 +44,7 @@ classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert
 }
 }
 \examples{
+## __ Scalar example __
 sjl(hms::parse_hms("03:30:00"), hms::parse_hms("05:00:00"))
 #> [1] "5400s (~1.5 hours)" # Expected
 sjl(hms::parse_hms("23:30:00"), hms::parse_hms("04:30:00"), abs = FALSE)
@@ -53,6 +54,7 @@ sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:45:00"))
 sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))
 #> NA # Expected
 
+## __ Vectorized example __
 msw <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
 msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
 sjl(msw, msf, abs = FALSE)
@@ -61,10 +63,17 @@ sjl(msw, msf, abs = FALSE)
 sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
 #> [1] "-300s (~-5 minutes)" # Expected
 
-## ** converting the output to hms **
+## __ Converting the output to `hms` __
 x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
 convert_to(x, "hms")
 #> 02:10:05 # Expected
+
+## __ Rounding the output at the seconds level __
+x <- sjl(hms::parse_hms("04:19:33.1234"), hms::parse_hms("2:55:05"))
+x
+#> [1] "5071.12339782715s (~1.41 hours)" # Expected
+round_time(x)
+#> [1] "5071s (~1.41 hours)" # Expected
 }
 \references{
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
@@ -76,7 +85,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
+Other MCTQ functions: 
 \code{\link{fd}()},
 \code{\link{gu}()},
 \code{\link{le_week}()},
@@ -88,4 +97,4 @@ Other standard MCTQ functions:
 \code{\link{so}()},
 \code{\link{tbt}()}
 }
-\concept{standard MCTQ functions}
+\concept{MCTQ functions}

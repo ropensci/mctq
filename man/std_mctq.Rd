@@ -223,6 +223,17 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_f}{
+A logical value indicating if the subject have any particular reasons for
+why he cannot freely choose his sleep times on work-free days.
+\cr \cr
+Statement (EN): "There are particular reasons why I cannot freely choose my
+sleep times on free days".
+\cr \cr
+Type: Basic.
+\cr \cr
+R class: \code{logical}.}
+
+\item{reasons_why_f}{
 Particular reasons why the subject cannot freely choose his sleep times on
 work-free days.
 \cr \cr
@@ -316,8 +327,9 @@ data(std_mctq)
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-A fictional dataset composed by basic/measurable and computed variables of
-the MCTQ (standard version) for testing and learning purposes.
+A fictional dataset composed by Munich Chronotype Questionnaire (MCTQ)
+(standard version) basic/measurable and computed variables for testing and
+learning purposes.
 
 This data was created according to Roenneberg, Wirz-Justice & Merrow
 (\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
@@ -330,7 +342,7 @@ the theWeP and guidelines of the
 }
 \details{
 \code{std_mctq} is a tidied, validated, and transformed version of
-\code{\link[=build_std_mctq]{build_std_mctq()}}. This dataset was created to demonstrate common
+\code{mctq:::build_std_mctq()}. This dataset was created to demonstrate common
 cases and data issues that researchers may find in their MCTQ data.
 
 You can learn more about the \code{std_mctq} data cleaning process in

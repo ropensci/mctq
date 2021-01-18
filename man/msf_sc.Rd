@@ -52,8 +52,20 @@ hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-p
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
 }
+
+\subsection{Rounding fractional time}{
+
+Some operations may produce an output with fractional time (\emph{e.g.}
+\code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
+can round it with \code{\link[=round_time]{round_time()}}.
+
+We recommend rounding values only after all computations are done, that way
+you can avoid
+\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+}
 }
 \examples{
+## __ Scalar example __
 msf_sc(hms::parse_hms("04:00:00"), lubridate::dhours(6),
        lubridate::dhours(7), lubridate::dhours(6.29), FALSE)
 #> 03:38:42 # Expected
@@ -65,8 +77,9 @@ msf_sc(hms::parse_hm("01:00:00"), lubridate::dhours(5.5),
 #> 23:52:30 # Expected
 msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(7.5),
        lubridate::dhours(10), lubridate::dhours(8.5), TRUE)
-#> NA # Expected
+#> NA # Expected (chronotype cannot be computed if `alarm_w == TRUE`)
 
+## __ Vectorized example __
 msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
 sd_w <- c(lubridate::dhours(5), lubridate::dhours(6.45))
 sd_f <- c(lubridate::dhours(9), lubridate::dhours(10))
@@ -76,10 +89,18 @@ msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 03:30:00 # Expected
 #> 04:21:00 # Expected
 
-## ** wrapper for msf_sc() **
+## __ A wrapper for msf_sc() __
 chronotype(hms::parse_hms("07:00:00"), lubridate::dhours(6),
            lubridate::dhours(12), lubridate::dhours(9.45), FALSE)
 #> 05:43:30 # Expected
+
+## __ Rounding the output at the seconds level __
+x <- msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(5.43678),
+            lubridate::dhours(9.345111), lubridate::dhours(7.5453), FALSE)
+x
+#> 04:46:02.340202 # Expected
+round_time(x)
+#> 04:46:02 # Expected
 }
 \references{
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
@@ -91,7 +112,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
+Other MCTQ functions: 
 \code{\link{fd}()},
 \code{\link{gu}()},
 \code{\link{le_week}()},
@@ -103,4 +124,4 @@ Other standard MCTQ functions:
 \code{\link{so}()},
 \code{\link{tbt}()}
 }
-\concept{standard MCTQ functions}
+\concept{MCTQ functions}

@@ -26,7 +26,7 @@
 #' However, if `vectorize = TRUE`, `sum_time()` will require that all objects in
 #' `...` have the same length, and will perform a paired sum between elements.
 #' In other words, in this setting, `sum_time(c(x, y), c(w, z))` will return a
-#' vector like c(sum_time(x, w,), sum_time(y, z)).
+#' vector like `c(sum_time(x, w,), sum_time(y, z))`.
 #'
 #' ## `POSIXt` objects
 #'
@@ -62,6 +62,8 @@
 #'   roll over on a 24 hour clock basis (default: `FALSE`).
 #' @param vectorize (optional) A logical value indicating if the function must
 #'   operate in a vectorized fashion (default: `FALSE`).
+#' @param na.rm (optional) A logical value indicating if the function must
+#'   remove `NA` values while performing the sum (default: `FALSE`).
 #'
 #' @return
 #'
@@ -81,35 +83,48 @@
 #' in `class` (default: `"hms"`) with a vectorized and cumulative sum of the
 #' time from objects in `...`.
 #'
-#' @family time arithmetic functions
-#' @export
+#' @family utility functions
+#' @noRd
 #'
 #' @examples
-#' ## ** Cumulative non-vectorized sum **
+#' ## __ Cumulative non-vectorized sum __
 #' x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 #' y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 #' sum_time(x, y, class = "duration")
 #' #> [1] "142200s (~1.65 days)" # Expected
 #'
-#' ## ** Non-vectorized sum rolled over on a 24 hour clock basis **
+#' ## __ Non-vectorized sum rolled over on a 24 hour clock basis __
 #' x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
 #' sum_time(x, clock = TRUE)
 #' #> 06:50:00 # Expected
 #'
-#' ## ** Cumulative vectorized sum **
+#' x <- c(lubridate::minutes(15), hms::parse_hm("02:30"), hms::as_hms(NA))
+#' sum_time(x, clock = TRUE)
+#' #> NA # Expected
+#' sum_time(x, clock = TRUE, na.rm = TRUE)
+#' #> 02:45:00 # Expected
+#'
+#' ## __ Cumulative vectorized sum __
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, vectorize = TRUE)
 #' #> 29:00:00 # Expected
 #' #> NA # Expected
+#' sum_time(x, y, vectorize = TRUE, na.rm = TRUE)
+#' #> 29:00:00 # Expected
+#' #> 10:00:00 # Expected
 #'
-#' ## ** Vectorized sum rolled over on a 24 hour clock basis **
+#' ## __ Vectorized sum rolled over on a 24 hour clock basis __
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, clock = TRUE, vectorize = TRUE)
 #' #> 05:00:00 # Expected
 #' #> NA # Expected
-sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
+#' sum_time(x, y, clock = TRUE, vectorize = TRUE, na.rm = TRUE)
+#' #> 05:00:00 # Expected
+#' #> 10:00:00 # Expected
+sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
+                     na.rm = FALSE) {
 
     # List `...` -----
 
@@ -127,6 +142,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
     checkmate::assert_string(class)
     checkmate::assert_flag(clock)
     checkmate::assert_flag(vectorize)
+    checkmate::assert_flag(na.rm)
     lapply(out, check)
 
     if (isTRUE(vectorize) && !(length(unique(sapply(out, length))) == 1)) {
@@ -143,7 +159,13 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
                as.numeric(hms::as_hms(x)), as.numeric(x))
     }
 
+    zero_nas <- function(x) {
+        ifelse(sapply(x, is.na), 0, as.numeric(x))
+    }
+
     out <- lapply(out, normalize)
+
+    if(isTRUE(na.rm)) out <- lapply(out, zero_nas)
 
     # Sum time -----
 
@@ -151,7 +173,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
         out <- Reduce("+", out)
     } else {
         out <- do.call("c", out)
-        out <- sum(out, na.rm = TRUE)
+        out <- sum(out, na.rm = na.rm)
     }
 
     # Roll time -----
@@ -178,7 +200,8 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
 #'
 #' @return An date/time object with the time rounded at the seconds level.
 #'
-#' @family time arithmetic functions
+#' @family utility functions
+#' @seealso [hms::round_hms()] [lubridate::round_date()]
 #' @export
 #'
 #' @examples
@@ -200,11 +223,17 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE) {
 #' #> 03:25:46 # Expected
 round_time <- function(x) {
 
+    # To do -----
+    #
+    # * Include parameters (_e.g._ `H`, `M`) (use `convert_to_units()`) for
+    #   that.
+    # * Add routines to allow `POSIXt` and `Interval` objects (use
+    #   lubridate::round_date())
+    # * See hms::round_hms and hms::trunc_hms as inspiration.
+
     # Check arguments -----
 
-    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
-                 "POSIXlt", "Interval")
-
+    classes <- c("Duration", "Period", "difftime", "hms")
     checkmate::assert_multi_class(x, classes)
 
     # Compute and return output -----

@@ -15,17 +15,18 @@
 #' __UNDER DEVELOPMENT__
 #'
 #' @param data A data frame.
-#' @param check A character vector indicating the variables to check. See
-#'   Details section for possible values. If `NULL` the function will validate
-#'   all MCTQ variables it can find on data (default: `NULL`).
-#' @param flag A logical value indicating if the function must return only a
-#'   logical value indicating if critical errors was found (default: `FALSE`).
-#' @param custom A named list with characters values indicating the equivalent
-#'   names for the MCTQ variables. See Custom variables section to learn more
-#'   (__optional__) (default: `NULL`)
-#' @param breaks A logical value indicating if the function must stop
-#' and ask to continue between each validation. This option only works in
-#' interactive mode and when `flag = FALSE` (default: `TRUE`).
+#' @param check (optional) A character vector indicating the variables to check.
+#'   See Details section for possible values. If `NULL` the function will
+#'   validate all MCTQ variables it can find on data (default: `NULL`).
+#' @param flag (optional) A logical value indicating if the function must return
+#'   only a logical value indicating if critical errors was found (default:
+#'   `FALSE`).
+#' @param custom (optional) A named list with characters values indicating the
+#'   equivalent names for the MCTQ variables. See Custom variables section to
+#'   learn more (default: `NULL`).
+#' @param breaks (optional) A logical value indicating if the function must stop
+#'   and ask to continue between each validation. This option only works in
+#'   interactive mode and when `flag = FALSE` (default: `TRUE`).
 #'
 #' @return If `flag` is `FALSE`, print results from validation tests. If `flag =
 #'   TRUE`, returns a logical value indicating if critical errors was found.
@@ -33,7 +34,7 @@
 #'   When run in interactive mode and with `remove_breaks = FALSE`,
 #'   `validate_mctq` offers a way to export the results.
 #'
-#' @family validation functions
+#' @family utility functions
 #' @importFrom validate in_range is_complete all_complete
 #' @importFrom lubridate is.duration
 #' @export
@@ -47,7 +48,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' validate_mctq(std_mctq, "bt_w")
+#' validate_mctq(mctq::std_mctq)
 #' }
 validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
                           breaks = TRUE) {
@@ -302,6 +303,127 @@ is_valid <- function(data, check = NULL, custom = NULL) {
 
 }
 
+#' Quick plot MCTQ quantitative variables
+#'
+#' @description
+#'
+#' `qplot_mctq()` uses [ggplot2::qplot()] to help you visualize the
+#' distributions of your MCTQ data. The function also adapt time values
+#' to a better fit plots.
+#'
+#' @details
+#'
+#' ## `Duration`, `Period`, and `difftime` objects
+#'
+#' In order to help with the visualization, `qplot_mctq()` automatically
+#' converts `Duration`, `Period`, and `difftime` objects to `hms`.
+#'
+#' ## Midday change
+#'
+#' `hms` variables with values greater than `22:00:00` will automatically be
+#' converted to POSIXct with a midday change, _i.e._ all values with less more
+#' than 12 hours will represent day one, and all the rest will represent day 2.
+#' This is made in order to pair values that cross midnight.
+#'
+#' ## `id` variables
+#'
+#' `qplot_mctq()` will jump any variable that ends with `id`.
+#'
+#' @param data A data frame with MCTQ data.
+#' @param cols (optional) A character vector indicating the variables to plot of
+#'   `data`. If `NULL`, `qplot_mctq()` will use all quantitative variables it
+#'   can find (default: `NULL`).
+#' @param pattern (optional) A string with a regular expression to select
+#'   columns names to plot of `data` (default: `NULL`).
+#'
+#' @family utility functions
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' qplot_mctq(mctq::std_mctq)
+#' qplot_mctq(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
+#' qplot_mctq(mctq::std_mctq, pattern = "w$)
+#' }
+qplot_mctq <- function(data, cols = NULL, pattern = NULL) {
+
+    # Check arguments -----
+
+    checkmate::assert_data_frame(data, all.missing = FALSE, min.rows = 1,
+                                 min.cols = 1)
+    checkmate::assert_subset(cols, names(data), empty.ok = TRUE)
+    checkmate::assert_string(pattern, null.ok = TRUE)
+
+    if (isFALSE(rlang::is_interactive())) {
+        rlang::abort("This function can only be used in interactive mode.")
+    }
+
+    if (!is.null(cols) && !is.null(pattern)) {
+        rlang::abort(paste0(
+            "`cols` and `pattern` can't both have values. ",
+            "You need to choose only one method."))
+    }
+
+    # Show introductory message -----
+
+    if (requireNamespace("grDevices", quietly = TRUE)) {
+        dialog_line(line = paste0(
+            "WARNING: `qplot_mctq()` clears all plots after it runs. \n",
+            "If you don't agree with this, press `esc` to exit, \n",
+            "or `enter` to continue."))
+    }
+
+    # Set values -----
+
+    if (!is.null(pattern)) {
+        cols <- grep(pattern, names(data), value = TRUE)
+
+        if (length(cols) == 0) {
+            rlang::abort("None pattern was found in `names(data)`.")
+        }
+    }
+
+    if (is.null(cols) && is.null(pattern)) cols <- names(data)
+
+    # Create qplots -----
+
+    transform <- function(x) {
+        classes <- c("Duration", "Period", "difftime")
+
+        if (hms::is_hms(x) &&
+            any(x > hms::parse_hm("22:00"), na.rm = TRUE)) {
+            midday_change(x)
+        } else if (checkmate::test_multi_class(x, classes)) {
+            convert_to(x, "hms")
+        } else {
+            x
+        }
+    }
+
+    for (i in cols) {
+        if (is.character(data[[i]]) || is.list(data[[i]]) ||
+            grepl("id$", i, ignore.case = TRUE)) {
+            next
+        }
+
+        x <- transform(data[[i]])
+        shush(print(ggplot2::qplot(x, xlab = i)))
+
+        dialog <- dialog_line(
+            line = "Press `esc` to exit or `enter` to continue.",
+            space_above = FALSE, space_below = FALSE)
+
+        if (requireNamespace("grDevices", quietly = TRUE)) {
+            grDevices::dev.off()
+        }
+
+    }
+
+}
+
+
+# HELPERS =====
+
 #' @family validation functions
 #' @noRd
 is_valid_test <- function(summary) {
@@ -351,7 +473,8 @@ export_validation <- function(data, rules, check, name = NULL) {
 
 }
 
-# Wrappers
+
+# Wrappers =====
 
 #' @family validation functions
 #' @noRd

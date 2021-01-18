@@ -34,23 +34,23 @@ Depends:
     R (>= 4.0)
 Imports: 
     checkmate,
-    circular,
     crayon,
     dplyr,
+    ggplot2,
     glue,
     hms,
     lifecycle,
     lubridate,
     magrittr,
-    readr,
     rlang,
+    stats,
     stringr,
-    tcltk,
     utils,
     validate
 Suggests: 
-    testthat (>= 2.0.0),
+    grDevices,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 2.0.0)
 Config/testthat/edition: 2
 VignetteBuilder: knitr

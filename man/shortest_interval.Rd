@@ -96,7 +96,7 @@ finds the longer interval between two hours. It's just a wrapper for
 }
 }
 \examples{
-## ** finding the shortest interval between two hour values **
+## __ Finding the shortest interval between two hour values __
 x <- hms::parse_hms("23:00:00")
 y <- hms::parse_hms("01:00:00")
 shortest_interval(x, y)
@@ -107,7 +107,7 @@ y <- lubridate::as_datetime("2020-09-10 12:00:00")
 shortest_interval(x, y)
 #> 00:00:00 # Expected
 
-## ** finding the longer interval between two hour values **
+## __ Finding the longer interval between two hour values __
 x <- lubridate::parse_date_time("01:10:00", "HMS")
 y <- lubridate::parse_date_time("11:45:00", "HMS")
 longer_interval(x, y)
@@ -118,7 +118,7 @@ y <- lubridate::as_datetime("1970-07-01 05:00:00")
 longer_interval(x, y)
 #> 24:00:00 # Expected
 
-## ** changing the output object class **
+## __ Changing the output object class __
 x <- as.POSIXct("1988-10-05 02:00:00")
 y <- as.POSIXlt("2100-05-07 13:30:00")
 shortest_interval(x, y, "Interval")
@@ -132,9 +132,13 @@ longer_interval(x, y, "POSIXct")
 #> [1] "0000-01-01 12:30:00 UTC" # Expected
 }
 \seealso{
-Other time arithmetic functions: 
+Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{convert_to}()},
+\code{\link{pretty_mctq}()},
+\code{\link{qplot_mctq}()},
+\code{\link{random_mctq}()},
 \code{\link{round_time}()},
-\code{\link{sum_time}()}
+\code{\link{validate_mctq}()}
 }
-\concept{time arithmetic functions}
+\concept{utility functions}

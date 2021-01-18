@@ -81,11 +81,11 @@
 #'
 #' @return A `hms` object, or a type of object indicated on `class`, with the
 #'   shortest interval between `x` and `y`.
-#' @family time arithmetic functions
+#' @family utility functions
 #' @export
 #'
 #' @examples
-#' ## ** finding the shortest interval between two hour values **
+#' ## __ Finding the shortest interval between two hour values __
 #' x <- hms::parse_hms("23:00:00")
 #' y <- hms::parse_hms("01:00:00")
 #' shortest_interval(x, y)
@@ -96,7 +96,7 @@
 #' shortest_interval(x, y)
 #' #> 00:00:00 # Expected
 #'
-#' ## ** finding the longer interval between two hour values **
+#' ## __ Finding the longer interval between two hour values __
 #' x <- lubridate::parse_date_time("01:10:00", "HMS")
 #' y <- lubridate::parse_date_time("11:45:00", "HMS")
 #' longer_interval(x, y)
@@ -107,7 +107,7 @@
 #' longer_interval(x, y)
 #' #> 24:00:00 # Expected
 #'
-#' ## ** changing the output object class **
+#' ## __ Changing the output object class __
 #' x <- as.POSIXct("1988-10-05 02:00:00")
 #' y <- as.POSIXlt("2100-05-07 13:30:00")
 #' shortest_interval(x, y, "Interval")
@@ -128,8 +128,8 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
     checkmate::assert_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
     assert_identical(x, y, type = "length")
-    checkmate::assert_numeric(lubridate::hour(x), lower = 0, max.len = 23)
-    checkmate::assert_numeric(lubridate::hour(y), lower = 0, max.len = 23)
+    checkmate::assert_numeric(lubridate::hour(x), lower = 0, upper = 23)
+    checkmate::assert_numeric(lubridate::hour(y), lower = 0, upper = 23)
     checkmate::assert_choice(tolower(class), tolower(choices))
     checkmate::assert_flag(inverse)
 

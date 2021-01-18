@@ -25,38 +25,17 @@ reference:
   - sjl
   - le_week
 
-- title: MCTQ validation
-  contents:
-  - validate_mctq
-
-- title: Time arithmetic
-  contents:
-  - sum_time
-  - shortest_interval
-  - assign_date
-
-- title: Datasets
+- title: Data
   contents:
   - std_mctq
-
-- title: Data wrangling
-  contents:
-  - build_std_mctq
-  - tidy_std_mctq
-  - validate_std_mctq
-  - analyze_std_mctq
 
 - title: Utilities
   contents:
   - convert_to
-  - midday_change
-  - flat_posixt
-  - is_time
-  - load_data
-  - write_data
-  - raw_data
-  - model_data
-  - swap_decimal
+  - pretty_mctq
+  - qplot_mctq
+  - random_mctq
+  - validate_mctq
 
 development:
   mode: auto

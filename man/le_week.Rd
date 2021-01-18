@@ -37,8 +37,20 @@ hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-p
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
 }
+
+\subsection{Rounding fractional time}{
+
+Some operations may produce an output with fractional time (\emph{e.g.}
+\code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
+can round it with \code{\link[=round_time]{round_time()}}.
+
+We recommend rounding values only after all computations are done, that way
+you can avoid
+\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+}
 }
 \examples{
+## __ Scalar example __
 le_week(5, lubridate::dhours(1.5), lubridate::dhours(3.7))
 #> [1] "7662.85714285714s (~2.13 hours)" # Expected
 le_week(6, lubridate::dhours(3), lubridate::dhours(1.5))
@@ -46,6 +58,7 @@ le_week(6, lubridate::dhours(3), lubridate::dhours(1.5))
 le_week(3, lubridate::dhours(5.6), lubridate::as.duration(NA))
 #> [1] NA # Expected
 
+## __ Vectorized example __
 wd <- c(4, 5)
 le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
 le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
@@ -53,12 +66,19 @@ le_week(wd, le_w, le_f)
 #> [1] "10800s (~3 hours)" # Expected
 #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 
-## ** converting the output to hms **
+## __ Converting the output to `hms` __
 x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))
 convert_to(x, "hms")
 #> 04:05:44.571429 # Expected
 convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
 #> 04:05:44 # Expected
+
+## __ Rounding the output at the seconds level __
+x <- le_week(2, lubridate::dhours(3.4094), lubridate::dhours(6.2345))
+x
+#> [1] "19538.3828571429s (~5.43 hours)" # Expected
+round_time(x)
+#> [1] "19538s (~5.43 hours)" # Expected
 }
 \references{
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
@@ -70,7 +90,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
 \seealso{
-Other standard MCTQ functions: 
+Other MCTQ functions: 
 \code{\link{fd}()},
 \code{\link{gu}()},
 \code{\link{msf_sc}()},
@@ -82,4 +102,4 @@ Other standard MCTQ functions:
 \code{\link{so}()},
 \code{\link{tbt}()}
 }
-\concept{standard MCTQ functions}
+\concept{MCTQ functions}
