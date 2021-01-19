@@ -68,9 +68,9 @@
 #'
 #' @param start,end A `hms` or `POSIXt` vector indicating the start or end
 #'   hour.
-#' @param ambiguity (optional) A `numeric` value to instruct `assign_date()` on
+#' @param ambiguity (optional) a `numeric` value to instruct `assign_date()` on
 #'   how to deal with ambiguities (see Details) (default: `0`).
-#' @param return (optional) A string indicating the type of output (see Details)
+#' @param return (optional) a string indicating the type of output (see Details)
 #'   (default: `"interval"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
 #'   with the `start` and `end` argument.

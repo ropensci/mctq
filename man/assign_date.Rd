@@ -17,10 +17,10 @@ assign_date(
 \item{start, end}{A \code{hms} or \code{POSIXt} vector indicating the start or end
 hour.}
 
-\item{ambiguity}{(optional) A \code{numeric} value to instruct \code{assign_date()} on
+\item{ambiguity}{(optional) a \code{numeric} value to instruct \code{assign_date()} on
 how to deal with ambiguities (see Details) (default: \code{0}).}
 
-\item{return}{(optional) A string indicating the type of output (see Details)
+\item{return}{(optional) a string indicating the type of output (see Details)
 (default: \code{"interval"}).}
 
 \item{start_name, end_name}{(optional) a string indicating a name associated

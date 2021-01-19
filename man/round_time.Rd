@@ -7,7 +7,7 @@
 round_time(x)
 }
 \arguments{
-\item{x}{A vector belonging to one of the following classes: \code{Duration},
+\item{x}{An object belonging to one of the following classes: \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}.}
 }
 \value{

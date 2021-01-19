@@ -17,8 +17,9 @@ a standard MCTQ questionnaire (you can use \code{\link[=ms]{ms()}} to compute it
 days} of a standard MCTQ questionnaire (you can use \code{\link[=ms]{ms()}} to
 compute it).}
 
-\item{abs}{A \code{logical} value indicating if the function must return an
-absolute SJL (always positive) or a relative SJL (the SJL with no changes).}
+\item{abs}{(optional) a \code{logical} value indicating if the function must
+return an absolute SJL (always positive) or a relative SJL (the SJL with no
+changes).}
 }
 \value{
 A \code{Duration} vector corresponding to the relative or absolute

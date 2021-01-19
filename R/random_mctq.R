@@ -38,12 +38,12 @@ random_mctq <- function(model = "standard") {
     # Create `work` and `wd` -----
 
     work <- sample(c(TRUE, FALSE), 1, prob = c(5, 1))
-    wd <- sample(0:7, 1, prob = c(1, rep(3, 6), 1))
+    wd <- sample(0:7, 1, prob = c(1, rep(2, 4), 10, 2, 1))
     if (work == "No") wd <- as.integer(NA)
 
     # Create `bt_w` and `bt_f` -----
 
-    min <- as.numeric(hms::parse_hms("20:00:00"))
+    min <- as.numeric(hms::parse_hms("21:00:00"))
     max <- as.numeric(sum_time(hms::as_hms(min),
                                lubridate::dhours(10))) # 06:00:00
     prob <- stats::dnorm(seq(min, max, by),

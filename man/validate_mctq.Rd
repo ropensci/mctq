@@ -12,19 +12,19 @@ is_valid(data, check = NULL, custom = NULL)
 \arguments{
 \item{data}{A data frame.}
 
-\item{check}{(optional) A character vector indicating the variables to check.
+\item{check}{(optional) a character vector indicating the variables to check.
 See Details section for possible values. If \code{NULL} the function will
 validate all MCTQ variables it can find on data (default: \code{NULL}).}
 
-\item{flag}{(optional) A logical value indicating if the function must return
+\item{flag}{(optional) a logical value indicating if the function must return
 only a logical value indicating if critical errors was found (default:
 \code{FALSE}).}
 
-\item{custom}{(optional) A named list with characters values indicating the
+\item{custom}{(optional) a named list with characters values indicating the
 equivalent names for the MCTQ variables. See Custom variables section to
 learn more (default: \code{NULL}).}
 
-\item{breaks}{(optional) A logical value indicating if the function must stop
+\item{breaks}{(optional) a logical value indicating if the function must stop
 and ask to continue between each validation. This option only works in
 interactive mode and when \code{flag = FALSE} (default: \code{TRUE}).}
 }

@@ -13,7 +13,7 @@
 #' ([2003](https://bit.ly/3rLu195)) and guidelines of The World Wide
 #' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)).
 #'
-#' @param wd A integerish number corresponding to the __number of work days per
+#' @param wd An integerish number corresponding to the __number of work days per
 #'   week__ of a standard MCTQ questionnaire.
 #'
 #' @return A numeric value equivalent to `7 - wd`, _i.e._ the difference between
@@ -572,8 +572,9 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #'
 #' @param msw A `hms` vector corresponding to the __mid-sleep on work days__ of
 #'   a standard MCTQ questionnaire (you can use [mctq::ms()] to compute it).
-#' @param abs A `logical` value indicating if the function must return an
-#' absolute SJL (always positive) or a relative SJL (the SJL with no changes).
+#' @param abs (optional) a `logical` value indicating if the function must
+#'   return an absolute SJL (always positive) or a relative SJL (the SJL with no
+#'   changes).
 #'
 #' @return A `Duration` vector corresponding to the relative or absolute
 #' (if `abs = TRUE`) social jetlag.

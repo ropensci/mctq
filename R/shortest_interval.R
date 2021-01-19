@@ -75,9 +75,9 @@
 #' `shortest_interval(x, y, class, inverse = TRUE)`.
 #'
 #' @param x,y A `hms` or `POSIXt` vector.
-#' @param class A string indicating the object class of the output.
-#' @param inverse A logical value indicating if the function must return a
-#' inverse output, _i.e_ the longer interval between `x` and `y`.
+#' @param class (optional) a string indicating the object class of the output.
+#' @param inverse (optional) a logical value indicating if the function must
+#'   return a inverse output, _i.e_ the longer interval between `x` and `y`.
 #'
 #' @return A `hms` object, or a type of object indicated on `class`, with the
 #'   shortest interval between `x` and `y`.

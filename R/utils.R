@@ -8,9 +8,9 @@
 #' parameters to learn more.
 #'
 #' @param data A data frame.
-#' @param round (optional) A logical value indicating if date/time objects must
+#' @param round (optional) a logical value indicating if date/time objects must
 #'   be rounded at the level of seconds (default: `TRUE`).
-#' @param hms (optional) A logical value indicating if all time values must
+#' @param hms (optional) a logical value indicating if all time values must
 #'   be converted to `hms` (default: `TRUE`).
 #'
 #' @return A transformed data frame, as indicated in parameters.
@@ -139,9 +139,10 @@ raw_data <- function(file = NULL) {
 #'
 #' `mdc()` is just a shorter version of `midday_change()` for convenience.
 #'
-#' @param x A `hms` or `POSIXt` vector.
+#' @param x A `hms` or `POSIXt` object.
 #'
-#' @return A vector of the same `POSIXt` class type as `x`.
+#' @return A `POSIXct`object when `x` is `hms` or `POSIXct`, or a `POSIXlt`
+#'   when `x` is `POSIXlt`.
 #'
 #' @family utility functions
 #' @noRd
@@ -183,7 +184,7 @@ mdc <- function(x) midday_change(x)
 #' can be use to standardizing a point of origin to time values.
 #'
 #' @param x A `POSIXt` vector.
-#' @param tz (optional) A `logical` value indicating if the time zone of `x`
+#' @param tz (optional) a `logical` value indicating if the time zone of `x`
 #'   must be forced to `"UTC"` (default: `TRUE`).
 #'
 #' @return A vector of the same `POSIXt` class type as `x` with `0000-01-01` as
@@ -221,11 +222,11 @@ flat_posixt = function(x, tz = TRUE) {
 #' `change_date()` help you change dates of `Date` or `POSIXt` objects without
 #' the need for a direct assignment.
 #'
-#' @param x A `Date` or `POSIXt` vector.
-#' @param date A `Date` or `character` vector of length 1 indicating the date
+#' @param x A `Date` or `POSIXt` object.
+#' @param date A `Date` or `character` object of length 1 indicating the date
 #'   for `x`.
 #'
-#' @return A `Date` or `POSIXt` vector with the indicated date.
+#' @return An object of the same class as `x` with the indicated date in `date`.
 #'
 #' @family utility functions
 #' @noRd
@@ -259,10 +260,10 @@ change_date <- function(x, date) {
 #' `change_day()` help you change days of `Date` or `POSIXt` objects without the
 #' need for a direct assignment.
 #'
-#' @param x A `Date` or `POSIXt` vector.
-#' @param day A number, between 1-31 indicating the new day for `x`.
+#' @param x A `Date` or `POSIXt` object.
+#' @param day A number between 1-31 indicating the new day for `x`.
 #'
-#' @return A `Date` or `POSIXt` vector with the indicated day.
+#' @return An object of the same class as `x` with the indicated day in `day`.
 #'
 #' @family utility functions
 #' @noRd
@@ -312,17 +313,16 @@ change_day <- function(x, day) {
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `is_time()` returns a boolean flag testing for objects of class `Duration`,
-#' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, `Interval`, or
-#' `Circular`.
+#' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, or `Interval`.
 #'
 #' @param x Any kind of R object.
-#' @param rm (optional) A character vector indicating names of object classes to
+#' @param rm (optional) a character vector indicating names of object classes to
 #'   remove from the test (case sensitive) (default: `NULL`).
 #'
 #' @return If `rm` is `NULL`, a boolean flag checking if `x` inherits a
-#'   `Duration`, `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`,
-#'   `Interval`, or `Circular` class. Else, the same as previous, but without
-#'   the classes indicated in `rm`.
+#'   `Duration`, `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, or
+#'   `Interval` class. Else, the same as previous, but without the classes
+#'   indicated in `rm`.
 #'
 #' @family utility functions
 #' @noRd
@@ -377,6 +377,8 @@ is_time <- function(x, rm = NULL) {
 #' #> [1] "'character'" # Expected
 #' class_collapse(1)
 #' #> [1] "'numeric'" # Expected
+#' class_collapse(hms::parse_hm("00:00"))
+#' #> [1] "'hms/difftime'" # Expected
 class_collapse <- function(x) {
 
     glue::single_quote(glue::glue_collapse(class(x), sep = '/'))
@@ -573,5 +575,40 @@ clock_roll <- function(x, class = "hms") {
 
     out <- flat_posixt(lubridate::as_datetime(x))
     convert_to(out, class)
+
+}
+
+#' @family utility functions
+#' @noRd
+na_as <- function(x) {
+
+    classes <- c("character", "integer", "double", "numeric", "Duration",
+                 "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt")
+
+    if (is.logical(x)) {
+        as.logical(NA)
+    } else if (checkmate::test_multi_class(x, classes)) {
+        convert_to(NA, class(x)[1])
+    } else {
+        rlang::abort(glue::glue(
+            "`na_as()` don't support objects of class {class_collapse(x)}."
+            ))
+    }
+
+}
+
+#' @family utility functions
+#' @noRd
+get_class <- function(x) {
+
+    foo <- function(x) {
+        class(x)[1]
+    }
+
+    if (is.list(x) || is.data.frame(x)) {
+        sapply(x, foo)
+    } else {
+        class(x)[1]
+    }
 
 }

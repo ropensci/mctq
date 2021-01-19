@@ -30,19 +30,19 @@
 #'
 #' @param file A string indicating the file address to load. If unassigned, a
 #'   dialog window will open allowing browsing (may not work in some OSs).
-#' @param delim (optional) A string containing the field separator in `file`
+#' @param delim (optional) a string containing the field separator in `file`
 #'   (default: `","`).
-#' @param na (optional) A character vector indicating values that must be
+#' @param na (optional) a character vector indicating values that must be
 #'   interpreted as `NA` (default: `c("", " ", "NA")`).
-#' @param col_types (optional) A `NULL` value or a [readr::cols()] specification
+#' @param col_types (optional) a `NULL` value or a [readr::cols()] specification
 #'   to set how `file` columns must be treated. Check [readr::read_delim()] to
 #'   learn more (default: `readr::cols(.default = "c")`, which imports all
 #'   columns as `character`).
-#' @param trim_ws (optional) A logical value indicating if leading and/or
+#' @param trim_ws (optional) a logical value indicating if leading and/or
 #'   trailing whitespaces must be trimmed from each field (default: `TRUE`).
-#' @param skip (optional) An integerish value, equal or greater than `0`,
+#' @param skip (optional) an integerish value, equal or greater than `0`,
 #'   indicating the number of rows to skip when reading `file` (default: `0`).
-#' @param skip_empty_rows (optional) A logical value indicating if blank rows
+#' @param skip_empty_rows (optional) a logical value indicating if blank rows
 #'   must be ignored altogether. If this option is `TRUE`, then blank rows will
 #'   not be represented at all. If it is `FALSE` then they will be represented
 #'   by `NA` values in all the columns (default: `TRUE`).

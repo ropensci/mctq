@@ -12,10 +12,10 @@ longer_interval(x, y, class = "hms")
 \arguments{
 \item{x, y}{A \code{hms} or \code{POSIXt} vector.}
 
-\item{class}{A string indicating the object class of the output.}
+\item{class}{(optional) a string indicating the object class of the output.}
 
-\item{inverse}{A logical value indicating if the function must return a
-inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
+\item{inverse}{(optional) a logical value indicating if the function must
+return a inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
 }
 \value{
 A \code{hms} object, or a type of object indicated on \code{class}, with the

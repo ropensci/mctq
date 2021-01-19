@@ -7,7 +7,7 @@
 sd_week(wd, sd_w, sd_f)
 }
 \arguments{
-\item{wd}{A integerish number corresponding to the \strong{number of work days per
+\item{wd}{An integerish number corresponding to the \strong{number of work days per
 week} of a standard MCTQ questionnaire.}
 
 \item{sd_w}{A \code{Duration} vector corresponding to the \strong{sleep duration on work

@@ -56,13 +56,13 @@
 #' @param ... Vectors belonging to one or more of the following classes:
 #'   `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or
 #'   `Interval`.
-#' @param class (optional) A string indicating the output class (default:
+#' @param class (optional) a string indicating the output class (default:
 #'   `"hms"`).
-#' @param clock (optional) A logical value indicating whether the sum should
+#' @param clock (optional) a logical value indicating whether the sum should
 #'   roll over on a 24 hour clock basis (default: `FALSE`).
-#' @param vectorize (optional) A logical value indicating if the function must
+#' @param vectorize (optional) a logical value indicating if the function must
 #'   operate in a vectorized fashion (default: `FALSE`).
-#' @param na.rm (optional) A logical value indicating if the function must
+#' @param na.rm (optional) a logical value indicating if the function must
 #'   remove `NA` values while performing the sum (default: `FALSE`).
 #'
 #' @return
@@ -195,7 +195,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 #' `round_time()` takes a time object and round it to the nearest value at
 #' the seconds level.
 #'
-#' @param x A vector belonging to one of the following classes: `Duration`,
+#' @param x An object belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`.
 #'
 #' @return An date/time object with the time rounded at the seconds level.

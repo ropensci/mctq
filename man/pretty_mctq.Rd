@@ -9,10 +9,10 @@ pretty_mctq(data, round = TRUE, hms = TRUE)
 \arguments{
 \item{data}{A data frame.}
 
-\item{round}{(optional) A logical value indicating if date/time objects must
+\item{round}{(optional) a logical value indicating if date/time objects must
 be rounded at the level of seconds (default: \code{TRUE}).}
 
-\item{hms}{(optional) A logical value indicating if all time values must
+\item{hms}{(optional) a logical value indicating if all time values must
 be converted to \code{hms} (default: \code{TRUE}).}
 }
 \value{

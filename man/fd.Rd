@@ -7,7 +7,7 @@
 fd(wd)
 }
 \arguments{
-\item{wd}{A integerish number corresponding to the \strong{number of work days per
+\item{wd}{An integerish number corresponding to the \strong{number of work days per
 week} of a standard MCTQ questionnaire.}
 }
 \value{

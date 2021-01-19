@@ -177,28 +177,28 @@
 #' @param x Any R object, provided that it has an assigned method.
 #' @param class A string indicating the class of the output.
 #' @param ... Additional arguments to be passed to or from methods.
-#' @param orders (optional) A character vector of date/time formats to parse a
+#' @param orders (optional) a character vector of date/time formats to parse a
 #'   `x` value of class `character` or `numeric`.
-#' @param tz (optional) A string indicating the time zone with which to
+#' @param tz (optional) a string indicating the time zone with which to
 #'   convert/parse `x` (defaul: `"UTC"`).
-#' @param input_unit (optional) A string indicating the unit of `x`.
-#' @param output_unit (optional) A string indicating the desire output unit.
-#' @param month_length (optional) A `duration` object or a non negative numeric
+#' @param input_unit (optional) a string indicating the unit of `x`.
+#' @param output_unit (optional) a string indicating the desire output unit.
+#' @param month_length (optional) a `duration` object or a non negative numeric
 #'   value with the number of seconds equivalent to the month length (default:
 #'   `lubridate::dmonths()`, which is equivalent to 30.4375 days).
-#' @param year_length (optional) A `duration` object or a non negative numeric
+#' @param year_length (optional) a `duration` object or a non negative numeric
 #'   value with the number of seconds equivalent to the year length (default:
 #'   `lubridate::dyears()`, which is equivalent to 365.25 days).
-#' @param ignore_date (optional) A logical value indicating if dates must be
+#' @param ignore_date (optional) a logical value indicating if dates must be
 #' ignored from `Date` or `POSIXt` objects when converting they to `numeric`.
-#' @param close_round (optional) A logical value indicating if numbers with
+#' @param close_round (optional) a logical value indicating if numbers with
 #' decimals starting with five leading 0s or 9s must be rounded
 #' (_e.g._ 1.99999) (default: `TRUE`).
-#' @param cols (optional) A character vector indicating the column names in `x`
+#' @param cols (optional) a character vector indicating the column names in `x`
 #'   to transform (default: `NULL`).
-#' @param where (optional) A function to apply in a [tidyselect::where()] call
+#' @param where (optional) a function to apply in a [tidyselect::where()] call
 #'   (default: `NULL`).
-#' @param quiet (optional) A logical value indicating if warnings or messages
+#' @param quiet (optional) a logical value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
 #' @return A R object of the indicated class.
