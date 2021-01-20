@@ -90,29 +90,29 @@
 #' start <- hms::parse_hms("12:34:00")
 #' end <- hms::parse_hms("01:25:00")
 #' assign_date(start, end)
-#' #> [1] 0000-01-01 12:34:00 UTC--0000-01-02 01:25:00 UTC # Expected
+#' #> [1] 1970-01-01 12:34:00 UTC--1970-01-02 01:25:00 UTC # Expected
 #'
 #' ## __ To return `start` and `end` as list __
 #' start <- hms::parse_hms("22:15:00")
-#' end <- hms::parse_hms("00:00:00")
+#' end <- hms::parse_hms("00:00:01")
 #' assign_date(start, end, return = "list")
 #' #> $start # Expected
-#' #> [1] "0000-01-01 22:15:00 UTC" # Expected
+#' #> [1] "1970-01-01 22:15:00 UTC" # Expected
 #' #> # Expected
 #' #> $end # Expected
-#' #> [1] "0000-01-02 UTC" # Expected
+#' #> [1] "1970-01-02 00:00:01 UTC" # Expected
 #'
 #' ## __ To return only the `start` output __
 #' start <- lubridate::parse_date_time("01:10:00", "HMS")
 #' end <- lubridate::parse_date_time("11:45:00", "HMS")
 #' assign_date(start, end, return = "start")
-#' #> [1] "0000-01-01 01:10:00 UTC" # Expected
+#' #> [1] "1970-01-01 01:10:00 UTC" # Expected
 #'
 #' ## __ To assign a 24h interval to ambiguities __
 #' start <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)
-#' #> [1] 0000-01-01 12:00:00 UTC--0000-01-02 12:00:00 UTC # Expected
+#' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
 assign_date <- function(start, end, ambiguity = 0, return = "interval",
                         start_name = deparse(substitute(start)),
                         end_name = deparse(substitute(end))) {

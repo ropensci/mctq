@@ -3,7 +3,7 @@
 \name{sjl}
 \alias{sjl}
 \alias{sjl_rel}
-\title{Compute MCTQ Social Jet Lag}
+\title{Compute MCTQ social jet lag}
 \usage{
 sjl(msw, msf, abs = TRUE)
 
@@ -30,18 +30,38 @@ A \code{Duration} vector corresponding to the relative or absolute
 
 \code{sjl()} computes the \strong{relative social jetlag} or the \strong{absolute social
 jetlag} for the standard Munich Chronotype Questionnaire (MCTQ).
+
+Note that, due to time arithmetic issues, \code{sjl()} does a slight different
+computation than those propose by Roenneberg, Wirz-Justice & Merrow
+(\href{https://bit.ly/3rLu195}{2003}) and the guidelines of The World Wide
+Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See
+\code{vignette("social_jet_lag_signal", package = "mctq")} for more details.
 }
 \details{
-\code{sjl()} does a slight different computation than those propose by Roenneberg,
-Wirz-Justice & Merrow (\href{https://bit.ly/3rLu195}{2003}) and the guidelines of
-The World Wide Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
-See \code{vignette("social_jet_lag_signal", package = "mctq")} for more details.
+This function was created according to Roenneberg, Wirz-Justice & Merrow
+(\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
+Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
+}
+
+\subsection{Rounding and fractional time}{
+
+Some operations may produce an output with fractional time (\emph{e.g.}
+\code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
+can round it with \code{\link[=round_time]{round_time()}}.
+
+We recommend rounding values only after all computations are done, that way
+you can avoid
+\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+
+Please keep in mind that this package don't assume as true a level of
+accuracy beyond the seconds level. That is not needed for computing MCTQ
+variables.
 }
 }
 \examples{

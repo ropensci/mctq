@@ -313,29 +313,6 @@ ms <- function(so, sd){
 #' `sd_week()` computes the __average weekly sleep duration__ for the standard
 #' Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @details
-#'
-#' This function was created according to Roenneberg, Wirz-Justice & Merrow
-#' ([2003](https://bit.ly/3rLu195)) and guidelines of The World Wide
-#' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)).
-#'
-#' ## Class requirements
-#'
-#' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found on [hms::hms-package] and
-#' [lubridate::lubridate-package]. If your data do not conform to the object
-#' classes required, you can use [mctq::convert_to()] to convert it.
-#'
-#' ## Rounding fractional time
-#'
-#' Some operations may produce an output with fractional time (_e.g._
-#' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
-#' can round it with [mctq::round_time()].
-#'
-#' We recommend rounding values only after all computations are done, that way
-#' you can avoid
-#' [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
-#'
 #' @param sd_w A `Duration` vector corresponding to the __sleep duration on work
 #'   days__ of a standard MCTQ questionnaire (you can use [mctq::sd()] to
 #'   compute it).
@@ -348,7 +325,7 @@ ms <- function(so, sd){
 #'
 #' @family MCTQ functions
 #' @inheritParams fd
-#' @inherit so references
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -416,7 +393,7 @@ sd_week <- function(wd, sd_w, sd_f){
 #'
 #' @family MCTQ functions
 #' @inheritParams sd_week
-#' @inherit sd_week details references
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -496,7 +473,7 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' @family MCTQ functions
 #' @inheritParams sd_week
 #' @inheritParams msf_sc
-#' @inherit sd_week details references
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -547,7 +524,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
 }
 
-#' Compute MCTQ Social Jet Lag
+#' Compute MCTQ social jet lag
 #'
 #' @description
 #'
@@ -556,19 +533,11 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' `sjl()` computes the __relative social jetlag__ or the __absolute social
 #' jetlag__ for the standard Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @details
-#'
-#' `sjl()` does a slight different computation than those propose by Roenneberg,
-#' Wirz-Justice & Merrow ([2003](https://bit.ly/3rLu195)) and the guidelines of
-#' The World Wide Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)).
-#' See `vignette("social_jet_lag_signal", package = "mctq")` for more details.
-#'
-#' ## Class requirements
-#'
-#' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found on [hms::hms-package] and
-#' [lubridate::lubridate-package]. If your data do not conform to the object
-#' classes required, you can use [mctq::convert_to()] to convert it.
+#' Note that, due to time arithmetic issues, `sjl()` does a slight different
+#' computation than those propose by Roenneberg, Wirz-Justice & Merrow
+#' ([2003](https://bit.ly/3rLu195)) and the guidelines of The World Wide
+#' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)). See
+#' `vignette("social_jet_lag_signal", package = "mctq")` for more details.
 #'
 #' @param msw A `hms` vector corresponding to the __mid-sleep on work days__ of
 #'   a standard MCTQ questionnaire (you can use [mctq::ms()] to compute it).
@@ -581,7 +550,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #'
 #' @family MCTQ functions
 #' @inheritParams msf_sc
-#' @inherit sd_week references
+#' @inherit so details references
 #' @export
 #'
 #' @examples
@@ -663,7 +632,7 @@ sjl_rel <- function(msw, msf){
 #'
 #' @family MCTQ functions
 #' @inheritParams fd
-#' @inherit sd_week details references
+#' @inherit so details references
 #' @export
 #'
 #' @examples

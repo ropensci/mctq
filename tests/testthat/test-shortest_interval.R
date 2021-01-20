@@ -16,8 +16,8 @@ test_that("x_interval() | changing the output object class", {
 
     object <- shortest_interval(x, y, "Interval")
     expected <- lubridate::as.interval(
-        lubridate::ymd_hms("0000-01-01 02:00:00"),
-        lubridate::ymd_hms("0000-01-01 13:30:00"))
+        lubridate::ymd_hms("1970-01-01 02:00:00"),
+        lubridate::ymd_hms("1970-01-01 13:30:00"))
     expect_equal(object, expected)
 
     object <- longer_interval(x, y, "Duration")
@@ -27,7 +27,7 @@ test_that("x_interval() | changing the output object class", {
     expect_equal(object, lubridate::hours(11) + lubridate::minutes(30))
 
     object <- longer_interval(x, y, "POSIXct")
-    expect_equal(object, lubridate::ymd_hms("0000-01-01 12:30:00"))
+    expect_equal(object, lubridate::ymd_hms("1970-01-01 12:30:00"))
 })
 
 test_that("longer_interval() | longer interval between two hours", {

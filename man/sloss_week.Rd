@@ -43,7 +43,7 @@ hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-p
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
 }
 
-\subsection{Rounding fractional time}{
+\subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
@@ -52,6 +52,10 @@ can round it with \code{\link[=round_time]{round_time()}}.
 We recommend rounding values only after all computations are done, that way
 you can avoid
 \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+
+Please keep in mind that this package don't assume as true a level of
+accuracy beyond the seconds level. That is not needed for computing MCTQ
+variables.
 }
 }
 \examples{

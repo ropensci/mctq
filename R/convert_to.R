@@ -237,11 +237,11 @@
 #' convert_to(360, "period", input_unit = "deg")
 #' #> [1] "1d 0H 0M 0S" # Expected
 #' convert_to(6.5, "posixct", input_unit = "H")
-#' #> [1] "0000-01-01 06:30:00 UTC" # Expected
+#' #> [1] "1970-01-01 06:30:00 UTC" # Expected
 #' convert_to(365.25, "hms", input_unit = "d")
 #' #> 8766:00:00 # Expected
 #' convert_to(1, "posixlt", input_unit = "W")
-#' #> [1] "0000-01-08 UTC" # Expected
+#' #> [1] "1970-01-08 UTC" # Expected
 #' convert_to(1.308997, "duration", input_unit = "rad")
 #' #> [1] "18000s (~5 hours)" # Expected
 #' convert_to_ut(1.308997, "duration", "rad") # Wrapper function
@@ -251,9 +251,9 @@
 #' convert_to(lubridate::duration(120), "hms")
 #' #> 00:02:00 # Expected
 #' convert_to(hms::as_hms("13:45:05"), "POSIXct")
-#' #> [1] "0000-01-01 13:45:05 UTC" # Expected
+#' #> [1] "1970-01-01 13:45:05 UTC" # Expected
 #' convert_to(lubridate::period(60), "POSIXct")
-#' #> [1] "0000-01-01 00:01:00 UTC" # Expected
+#' #> [1] "1970-01-01 00:01:00 UTC" # Expected
 #' convert_to(lubridate::as_date("1765-10-05"), "POSIXct")
 #' #> [1] "1765-10-05 UTC" # Expected
 #' x <- lubridate::ymd_hms("2020-01-01 12:31:05", tz = "EST")
@@ -288,7 +288,7 @@
 #' convert_to("2020-01-01 10:00:00", "Date", orders = "ymd HMS")
 #' #> [1] "2020-01-01" # Expected
 #' convert_to(13, "POSIXct", orders = "H")
-#' #> [1] "0000-01-01 13:00:00 UTC" # Expected
+#' #> [1] "1970-01-01 13:00:00 UTC" # Expected
 #' convert_to("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS", tz = "EST")
 #' #> [1] "2020-01-01 12:31:05 EST" # Expected
 #' convert_to("03/07/1982 13:00", "POSIXlt", orders = "dmy HM")
@@ -481,7 +481,6 @@ convert_to.character <- function(x, class, ..., orders = NULL, tz = "UTC",
             lubridate::force_tz(as.POSIXlt(x), tz = tz)
         } else {
             x <- as.POSIXlt(x)
-            lubridate::year(x) <- 0
             lubridate::force_tz(x, tz = tz)
         }
     } else {
@@ -556,11 +555,9 @@ convert_to.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         lubridate::as_date(NA)
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
-        lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else if (class == "posixlt") {
         x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
-        lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else {
         rlang::abort("Critical error.")
@@ -643,11 +640,9 @@ convert_to.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         lubridate::as_date(NA)
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(x))
-        lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else if (class == "posixlt") {
         x <- as.POSIXlt(hms::as_hms(x))
-        lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else {
         rlang::abort("Critical error.")
@@ -822,11 +817,9 @@ convert_to.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         lubridate::as_date(NA)
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
-        lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else if (class == "posixlt") {
         x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
-        lubridate::year(x) <- 0
         lubridate::force_tz(x, tz = tz)
     } else {
         rlang::abort("Critical error.")

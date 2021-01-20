@@ -1,4 +1,4 @@
-#' Validate values from a standard MCTQ dataset
+#' Validate MCTQ values
 #'
 #' @description
 #'

@@ -9,11 +9,12 @@ pretty_mctq(data, round = TRUE, hms = TRUE)
 \arguments{
 \item{data}{A data frame.}
 
-\item{round}{(optional) a logical value indicating if date/time objects must
-be rounded at the level of seconds (default: \code{TRUE}).}
+\item{round}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
+\code{difftime}, and \code{hms} objects must be rounded at the level of seconds
+(default: \code{TRUE}).}
 
-\item{hms}{(optional) a logical value indicating if all time values must
-be converted to \code{hms} (default: \code{TRUE}).}
+\item{hms}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
+and \code{difftime} objects must be converted to \code{hms} (default: \code{TRUE}).}
 }
 \value{
 A transformed data frame, as indicated in parameters.

@@ -28,13 +28,13 @@ test_that("convert_to() | conversion from units to date/time objects", {
     expect_equal(object, convert_to_ut(360, "period", "deg"))
 
     object <- convert_to(6.5, "posixct", input_unit = "H")
-    expect_equal(object, lubridate::ymd_hms("0000-01-01 06:30:00"))
+    expect_equal(object, lubridate::ymd_hms("1970-01-01 06:30:00"))
 
     object <- convert_to(365.25, "hms", input_unit = "d")
     expect_equal(object, hms::as_hms(as.numeric(lubridate::dhours(8766))))
 
     object <- convert_to(1, "posixlt", input_unit = "W")
-    expect_equal(object, lubridate::as_datetime("0000-01-08"))
+    expect_equal(object, lubridate::as_datetime("1970-01-08"))
 
     object <- convert_to(1.308997, "duration", input_unit = "rad")
     expect_equal(object, lubridate::dhours(5))
@@ -48,10 +48,10 @@ test_that("convert_to() | conversion between date/time objects", {
     expect_equal(object, hms::parse_hm("00:02"))
 
     object <- convert_to(hms::as_hms("13:45:05"), "POSIXct")
-    expect_equal(object, lubridate::parse_date_time("13:45:05", "HMS"))
+    expect_equal(object, lubridate::as_datetime("1970-01-01 13:45:05"))
 
     object <- convert_to(lubridate::period(60), "POSIXct")
-    expect_equal(object, lubridate::parse_date_time("1", "M"))
+    expect_equal(object, lubridate::as_datetime("1970-01-01 00:01:00"))
 
     object <- convert_to(lubridate::as_date("1765-10-05"), "POSIXct")
     expect_equal(object, lubridate::as_datetime("1765-10-05"))
@@ -109,7 +109,7 @@ test_that("convert_to() | conversion from p. objects to date/time objects", {
     expect_equal(object, lubridate::as_date("2020-01-01"))
 
     object <- convert_to(13, "POSIXct", orders = "H")
-    expect_equal(object, lubridate::parse_date_time(13, "H"))
+    expect_equal(object, lubridate::as_datetime("1970-01-01 13:00:00 UTC"))
 
     object <- convert_to("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS",
                          tz = "EST")

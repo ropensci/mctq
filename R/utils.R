@@ -8,10 +8,11 @@
 #' parameters to learn more.
 #'
 #' @param data A data frame.
-#' @param round (optional) a logical value indicating if date/time objects must
-#'   be rounded at the level of seconds (default: `TRUE`).
-#' @param hms (optional) a logical value indicating if all time values must
-#'   be converted to `hms` (default: `TRUE`).
+#' @param round (optional) a `logical` value indicating if `Duration`, `Period`,
+#'   `difftime`, and `hms` objects must be rounded at the level of seconds
+#'   (default: `TRUE`).
+#' @param hms (optional) a `logical` value indicating if `Duration`, `Period`,
+#'   and `difftime` objects must be converted to `hms` (default: `TRUE`).
 #'
 #' @return A transformed data frame, as indicated in parameters.
 #'
@@ -129,7 +130,7 @@ raw_data <- function(file = NULL) {
 #'
 #' `midday_change()` changes the dates of `POSIXt` objects accordingly to the
 #' time of day registered in the object values. The function do this by flatting
-#' the date to `0000-01-01` and them adding a day if the hour is lower than 12.
+#' the date to `1970-01-01` and them adding a day if the hour is lower than 12.
 #'
 #' `hms` objects are also allowed. In this case `midday_change()` will convert
 #' all values to `POSIXct` and do the same operations described above.
@@ -142,7 +143,7 @@ raw_data <- function(file = NULL) {
 #' @param x A `hms` or `POSIXt` object.
 #'
 #' @return A `POSIXct`object when `x` is `hms` or `POSIXct`, or a `POSIXlt`
-#'   when `x` is `POSIXlt`.
+#'   object when `x` is `POSIXlt`.
 #'
 #' @family utility functions
 #' @noRd
@@ -150,11 +151,11 @@ raw_data <- function(file = NULL) {
 #' @examples
 #' x <- lubridate::ymd_hms("2021-01-15 20:02:01") # hour > 12h
 #' midday_change(x)
-#' #> [1] "0000-01-01 20:02:01 UTC" # Expected
+#' #> [1] "1970-01-01 20:02:01 UTC" # Expected
 #'
 #' x <- lubridate::ymd_hms("1987-12-24 07:45:32") # hour < 12h
 #' midday_change(x)
-#' #> [1] "0000-01-02 07:45:32 UTC" # Expected
+#' #> [1] "1970-01-02 07:45:32 UTC" # Expected
 midday_change = function(x) {
 
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
@@ -180,32 +181,43 @@ mdc <- function(x) midday_change(x)
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `flat_posixt()` changes the dates of `POSIXt` objects to `0000-01-01`. This
-#' can be use to standardizing a point of origin to time values.
+#' `flat_posixt()` changes the dates of `POSIXt` objects to a base reference.
+#' This can be use to standardizing a point of origin to time values.
 #'
-#' @param x A `POSIXt` vector.
-#' @param tz (optional) a `logical` value indicating if the time zone of `x`
-#'   must be forced to `"UTC"` (default: `TRUE`).
+#' Please note that, accordingly to `?base::POSIXct`, not all OSes can
+#' correctly convert times before 1902 or after 2037. It's best to maintain the
+#' base date as the [UNIX epoch](https://en.wikipedia.org/wiki/Unix_time),
+#' _i.e_ `"1970-01-01"` (default).
 #'
-#' @return A vector of the same `POSIXt` class type as `x` with `0000-01-01` as
-#'   date.
+#' @param x A `POSIXt` object.
+#' @param force_utc (optional) a `logical` value indicating if the time zone of
+#'   `x` must be forced to `"UTC"` (default: `TRUE`).
+#' @param base (optional) a string indicating the base date for flatting `x`
+#'   in `%Y-%m-%d` format (default: `"1970-01-01"`).
+#'
+#' @return An object of the same `POSIXt` class type as `x` with dates and time
+#'   zone transformed.
 #'
 #' @family utility functions
 #' @noRd
 #'
 #' @examples
-#' flat_posixt(lubridate::ymd_hms("1987-12-24 07:45:32"))
-#' #> [1] "0000-01-01 07:45:32 UTC" # Expected
-#' flat_posixt(lubridate::ymd_hms("2001-09-15 11:15:05", tz = "EST"), FALSE)
-#' #> [1] "0000-01-01 11:15:05 EST"" # Expected
-flat_posixt = function(x, tz = TRUE) {
+#' x <- lubridate::ymd_hms("2001-09-15 11:15:05", tz = "EST")
+#' flat_posixt(x)
+#' #> [1] "1970-01-01 11:15:05 UTC" # Expected
+#' flat_posixt(x, force_utc = FALSE)
+#' #> [1] "1970-01-01 11:15:05 EST" # Expected
+#' flat_posixt(x, base = "2020-01-01")
+#' #> [1] "2020-01-01 11:15:05 UTC"
+flat_posixt = function(x, force_utc = TRUE, base = "1970-01-01") {
 
     assert_posixt(x, null.ok = FALSE)
-    checkmate::assert_flag(tz)
+    checkmate::assert_flag(force_utc)
+    checkmate::assert_string(base)
 
-    lubridate::date(x) <- "0000-01-01"
+    lubridate::date(x) <- base
 
-    if (isTRUE(tz)) {
+    if (isTRUE(force_utc)) {
         x <- lubridate::force_tz(x, "UTC")
     }
 

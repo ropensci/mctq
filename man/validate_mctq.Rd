@@ -3,7 +3,7 @@
 \name{validate_mctq}
 \alias{validate_mctq}
 \alias{is_valid}
-\title{Validate values from a standard MCTQ dataset}
+\title{Validate MCTQ values}
 \usage{
 validate_mctq(data, check = NULL, flag = FALSE, custom = NULL, breaks = TRUE)
 

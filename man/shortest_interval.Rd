@@ -122,14 +122,14 @@ longer_interval(x, y)
 x <- as.POSIXct("1988-10-05 02:00:00")
 y <- as.POSIXlt("2100-05-07 13:30:00")
 shortest_interval(x, y, "Interval")
-#> [1] 0000-01-01 02:00:00 UTC--0000-01-01 13:30:00 UTC # Expected
+#> [1] 1970-01-01 02:00:00 UTC--1970-01-01 13:30:00 UTC # Expected
 
 longer_interval(x, y, "Duration")
 #> [1] "45000s (~12.5 hours)" # Expected
 shortest_interval(x, y, "Period")
 #> [1] "11H 30M 0S" # Expected
 longer_interval(x, y, "POSIXct")
-#> [1] "0000-01-01 12:30:00 UTC" # Expected
+#> [1] "1970-01-01 12:30:00 UTC" # Expected
 }
 \seealso{
 Other utility functions: 
