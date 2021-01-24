@@ -38,6 +38,7 @@ Other utility functions:
 \code{\link{qplot_mctq}()},
 \code{\link{round_time}()},
 \code{\link{shortest_interval}()},
+\code{\link{sum_time}()},
 \code{\link{validate_mctq}()}
 }
 \concept{utility functions}

@@ -84,7 +84,7 @@
 #' time from objects in `...`.
 #'
 #' @family utility functions
-#' @noRd
+#' @export
 #'
 #' @examples
 #' ## __ Cumulative non-vectorized sum __
@@ -192,16 +192,21 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `round_time()` takes a time object and round it to the nearest value at
-#' the seconds level.
+#' `round_time()` takes a `Duration`, `Period`, `difftime`, or `hms` object and
+#' round it at the seconds level.
+#'
+#' Note that `round_time()` convert time to seconds and them uses
+#' [base::round()] to round it. That is to say that `round_time()` uses the same
+#' IEC 60559 standard (_"go to the even digit"_) for rounding off a 5. Therefore
+#' round(0.5) is 0 and round(-1.5) is -2. See `?round` to learn more.
 #'
 #' @param x An object belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`.
 #'
-#' @return An date/time object with the time rounded at the seconds level.
+#' @return An time object with the time rounded at the seconds level.
 #'
 #' @family utility functions
-#' @seealso [hms::round_hms()] [lubridate::round_date()]
+#' @seealso [hms::round_hms()] [hms::trunc_hms()] [lubridate::round_date()].
 #' @export
 #'
 #' @examples
@@ -223,20 +228,8 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 #' #> 03:25:46 # Expected
 round_time <- function(x) {
 
-    # To do -----
-    #
-    # * Include parameters (_e.g._ `H`, `M`) (use `convert_to_units()`) for
-    #   that.
-    # * Add routines to allow `POSIXt` and `Interval` objects (use
-    #   lubridate::round_date())
-    # * See hms::round_hms and hms::trunc_hms as inspiration.
-
-    # Check arguments -----
-
     classes <- c("Duration", "Period", "difftime", "hms")
     checkmate::assert_multi_class(x, classes)
-
-    # Compute and return output -----
 
     class <- class(x)[1]
     x <- round(as.numeric(x))

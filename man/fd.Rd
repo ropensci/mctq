@@ -2,13 +2,13 @@
 % Please edit documentation in R/mctq.R
 \name{fd}
 \alias{fd}
-\title{Compute MCTQ free days}
+\title{Compute MCTQ work-free days}
 \usage{
 fd(wd)
 }
 \arguments{
 \item{wd}{An integerish number corresponding to the \strong{number of work days per
-week} of a standard MCTQ questionnaire.}
+week} value from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
 A numeric value equivalent to \code{7 - wd}, \emph{i.e.} the difference between
@@ -17,14 +17,41 @@ the number of days in a week and the number of work days.
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{fd()} computes the \strong{number of work-free days per week} for the standard
-Munich Chronotype Questionnaire (MCTQ).
+\code{fd()} computes the \strong{number of work-free days per week} for standard
+and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
-This function was created according to Roenneberg, Wirz-Justice & Merrow
-(\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
-Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+\strong{Standard MCTQ} functions were created following the guidelines in
+Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+and The World Wide Experimental Platform
+(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
+Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
+guidelines used for the standard MCTQ.
+
+\strong{MCTQ Shift} functions were created following the guidelines in Juda,
+Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+guidelines used for the standard MCTQ.
+
+See References section to learn more.
 }
+\section{Guidelines}{
+
+
+For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}) and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
+guidelines to \code{fd()} (\eqn{FD}) computation are as follow.
+
+\strong{\deqn{7 - WD}}
+
+Where:
+\itemize{
+\item \eqn{WD} = number of workdays.
+}
+}
+
 \examples{
 fd(5)
 #> [1] 2 # Expected
@@ -34,6 +61,21 @@ fd(c(1, NA))
 #> [1]  6 NA # Expected
 }
 \references{
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
+\emph{28}(2), 130-140. doi:
+\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
+
+Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
+D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
+(2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
+\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+
+Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
+\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes.
 \emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
@@ -48,6 +90,9 @@ Other MCTQ functions:
 \code{\link{le_week}()},
 \code{\link{msf_sc}()},
 \code{\link{ms}()},
+\code{\link{napd}()},
+\code{\link{sd24}()},
+\code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
 \code{\link{sjl}()},

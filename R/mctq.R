@@ -1,26 +1,32 @@
-#' Compute MCTQ free days
+#' Compute MCTQ work-free days
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `fd()` computes the __number of work-free days per week__ for the standard
-#' Munich Chronotype Questionnaire (MCTQ).
+#' `fd()` computes the __number of work-free days per week__ for standard
+#' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @details
+#' @section Guidelines:
 #'
-#' This function was created according to Roenneberg, Wirz-Justice & Merrow
-#' ([2003](https://bit.ly/3rLu195)) and guidelines of The World Wide
-#' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)).
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)) and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `fd()` (\eqn{FD}) computation are as follow.
+#'
+#' __\deqn{7 - WD}__
+#'
+#' Where:
+#'
+#' * \eqn{WD} = number of workdays.
 #'
 #' @param wd An integerish number corresponding to the __number of work days per
-#'   week__ of a standard MCTQ questionnaire.
+#'   week__ value from a standard or micro version of the MCTQ questionnaire.
 #'
 #' @return A numeric value equivalent to `7 - wd`, _i.e._ the difference between
 #'   the number of days in a week and the number of work days.
 #'
-#' @family MCTQ functions
-#' @inherit so references
+#' @template mctq_a
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -44,56 +50,40 @@ fd <- function(wd) {
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `so()` computes the __time of sleep onset__ for the standard Munich
-#' Chronotype Questionnaire (MCTQ).
+#' `so()` computes the __time of sleep onset__ for standard and shift
+#' versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @details
+#' Note that this value is collected directly from the questionnaire if you're
+#' using the \eqn{\mu}MCTQ.
 #'
-#' This function was created according to Roenneberg, Wirz-Justice & Merrow
-#' ([2003](https://bit.ly/3rLu195)) and guidelines of The World Wide
-#' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)).
+#' @section Guidelines:
 #'
-#' ## Class requirements
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `so()` (\eqn{SO}) computation are as follow.
 #'
-#' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found on [hms::hms-package] and
-#' [lubridate::lubridate-package]. If your data do not conform to the object
-#' classes required, you can use [mctq::convert_to()] to convert it.
+#' __\deqn{SPrep + SLat}__
 #'
-#' ## Rounding and fractional time
+#' Where:
 #'
-#' Some operations may produce an output with fractional time (_e.g._
-#' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
-#' can round it with [mctq::round_time()].
+#' * \eqn{SPrep} = local time of preparing to sleep.
+#' * \eqn{SLat} = sleep latency ("I need ... min to fall asleep").
 #'
-#' We recommend rounding values only after all computations are done, that way
-#' you can avoid
-#' [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{SPrepw + SPrepw}).
 #'
-#' Please keep in mind that this package don't assume as true a level of
-#' accuracy beyond the seconds level. That is not needed for computing MCTQ
-#' variables.
+#' @param sprep A `hms` object corresponding to the __local time of getting out
+#'   of bed__ value from a standard or shift version of the MCTQ questionnaire.
+#' @param slat A `Duration` object corresponding to the __sleep latency__ value
+#'   from a standard or shift version of the MCTQ questionnaire.
 #'
-#' @param sprep A `hms` vector corresponding to the __local time of getting out
-#'   of bed__ of a standard MCTQ questionnaire.
-#' @param slat A `Duration` vector corresponding to the __sleep latency__ of
-#'   standard a MCTQ questionnaire.
+#' @return A `hms` object corresponding to the sum of `sprep` and `slat` rolled
+#'   on a 24-hour clock basis.
 #'
-#' @return A `hms` vector corresponding to the sum of `sprep` and `slat` rolled
-#'   on a 24 hours clock basis.
-#'
-#' @family MCTQ functions
+#' @template mctq_b
+#' @template references_a
 #' @export
-#'
-#' @references
-#'
-#' Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
-#' daily temporal patterns of human chronotypes.
-#' _Journal of Biological Rhythms_, _18_(1), 80-90. doi:
-#' [10.1177/0748730402239679](https://doi.org/10.1177/0748730402239679).
-#'
-#' The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
-#' <https://www.thewep.org/documentations/mctq/>.
 #'
 #' @examples
 #' ## __ Scalar example __
@@ -110,7 +100,7 @@ fd <- function(wd) {
 #' so(sprep, slat)
 #' #> 22:15:00 # Expected
 #' #> 22:20:00 # Expected
-so <- function(sprep, slat){
+so <- function(sprep, slat) {
 
     checkmate::assert_class(sprep, "hms")
     assert_duration(slat)
@@ -126,19 +116,40 @@ so <- function(sprep, slat){
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `gu()` computes the __local time of getting out of bed__ for the standard
-#' Munich Chronotype Questionnaire (MCTQ).
+#' `gu()` computes the __local time of getting out of bed__ for standard and
+#' shift versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @param se A `hms` vector corresponding to the __sleep end__ of a standard
-#'   MCTQ questionnaire.
-#' @param si A `Duration` vector corresponding to the __sleep inertia__ of
-#'   standard a MCTQ questionnaire.
+#' @section Guidelines:
 #'
-#' @return A `hms` vector corresponding to the sum of `se` and `si` rolled on a
-#'   24 hours clock basis.
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `gu()` (\eqn{GU}) computation are as follow.
 #'
-#' @family MCTQ functions
-#' @inherit so details references
+#' __\deqn{SE + SI}__
+#'
+#' Where:
+#'
+#' * \eqn{SE} = sleep end.
+#' * \eqn{SI} = sleep inertia ("after ... min, I get up").
+#'
+#' MCTQ Shift uses \eqn{TGU} (time to get up) instead of \eqn{SI}, but both
+#' represent the same thing.
+#'
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{SEw + SIw}).
+#'
+#' @param se A `hms` object corresponding to the __sleep end__ value from a
+#'   standard or shift version of the MCTQ questionnaire.
+#' @param si A `Duration` object corresponding to the __sleep inertia__ or
+#'   __time to get up__ value from a standard or shift version of the MCTQ
+#'   questionnaire.
+#'
+#' @return A `hms` object corresponding to the sum of `se` and `si` rolled on a
+#'   24-hour clock basis.
+#'
+#' @template mctq_b
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -156,7 +167,7 @@ so <- function(sprep, slat){
 #' gu(se, si)
 #' #> 12:40:00 # Expected
 #' #> 06:50:00 # Expected
-gu <- function(se, si){
+gu <- function(se, si) {
 
     checkmate::assert_class(se, "hms")
     assert_duration(si)
@@ -172,19 +183,38 @@ gu <- function(se, si){
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `sd()` computes the __sleep duration__ for the standard Munich Chronotype
-#' Questionnaire (MCTQ).
+#' `sd()` computes the __sleep duration__ for standard, micro, and shift
+#' versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @param so A `hms` vector corresponding to the __sleep onset__ of a standard
-#'   MCTQ questionnaire (you can use [mctq::so()] to compute it).
-#' @param se A `hms` vector corresponding to the __sleep end__ of a standard
-#'   MCTQ questionnaire.
+#' @section Guidelines:
 #'
-#' @return A `Duration` vector corresponding to the difference between `se` and
-#'   `so` rolled on a 24 hours clock basis.
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
+#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `sd()` (\eqn{SD}) computation are as follow.
 #'
-#' @family MCTQ functions
-#' @inherit so details references
+#' __\deqn{SE - SO}__
+#'
+#' Where:
+#'
+#' * \eqn{SE} = sleep end.
+#' * \eqn{SO} = sleep onset.
+#'
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{SEw - SOw}).
+#'
+#' @param so A `hms` object corresponding to the __sleep onset__ value
+#'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
+#'   use [mctq::so()] to compute it for the standard or shift version.
+#' @param se A `hms` object corresponding to the __sleep end__ value
+#'   from a standard, micro, or shift version of the MCTQ questionnaire.
+#'
+#' @return A `Duration` object corresponding to the difference between
+#'   `se` and `so` rolled on a 24-hour clock basis.
+#'
+#' @template mctq_b
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -201,7 +231,7 @@ gu <- function(se, si){
 #' se <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
 #' sd(so, se)
 #' #> [1] "37080s (~10.3 hours)" "23100s (~6.42 hours)" # Expected
-sd <- function(so, se){
+sd <- function(so, se) {
 
     checkmate::assert_class(so, "hms")
     checkmate::assert_class(se, "hms")
@@ -211,44 +241,184 @@ sd <- function(so, se){
 
 }
 
+#' Compute MCTQ nap duration (only for MCTQ Shift)
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `napd()` computes the __nap duration__ for the shift version of the Munich
+#' Chronotype Questionnaire (MCTQ).
+#'
+#' @section Guidelines:
+#'
+#' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines to `napd()`
+#' (\eqn{NapD}) computation are as follow.
+#'
+#' __\deqn{NapE - NapO}__
+#'
+#' Where:
+#'
+#' * \eqn{NapO} = local time of nap onset ("I take a nap from ... o'clock
+#' [...]").
+#' * \eqn{NapE} = local time of nap end ("[...] to ... o'clock").
+#'
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{NapEwm - NapOwm}).
+#'
+#' @param napo A `hms` object corresponding to the __nap onset__ value
+#'   from the shift version of the MCTQ questionnaire.
+#' @param nape A `hms` object corresponding to the __nap end__ value
+#'   from the shift version of the MCTQ questionnaire.
+#'
+#' @return A `Duration` object corresponding to the difference between
+#'   `nape` and `napo` rolled on a 24-hour clock basis.
+#'
+#' @template mctq_b
+#' @template references_a
+#' @export
+#'
+#' @examples
+#' ## __ Scalar example __
+#' napd(hms::parse_hms("12:30:00"), hms::parse_hms("14:20:00"))
+#' #> [1] "6600s (~1.83 hours)"" # Expected
+#' napd(hms::parse_hms("23:45:00"), hms::parse_hms("00:30:00"))
+#' #> [1] "2700s (~45 minutes)" # Expected
+#' napd(hms::parse_hms("10:20:00"), hms::as_hms(NA))
+#' #> NA # Expected
+#'
+#' ## __ Vectorized example __
+#' napo <- c(hms::parse_hms("01:25:00"), hms::parse_hms("23:50:00"))
+#' nape <- c(hms::parse_hms("03:10:00"), hms::parse_hms("01:10:00"))
+#' napd(napo, nape)
+#' #> [1] "6300s (~1.75 hours)" "4800s (~1.33 hours)"  # Expected
+napd <- function(napo, nape) {
+
+    checkmate::assert_class(napo, "hms")
+    checkmate::assert_class(nape, "hms")
+    assert_identical(napo, nape, type = "length")
+
+    sum_time(nape, - napo, class = "Duration", clock = TRUE, vectorize = TRUE)
+
+}
+
+#' Compute MCTQ 24h sleep duration (only for MCTQ Shift)
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `sd24()` computes the __24h sleep duration__ for the shift version of the
+#' Munich Chronotype Questionnaire (MCTQ).
+#'
+#' @section Guidelines:
+#'
+#' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines to `sd24()`
+#' (\eqn{SD24}) computation are as follow.
+#'
+#' __\deqn{SD + Napd}__
+#'
+#' Where:
+#'
+#' * \eqn{SD} = sleep duration.
+#' * \eqn{NapD} = nap duration.
+#'
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{SDwm + NapDwm}).
+#'
+#' @param sd A `Duration` object corresponding to the __sleep duration__ value
+#'   from the shift version of the MCTQ questionnaire. You can use [mctq::sd()]
+#'   to compute it.
+#' @param napd A `Duration` object corresponding to the __nap duration__ value
+#'   from the shift version of the MCTQ questionnaire. You can use
+#'   [mctq::napd()] to compute it.
+#'
+#' @return A `Duration` object corresponding to the sum between `sd` and `napd`.
+#'
+#' @template mctq_b
+#' @template references_a
+#' @export
+#'
+#' @examples
+#' ## __ Scalar example __
+#' sd24(lubridate::dhours(6), lubridate::dhours(0.5))
+#' #> [1] "23400s (~6.5 hours)" # Expected
+#' sd24(lubridate::dhours(9), lubridate::dhours(1.5))
+#' #> [1] "37800s (~10.5 hours)" # Expected
+#' sd24(lubridate::as.duration(NA), lubridate::dhours(2.3))
+#' #> [1] NA # Expected
+#'
+#' ## __ Vectorized example __
+#' sd <- c(lubridate::dhours(7.5), lubridate::dhours(8))
+#' napd <- c(lubridate::dhours(0.75), lubridate::dhours(1))
+#' sd24(sd, napd)
+#' #> [1] "29700s (~8.25 hours)" "32400s (~9 hours)"   # Expected
+sd24 <- function(sd, napd) {
+
+    checkmate::assert_class(sd, "Duration")
+    checkmate::assert_class(napd, "Duration")
+    assert_identical(sd, napd, type = "length")
+
+    sum_time(sd, napd, class = "Duration", clock = FALSE, vectorize = TRUE)
+
+}
+
 #' Compute MCTQ total time in bed
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `tbt()` computes the __total time in bed__ for the standard Munich Chronotype
-#' Questionnaire (MCTQ).
+#' `tbt()` computes the __total time in bed__ for standard and shift versions of
+#' the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @param bt A `hms` vector corresponding to the __local time of going to bed__
-#'   of a standard MCTQ questionnaire.
-#' @param gu A `hms` vector corresponding to the __local time of getting out of
-#'   bed__ of a standard MCTQ questionnaire (you can use [mctq::gu()] to compute
-#'   it).
+#' @section Guidelines:
 #'
-#' @return A `hms` vector corresponding to the difference between `gu` and `bt`
-#'   rolled on a 24 hours clock basis.
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `tbt()` (\eqn{TBT}) computation are as follow.
 #'
-#' @family MCTQ functions
-#' @inherit so details references
+#' __\deqn{GU - BT}__
+#'
+#' Where:
+#'
+#' * \eqn{BT} = Local time of going to bed ("I go to bed at ... o'clock").
+#' * \eqn{GU} = local time of getting out of bed.
+#'
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{GUw - BTw}).
+#'
+#' @param bt A `hms` object corresponding to the __local time of going to bed__
+#'   value from a standard or shift version of the MCTQ questionnaire.
+#' @param gu A `hms` object corresponding to the __local time of getting out of
+#'   bed__ value from a standard or shift version of the MCTQ questionnaire. You
+#'   can use [mctq::gu()] to compute it.
+#'
+#' @return A `Duration` object corresponding to the difference between `gu` and
+#'   `bt` rolled on a 24-hour clock basis.
+#'
+#' @template mctq_b
+#' @template references_a
 #' @export
 #'
 #' @examples
 #' ## __ Scalar example __
 #' tbt(hms::parse_hms("22:10:00"), hms::parse_hms("06:15:00"))
-#' #> 08:05:00 # Expected
+#' #> [1] "29100s (~8.08 hours)" # Expected
 #' tbt(hms::parse_hms("01:20:00"), hms::parse_hms("14:00:00"))
-#' #> 12:40:00 # Expected
+#' #> [1] "45600s (~12.67 hours)" # Expected
 #' tbt(hms::as_hms(NA), hms::parse_hms("07:20:00"))
-#' #> NA # Expected
+#' #> [1] NA # Expected
 #'
 #' ## __ Vectorized example __
 #' bt <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
 #' gu <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
 #' tbt(bt, gu)
-#' #> [1] 09:40:00 # Expected
-#' #> [1] 08:55:00 # Expected
-tbt <- function(bt, gu){
+#' #> [1] "34800s (~9.67 hours)" "32100s (~8.92 hours)" # Expected
+tbt <- function(bt, gu) {
 
     checkmate::assert_class(bt, "hms")
     checkmate::assert_class(gu, "hms")
@@ -264,19 +434,40 @@ tbt <- function(bt, gu){
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `ms()` computes the __mid-sleep__ for the standard Munich Chronotype
-#' Questionnaire (MCTQ).
+#' `ms()` computes the __mid-sleep__ for standard, micro, and shift versions of
+#' the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @param so A `hms` vector corresponding to the __sleep onset__ of a standard
-#'   MCTQ questionnaire (you can use [mctq::so()] to compute it).
-#' @param sd A `Duration` vector corresponding to the __sleep duration__ of a
-#'   standard MCTQ questionnaire (you can use [mctq::sd()] to compute it).
+#' @section Guidelines:
 #'
-#' @return A `hms` vector corresponding to the sum between `so` and (`sd` / 2)
-#'   rolled on a 24 hours clock basis.
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
+#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `ms()` (\eqn{MS}) computation are as follow.
 #'
-#' @family MCTQ functions
-#' @inherit so details references
+#' __\deqn{SO + (SD / 2)}__
+#'
+#' Where:
+#'
+#' * \eqn{SO} = sleep onset.
+#' * \eqn{SD} = sleep duration.
+#'
+#' Note that this computation must be applied to each section of the
+#' questionnaire (_e.g._ \eqn{SOw + (SDw / 2)}).
+#'
+#' @param so A `hms` object corresponding to the __sleep onset__ value from a
+#'   standard, micro, or shift version of the MCTQ questionnaire. You can use
+#'   [mctq::so()] to compute it for the standard or shift version.
+#' @param sd A `Duration` object corresponding to the __sleep duration__ value
+#'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
+#'   use [mctq::sd()] to compute it for any MCTQ version.
+#'
+#' @return A `hms` object corresponding to the sum between `so` and (`sd` / 2)
+#'   rolled on a 24-hour clock basis.
+#'
+#' @aliases msw msf
+#' @template mctq_b
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -294,7 +485,7 @@ tbt <- function(bt, gu){
 #' ms(so, sd)
 #' #> [1] 04:47:30 # Expected
 #' #> [1] 03:58:30 # Expected
-ms <- function(so, sd){
+ms <- function(so, sd) {
 
     checkmate::assert_class(so, "hms")
     assert_duration(sd)
@@ -311,21 +502,40 @@ ms <- function(so, sd){
 #' `r lifecycle::badge("experimental")`
 #'
 #' `sd_week()` computes the __average weekly sleep duration__ for the standard
-#' Munich Chronotype Questionnaire (MCTQ).
+#' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @param sd_w A `Duration` vector corresponding to the __sleep duration on work
-#'   days__ of a standard MCTQ questionnaire (you can use [mctq::sd()] to
+#' See [mctq::sd_overall()] to compute the overall sleep duration for
+#' the shift version of the MCTQ.
+#'
+#' @section Guidelines:
+#'
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
+#' ([2020](https://bit.ly/34VhA0l)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines to `sd_week()` (\eqn{SDweek}) computation are as follow.
+#'
+#' __\deqn{((SDw x WD) + (SDf x FD)) / 7}__
+#'
+#' Where:
+#'
+#' * \eqn{SDw} = sleep duration on workdays.
+#' * \eqn{WD} = number of workdays per week.
+#' * \eqn{SDf} = sleep duration on work-free days.
+#' * \eqn{FD} = number of work-free days per week.
+#'
+#' @param sd_w A `Duration` object corresponding to the __sleep duration on work
+#'   days__ from a standard MCTQ questionnaire (you can use [mctq::sd()] to
 #'   compute it).
-#' @param sd_f A `Duration` vector corresponding to the __sleep duration on
-#'   work-free days__ of a standard MCTQ questionnaire (you can use [mctq::sd()]
-#'   to compute it).
+#' @param sd_f A `Duration` object corresponding to the __sleep duration on
+#'   work-free days__ from a standard MCTQ questionnaire (you can use
+#'   [mctq::sd()] to compute it).
 #'
-#' @return A `Duration` vector corresponding to the average weekly sleep
+#' @return A `Duration` object corresponding to the average weekly sleep
 #'   duration.
 #'
-#' @family MCTQ functions
 #' @inheritParams fd
-#' @inherit so details references
+#' @template mctq_c
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -357,7 +567,7 @@ ms <- function(so, sd){
 #' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 #' round_time(x)
 #' #> [1] "22989s (~6.39 hours)" # Expected
-sd_week <- function(wd, sd_w, sd_f){
+sd_week <- function(wd, sd_w, sd_f) {
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_duration(sd_w)
@@ -365,6 +575,136 @@ sd_week <- function(wd, sd_w, sd_f){
     assert_identical(wd, sd_w, sd_f, type = "length")
 
     ((sd_w * wd) + (sd_f * fd(wd))) / 7
+
+}
+
+#' Compute MCTQ overall sleep duration (only for MCTQ Shift)
+#'
+#' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `sd_overall()` computes the __overall sleep duration__ for the shift version
+#' of the Munich Chronotype Questionnaire (MCTQ).
+#'
+#' See [mctq::sd_week()] to compute the average weekly sleep duration for the
+#' standard and micro versions of the MCTQ.
+#'
+#' Please check the Arguments section if you have any questions about
+#' `sd_overall()` operation.
+#'
+#' @section Guidelines:
+#'
+#' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines to `sd_overall()`
+#' (\eqn{\OSD}) computation are as follow.
+#'
+#' __\deqn{((SDwMEN * nwMEN) + (SDfMEN * nfMEN)) / (nwMEN + nfMEN)}__
+#'
+#' Where:
+#'
+#' * \eqn{SDwMEN} = sleep duration in each shift (MEN`*`).
+#' * \eqn{nwMEN} = number of days worked in each shift (MEN`*`) within a shift
+#' cycle.
+#' * \eqn{SDfMEN} = sleep duration between two free days after each shift
+#' (MEN`*`).
+#' * \eqn{nwMEN} = number of free days after each shift (MEN`*`) within a shift
+#' cycle.
+#'
+#' `*` \eqn{M}: morning; \eqn{E}: evening; \eqn{N}: night.
+#'
+#' Note that the overall sleep duration is the weighted average of the
+#' shift-specific mean sleep durations, _i.e._ \eqn{(SDwMEN * nwMEN)} and
+#' \eqn{(SDfMEN * nfMEN)} must be unfold for each shift and non-shift
+#' (_e.g._ \eqn{(SDw_M * nw_M) + (SDw_E * nw_E) ...}).
+#'
+#' @param n_w An `integer` or `numeric` object corresponding to the __number of
+#'   days worked in each shift__ from a MCTQ shift questionnaire (_e.g_ c(4, 3,
+#'   4). `n_w` values must be paired with `sd_w`.
+#' @param sd_w A `Duration` object corresponding to the __sleep duration in
+#'   each shift__ from a MCTQ shift questionnaire. `sd_w` values must be paired
+#'   with `n_w`.
+#' @param n_f An `integer` or `numeric` object corresponding to the __number of
+#'   free days after each shift__ from a MCTQ shift questionnaire (_e.g_ c(2, 1,
+#'   2). `n_f` values must be paired with `sd_f`.
+#' @param sd_f A `Duration` object corresponding to the __sleep duration between
+#'   two free days after each shift__ from a MCTQ shift questionnaire. `sd_f`
+#'   values must be paired with `n_f`.
+#'
+#' @return A `Duration` object corresponding to the overall sleep duration
+#'   duration.
+#'
+#' @template mctq_c
+#' @template references_a
+#' @export
+#'
+#' @examples
+#' ## __ Scalar example __
+#' n_w <- list(n_wm = 1, n_we = 1)
+#' sd_w <- list(sd_wm = lubridate::dhours(2), sd_we = lubridate::dhours(1))
+#' n_f <- list(n_fm = 1, n_fe = 1)
+#' sd_f <- list(sd_fm = lubridate::dhours(1), sd_fe = lubridate::dhours(1))
+#' sd_overall(n_w, sd_w, n_f, sd_f)
+#' #> [1] "4500s (~1.25 hours)" # Expected
+#'
+#' ## __ Vectorized example __
+#' n_w <- list(n_wm = c(1, 1), n_we = c(1, 1))
+#' sd_w <- list(sd_wm = c(lubridate::dhours(2), lubridate::dhours(1)),
+#'              sd_we = c(lubridate::dhours(1), lubridate::dhours(1)))
+#' n_f <- list(n_fm = c(1, 2), n_fe = c(1, 3))
+#' sd_f <- list(sd_fm = c(lubridate::dhours(1), lubridate::dhours(1)),
+#'              sd_fe = c(lubridate::dhours(1), lubridate::dhours(1)))
+#' ((sd_w[[1]][1] * n_w[[1]][1]) + (sd_w[[2]][1] * n_w[[2]][1]) +
+#'    (sd_f[[1]][1] * n_f[[1]][1]) + (sd_f[[2]][1] * n_f[[2]][1])) /
+#'    (n_w[[1]][1] + n_w[[2]][1] + n_f[[1]][1] + n_f[[2]][1])
+#' ((sd_w[[1]][2] * n_w[[1]][2]) + (sd_w[[2]][2] * n_w[[2]][2]) +
+#'  (sd_f[[1]][2] * n_f[[1]][2]) + (sd_f[[2]][2] * n_f[[2]][2])) /
+#'  (n_w[[1]][2] + n_w[[2]][2] + n_f[[1]][2] + n_f[[2]][2])
+#' sd_overall(n_w, sd_w, n_f, sd_f)
+#' #> [1] "4500s (~1.25 hours)" "3600s (~1 hours)" # Expected
+#'
+#' ## __ Converting the output to hms __
+#' n_w <- list(n_wm = 1, n_we = 1)
+#' sd_w <- list(sd_wm = lubridate::dhours(2), sd_we = lubridate::dhours(1))
+#' n_f <- list(n_fm = 1, n_fe = 1)
+#' sd_f <- list(sd_fm = lubridate::dhours(1), sd_fe = lubridate::dhours(1))
+#' sd_overall(n_w, sd_w, n_f, sd_f)
+#' #> [1] "4500s (~1.25 hours)" # Expected
+#' x <- sd_overall(n_w, sd_w, n_f, sd_f)
+#' convert_to(x, "hms")
+#' #> 01:15:00 # Expected
+#'
+#' ## __ Rounding the output at the seconds level __
+#' x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
+#' x
+#' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
+#' round_time(x)
+#' #> [1] "22989s (~6.39 hours)" # Expected
+sd_overall <- function(n_w, sd_w, n_f, sd_f) {
+
+    lapply(n_w, checkmate::assert_integerish)
+    lapply(n_f, checkmate::assert_integerish)
+    lapply(sd_w, assert_duration)
+    lapply(sd_f, assert_duration)
+    mapply(assert_identical, n_w, sd_w, MoreArgs = list(type = "length"))
+    mapply(assert_identical, n_f, sd_f, MoreArgs = list(type = "length"))
+
+    foo <- function(x, y) {
+        reduce <- NULL
+        class <- class(y)[1]
+        for (i in seq_along(x)) {
+            reduce[i] <- Reduce("*", list(x[[i]], y[[i]]))
+        }
+        convert_to(reduce, class)
+    }
+
+    sd_w <- mapply(foo, n_w, sd_w, SIMPLIFY = FALSE)
+    sd_f <- mapply(foo, n_f, sd_f, SIMPLIFY = FALSE)
+    sd_w <- Reduce("+", sd_w)
+    sd_f <- Reduce("+", sd_f)
+    n <- Reduce("+", n_w) + Reduce("+", n_f)
+
+    (sd_w + sd_f) / n
 
 }
 
@@ -379,21 +719,21 @@ sd_week <- function(wd, sd_w, sd_f){
 #'
 #' `chronotype()` is just a wrapper for `msf_sc()`.
 #'
-#' @param msf A `hms` vector corresponding to the __mid-sleep on work-free
+#' @param msf A `hms` object corresponding to the __mid-sleep on work-free
 #'   days__ of a standard MCTQ questionnaire (you can use [mctq::ms()] to
 #'   compute it).
-#' @param sd_week A `Duration` vector corresponding to the __average weekly
+#' @param sd_week A `Duration` object corresponding to the __average weekly
 #'   sleep duration__ of a standard MCTQ questionnaire (you can use
 #'   [mctq::sd_week()] to compute it).
-#' @param alarm_f A `logical` vector corresponding to the __alarm clock use on
+#' @param alarm_f A `logical` object corresponding to the __alarm clock use on
 #'   work-free days__ of a standard MCTQ questionnaire.
 #'
-#' @return A `hms` vector corresponding to the chronotype/corrected midsleep on
+#' @return A `hms` object corresponding to the chronotype/corrected midsleep on
 #'   free days.
 #'
-#' @family MCTQ functions
 #' @inheritParams sd_week
-#' @inherit so details references
+#' @template mctq_c
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -416,7 +756,7 @@ sd_week <- function(wd, sd_w, sd_f){
 #' sd_w <- c(lubridate::dhours(5), lubridate::dhours(6.45))
 #' sd_f <- c(lubridate::dhours(9), lubridate::dhours(10))
 #' sd_week <- c(lubridate::dhours(8.5), lubridate::dhours(9.2))
-#' alarm_f <- c(TRUE, TRUE)
+#' alarm_f <- c(FALSE, FALSE)
 #' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 03:30:00 # Expected
 #' #> 04:21:00 # Expected
@@ -433,7 +773,7 @@ sd_week <- function(wd, sd_w, sd_f){
 #' #> 04:46:02.340202 # Expected
 #' round_time(x)
 #' #> 04:46:02 # Expected
-msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f){
+msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 
     checkmate::assert_class(msf, "hms")
     assert_duration(sd_w)
@@ -442,11 +782,17 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f){
     checkmate::assert_logical(alarm_f)
     assert_identical(msf, sd_w, sd_f, sd_week, alarm_f, type = "length")
 
+    ## `sc` exists to remove unnecessary warnings of lubridate package when
+    ## subtracting objects of class `Duration`.
+
+    sc <- sum_time(sd_f, - sd_week, class = "Duration", vectorize = TRUE)
+    sc <- sc / 2
+
     dplyr::case_when(
-        isTRUE(alarm_f) ~ hms::as_hms(NA),
+        alarm_f == TRUE ~ hms::as_hms(NA),
         sd_f <= sd_w ~ msf,
-        TRUE ~ sum_time(msf, - ((sd_f - sd_week) / 2), class = "hms",
-                        clock = TRUE, vectorize = TRUE)
+        sd_f > sd_w ~ sum_time(msf, - sc, class = "hms",
+                               clock = TRUE, vectorize = TRUE)
     )
 
 }
@@ -468,12 +814,12 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' `sloss_week()` computes the __weekly sleep loss__ for the standard Munich
 #' Chronotype Questionnaire (MCTQ).
 #'
-#' @return A `Duration` vector corresponding to the weekly sleep loss.
+#' @return A `Duration` object corresponding to the weekly sleep loss.
 #'
-#' @family MCTQ functions
 #' @inheritParams sd_week
 #' @inheritParams msf_sc
-#' @inherit so details references
+#' @template mctq_c
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -509,7 +855,7 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' #> [1] "5851.44000000001s (~1.63 hours)" # Expected
 #' round_time(x)
 #' #> [1] "5851s (~1.63 hours)" # Expected
-sloss_week <- function(wd, sd_w, sd_f, sd_week){
+sloss_week <- function(wd, sd_w, sd_f, sd_week) {
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_duration(sd_w)
@@ -519,7 +865,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 
     dplyr::case_when(
         sd_week > sd_w ~ (sd_week - sd_w) * wd,
-        TRUE ~ (sd_week - sd_f) * fd(wd) # sd_week <= sd_w
+        sd_week <= sd_w ~ (sd_week - sd_f) * fd(wd)
     )
 
 }
@@ -539,18 +885,18 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week){
 #' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)). See
 #' `vignette("social_jet_lag_signal", package = "mctq")` for more details.
 #'
-#' @param msw A `hms` vector corresponding to the __mid-sleep on work days__ of
+#' @param msw A `hms` object corresponding to the __mid-sleep on work days__ of
 #'   a standard MCTQ questionnaire (you can use [mctq::ms()] to compute it).
 #' @param abs (optional) a `logical` value indicating if the function must
 #'   return an absolute SJL (always positive) or a relative SJL (the SJL with no
-#'   changes).
+#'   changes) (default: `TRUE`).
 #'
-#' @return A `Duration` vector corresponding to the relative or absolute
-#' (if `abs = TRUE`) social jetlag.
+#' @return A `Duration` object corresponding to the relative or absolute
+#' (if `abs = TRUE`) social jet lag.
 #'
-#' @family MCTQ functions
 #' @inheritParams msf_sc
-#' @inherit so details references
+#' @template mctq_c
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -607,7 +953,7 @@ sjl <- function(msw, msf, abs = TRUE) {
 
 #' @rdname sjl
 #' @export
-sjl_rel <- function(msw, msf){
+sjl_rel <- function(msw, msf) {
 
     sjl(msw, msf, abs = FALSE)
 
@@ -622,17 +968,17 @@ sjl_rel <- function(msw, msf){
 #' `le_week()` computes the __average weekly light exposure__ for the standard
 #' Munich Chronotype Questionnaire (MCTQ).
 #'
-#' @param le_w A `Duration` vector corresponding to the __light exposure on work
+#' @param le_w A `Duration` object corresponding to the __light exposure on work
 #'   days__ of a standard MCTQ questionnaire.
-#' @param le_f A `Duration` vector corresponding to the __light exposure on
+#' @param le_f A `Duration` object corresponding to the __light exposure on
 #'   work-free days__ of a standard MCTQ questionnaire.
 #'
-#' @return A `Duration` vector corresponding to the average weekly light
+#' @return A `Duration` object corresponding to the average weekly light
 #'   exposure.
 #'
-#' @family MCTQ functions
 #' @inheritParams fd
-#' @inherit so details references
+#' @template mctq_c
+#' @template references_a
 #' @export
 #'
 #' @examples
@@ -665,7 +1011,7 @@ sjl_rel <- function(msw, msf){
 #' #> [1] "19538.3828571429s (~5.43 hours)" # Expected
 #' round_time(x)
 #' #> [1] "19538s (~5.43 hours)" # Expected
-le_week <- function(wd, le_w, le_f){
+le_week <- function(wd, le_w, le_f) {
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_duration(le_w)

@@ -11,13 +11,18 @@ round_time(x)
 \code{Period}, \code{difftime}, \code{hms}.}
 }
 \value{
-An date/time object with the time rounded at the seconds level.
+An time object with the time rounded at the seconds level.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{round_time()} takes a time object and round it to the nearest value at
-the seconds level.
+\code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, or \code{hms} object and
+round it at the seconds level.
+
+Note that \code{round_time()} convert time to seconds and them uses
+\code{\link[base:Round]{base::round()}} to round it. That is to say that \code{round_time()} uses the same
+IEC 60559 standard (\emph{"go to the even digit"}) for rounding off a 5. Therefore
+round(0.5) is 0 and round(-1.5) is -2. See \code{?round} to learn more.
 }
 \examples{
 lubridate::dhours(1.45678696454)
@@ -38,7 +43,7 @@ round_time(hms::as_hms(12345.6789))
 #> 03:25:46 # Expected
 }
 \seealso{
-\code{\link[hms:round_hms]{hms::round_hms()}} \code{\link[lubridate:round_date]{lubridate::round_date()}}
+\code{\link[hms:round_hms]{hms::round_hms()}} \code{\link[hms:round_hms]{hms::trunc_hms()}} \code{\link[lubridate:round_date]{lubridate::round_date()}}.
 
 Other utility functions: 
 \code{\link{assign_date}()},
@@ -47,6 +52,7 @@ Other utility functions:
 \code{\link{qplot_mctq}()},
 \code{\link{random_mctq}()},
 \code{\link{shortest_interval}()},
+\code{\link{sum_time}()},
 \code{\link{validate_mctq}()}
 }
 \concept{utility functions}

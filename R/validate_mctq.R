@@ -94,6 +94,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     sprep_w <- sprep_f <- slat <- slat_w <- slat_f <- se <- NULL
     se_w <- se_f <- si <- si_w <- si_f <- alarm_w <- alarm_f <- NULL
     wake_before_alarm_w <- le <- le_w <- le_f <- reasons_f <- NULL
+    reasons_why_f <- NULL
     fd <- so <- so_w <- so_f <- gu <- gu_w <- gu_f <- sd <- sd_w <- NULL
     sd_f <- tbt <- tbt_w <- tbt_f <- ms <- msw <- ms_w <- msf <- ms_f <- NULL
     sd_week <- msf_sc <- chronotype <- sloss_week <- sjl_rel <- NULL
@@ -136,20 +137,21 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
         wd = is.integrish(wd),
         bt_w = is.hms(bt_w),
         sprep_w = is.hms(sprep_w),
-        slat_w = is.duration(slat_w),
+        slat_w = is.duration(slat_w) | is.hms(slat_w),
         se_w = is.hms(se_w),
-        si_w = is.duration(si_w),
+        si_w = is.duration(si_w) | is.hms(si_w),
         alarm_w = is.logical(alarm_w),
         wake_before_alarm_w = is.logical(wake_before_alarm_w),
-        le_w = is.duration(le_w),
+        le_w = is.duration(le_w) | is.hms(le_w),
         bt_f = is.hms(bt_f),
         sprep_f = is.hms(sprep_f),
-        slat_f = is.duration(slat_f),
+        slat_f = is.duration(slat_f) | is.hms(slat_f),
         se_f = is.hms(se_f),
-        si_f = is.duration(si_f),
+        si_f = is.duration(si_f) | is.hms(si_f),
         alarm_f = is.logical(alarm_f),
-        reasons_f = is.character(reasons_f),
-        le_f = is.duration(le_f)
+        reasons_f = is.logical(reasons_f),
+        reasons_why_f = is.character(reasons_why_f),
+        le_f = is.duration(le_f) | is.hms(le_f)
     )
 
     export <- export_validation(data, rules, check,
@@ -178,6 +180,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 
     rules <- validate::validator(
         wd = in_range(wd, min = 0, max = 7),
+        fd = in_range(wd, min = 0, max = 7),
         bt_w = in_range(bt_w, min = hms::parse_hm("00:00"),
                         max = hms::parse_hm("24:00")),
         sprep_w = in_range(sprep_w, min = hms::parse_hm("00:00"),
@@ -223,6 +226,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     ## Do multivariate checks (critical!) -----
 
     rules <- validate::validator(
+        "wd + fd" = (wd + fd) == 7,
         "wd | x_w" = if(!is.na(wd)) is_complete(bt_w, sprep_w, slat_w,
                                                 se_w, si_w),
         "fd(wd) | x_f" = if(fd(wd) > 0) is_complete(bt_f, sprep_f, slat_f,
@@ -230,7 +234,8 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
         "bt_w | sprep_w inversion" =
             assign_date(bt_w, sprep_w) < lubridate::dhours(12),
         "bt_f | sprep_f inversion" =
-            assign_date(bt_f, sprep_f) < lubridate::dhours(12)
+            assign_date(bt_f, sprep_f) < lubridate::dhours(12),
+        "msf_sc" = msf_sc <= msf
     )
 
     export <- export_validation(data, rules, check,

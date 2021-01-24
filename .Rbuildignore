@@ -5,6 +5,7 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^man-roxygen$
 ^\.github$
 ^\.archive$
 ^CODE_OF_CONDUCT\.md$

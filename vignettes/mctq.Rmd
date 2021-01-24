@@ -17,3 +17,5 @@ knitr::opts_chunk$set(
 __UNDER DEVELOPMENT__
 
 Shows the rationale behind the MCTQ, its different versions, and how to handle them with the `mctq` package.
+
+Why a mctq package? What are the advantages to use it? (big datasets, consistency, avoid common data issues, community development ...)

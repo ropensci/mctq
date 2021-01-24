@@ -17,3 +17,6 @@ knitr::opts_chunk$set(
 __UNDER DEVELOPMENT__
 
 Shows the rationale behind the social jet lag concept and computation, and how its signal must be interpreted.
+
+12h limit on the shortest interval. Unsolvable condition due to the problem
+of the two intervals.

@@ -11,6 +11,9 @@
 #' This function also supports date/time parsing and value transformations.
 #' Check Details section to learn more.
 #'
+#' For a complete picture about how to convert your MCTQ data, see
+#' `vignette("converting_data", package = "mctq")`.
+#'
 #' @details
 #'
 #' `convert_to` was designed to be a simple to use function with powerful

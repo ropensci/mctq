@@ -10,20 +10,20 @@ sjl(msw, msf, abs = TRUE)
 sjl_rel(msw, msf)
 }
 \arguments{
-\item{msw}{A \code{hms} vector corresponding to the \strong{mid-sleep on work days} of
+\item{msw}{A \code{hms} object corresponding to the \strong{mid-sleep on work days} of
 a standard MCTQ questionnaire (you can use \code{\link[=ms]{ms()}} to compute it).}
 
-\item{msf}{A \code{hms} vector corresponding to the \strong{mid-sleep on work-free
+\item{msf}{A \code{hms} object corresponding to the \strong{mid-sleep on work-free
 days} of a standard MCTQ questionnaire (you can use \code{\link[=ms]{ms()}} to
 compute it).}
 
 \item{abs}{(optional) a \code{logical} value indicating if the function must
 return an absolute SJL (always positive) or a relative SJL (the SJL with no
-changes).}
+changes) (default: \code{TRUE}).}
 }
 \value{
-A \code{Duration} vector corresponding to the relative or absolute
-(if \code{abs = TRUE}) social jetlag.
+A \code{Duration} object corresponding to the relative or absolute
+(if \code{abs = TRUE}) social jet lag.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -38,15 +38,28 @@ Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See
 \code{vignette("social_jet_lag_signal", package = "mctq")} for more details.
 }
 \details{
-This function was created according to Roenneberg, Wirz-Justice & Merrow
-(\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
-Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+\strong{Standard MCTQ} functions were created following the guidelines in
+Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+and The World Wide Experimental Platform
+(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
+Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
+guidelines used for the standard MCTQ.
+
+\strong{MCTQ Shift} functions were created following the guidelines in Juda,
+Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+guidelines used for the standard MCTQ.
+
+See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
+classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
+(see \code{vignette("converting_data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -55,13 +68,26 @@ Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with \code{\link[=round_time]{round_time()}}.
 
-We recommend rounding values only after all computations are done, that way
-you can avoid
-\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+Our recommendation is to avoid rounding, but, if you do, make sure that you
+only round your values after all computations are done, that way you can
+avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+}
 
-Please keep in mind that this package don't assume as true a level of
-accuracy beyond the seconds level. That is not needed for computing MCTQ
-variables.
+\subsection{Missing sections in standard and micro MCTQ versions}{
+
+Although the standard and micro versions of the MCTQ ask for subjects to
+complete the workdays and work-free days sections, even when he/she do not
+have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
+(\code{wd = 7}), some of them may still end skipping one of this parts of the
+questionnaire. In this cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
+\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
+(Not Available) as output. That's because their computation combines workdays
+and work-free days variables.
+
+For those special standard and micro MCTQ cases where one section is
+missing, a \code{NA} value is the correct output for the functions above when
+\code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
+different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
 }
 }
 \examples{
@@ -97,6 +123,21 @@ round_time(x)
 #> [1] "5071s (~1.41 hours)" # Expected
 }
 \references{
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
+\emph{28}(2), 130-140. doi:
+\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
+
+Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
+D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
+(2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
+\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+
+Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
+\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes.
 \emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
@@ -112,6 +153,9 @@ Other MCTQ functions:
 \code{\link{le_week}()},
 \code{\link{msf_sc}()},
 \code{\link{ms}()},
+\code{\link{napd}()},
+\code{\link{sd24}()},
+\code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
 \code{\link{sloss_week}()},

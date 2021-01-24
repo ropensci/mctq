@@ -1,0 +1,43 @@
+---
+title: "Missing sections"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{missing_sections}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+__UNDER DEVELOPMENT__
+
+Although the standard and micro versions of the MCTQ ask for subjects to complete the workdays and work-free days sections, even when he/she do not have a regular work schedule (`wd = 0`) or have a 7 day/week work schedule (`wd = 7`), some of them may still end skipping one of this parts of the questionnaire. In this cases, `sd_week()`, `msf_sc()`, `sloss_week()`, `sjl()`, and `le_week()` will produce `NA` (Not Available) as output. That's because their computation combines workdays and work-free days variables.
+
+> [insert a standard MCTQ image showing the case above]
+
+For those special standard and micro MCTQ cases where one section is missing, a `NA` value is the correct output for the functions above when `wd > 0 & wd < 7`, but it may not be when `wd == 0` or `wd == 7`. While some researches may just invalid these latter cases, others follow a different approach.
+
+Consider this: if a subject __do not have a regular work schedule__ (`wd == 0`), __only answered the work-free days section__, and __do not use an alarm clock on his/her free days___ (`alarm_f == FALSE`), it would be fair to assume that there's no masking on the sleep-wake cycle, therefore, his/her chronotype (`msf_sc`) must be equal as his/her midsleep on work-free days (`msf`).
+
+Following this same line of thought, we can also say that:
+
+* `sd_week` (average weekly sleep duration) value must be the same as `sd_f`(sleep duration on work-free days), since there's no workdays.
+* `le_week` (average weekly light exposure) value must be the same as `le_f` (light exposure on work-free days), since there's no workdays.
+* `sloss_week` (weekly sleep loss) value must be `0s`, because, in MCTQ terms, there's no sleep loss.
+* `sjl_rel` (relative social jet lag) and `sjl` (absolute social jet lag) must be `0s`, because there's nothing (in MCTQ terms) to disrupt the subject sleep-wake cycle.
+
+Note that the [chronotype computation] (https://www.thewep.org/documentations/mctq/item/mctq-variables) follows a similar line of thought.
+
+The opposite scenario, _i.e._ when the subject __works 7 days per week__ (`wd == 7`) and __only answered the work days section__, can also produce different outputs if you follow the same line of thought mentioned above. `msf_sc` (chronotype), `sloss_week`, `sjl_rel`, `sjl` should still produce a `NA` as output, since there's no way to know the real behavior of the subject sleep-wake cycle. But the same can't be said for `sd_week` and `le_week`, that must be as the following.
+
+* `sd_week` (average weekly sleep duration) value must be the same as `sd_w` (sleep duration on workdays), since there's no work-free days.
+* `le_week` (average weekly light exposure) value must be the same as `le_w` (light exposure on work-free days), since there's no work-free days.
+
+To go around this issue, we recommend creating dummy variables to identify those two situations and them changing the case values as mentioned. You can see this procedure in action in `vignette("data_wranglinf", package = "mctq")`.
+
+Please note that, if you agree to go with this line of thought, you have to mentioned it in you methods section.

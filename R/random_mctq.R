@@ -39,7 +39,7 @@ random_mctq <- function(model = "standard") {
 
     work <- sample(c(TRUE, FALSE), 1, prob = c(5, 1))
     wd <- sample(0:7, 1, prob = c(1, rep(2, 4), 10, 2, 1))
-    if (work == "No") wd <- as.integer(NA)
+    if (work == FALSE) wd <- as.integer(NA)
 
     # Create `bt_w` and `bt_f` -----
 
@@ -72,6 +72,9 @@ random_mctq <- function(model = "standard") {
 
     min <- as.numeric(bt_f)
     max <- as.numeric(bt_f + lubridate::dhours(4))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(bt_f + lubridate::dhours(1)),
+                         sd = as.numeric(lubridate::dhours(0.5)))
 
     for (i in seq(3)) { # Bias
         sprep_f <- clock_roll(sample_time(min = min, max = max, by = by,
@@ -111,13 +114,18 @@ random_mctq <- function(model = "standard") {
     min <- as.numeric(sprep_w + slat_w + lubridate::dhours(4))
     max <- as.numeric(sprep_w + slat_w + lubridate::dhours(14))
     prob <- stats::dnorm(seq(min, max, by),
-                         mean = as.numeric(sprep_w + lubridate::dhours(7)),
+                         mean = as.numeric(
+                             sprep_w + + slat_w + lubridate::dhours(6)),
                          sd = as.numeric(lubridate::dhours(1.5)))
     se_w <- clock_roll(sample_time(min = min, max = max, by = by,
                                    prob = prob))
 
     min <- as.numeric(sprep_f + slat_f + lubridate::dhours(4))
     max <- as.numeric(sprep_f + slat_f + lubridate::dhours(14))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(
+                             sprep_f + slat_f + lubridate::dhours(9)),
+                         sd = as.numeric(lubridate::dhours(1.5)))
 
     for (i in seq(3)) { # Bias
         se_f <- clock_roll(sample_time(min = min, max = max, by = by,

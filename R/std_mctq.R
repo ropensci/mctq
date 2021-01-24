@@ -38,7 +38,7 @@
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform
 #' ([n.d.](http://bit.ly/3pv8EH1)).
 #'
-#' @format A data frame with 10 rows and 18 variables:
+#' @format A tibble with `r ncol(std_mctq)` columns and `r nrow(std_mctq)` rows:
 #'
 #' \describe{
 #'   \item{id}{
@@ -1218,16 +1218,16 @@ validate_std_mctq <- function(write = FALSE) {
                 .data$id %in% c(9, 21), na_as(.x), .x))) %>%
         dplyr::ungroup()
 
-    # Fix/impute data -----
+    # Fix/impute linked data -----
 
     std_mctq <- std_mctq %>%
         dplyr::mutate(
-            work = dplyr::case_when(
-                work == FALSE & wd > 0 ~ TRUE,
-                TRUE ~ work),
             wd = dplyr::case_when(
                 work == FALSE & is.na(wd) ~ as.integer(0),
                 TRUE ~ wd),
+            work = dplyr::case_when(
+                work == FALSE & wd > 0 ~ TRUE,
+                TRUE ~ work),
             wake_before_w = dplyr::case_when(
                 alarm_w == FALSE ~ as.logical(NA),
                 TRUE ~ wake_before_w),
@@ -1302,6 +1302,8 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     alarm_w <- alarm_f <- wake_before_w <- reasons_f <- reasons_why_f<- NULL
     le_w <- le_f <- sd_w <- sd_f <- tbt_w <- tbt_f <- msw <- msf <- NULL
     sd_week <- msf_sc <- sloss_week <- sjl_rel <- sjl <- le_week <- NULL
+    dummy_0_a <- dummy_0_b <- dummy_0_c <- dummy_7_a <- dummy_7_b <- NULL
+    dummy_0 <- dummy_7 <- NULL
 
     # Create computed variables -----
 
@@ -1330,6 +1332,50 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
             slat_f, so_f, se_f, si_f, gu_f, alarm_f, reasons_f, reasons_why_f,
             le_f, sd_f, tbt_f, msf, sd_week, msf_sc, sloss_week, sjl_rel, sjl,
             le_week)
+
+    # Fix missing sections -----
+
+    ## See `vignette("missing_sections", "mctq")` to learn more.
+
+    count_w <- length(subset(names(std_mctq),  grepl("_w$", names(std_mctq))))
+    count_f <- length(subset(names(std_mctq),  grepl("_f$", names(std_mctq))))
+    count_w <- count_w * 2/3
+    count_f <- count_f * 2/3
+
+    test <- std_mctq %>%
+        dplyr::mutate(dplyr::across(.fns = as.character)) %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(
+            dummy_0_a = as.integer(wd) == 0 & !is.na(wd),
+            dummy_0_b = count_na(
+                dplyr::c_across(dplyr::ends_with("_w"))) >= count_w,
+            dummy_0_c = alarm_f == as.logical(FALSE) | is.na(alarm_f),
+            dummy_7_a = as.integer(wd) == 7 & !is.na(wd),
+            dummy_7_b = count_na(
+                dplyr::c_across(dplyr::ends_with("_f"))) >= count_f,
+            dummy_0 = dummy_0_a & dummy_0_b & dummy_0_c & dummy_7_b == FALSE,
+            dummy_7 = dummy_7_a & dummy_7_b & dummy_0_b == FALSE) %>%
+        dplyr::ungroup() %>%
+        dplyr::select(dummy_0, dummy_7)
+
+    std_mctq <- dplyr::bind_cols(std_mctq, test) %>%
+        dplyr::mutate(
+            sd_week = dplyr::case_when(
+                dummy_0 == TRUE ~ sd_f,
+                dummy_7 == TRUE ~ sd_w,
+                TRUE ~ sd_week),
+            msf_sc = dplyr::if_else(dummy_0, msf, msf_sc),
+            sloss_week = dplyr::if_else(dummy_0, lubridate::dhours(0),
+                                        sloss_week),
+            sjl_rel = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_rel),
+            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl),
+            le_week = dplyr::case_when(
+                dummy_0 == TRUE ~ le_f,
+                dummy_7 == TRUE ~ le_w,
+                TRUE ~ le_week)) %>%
+        dplyr::select(-dummy_0, -dummy_7)
+
+    # Make MCTQ pretty -----
 
     std_mctq <- std_mctq %>% pretty_mctq(round = round, hms = hms)
 

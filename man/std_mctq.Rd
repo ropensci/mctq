@@ -5,7 +5,7 @@
 \alias{std_mctq}
 \title{A standard MCTQ dataset}
 \format{
-A data frame with 10 rows and 18 variables:
+A tibble with 37 columns and 50 rows:
 
 \describe{
 \item{id}{

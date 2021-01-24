@@ -67,6 +67,7 @@ Other utility functions:
 \code{\link{qplot_mctq}()},
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},
-\code{\link{shortest_interval}()}
+\code{\link{shortest_interval}()},
+\code{\link{sum_time}()}
 }
 \concept{utility functions}

@@ -7,33 +7,53 @@
 tbt(bt, gu)
 }
 \arguments{
-\item{bt}{A \code{hms} vector corresponding to the \strong{local time of going to bed}
-of a standard MCTQ questionnaire.}
+\item{bt}{A \code{hms} object corresponding to the \strong{local time of going to bed}
+value from a standard or shift version of the MCTQ questionnaire.}
 
-\item{gu}{A \code{hms} vector corresponding to the \strong{local time of getting out of
-bed} of a standard MCTQ questionnaire (you can use \code{\link[=gu]{gu()}} to compute
-it).}
+\item{gu}{A \code{hms} object corresponding to the \strong{local time of getting out of
+bed} value from a standard or shift version of the MCTQ questionnaire. You
+can use \code{\link[=gu]{gu()}} to compute it.}
 }
 \value{
-A \code{hms} vector corresponding to the difference between \code{gu} and \code{bt}
-rolled on a 24 hours clock basis.
+A \code{Duration} object corresponding to the difference between \code{gu} and
+\code{bt} rolled on a 24-hour clock basis.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{tbt()} computes the \strong{total time in bed} for the standard Munich Chronotype
-Questionnaire (MCTQ).
+\code{tbt()} computes the \strong{total time in bed} for standard and shift versions of
+the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
-This function was created according to Roenneberg, Wirz-Justice & Merrow
-(\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
-Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+\strong{Standard MCTQ} functions were created following the guidelines in
+Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+and The World Wide Experimental Platform
+(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
+Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
+guidelines used for the standard MCTQ.
+
+\strong{MCTQ Shift} functions were created following the guidelines in Juda,
+Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+guidelines used for the standard MCTQ.
+
+See References section to learn more.
+\subsection{Workdays and work-free days computation}{
+
+The computation is the same for workdays and work-free days. Use the
+appropriated value entered on the section you are working on (\emph{e.g.} \code{X_w},
+\code{X_f}).
+}
+
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it.
+classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
+(see \code{vignette("converting_data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -42,32 +62,62 @@ Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with \code{\link[=round_time]{round_time()}}.
 
-We recommend rounding values only after all computations are done, that way
-you can avoid
-\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+Our recommendation is to avoid rounding, but, if you do, make sure that you
+only round your values after all computations are done, that way you can
+avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+}
+}
+\section{Guidelines}{
 
-Please keep in mind that this package don't assume as true a level of
-accuracy beyond the seconds level. That is not needed for computing MCTQ
-variables.
+
+For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter & Roenneberg
+(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
+guidelines to \code{tbt()} (\eqn{TBT}) computation are as follow.
+
+\strong{\deqn{GU - BT}}
+
+Where:
+\itemize{
+\item \eqn{BT} = Local time of going to bed ("I go to bed at ... o'clock").
+\item \eqn{GU} = local time of getting out of bed.
 }
+
+Note that this computation must be applied to each section of the
+questionnaire (\emph{e.g.} \eqn{GUw - BTw}).
 }
+
 \examples{
 ## __ Scalar example __
 tbt(hms::parse_hms("22:10:00"), hms::parse_hms("06:15:00"))
-#> 08:05:00 # Expected
+#> [1] "29100s (~8.08 hours)" # Expected
 tbt(hms::parse_hms("01:20:00"), hms::parse_hms("14:00:00"))
-#> 12:40:00 # Expected
+#> [1] "45600s (~12.67 hours)" # Expected
 tbt(hms::as_hms(NA), hms::parse_hms("07:20:00"))
-#> NA # Expected
+#> [1] NA # Expected
 
 ## __ Vectorized example __
 bt <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
 gu <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
 tbt(bt, gu)
-#> [1] 09:40:00 # Expected
-#> [1] 08:55:00 # Expected
+#> [1] "34800s (~9.67 hours)" "32100s (~8.92 hours)" # Expected
 }
 \references{
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
+\emph{28}(2), 130-140. doi:
+\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
+
+Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
+D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
+(2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
+\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+
+Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
+\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes.
 \emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
@@ -83,6 +133,9 @@ Other MCTQ functions:
 \code{\link{le_week}()},
 \code{\link{msf_sc}()},
 \code{\link{ms}()},
+\code{\link{napd}()},
+\code{\link{sd24}()},
+\code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
 \code{\link{sjl}()},

@@ -17,9 +17,12 @@ reference:
   - so
   - gu
   - sd
+  - napd
+  - sd24
   - tbt
   - ms
   - sd_week
+  - sd_overall
   - msf_sc
   - sloss_week
   - sjl
@@ -35,6 +38,8 @@ reference:
   - pretty_mctq
   - qplot_mctq
   - random_mctq
+  - round_time
+  - sum_time
   - validate_mctq
 
 development:

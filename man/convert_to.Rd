@@ -218,6 +218,9 @@ simple and fast way.
 
 This function also supports date/time parsing and value transformations.
 Check Details section to learn more.
+
+For a complete picture about how to convert your MCTQ data, see
+\code{vignette("converting_data", package = "mctq")}.
 }
 \details{
 \code{convert_to} was designed to be a simple to use function with powerful
@@ -513,6 +516,7 @@ Other utility functions:
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},
 \code{\link{shortest_interval}()},
+\code{\link{sum_time}()},
 \code{\link{validate_mctq}()}
 }
 \concept{utility functions}
