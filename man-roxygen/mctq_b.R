@@ -11,7 +11,7 @@
 #' guidelines used for the standard MCTQ.
 #'
 #' __MCTQ Shift__ functions were created following the guidelines in Juda,
-#' Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)), in addition to the
+#' Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)), in addition to the
 #' guidelines used for the standard MCTQ.
 #'
 #' See References section to learn more.

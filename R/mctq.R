@@ -11,7 +11,7 @@
 #'
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 #' ([2012](http://bit.ly/3iGEgqX)) and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `fd()` (\eqn{FD}) computation are as follow.
+#' guidelines for `fd()` (\eqn{FD}) computation are as follow.
 #'
 #' __\deqn{7 - WD}__
 #'
@@ -59,9 +59,9 @@ fd <- function(wd) {
 #' @section Guidelines:
 #'
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter & Roenneberg
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `so()` (\eqn{SO}) computation are as follow.
+#' guidelines for `so()` (\eqn{SO}) computation are as follow.
 #'
 #' __\deqn{SPrep + SLat}__
 #'
@@ -122,9 +122,9 @@ so <- function(sprep, slat) {
 #' @section Guidelines:
 #'
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter & Roenneberg
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `gu()` (\eqn{GU}) computation are as follow.
+#' guidelines for `gu()` (\eqn{GU}) computation are as follow.
 #'
 #' __\deqn{SE + SI}__
 #'
@@ -190,9 +190,9 @@ gu <- function(se, si) {
 #'
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 #' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
-#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter & Roenneberg
+#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `sd()` (\eqn{SD}) computation are as follow.
+#' guidelines for `sd()` (\eqn{SD}) computation are as follow.
 #'
 #' __\deqn{SE - SO}__
 #'
@@ -253,7 +253,7 @@ sd <- function(so, se) {
 #' @section Guidelines:
 #'
 #' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines to `napd()`
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `napd()`
 #' (\eqn{NapD}) computation are as follow.
 #'
 #' __\deqn{NapE - NapO}__
@@ -315,7 +315,7 @@ napd <- function(napo, nape) {
 #' @section Guidelines:
 #'
 #' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines to `sd24()`
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd24()`
 #' (\eqn{SD24}) computation are as follow.
 #'
 #' __\deqn{SD + Napd}__
@@ -377,9 +377,9 @@ sd24 <- function(sd, napd) {
 #' @section Guidelines:
 #'
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter & Roenneberg
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `tbt()` (\eqn{TBT}) computation are as follow.
+#' guidelines for `tbt()` (\eqn{TBT}) computation are as follow.
 #'
 #' __\deqn{GU - BT}__
 #'
@@ -441,9 +441,9 @@ tbt <- function(bt, gu) {
 #'
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 #' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
-#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter & Roenneberg
+#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `ms()` (\eqn{MS}) computation are as follow.
+#' guidelines for `ms()` (\eqn{MS}) computation are as follow.
 #'
 #' __\deqn{SO + (SD / 2)}__
 #'
@@ -512,7 +512,7 @@ ms <- function(so, sd) {
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 #' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
 #' ([2020](https://bit.ly/34VhA0l)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines to `sd_week()` (\eqn{SDweek}) computation are as follow.
+#' guidelines for `sd_week()` (\eqn{SDweek}) computation are as follow.
 #'
 #' __\deqn{((SDw x WD) + (SDf x FD)) / 7}__
 #'
@@ -524,11 +524,11 @@ ms <- function(so, sd) {
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
-#'   days__ from a standard MCTQ questionnaire (you can use [mctq::sd()] to
-#'   compute it).
+#'   days__ value from a standard or micro version of the MCTQ questionnaire
+#'   (you can use [mctq::sd()] to compute it).
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
-#'   work-free days__ from a standard MCTQ questionnaire (you can use
-#'   [mctq::sd()] to compute it).
+#'   work-free days__ value from a standard or micro version of the MCTQ
+#'   questionnaire (you can use [mctq::sd()] to compute it).
 #'
 #' @return A `Duration` object corresponding to the average weekly sleep
 #'   duration.
@@ -590,14 +590,29 @@ sd_week <- function(wd, sd_w, sd_f) {
 #' See [mctq::sd_week()] to compute the average weekly sleep duration for the
 #' standard and micro versions of the MCTQ.
 #'
-#' Please check the Arguments section if you have any questions about
-#' `sd_overall()` operation.
+#' Please check Operation section if you have any questions about `sd_overall()`
+#' operation.
+#'
+#' @section Operation:
+#'
+#' The shift version of the MCTQ was developed for shift-workers rotating
+#' through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
+#' 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
+#' schedules (Juda, Vetter, & Roenneberg, [2013](https://bit.ly/38IEEk4)). For
+#' that reason, `sd_overall()` must operate considering any shift combination.
+#'
+#' Considering the requirement above, `sd_overall()` was developed to only
+#' accept lists values as arguments. For this approach to work, both `n` and
+#' `sd` arguments must be lists with paired elements and values between `n` and
+#' `sd`, _i.e._ the first element of `n` (_e.g._ `n_wm`) must be paired with the
+#' first element of `sd` (_e.g._ `sd_wm`). The function will do the work of
+#' combining them and output a weighted mean.
 #'
 #' @section Guidelines:
 #'
-#' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines to `sd_overall()`
-#' (\eqn{\OSD}) computation are as follow.
+#' For reference, Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4))
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_overall()`
+#' computation are as follow.
 #'
 #' __\deqn{((SDwMEN * nwMEN) + (SDfMEN * nfMEN)) / (nwMEN + nfMEN)}__
 #'
@@ -616,23 +631,20 @@ sd_week <- function(wd, sd_w, sd_f) {
 #' Note that the overall sleep duration is the weighted average of the
 #' shift-specific mean sleep durations, _i.e._ \eqn{(SDwMEN * nwMEN)} and
 #' \eqn{(SDfMEN * nfMEN)} must be unfold for each shift and non-shift
-#' (_e.g._ \eqn{(SDw_M * nw_M) + (SDw_E * nw_E) ...}).
+#' (_e.g._ \eqn{(SDwM * nw_M) + (SDwE * nwE) ...}).
 #'
-#' @param n_w An `integer` or `numeric` object corresponding to the __number of
-#'   days worked in each shift__ from a MCTQ shift questionnaire (_e.g_ c(4, 3,
-#'   4). `n_w` values must be paired with `sd_w`.
-#' @param sd_w A `Duration` object corresponding to the __sleep duration in
-#'   each shift__ from a MCTQ shift questionnaire. `sd_w` values must be paired
-#'   with `n_w`.
-#' @param n_f An `integer` or `numeric` object corresponding to the __number of
-#'   free days after each shift__ from a MCTQ shift questionnaire (_e.g_ c(2, 1,
-#'   2). `n_f` values must be paired with `sd_f`.
-#' @param sd_f A `Duration` object corresponding to the __sleep duration between
-#'   two free days after each shift__ from a MCTQ shift questionnaire. `sd_f`
-#'   values must be paired with `n_f`.
+#' @param n A `list` object with [integerish][rlang::is_integerish()] `integer`
+#'   or `numeric` elements corresponding to the __number of days from each
+#'   shift__ and __number of free days after each shift__ from a MCTQ shift
+#'   questionnaire. `n` elements and values must be paired with `sd` elements
+#'   and values.
+#' @param sd A `list` object with `Duration` elements corresponding to the
+#'   __sleep duration in each shift__ and __sleep duration between two free days
+#'   after each shift__ from a MCTQ shift questionnaire. `sd` elements and
+#'   values must be paired with `n` elements and values.
 #'
-#' @return A `Duration` object corresponding to the overall sleep duration
-#'   duration.
+#' @return A `Duration` object corresponding to the weighted mean of `sd` and
+#'   `n` (weights).
 #'
 #' @template mctq_c
 #' @template references_a
@@ -640,99 +652,159 @@ sd_week <- function(wd, sd_w, sd_f) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' n_w <- list(n_wm = 1, n_we = 1)
-#' sd_w <- list(sd_wm = lubridate::dhours(2), sd_we = lubridate::dhours(1))
-#' n_f <- list(n_fm = 1, n_fe = 1)
-#' sd_f <- list(sd_fm = lubridate::dhours(1), sd_fe = lubridate::dhours(1))
-#' sd_overall(n_w, sd_w, n_f, sd_f)
-#' #> [1] "4500s (~1.25 hours)" # Expected
+#' n <- list(n_wm = 2, n_we = 4, n_wn = 3, n_fm = 2, n_fw = 4, n_fn = 2)
+#' sd <- list(sd_wm = lubridate::dhours(5), sd_we = lubridate::dhours(6),
+#'            sd_wn = lubridate::dhours(5), sd_fm = lubridate::dhours(10),
+#'            sd_fe = lubridate::dhours(9), sd_fn = lubridate::dhours(8.5))
+#' sd_overall(n, sd)
+#' #> [1] "25835.2941176471s (~7.18 hours)" # Expected
 #'
 #' ## __ Vectorized example __
-#' n_w <- list(n_wm = c(1, 1), n_we = c(1, 1))
-#' sd_w <- list(sd_wm = c(lubridate::dhours(2), lubridate::dhours(1)),
-#'              sd_we = c(lubridate::dhours(1), lubridate::dhours(1)))
-#' n_f <- list(n_fm = c(1, 2), n_fe = c(1, 3))
-#' sd_f <- list(sd_fm = c(lubridate::dhours(1), lubridate::dhours(1)),
-#'              sd_fe = c(lubridate::dhours(1), lubridate::dhours(1)))
-#' ((sd_w[[1]][1] * n_w[[1]][1]) + (sd_w[[2]][1] * n_w[[2]][1]) +
-#'    (sd_f[[1]][1] * n_f[[1]][1]) + (sd_f[[2]][1] * n_f[[2]][1])) /
-#'    (n_w[[1]][1] + n_w[[2]][1] + n_f[[1]][1] + n_f[[2]][1])
-#' ((sd_w[[1]][2] * n_w[[1]][2]) + (sd_w[[2]][2] * n_w[[2]][2]) +
-#'  (sd_f[[1]][2] * n_f[[1]][2]) + (sd_f[[2]][2] * n_f[[2]][2])) /
-#'  (n_w[[1]][2] + n_w[[2]][2] + n_f[[1]][2] + n_f[[2]][2])
-#' sd_overall(n_w, sd_w, n_f, sd_f)
-#' #> [1] "4500s (~1.25 hours)" "3600s (~1 hours)" # Expected
+#' n <- list(n_wm = c(4, 3), n_we = c(2, 3), n_fm = c(2, 2), n_fe = c(4, 4))
+#' sd <- list(sd_wm = c(lubridate::dhours(6), lubridate::dhours(7)),
+#'            sd_we = c(lubridate::dhours(5.5), lubridate::dhours(6)),
+#'            sd_fm = c(lubridate::dhours(9), lubridate::dhours(8.5)),
+#'            sd_fe = c(lubridate::dhours(7), lubridate::dhours(10)))
+#' sd_overall(n, sd)
+#' #> [1] "24300s (~6.75 hours)" "28800s (~8 hours)"  # Expected
+#'
+#' ## __ Checking second output from vectorized example __
+#' i <- 2
+#' x <- c(sd[["sd_wm"]][i], sd[["sd_we"]][i], sd[["sd_fm"]][i],
+#'        sd[["sd_fe"]][i])
+#' w <- c(n[["n_wm"]][i], n[["n_we"]][i], n[["n_fm"]][i], n[["n_fe"]][i])
+#' lubridate::as.duration(stats::weighted.mean(x, w))
+#' #> [1] "28800s (~8 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
-#' n_w <- list(n_wm = 1, n_we = 1)
-#' sd_w <- list(sd_wm = lubridate::dhours(2), sd_we = lubridate::dhours(1))
-#' n_f <- list(n_fm = 1, n_fe = 1)
-#' sd_f <- list(sd_fm = lubridate::dhours(1), sd_fe = lubridate::dhours(1))
-#' sd_overall(n_w, sd_w, n_f, sd_f)
-#' #> [1] "4500s (~1.25 hours)" # Expected
-#' x <- sd_overall(n_w, sd_w, n_f, sd_f)
-#' convert_to(x, "hms")
-#' #> 01:15:00 # Expected
+#' n <- list(n_wm = 3, n_we = 2, n_wn = 2, n_fm = 1, n_fw = 3, n_fn = 5)
+#' sd <- list(sd_wm = lubridate::dhours(4.12), sd_we = lubridate::dhours(6),
+#'            sd_wn = lubridate::dhours(3.43), sd_fm = lubridate::dhours(9.5),
+#'            sd_fe = lubridate::dhours(7.32), sd_fn = lubridate::dhours(10.5))
+#' sd_overall(n, sd)
+#' #> [1] "25915.5s (~7.2 hours)" # Expected
+#' convert_to(sd_overall(n, sd), "hms")
+#' #> 07:11:55.5 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
-#' x
-#' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
-#' round_time(x)
-#' #> [1] "22989s (~6.39 hours)" # Expected
-sd_overall <- function(n_w, sd_w, n_f, sd_f) {
+#' round_time(sd_overall(n, sd))
+#' #> [1] "25916s (~7.2 hours)" # Expected
+#' round_time(convert_to(sd_overall(n, sd), "hms"))
+#' #> 07:11:56 # Expected
+sd_overall <- function(n, sd) {
 
-    lapply(n_w, checkmate::assert_integerish)
-    lapply(n_f, checkmate::assert_integerish)
-    lapply(sd_w, assert_duration)
-    lapply(sd_f, assert_duration)
-    mapply(assert_identical, n_w, sd_w, MoreArgs = list(type = "length"))
-    mapply(assert_identical, n_f, sd_f, MoreArgs = list(type = "length"))
+    checkmate::assert_list(n, len = length(sd))
+    checkmate::assert_list(sd, len = length(n))
+    lapply(n, checkmate::assert_integerish)
+    lapply(sd, assert_duration)
+    mapply(assert_identical, n, sd, MoreArgs = list(type = "length"))
 
     foo <- function(x, y) {
-        reduce <- NULL
-        class <- class(y)[1]
-        for (i in seq_along(x)) {
-            reduce[i] <- Reduce("*", list(x[[i]], y[[i]]))
-        }
-        convert_to(reduce, class)
+        out <- Reduce("*", list(x, y))
+        lubridate::as.duration(out)
     }
 
-    sd_w <- mapply(foo, n_w, sd_w, SIMPLIFY = FALSE)
-    sd_f <- mapply(foo, n_f, sd_f, SIMPLIFY = FALSE)
-    sd_w <- Reduce("+", sd_w)
-    sd_f <- Reduce("+", sd_f)
-    n <- Reduce("+", n_w) + Reduce("+", n_f)
+    sd <- mapply(foo, n, sd, SIMPLIFY = FALSE)
+    sd <- Reduce("+", sd)
+    n <- Reduce("+", n)
 
-    (sd_w + sd_f) / n
+    (sd) / n
 
 }
 
-#' Compute MCTQ chronotype/corrected midsleep on work-free days
+#' Compute MCTQ chronotype or corrected midsleep on work-free days
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `msf_sc()` computes the __chronotype/corrected midsleep on free days__ for
-#' the standard Munich Chronotype Questionnaire (MCTQ).
+#' `msf_sc()` computes the __chronotype or corrected midsleep on free days__ for
+#' standard, micro, and shift versions of the Munich Chronotype Questionnaire
+#' (MCTQ).
+#'
+#' When using the shift version of the MCTQ, replace the value of `sd_week` to
+#' `sd_overall`, as instructed in the Arguments section.
 #'
 #' `chronotype()` is just a wrapper for `msf_sc()`.
 #'
+#' Note that the basis for estimating chronotype in shift-workers is the
+#' mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
+#' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
+#' midsleep time on free days of other shifts (_e.g._ by using a linear model).
+#' Unfortunately the `mctq` package can't help you with that, as it requires a
+#' closer look at your data.
+#'
+#' @section Guidelines:
+#'
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
+#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines for `msf_sc()` (\eqn{MSFsc}) computation are as follow.
+#'
+#' Note that, for all cases, \eqn{MSFsc} cannot be computed if the participant
+#' wake up with an alarm clock on free days.
+#'
+#' ### For standard and micro versions of the MCTQ:
+#'
+#' __\deqn{If SDf <= SDw: MSF}__
+#' __\deqn{If SDf > SDw: MSF - (SDf - SDweek) / 2}__
+#'
+#' Where:
+#'
+#' * \eqn{MSF} = mid-sleep on work-free days.
+#' * \eqn{SDw} = sleep duration on work days.
+#' * \eqn{SDf} = sleep duration on work-free days.
+#' * \eqn{SDweek} = average weekly sleep duration.
+#'
+#' \eqn{MSFsc} is the participant chronotype in standard and micro versions of
+#' the MCTQ.
+#'
+#' ### For the shift version of the MCTQ:
+#'
+#' __\deqn{If SDf <= SDw: MSF}__
+#' __\deqn{If SDf > SDw: MSF - (SDf - OSD) / 2}__
+#'
+#' Where:
+#'
+#' * \eqn{MSF} = mid-sleep on free days after shift.
+#' * \eqn{SDw} = sleep duration on shift.
+#' * \eqn{SDf} = sleep duration on free days after shift.
+#' * \eqn{OSD} = overall sleep duration.
+#'
+#' Note that the basis for estimating chronotype in shift-workers is the
+#' mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
+#' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
+#' midsleep time on free days of other shifts (_e.g._ by using a linear model).
+#' Unfortunately the `mctq` package can't help you with that, as it requires a
+#' closer look at your data.
+#'
 #' @param msf A `hms` object corresponding to the __mid-sleep on work-free
-#'   days__ of a standard MCTQ questionnaire (you can use [mctq::ms()] to
-#'   compute it).
+#'   days__ value from a standard, micro, or shift version of the MCTQ
+#'   questionnaire (you can use [mctq::ms()] to compute it).
+#' @param sd_w A `Duration` object corresponding to the __sleep duration on work
+#'   days__ value from a standard, micro, or shift version of the MCTQ
+#'   questionnaire (you can use [mctq::sd()] to compute it).
+#' @param sd_f A `Duration` object corresponding to the __sleep duration on
+#'   work-free days__ value from a standard, micro, or shift version of the MCTQ
+#'   questionnaire (you can use [mctq::sd()] to compute it).
 #' @param sd_week A `Duration` object corresponding to the __average weekly
-#'   sleep duration__ of a standard MCTQ questionnaire (you can use
-#'   [mctq::sd_week()] to compute it).
+#'   sleep duration__ value from a standard or micro version of the MCTQ
+#'   questionnaire (you can use [mctq::sd_week()] to compute it) __or__ the
+#'   __overall sleep duration__ value from a MCTQ shift (you can use
+#'   [mctq::sd_overall()] to compute it).
 #' @param alarm_f A `logical` object corresponding to the __alarm clock use on
-#'   work-free days__ of a standard MCTQ questionnaire.
+#'   work-free days__ value from a standard, micro, or shift version of the MCTQ
+#'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
+#'   computed. `msf_sc()` will return `NA` for those cases.
 #'
-#' @return A `hms` object corresponding to the chronotype/corrected midsleep on
-#'   free days.
+#' @return A `hms` object corresponding to the chronotype or corrected midsleep
+#'   on free days.
 #'
-#' @inheritParams sd_week
 #' @template mctq_c
+#' @template mctq_d
 #' @template references_a
 #' @export
 #'
@@ -819,6 +891,7 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #' @inheritParams sd_week
 #' @inheritParams msf_sc
 #' @template mctq_c
+#' @template mctq_d
 #' @template references_a
 #' @export
 #'
@@ -896,6 +969,7 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week) {
 #'
 #' @inheritParams msf_sc
 #' @template mctq_c
+#' @template mctq_d
 #' @template references_a
 #' @export
 #'
@@ -978,6 +1052,7 @@ sjl_rel <- function(msw, msf) {
 #'
 #' @inheritParams fd
 #' @template mctq_c
+#' @template mctq_d
 #' @template references_a
 #' @export
 #'

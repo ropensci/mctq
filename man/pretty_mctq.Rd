@@ -55,7 +55,7 @@ pretty_mctq(mctq:::analyze_std_mctq(round = FALSE, hms = FALSE))
 Other utility functions: 
 \code{\link{assign_date}()},
 \code{\link{convert_to}()},
-\code{\link{qplot_mctq}()},
+\code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},
 \code{\link{shortest_interval}()},

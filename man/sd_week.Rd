@@ -11,12 +11,12 @@ sd_week(wd, sd_w, sd_f)
 week} value from a standard or micro version of the MCTQ questionnaire.}
 
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} from a standard MCTQ questionnaire (you can use \code{\link[=sd]{sd()}} to
-compute it).}
+days} value from a standard or micro version of the MCTQ questionnaire
+(you can use \code{\link[=sd]{sd()}} to compute it).}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
-work-free days} from a standard MCTQ questionnaire (you can use
-\code{\link[=sd]{sd()}} to compute it).}
+work-free days} value from a standard or micro version of the MCTQ
+questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
 }
 \value{
 A \code{Duration} object corresponding to the average weekly sleep
@@ -43,7 +43,7 @@ Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
 \strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
@@ -66,23 +66,6 @@ Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
-
-\subsection{Missing sections in standard and micro MCTQ versions}{
-
-Although the standard and micro versions of the MCTQ ask for subjects to
-complete the workdays and work-free days sections, even when he/she do not
-have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of this parts of the
-questionnaire. In this cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
-\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
-(Not Available) as output. That's because their computation combines workdays
-and work-free days variables.
-
-For those special standard and micro MCTQ cases where one section is
-missing, a \code{NA} value is the correct output for the functions above when
-\code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
-}
 }
 \section{Guidelines}{
 
@@ -90,7 +73,7 @@ different approaches to deal with cases like this. See \code{vignette("missing s
 For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 (\href{http://bit.ly/3iGEgqX}{2012}), Ghotbi \emph{et.al}
 (\href{https://bit.ly/34VhA0l}{2020}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines to \code{sd_week()} (\eqn{SDweek}) computation are as follow.
+guidelines for \code{sd_week()} (\eqn{SDweek}) computation are as follow.
 
 \strong{\deqn{((SDw x WD) + (SDf x FD)) / 7}}
 

@@ -10,11 +10,11 @@ shortest_interval(x, y, class = "hms", inverse = FALSE)
 longer_interval(x, y, class = "hms")
 }
 \arguments{
-\item{x, y}{A \code{hms} or \code{POSIXt} vector.}
+\item{x, y}{A \code{hms} or \code{POSIXt} object.}
 
 \item{class}{(optional) a string indicating the object class of the output.}
 
-\item{inverse}{(optional) a logical value indicating if the function must
+\item{inverse}{(optional) a \code{logical} value indicating if the function must
 return a inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
 }
 \value{
@@ -136,7 +136,7 @@ Other utility functions:
 \code{\link{assign_date}()},
 \code{\link{convert_to}()},
 \code{\link{pretty_mctq}()},
-\code{\link{qplot_mctq}()},
+\code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},
 \code{\link{sum_time}()},

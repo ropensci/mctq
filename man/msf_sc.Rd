@@ -3,7 +3,7 @@
 \name{msf_sc}
 \alias{msf_sc}
 \alias{chronotype}
-\title{Compute MCTQ chronotype/corrected midsleep on work-free days}
+\title{Compute MCTQ chronotype or corrected midsleep on work-free days}
 \usage{
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 
@@ -11,35 +11,51 @@ chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 }
 \arguments{
 \item{msf}{A \code{hms} object corresponding to the \strong{mid-sleep on work-free
-days} of a standard MCTQ questionnaire (you can use \code{\link[=ms]{ms()}} to
-compute it).}
+days} value from a standard, micro, or shift version of the MCTQ
+questionnaire (you can use \code{\link[=ms]{ms()}} to compute it).}
 
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} from a standard MCTQ questionnaire (you can use \code{\link[=sd]{sd()}} to
-compute it).}
+days} value from a standard, micro, or shift version of the MCTQ
+questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
-work-free days} from a standard MCTQ questionnaire (you can use
-\code{\link[=sd]{sd()}} to compute it).}
+work-free days} value from a standard, micro, or shift version of the MCTQ
+questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
 
 \item{sd_week}{A \code{Duration} object corresponding to the \strong{average weekly
-sleep duration} of a standard MCTQ questionnaire (you can use
-\code{\link[=sd_week]{sd_week()}} to compute it).}
+sleep duration} value from a standard or micro version of the MCTQ
+questionnaire (you can use \code{\link[=sd_week]{sd_week()}} to compute it) \strong{or} the
+\strong{overall sleep duration} value from a MCTQ shift (you can use
+\code{\link[=sd_overall]{sd_overall()}} to compute it).}
 
 \item{alarm_f}{A \code{logical} object corresponding to the \strong{alarm clock use on
-work-free days} of a standard MCTQ questionnaire.}
+work-free days} value from a standard, micro, or shift version of the MCTQ
+questionnaire. Note that, if \code{alarm_f == TRUE}, \code{msf_sc} cannot be
+computed. \code{msf_sc()} will return \code{NA} for those cases.}
 }
 \value{
-A \code{hms} object corresponding to the chronotype/corrected midsleep on
-free days.
+A \code{hms} object corresponding to the chronotype or corrected midsleep
+on free days.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{msf_sc()} computes the \strong{chronotype/corrected midsleep on free days} for
-the standard Munich Chronotype Questionnaire (MCTQ).
+\code{msf_sc()} computes the \strong{chronotype or corrected midsleep on free days} for
+standard, micro, and shift versions of the Munich Chronotype Questionnaire
+(MCTQ).
+
+When using the shift version of the MCTQ, replace the value of \code{sd_week} to
+\code{sd_overall}, as instructed in the Arguments section.
 
 \code{chronotype()} is just a wrapper for \code{msf_sc()}.
+
+Note that the basis for estimating chronotype in shift-workers is the
+mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
+schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
+(\href{https://bit.ly/38IEEk4}{2013}) propose to derive it from the corrected
+midsleep time on free days of other shifts (\emph{e.g.} by using a linear model).
+Unfortunately the \code{mctq} package can't help you with that, as it requires a
+closer look at your data.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -53,7 +69,7 @@ Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
 \strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
@@ -76,8 +92,60 @@ Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
+}
+\section{Guidelines}{
 
-\subsection{Missing sections in standard and micro MCTQ versions}{
+
+For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}), Ghotbi \emph{et.al}
+(\href{https://bit.ly/34VhA0l}{2020}), Juda, Vetter, & Roenneberg
+(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
+guidelines for \code{msf_sc()} (\eqn{MSFsc}) computation are as follow.
+
+Note that, for all cases, \eqn{MSFsc} cannot be computed if the participant
+wake up with an alarm clock on free days.
+\subsection{For standard and micro versions of the MCTQ:}{
+
+\strong{\deqn{If SDf <= SDw: MSF}}
+\strong{\deqn{If SDf > SDw: MSF - (SDf - SDweek) / 2}}
+
+Where:
+\itemize{
+\item \eqn{MSF} = mid-sleep on work-free days.
+\item \eqn{SDw} = sleep duration on work days.
+\item \eqn{SDf} = sleep duration on work-free days.
+\item \eqn{SDweek} = average weekly sleep duration.
+}
+
+\eqn{MSFsc} is the participant chronotype in standard and micro versions of
+the MCTQ.
+}
+
+\subsection{For the shift version of the MCTQ:}{
+
+\strong{\deqn{If SDf <= SDw: MSF}}
+\strong{\deqn{If SDf > SDw: MSF - (SDf - OSD) / 2}}
+
+Where:
+\itemize{
+\item \eqn{MSF} = mid-sleep on free days after shift.
+\item \eqn{SDw} = sleep duration on shift.
+\item \eqn{SDf} = sleep duration on free days after shift.
+\item \eqn{OSD} = overall sleep duration.
+}
+
+Note that the basis for estimating chronotype in shift-workers is the
+mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
+schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
+(\href{https://bit.ly/38IEEk4}{2013}) propose to derive it from the corrected
+midsleep time on free days of other shifts (\emph{e.g.} by using a linear model).
+Unfortunately the \code{mctq} package can't help you with that, as it requires a
+closer look at your data.
+}
+}
+
+\section{Missing sections in standard and micro MCTQ versions}{
+
 
 Although the standard and micro versions of the MCTQ ask for subjects to
 complete the workdays and work-free days sections, even when he/she do not
@@ -93,7 +161,7 @@ missing, a \code{NA} value is the correct output for the functions above when
 \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
 different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
 }
-}
+
 \examples{
 ## __ Scalar example __
 msf_sc(hms::parse_hms("04:00:00"), lubridate::dhours(6),

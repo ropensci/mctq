@@ -38,7 +38,7 @@ Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
 \strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
@@ -73,9 +73,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter & Roenneberg
+(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
 (\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines to \code{so()} (\eqn{SO}) computation are as follow.
+guidelines for \code{so()} (\eqn{SO}) computation are as follow.
 
 \strong{\deqn{SPrep + SLat}}
 

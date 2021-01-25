@@ -49,7 +49,7 @@ Other utility functions:
 \code{\link{assign_date}()},
 \code{\link{convert_to}()},
 \code{\link{pretty_mctq}()},
-\code{\link{qplot_mctq}()},
+\code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{shortest_interval}()},
 \code{\link{sum_time}()},

@@ -4,28 +4,23 @@
 \alias{sd_overall}
 \title{Compute MCTQ overall sleep duration (only for MCTQ Shift)}
 \usage{
-sd_overall(n_w, sd_w, n_f, sd_f)
+sd_overall(n, sd)
 }
 \arguments{
-\item{n_w}{An \code{integer} or \code{numeric} object corresponding to the \strong{number of
-days worked in each shift} from a MCTQ shift questionnaire (\emph{e.g} c(4, 3,
-4). \code{n_w} values must be paired with \code{sd_w}.}
+\item{n}{A \code{list} object with \link[rlang:is_integerish]{integerish} \code{integer}
+or \code{numeric} elements corresponding to the \strong{number of days from each
+shift} and \strong{number of free days after each shift} from a MCTQ shift
+questionnaire. \code{n} elements and values must be paired with \code{sd} elements
+and values.}
 
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration in
-each shift} from a MCTQ shift questionnaire. \code{sd_w} values must be paired
-with \code{n_w}.}
-
-\item{n_f}{An \code{integer} or \code{numeric} object corresponding to the \strong{number of
-free days after each shift} from a MCTQ shift questionnaire (\emph{e.g} c(2, 1,
-2). \code{n_f} values must be paired with \code{sd_f}.}
-
-\item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration between
-two free days after each shift} from a MCTQ shift questionnaire. \code{sd_f}
-values must be paired with \code{n_f}.}
+\item{sd}{A \code{list} object with \code{Duration} elements corresponding to the
+\strong{sleep duration in each shift} and \strong{sleep duration between two free days
+after each shift} from a MCTQ shift questionnaire. \code{sd} elements and
+values must be paired with \code{n} elements and values.}
 }
 \value{
-A \code{Duration} object corresponding to the overall sleep duration
-duration.
+A \code{Duration} object corresponding to the weighted mean of \code{sd} and
+\code{n} (weights).
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -36,8 +31,8 @@ of the Munich Chronotype Questionnaire (MCTQ).
 See \code{\link[=sd_week]{sd_week()}} to compute the average weekly sleep duration for the
 standard and micro versions of the MCTQ.
 
-Please check the Arguments section if you have any questions about
-\code{sd_overall()} operation.
+Please check Operation section if you have any questions about \code{sd_overall()}
+operation.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -51,7 +46,7 @@ Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
 \strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
@@ -74,30 +69,30 @@ Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
-
-\subsection{Missing sections in standard and micro MCTQ versions}{
-
-Although the standard and micro versions of the MCTQ ask for subjects to
-complete the workdays and work-free days sections, even when he/she do not
-have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of this parts of the
-questionnaire. In this cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
-\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
-(Not Available) as output. That's because their computation combines workdays
-and work-free days variables.
-
-For those special standard and micro MCTQ cases where one section is
-missing, a \code{NA} value is the correct output for the functions above when
-\code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
 }
+\section{Operation}{
+
+
+The shift version of the MCTQ was developed for shift-workers rotating
+through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
+2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
+schedules (Juda, Vetter, & Roenneberg, \href{https://bit.ly/38IEEk4}{2013}). For
+that reason, \code{sd_overall()} must operate considering any shift combination.
+
+Considering the requirement above, \code{sd_overall()} was developed to only
+accept lists values as arguments. For this approach to work, both \code{n} and
+\code{sd} arguments must be lists with paired elements and values between \code{n} and
+\code{sd}, \emph{i.e.} the first element of \code{n} (\emph{e.g.} \code{n_wm}) must be paired with the
+first element of \code{sd} (\emph{e.g.} \code{sd_wm}). The function will do the work of
+combining them and output a weighted mean.
 }
+
 \section{Guidelines}{
 
 
-For reference, Juda, Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}),
-and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines to \code{sd_overall()}
-(\eqn{\OSD}) computation are as follow.
+For reference, Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013})
+and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sd_overall()}
+computation are as follow.
 
 \strong{\deqn{((SDwMEN * nwMEN) + (SDfMEN * nfMEN)) / (nwMEN + nfMEN)}}
 
@@ -117,47 +112,50 @@ cycle.
 Note that the overall sleep duration is the weighted average of the
 shift-specific mean sleep durations, \emph{i.e.} \eqn{(SDwMEN * nwMEN)} and
 \eqn{(SDfMEN * nfMEN)} must be unfold for each shift and non-shift
-(\emph{e.g.} \eqn{(SDw_M * nw_M) + (SDw_E * nw_E) ...}).
+(\emph{e.g.} \eqn{(SDwM * nw_M) + (SDwE * nwE) ...}).
 }
 
 \examples{
 ## __ Scalar example __
-sd_week(5, lubridate::dhours(4), lubridate::dhours(8))
-#> [1] "18514.2857142857s (~5.14 hours)" # Expected
-sd_week(4, lubridate::dhours(7), lubridate::dhours(7))
-#> [1] "25200s (~7 hours)" # Expected
-sd_week(6, lubridate::as.duration(NA), lubridate::dhours(10))
-#> [1] NA # Expected
+n <- list(n_wm = 2, n_we = 4, n_wn = 3, n_fm = 2, n_fw = 4, n_fn = 2)
+sd <- list(sd_wm = lubridate::dhours(5), sd_we = lubridate::dhours(6),
+           sd_wn = lubridate::dhours(5), sd_fm = lubridate::dhours(10),
+           sd_fe = lubridate::dhours(9), sd_fn = lubridate::dhours(8.5))
+sd_overall(n, sd)
+#> [1] "25835.2941176471s (~7.18 hours)" # Expected
 
 ## __ Vectorized example __
-n_w <- list(n_wm = c(1, 1), n_we = c(1, 1))
-sd_w <- list(sd_wm = c(lubridate::dhours(2), lubridate::dhours(1)),
-             sd_we = c(lubridate::dhours(1), lubridate::dhours(1)))
-n_f <- list(n_fm = c(1, 2), n_fe = c(1, 3))
-sd_f <- list(sd_fm = c(lubridate::dhours(1), lubridate::dhours(1)),
-             sd_fe = c(lubridate::dhours(1), lubridate::dhours(1)))
-((sd_w[[1]][1] * n_w[[1]][1]) + (sd_w[[2]][1] * n_w[[2]][1]) +
-   (sd_f[[1]][1] * n_f[[1]][1]) + (sd_f[[2]][1] * n_f[[2]][1])) /
-   (n_w[[1]][1] + n_w[[2]][1] + n_f[[1]][1] + n_f[[2]][1])
-((sd_w[[1]][2] * n_w[[1]][2]) + (sd_w[[2]][2] * n_w[[2]][2]) +
- (sd_f[[1]][2] * n_f[[1]][2]) + (sd_f[[2]][2] * n_f[[2]][2])) /
- (n_w[[1]][2] + n_w[[2]][2] + n_f[[1]][2] + n_f[[2]][2])
-sd_overall(n_w, sd_w, n_f, sd_f)
-#> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
+n <- list(n_wm = c(4, 3), n_we = c(2, 3), n_fm = c(2, 2), n_fe = c(4, 4))
+sd <- list(sd_wm = c(lubridate::dhours(6), lubridate::dhours(7)),
+           sd_we = c(lubridate::dhours(5.5), lubridate::dhours(6)),
+           sd_fm = c(lubridate::dhours(9), lubridate::dhours(8.5)),
+           sd_fe = c(lubridate::dhours(7), lubridate::dhours(10)))
+sd_overall(n, sd)
+#> [1] "24300s (~6.75 hours)" "28800s (~8 hours)"  # Expected
+
+## __ Checking second output from vectorized example __
+i <- 2
+x <- c(sd[["sd_wm"]][i], sd[["sd_we"]][i], sd[["sd_fm"]][i],
+       sd[["sd_fe"]][i])
+w <- c(n[["n_wm"]][i], n[["n_we"]][i], n[["n_fm"]][i], n[["n_fe"]][i])
+lubridate::as.duration(stats::weighted.mean(x, w))
+#> [1] "28800s (~8 hours)" # Expected
 
 ## __ Converting the output to hms __
-x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
-convert_to(x, "hms")
-#> 06:36:25.714286 # Expected
-convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
-#> 06:36:25 # Expected
+n <- list(n_wm = 3, n_we = 2, n_wn = 2, n_fm = 1, n_fw = 3, n_fn = 5)
+sd <- list(sd_wm = lubridate::dhours(4.12), sd_we = lubridate::dhours(6),
+           sd_wn = lubridate::dhours(3.43), sd_fm = lubridate::dhours(9.5),
+           sd_fe = lubridate::dhours(7.32), sd_fn = lubridate::dhours(10.5))
+sd_overall(n, sd)
+#> [1] "25915.5s (~7.2 hours)" # Expected
+convert_to(sd_overall(n, sd), "hms")
+#> 07:11:55.5 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
-x
-#> [1] "22988.5714285714s (~6.39 hours)" # Expected
-round_time(x)
-#> [1] "22989s (~6.39 hours)" # Expected
+round_time(sd_overall(n, sd))
+#> [1] "25916s (~7.2 hours)" # Expected
+round_time(convert_to(sd_overall(n, sd), "hms"))
+#> 07:11:56 # Expected
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType

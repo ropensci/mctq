@@ -1,18 +1,40 @@
-#' Quick plot for MCTQ variables
+#' Walk through distribution plots
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `qplot_mctq()` uses [ggplot2::qplot()] to help you visualize the
-#' distributions of your MCTQ data. The function also adapts time values
-#' to better fit plots.
+#' `qplot_walk()` helps you to visually assess the distribution of your data.
+#' It uses [ggplot2::qplot()] to walk through each selected variable from a
+#' data frame.
 #'
 #' @details
 #'
+#' ## Requirements
+#'
+#' This function requires the [grDevices][grDevices::grDevices-package]
+#' package loaded and can only run in interactive mode. This wont be a issue for
+#' most people, since the package comes with a standard R installation and is
+#' typically loaded by default. Most people also run R interactively.
+#'
+#' ## Plot recover
+#'
+#' `qplot_walk()` erases all plots after it runs. For that reason, the function
+#' first emits a dialog message warning the user of this behavior before it
+#' runs. If you want to recover a single distribution plot, assign the variable
+#' vector on the `data` argument.
+#'
+#' ## Additional arguments to [ggplot2::qplot()]
+#'
+#' `qplot_walk()` uses ggplot2 [ggplot2::qplot()] to generate plots. If you are
+#' familiar with [ggplot2::qplot()], you can pass additional arguments to the
+#' function using the ellipsis argument (`...`).
+#'
+#' Note that `x`, `y` and `data` arguments are reserved for `qplot_walk()`.
+#'
 #' ## `Duration`, `Period`, and `difftime` objects
 #'
-#' In order to help with the visualization, `qplot_mctq()` automatically
+#' In order to help with the visualization, `qplot_walk()` automatically
 #' converts `Duration`, `Period`, and `difftime` objects to `hms`.
 #'
 #' ## Midday change
@@ -27,15 +49,17 @@
 #'
 #' ## `id` variables
 #'
-#' `qplot_mctq()` will ignore any variable with the follow name pattern
+#' `qplot_walk()` will ignore any variable with the follow name pattern
 #' `"^id$|[\\._-]id$"`, _i.e_ any variable named `id` or that ends with
 #' `.id`, `_id`, or `-id`.
 #'
 #' You can disable this behavior using `remove_id = FALSE`.
 #'
 #' @param data An `atomic` or `data frame` object.
+#' @param ... (optional) additional arguments to be passed to
+#'   [ggplot2::qplot()].
 #' @param cols (optional) (only for data frames) a character vector indicating
-#'   columns names in `data` for plotting. If `NULL`, `qplot_mctq()` will use
+#'   columns names in `data` for plotting. If `NULL`, `qplot_walk()` will use
 #'   all columns in `data`. This setting only works if `pattern = NULL`
 #'   (default: `NULL`).
 #' @param pattern (optional) (only for data frames) a string with a regular
@@ -58,20 +82,32 @@
 #'
 #' @examples
 #' \dontrun{
-#' qplot_mctq(mctq::std_mctq$bt_w)
-#' qplot_mctq(mctq::std_mctq)
-#' qplot_mctq(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
-#' qplot_mctq(mctq::std_mctq, pattern = "_w$")
-#' qplot_mctq(datasets::iris)
-#' qplot_mctq(datasets::mtcars)
+#' qplot_walk(mctq::std_mctq$bt_w)
+#' qplot_walk(mctq::std_mctq)
+#' qplot_walk(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
+#' qplot_walk(mctq::std_mctq, pattern = "_w$")
+#' qplot_walk(datasets::iris)
+#' qplot_walk(datasets::mtcars)
 #' }
-qplot_mctq <- function(data, cols = NULL, pattern = NULL, ignore = "character",
-                       remove_id = TRUE, midday_change = TRUE) {
+qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
+                       ignore = "character", remove_id = TRUE,
+                       midday_change = TRUE) {
 
     # Check arguments -----
 
     if (isFALSE(rlang::is_interactive())) {
         rlang::abort("This function can only be used in interactive mode.")
+    }
+
+    if(!isNamespaceLoaded("grDevices")) {
+        rlang::abort("This function requires the `grDevices` package to run.")
+    }
+
+    if (any(c("x", "y", "data") %in% names(list(...)))) {
+        rlang::abort(paste0(
+            "`x`, `y` and `data` are reserved arguments for ",
+            "`qplot_walk()`."
+            ))
     }
 
     if (is.data.frame(data)) {
@@ -115,16 +151,18 @@ qplot_mctq <- function(data, cols = NULL, pattern = NULL, ignore = "character",
         assert_has_length(data)
 
         rlang::warn(paste0(
-            "`data` is atomic. All other arguments, except `midday_change`, ",
-            "are ignored."
+            "`data` is atomic. All other arguments, except `...` and ",
+            "`midday_change`, are ignored."
             ))
 
         x <- transform(data, midday_change)
+        xlab <- deparse(substitute(data))
 
-        return(
-            ggplot2::qplot(x, xlab = deparse(substitute(data))) %>%
-                   print %>% shush
-            )
+        if ("xlab" %in% names(list(...))) {
+            return(ggplot2::qplot(x, ...) %>% print %>% shush)
+        } else {
+            return(ggplot2::qplot(x, xlab = xlab, ...) %>% print %>% shush)
+        }
     }
 
     # Set values -----
@@ -143,7 +181,7 @@ qplot_mctq <- function(data, cols = NULL, pattern = NULL, ignore = "character",
         if (all(unique(get_class(data[cols])) %in% ignore)) {
             rlang::abort(paste0(
                 "You can't ignore all variables in `cols` or in `data`. ",
-                "Note that `qplot_mctq()` is set by default to ignore ",
+                "Note that `qplot_walk()` is set by default to ignore ",
                 "'character' objects. Please check your settings."
             ))
         }
@@ -170,7 +208,7 @@ qplot_mctq <- function(data, cols = NULL, pattern = NULL, ignore = "character",
 
     if (requireNamespace("grDevices", quietly = TRUE)) {
         dialog_line(line = paste0(
-            "WARNING: `qplot_mctq()` clears all plots from your system \n",
+            "WARNING: `qplot_walk()` clears all plots from your system \n",
             "after it runs. If you don't agree with this, press `esc` to \n",
             "exit, or `enter` to continue."))
     }
@@ -179,7 +217,12 @@ qplot_mctq <- function(data, cols = NULL, pattern = NULL, ignore = "character",
 
     for (i in cols) {
         x <- transform(data[[i]], midday_change)
-        shush(print(ggplot2::qplot(x, xlab = i)))
+
+        if ("xlab" %in% names(list(...))) {
+            shush(print(ggplot2::qplot(x, ...)))
+        } else {
+            shush(print(ggplot2::qplot(x, xlab = i, ...)))
+        }
 
         dialog <- dialog_line(
             line = "Press `esc` to exit or `enter` to continue.",

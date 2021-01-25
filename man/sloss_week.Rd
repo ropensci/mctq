@@ -11,16 +11,18 @@ sloss_week(wd, sd_w, sd_f, sd_week)
 week} value from a standard or micro version of the MCTQ questionnaire.}
 
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} from a standard MCTQ questionnaire (you can use \code{\link[=sd]{sd()}} to
-compute it).}
+days} value from a standard or micro version of the MCTQ questionnaire
+(you can use \code{\link[=sd]{sd()}} to compute it).}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
-work-free days} from a standard MCTQ questionnaire (you can use
-\code{\link[=sd]{sd()}} to compute it).}
+work-free days} value from a standard or micro version of the MCTQ
+questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
 
 \item{sd_week}{A \code{Duration} object corresponding to the \strong{average weekly
-sleep duration} of a standard MCTQ questionnaire (you can use
-\code{\link[=sd_week]{sd_week()}} to compute it).}
+sleep duration} value from a standard or micro version of the MCTQ
+questionnaire (you can use \code{\link[=sd_week]{sd_week()}} to compute it) \strong{or} the
+\strong{overall sleep duration} value from a MCTQ shift (you can use
+\code{\link[=sd_overall]{sd_overall()}} to compute it).}
 }
 \value{
 A \code{Duration} object corresponding to the weekly sleep loss.
@@ -43,7 +45,7 @@ Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
 \strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
@@ -66,8 +68,9 @@ Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
+}
+\section{Missing sections in standard and micro MCTQ versions}{
 
-\subsection{Missing sections in standard and micro MCTQ versions}{
 
 Although the standard and micro versions of the MCTQ ask for subjects to
 complete the workdays and work-free days sections, even when he/she do not
@@ -83,7 +86,7 @@ missing, a \code{NA} value is the correct output for the functions above when
 \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
 different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
 }
-}
+
 \examples{
 ## __ Scalar example __
 sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7),

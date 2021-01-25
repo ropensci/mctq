@@ -11,7 +11,7 @@ template:
     noindex: true
 
 reference:
-- title: Standard MCTQ
+- title: MCTQ
   contents:
   - fd
   - so
@@ -34,11 +34,13 @@ reference:
 
 - title: Utilities
   contents:
+  - assign_date
   - convert_to
   - pretty_mctq
-  - qplot_mctq
+  - qplot_walk
   - random_mctq
   - round_time
+  - shortest_interval
   - sum_time
   - validate_mctq
 

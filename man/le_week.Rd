@@ -38,7 +38,7 @@ Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
 \strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
+Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
@@ -61,8 +61,9 @@ Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
+}
+\section{Missing sections in standard and micro MCTQ versions}{
 
-\subsection{Missing sections in standard and micro MCTQ versions}{
 
 Although the standard and micro versions of the MCTQ ask for subjects to
 complete the workdays and work-free days sections, even when he/she do not
@@ -78,7 +79,7 @@ missing, a \code{NA} value is the correct output for the functions above when
 \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
 different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
 }
-}
+
 \examples{
 ## __ Scalar example __
 le_week(5, lubridate::dhours(1.5), lubridate::dhours(3.7))

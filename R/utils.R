@@ -371,7 +371,7 @@ is_time <- function(x, rm = NULL) {
 
     checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
 
-    classes <- c("difftime", "Duration", "hms", "Period", "Date", "POSIXct",
+    classes <- c("Duration", "Period", "difftime", "hms", "Date", "POSIXct",
                  "POSIXlt", "Interval")
 
     if (!is.null(rm)) {
@@ -639,7 +639,7 @@ get_class <- function(x) {
     }
 
     if (is.list(x) || is.data.frame(x)) {
-        sapply(x, foo)
+        vapply(x, foo, character(1))
     } else {
         class(x)[1]
     }
