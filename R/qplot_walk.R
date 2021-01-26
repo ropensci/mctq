@@ -210,7 +210,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         dialog_line(line = paste0(
             "WARNING: `qplot_walk()` clears all plots from your system \n",
             "after it runs. If you don't agree with this, press `esc` to \n",
-            "exit, or `enter` to continue."))
+            "exit, or press `enter` to continue."))
     }
 
     # Create qplots -----

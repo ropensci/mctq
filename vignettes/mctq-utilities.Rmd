@@ -1,0 +1,19 @@
+---
+title: "MCTQ utilities"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mctq_utilities}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+__UNDER DEVELOPMENT__
+
+Shows how to operate the utilities functions from the `mctq` package, and  explains how can they help the user while performing data processing and analysis.

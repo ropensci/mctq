@@ -4,7 +4,7 @@
 \alias{sloss_week}
 \title{Compute MCTQ weekly sleep loss}
 \usage{
-sloss_week(wd, sd_w, sd_f, sd_week)
+sloss_week(wd, sd_w, sd_f)
 }
 \arguments{
 \item{wd}{An integerish number corresponding to the \strong{number of work days per
@@ -17,12 +17,6 @@ days} value from a standard or micro version of the MCTQ questionnaire
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} value from a standard or micro version of the MCTQ
 questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
-
-\item{sd_week}{A \code{Duration} object corresponding to the \strong{average weekly
-sleep duration} value from a standard or micro version of the MCTQ
-questionnaire (you can use \code{\link[=sd_week]{sd_week()}} to compute it) \strong{or} the
-\strong{overall sleep duration} value from a MCTQ shift (you can use
-\code{\link[=sd_overall]{sd_overall()}} to compute it).}
 }
 \value{
 A \code{Duration} object corresponding to the weekly sleep loss.
@@ -30,8 +24,11 @@ A \code{Duration} object corresponding to the weekly sleep loss.
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{sloss_week()} computes the \strong{weekly sleep loss} for the standard Munich
-Chronotype Questionnaire (MCTQ).
+\code{sloss_week()} computes the \strong{weekly sleep loss} for the standard and micro
+versions of the Munich Chronotype Questionnaire (MCTQ).
+
+Please note that this function is not appropriated for use with he MCTQ
+Shift.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -55,7 +52,7 @@ The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
-(see \code{vignette("converting_data", package = "mctq")}).
+(see \code{vignette("converting-data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -69,6 +66,25 @@ only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
+\section{Guidelines}{
+
+
+For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}) and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
+guidelines for \code{sloss_week()} (\eqn{SLossweek}) computation are as follow.
+
+\strong{\deqn{If SDweek > SDw: (SDweek - SDw) * WD}}
+\strong{\deqn{If SDweek <= SDw: (SDweek - SDf) * (7 - WD)}}
+
+Where:
+\itemize{
+\item \eqn{WD} = number of workdays per week.
+\item \eqn{SDw} = sleep duration on workdays.
+\item \eqn{SDf} = sleep duration on work-free days.
+\item \eqn{SDweek} = average weekly sleep duration.
+}
+}
+
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
@@ -84,42 +100,38 @@ and work-free days variables.
 For those special standard and micro MCTQ cases where one section is
 missing, a \code{NA} value is the correct output for the functions above when
 \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
+different approaches to deal with cases like this. See
+\code{vignette("missing-sections", package = "mctq")} to learn more.
 }
 
 \examples{
 ## __ Scalar example __
-sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7),
-          lubridate::dhours(6.75))
-#> [1] "3600s (~1 hours)" # Expected
-sloss_week(5, lubridate::dhours(7), lubridate::dhours(8),
-          lubridate::dhours(7.45))
-#> [1] "8100s (~2.25 hours)" # Expected
-sloss_week(7, lubridate::dhours(4.5), lubridate::dhours(9.45),
-           lubridate::as.duration(NA))
+sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7))
+#> [1] "3085.71428571429s (~51.43 minutes)" # Expected
+sloss_week(5, lubridate::dhours(7), lubridate::dhours(8))
+#> [1] "5142.85714285714s (~1.43 hours)" # Expected
+sloss_week(7, lubridate::dhours(NA), lubridate::dhours(9.45))
 #> [1] NA # Expected
 
 ## __ Vectorized example __
 wd <- c(2, 0)
 sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
-sd_week <- c(lubridate::dhours(6.75), lubridate::dhours(8))
-sloss_week(wd, sd_w, sd_f, sd_week)
-#> [1] "4500s (~1.25 hours)" "0s"  # Expected
+sloss_week(wd, sd_w, sd_f)
+#> [1] "2571.42857142857s (~42.86 minutes)" # Expected
+#> [2] "0s"
 
 ## __ Converting the output to `hms` __
-x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5),
-               lubridate::dhours(4.2))
+x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5))
 convert_to(x, "hms")
-#> 00:36:00 # Expected
+#> 01:42:51.428571 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324),
-               lubridate::dhours(6.1452))
+x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324))
 x
-#> [1] "5851.44000000001s (~1.63 hours)" # Expected
+#> [1] "4807.85142857144s (~1.34 hours)" # Expected
 round_time(x)
-#> [1] "5851s (~1.63 hours)" # Expected
+#> [1] "4808s (~1.34 hours)" # Expected
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType

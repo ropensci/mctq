@@ -16,19 +16,13 @@
 #'
 #' See References section to learn more.
 #'
-#' ## Workdays and work-free days computation
-#'
-#' The computation is the same for workdays and work-free days. Use the
-#' appropriated value entered on the section you are working on (_e.g._ `X_w`,
-#' `X_f`).
-#'
 #' ## Class requirements
 #'
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. This classes can be found on [hms::hms-package] and
 #' [lubridate::lubridate-package]. If your data do not conform to the object
 #' classes required, you can use [mctq::convert_to()] to convert it
-#' (see `vignette("converting_data", package = "mctq")`).
+#' (see `vignette("converting-data", package = "mctq")`).
 #'
 #' ## Rounding and fractional time
 #'

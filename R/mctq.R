@@ -82,6 +82,7 @@ fd <- function(wd) {
 #'   on a 24-hour clock basis.
 #'
 #' @template mctq_b
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -149,6 +150,7 @@ so <- function(sprep, slat) {
 #'   24-hour clock basis.
 #'
 #' @template mctq_b
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -214,6 +216,7 @@ gu <- function(se, si) {
 #'   `se` and `so` rolled on a 24-hour clock basis.
 #'
 #' @template mctq_b
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -276,6 +279,7 @@ sd <- function(so, se) {
 #'   `nape` and `napo` rolled on a 24-hour clock basis.
 #'
 #' @template mctq_b
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -338,6 +342,7 @@ napd <- function(napo, nape) {
 #' @return A `Duration` object corresponding to the sum between `sd` and `napd`.
 #'
 #' @template mctq_b
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -401,6 +406,7 @@ sd24 <- function(sd, napd) {
 #'   `bt` rolled on a 24-hour clock basis.
 #'
 #' @template mctq_b
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -534,7 +540,8 @@ ms <- function(so, sd) {
 #'   duration.
 #'
 #' @inheritParams fd
-#' @template mctq_c
+#' @template mctq_b
+#' @template mctq_d
 #' @template references_a
 #' @export
 #'
@@ -553,6 +560,13 @@ ms <- function(so, sd) {
 #' sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
 #' sd_week(wd, sd_w, sd_f)
 #' #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
+#'
+#' ## __ Checking second output from vectorized example __
+#' i <- 2
+#' x <- c(sd_w[i], sd_f[i])
+#' w <- c(wd[i], fd(wd[i]))
+#' lubridate::as.duration(stats::weighted.mean(x, w))
+#' #> [1] "19620s (~5.45 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
 #' x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
@@ -646,7 +660,7 @@ sd_week <- function(wd, sd_w, sd_f) {
 #' @return A `Duration` object corresponding to the weighted mean of `sd` and
 #'   `n` (weights).
 #'
-#' @template mctq_c
+#' @template mctq_b
 #' @template references_a
 #' @export
 #'
@@ -708,7 +722,7 @@ sd_overall <- function(n, sd) {
     sd <- Reduce("+", sd)
     n <- Reduce("+", n)
 
-    (sd) / n
+    sd / n
 
 }
 
@@ -722,12 +736,17 @@ sd_overall <- function(n, sd) {
 #' standard, micro, and shift versions of the Munich Chronotype Questionnaire
 #' (MCTQ).
 #'
+#' `chronotype()` is just a wrapper for `msf_sc()`.
+#'
+#' Note that, for epidemiological and genetic studies, `msf_sc` must be
+#' normalized for age and sex to make populations of different age and sex
+#' compositions comparable (Roenneberg, Allebrandt, Merrow, & Vetter,
+#' [2012](http://bit.ly/3iGEgqX)).
+#'
 #' When using the shift version of the MCTQ, replace the value of `sd_week` to
 #' `sd_overall`, as instructed in the Arguments section.
 #'
-#' `chronotype()` is just a wrapper for `msf_sc()`.
-#'
-#' Note that the basis for estimating chronotype in shift-workers is the
+#' Also note that the basis for estimating chronotype in shift-workers is the
 #' mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
 #' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
@@ -803,7 +822,7 @@ sd_overall <- function(n, sd) {
 #' @return A `hms` object corresponding to the chronotype or corrected midsleep
 #'   on free days.
 #'
-#' @template mctq_c
+#' @template mctq_b
 #' @template mctq_d
 #' @template references_a
 #' @export
@@ -883,58 +902,72 @@ chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `sloss_week()` computes the __weekly sleep loss__ for the standard Munich
-#' Chronotype Questionnaire (MCTQ).
+#' `sloss_week()` computes the __weekly sleep loss__ for the standard and micro
+#' versions of the Munich Chronotype Questionnaire (MCTQ).
+#'
+#' Please note that this function is not appropriated for use with he MCTQ
+#' Shift.
+#'
+#' @section Guidelines:
+#'
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)) and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines for `sloss_week()` (\eqn{SLossweek}) computation are as follow.
+#'
+#' __\deqn{If SDweek > SDw: (SDweek - SDw) * WD}__
+#' __\deqn{If SDweek <= SDw: (SDweek - SDf) * (7 - WD)}__
+#'
+#' Where:
+#'
+#' * \eqn{WD} = number of workdays per week.
+#' * \eqn{SDw} = sleep duration on workdays.
+#' * \eqn{SDf} = sleep duration on work-free days.
+#' * \eqn{SDweek} = average weekly sleep duration.
 #'
 #' @return A `Duration` object corresponding to the weekly sleep loss.
 #'
 #' @inheritParams sd_week
-#' @inheritParams msf_sc
-#' @template mctq_c
+#' @template mctq_b
 #' @template mctq_d
 #' @template references_a
 #' @export
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7),
-#'           lubridate::dhours(6.75))
-#' #> [1] "3600s (~1 hours)" # Expected
-#' sloss_week(5, lubridate::dhours(7), lubridate::dhours(8),
-#'           lubridate::dhours(7.45))
-#' #> [1] "8100s (~2.25 hours)" # Expected
-#' sloss_week(7, lubridate::dhours(4.5), lubridate::dhours(9.45),
-#'            lubridate::as.duration(NA))
+#' sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7))
+#' #> [1] "3085.71428571429s (~51.43 minutes)" # Expected
+#' sloss_week(5, lubridate::dhours(7), lubridate::dhours(8))
+#' #> [1] "5142.85714285714s (~1.43 hours)" # Expected
+#' sloss_week(7, lubridate::dhours(NA), lubridate::dhours(9.45))
 #' #> [1] NA # Expected
 #'
 #' ## __ Vectorized example __
 #' wd <- c(2, 0)
 #' sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 #' sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
-#' sd_week <- c(lubridate::dhours(6.75), lubridate::dhours(8))
-#' sloss_week(wd, sd_w, sd_f, sd_week)
-#' #> [1] "4500s (~1.25 hours)" "0s"  # Expected
+#' sloss_week(wd, sd_w, sd_f)
+#' #> [1] "2571.42857142857s (~42.86 minutes)" # Expected
+#' #> [2] "0s"
 #'
 #' ## __ Converting the output to `hms` __
-#' x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5),
-#'                lubridate::dhours(4.2))
+#' x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5))
 #' convert_to(x, "hms")
-#' #> 00:36:00 # Expected
+#' #> 01:42:51.428571 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324),
-#'                lubridate::dhours(6.1452))
+#' x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324))
 #' x
-#' #> [1] "5851.44000000001s (~1.63 hours)" # Expected
+#' #> [1] "4807.85142857144s (~1.34 hours)" # Expected
 #' round_time(x)
-#' #> [1] "5851s (~1.63 hours)" # Expected
-sloss_week <- function(wd, sd_w, sd_f, sd_week) {
+#' #> [1] "4808s (~1.34 hours)" # Expected
+sloss_week <- function(wd, sd_w, sd_f) {
 
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_duration(sd_w)
     assert_duration(sd_f)
-    assert_duration(sd_week)
-    assert_identical(wd, sd_w, sd_f, sd_week, type = "length")
+    assert_identical(wd, sd_w, sd_f, type = "length")
+
+    sd_week <- sd_week(wd, sd_w, sd_f)
 
     dplyr::case_when(
         sd_week > sd_w ~ (sd_week - sd_w) * wd,
@@ -950,25 +983,49 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week) {
 #' `r lifecycle::badge("experimental")`
 #'
 #' `sjl()` computes the __relative social jetlag__ or the __absolute social
-#' jetlag__ for the standard Munich Chronotype Questionnaire (MCTQ).
+#' jetlag__ for standard, micro, and shift versions of the Munich Chronotype
+#' Questionnaire (MCTQ).
+#'
+#' `sjl_rel()` it's just a wrapper for `sjl()` with `abs = FALSE`.
+#'
+#' @section Guidelines:
+#'
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines for `sjl()` (\eqn{SJLrel} and \eqn{SJL}) computation are as
+#' follow.
+#'
+#' For the relative social jetlag:
+#'
+#' __\deqn{MSF - MSW}__
+#'
+#' For the absolute social jetlag:
+#'
+#' __\deqn{| MSF - MSW |}__
+#'
+#' Where:
+#'
+#' * \eqn{MSW} = mid-sleep on work days.
+#' * \eqn{MSF} = mid-sleep on work-free days.
 #'
 #' Note that, due to time arithmetic issues, `sjl()` does a slight different
-#' computation than those propose by Roenneberg, Wirz-Justice & Merrow
-#' ([2003](https://bit.ly/3rLu195)) and the guidelines of The World Wide
-#' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)). See
-#' `vignette("social_jet_lag_signal", package = "mctq")` for more details.
+#' computation than those propose by the authors mentioned above. See
+#' `vignette("social_jet_lag", package = "mctq")` for more details.
 #'
-#' @param msw A `hms` object corresponding to the __mid-sleep on work days__ of
-#'   a standard MCTQ questionnaire (you can use [mctq::ms()] to compute it).
+#' @param msw A `hms` object corresponding to the __mid-sleep on work days__
+#'   from a standard, micro, or shift version of the MCTQ questionnaire (you can
+#'   use [mctq::ms()] to compute it).
 #' @param abs (optional) a `logical` value indicating if the function must
 #'   return an absolute SJL (always positive) or a relative SJL (the SJL with no
 #'   changes) (default: `TRUE`).
 #'
-#' @return A `Duration` object corresponding to the relative or absolute
-#' (if `abs = TRUE`) social jet lag.
+#' @return A `Duration` object corresponding to the relative or absolute (if
+#'   `abs = TRUE`) value of the shortest interval between `msf` and `msw`. See
+#' `vignette("social-jet-lag", package = "mctq")` for more details.
 #'
 #' @inheritParams msf_sc
-#' @template mctq_c
+#' @template mctq_b
 #' @template mctq_d
 #' @template references_a
 #' @export
@@ -977,8 +1034,8 @@ sloss_week <- function(wd, sd_w, sd_f, sd_week) {
 #' ## __ Scalar example __
 #' sjl(hms::parse_hms("03:30:00"), hms::parse_hms("05:00:00"))
 #' #> [1] "5400s (~1.5 hours)" # Expected
-#' sjl(hms::parse_hms("23:30:00"), hms::parse_hms("04:30:00"), abs = FALSE)
-#' #> [1] "18000s (~5 hours)"
+#' sjl(hms::parse_hms("04:30:00"), hms::parse_hms("23:30:00"), abs = FALSE)
+#' #> [1] "-18000s (~-5 hours)"
 #' sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:45:00"))
 #' #> [1] "9000s (~2.5 hours)" # Expected
 #' sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))
@@ -1051,7 +1108,7 @@ sjl_rel <- function(msw, msf) {
 #'   exposure.
 #'
 #' @inheritParams fd
-#' @template mctq_c
+#' @template mctq_b
 #' @template mctq_d
 #' @template references_a
 #' @export
@@ -1072,6 +1129,13 @@ sjl_rel <- function(msw, msf) {
 #' le_week(wd, le_w, le_f)
 #' #> [1] "10800s (~3 hours)" # Expected
 #' #> [2] "10157.1428571429s (~2.82 hours)" # Expected
+#'
+#' ## __ Checking second output from vectorized example __
+#' i <- 2
+#' x <- c(le_w[i], le_f[i])
+#' w <- c(wd[i], fd(wd[i]))
+#' lubridate::as.duration(stats::weighted.mean(x, w))
+#' #> [1] "10157.1428571429s (~2.82 hours)" # Expected
 #'
 #' ## __ Converting the output to `hms` __
 #' x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))

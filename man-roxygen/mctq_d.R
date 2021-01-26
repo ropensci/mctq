@@ -12,5 +12,5 @@
 #' For those special standard and micro MCTQ cases where one section is
 #' missing, a `NA` value is the correct output for the functions above when
 #' `wd > 0 & wd < 7`, but it may not be when `wd == 0` or `wd == 7`. There are
-#' different approaches to deal with cases like this. See `vignette("missing
-#' sections", package = "mctq")` to learn more.
+#' different approaches to deal with cases like this. See
+#' `vignette("missing-sections", package = "mctq")` to learn more.

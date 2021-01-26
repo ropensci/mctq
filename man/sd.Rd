@@ -40,20 +40,13 @@ Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
 guidelines used for the standard MCTQ.
 
 See References section to learn more.
-\subsection{Workdays and work-free days computation}{
-
-The computation is the same for workdays and work-free days. Use the
-appropriated value entered on the section you are working on (\emph{e.g.} \code{X_w},
-\code{X_f}).
-}
-
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
-(see \code{vignette("converting_data", package = "mctq")}).
+(see \code{vignette("converting-data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -86,6 +79,14 @@ Where:
 
 Note that this computation must be applied to each section of the
 questionnaire (\emph{e.g.} \eqn{SEw - SOw}).
+}
+
+\section{Workdays and work-free days computation}{
+
+
+The computation is the same for workdays and work-free days. Use the
+appropriated value entered on the section you are working on (\emph{e.g.} \code{X_w},
+\code{X_f}).
 }
 
 \examples{

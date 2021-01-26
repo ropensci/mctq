@@ -10,8 +10,9 @@ sjl(msw, msf, abs = TRUE)
 sjl_rel(msw, msf)
 }
 \arguments{
-\item{msw}{A \code{hms} object corresponding to the \strong{mid-sleep on work days} of
-a standard MCTQ questionnaire (you can use \code{\link[=ms]{ms()}} to compute it).}
+\item{msw}{A \code{hms} object corresponding to the \strong{mid-sleep on work days}
+from a standard, micro, or shift version of the MCTQ questionnaire (you can
+use \code{\link[=ms]{ms()}} to compute it).}
 
 \item{msf}{A \code{hms} object corresponding to the \strong{mid-sleep on work-free
 days} value from a standard, micro, or shift version of the MCTQ
@@ -22,20 +23,18 @@ return an absolute SJL (always positive) or a relative SJL (the SJL with no
 changes) (default: \code{TRUE}).}
 }
 \value{
-A \code{Duration} object corresponding to the relative or absolute
-(if \code{abs = TRUE}) social jet lag.
+A \code{Duration} object corresponding to the relative or absolute (if
+\code{abs = TRUE}) value of the shortest interval between \code{msf} and \code{msw}. See
+\code{vignette("social-jet-lag", package = "mctq")} for more details.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
 \code{sjl()} computes the \strong{relative social jetlag} or the \strong{absolute social
-jetlag} for the standard Munich Chronotype Questionnaire (MCTQ).
+jetlag} for standard, micro, and shift versions of the Munich Chronotype
+Questionnaire (MCTQ).
 
-Note that, due to time arithmetic issues, \code{sjl()} does a slight different
-computation than those propose by Roenneberg, Wirz-Justice & Merrow
-(\href{https://bit.ly/3rLu195}{2003}) and the guidelines of The World Wide
-Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See
-\code{vignette("social_jet_lag_signal", package = "mctq")} for more details.
+\code{sjl_rel()} it's just a wrapper for \code{sjl()} with \code{abs = FALSE}.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -59,7 +58,7 @@ The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
-(see \code{vignette("converting_data", package = "mctq")}).
+(see \code{vignette("converting-data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -73,6 +72,34 @@ only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
+\section{Guidelines}{
+
+
+For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
+(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
+guidelines for \code{sjl()} (\eqn{SJLrel} and \eqn{SJL}) computation are as
+follow.
+
+For the relative social jetlag:
+
+\strong{\deqn{MSF - MSW}}
+
+For the absolute social jetlag:
+
+\strong{\deqn{| MSF - MSW |}}
+
+Where:
+\itemize{
+\item \eqn{MSW} = mid-sleep on work days.
+\item \eqn{MSF} = mid-sleep on work-free days.
+}
+
+Note that, due to time arithmetic issues, \code{sjl()} does a slight different
+computation than those propose by the authors mentioned above. See
+\code{vignette("social_jet_lag", package = "mctq")} for more details.
+}
+
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
@@ -88,15 +115,16 @@ and work-free days variables.
 For those special standard and micro MCTQ cases where one section is
 missing, a \code{NA} value is the correct output for the functions above when
 \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
+different approaches to deal with cases like this. See
+\code{vignette("missing-sections", package = "mctq")} to learn more.
 }
 
 \examples{
 ## __ Scalar example __
 sjl(hms::parse_hms("03:30:00"), hms::parse_hms("05:00:00"))
 #> [1] "5400s (~1.5 hours)" # Expected
-sjl(hms::parse_hms("23:30:00"), hms::parse_hms("04:30:00"), abs = FALSE)
-#> [1] "18000s (~5 hours)"
+sjl(hms::parse_hms("04:30:00"), hms::parse_hms("23:30:00"), abs = FALSE)
+#> [1] "-18000s (~-5 hours)"
 sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:45:00"))
 #> [1] "9000s (~2.5 hours)" # Expected
 sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))

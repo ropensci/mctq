@@ -48,7 +48,7 @@ The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
-(see \code{vignette("converting_data", package = "mctq")}).
+(see \code{vignette("converting-data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -77,7 +77,8 @@ and work-free days variables.
 For those special standard and micro MCTQ cases where one section is
 missing, a \code{NA} value is the correct output for the functions above when
 \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See \code{vignette("missing sections", package = "mctq")} to learn more.
+different approaches to deal with cases like this. See
+\code{vignette("missing-sections", package = "mctq")} to learn more.
 }
 
 \examples{
@@ -96,6 +97,13 @@ le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
 le_week(wd, le_w, le_f)
 #> [1] "10800s (~3 hours)" # Expected
 #> [2] "10157.1428571429s (~2.82 hours)" # Expected
+
+## __ Checking second output from vectorized example __
+i <- 2
+x <- c(le_w[i], le_f[i])
+w <- c(wd[i], fd(wd[i]))
+lubridate::as.duration(stats::weighted.mean(x, w))
+#> [1] "10157.1428571429s (~2.82 hours)" # Expected
 
 ## __ Converting the output to `hms` __
 x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))

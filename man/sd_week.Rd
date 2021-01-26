@@ -53,7 +53,7 @@ The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
-(see \code{vignette("converting_data", package = "mctq")}).
+(see \code{vignette("converting-data", package = "mctq")}).
 }
 
 \subsection{Rounding and fractional time}{
@@ -86,6 +86,25 @@ Where:
 }
 }
 
+\section{Missing sections in standard and micro MCTQ versions}{
+
+
+Although the standard and micro versions of the MCTQ ask for subjects to
+complete the workdays and work-free days sections, even when he/she do not
+have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
+(\code{wd = 7}), some of them may still end skipping one of this parts of the
+questionnaire. In this cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
+\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
+(Not Available) as output. That's because their computation combines workdays
+and work-free days variables.
+
+For those special standard and micro MCTQ cases where one section is
+missing, a \code{NA} value is the correct output for the functions above when
+\code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
+different approaches to deal with cases like this. See
+\code{vignette("missing-sections", package = "mctq")} to learn more.
+}
+
 \examples{
 ## __ Scalar example __
 sd_week(5, lubridate::dhours(4), lubridate::dhours(8))
@@ -101,6 +120,13 @@ sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
 sd_week(wd, sd_w, sd_f)
 #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
+
+## __ Checking second output from vectorized example __
+i <- 2
+x <- c(sd_w[i], sd_f[i])
+w <- c(wd[i], fd(wd[i]))
+lubridate::as.duration(stats::weighted.mean(x, w))
+#> [1] "19620s (~5.45 hours)" # Expected
 
 ## __ Converting the output to hms __
 x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))

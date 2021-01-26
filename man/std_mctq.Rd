@@ -346,7 +346,7 @@ the theWeP and guidelines of the
 cases and data issues that researchers may find in their MCTQ data.
 
 You can learn more about the \code{std_mctq} data cleaning process in
-\code{vignette("data_wrangling", package = "mctq")}.
+\code{vignette("data-wrangling", package = "mctq")}.
 
 To learn more about the Munich Chronotype Questionnaire (MCTQ), \emph{cf.}
 Roenneberg, Wirz-Justice & Merrow (\href{https://bit.ly/3rLu195}{2003}) and
