@@ -18,14 +18,15 @@ reference:
   - gu
   - sd
   - napd
-  - sd24
   - tbt
   - ms
+  - sd24
   - sd_week
   - sd_overall
-  - msf_sc
-  - sloss_week
   - sjl
+  - sjl_overall
+  - sloss_week
+  - msf_sc
   - le_week
 
 - title: Data
