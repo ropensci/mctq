@@ -73,8 +73,8 @@ For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 (\href{http://bit.ly/3iGEgqX}{2012}) and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
 guidelines for \code{sloss_week()} (\eqn{SLossweek}) computation are as follow.
 
-\strong{\deqn{If SDweek > SDw: (SDweek - SDw) * WD}}
-\strong{\deqn{If SDweek <= SDw: (SDweek - SDf) * (7 - WD)}}
+\strong{\deqn{If (SDweek > SDw): (SDweek - SDw) * WD}}
+\strong{\deqn{If (SDweek <= SDw): (SDweek - SDf) * (7 - WD)}}
 
 Where:
 \itemize{

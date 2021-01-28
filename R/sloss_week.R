@@ -16,8 +16,8 @@
 #' ([2012](http://bit.ly/3iGEgqX)) and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
 #' guidelines for `sloss_week()` (\eqn{SLossweek}) computation are as follow.
 #'
-#' __\deqn{If SDweek > SDw: (SDweek - SDw) * WD}__
-#' __\deqn{If SDweek <= SDw: (SDweek - SDf) * (7 - WD)}__
+#' __\deqn{If (SDweek > SDw): (SDweek - SDw) * WD}__
+#' __\deqn{If (SDweek <= SDw): (SDweek - SDf) * (7 - WD)}__
 #'
 #' Where:
 #'

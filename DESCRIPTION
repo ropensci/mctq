@@ -49,6 +49,7 @@ Imports:
     utils,
     validate
 Suggests: 
+    covr,
     grDevices,
     knitr,
     rmarkdown,

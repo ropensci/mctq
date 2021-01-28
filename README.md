@@ -4,22 +4,22 @@
 # mctq
 
 <!-- badges: start -->
-
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/gipsousp/mctq/branch/master/graph/badge.svg)](https://codecov.io/gh/gipsousp/mctq?branch=master)
 [![Contributor
 Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
-
 <!-- badges: end -->
 
 The goal of `mctq` is to provide a fast and friendly way to process
 Munich ChronoType Questionnaire (MCTQ) data in R.
 
-At the moment, only the standard MCTQ is supported. Future versions will
-also include tools for MCTQ Shift and µMCTQ.
+At the moment, only the standard and micro (µ) MCTQ are supported.
+Future versions will also include tools for MCTQ Shift.
 
 ## Installation
 

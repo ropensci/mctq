@@ -218,7 +218,7 @@ sjl_overall <- function(n, sjl) {
     checkmate::assert_list(sjl, len = length(n))
     lapply(n, checkmate::assert_integerish)
     lapply(sjl, assert_duration)
-    lapply(sjl, assert_numeric, lower = 0)
+    lapply(sjl, checkmate::assert_numeric, lower = 0)
     mapply(assert_identical, n, sjl, MoreArgs = list(type = "length"))
 
     lapply(sjl, abs)
