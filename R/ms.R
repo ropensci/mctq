@@ -9,21 +9,27 @@
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
-#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
+#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `ms()` (\eqn{MS}) computation are as follow.
+#' guidelines for `ms()` (\eqn{MSW} or \eqn{MSF}) computation are as follow.
 #'
-#' __\deqn{SO + (SD / 2)}__
+#' ### Notes
+#'
+#' * The computation below must be applied to each section of the
+#' questionnaire.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' __\deqn{SO + \frac{SD}{2}}{SO + (SD / 2)}__
 #'
 #' Where:
 #'
 #' * \eqn{SO} = sleep onset.
 #' * \eqn{SD} = sleep duration.
-#'
-#' Note that this computation must be applied to each section of the
-#' questionnaire (_e.g._ \eqn{SOw + (SDw / 2)}).
 #'
 #' @param so A `hms` object corresponding to the __sleep onset__ value from a
 #'   standard, micro, or shift version of the MCTQ questionnaire. You can use
@@ -71,73 +77,87 @@ ms <- function(so, sd) {
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `msf_sc()` computes the __chronotype or corrected midsleep on free days__ for
-#' standard, micro, and shift versions of the Munich Chronotype Questionnaire
-#' (MCTQ).
+#' `msf_sc()` computes the __chronotype or corrected midsleep on work-free
+#' days__ for standard, micro, and shift versions of the Munich Chronotype
+#' Questionnaire (MCTQ).
 #'
 #' `chronotype()` is just a wrapper for `msf_sc()`.
-#'
-#' Note that, for epidemiological and genetic studies, `msf_sc` must be
-#' normalized for age and sex to make populations of different age and sex
-#' compositions comparable (Roenneberg, Allebrandt, Merrow, & Vetter,
-#' [2012](http://bit.ly/3iGEgqX)).
 #'
 #' When using the shift version of the MCTQ, replace the value of `sd_week` to
 #' `sd_overall`, as instructed in the Arguments section.
 #'
-#' Also note that the basis for estimating chronotype in shift-workers is the
-#' mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
-#' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
-#' midsleep time on free days of other shifts (_e.g._ by using a linear model).
-#' Unfortunately the `mctq` package can't help you with that, as it requires a
-#' closer look at your data.
-#'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
-#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
+#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `msf_sc()` (\eqn{MSFsc}) computation are as follow.
+#' guidelines for `msf_sc()` (\eqn{MSF_{sc}}{MSF_sc}) computation are as follow.
 #'
-#' Note that, for all cases, \eqn{MSFsc} cannot be computed if the participant
-#' wake up with an alarm clock on free days.
+#' ### Notes
 #'
-#' ### For standard and micro versions of the MCTQ:
+#' * For all cases, \eqn{MSF_{sc}}{MSF_sc} cannot be computed if the participant
+#' wake up with an alarm clock on free days (\eqn{Alarm_F}{Alarm_F}).
 #'
-#' __\deqn{If (SDf <= SDw): MSF}__
-#' __\deqn{If (SDf > SDw): MSF - (SDf - SDweek) / 2}__
+#' * \eqn{MSF_{sc}}{MSF_sc} is the participant chronotype in standard and micro
+#' versions of the MCTQ.
+#'
+#' * For the MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be
+#' applied to each shift section of the questionnaire.
+#'
+#' * The basis for estimating chronotype in shift-workers is the mid-sleep time
+#' on work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
+#' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
+#' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
+#' mid-sleep time on work-free days of other shifts (_e.g._ by using a linear
+#' model). Unfortunately the `mctq` package can't help you with that, as it
+#' requires a closer look at your data.
+#'
+#' * The MCTQ\eqn{^{Shift}}{ Shift} can be adapted for other work schedules.
+#' If that is your case, don't worry, the `mctq` package can be used with any
+#' shift combination.
+#'
+#' * For epidemiological and genetic studies, \eqn{MSF_{sc}}{MSF_sc} must be
+#' normalized for age and sex to make populations of different age and sex
+#' compositions comparable (Roenneberg, Allebrandt, Merrow, & Vetter,
+#' [2012](http://bit.ly/3iGEgqX)).
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ### For standard and micro versions of the MCTQ
+#'
+#' __\deqn{\text{If } SD_F \leq SD_W \; , \; MSF}{If SD_F <= SD_W, MSF}__
+#' __\deqn{\text{If } SD_F > SD_W \; , \; MSF - \frac{SD_F - SD_{week}}{2}}{
+#' If SD_F > SD_W, MSF - (SD_F - SD_week) / 2}__
 #'
 #' Where:
 #'
 #' * \eqn{MSF} = mid-sleep on work-free days.
-#' * \eqn{SDw} = sleep duration on work days.
-#' * \eqn{SDf} = sleep duration on work-free days.
-#' * \eqn{SDweek} = average weekly sleep duration.
+#' * \eqn{SD_W} = sleep duration on work days.
+#' * \eqn{SD_F} = sleep duration on work-free days.
+#' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
 #'
-#' \eqn{MSFsc} is the participant chronotype in standard and micro versions of
-#' the MCTQ.
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
 #'
-#' ### For the shift version of the MCTQ:
+#' ### For the shift version of the MCTQ
 #'
-#' __\deqn{If (SDf <= SDw): MSF}__
-#' __\deqn{If (SDf > SDw): MSF - (SDf - OSD) / 2}__
+#' __\deqn{\text{If } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \; MSF^{M/E/N}}{
+#' If SD_F_M/E/N <= SD_W_M/E/N, MSF}__
+#' __\deqn{\text{If } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \; MSF^{M/E/N} -
+#' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}{If SD_F_M/E/N > SD_W_M/E/N,
+#' MSF - (SD_F_M/E/N - OSD_M/E/N) / 2}__
 #'
 #' Where:
 #'
-#' * \eqn{MSF} = mid-sleep on free days after shift.
-#' * \eqn{SDw} = sleep duration on shift.
-#' * \eqn{SDf} = sleep duration on free days after shift.
-#' * \eqn{OSD} = overall sleep duration.
+#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = mid-sleep on free days after shift.
+#' * \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = sleep duration on shift.
+#' * \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = sleep duration on free days after shift.
+#' * \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = shift overall sleep duration.
 #'
-#' Note that the basis for estimating chronotype in shift-workers is the
-#' mid-sleep time on free days after evening shifts (\eqn{MSF_E}). In case work
-#' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
-#' midsleep time on free days of other shifts (_e.g._ by using a linear model).
-#' Unfortunately the `mctq` package can't help you with that, as it requires a
-#' closer look at your data.
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param msf A `hms` object corresponding to the __mid-sleep on work-free
 #'   days__ value from a standard, micro, or shift version of the MCTQ
@@ -156,13 +176,13 @@ ms <- function(so, sd) {
 #' @param alarm_f A `logical` object corresponding to the __alarm clock use on
 #'   work-free days__ value from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
-#'   computed. `msf_sc()` will return `NA` for those cases.
+#'   computed, `msf_sc()` will return `NA` for those cases.
 #'
-#' @return A `hms` object corresponding to the chronotype or corrected midsleep
-#'   on free days.
+#' @return A `hms` object corresponding to the MCTQ chronotype or corrected
+#'   midsleep on work-free days.
 #'
 #' @template mctq_b
-#' @template mctq_d
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -179,7 +199,7 @@ ms <- function(so, sd) {
 #' #> 23:52:30 # Expected
 #' msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(7.5),
 #'        lubridate::dhours(10), lubridate::dhours(8.5), TRUE)
-#' #> NA # Expected (chronotype cannot be computed if `alarm_f == TRUE`)
+#' #> NA # Expected (msf_sc cannot be computed if `alarm_f == TRUE`)
 #'
 #' ## __ Vectorized example __
 #' msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))

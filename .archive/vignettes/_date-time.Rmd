@@ -2,7 +2,7 @@
 title: "Dealing with dates and time in R"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{time_arithmetic}
+  %\VignetteIndexEntry{Dealing with dates and time in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,7 +17,5 @@ knitr::opts_chunk$set(
 __UNDER DEVELOPMENT__
 
 Shows how time arithmetic can be tricky, possible ways to go around problems, and how the `mctq` package can help with this.
-
-Talk about floating point representation of POSIXt objects.
 
 Add "Visualizing date/time objects with ggplot2" topic.

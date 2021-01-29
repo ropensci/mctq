@@ -139,7 +139,6 @@ Other utility functions:
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},
 \code{\link{shortest_interval}()},
-\code{\link{sum_time}()},
-\code{\link{validate_mctq}()}
+\code{\link{sum_time}()}
 }
 \concept{utility functions}

@@ -9,23 +9,50 @@
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `gu()` (\eqn{GU}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
+#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
+#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `gu()` (\eqn{GU}) computation
+#' are as follow.
 #'
-#' __\deqn{SE + SI}__
+#' ### Notes
+#'
+#' * The computation below must be applied to each section of the
+#' questionnaire.
+#'
+#' * MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
+#' \eqn{SI} (sleep inertia), but, for the purpose of this computation, both
+#' represent the same thing.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ### For standard and micro versions of the MCTQ
+#'
+#' __\deqn{SE_{W/F} + SI_{W/F}}{SE_W/F + SI_W/F}__
 #'
 #' Where:
 #'
-#' * \eqn{SE} = sleep end.
-#' * \eqn{SI} = sleep inertia ("after ... min, I get up").
+#' * \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
+#' * \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
+#' ... min, I get up").
 #'
-#' MCTQ Shift uses \eqn{TGU} (time to get up) instead of \eqn{SI}, but both
-#' represent the same thing.
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
 #'
-#' Note that this computation must be applied to each section of the
-#' questionnaire (_e.g._ \eqn{SEw + SIw}).
+#' ### For the shift version of the MCTQ
+#'
+#' __\deqn{SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}{SE_W/F_M/E/N + TGU_W/F_M/E/N}__
+#'
+#' Where:
+#'
+#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end on shift or free days
+#' after shift.
+#' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep onset
+#' on shift or free days after shift ("after ... min, I get up").
+#'
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param se A `hms` object corresponding to the __sleep end__ value from a
 #'   standard or shift version of the MCTQ questionnaire.
@@ -33,11 +60,10 @@
 #'   __time to get up__ value from a standard or shift version of the MCTQ
 #'   questionnaire.
 #'
-#' @return A `hms` object corresponding to the sum of `se` and `si` rolled on a
+#' @return A `hms` object corresponding to the sum of `se` and `si` rolled in a
 #'   24-hour clock basis.
 #'
 #' @template mctq_b
-#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -51,11 +77,11 @@
 #' #> NA # Expected
 #'
 #' ## __ Vectorized example __
-#' se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
-#' si <- c(lubridate::dminutes(10), lubridate::dminutes(10))
+#' se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("23:45:00"))
+#' si <- c(lubridate::dminutes(10), lubridate::dminutes(70))
 #' gu(se, si)
 #' #> 12:40:00 # Expected
-#' #> 06:50:00 # Expected
+#' #> 00:55:00 # Expected
 gu <- function(se, si) {
 
     checkmate::assert_class(se, "hms")

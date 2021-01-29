@@ -9,9 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)) and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `fd()` (\eqn{FD}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
+#' theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `fd()` (\eqn{FD})
+#' computation are as follow.
 #'
 #' __\deqn{7 - WD}__
 #'

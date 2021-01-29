@@ -24,7 +24,7 @@ reference:
   - sd_week
   - sd_overall
   - sjl
-  - sjl_overall
+  - sjl_weighted
   - sloss_week
   - msf_sc
   - le_week
@@ -43,7 +43,6 @@ reference:
   - round_time
   - shortest_interval
   - sum_time
-  - validate_mctq
 
 development:
   mode: auto

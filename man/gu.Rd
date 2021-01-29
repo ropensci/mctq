@@ -15,7 +15,7 @@ standard or shift version of the MCTQ questionnaire.}
 questionnaire.}
 }
 \value{
-A \code{hms} object corresponding to the sum of \code{se} and \code{si} rolled on a
+A \code{hms} object corresponding to the sum of \code{se} and \code{si} rolled in a
 24-hour clock basis.
 }
 \description{
@@ -35,9 +35,9 @@ and The World Wide Experimental Platform
 Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
-\strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
+guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
+addition to the guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
@@ -63,32 +63,53 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
-(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{gu()} (\eqn{GU}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{gu()} (\eqn{GU}) computation
+are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each section of the
+questionnaire.
+\item MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
+\eqn{SI} (sleep inertia), but, for the purpose of this computation, both
+represent the same thing.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{SE + SI}}
+\subsection{For standard and micro versions of the MCTQ}{
+
+\strong{\deqn{SE_{W/F} + SI_{W/F}}{SE_W/F + SI_W/F}}
 
 Where:
 \itemize{
-\item \eqn{SE} = sleep end.
-\item \eqn{SI} = sleep inertia ("after ... min, I get up").
+\item \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
+\item \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
+... min, I get up").
 }
 
-MCTQ Shift uses \eqn{TGU} (time to get up) instead of \eqn{SI}, but both
-represent the same thing.
-
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{SEw + SIw}).
+\strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
 }
 
-\section{Workdays and work-free days computation}{
+\subsection{For the shift version of the MCTQ}{
 
+\strong{\deqn{SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}{SE_W/F_M/E/N + TGU_W/F_M/E/N}}
 
-The computation is the same for workdays and work-free days. Use the
-appropriated value entered on the section you are working on (\emph{e.g.} \code{X_w},
-\code{X_f}).
+Where:
+\itemize{
+\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end on shift or free days
+after shift.
+\item \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep onset
+on shift or free days after shift ("after ... min, I get up").
+}
+
+\strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
 }
 
 \examples{
@@ -101,16 +122,16 @@ gu(hms::as_hms(NA), lubridate::dminutes(90))
 #> NA # Expected
 
 ## __ Vectorized example __
-se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("06:40:00"))
-si <- c(lubridate::dminutes(10), lubridate::dminutes(10))
+se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("23:45:00"))
+si <- c(lubridate::dminutes(10), lubridate::dminutes(70))
 gu(se, si)
 #> 12:40:00 # Expected
-#> 06:50:00 # Expected
+#> 00:55:00 # Expected
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
-\emph{28}(2), 130-140. doi:
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
 \href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
 
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -142,7 +163,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
-\code{\link{sjl_overall}()},
+\code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{sloss_week}()},
 \code{\link{so}()},

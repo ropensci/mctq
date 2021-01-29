@@ -2,7 +2,7 @@
 title: "MCTQ utilities"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{mctq_utilities}
+  %\VignetteIndexEntry{MCTQ utilities}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

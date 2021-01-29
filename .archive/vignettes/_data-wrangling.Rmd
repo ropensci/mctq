@@ -2,7 +2,7 @@
 title: "MCTQ data wrangling"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{common_data_issues}
+  %\VignetteIndexEntry{MCTQ data wrangling}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

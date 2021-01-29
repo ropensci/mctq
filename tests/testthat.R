@@ -17,6 +17,7 @@ test_check("mctq")
 # library(lifecycle)
 # library(lubridate)
 # library(magrittr)
+# library(pkgdown)
 # library(rlang)
 # library(tidyverse)
 # library(validate)
@@ -25,5 +26,5 @@ test_check("mctq")
 # load_all()
 # document()
 
-# Helpers:
+# # Helpers:
 # normalizePath(readClipboard(), "/", mustWork = FALSE)

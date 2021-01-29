@@ -34,7 +34,6 @@
 #'   `bt` rolled on a 24-hour clock basis.
 #'
 #' @template mctq_b
-#' @template mctq_c
 #' @template references_a
 #' @export
 #'

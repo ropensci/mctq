@@ -30,7 +30,7 @@
 #'
 #' @inheritParams sd_week
 #' @template mctq_b
-#' @template mctq_d
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'

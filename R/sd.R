@@ -35,7 +35,6 @@
 #'   `se` and `so` rolled on a 24-hour clock basis.
 #'
 #' @template mctq_b
-#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -98,7 +97,6 @@ sd <- function(so, se) {
 #'   `nape` and `napo` rolled on a 24-hour clock basis.
 #'
 #' @template mctq_b
-#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -161,7 +159,6 @@ napd <- function(napo, nape) {
 #' @return A `Duration` object corresponding to the sum between `sd` and `napd`.
 #'
 #' @template mctq_b
-#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -206,15 +203,15 @@ sd24 <- function(sd, napd) {
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 #' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
 #' ([2020](https://bit.ly/34VhA0l)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `sd_week()` (\eqn{SDweek}) computation are as follow.
+#' guidelines for `sd_week()` (\eqn{SD_{week}}) computation are as follow.
 #'
-#' __\deqn{((SDw x WD) + (SDf x FD)) / 7}__
+#' __\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}__
 #'
 #' Where:
 #'
-#' * \eqn{SDw} = sleep duration on workdays.
+#' * \eqn{SD_w} = sleep duration on workdays.
 #' * \eqn{WD} = number of workdays per week.
-#' * \eqn{SDf} = sleep duration on work-free days.
+#' * \eqn{SD_f} = sleep duration on work-free days.
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
@@ -229,7 +226,7 @@ sd24 <- function(sd, napd) {
 #'
 #' @inheritParams fd
 #' @template mctq_b
-#' @template mctq_d
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'

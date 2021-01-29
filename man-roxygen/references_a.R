@@ -1,8 +1,8 @@
 #' @references
 #'
 #' Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-#' Questionnaire for shift-workers (MCTQShift). _Journal of Biological Rhythms_,
-#' _28_(2), 130-140. doi:
+#' Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+#' _Journal of Biological Rhythms_, _28_(2), 130-140. doi:
 #' [10.1177/0748730412475041](https://doi.org/10.1177/0748730412475041).
 #'
 #' Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,

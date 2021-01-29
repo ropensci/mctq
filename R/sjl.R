@@ -15,14 +15,19 @@
 #' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 #' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `sjl()` (\eqn{SJLrel} and \eqn{SJL}) computation are as
-#' follow.
+#' guidelines for `sjl()` (\eqn{SJL_rel}{SJLrel} and \eqn{SJL}) computation are
+#' as follow.
 #'
-#' For the relative social jetlag:
+#' If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ### For the relative social jetlag
 #'
 #' __\deqn{MSF - MSW}__
 #'
-#' For the absolute social jetlag:
+#' ### For the absolute social jetlag
 #'
 #' __\deqn{| MSF - MSW |}__
 #'
@@ -30,6 +35,8 @@
 #'
 #' * \eqn{MSW} = mid-sleep on work days.
 #' * \eqn{MSF} = mid-sleep on work-free days.
+#'
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
 #'
 #' Note that, due to time arithmetic issues, `sjl()` does a slight different
 #' computation than those propose by the authors mentioned above. See
@@ -48,7 +55,7 @@
 #'
 #' @inheritParams msf_sc
 #' @template mctq_b
-#' @template mctq_d
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'
@@ -112,13 +119,13 @@ sjl_rel <- function(msw, msf) {
 
 }
 
-#' Compute MCTQ overall social jetlag (only for MCTQ Shift)
+#' Compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `sjl_overall()` computes the __absolute social jetlag across all shifts__ for
+#' `sjl_weighted()` computes the __absolute social jetlag across all shifts__ for
 #' the shift version of the Munich Chronotype Questionnaire (MCTQ).
 #'
 #' @section Operation:
@@ -127,9 +134,9 @@ sjl_rel <- function(msw, msf) {
 #' through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
 #' 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
 #' schedules (Juda, Vetter, & Roenneberg, [2013](https://bit.ly/38IEEk4)). For
-#' that reason, `sjl_overall()` must operate considering any shift combination.
+#' that reason, `sjl_weighted()` must operate considering any shift combination.
 #'
-#' Considering the requirement above, `sjl_overall()` was developed to only
+#' Considering the requirement above, `sjl_weighted()` was developed to only
 #' accept lists values as arguments. For this approach to work, both `n` and
 #' `sjl` arguments must be lists with paired elements and values between `n` and
 #' `sjl`, _i.e._ the first element of `n` (_e.g._ `n_m`) must be paired with
@@ -139,25 +146,32 @@ sjl_rel <- function(msw, msf) {
 #' @section Guidelines:
 #'
 #' For reference, Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4))
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sjl_overall()`
+#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sjl_weighted()`
 #' computation are as follow.
 #'
-#' __\deqn{((|SJL_M| * nwM) + (|SJL_E| * nwE) + (|SJL_N| * nwN)) /
-#' (nwM + nwE + nwN)}__
+#' If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' __\deqn{(| SJL^M | * n_W^M + | SJL^E | * n_W^E + | SJL^N | * n_W^N) / (n_W^M
+#' + n_W^E + n_W^N)}{(| SJL_M | * n_W_M + | SJL_E | * n_W_E + | SJL_N | * n_W_N)
+#' / (n_W_M + n_W_E + n_W_N)}__
 #'
 #' Where:
 #'
-#' * \eqn{SJL_*} = absolute social jetlag in each shift (MEN`*`).
-#' * \eqn{nw*} = number of days worked in each shift (MEN`*`) within a shift
-#' cycle.
+#' * \eqn{SJL^{M/E/N}}{SJL_M/E/N} = absolute social jetlag in each shift.
+#' * \eqn{n_W^{M/E/N}}{n_W_M/E/N} = number of days worked in each shift within a
+#' shift cycle.
 #'
-#' `*` \eqn{M}: morning; \eqn{E}: evening; \eqn{N}: night.
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' Note that the overall social jetlag is the weighted average of
-#' shift-specific absolute social jetlags. The authors shows a formula for a
-#' three shift schedule, but this may not be your case. That's way this
-#' function works a little bit different (see Operation section), allowing to
-#' compute a weighted average of any shift combination.
+#' Note that the absolute social jetlag across all shifts is the weighted
+#' average of all absolute social jetlags. The authors shows a formula for a
+#' three shift schedule, but that may not be your case. That's why this function
+#' works a little bit different (see Operation section), allowing to compute a
+#' weighted average of any shift combination.
 #'
 #' @param n A `list` object with [integerish][rlang::is_integerish()] `integer`
 #'   or `numeric` elements corresponding to the __number of days from each work
@@ -180,7 +194,7 @@ sjl_rel <- function(msw, msf) {
 #' n <- list(n_m = 3, n_e = 1, n_n = 4)
 #' sjl <- list(sjl_m = lubridate::dhours(1.25), sjl_e = lubridate::dhours(0.5),
 #'            sjl_n = lubridate::dhours(3))
-#' sjl_overall(n, sjl)
+#' sjl_weighted(n, sjl)
 #' #> [1] "7312.5s (~2.03 hours)" # Expected
 #'
 #' ## __ Vectorized example __
@@ -188,7 +202,7 @@ sjl_rel <- function(msw, msf) {
 #' sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
 #'             sjl_e = c(lubridate::dhours(3.21), lubridate::dhours(0)),
 #'             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
-#' sjl_overall(n, sjl)
+#' sjl_weighted(n, sjl)
 #' #> [1] "8298s (~2.31 hours)"  "11988s (~3.33 hours)"  # Expected
 #'
 #' ## __ Checking the second output from vectorized example __
@@ -202,17 +216,17 @@ sjl_rel <- function(msw, msf) {
 #' n <- list(n_m = 4, n_e = 2, n_n = 1)
 #' sjl <- list(sjl_m = lubridate::dhours(0.25), sjl_e = lubridate::dhours(1.2),
 #'            sjl_n = lubridate::dhours(4.32))
-#' sjl_overall(n, sjl)
+#' sjl_weighted(n, sjl)
 #' #> [1] "3970.28571428571s (~1.1 hours)" # Expected
-#' convert_to(sjl_overall(n, sjl), "hms")
+#' convert_to(sjl_weighted(n, sjl), "hms")
 #' #> 01:06:10.285714 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' round_time(sjl_overall(n, sjl))
+#' round_time(sjl_weighted(n, sjl))
 #' #> [1] "3970s (~1.1 hours)" # Expected
-#' round_time(convert_to(sjl_overall(n, sjl), "hms"))
+#' round_time(convert_to(sjl_weighted(n, sjl), "hms"))
 #' #> 01:06:10 # Expected
-sjl_overall <- function(n, sjl) {
+sjl_weighted <- function(n, sjl) {
 
     checkmate::assert_list(n, len = length(sjl))
     checkmate::assert_list(sjl, len = length(n))
@@ -235,4 +249,3 @@ sjl_overall <- function(n, sjl) {
     sjl / n
 
 }
-

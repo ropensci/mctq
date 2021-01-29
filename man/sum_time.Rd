@@ -142,7 +142,6 @@ Other utility functions:
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},
-\code{\link{shortest_interval}()},
-\code{\link{validate_mctq}()}
+\code{\link{shortest_interval}()}
 }
 \concept{utility functions}

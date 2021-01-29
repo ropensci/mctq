@@ -47,9 +47,9 @@ and The World Wide Experimental Platform
 Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
-\strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
+guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
+addition to the guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
@@ -78,14 +78,19 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 (\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
 (\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{sjl()} (\eqn{SJLrel} and \eqn{SJL}) computation are as
-follow.
+guidelines for \code{sjl()} (\eqn{SJL_rel}{SJLrel} and \eqn{SJL}) computation are
+as follow.
 
-For the relative social jetlag:
+If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+\subsection{For the relative social jetlag}{
 
 \strong{\deqn{MSF - MSW}}
+}
 
-For the absolute social jetlag:
+\subsection{For the absolute social jetlag}{
 
 \strong{\deqn{| MSF - MSW |}}
 
@@ -95,9 +100,12 @@ Where:
 \item \eqn{MSF} = mid-sleep on work-free days.
 }
 
+\strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
+
 Note that, due to time arithmetic issues, \code{sjl()} does a slight different
 computation than those propose by the authors mentioned above. See
 \code{vignette("social_jet_lag", package = "mctq")} for more details.
+}
 }
 
 \section{Missing sections in standard and micro MCTQ versions}{
@@ -106,17 +114,14 @@ computation than those propose by the authors mentioned above. See
 Although the standard and micro versions of the MCTQ ask for subjects to
 complete the workdays and work-free days sections, even when he/she do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of this parts of the
-questionnaire. In this cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
+(\code{wd = 7}), some of them may still end skipping one of those parts of the
+questionnaire. In those cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
 \code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
 (Not Available) as output. That's because their computation combines workdays
 and work-free days variables.
 
-For those special standard and micro MCTQ cases where one section is
-missing, a \code{NA} value is the correct output for the functions above when
-\code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See
-\code{vignette("missing-sections", package = "mctq")} to learn more.
+A \code{NA} value is the correct output for the functions above when \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are different
+approaches to deal with those cases. See \code{vignette("missing-sections", package = "mctq")} to learn more.
 }
 
 \examples{
@@ -153,8 +158,8 @@ round_time(x)
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
-\emph{28}(2), 130-140. doi:
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
 \href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
 
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -187,7 +192,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
-\code{\link{sjl_overall}()},
+\code{\link{sjl_weighted}()},
 \code{\link{sloss_week}()},
 \code{\link{so}()},
 \code{\link{tbt}()}

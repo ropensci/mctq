@@ -1,20 +1,22 @@
-#' A standard MCTQ dataset
+#' A fictional standard MCTQ dataset
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A fictional dataset composed by Munich Chronotype Questionnaire (MCTQ)
-#' (standard version) basic/measurable and computed variables for testing and
-#' learning purposes.
+#' A fictional dataset composed by standard Munich Chronotype Questionnaire
+#' (MCTQ) basic/measurable and computed variables for testing and learning
+#' purposes.
 #'
-#' This data was created according to Roenneberg, Wirz-Justice & Merrow
-#' ([2003](https://bit.ly/3rLu195)) and guidelines of The World Wide
+#' This data was created according to Roenneberg, Wirz-Justice, & Merrow
+#' ([2003](https://bit.ly/3rLu195)), Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), and guidelines of The World Wide
 #' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)). See References
 #' and Details sections to learn more.
 #'
 #' The naming of the variables took into account the standard names used by
-#' the theWeP and guidelines of the
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
+#' theWeP ([n.d.](http://bit.ly/3pv8EH1)) and also guidelines of the
 #' [tidyverse style guide](https://style.tidyverse.org/).
 #'
 #' @details
@@ -26,15 +28,16 @@
 #' You can learn more about the `std_mctq` data cleaning process in
 #' `vignette("data-wrangling", package = "mctq")`.
 #'
-#' To learn more about the Munich Chronotype Questionnaire (MCTQ), _cf._
-#' Roenneberg, Wirz-Justice & Merrow ([2003](https://bit.ly/3rLu195)) and
-#' ROENNEBERG, T. _et al._ ([2015](http://bit.ly/2X37mqE)).
+#' To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
+#' _cf._ Roenneberg, Wirz-Justice, & Merrow ([2003](https://bit.ly/3rLu195)),
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)), and
+#' Roenneberg, T. _et al._ ([2015](http://bit.ly/2X37mqE)).
 #'
 #' To know about different MCTQ versions, _cf._ Juda, Vetter & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)) and Ghotbi _et.al_
 #' ([2020](https://bit.ly/34VhA0l)).
 #'
-#' If you curious about the computations and want to have access to
+#' If you curious about the variable computations and want to have access to
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform
 #' ([n.d.](http://bit.ly/3pv8EH1)).
 #'

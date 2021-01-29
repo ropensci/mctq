@@ -2,7 +2,7 @@
 title: "How to convert your MCTQ data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{converting}
+  %\VignetteIndexEntry{How to convert your MCTQ data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

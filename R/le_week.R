@@ -5,19 +5,36 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #' `le_week()` computes the __average weekly light exposure__ for the standard
-#' Munich Chronotype Questionnaire (MCTQ).
+#' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
+#'
+#' @section Guidelines:
+#'
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
+#' ([2020](https://bit.ly/34VhA0l)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' guidelines for `sd_week()` (\eqn{LE_{week}}) computation are as follow.
+#'
+#' __\deqn{\frac{LE_w \times WD + LE_f \times FD}{7}}__
+#'
+#' Where:
+#'
+#' * \eqn{Le_w} = light exposure on workdays.
+#' * \eqn{WD} = number of workdays per week.
+#' * \eqn{LE_f} = light exposure on work-free days.
+#' * \eqn{FD} = number of work-free days per week.
 #'
 #' @param le_w A `Duration` object corresponding to the __light exposure on work
-#'   days__ of a standard MCTQ questionnaire.
+#'   days__ value from a standard or micro version of the MCTQ questionnaire.
 #' @param le_f A `Duration` object corresponding to the __light exposure on
-#'   work-free days__ of a standard MCTQ questionnaire.
+#'   work-free days__ value from a standard or micro version of the MCTQ
+#'   questionnaire.
 #'
 #' @return A `Duration` object corresponding to the average weekly light
 #'   exposure.
 #'
 #' @inheritParams fd
 #' @template mctq_b
-#' @template mctq_d
+#' @template mctq_c
 #' @template references_a
 #' @export
 #'

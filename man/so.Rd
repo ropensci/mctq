@@ -37,9 +37,9 @@ and The World Wide Experimental Platform
 Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
-\strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
+guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
+addition to the guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
@@ -82,14 +82,6 @@ Note that this computation must be applied to each section of the
 questionnaire (\emph{e.g.} \eqn{SPrepw + SPrepw}).
 }
 
-\section{Workdays and work-free days computation}{
-
-
-The computation is the same for workdays and work-free days. Use the
-appropriated value entered on the section you are working on (\emph{e.g.} \code{X_w},
-\code{X_f}).
-}
-
 \examples{
 ## __ Scalar example __
 so(hms::parse_hms("22:00:00"), lubridate::dminutes(15))
@@ -108,8 +100,8 @@ so(sprep, slat)
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
-\emph{28}(2), 130-140. doi:
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
 \href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
 
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -142,7 +134,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
-\code{\link{sjl_overall}()},
+\code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{sloss_week}()},
 \code{\link{tbt}()}

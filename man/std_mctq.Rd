@@ -3,7 +3,7 @@
 \docType{data}
 \name{std_mctq}
 \alias{std_mctq}
-\title{A standard MCTQ dataset}
+\title{A fictional standard MCTQ dataset}
 \format{
 A tibble with 37 columns and 50 rows:
 
@@ -327,17 +327,19 @@ data(std_mctq)
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-A fictional dataset composed by Munich Chronotype Questionnaire (MCTQ)
-(standard version) basic/measurable and computed variables for testing and
-learning purposes.
+A fictional dataset composed by standard Munich Chronotype Questionnaire
+(MCTQ) basic/measurable and computed variables for testing and learning
+purposes.
 
-This data was created according to Roenneberg, Wirz-Justice & Merrow
-(\href{https://bit.ly/3rLu195}{2003}) and guidelines of The World Wide
+This data was created according to Roenneberg, Wirz-Justice, & Merrow
+(\href{https://bit.ly/3rLu195}{2003}), Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}), and guidelines of The World Wide
 Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See References
 and Details sections to learn more.
 
 The naming of the variables took into account the standard names used by
-the theWeP and guidelines of the
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}) and
+theWeP (\href{http://bit.ly/3pv8EH1}{n.d.}) and also guidelines of the
 \href{https://style.tidyverse.org/}{tidyverse style guide}.
 }
 \details{
@@ -348,22 +350,23 @@ cases and data issues that researchers may find in their MCTQ data.
 You can learn more about the \code{std_mctq} data cleaning process in
 \code{vignette("data-wrangling", package = "mctq")}.
 
-To learn more about the Munich Chronotype Questionnaire (MCTQ), \emph{cf.}
-Roenneberg, Wirz-Justice & Merrow (\href{https://bit.ly/3rLu195}{2003}) and
-ROENNEBERG, T. \emph{et al.} (\href{http://bit.ly/2X37mqE}{2015}).
+To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
+\emph{cf.} Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}), and
+Roenneberg, T. \emph{et al.} (\href{http://bit.ly/2X37mqE}{2015}).
 
 To know about different MCTQ versions, \emph{cf.} Juda, Vetter & Roenneberg
 (\href{https://bit.ly/38IEEk4}{2013}) and Ghotbi \emph{et.al}
 (\href{https://bit.ly/34VhA0l}{2020}).
 
-If you curious about the computations and want to have access to
+If you curious about the variable computations and want to have access to
 the full questionnaire, \emph{cf.} The Worldwide Experimental Platform
 (\href{http://bit.ly/3pv8EH1}{n.d.}).
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
-\emph{28}(2), 130-140. doi:
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
 \href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
 
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -371,6 +374,10 @@ D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 (2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
 Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
 \href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+
+Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
+\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
 
 Roenneberg, T., Keller, L. K., Fischer, D., Matera, J. L., Vetter, C., &
 Winnebeck, E. C. (2015). Human activity and rest in situ. In A. Sehgal (Ed.),

@@ -38,9 +38,9 @@ and The World Wide Experimental Platform
 Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
-\strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
+guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
+addition to the guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
@@ -66,22 +66,28 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Ghotbi \emph{et.al}
-(\href{https://bit.ly/34VhA0l}{2020}), Juda, Vetter, & Roenneberg
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), Juda, Vetter, & Roenneberg
 (\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{ms()} (\eqn{MS}) computation are as follow.
+guidelines for \code{ms()} (\eqn{MSW} or \eqn{MSF}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each section of the
+questionnaire.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
 
-\strong{\deqn{SO + (SD / 2)}}
+\strong{\deqn{SO + \frac{SD}{2}}{SO + (SD / 2)}}
 
 Where:
 \itemize{
 \item \eqn{SO} = sleep onset.
 \item \eqn{SD} = sleep duration.
 }
-
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{SOw + (SDw / 2)}).
+}
 }
 
 \examples{
@@ -102,8 +108,8 @@ ms(so, sd)
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
-\emph{28}(2), 130-140. doi:
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
 \href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
 
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -135,7 +141,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
-\code{\link{sjl_overall}()},
+\code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{sloss_week}()},
 \code{\link{so}()},

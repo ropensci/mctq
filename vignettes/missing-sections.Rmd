@@ -2,7 +2,7 @@
 title: "Missing sections"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{missing_sections}
+  %\VignetteIndexEntry{Missing sections}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

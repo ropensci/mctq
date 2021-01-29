@@ -11,10 +11,11 @@ le_week(wd, le_w, le_f)
 week} value from a standard or micro version of the MCTQ questionnaire.}
 
 \item{le_w}{A \code{Duration} object corresponding to the \strong{light exposure on work
-days} of a standard MCTQ questionnaire.}
+days} value from a standard or micro version of the MCTQ questionnaire.}
 
 \item{le_f}{A \code{Duration} object corresponding to the \strong{light exposure on
-work-free days} of a standard MCTQ questionnaire.}
+work-free days} value from a standard or micro version of the MCTQ
+questionnaire.}
 }
 \value{
 A \code{Duration} object corresponding to the average weekly light
@@ -24,7 +25,7 @@ exposure.
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
 \code{le_week()} computes the \strong{average weekly light exposure} for the standard
-Munich Chronotype Questionnaire (MCTQ).
+and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -37,9 +38,9 @@ and The World Wide Experimental Platform
 Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
 guidelines used for the standard MCTQ.
 
-\strong{MCTQ Shift} functions were created following the guidelines in Juda,
-Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
+guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
+addition to the guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
@@ -62,23 +63,39 @@ only round your values after all computations are done, that way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
+\section{Guidelines}{
+
+
+For reference, Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}), Ghotbi \emph{et.al}
+(\href{https://bit.ly/34VhA0l}{2020}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
+guidelines for \code{sd_week()} (\eqn{LE_{week}}) computation are as follow.
+
+\strong{\deqn{\frac{LE_w \times WD + LE_f \times FD}{7}}}
+
+Where:
+\itemize{
+\item \eqn{Le_w} = light exposure on workdays.
+\item \eqn{WD} = number of workdays per week.
+\item \eqn{LE_f} = light exposure on work-free days.
+\item \eqn{FD} = number of work-free days per week.
+}
+}
+
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
 Although the standard and micro versions of the MCTQ ask for subjects to
 complete the workdays and work-free days sections, even when he/she do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of this parts of the
-questionnaire. In this cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
+(\code{wd = 7}), some of them may still end skipping one of those parts of the
+questionnaire. In those cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
 \code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
 (Not Available) as output. That's because their computation combines workdays
 and work-free days variables.
 
-For those special standard and micro MCTQ cases where one section is
-missing, a \code{NA} value is the correct output for the functions above when
-\code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are
-different approaches to deal with cases like this. See
-\code{vignette("missing-sections", package = "mctq")} to learn more.
+A \code{NA} value is the correct output for the functions above when \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are different
+approaches to deal with those cases. See \code{vignette("missing-sections", package = "mctq")} to learn more.
 }
 
 \examples{
@@ -121,8 +138,8 @@ round_time(x)
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQShift). \emph{Journal of Biological Rhythms},
-\emph{28}(2), 130-140. doi:
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
+\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
 \href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
 
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -154,7 +171,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sd}()},
-\code{\link{sjl_overall}()},
+\code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{sloss_week}()},
 \code{\link{so}()},

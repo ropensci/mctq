@@ -37,7 +37,7 @@
 #' @family utility functions
 #' @importFrom validate in_range is_complete all_complete
 #' @importFrom lubridate is.duration
-#' @export
+#' @noRd
 #'
 #' @references
 #'
@@ -301,7 +301,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 }
 
 #' @rdname validate_mctq
-#' @export
+#' @noRd
 is_valid <- function(data, check = NULL, custom = NULL) {
 
     validate_mctq(data, check, flag = TRUE, custom)

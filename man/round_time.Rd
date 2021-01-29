@@ -52,7 +52,6 @@ Other utility functions:
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{shortest_interval}()},
-\code{\link{sum_time}()},
-\code{\link{validate_mctq}()}
+\code{\link{sum_time}()}
 }
 \concept{utility functions}

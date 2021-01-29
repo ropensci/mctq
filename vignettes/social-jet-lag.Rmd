@@ -2,7 +2,7 @@
 title: "The social jet lag signal"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Social Jetlag Signal}
+  %\VignetteIndexEntry{The social jet lag signal}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
