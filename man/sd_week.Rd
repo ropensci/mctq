@@ -4,12 +4,9 @@
 \alias{sd_week}
 \title{Compute MCTQ average weekly sleep duration}
 \usage{
-sd_week(wd, sd_w, sd_f)
+sd_week(sd_w, sd_f, wd)
 }
 \arguments{
-\item{wd}{An integerish number corresponding to the \strong{number of work days per
-week} value from a standard or micro version of the MCTQ questionnaire.}
-
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
 days} value from a standard or micro version of the MCTQ questionnaire
 (you can use \code{\link[=sd]{sd()}} to compute it).}
@@ -17,10 +14,14 @@ days} value from a standard or micro version of the MCTQ questionnaire
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} value from a standard or micro version of the MCTQ
 questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
+
+\item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
+object corresponding to the \strong{number of work days per week} value from a
+standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the average weekly sleep
-duration.
+A \code{Duration} object corresponding to the weighted mean of \code{sd} and
+\code{wd} and \code{fd(wd)} (weights).
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -52,7 +53,7 @@ See References section to learn more.
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
+classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
 }
 
@@ -80,8 +81,8 @@ guidelines for \code{sd_week()} (\eqn{SD_{week}}) computation are as follow.
 Where:
 \itemize{
 \item \eqn{SD_w} = sleep duration on workdays.
-\item \eqn{WD} = number of workdays per week.
 \item \eqn{SD_f} = sleep duration on work-free days.
+\item \eqn{WD} = number of workdays per week.
 \item \eqn{FD} = number of work-free days per week.
 }
 }
@@ -104,18 +105,18 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-sd_week(5, lubridate::dhours(4), lubridate::dhours(8))
+sd_week(lubridate::dhours(4), lubridate::dhours(8), 5)
 #> [1] "18514.2857142857s (~5.14 hours)" # Expected
-sd_week(4, lubridate::dhours(7), lubridate::dhours(7))
+sd_week(lubridate::dhours(7), lubridate::dhours(7), 4)
 #> [1] "25200s (~7 hours)" # Expected
-sd_week(6, lubridate::as.duration(NA), lubridate::dhours(10))
+sd_week(lubridate::as.duration(NA), lubridate::dhours(10), 6)
 #> [1] NA # Expected
 
 ## __ Vectorized example __
-wd <- c(3, 7)
 sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
-sd_week(wd, sd_w, sd_f)
+wd <- c(3, 7)
+sd_week(sd_w, sd_f, wd)
 #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 
 ## __ Checking second output from vectorized example __
@@ -126,39 +127,35 @@ lubridate::as.duration(stats::weighted.mean(x, w))
 #> [1] "19620s (~5.45 hours)" # Expected
 
 ## __ Converting the output to hms __
-x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
-convert_to(x, "hms")
+x <- sd_week(lubridate::dhours(5.45), lubridate::dhours(9.5), 5)
+convert(x, "hms")
 #> 06:36:25.714286 # Expected
-convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
-#> 06:36:25 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
+x <- sd_week(lubridate::dhours(4.5), lubridate::dhours(7.8), 3)
 x
 #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 round_time(x)
 #> [1] "22989s (~6.39 hours)" # Expected
 }
 \references{
-Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
-\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
-\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
-
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
 D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 (2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
-Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
-\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110.
+\doi{10.1177/0748730419886986}.
+
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
+Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
 
 Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
-and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
-\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
+\doi{10.1016/j.cub.2012.03.038}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
-daily temporal patterns of human chronotypes.
-\emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
-\href{https://doi.org/10.1177/0748730402239679}{10.1177/0748730402239679}.
+daily temporal patterns of human chronotypes. \emph{Journal of Biological
+Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
@@ -176,7 +173,6 @@ Other MCTQ functions:
 \code{\link{sd}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
-\code{\link{sloss_week}()},
 \code{\link{so}()},
 \code{\link{tbt}()}
 }

@@ -7,9 +7,6 @@
 #' `pretty_mctq()` helps you to transform your MCTQ data in many ways. See
 #' parameters and Details section to learn more.
 #'
-#' You can also see `pretty_mctq()`in action in
-#' `vignette("data_wrangling", package = "mctq")`.
-#'
 #' @details
 #'
 #' ## Rounding
@@ -35,7 +32,7 @@
 #' @param hms (optional) a `logical` value indicating if `Duration`, `Period`,
 #'   and `difftime` objects must be converted to `hms` (default: `TRUE`).
 #'
-#' @return A transformed data frame, as indicated in parameters.
+#' @return A transformed data frame, as indicated in arguments.
 #'
 #' @family utility functions
 #' @export
@@ -59,7 +56,7 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     }
 
     if (isTRUE(hms)) {
-        data <- convert_to(data, "hms", where = test)
+        data <- convert(data, "hms", where = test)
     }
 
     data

@@ -19,14 +19,16 @@
 #'
 #' * \eqn{WD} = number of workdays.
 #'
-#' @param wd An integerish number corresponding to the __number of work days per
-#'   week__ value from a standard or micro version of the MCTQ questionnaire.
+#' @param wd An [integerish][rlang::is_integerish()] `integer` or `numeric`
+#'   object corresponding to the __number of work days per week__ value from a
+#'   standard or micro version of the MCTQ questionnaire.
 #'
 #' @return A numeric value equivalent to `7 - wd`, _i.e._ the difference between
 #'   the number of days in a week and the number of work days.
 #'
-#' @template mctq_a
+#' @template details_a
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples

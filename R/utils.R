@@ -113,7 +113,7 @@ midday_change = function(x) {
 
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
 
-    x <- flat_posixt(convert_to(x, "posixct"))
+    x <- flat_posixt(convert(x, "posixct"))
 
     x <- dplyr::case_when(
         lubridate::hour(x) < 12 ~ change_day(x, 2),
@@ -357,8 +357,8 @@ hms_interval <- function(start, end, tz = "UTC") {
     checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
     checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
 
-    start <- flat_posixt(convert_to(start, "posixct", tz = tz), FALSE)
-    end <- flat_posixt(convert_to(end, "posixct", tz = tz), FALSE)
+    start <- flat_posixt(convert(start, "posixct", tz = tz), FALSE)
+    end <- flat_posixt(convert(end, "posixct", tz = tz), FALSE)
 
     lubridate::interval(start, end)
 
@@ -530,7 +530,7 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
     sample <- sample(seq(min, max, by), size = size, replace = replace,
                      prob = prob)
 
-    convert_to(sample, class)
+    convert(sample, class)
 
 }
 
@@ -539,7 +539,7 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
 clock_roll <- function(x, class = "hms") {
 
     out <- flat_posixt(lubridate::as_datetime(x))
-    convert_to(out, class)
+    convert(out, class)
 
 }
 
@@ -553,7 +553,7 @@ na_as <- function(x) {
     if (is.logical(x)) {
         as.logical(NA)
     } else if (checkmate::test_multi_class(x, classes)) {
-        convert_to(NA, class(x)[1])
+        convert(NA, class(x)[1])
     } else {
         rlang::abort(glue::glue(
             "`na_as()` don't support objects of class {class_collapse(x)}."

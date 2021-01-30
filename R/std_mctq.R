@@ -452,7 +452,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         # format <- unlist(format)
         format <- c(1, 5)
 
-        out <- convert_to(x, "hms")
+        out <- convert(x, "hms")
         # out <- hms::trunc_hms(x, 60)
         out <- substr(as.character(out), format[1], format[2])
 
@@ -465,8 +465,8 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     format_duration <- function(x) {
         assert_time(x)
-        out <- convert_to(x, "duration")
-        as.character(convert_to_tu(out, "M"))
+        out <- convert(x, "duration")
+        as.character(convert_tu(out, "M"))
     }
 
     if (isTRUE(random_cases)) {
@@ -983,48 +983,48 @@ tidy_std_mctq <- function(write = FALSE) {
         wd = as.integer(.data$`WORK DAYS`),
         bt_w = dplyr::case_when(
             stringr::str_detect(.data$`W BED TIME`, pattern_1) ~
-                convert_to_pt(.data$`W BED TIME`, "hms",
+                convert_pt(.data$`W BED TIME`, "hms",
                               c("HM", "IMp"), quiet = TRUE),
             stringr::str_detect(.data$`W BED TIME`, pattern_4) ~
-                convert_to_pt(.data$`W BED TIME`, "hms", "HM",
+                convert_pt(.data$`W BED TIME`, "hms", "HM",
                               quiet = TRUE)),
-        sprep_w = convert_to_pt(.data$`W SLEEP PREP`, "hms",
+        sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms",
                                 c("HMS", "HM", "H")),
         slat_w = dplyr::case_when(
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_2) ~
-                convert_to_pt(.data$`W SLEEP LAT`, "Duration", "M",
+                convert_pt(.data$`W SLEEP LAT`, "Duration", "M",
                               quiet = TRUE),
             stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
-                convert_to_pt(.data$`W SLEEP LAT`, "Duration",
+                convert_pt(.data$`W SLEEP LAT`, "Duration",
                               c("HMS", "HM", "H"), quiet = TRUE)),
-        se_w = convert_to_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
-        si_w = convert_to_pt(.data$`W SLEEP INERTIA`, "Duration", "M"),
+        se_w = convert_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
+        si_w = convert_pt(.data$`W SLEEP INERTIA`, "Duration", "M"),
         alarm_w = dplyr::case_when(
             tolower(.data$`W ALARM`) == "yes" ~ TRUE,
             tolower(.data$`W ALARM`) == "no" ~ FALSE),
         wake_before_w = dplyr::case_when(
             tolower(.data$`W WAKE BEFORE ALARM`) == "yes" ~ TRUE,
             tolower(.data$`W WAKE BEFORE ALARM`) == "no" ~ FALSE),
-        le_w = convert_to_pt(.data$`W LIGHT EXPOSURE`, "Duration",
+        le_w = convert_pt(.data$`W LIGHT EXPOSURE`, "Duration",
                              c("HMS", "HM", "H")),
         bt_f = dplyr::case_when(
             stringr::str_detect(.data$`F BED TIME`, pattern_1) ~
-                convert_to_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
+                convert_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
                               quiet = TRUE),
             stringr::str_detect(.data$`F BED TIME`, pattern_4) ~
-                convert_to_pt(.data$`F BED TIME`, "hms", "HM",
+                convert_pt(.data$`F BED TIME`, "hms", "HM",
                               quiet = TRUE)),
-        sprep_f = convert_to_pt(.data$`F SLEEP PREP`, "hms",
+        sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms",
                                 c("HMS", "HM", "H")),
-        slat_f = convert_to_pt(.data$`F SLEEP LAT`, "Duration", "M",
+        slat_f = convert_pt(.data$`F SLEEP LAT`, "Duration", "M",
                                quiet = TRUE),
-        se_f = convert_to_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
+        se_f = convert_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
         si_f = dplyr::case_when(
             stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_2) ~
-                convert_to_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
+                convert_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
                               quiet = TRUE),
             stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_1) ~
-                convert_to_pt(.data$`F SLEEP INERTIA`, "Duration",
+                convert_pt(.data$`F SLEEP INERTIA`, "Duration",
                               c("HMS", "HM", "H"), quiet = TRUE)),
         alarm_f = dplyr::case_when(
             tolower(.data$`F ALARM`) == "yes" ~ TRUE,
@@ -1033,7 +1033,7 @@ tidy_std_mctq <- function(write = FALSE) {
             tolower(.data$`F REASONS`) == "yes" ~ TRUE,
             tolower(.data$`F REASONS`) == "no" ~ FALSE),
         reasons_why_f = .data$`F REASONS WHY`,
-        le_f = convert_to_pt(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
+        le_f = convert_pt(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
     )
 
     # Write and output dataset -----

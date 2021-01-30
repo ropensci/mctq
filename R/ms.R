@@ -39,11 +39,12 @@
 #'   use [mctq::sd()] to compute it for any MCTQ version.
 #'
 #' @return A `hms` object corresponding to the sum between `so` and (`sd` / 2)
-#'   rolled on a 24-hour clock basis.
+#'   rolled in a 24-hour clock basis.
 #'
 #' @aliases msw msf
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
@@ -181,9 +182,10 @@ ms <- function(so, sd) {
 #' @return A `hms` object corresponding to the MCTQ chronotype or corrected
 #'   midsleep on work-free days.
 #'
-#' @template mctq_b
-#' @template mctq_c
+#' @template details_b
+#' @template section_a
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples

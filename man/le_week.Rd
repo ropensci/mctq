@@ -4,22 +4,23 @@
 \alias{le_week}
 \title{Compute MCTQ average weekly light exposure}
 \usage{
-le_week(wd, le_w, le_f)
+le_week(le_w, le_f, wd)
 }
 \arguments{
-\item{wd}{An integerish number corresponding to the \strong{number of work days per
-week} value from a standard or micro version of the MCTQ questionnaire.}
-
 \item{le_w}{A \code{Duration} object corresponding to the \strong{light exposure on work
 days} value from a standard or micro version of the MCTQ questionnaire.}
 
 \item{le_f}{A \code{Duration} object corresponding to the \strong{light exposure on
 work-free days} value from a standard or micro version of the MCTQ
 questionnaire.}
+
+\item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
+object corresponding to the \strong{number of work days per week} value from a
+standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the average weekly light
-exposure.
+A \code{Duration} object corresponding to the weighted mean of \code{le} and
+\code{wd} and \code{fd(wd)} (weights).
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -48,7 +49,7 @@ See References section to learn more.
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
+classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
 }
 
@@ -66,19 +67,33 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Ghotbi \emph{et.al}
-(\href{https://bit.ly/34VhA0l}{2020}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{sd_week()} (\eqn{LE_{week}}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{le_week()}
+(\eqn{LE_{week}}{LE_week}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{\frac{LE_w \times WD + LE_f \times FD}{7}}}
+\subsection{Computation}{
+
+\strong{\deqn{\frac{LE_W \times WD + LE_F \times FD}{7}}{
+(LE_W * WD + LE_F * FD) / 7}}
 
 Where:
 \itemize{
-\item \eqn{Le_w} = light exposure on workdays.
+\item \eqn{LE_W} = light exposure on workdays.
+\item \eqn{LE_F} = light exposure on work-free days.
 \item \eqn{WD} = number of workdays per week.
-\item \eqn{LE_f} = light exposure on work-free days.
 \item \eqn{FD} = number of work-free days per week.
+}
+
+\strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
 }
 }
 
@@ -100,18 +115,18 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-le_week(5, lubridate::dhours(1.5), lubridate::dhours(3.7))
+le_week(lubridate::dhours(1.5), lubridate::dhours(3.7), 5)
 #> [1] "7662.85714285714s (~2.13 hours)" # Expected
-le_week(6, lubridate::dhours(3), lubridate::dhours(1.5))
+le_week(lubridate::dhours(3), lubridate::dhours(1.5), 6)
 #> [1] "10028.5714285714s (~2.79 hours)" # Expected
-le_week(3, lubridate::dhours(5.6), lubridate::as.duration(NA))
+le_week(lubridate::dhours(5.6), lubridate::as.duration(NA), 3)
 #> [1] NA # Expected
 
 ## __ Vectorized example __
-wd <- c(4, 5)
 le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
 le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
-le_week(wd, le_w, le_f)
+wd <- c(4, 5)
+le_week(le_w, le_f, wd)
 #> [1] "10800s (~3 hours)" # Expected
 #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 
@@ -123,39 +138,35 @@ lubridate::as.duration(stats::weighted.mean(x, w))
 #> [1] "10157.1428571429s (~2.82 hours)" # Expected
 
 ## __ Converting the output to `hms` __
-x <- le_week(3, lubridate::dhours(1.25), lubridate::dhours(6.23))
-convert_to(x, "hms")
+x <- le_week(lubridate::dhours(1.25), lubridate::dhours(6.23), 3)
+convert(x, "hms")
 #> 04:05:44.571429 # Expected
-convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
-#> 04:05:44 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- le_week(2, lubridate::dhours(3.4094), lubridate::dhours(6.2345))
+x <- le_week(lubridate::dhours(3.4094), lubridate::dhours(6.2345), 2)
 x
 #> [1] "19538.3828571429s (~5.43 hours)" # Expected
 round_time(x)
 #> [1] "19538s (~5.43 hours)" # Expected
 }
 \references{
-Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
-\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
-\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
-
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
 D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 (2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
-Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
-\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110.
+\doi{10.1177/0748730419886986}.
+
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
+Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
 
 Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
-and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
-\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
+\doi{10.1016/j.cub.2012.03.038}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
-daily temporal patterns of human chronotypes.
-\emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
-\href{https://doi.org/10.1177/0748730402239679}{10.1177/0748730402239679}.
+daily temporal patterns of human chronotypes. \emph{Journal of Biological
+Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
@@ -173,7 +184,6 @@ Other MCTQ functions:
 \code{\link{sd}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
-\code{\link{sloss_week}()},
 \code{\link{so}()},
 \code{\link{tbt}()}
 }

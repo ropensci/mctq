@@ -15,5 +15,3 @@
 #' addition to the guidelines used for the standard MCTQ.
 #'
 #' See References section to learn more.
-#'
-#' @family MCTQ functions

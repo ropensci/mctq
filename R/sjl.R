@@ -54,9 +54,10 @@
 #' `vignette("social-jet-lag", package = "mctq")` for more details.
 #'
 #' @inheritParams msf_sc
-#' @template mctq_b
-#' @template mctq_c
+#' @template details_b
+#' @template section_a
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
@@ -81,7 +82,7 @@
 #'
 #' ## __ Converting the output to `hms` __
 #' x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
-#' convert_to(x, "hms")
+#' convert(x, "hms")
 #' #> 02:10:05 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
@@ -98,8 +99,8 @@ sjl <- function(msw, msf, abs = TRUE) {
     assert_identical(msw, msf, type = "length")
 
     shortest_interval <- shortest_interval(msw, msf, class = "Interval")
-    int_start <- convert_to(lubridate::int_start(shortest_interval), "hms")
-    out <- convert_to(shortest_interval, class = "Duration")
+    int_start <- convert(lubridate::int_start(shortest_interval), "hms")
+    out <- convert(shortest_interval, class = "Duration")
 
     out <- dplyr::case_when(
         msw == msf ~ out,
@@ -173,79 +174,80 @@ sjl_rel <- function(msw, msf) {
 #' works a little bit different (see Operation section), allowing to compute a
 #' weighted average of any shift combination.
 #'
-#' @param n A `list` object with [integerish][rlang::is_integerish()] `integer`
-#'   or `numeric` elements corresponding to the __number of days from each work
-#'   shift__ from a MCTQ shift questionnaire. `n` elements and values must be
-#'   paired with `sjl` elements and values.
 #' @param sjl A `list` object with `Duration` elements corresponding to the
-#'   __absolute social jetlag in each shift__ from a MCTQ shift questionnaire
-#'   (you can use [mctq::sjl()] to compute it). `sjl` elements and values must
-#'   be paired with `n` elements and values.
+#'   __absolute social jetlag in each shift__ from a shift version of the MCTQ
+#'   questionnaire (you can use [mctq::sjl()] to compute it). `sjl` elements and
+#'   values must be paired with `n` elements and values.
+#' @param n_w A `list` object with [integerish][rlang::is_integerish()]
+#'   `integer` or `numeric` elements corresponding to the __number of days
+#'   worked in each shift__ from a shift version of the MCTQ questionnaire. `n`
+#'   elements and values must be paired with `sjl` elements and values.
 #'
 #' @return A `Duration` object corresponding to the weighted mean of `sjl` and
-#'   `n` (weights).
+#'   `n_w` (weights).
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
 #' ## __ Scalar example __
-#' n <- list(n_m = 3, n_e = 1, n_n = 4)
 #' sjl <- list(sjl_m = lubridate::dhours(1.25), sjl_e = lubridate::dhours(0.5),
 #'            sjl_n = lubridate::dhours(3))
-#' sjl_weighted(n, sjl)
+#' n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+#' sjl_weighted(sjl, n_w)
 #' #> [1] "7312.5s (~2.03 hours)" # Expected
 #'
 #' ## __ Vectorized example __
-#' n <- list(n_m = c(1, 3), n_e = c(4, 1), n_n = c(3, 3))
 #' sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
 #'             sjl_e = c(lubridate::dhours(3.21), lubridate::dhours(0)),
 #'             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
-#' sjl_weighted(n, sjl)
+#' n_w <- list(n_w_m = c(1, 3), n_w_e = c(4, 1), n_w_n = c(3, 3))
+#' sjl_weighted(sjl, n_w)
 #' #> [1] "8298s (~2.31 hours)"  "11988s (~3.33 hours)"  # Expected
 #'
 #' ## __ Checking the second output from vectorized example __
 #' i <- 2
 #' x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
-#' w <- c(n[["n_m"]][i], n[["n_e"]][i], n[["n_n"]][i])
+#' w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
 #' lubridate::as.duration(stats::weighted.mean(x, w))
 #' #> [1] "11988s (~3.33 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
-#' n <- list(n_m = 4, n_e = 2, n_n = 1)
 #' sjl <- list(sjl_m = lubridate::dhours(0.25), sjl_e = lubridate::dhours(1.2),
 #'            sjl_n = lubridate::dhours(4.32))
-#' sjl_weighted(n, sjl)
+#' n_w <- list(n_w_m = 4, n_w_e = 2, n_w_n = 1)
+#' sjl_weighted(sjl, n_w)
 #' #> [1] "3970.28571428571s (~1.1 hours)" # Expected
-#' convert_to(sjl_weighted(n, sjl), "hms")
+#' convert(sjl_weighted(sjl, n_w), "hms")
 #' #> 01:06:10.285714 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' round_time(sjl_weighted(n, sjl))
+#' round_time(sjl_weighted(sjl, n_w))
 #' #> [1] "3970s (~1.1 hours)" # Expected
-#' round_time(convert_to(sjl_weighted(n, sjl), "hms"))
+#' round_time(convert(sjl_weighted(sjl, n_w), "hms"))
 #' #> 01:06:10 # Expected
-sjl_weighted <- function(n, sjl) {
+sjl_weighted <- function(sjl, n_w) {
 
-    checkmate::assert_list(n, len = length(sjl))
-    checkmate::assert_list(sjl, len = length(n))
-    lapply(n, checkmate::assert_integerish)
+    checkmate::assert_list(sjl, len = length(n_w))
+    checkmate::assert_list(n_w, len = length(sjl))
     lapply(sjl, assert_duration)
-    lapply(sjl, checkmate::assert_numeric, lower = 0)
-    mapply(assert_identical, n, sjl, MoreArgs = list(type = "length"))
+    lapply(n_w, checkmate::assert_integerish)
+    lapply(sjl, checkmate::assert_numeric)
+    mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
 
-    lapply(sjl, abs)
+    sjl <- lapply(sjl, abs)
 
     foo <- function(x, y) {
         out <- Reduce("*", list(x, y))
         lubridate::as.duration(out)
     }
 
-    sjl <- mapply(foo, n, sjl, SIMPLIFY = FALSE)
+    sjl <- mapply(foo, n_w, sjl, SIMPLIFY = FALSE)
     sjl <- Reduce("+", sjl)
-    n <- Reduce("+", n)
+    n_w <- Reduce("+", n_w)
 
-    sjl / n
+    sjl / n_w
 
 }

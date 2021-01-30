@@ -8,7 +8,7 @@ random_mctq(model = "standard")
 }
 \arguments{
 \item{model}{A string indicating the data model to return. Valid values are:
-\code{"standard"}, "\verb{shift"}, \code{"micro"},  (default: \code{"standard"}).}
+\code{"standard"}, "\verb{shift"}, and \code{"micro"} (default: \code{"standard"}).}
 }
 \value{
 A named list with elements representing each MCTQ basic/measurable
@@ -20,8 +20,8 @@ variable of the model indicated in \code{model}.
 \code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 composed by MCTQ basic/measurable variables.
 
-The case structure are the same as the datasets provided by the \code{mctq}
-package. See \link{std_mctq} to learn more.
+The case structure (variable names and classes) are the same as the datasets
+provided by the \code{mctq} package. See \link{std_mctq} to learn more.
 
 At the moment, \strong{only the standard MCTQ is available}.
 }
@@ -33,7 +33,7 @@ random_case()
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert_to}()},
+\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{round_time}()},

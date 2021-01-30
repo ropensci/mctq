@@ -46,10 +46,11 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end on shift or free days
-#' after shift.
-#' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep onset
-#' on shift or free days after shift ("after ... min, I get up").
+#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end in a particular shift or
+#' between two free days after a particular shift.
+#' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
+#' in a particular shift or between two free days after a particular
+#' shift.("after ... min, I get up").
 #'
 #' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
@@ -63,8 +64,9 @@
 #' @return A `hms` object corresponding to the sum of `se` and `si` rolled in a
 #'   24-hour clock basis.
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples

@@ -12,9 +12,9 @@
 #'
 #' ## Requirements
 #'
-#' This function requires the [grDevices][grDevices::grDevices-package]
+#' This function requires the [`grDevices`][grDevices::grDevices-package]
 #' package loaded and can only run in interactive mode. This wont be a issue for
-#' most people, since the package comes with a standard R installation and is
+#' most people, since `grDevices` comes with a standard R installation and is
 #' typically loaded by default. Most people also run R interactively.
 #'
 #' ## Plot recover
@@ -58,20 +58,20 @@
 #' @param data An `atomic` or `data frame` object.
 #' @param ... (optional) additional arguments to be passed to
 #'   [ggplot2::qplot()].
-#' @param cols (optional) (only for data frames) a character vector indicating
+#' @param cols (optional) (only for data frames) a `character` vector indicating
 #'   columns names in `data` for plotting. If `NULL`, `qplot_walk()` will use
 #'   all columns in `data`. This setting only works if `pattern = NULL`
 #'   (default: `NULL`).
 #' @param pattern (optional) (only for data frames) a string with a regular
 #'   expression to select columns names in `data` for plotting. This setting
 #'   only works if `cols = NULL` (default: `NULL`).
-#' @param ignore (optional) (only for data frames) a character vector indicating
-#'   which object classes the function must ignore. This setting can be used
-#'   with `cols` and `pattern`. Assign `NULL` to disable this behavior (default:
-#'   `"character"`).
+#' @param ignore (optional) (only for data frames) a `character` vector
+#'   indicating which object classes the function must ignore. This setting can
+#'   be used with `cols` and `pattern`. Assign `NULL` to disable this behavior
+#'   (default: `"character"`).
 #' @param remove_id (optional) (only for data frames) a logical value indicating
-#'   if the function must ignore column names in `data` that match with
-#'   `"^id$|[\\._-]id$"` (default: `TRUE`).
+#'   if the function must ignore column names in `data` that match with the
+#'   regular expression `"^id$|[\\._-]id$"` (default: `TRUE`).
 #' @param midday_change (optional) a logical value indicating if the function
 #'   must apply a midday change for `hms` variables with values greater than
 #'   `22:00:00` (see Details section to learn more) (default: `TRUE`).
@@ -141,7 +141,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             any(x > hms::parse_hm("22:00"), na.rm = TRUE)) {
             midday_change(x)
         } else if (checkmate::test_multi_class(x, classes)) {
-            convert_to(x, "hms")
+            convert(x, "hms")
         } else {
             x
         }

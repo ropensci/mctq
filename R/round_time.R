@@ -15,10 +15,12 @@
 #' @param x An object belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`.
 #'
-#' @return An time object with the time rounded at the seconds level.
+#' @return A time object with the time rounded at the seconds level.
+#'
+#' @seealso Other date-time rounding functions: [hms::round_hms()]
+#'   [hms::trunc_hms()] [lubridate::round_date()].
 #'
 #' @family utility functions
-#' @seealso [hms::round_hms()] [hms::trunc_hms()] [lubridate::round_date()].
 #' @export
 #'
 #' @examples
@@ -30,7 +32,7 @@
 #' lubridate::microseconds(2454876956)
 #' #> [1] "2454.876956S" # Expected
 #' hms::as_hms(as.numeric(lubridate::microseconds(2454876956)))
-#' #> 00:40:54.876956
+#' #> 00:40:54.876956 # Expected
 #' round_time(lubridate::microseconds(2454876956))
 #' #> [1] "40M 55S" # Expected
 #'
@@ -45,6 +47,6 @@ round_time <- function(x) {
 
     class <- class(x)[1]
     x <- round(as.numeric(x))
-    convert_to(x, class)
+    convert(x, class)
 
 }

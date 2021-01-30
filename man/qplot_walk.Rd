@@ -20,7 +20,7 @@ qplot_walk(
 \item{...}{(optional) additional arguments to be passed to
 \code{\link[ggplot2:qplot]{ggplot2::qplot()}}.}
 
-\item{cols}{(optional) (only for data frames) a character vector indicating
+\item{cols}{(optional) (only for data frames) a \code{character} vector indicating
 columns names in \code{data} for plotting. If \code{NULL}, \code{qplot_walk()} will use
 all columns in \code{data}. This setting only works if \code{pattern = NULL}
 (default: \code{NULL}).}
@@ -29,14 +29,14 @@ all columns in \code{data}. This setting only works if \code{pattern = NULL}
 expression to select columns names in \code{data} for plotting. This setting
 only works if \code{cols = NULL} (default: \code{NULL}).}
 
-\item{ignore}{(optional) (only for data frames) a character vector indicating
-which object classes the function must ignore. This setting can be used
-with \code{cols} and \code{pattern}. Assign \code{NULL} to disable this behavior (default:
-\code{"character"}).}
+\item{ignore}{(optional) (only for data frames) a \code{character} vector
+indicating which object classes the function must ignore. This setting can
+be used with \code{cols} and \code{pattern}. Assign \code{NULL} to disable this behavior
+(default: \code{"character"}).}
 
 \item{remove_id}{(optional) (only for data frames) a logical value indicating
-if the function must ignore column names in \code{data} that match with
-\code{"^id$|[\\\\._-]id$"} (default: \code{TRUE}).}
+if the function must ignore column names in \code{data} that match with the
+regular expression \code{"^id$|[\\\\._-]id$"} (default: \code{TRUE}).}
 
 \item{midday_change}{(optional) a logical value indicating if the function
 must apply a midday change for \code{hms} variables with values greater than
@@ -52,9 +52,9 @@ data frame.
 \details{
 \subsection{Requirements}{
 
-This function requires the \link[grDevices:grDevices-package]{grDevices}
+This function requires the \code{\link[grDevices:grDevices-package]{grDevices}}
 package loaded and can only run in interactive mode. This wont be a issue for
-most people, since the package comes with a standard R installation and is
+most people, since \code{grDevices} comes with a standard R installation and is
 typically loaded by default. Most people also run R interactively.
 }
 
@@ -114,7 +114,7 @@ qplot_walk(datasets::mtcars)
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert_to}()},
+\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},

@@ -4,22 +4,22 @@
 \alias{sjl_weighted}
 \title{Compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)}
 \usage{
-sjl_weighted(n, sjl)
+sjl_weighted(sjl, n_w)
 }
 \arguments{
-\item{n}{A \code{list} object with \link[rlang:is_integerish]{integerish} \code{integer}
-or \code{numeric} elements corresponding to the \strong{number of days from each work
-shift} from a MCTQ shift questionnaire. \code{n} elements and values must be
-paired with \code{sjl} elements and values.}
-
 \item{sjl}{A \code{list} object with \code{Duration} elements corresponding to the
-\strong{absolute social jetlag in each shift} from a MCTQ shift questionnaire
-(you can use \code{\link[=sjl]{sjl()}} to compute it). \code{sjl} elements and values must
-be paired with \code{n} elements and values.}
+\strong{absolute social jetlag in each shift} from a shift version of the MCTQ
+questionnaire (you can use \code{\link[=sjl]{sjl()}} to compute it). \code{sjl} elements and
+values must be paired with \code{n} elements and values.}
+
+\item{n_w}{A \code{list} object with \link[rlang:is_integerish]{integerish}
+\code{integer} or \code{numeric} elements corresponding to the \strong{number of days
+worked in each shift} from a shift version of the MCTQ questionnaire. \code{n}
+elements and values must be paired with \code{sjl} elements and values.}
 }
 \value{
 A \code{Duration} object corresponding to the weighted mean of \code{sjl} and
-\code{n} (weights).
+\code{n_w} (weights).
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -48,7 +48,7 @@ See References section to learn more.
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
+classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
 }
 
@@ -115,62 +115,60 @@ weighted average of any shift combination.
 
 \examples{
 ## __ Scalar example __
-n <- list(n_m = 3, n_e = 1, n_n = 4)
 sjl <- list(sjl_m = lubridate::dhours(1.25), sjl_e = lubridate::dhours(0.5),
            sjl_n = lubridate::dhours(3))
-sjl_weighted(n, sjl)
+n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+sjl_weighted(sjl, n_w)
 #> [1] "7312.5s (~2.03 hours)" # Expected
 
 ## __ Vectorized example __
-n <- list(n_m = c(1, 3), n_e = c(4, 1), n_n = c(3, 3))
 sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
             sjl_e = c(lubridate::dhours(3.21), lubridate::dhours(0)),
             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
-sjl_weighted(n, sjl)
+n_w <- list(n_w_m = c(1, 3), n_w_e = c(4, 1), n_w_n = c(3, 3))
+sjl_weighted(sjl, n_w)
 #> [1] "8298s (~2.31 hours)"  "11988s (~3.33 hours)"  # Expected
 
 ## __ Checking the second output from vectorized example __
 i <- 2
 x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
-w <- c(n[["n_m"]][i], n[["n_e"]][i], n[["n_n"]][i])
+w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
 lubridate::as.duration(stats::weighted.mean(x, w))
 #> [1] "11988s (~3.33 hours)" # Expected
 
 ## __ Converting the output to hms __
-n <- list(n_m = 4, n_e = 2, n_n = 1)
 sjl <- list(sjl_m = lubridate::dhours(0.25), sjl_e = lubridate::dhours(1.2),
            sjl_n = lubridate::dhours(4.32))
-sjl_weighted(n, sjl)
+n_w <- list(n_w_m = 4, n_w_e = 2, n_w_n = 1)
+sjl_weighted(sjl, n_w)
 #> [1] "3970.28571428571s (~1.1 hours)" # Expected
-convert_to(sjl_weighted(n, sjl), "hms")
+convert(sjl_weighted(sjl, n_w), "hms")
 #> 01:06:10.285714 # Expected
 
 ## __ Rounding the output at the seconds level __
-round_time(sjl_weighted(n, sjl))
+round_time(sjl_weighted(sjl, n_w))
 #> [1] "3970s (~1.1 hours)" # Expected
-round_time(convert_to(sjl_weighted(n, sjl), "hms"))
+round_time(convert(sjl_weighted(sjl, n_w), "hms"))
 #> 01:06:10 # Expected
 }
 \references{
-Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
-\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
-\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
-
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
 D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 (2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
-Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
-\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110.
+\doi{10.1177/0748730419886986}.
+
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
+Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
 
 Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
-and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
-\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
+\doi{10.1016/j.cub.2012.03.038}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
-daily temporal patterns of human chronotypes.
-\emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
-\href{https://doi.org/10.1177/0748730402239679}{10.1177/0748730402239679}.
+daily temporal patterns of human chronotypes. \emph{Journal of Biological
+Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
@@ -188,7 +186,6 @@ Other MCTQ functions:
 \code{\link{sd_week}()},
 \code{\link{sd}()},
 \code{\link{sjl}()},
-\code{\link{sloss_week}()},
 \code{\link{so}()},
 \code{\link{tbt}()}
 }

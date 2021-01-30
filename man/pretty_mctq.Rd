@@ -17,16 +17,13 @@ pretty_mctq(data, round = TRUE, hms = TRUE)
 and \code{difftime} objects must be converted to \code{hms} (default: \code{TRUE}).}
 }
 \value{
-A transformed data frame, as indicated in parameters.
+A transformed data frame, as indicated in arguments.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
 \code{pretty_mctq()} helps you to transform your MCTQ data in many ways. See
 parameters and Details section to learn more.
-
-You can also see \code{pretty_mctq()}in action in
-\code{vignette("data_wrangling", package = "mctq")}.
 }
 \details{
 \subsection{Rounding}{
@@ -54,7 +51,7 @@ pretty_mctq(mctq:::analyze_std_mctq(round = FALSE, hms = FALSE))
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert_to}()},
+\code{\link{convert}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{round_time}()},

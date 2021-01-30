@@ -7,8 +7,8 @@
 assign_date(
   start,
   end,
-  ambiguity = 0,
   return = "interval",
+  ambiguity = 0,
   start_name = deparse(substitute(start)),
   end_name = deparse(substitute(end))
 )
@@ -17,11 +17,11 @@ assign_date(
 \item{start, end}{A \code{hms} or \code{POSIXt} vector indicating the start or end
 hour.}
 
+\item{return}{(optional) a string indicating the class of the output (see
+Details) (default: \code{"interval"}).}
+
 \item{ambiguity}{(optional) a \code{numeric} value to instruct \code{assign_date()} on
 how to deal with ambiguities (see Details) (default: \code{0}).}
-
-\item{return}{(optional) a string indicating the type of output (see Details)
-(default: \code{"interval"}).}
 
 \item{start_name, end_name}{(optional) a string indicating a name associated
 with the \code{start} and \code{end} argument.}
@@ -87,8 +87,8 @@ this elements with the names of the variables assigned to \code{start} and \code
 arguments.
 
 If the number of characters (\code{nchar}) of \code{start_name} or \code{end_name} are equal
-or greater than 30, \code{assign_date()} will name the list elements as \code{start}
-and \code{end}.
+or greater than 30, \code{assign_date()} will name the list elements as \code{"start"}
+and \code{"end"}.
 }
 
 \subsection{\code{POSIXt} objects}{
@@ -133,7 +133,7 @@ assign_date(start, end, ambiguity = 24)
 }
 \seealso{
 Other utility functions: 
-\code{\link{convert_to}()},
+\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

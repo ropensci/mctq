@@ -8,14 +8,14 @@
 #' objects.
 #'
 #' This function supports vectorized operations and can also be set to roll the
-#' sum on a 24 hours clock basis, helping with time arithmetic issues.
+#' sum in a 24 hours clock basis, helping with time arithmetic issues.
 #'
 #' @details
 #'
 #' ## `class` argument
 #'
-#' `sum_time()` is integrated with [mctq::convert_to()]. That way you can choose
-#' what class of object will prefer for output.
+#' `sum_time()` is integrated with [mctq::convert()]. That way you can choose
+#' what class of object will prefer as output.
 #'
 #' ## `vectorize` argument
 #'
@@ -35,13 +35,11 @@
 #'
 #' ## `Period` objects
 #'
-#' `Period` objects are a special time of object develop by the
-#' [lubridate::lubridate] team that track changes in clock times ignoring
-#' time irregularities. That is to say that 1 day as `Period` will always
-#' represent 1 day in the time line.
-#'
-#' `sum_time` ignores that property of `Period` objects, treating them as
-#' objects of class `Duration`.
+#' `Period` objects are a special time of object developed by the
+#' [lubridate::lubridate-package] team that track changes in clock times
+#' ignoring time irregularities. That is to say that 1 day as `Period` will
+#' always represent 1 day in the timeline. `sum_time()` ignores that property of
+#' `Period` objects, treating them as objects of class `Duration`.
 #'
 #' ## Time line irregularities
 #'
@@ -49,17 +47,13 @@
 #' leap years, DST, leap seconds). This may not be a issue for most people, but
 #' it must be considered when doing time arithmetic.
 #'
-#' ## `NA` values
-#'
-#' `sum_time()` only return `NA` values when `vectorize = TRUE`.
-#'
 #' @param ... Vectors belonging to one or more of the following classes:
 #'   `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or
 #'   `Interval`.
 #' @param class (optional) a string indicating the output class (default:
 #'   `"hms"`).
 #' @param clock (optional) a logical value indicating whether the sum should
-#'   roll over on a 24 hour clock basis (default: `FALSE`).
+#'   roll in a 24 hour clock basis (default: `FALSE`).
 #' @param vectorize (optional) a logical value indicating if the function must
 #'   operate in a vectorized fashion (default: `FALSE`).
 #' @param na.rm (optional) a logical value indicating if the function must
@@ -67,21 +61,21 @@
 #'
 #' @return
 #'
-#' * If `clock = TRUE` (default) and `vectorize = FALSE` (default), an object of
+#' * If `clock = TRUE` and `vectorize = FALSE` (default), an object of
 #' the indicated class in `class` (default: `"hms"`) with the sum of the time
-#' from objects in `...` rolled over on a 24 hour clock basis.
+#' from objects in `...` rolled in a 24 hour clock basis.
 #'
-#' * If `clock = FALSE` and `vectorize = FALSE` (default), an object of the
-#' indicated class in `class` (default: `"hms"`) with the cumulative sum of the
-#' time from objects in `...`.
+#' * If `clock = FALSE` (default) and `vectorize = FALSE` (default), an object
+#' of the indicated class in `class` (default: `"hms"`) with the cumulative sum
+#' of the time from objects in `...`.
 #'
-#' * If `clock = TRUE` (default) and `vectorize = TRUE`, an object of the
-#' indicated class in `class` (default: `"hms"`) with a vectorized sum of the
-#' time from objects in `...` rolled over on a 24 hour clock basis.
+#' * If `clock = TRUE` and `vectorize = TRUE`, an object of the indicated class
+#' in `class` (default: `"hms"`) with a vectorized sum of the time from objects
+#' in `...` rolled in a 24 hour clock basis.
 #'
-#' * If `clock = FALSE` and `vectorize = TRUE`, an object of the indicated class
-#' in `class` (default: `"hms"`) with a vectorized and cumulative sum of the
-#' time from objects in `...`.
+#' * If `clock = FALSE` (default) and `vectorize = TRUE`, an object of the
+#' indicated class in `class` (default: `"hms"`) with a vectorized and
+#' cumulative sum of the time from objects in `...`.
 #'
 #' @family utility functions
 #' @export
@@ -93,12 +87,12 @@
 #' sum_time(x, y, class = "duration")
 #' #> [1] "142200s (~1.65 days)" # Expected
 #'
-#' ## __ Non-vectorized sum rolled over on a 24 hour clock basis __
+#' ## __ Non-vectorized sum rolled over in a 24 hour clock basis __
 #' x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
 #' sum_time(x, clock = TRUE)
 #' #> 06:50:00 # Expected
 #'
-#' x <- c(lubridate::minutes(15), hms::parse_hm("02:30"), hms::as_hms(NA))
+#' x <- c(hms::parse_hm("00:15"), hms::parse_hm("02:30"), hms::as_hms(NA))
 #' sum_time(x, clock = TRUE)
 #' #> NA # Expected
 #' sum_time(x, clock = TRUE, na.rm = TRUE)
@@ -109,17 +103,17 @@
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, vectorize = TRUE)
 #' #> 29:00:00 # Expected
-#' #> NA # Expected
+#' #>       NA # Expected
 #' sum_time(x, y, vectorize = TRUE, na.rm = TRUE)
 #' #> 29:00:00 # Expected
 #' #> 10:00:00 # Expected
 #'
-#' ## __ Vectorized sum rolled over on a 24 hour clock basis __
+#' ## __ Vectorized sum rolled over in a 24 hour clock basis __
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, clock = TRUE, vectorize = TRUE)
 #' #> 05:00:00 # Expected
-#' #> NA # Expected
+#' #>       NA # Expected
 #' sum_time(x, y, clock = TRUE, vectorize = TRUE, na.rm = TRUE)
 #' #> 05:00:00 # Expected
 #' #> 10:00:00 # Expected
@@ -182,6 +176,6 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 
     # Return output -----
 
-    convert_to(out, class)
+    convert(out, class)
 
 }

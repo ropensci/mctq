@@ -215,13 +215,13 @@ write_data <- function(data,
     out <- out %>%
         dplyr::mutate(across(where(is.list), ~ dplyr::na_if(
             paste(sapply(.x, unlist), collapse = ","), "NA")),
-               across(where(lubridate::is.duration), ~ convert_to(.x, "hms")),
-               across(where(lubridate::is.period), ~ convert_to(.x, "hms")),
-               across(where(lubridate::is.difftime), ~ convert_to(.x, "hms")),
+               across(where(lubridate::is.duration), ~ convert(.x, "hms")),
+               across(where(lubridate::is.period), ~ convert(.x, "hms")),
+               across(where(lubridate::is.difftime), ~ convert(.x, "hms")),
                across(where(lubridate::is.POSIXt), ~
-                          convert_to(.x, "character")),
+                          convert(.x, "character")),
                across(where(lubridate::is.interval),
-                      ~ convert_to(.x, "character")))
+                      ~ convert(.x, "character")))
 
     # Write data -----
 

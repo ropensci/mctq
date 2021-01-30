@@ -43,8 +43,7 @@
 #'
 #' Van der Loo, M., & De Jonge, E. (2018).
 #' _Statistical data cleaning with applications in R_. Hooboken, NJ: John
-#' Wiley & Sons. doi:
-#' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
+#' Wiley & Sons. \doi{10.1002/9781118897126}.
 #'
 #' @examples
 #' \dontrun{

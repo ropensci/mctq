@@ -7,7 +7,7 @@ test_that("shortest_interval() | shortest interval between two hours", {
     x <- lubridate::as_datetime("1985-01-15 12:00:00")
     y <- lubridate::as_datetime("2020-09-10 12:00:00")
     object <- shortest_interval(x, y)
-    expect_equal(object, hms::parse_hms("00:00:00"))
+    expect_equal(object, lubridate::as_datetime("1970-01-01 00:00:00"))
 })
 
 test_that("x_interval() | changing the output object class", {
@@ -33,11 +33,11 @@ test_that("x_interval() | changing the output object class", {
 test_that("longer_interval() | longer interval between two hours", {
     x <- lubridate::parse_date_time("01:10:00", "HMS")
     y <- lubridate::parse_date_time("11:45:00", "HMS")
-    object <- longer_interval(x, y)
+    object <- longer_interval(x, y, "hms")
     expect_equal(object, hms::parse_hms("13:25:00"))
 
     x <- lubridate::as_datetime("1915-02-14 05:00:00")
     y <- lubridate::as_datetime("1970-07-01 05:00:00")
     object <- longer_interval(x, y)
-    expect_equal(object, hms::parse_hms("24:00:00"))
+    expect_equal(object, lubridate::as_datetime("1970-01-01 24:00:00"))
 })

@@ -11,7 +11,7 @@ round_time(x)
 \code{Period}, \code{difftime}, \code{hms}.}
 }
 \value{
-An time object with the time rounded at the seconds level.
+A time object with the time rounded at the seconds level.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -33,7 +33,7 @@ round_time(lubridate::dhours(1.45678696454))
 lubridate::microseconds(2454876956)
 #> [1] "2454.876956S" # Expected
 hms::as_hms(as.numeric(lubridate::microseconds(2454876956)))
-#> 00:40:54.876956
+#> 00:40:54.876956 # Expected
 round_time(lubridate::microseconds(2454876956))
 #> [1] "40M 55S" # Expected
 
@@ -43,11 +43,12 @@ round_time(hms::as_hms(12345.6789))
 #> 03:25:46 # Expected
 }
 \seealso{
-\code{\link[hms:round_hms]{hms::round_hms()}} \code{\link[hms:round_hms]{hms::trunc_hms()}} \code{\link[lubridate:round_date]{lubridate::round_date()}}.
+Other date-time rounding functions: \code{\link[hms:round_hms]{hms::round_hms()}}
+\code{\link[hms:round_hms]{hms::trunc_hms()}} \code{\link[lubridate:round_date]{lubridate::round_date()}}.
 
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert_to}()},
+\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

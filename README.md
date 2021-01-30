@@ -18,8 +18,7 @@ Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff6
 The goal of `mctq` is to provide a fast and friendly way to process
 Munich ChronoType Questionnaire (MCTQ) data in R.
 
-At the moment, only the standard and micro (µ) MCTQ are supported.
-Future versions will also include tools for MCTQ Shift.
+All three MCTQ versions (standard, micro, and shift) are supported.
 
 ## Installation
 

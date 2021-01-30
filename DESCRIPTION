@@ -1,5 +1,5 @@
 Package: mctq
-Title: The R package for MCTQ data
+Title: The R Package for MCTQ data
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Daniel",

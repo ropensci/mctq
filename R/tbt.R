@@ -31,10 +31,11 @@
 #'   can use [mctq::gu()] to compute it.
 #'
 #' @return A `Duration` object corresponding to the difference between `gu` and
-#'   `bt` rolled on a 24-hour clock basis.
+#'   `bt` rolled in a 24-hour clock basis.
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples

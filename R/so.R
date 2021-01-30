@@ -33,10 +33,11 @@
 #'   from a standard or shift version of the MCTQ questionnaire.
 #'
 #' @return A `hms` object corresponding to the sum of `sprep` and `slat` rolled
-#'   on a 24-hour clock basis.
+#'   in a 24-hour clock basis.
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples

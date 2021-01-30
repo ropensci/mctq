@@ -4,12 +4,9 @@
 \alias{sloss_week}
 \title{Compute MCTQ weekly sleep loss}
 \usage{
-sloss_week(wd, sd_w, sd_f)
+sloss_week(sd_w, sd_f, wd)
 }
 \arguments{
-\item{wd}{An integerish number corresponding to the \strong{number of work days per
-week} value from a standard or micro version of the MCTQ questionnaire.}
-
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
 days} value from a standard or micro version of the MCTQ questionnaire
 (you can use \code{\link[=sd]{sd()}} to compute it).}
@@ -17,6 +14,10 @@ days} value from a standard or micro version of the MCTQ questionnaire
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} value from a standard or micro version of the MCTQ
 questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
+
+\item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
+object corresponding to the \strong{number of work days per week} value from a
+standard or micro version of the MCTQ questionnaire.}
 }
 \value{
 A \code{Duration} object corresponding to the weekly sleep loss.
@@ -51,7 +52,7 @@ See References section to learn more.
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert_to]{convert_to()}} to convert it
+classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
 }
 
@@ -103,72 +104,52 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-sloss_week(4, lubridate::dhours(6.5), lubridate::dhours(7))
+sloss_week(lubridate::dhours(6.5), lubridate::dhours(7), 4)
 #> [1] "3085.71428571429s (~51.43 minutes)" # Expected
-sloss_week(5, lubridate::dhours(7), lubridate::dhours(8))
+sloss_week(lubridate::dhours(7), lubridate::dhours(8), 5)
 #> [1] "5142.85714285714s (~1.43 hours)" # Expected
-sloss_week(7, lubridate::dhours(NA), lubridate::dhours(9.45))
+sloss_week(lubridate::dhours(NA), lubridate::dhours(9.45), 7)
 #> [1] NA # Expected
 
 ## __ Vectorized example __
-wd <- c(2, 0)
 sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
-sloss_week(wd, sd_w, sd_f)
+wd <- c(2, 0)
+sloss_week(sd_w, sd_f, wd)
 #> [1] "2571.42857142857s (~42.86 minutes)" # Expected
 #> [2] "0s"
 
 ## __ Converting the output to `hms` __
-x <- sloss_week(3, lubridate::dhours(4), lubridate::dhours(5))
-convert_to(x, "hms")
+x <- sloss_week(lubridate::dhours(4), lubridate::dhours(5), 3)
+convert(x, "hms")
 #> 01:42:51.428571 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sloss_week(6, lubridate::dhours(5.8743), lubridate::dhours(7.4324))
+x <- sloss_week(lubridate::dhours(5.8743), lubridate::dhours(7.4324), 6)
 x
 #> [1] "4807.85142857144s (~1.34 hours)" # Expected
 round_time(x)
 #> [1] "4808s (~1.34 hours)" # Expected
 }
 \references{
-Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
-Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}).
-\emph{Journal of Biological Rhythms}, \emph{28}(2), 130-140. doi:
-\href{https://doi.org/10.1177/0748730412475041}{10.1177/0748730412475041}.
-
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
 D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 (2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
-Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110. doi:
-\href{https://doi.org/10.1177/0748730419886986}{10.1177/0748730419886986}.
+Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110.
+\doi{10.1177/0748730419886986}.
+
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
+Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
 
 Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
-and obesity. \emph{Current Biology}, \emph{22}(10), 939-43. doi:
-\href{https://doi.org/10.1016/j.cub.2012.03.038}{10.1016/j.cub.2012.03.038}.
+and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
+\doi{10.1016/j.cub.2012.03.038}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
-daily temporal patterns of human chronotypes.
-\emph{Journal of Biological Rhythms}, \emph{18}(1), 80-90. doi:
-\href{https://doi.org/10.1177/0748730402239679}{10.1177/0748730402239679}.
+daily temporal patterns of human chronotypes. \emph{Journal of Biological
+Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
 }
-\seealso{
-Other MCTQ functions: 
-\code{\link{fd}()},
-\code{\link{gu}()},
-\code{\link{le_week}()},
-\code{\link{msf_sc}()},
-\code{\link{ms}()},
-\code{\link{napd}()},
-\code{\link{sd24}()},
-\code{\link{sd_overall}()},
-\code{\link{sd_week}()},
-\code{\link{sd}()},
-\code{\link{sjl_weighted}()},
-\code{\link{sjl}()},
-\code{\link{so}()},
-\code{\link{tbt}()}
-}
-\concept{MCTQ functions}

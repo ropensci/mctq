@@ -5,9 +5,13 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #' `shortest_interval()` finds and return the shortest interval between two
-#' `hms` or `POSIXt` objects. This is useful for time arithmetic, because
+#' `hms` or `POSIXt` objects hours. This is useful for time arithmetic, because
 #' there's always two possible intervals between two hour values with no date
 #' reference.
+#'
+#' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_
+#' finds the longer interval between two hours. It's just a wrapper for
+#' `shortest_interval(x, y, class, inverse = TRUE)`.
 #'
 #' @details
 #'
@@ -27,6 +31,8 @@
 #' resulting in a interval from `x` to `x`. But, if `inverse = TRUE` or
 #' `longer_interval()` is use instead, the latter condition will return a
 #' interval with 24 hours of length (from `x` to `x` + 1 day).
+#'
+#' Note that this function assumes a limit of 24h for longer intervals.
 #'
 #' ```
 #'              day 1                        day 2
@@ -53,8 +59,8 @@
 #'
 #' ## `class` argument
 #'
-#' `shortest_interval()` is integrated with [mctq::convert_to()]. That way you
-#' can choose what class of object will prefer for output.
+#' `shortest_interval()` is integrated with [mctq::convert()]. That way you
+#' can choose what class of object your prefer as output.
 #'
 #' Valid `class` values are: `"Duration"`, `"Period"`, `"hms"`, `"POSIXct"`,
 #' `"POSIXlt"`, and `"Interval"` (case insensitive).
@@ -68,19 +74,15 @@
 #'
 #' `shortest_interval()` will return `NA` if `x` or `y` are `NA`.
 #'
-#' ## `longer_interval()` function
-#'
-#' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_
-#' finds the longer interval between two hours. It's just a wrapper for
-#' `shortest_interval(x, y, class, inverse = TRUE)`.
-#'
 #' @param x,y A `hms` or `POSIXt` object.
-#' @param class (optional) a string indicating the object class of the output.
+#' @param class (optional) a string indicating the object class of the output
+#'   (default: `class(x)[1]`).
 #' @param inverse (optional) a `logical` value indicating if the function must
 #'   return a inverse output, _i.e_ the longer interval between `x` and `y`.
 #'
-#' @return A `hms` object, or a type of object indicated on `class`, with the
-#'   shortest interval between `x` and `y`.
+#' @return A R object, of class indicated on `class`, with the shortest or
+#'   longer interval (if `inverse = TRUE` or `longer_interval()` is used)
+#'   between `x` and `y`.
 #'
 #' @family utility functions
 #' @export
@@ -94,18 +96,18 @@
 #'
 #' x <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' y <- lubridate::as_datetime("2020-09-10 12:00:00")
-#' shortest_interval(x, y)
+#' shortest_interval(x, y, "hms")
 #' #> 00:00:00 # Expected
 #'
 #' ## __ Finding the longer interval between two hour values __
 #' x <- lubridate::parse_date_time("01:10:00", "HMS")
 #' y <- lubridate::parse_date_time("11:45:00", "HMS")
-#' longer_interval(x, y)
+#' longer_interval(x, y, "hms")
 #' #> 13:25:00 # Expected
 #'
 #' x <- lubridate::as_datetime("1915-02-14 05:00:00")
 #' y <- lubridate::as_datetime("1970-07-01 05:00:00")
-#' longer_interval(x, y)
+#' longer_interval(x, y, "hms")
 #' #> 24:00:00 # Expected
 #'
 #' ## __ Changing the output object class __
@@ -118,9 +120,9 @@
 #' #> [1] "45000s (~12.5 hours)" # Expected
 #' shortest_interval(x, y, "Period")
 #' #> [1] "11H 30M 0S" # Expected
-#' longer_interval(x, y, "POSIXct")
+#' longer_interval(x, y, "POSIXlt")
 #' #> [1] "1970-01-01 12:30:00 UTC" # Expected
-shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
+shortest_interval <- function(x, y, class = base::class(x)[1], inverse = FALSE) {
 
     # Check arguments -----
 
@@ -140,8 +142,8 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
 
     # Convert `x` and `y` -----
 
-    x <- flat_posixt(convert_to(x, "posixct"))
-    y <- flat_posixt(convert_to(y, "posixct"))
+    x <- flat_posixt(convert(x, "posixct"))
+    y <- flat_posixt(convert(y, "posixct"))
 
     list2env(swap_if(x, y, "x > y"), envir = environment())
 
@@ -173,14 +175,14 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
     if (class == "interval") {
         out
     } else {
-        convert_to(out, class)
+        convert(out, class)
     }
 
 }
 
 #' @rdname shortest_interval
 #' @export
-longer_interval <- function(x, y, class = "hms") {
+longer_interval <- function(x, y, class = base::class(x)[1]) {
 
     shortest_interval(x, y, class, inverse = TRUE)
 

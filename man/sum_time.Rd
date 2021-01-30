@@ -15,7 +15,7 @@ sum_time(..., class = "hms", clock = FALSE, vectorize = FALSE, na.rm = FALSE)
 \code{"hms"}).}
 
 \item{clock}{(optional) a logical value indicating whether the sum should
-roll over on a 24 hour clock basis (default: \code{FALSE}).}
+roll in a 24 hour clock basis (default: \code{FALSE}).}
 
 \item{vectorize}{(optional) a logical value indicating if the function must
 operate in a vectorized fashion (default: \code{FALSE}).}
@@ -25,18 +25,18 @@ remove \code{NA} values while performing the sum (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{clock = TRUE} (default) and \code{vectorize = FALSE} (default), an object of
+\item If \code{clock = TRUE} and \code{vectorize = FALSE} (default), an object of
 the indicated class in \code{class} (default: \code{"hms"}) with the sum of the time
-from objects in \code{...} rolled over on a 24 hour clock basis.
-\item If \code{clock = FALSE} and \code{vectorize = FALSE} (default), an object of the
-indicated class in \code{class} (default: \code{"hms"}) with the cumulative sum of the
-time from objects in \code{...}.
-\item If \code{clock = TRUE} (default) and \code{vectorize = TRUE}, an object of the
-indicated class in \code{class} (default: \code{"hms"}) with a vectorized sum of the
-time from objects in \code{...} rolled over on a 24 hour clock basis.
-\item If \code{clock = FALSE} and \code{vectorize = TRUE}, an object of the indicated class
-in \code{class} (default: \code{"hms"}) with a vectorized and cumulative sum of the
-time from objects in \code{...}.
+from objects in \code{...} rolled in a 24 hour clock basis.
+\item If \code{clock = FALSE} (default) and \code{vectorize = FALSE} (default), an object
+of the indicated class in \code{class} (default: \code{"hms"}) with the cumulative sum
+of the time from objects in \code{...}.
+\item If \code{clock = TRUE} and \code{vectorize = TRUE}, an object of the indicated class
+in \code{class} (default: \code{"hms"}) with a vectorized sum of the time from objects
+in \code{...} rolled in a 24 hour clock basis.
+\item If \code{clock = FALSE} (default) and \code{vectorize = TRUE}, an object of the
+indicated class in \code{class} (default: \code{"hms"}) with a vectorized and
+cumulative sum of the time from objects in \code{...}.
 }
 }
 \description{
@@ -46,13 +46,13 @@ time from objects in \code{...}.
 objects.
 
 This function supports vectorized operations and can also be set to roll the
-sum on a 24 hours clock basis, helping with time arithmetic issues.
+sum in a 24 hours clock basis, helping with time arithmetic issues.
 }
 \details{
 \subsection{\code{class} argument}{
 
-\code{sum_time()} is integrated with \code{\link[=convert_to]{convert_to()}}. That way you can choose
-what class of object will prefer for output.
+\code{sum_time()} is integrated with \code{\link[=convert]{convert()}}. That way you can choose
+what class of object will prefer as output.
 }
 
 \subsection{\code{vectorize} argument}{
@@ -75,13 +75,11 @@ considered.
 
 \subsection{\code{Period} objects}{
 
-\code{Period} objects are a special time of object develop by the
-\link[lubridate:lubridate-package]{lubridate::lubridate} team that track changes in clock times ignoring
-time irregularities. That is to say that 1 day as \code{Period} will always
-represent 1 day in the time line.
-
-\code{sum_time} ignores that property of \code{Period} objects, treating them as
-objects of class \code{Duration}.
+\code{Period} objects are a special time of object developed by the
+\link[lubridate:lubridate-package]{lubridate::lubridate-package} team that track changes in clock times
+ignoring time irregularities. That is to say that 1 day as \code{Period} will
+always represent 1 day in the timeline. \code{sum_time()} ignores that property of
+\code{Period} objects, treating them as objects of class \code{Duration}.
 }
 
 \subsection{Time line irregularities}{
@@ -89,11 +87,6 @@ objects of class \code{Duration}.
 This function does not take into account time line irregularities (\emph{e.g.}
 leap years, DST, leap seconds). This may not be a issue for most people, but
 it must be considered when doing time arithmetic.
-}
-
-\subsection{\code{NA} values}{
-
-\code{sum_time()} only return \code{NA} values when \code{vectorize = TRUE}.
 }
 }
 \examples{
@@ -103,12 +96,12 @@ y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 sum_time(x, y, class = "duration")
 #> [1] "142200s (~1.65 days)" # Expected
 
-## __ Non-vectorized sum rolled over on a 24 hour clock basis __
+## __ Non-vectorized sum rolled over in a 24 hour clock basis __
 x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
 sum_time(x, clock = TRUE)
 #> 06:50:00 # Expected
 
-x <- c(lubridate::minutes(15), hms::parse_hm("02:30"), hms::as_hms(NA))
+x <- c(hms::parse_hm("00:15"), hms::parse_hm("02:30"), hms::as_hms(NA))
 sum_time(x, clock = TRUE)
 #> NA # Expected
 sum_time(x, clock = TRUE, na.rm = TRUE)
@@ -119,17 +112,17 @@ x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 sum_time(x, y, vectorize = TRUE)
 #> 29:00:00 # Expected
-#> NA # Expected
+#>       NA # Expected
 sum_time(x, y, vectorize = TRUE, na.rm = TRUE)
 #> 29:00:00 # Expected
 #> 10:00:00 # Expected
 
-## __ Vectorized sum rolled over on a 24 hour clock basis __
+## __ Vectorized sum rolled over in a 24 hour clock basis __
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 sum_time(x, y, clock = TRUE, vectorize = TRUE)
 #> 05:00:00 # Expected
-#> NA # Expected
+#>       NA # Expected
 sum_time(x, y, clock = TRUE, vectorize = TRUE, na.rm = TRUE)
 #> 05:00:00 # Expected
 #> 10:00:00 # Expected
@@ -137,7 +130,7 @@ sum_time(x, y, clock = TRUE, vectorize = TRUE, na.rm = TRUE)
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert_to}()},
+\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

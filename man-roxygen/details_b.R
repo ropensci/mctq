@@ -21,7 +21,7 @@
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. This classes can be found on [hms::hms-package] and
 #' [lubridate::lubridate-package]. If your data do not conform to the object
-#' classes required, you can use [mctq::convert_to()] to convert it
+#' classes required, you can use [mctq::convert()] to convert it
 #' (see `vignette("converting-data", package = "mctq")`).
 #'
 #' ## Rounding and fractional time
@@ -33,5 +33,3 @@
 #' Our recommendation is to avoid rounding, but, if you do, make sure that you
 #' only round your values after all computations are done, that way you can
 #' avoid [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
-#'
-#' @family MCTQ functions

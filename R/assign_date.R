@@ -54,8 +54,8 @@
 #' arguments.
 #'
 #' If the number of characters (`nchar`) of `start_name` or `end_name` are equal
-#' or greater than 30, `assign_date()` will name the list elements as `start`
-#' and `end`.
+#' or greater than 30, `assign_date()` will name the list elements as `"start"`
+#' and `"end"`.
 #'
 #' ## `POSIXt` objects
 #'
@@ -70,8 +70,8 @@
 #'   hour.
 #' @param ambiguity (optional) a `numeric` value to instruct `assign_date()` on
 #'   how to deal with ambiguities (see Details) (default: `0`).
-#' @param return (optional) a string indicating the type of output (see Details)
-#'   (default: `"interval"`).
+#' @param return (optional) a string indicating the class of the output (see
+#'   Details) (default: `"interval"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
 #'   with the `start` and `end` argument.
 #'
@@ -113,7 +113,7 @@
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)
 #' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
-assign_date <- function(start, end, ambiguity = 0, return = "interval",
+assign_date <- function(start, end, return = "interval", ambiguity = 0,
                         start_name = deparse(substitute(start)),
                         end_name = deparse(substitute(end))) {
 
@@ -124,8 +124,8 @@ assign_date <- function(start, end, ambiguity = 0, return = "interval",
     assert_identical(start, end, type = "length")
     checkmate::assert_numeric(lubridate::hour(start), lower = 0, upper = 23)
     checkmate::assert_numeric(lubridate::hour(end), lower = 0, upper = 23)
-    checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     checkmate::assert_choice(return, c("list", "interval", "start", "end"))
+    checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     checkmate::assert_string(start_name)
     checkmate::assert_string(end_name)
 
@@ -136,8 +136,8 @@ assign_date <- function(start, end, ambiguity = 0, return = "interval",
 
     # Convert `start` and `end` -----
 
-    start <- flat_posixt(convert_to(start, "posixct"))
-    end <- flat_posixt(convert_to(end, "posixct"))
+    start <- flat_posixt(convert(start, "posixct"))
+    end <- flat_posixt(convert(end, "posixct"))
 
     # Create intervals -----
 

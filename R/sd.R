@@ -32,10 +32,11 @@
 #'   from a standard, micro, or shift version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the difference between
-#'   `se` and `so` rolled on a 24-hour clock basis.
+#'   `se` and `so` rolled in a 24-hour clock basis.
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
@@ -94,10 +95,11 @@ sd <- function(so, se) {
 #'   from the shift version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the difference between
-#'   `nape` and `napo` rolled on a 24-hour clock basis.
+#'   `nape` and `napo` rolled in a 24-hour clock basis.
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
@@ -156,10 +158,11 @@ napd <- function(napo, nape) {
 #'   from the shift version of the MCTQ questionnaire. You can use
 #'   [mctq::napd()] to compute it.
 #'
-#' @return A `Duration` object corresponding to the sum between `sd` and `napd`.
+#' @return A `Duration` object corresponding to the sum of `sd` and `napd`.
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
@@ -210,8 +213,8 @@ sd24 <- function(sd, napd) {
 #' Where:
 #'
 #' * \eqn{SD_w} = sleep duration on workdays.
-#' * \eqn{WD} = number of workdays per week.
 #' * \eqn{SD_f} = sleep duration on work-free days.
+#' * \eqn{WD} = number of workdays per week.
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
@@ -221,29 +224,30 @@ sd24 <- function(sd, napd) {
 #'   work-free days__ value from a standard or micro version of the MCTQ
 #'   questionnaire (you can use [mctq::sd()] to compute it).
 #'
-#' @return A `Duration` object corresponding to the average weekly sleep
-#'   duration.
+#' @return A `Duration` object corresponding to the weighted mean of `sd` and
+#'   `wd` and `fd(wd)` (weights).
 #'
 #' @inheritParams fd
-#' @template mctq_b
-#' @template mctq_c
+#' @template details_b
+#' @template section_a
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sd_week(5, lubridate::dhours(4), lubridate::dhours(8))
+#' sd_week(lubridate::dhours(4), lubridate::dhours(8), 5)
 #' #> [1] "18514.2857142857s (~5.14 hours)" # Expected
-#' sd_week(4, lubridate::dhours(7), lubridate::dhours(7))
+#' sd_week(lubridate::dhours(7), lubridate::dhours(7), 4)
 #' #> [1] "25200s (~7 hours)" # Expected
-#' sd_week(6, lubridate::as.duration(NA), lubridate::dhours(10))
+#' sd_week(lubridate::as.duration(NA), lubridate::dhours(10), 6)
 #' #> [1] NA # Expected
 #'
 #' ## __ Vectorized example __
-#' wd <- c(3, 7)
 #' sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 #' sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
-#' sd_week(wd, sd_w, sd_f)
+#' wd <- c(3, 7)
+#' sd_week(sd_w, sd_f, wd)
 #' #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 #'
 #' ## __ Checking second output from vectorized example __
@@ -254,23 +258,21 @@ sd24 <- function(sd, napd) {
 #' #> [1] "19620s (~5.45 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
-#' x <- sd_week(5, lubridate::dhours(5.45), lubridate::dhours(9.5))
-#' convert_to(x, "hms")
+#' x <- sd_week(lubridate::dhours(5.45), lubridate::dhours(9.5), 5)
+#' convert(x, "hms")
 #' #> 06:36:25.714286 # Expected
-#' convert_to(as.integer(x), "hms") # if you want to discard the milliseconds.
-#' #> 06:36:25 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- sd_week(3, lubridate::dhours(4.5), lubridate::dhours(7.8))
+#' x <- sd_week(lubridate::dhours(4.5), lubridate::dhours(7.8), 3)
 #' x
 #' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 #' round_time(x)
 #' #> [1] "22989s (~6.39 hours)" # Expected
-sd_week <- function(wd, sd_w, sd_f) {
+sd_week <- function(sd_w, sd_f, wd) {
 
-    checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_duration(sd_w)
     assert_duration(sd_f)
+    checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_identical(wd, sd_w, sd_f, type = "length")
 
     ((sd_w * wd) + (sd_f * fd(wd))) / 7
@@ -283,128 +285,119 @@ sd_week <- function(wd, sd_w, sd_f) {
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `sd_overall()` computes the __overall sleep duration__ for the shift version
-#' of the Munich Chronotype Questionnaire (MCTQ).
+#' `sd_overall()` computes the __overall sleep duration in a particular shift__
+#' for the shift version of the Munich Chronotype Questionnaire (MCTQ).
 #'
 #' See [mctq::sd_week()] to compute the average weekly sleep duration for the
 #' standard and micro versions of the MCTQ.
 #'
-#' @section Operation:
-#'
-#' The shift version of the MCTQ was developed for shift-workers rotating
-#' through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
-#' 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
-#' schedules (Juda, Vetter, & Roenneberg, [2013](https://bit.ly/38IEEk4)). For
-#' that reason, `sd_overall()` must operate considering any shift combination.
-#'
-#' Considering the requirement above, `sd_overall()` was developed to only
-#' accept lists values as arguments. For this approach to work, both `n` and
-#' `sd` arguments must be lists with paired elements and values between `n` and
-#' `sd`, _i.e._ the first element of `n` (_e.g._ `n_wm`) must be paired with the
-#' first element of `sd` (_e.g._ `sd_wm`). The function will do the work of
-#' combining them and output a weighted mean.
-#'
 #' @section Guidelines:
 #'
-#' For reference, Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4))
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_overall()`
-#' computation are as follow.
+#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)) and theWeP
+#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_overall()` (\eqn{\emptyset
+#' SD^{M/E/N}}{OSD_M/E/N}) computation are as follow.
 #'
-#' __\deqn{((SDwMEN * nwMEN) + (SDfMEN * nfMEN)) / (nwMEN + nfMEN)}__
+#' ### Notes
+#'
+#' * The computation below must be applied to each shift section of the
+#' questionnaire. If you are using the three shift design propose by the authors,
+#' you need to compute three overall sleep duration (_e.g._
+#' \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E};
+#' \eqn{\emptyset SD^N}{OSD_N}).
+#'
+#' * The overall sleep duration is the weighted average of the shift-specific
+#' mean sleep durations.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ### Computation
+#'
+#' __\deqn{\frac{SD_W^{M/E/N} \times n_W^{M/E/N} + SD_F^{M/E/N} \times
+#' n_F^{M/E/N}}{n_W^{M/E/N} + n_F^{M/E/N}}}{(SD_W_M/E/N * n_W_M/E/N +
+#' SD_F_M/E/N * n_F_M/E/N) / (n_W_M/E/N + n_F_M/E/N)}__
 #'
 #' Where:
 #'
-#' * \eqn{SDwMEN} = sleep duration in each shift (MEN`*`).
-#' * \eqn{nwMEN} = number of days worked in each shift (MEN`*`) within a shift
-#' cycle.
-#' * \eqn{SDfMEN} = sleep duration between two free days after each shift
-#' (MEN`*`).
-#' * \eqn{nwMEN} = number of free days after each shift (MEN`*`) within a shift
-#' cycle.
+#' * \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = sleep duration in a particular shift.
+#' * \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days after
+#' a particular shift.
+#' * \eqn{n_W^{M/E/N}}{n_W_M/E/N} = number of days worked in a particular shift
+#' within a shift cycle.
+#' * \eqn{n_F^{M/E/N}}{n_F_M/E/N} = number of free days after a particular shift
+#' within a shift cycle.
 #'
-#' `*` \eqn{M}: morning; \eqn{E}: evening; \eqn{N}: night.
+#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' Note that the overall sleep duration is the weighted average of
-#' shift-specific sleep durations, _i.e._ \eqn{(SDwMEN * nwMEN)} and
-#' \eqn{(SDfMEN * nfMEN)} must be unfold for each shift and non-shift
-#' (_e.g._ \eqn{(SDwM * nw_M) + (SDwE * nwE) ...}).
-#'
-#' @param n A `list` object with [integerish][rlang::is_integerish()] `integer`
-#'   or `numeric` elements corresponding to the __number of days from each
-#'   shift__ and __number of free days after each shift__ from a MCTQ shift
-#'   questionnaire. `n` elements and values must be paired with `sd` elements
-#'   and values.
-#' @param sd A `list` object with `Duration` elements corresponding to the
-#'   __sleep duration in each shift__ and __sleep duration between two free days
-#'   after each shift__ from a MCTQ shift questionnaire (you can use
-#'   [mctq::sd()] to compute it). `sd` elements and values must be paired with
-#'   `n` elements and values.
+#' @param sd_w A `Duration` object corresponding to the __sleep duration in a
+#'   particular shift__ value from a shift version of the MCTQ questionnaire
+#'   (you can use [mctq::sd()] to compute it).
+#' @param sd_f A `Duration` object corresponding to the __sleep duration between
+#'   two free days after a particular shift__ value from a shift version of the
+#'   MCTQ questionnaire (you can use [mctq::sd()] to compute it).
+#' @param n_w An [integerish][rlang::is_integerish()] `integer` or `numeric`
+#'   object corresponding to the __number of days worked in a particular shift
+#'   within a shift cycle__ value from a shift version of the MCTQ
+#'   questionnaire.
+#' @param n_f An [integerish][rlang::is_integerish()] `integer` or `numeric`
+#'   object corresponding to the __number of free days after a particular shift
+#'   within a shift cycle__ value from a shift version of the MCTQ
+#'   questionnaire.
 #'
 #' @return A `Duration` object corresponding to the weighted mean of `sd` and
 #'   `n` (weights).
 #'
-#' @template mctq_b
+#' @template details_b
 #' @template references_a
+#' @family MCTQ functions
 #' @export
 #'
 #' @examples
 #' ## __ Scalar example __
-#' n <- list(n_wm = 2, n_we = 4, n_wn = 3, n_fm = 2, n_fw = 4, n_fn = 2)
-#' sd <- list(sd_wm = lubridate::dhours(5), sd_we = lubridate::dhours(6),
-#'            sd_wn = lubridate::dhours(5), sd_fm = lubridate::dhours(10),
-#'            sd_fe = lubridate::dhours(9), sd_fn = lubridate::dhours(8.5))
-#' sd_overall(n, sd)
-#' #> [1] "25835.2941176471s (~7.18 hours)" # Expected
+#' sd_overall(lubridate::dhours(5), lubridate::dhours(9), 2, 2)
+#' #> [1] "25200s (~7 hours)" # Expected
+#' sd_overall(lubridate::dhours(3.45), lubridate::dhours(10), 3, 1)
+#' #> [1] "18315s (~5.09 hours)" # Expected
+#' sd_overall(lubridate::as.duration(NA), lubridate::dhours(12), 4, 4)
+#' #> [1] NA # Expected
 #'
 #' ## __ Vectorized example __
-#' n <- list(n_wm = c(4, 3), n_we = c(2, 3), n_fm = c(2, 2), n_fe = c(4, 4))
-#' sd <- list(sd_wm = c(lubridate::dhours(6), lubridate::dhours(7)),
-#'            sd_we = c(lubridate::dhours(5.5), lubridate::dhours(6)),
-#'            sd_fm = c(lubridate::dhours(9), lubridate::dhours(8.5)),
-#'            sd_fe = c(lubridate::dhours(7), lubridate::dhours(10)))
-#' sd_overall(n, sd)
-#' #> [1] "24300s (~6.75 hours)" "28800s (~8 hours)"  # Expected
+#' sd_w <- c(lubridate::dhours(4), lubridate::dhours(7))
+#' sd_f <- c(lubridate::dhours(12), lubridate::dhours(9))
+#' n_w <- c(3, 4)
+#' n_f <- c(2, 4)
+#' sd_overall(sd_w, sd_f, n_w, n_f)
+#' #> [1] "25920s (~7.2 hours)" "28800s (~8 hours)"  # Expected
 #'
-#' ## __ Checking the second output from vectorized example __
+#' ## __ Checking second output from vectorized example __
 #' i <- 2
-#' x <- c(sd[["sd_wm"]][i], sd[["sd_we"]][i], sd[["sd_fm"]][i],
-#'        sd[["sd_fe"]][i])
-#' w <- c(n[["n_wm"]][i], n[["n_we"]][i], n[["n_fm"]][i], n[["n_fe"]][i])
+#' x <- c(sd_w[i], sd_f[i])
+#' w <- c(n_w[i], n_f[i])
 #' lubridate::as.duration(stats::weighted.mean(x, w))
 #' #> [1] "28800s (~8 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
-#' n <- list(n_wm = 3, n_we = 2, n_wn = 2, n_fm = 1, n_fw = 3, n_fn = 5)
-#' sd <- list(sd_wm = lubridate::dhours(4.12), sd_we = lubridate::dhours(6),
-#'            sd_wn = lubridate::dhours(3.43), sd_fm = lubridate::dhours(9.5),
-#'            sd_fe = lubridate::dhours(7.32), sd_fn = lubridate::dhours(10.5))
-#' sd_overall(n, sd)
-#' #> [1] "25915.5s (~7.2 hours)" # Expected
-#' convert_to(sd_overall(n, sd), "hms")
-#' #> 07:11:55.5 # Expected
+#' x <- sd_overall(lubridate::dhours(4.75), lubridate::dhours(10), 5, 2)
+#' convert(x, "hms")
+#' #> 06:15:00 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' round_time(sd_overall(n, sd))
-#' #> [1] "25916s (~7.2 hours)" # Expected
-#' round_time(convert_to(sd_overall(n, sd), "hms"))
-#' #> 07:11:56 # Expected
-sd_overall <- function(n, sd) {
+#' x <- sd_overall(lubridate::dhours(5.9874), lubridate::dhours(9.3), 3, 2)
+#' x
+#' #> [1] "26324.784s (~7.31 hours)" # Expected
+#' round_time(x)
+#' #> [1] "26325s (~7.31 hours)" # Expected
+sd_overall <- function(sd_w, sd_f, n_w, n_f) {
 
-    checkmate::assert_list(n, len = length(sd))
-    checkmate::assert_list(sd, len = length(n))
-    lapply(n, checkmate::assert_integerish)
-    lapply(sd, assert_duration)
-    mapply(assert_identical, n, sd, MoreArgs = list(type = "length"))
+    assert_duration(sd_w)
+    assert_duration(sd_f)
+    checkmate::assert_numeric(n_w, lower = 0)
+    checkmate::assert_numeric(n_f, lower = 0)
+    assert_identical(n_w, n_f, sd_w, sd_f, type = "length")
 
-    foo <- function(x, y) {
-        out <- Reduce("*", list(x, y))
-        lubridate::as.duration(out)
-    }
-
-    sd <- mapply(foo, n, sd, SIMPLIFY = FALSE)
-    sd <- Reduce("+", sd)
-    n <- Reduce("+", n)
-
-    sd / n
+    ((sd_w * n_w) + (sd_f * n_f)) / (n_w + n_f)
 
 }
