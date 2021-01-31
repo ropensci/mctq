@@ -5,23 +5,25 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #' `le_week()` computes the __average weekly light exposure__ for the standard
-#' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
+#' version of the Munich Chronotype Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
-#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `le_week()`
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
+#' theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `le_week()`
 #' (\eqn{LE_{week}}{LE_week}) computation are as follow.
 #'
-#' ### Notes
+#' ## Notes
+#'
+#' * The average weekly light exposure is the weighted average of the light
+#' exposure on work and work-free days in a week.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble to understand the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
-#' ### Computation
+#' ## Computation
 #'
 #' __\deqn{\frac{LE_W \times WD + LE_F \times FD}{7}}{
 #' (LE_W * WD + LE_F * FD) / 7}__
@@ -30,19 +32,19 @@
 #'
 #' * \eqn{LE_W} = light exposure on workdays.
 #' * \eqn{LE_F} = light exposure on work-free days.
-#' * \eqn{WD} = number of workdays per week.
+#' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+#' work ... days per week").
 #' * \eqn{FD} = number of work-free days per week.
 #'
-#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
 #' @param le_w A `Duration` object corresponding to the __light exposure on work
-#'   days__ value from a standard or micro version of the MCTQ questionnaire.
+#'   days__ value from a standard version of the MCTQ questionnaire.
 #' @param le_f A `Duration` object corresponding to the __light exposure on
-#'   work-free days__ value from a standard or micro version of the MCTQ
-#'   questionnaire.
+#'   work-free days__ value from a standard version of the MCTQ questionnaire.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `le` and
-#'   `wd` and `fd(wd)` (weights).
+#' @return A `Duration` object corresponding to the weighted mean of `le_w` and
+#'   `le_f` with `wd` and `fd(wd)` as weights.
 #'
 #' @inheritParams fd
 #' @template details_b

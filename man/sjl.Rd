@@ -5,34 +5,36 @@
 \alias{sjl_rel}
 \title{Compute MCTQ social jet lag}
 \usage{
-sjl(msw, msf, abs = TRUE)
+sjl(msw, msf, abs = TRUE, method = "shortest")
 
-sjl_rel(msw, msf)
+sjl_rel(msw, msf, method = "shortest")
 }
 \arguments{
 \item{msw}{A \code{hms} object corresponding to the \strong{mid-sleep on work days}
-from a standard, micro, or shift version of the MCTQ questionnaire (you can
-use \code{\link[=ms]{ms()}} to compute it).}
+from a standard, micro, or shift version of the MCTQ questionnaire. You can
+use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{msf}{A \code{hms} object corresponding to the \strong{mid-sleep on work-free
 days} value from a standard, micro, or shift version of the MCTQ
-questionnaire (you can use \code{\link[=ms]{ms()}} to compute it).}
+questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{abs}{(optional) a \code{logical} value indicating if the function must
-return an absolute SJL (always positive) or a relative SJL (the SJL with no
-changes) (default: \code{TRUE}).}
+return an absolute social jetlag or a relative social jetlag (default:
+\code{TRUE}).}
+
+\item{method}{(optional) a string indicating which method the function must
+use to compute the social jetlag. See Methods section to learn
+more (default: \code{"shortest"}).}
 }
 \value{
-A \code{Duration} object corresponding to the relative or absolute (if
-\code{abs = TRUE}) value of the shortest interval between \code{msf} and \code{msw}. See
-\code{vignette("social-jet-lag", package = "mctq")} for more details.
+A \code{Duration} object corresponding to the relative or absolute social
+jetlag.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{sjl()} computes the \strong{relative social jetlag} or the \strong{absolute social
-jetlag} for standard, micro, and shift versions of the Munich Chronotype
-Questionnaire (MCTQ).
+\code{sjl()} computes the \strong{relative or absolute social jetlag} for standard,
+micro, and shift versions of the Munich Chronotype Questionnaire (MCTQ).
 
 \code{sjl_rel()} it's just a wrapper for \code{sjl()} with \code{abs = FALSE}.
 }
@@ -75,22 +77,31 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
-(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{sjl()} (\eqn{SJL_rel}{SJLrel} and \eqn{SJL}) computation are
-as follow.
-
-If you are visualizing this documentation in plain text (\code{ASCII}), you may
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sjl()}
+(\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
+each shift section of the questionnaire.
+\item Due to time arithmetic issues, \code{sjl()} does a slight different computation
+than those propose by the authors mentioned above. See
+\code{vignette("social_jet_lag", package = "mctq")} for more details.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble to understand the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
-\subsection{For the relative social jetlag}{
-
-\strong{\deqn{MSF - MSW}}
+}
 }
 
-\subsection{For the absolute social jetlag}{
+\subsection{For standard and micro versions of the MCTQ}{
+
+Relative social jetlag (\eqn{SJL_{rel}}{SJL_rel}):
+
+\strong{\deqn{MSF - MSW}}
+
+Absolute social jetlag (\eqn{SJL}):
 
 \strong{\deqn{| MSF - MSW |}}
 
@@ -100,12 +111,76 @@ Where:
 \item \eqn{MSF} = mid-sleep on work-free days.
 }
 
-\strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
-
-Note that, due to time arithmetic issues, \code{sjl()} does a slight different
-computation than those propose by the authors mentioned above. See
-\code{vignette("social_jet_lag", package = "mctq")} for more details.
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 }
+
+\subsection{For the shift version of the MCTQ}{
+
+Relative social jetlag (\eqn{SJL_{rel}}{SJL_rel}):
+
+\strong{\deqn{MSF^{M/E/N} - MSW^{M/E/N}}{MSF_M/E/N - MSW_M/E/N}}
+
+Absolute social jetlag (\eqn{SJL}):
+
+\strong{\deqn{| MSF^{M/E/N} - MSW^{M/E/N} |}{| MSF_M/E/N - MSW_M/E/N |}}
+
+Where:
+\itemize{
+\item \eqn{MSW^{M/E/N}}{MSW_M/E/N} = mid-sleep between two days in a particular
+shift.
+\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = mid-sleep between two free days after a
+particular shift.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
+}
+
+\section{Methods for computing the social jet lag}{
+
+
+There are different approaches to compute the social jetlag \eqn{SJL}. By
+default, \code{sjl()} uses an approach that we call by "the shortest interval
+approach" (\code{"shortest"}).
+
+The topics below provide a simple explanation of each method supported by
+\code{sjl()}. To get a detail understating of this methods, see
+\code{vignette("social-jet-lag", package = "mctq")}.
+
+Please note that none of the approaches below are related to Jankowski's
+(\href{https://bit.ly/3ouBTbT}{2017}) social jet lag sleep-corrected proposal.
+Since the Jankowski's alternative is still disputed (Roenneberg, T., Pilz, L.
+K., Zerbini, G., & Winnebeck, E. C., \href{http://bit.ly/3r6lBYr}{2019}), the
+\code{mctq} package currently don't provide a function for it. Future versions of
+the package may include it.
+\itemize{
+\item \code{"difference"}
+}
+
+By using \code{method = "difference"}, \code{sjl()} will do the exact computation
+proposed by the original authors, \emph{i.e.} \eqn{SJL} will be computed as the
+linear difference between \eqn{MSF} and \eqn{MSW} (see Guidelines section).
+
+\strong{We do not recommend using this method}, as it have many limitations.
+\itemize{
+\item \code{"shortest"}
+}
+
+This is the default method for \code{sjl()}. It's based on the shortest
+interval between \eqn{MSF} and \eqn{MSW}, solving most of the issues
+relating to \eqn{SJL} computation.
+\itemize{
+\item \code{"longer"}
+}
+
+The \code{"longer"} method uses the sames logic of the \code{"shortest"} method, but,
+instead of using the shortest interval between \eqn{MSF} and \eqn{MSW}, it
+uses the longer interval between the two, considering a two day window.
+
+This method may help with special contexts, like when dealing with
+shift-workers that usually have a greater than 12h distance between he/she
+mid-sleep hours.
 }
 
 \section{Missing sections in standard and micro MCTQ versions}{
@@ -126,23 +201,53 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-sjl(hms::parse_hms("03:30:00"), hms::parse_hms("05:00:00"))
+msw <- hms::parse_hms("03:30:00")
+msf <- hms::parse_hms("05:00:00")
+sjl(msw, msf)
 #> [1] "5400s (~1.5 hours)" # Expected
-sjl(hms::parse_hms("04:30:00"), hms::parse_hms("23:30:00"), abs = FALSE)
-#> [1] "-18000s (~-5 hours)"
-sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:45:00"))
-#> [1] "9000s (~2.5 hours)" # Expected
-sjl(hms::as_hms(NA), hms::parse_hms("05:15:00"))
+
+msw <- hms::parse_hms("04:30:00")
+msf <- hms::parse_hms("23:30:00")
+sjl(msw, msf)
+#> [1] "18000s (~5 hours)" # Expected
+sjl(msw, msf, abs = FALSE)
+#> [1] "18000s (~-5 hours)" # Expected
+sjl_rel(msw, msf) # Wrapper function
+#> [1] "18000s (~-5 hours)" # Expected
+
+msw <- hms::as_hms(NA)
+msf <- hms::parse_hms("05:15:00")
+sjl(msw, msf)
 #> NA # Expected
 
 ## __ Vectorized example __
-msw <- c(hms::parse_hms("04:05:00"), hms::parse_hms("04:05:00"))
-msf <- c(hms::parse_hms("03:05:00"), hms::parse_hms("04:05:00"))
+msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
+msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("04:05:00"))
+sjl(msw, msf)
+#> [1] "-10800s (~3 hours)" "0s" # Expected
 sjl(msw, msf, abs = FALSE)
-#> [1] "-3600s (~-1 hours)" "0s" # Expected
+#> [1] "-10800s (~-3 hours)" "0s" # Expected
+sjl_rel(msw, msf) # Wrapper function
+#> [1] "-10800s (~-3 hours)" "0s" # Expected
 
-sjl_rel(hms::parse_hms("05:10:00"), hms::parse_hms("05:05:00"))
-#> [1] "-300s (~-5 minutes)" # Expected
+## __ Using different methods __
+msw <- hms::parse_hms("19:15:00")
+msf <- hms::parse_hms("02:30:00")
+sjl(msw, msf, abs = FALSE, method = "difference")
+#> [1] "-60300s (~-16.75 hours)" # Expected
+sjl(msw, msf, abs = FALSE, method = "shortest") # default method
+#> [1] "26100s (~7.25 hours)" # Expected
+sjl(msw, msf, abs = FALSE, method = "longer")
+#> [1] "-60300s (~-16.75 hours)" # Expected
+
+msw <- hms::parse_hms("02:45:00")
+msf <- hms::parse_hms("04:15:00")
+sjl(msw, msf, abs = FALSE, method = "difference")
+#> [1] "5400s (~1.5 hours)" # Expected
+sjl(msw, msf, abs = FALSE, method = "shortest") # default method
+#> [1] "5400s (~1.5 hours)" # Expected
+sjl(msw, msf, abs = FALSE, method = "longer")
+#> [1] [1] "-81000s (~-22.5 hours)" # Expected
 
 ## __ Converting the output to `hms` __
 x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
@@ -163,6 +268,10 @@ D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110.
 \doi{10.1177/0748730419886986}.
 
+Jankowski K. S. (2017). Social jet lag: sleep-corrected formula.
+\emph{Chronobiology International}, \emph{34}(4), 531-535.
+\doi{10.1080/07420528.2017.1299162}.
+
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
 Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
 Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
@@ -170,6 +279,10 @@ Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
 Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
 and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
 \doi{10.1016/j.cub.2012.03.038}.
+
+Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
+Chronotype and social jetlag: a (self-) critical review. Biology, 8(3), 54.
+\doi{10.3390/biology8030054}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological

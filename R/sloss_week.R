@@ -7,24 +7,36 @@
 #' `sloss_week()` computes the __weekly sleep loss__ for the standard and micro
 #' versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' Please note that this function is not appropriated for use with he MCTQ
-#' Shift.
-#'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)) and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `sloss_week()` (\eqn{SLossweek}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
+#' theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sloss_week()`
+#' (\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
 #'
-#' __\deqn{If (SDweek > SDw): (SDweek - SDw) * WD}__
-#' __\deqn{If (SDweek <= SDw): (SDweek - SDf) * (7 - WD)}__
+#' ## Notes
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## Computation
+#'
+#' __\deqn{\text{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
+#' If SD_week > SD_W, (SD_week - SD_W) * WD}__
+#' __\deqn{\text{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
+#' FD}{If SD_week <= SD_W, (SD_week - SD_F) * FD}__
 #'
 #' Where:
 #'
-#' * \eqn{WD} = number of workdays per week.
-#' * \eqn{SDw} = sleep duration on workdays.
-#' * \eqn{SDf} = sleep duration on work-free days.
-#' * \eqn{SDweek} = average weekly sleep duration.
+#' * \eqn{SD_W} = sleep duration on workdays.
+#' * \eqn{SD_F} = sleep duration on work-free days.
+#' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
+#' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+#' work ... days per week").
+#' * \eqn{FD} = number of work-free days per week.
+#'
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
 #' @return A `Duration` object corresponding to the weekly sleep loss.
 #'

@@ -7,10 +7,12 @@
 #' `random_mctq` builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 #' composed by MCTQ basic/measurable variables.
 #'
+#' At the moment, __only the standard MCTQ is available__.
+#'
+#' @details
+#'
 #' The case structure (variable names and classes) are the same as the datasets
 #' provided by the `mctq` package. See [mctq::std_mctq] to learn more.
-#'
-#' At the moment, __only the standard MCTQ is available__.
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).

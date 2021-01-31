@@ -92,7 +92,7 @@ Where:
 ... min, I get up").
 }
 
-\strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -101,14 +101,14 @@ Where:
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end in a particular shift or
-between two free days after a particular shift.
+\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
+particular shift \strong{or} between two free days after a particular shift.
 \item \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
-in a particular shift or between two free days after a particular
-shift.("after ... min, I get up").
+between two days in a particular shift \strong{or} between two free days after a
+particular shift ("after ... min, I get up").
 }
 
-\strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 }

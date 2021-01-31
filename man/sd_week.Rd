@@ -8,20 +8,20 @@ sd_week(sd_w, sd_f, wd)
 }
 \arguments{
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} value from a standard or micro version of the MCTQ questionnaire
-(you can use \code{\link[=sd]{sd()}} to compute it).}
+days} value from a standard or micro version of the MCTQ questionnaire.
+You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} value from a standard or micro version of the MCTQ
-questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
+questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
 object corresponding to the \strong{number of work days per week} value from a
 standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{sd} and
-\code{wd} and \code{fd(wd)} (weights).
+A \code{Duration} object corresponding to the weighted mean of \code{sd_w} and
+\code{sd_f} with \code{wd} and \code{fd(wd)} as weights.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -29,8 +29,8 @@ A \code{Duration} object corresponding to the weighted mean of \code{sd} and
 \code{sd_week()} computes the \strong{average weekly sleep duration} for the standard
 and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 
-See \code{\link[=sd_overall]{sd_overall()}} to compute the overall sleep duration for
-the shift version of the MCTQ.
+See \code{\link[=sd_overall]{sd_overall()}} to compute the overall sleep duration of a
+particular shift for the shift version of the MCTQ.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -71,19 +71,36 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Ghotbi \emph{et.al}
-(\href{https://bit.ly/34VhA0l}{2020}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{sd_week()} (\eqn{SD_{week}}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sd_week()}
+(\eqn{SD_{week}}{SD_week}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The average weekly sleep duration is the weighted average of the sleep
+durations on work and work-free days in a week.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}}
+\subsection{Computation}{
+
+\strong{\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}{
+(SD_W * WD + SD_F * FD) / 7}}
 
 Where:
 \itemize{
 \item \eqn{SD_w} = sleep duration on workdays.
 \item \eqn{SD_f} = sleep duration on work-free days.
-\item \eqn{WD} = number of workdays per week.
+\item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+work ... days per week").
 \item \eqn{FD} = number of work-free days per week.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 }
 }
 

@@ -20,10 +20,11 @@ variable of the model indicated in \code{model}.
 \code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 composed by MCTQ basic/measurable variables.
 
+At the moment, \strong{only the standard MCTQ is available}.
+}
+\details{
 The case structure (variable names and classes) are the same as the datasets
 provided by the \code{mctq} package. See \link{std_mctq} to learn more.
-
-At the moment, \strong{only the standard MCTQ is available}.
 }
 \examples{
 \dontrun{

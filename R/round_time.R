@@ -7,10 +7,12 @@
 #' `round_time()` takes a `Duration`, `Period`, `difftime`, or `hms` object and
 #' round it at the seconds level.
 #'
-#' Note that `round_time()` convert time to seconds and them uses
-#' [base::round()] to round it. That is to say that `round_time()` uses the same
-#' IEC 60559 standard (_"go to the even digit"_) for rounding off a 5. Therefore
-#' round(0.5) is 0 and round(-1.5) is -2. See `?round` to learn more.
+#' @details
+#'
+#' `round_time()` convert time to seconds and them uses [base::round()] to round
+#' it. That is to say that `round_time()` uses the same IEC 60559 standard (_"go
+#' to the even digit"_) for rounding off a 5. Therefore round(0.5) is 0 and
+#' round(-1.5) is -2. See `?round` to learn more.
 #'
 #' @param x An object belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`.

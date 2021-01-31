@@ -14,7 +14,7 @@
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
 #' guidelines for `ms()` (\eqn{MSW} or \eqn{MSF}) computation are as follow.
 #'
-#' ### Notes
+#' ## Notes
 #'
 #' * The computation below must be applied to each section of the
 #' questionnaire.
@@ -24,12 +24,31 @@
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
-#' __\deqn{SO + \frac{SD}{2}}{SO + (SD / 2)}__
+#' ## For standard and micro versions of the MCTQ
+#'
+#' __\deqn{SO_{W/F} + \frac{SD_{W/F}}{2}}{SO_W/F + (SD_W/F / 2)}__
 #'
 #' Where:
 #'
-#' * \eqn{SO} = sleep onset.
-#' * \eqn{SD} = sleep duration.
+#' * \eqn{SO_{W/F}}{SO_W/F} = sleep onset on work or work-free days.
+#' * \eqn{SD_{W/F}}{SD_W/F} = sleep duration on work or work-free days.
+#'
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#'
+#' ## For the shift version of the MCTQ
+#'
+#' __\deqn{SO_{W/F}^{M/E/N} + \frac{SD_{W/F}^{M/E/N}}{2}}{
+#' SO_W/F_M/E/N + (SD_W/F_M/E/N / 2)}__
+#'
+#' Where:
+#'
+#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = sleep onset between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#'
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param so A `hms` object corresponding to the __sleep onset__ value from a
 #'   standard, micro, or shift version of the MCTQ questionnaire. You can use
@@ -38,7 +57,7 @@
 #'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
 #'   use [mctq::sd()] to compute it for any MCTQ version.
 #'
-#' @return A `hms` object corresponding to the sum between `so` and (`sd` / 2)
+#' @return A `hms` object corresponding to the sum of `so` and `(sd / 2)`
 #'   rolled in a 24-hour clock basis.
 #'
 #' @aliases msw msf
@@ -72,13 +91,13 @@ ms <- function(so, sd) {
 
 }
 
-#' Compute MCTQ chronotype or corrected midsleep on work-free days
+#' Compute MCTQ chronotype or corrected mid-sleep on work-free days
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `msf_sc()` computes the __chronotype or corrected midsleep on work-free
+#' `msf_sc()` computes the __chronotype or corrected mid-sleep on work-free
 #' days__ for standard, micro, and shift versions of the Munich Chronotype
 #' Questionnaire (MCTQ).
 #'
@@ -94,40 +113,38 @@ ms <- function(so, sd) {
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
 #' guidelines for `msf_sc()` (\eqn{MSF_{sc}}{MSF_sc}) computation are as follow.
 #'
-#' ### Notes
+#' ## Notes
 #'
 #' * For all cases, \eqn{MSF_{sc}}{MSF_sc} cannot be computed if the participant
-#' wake up with an alarm clock on free days (\eqn{Alarm_F}{Alarm_F}).
+#' wake up with an alarm clock on work-free days (\eqn{Alarm_F}{Alarm_F}).
 #'
-#' * \eqn{MSF_{sc}}{MSF_sc} is the participant chronotype in standard and micro
-#' versions of the MCTQ.
+#' * For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
+#' each shift section of the questionnaire.
 #'
-#' * For the MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be
-#' applied to each shift section of the questionnaire.
+#' * \eqn{MSF_{sc}}{MSF_sc} is a proxy for the participant chronotype in
+#' standard and micro versions of the MCTQ.
 #'
 #' * The basis for estimating chronotype in shift-workers is the mid-sleep time
-#' on work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
-#' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)) propose to derive it from the corrected
-#' mid-sleep time on work-free days of other shifts (_e.g._ by using a linear
-#' model). Unfortunately the `mctq` package can't help you with that, as it
-#' requires a closer look at your data.
+#' on work-free days after evening shifts (\eqn{MSF^E}{MSF_E}).
 #'
-#' * The MCTQ\eqn{^{Shift}}{ Shift} can be adapted for other work schedules.
-#' If that is your case, don't worry, the `mctq` package can be used with any
-#' shift combination.
+#' * In case work schedules do not comprise evening shifts, Juda, Vetter, &
+#' Roenneberg ([2013](https://bit.ly/38IEEk4)) propose to derive it from the
+#' \eqn{MSF_{sc}}{MSF_sc} of other shifts (_e.g._ by using a linear model).
+#' Unfortunately the `mctq` package can't help you with that, as it requires a
+#' closer look at your data.
 #'
-#' * For epidemiological and genetic studies, \eqn{MSF_{sc}}{MSF_sc} must be
-#' normalized for age and sex to make populations of different age and sex
-#' compositions comparable (Roenneberg, Allebrandt, Merrow, & Vetter,
-#' [2012](http://bit.ly/3iGEgqX)).
+#' * \eqn{MSF_{sc}}{MSF_sc} depends on developmental and environmental
+#' conditions (_e.g._ age; light exposure). For epidemiological and genetic
+#' studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
+#' populations of different age and sex compositions comparable (Roenneberg,
+#' Allebrandt, Merrow, & Vetter, [2012](http://bit.ly/3iGEgqX)).
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble to understand the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
-#' ### For standard and micro versions of the MCTQ
+#' ## For standard and micro versions of the MCTQ
 #'
 #' __\deqn{\text{If } SD_F \leq SD_W \; , \; MSF}{If SD_F <= SD_W, MSF}__
 #' __\deqn{\text{If } SD_F > SD_W \; , \; MSF - \frac{SD_F - SD_{week}}{2}}{
@@ -136,13 +153,13 @@ ms <- function(so, sd) {
 #' Where:
 #'
 #' * \eqn{MSF} = mid-sleep on work-free days.
-#' * \eqn{SD_W} = sleep duration on work days.
+#' * \eqn{SD_W} = sleep duration on workdays.
 #' * \eqn{SD_F} = sleep duration on work-free days.
 #' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
 #'
-#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
-#' ### For the shift version of the MCTQ
+#' ## For the shift version of the MCTQ
 #'
 #' __\deqn{\text{If } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \; MSF^{M/E/N}}{
 #' If SD_F_M/E/N <= SD_W_M/E/N, MSF}__
@@ -152,35 +169,39 @@ ms <- function(so, sd) {
 #'
 #' Where:
 #'
-#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = mid-sleep on free days after shift.
-#' * \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = sleep duration on shift.
-#' * \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = sleep duration on free days after shift.
-#' * \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = shift overall sleep duration.
+#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = mid-sleep between two free days after a
+#' particular shift.
+#' * \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = sleep duration between two days in a
+#' particular shift.
+#' * \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days
+#' after a particular shift.
+#' * \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = overall sleep duration of a
+#' particular shift.
 #'
-#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param msf A `hms` object corresponding to the __mid-sleep on work-free
 #'   days__ value from a standard, micro, or shift version of the MCTQ
-#'   questionnaire (you can use [mctq::ms()] to compute it).
+#'   questionnaire. You can use [mctq::ms()] to compute it.
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
 #'   days__ value from a standard, micro, or shift version of the MCTQ
-#'   questionnaire (you can use [mctq::sd()] to compute it).
+#'   questionnaire. You can use [mctq::sd()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
 #'   work-free days__ value from a standard, micro, or shift version of the MCTQ
-#'   questionnaire (you can use [mctq::sd()] to compute it).
+#'   questionnaire. You can use [mctq::sd()] to compute it.
 #' @param sd_week A `Duration` object corresponding to the __average weekly
 #'   sleep duration__ value from a standard or micro version of the MCTQ
 #'   questionnaire (you can use [mctq::sd_week()] to compute it) __or__ the
-#'   __overall sleep duration__ value from a MCTQ shift (you can use
-#'   [mctq::sd_overall()] to compute it).
+#'   __overall sleep duration of a particular shift__ value from a shift version
+#'   of the MCTQ questionnaire (you can use [mctq::sd_overall()] to compute it).
 #' @param alarm_f A `logical` object corresponding to the __alarm clock use on
 #'   work-free days__ value from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
 #'   computed, `msf_sc()` will return `NA` for those cases.
 #'
 #' @return A `hms` object corresponding to the MCTQ chronotype or corrected
-#'   midsleep on work-free days.
+#'   mid-sleep on work-free days.
 #'
 #' @template details_b
 #' @template section_a
@@ -193,9 +214,6 @@ ms <- function(so, sd) {
 #' msf_sc(hms::parse_hms("04:00:00"), lubridate::dhours(6),
 #'        lubridate::dhours(7), lubridate::dhours(6.29), FALSE)
 #' #> 03:38:42 # Expected
-#' msf_sc(hms::parse_hms("06:30:00"), lubridate::dhours(7.5),
-#'        lubridate::dhours(7.5), lubridate::dhours(7.5), FALSE)
-#' #> 06:30:00 # Expected
 #' msf_sc(hms::parse_hm("01:00:00"), lubridate::dhours(5.5),
 #'        lubridate::dhours(9), lubridate::dhours(6.75), FALSE)
 #' #> 23:52:30 # Expected

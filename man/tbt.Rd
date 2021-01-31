@@ -63,21 +63,53 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
-(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{tbt()} (\eqn{TBT}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{tbt()} (\eqn{TBT})
+computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each section of the
+questionnaire.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{GU - BT}}
+\subsection{For standard and micro versions of the MCTQ}{
+
+\strong{\deqn{GU_{W/F} - BT_{W/F}}{GU_W/F - BT_W/F}}
 
 Where:
 \itemize{
-\item \eqn{BT} = Local time of going to bed ("I go to bed at ... o'clock").
-\item \eqn{GU} = local time of getting out of bed.
+\item \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work or work-free
+days ("I go to bed at ... o'clock").
+\item \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
+work-free days.
 }
 
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{GUw - BTw}).
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+}
+
+\subsection{For the shift version of the MCTQ}{
+
+\strong{\deqn{GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}{GU_W/F_M/E/N - BT_W/F_M/E/N}}
+
+Where:
+\itemize{
+\item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
+two days in a particular shift \strong{or} between two free days after a
+particular shift  ("I go to bed at ... o'clock").
+\item \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
+between two days in a particular shift \strong{or} between two free days after a
+particular shift.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
 }
 
 \examples{

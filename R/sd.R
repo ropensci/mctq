@@ -15,15 +15,40 @@
 #' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
 #' guidelines for `sd()` (\eqn{SD}) computation are as follow.
 #'
-#' __\deqn{SE - SO}__
+#' ## Notes
+#'
+#' * The computation below must be applied to each section of the
+#' questionnaire.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## For standard and micro versions of the MCTQ
+#'
+#' __\deqn{SE_{W/F} - SO_{W/F}}{SE_W/F - SO_W/F}__
 #'
 #' Where:
 #'
-#' * \eqn{SE} = sleep end.
-#' * \eqn{SO} = sleep onset.
+#' * \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
+#' * \eqn{SO_{W/F}}{SO_W/F}  = sleep onset on work or work-free days.
 #'
-#' Note that this computation must be applied to each section of the
-#' questionnaire (_e.g._ \eqn{SEw - SOw}).
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#'
+#' ## For the shift version of the MCTQ
+#'
+#' __\deqn{SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}{SE_W/F_M/E/N - SO_W/F_M/E/N}__
+#'
+#' Where:
+#'
+#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = sleep onset between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#'
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param so A `hms` object corresponding to the __sleep onset__ value
 #'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
@@ -74,20 +99,36 @@ sd <- function(so, se) {
 #'
 #' @section Guidelines:
 #'
-#' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `napd()`
-#' (\eqn{NapD}) computation are as follow.
+#' Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
+#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `napd()` (\eqn{NapD})
+#' computation are as follow.
 #'
-#' __\deqn{NapE - NapO}__
+#' ## Notes
+#'
+#' * The computation below must be applied to each shift section of the
+#' questionnaire.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## Computation
+#'
+#' __\deqn{NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}{
+#' NapE_W/F_M/E/N - NapO_W/F_M/E/N}__
 #'
 #' Where:
 #'
-#' * \eqn{NapO} = local time of nap onset ("I take a nap from ... o'clock
-#' [...]").
-#' * \eqn{NapE} = local time of nap end ("[...] to ... o'clock").
+#' * \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = local time of nap onset between
+#' two days in a particular shift __or__ between two free days after a
+#' particular shift ("I take a nap from ... o'clock \[...\]").
+#' * \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = local time of nap end between
+#' two days in a particular shift __or__ between two free days after a
+#' particular shift ("\[...\] to ... o'clock").
 #'
-#' Note that this computation must be applied to each section of the
-#' questionnaire (_e.g._ \eqn{NapEwm - NapOwm}).
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param napo A `hms` object corresponding to the __nap onset__ value
 #'   from the shift version of the MCTQ questionnaire.
@@ -137,19 +178,34 @@ napd <- function(napo, nape) {
 #'
 #' @section Guidelines:
 #'
-#' For reference, Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)),
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd24()`
-#' (\eqn{SD24}) computation are as follow.
+#' Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
+#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd24()` (\eqn{SD24})
+#' computation are as follow.
 #'
-#' __\deqn{SD + Napd}__
+#' ## Notes
+#'
+#' * The computation below must be applied to each shift section of the
+#' questionnaire.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## Computation
+#'
+#' __\deqn{SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}{
+#' SD_W/F_M/E/N + NapD_W/F_M/E/N}__
 #'
 #' Where:
 #'
-#' * \eqn{SD} = sleep duration.
-#' * \eqn{NapD} = nap duration.
+#' * \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{NapD_{W/F}^{M/E/N}}{NapD_W/F_M/E/N} = nap duration between two days in
+#' a particular shift __or__ between two free days after a particular shift.
 #'
-#' Note that this computation must be applied to each section of the
-#' questionnaire (_e.g._ \eqn{SDwm + NapDwm}).
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param sd A `Duration` object corresponding to the __sleep duration__ value
 #'   from the shift version of the MCTQ questionnaire. You can use [mctq::sd()]
@@ -198,34 +254,50 @@ sd24 <- function(sd, napd) {
 #' `sd_week()` computes the __average weekly sleep duration__ for the standard
 #' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' See [mctq::sd_overall()] to compute the overall sleep duration for
-#' the shift version of the MCTQ.
+#' See [mctq::sd_overall()] to compute the overall sleep duration of a
+#' particular shift for the shift version of the MCTQ.
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
-#' ([2020](https://bit.ly/34VhA0l)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `sd_week()` (\eqn{SD_{week}}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
+#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), and theWeP
+#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_week()`
+#' (\eqn{SD_{week}}{SD_week}) computation are as follow.
 #'
-#' __\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}__
+#' ## Notes
+#'
+#' * The average weekly sleep duration is the weighted average of the sleep
+#' durations on work and work-free days in a week.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## Computation
+#'
+#' __\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}{
+#' (SD_W * WD + SD_F * FD) / 7}__
 #'
 #' Where:
 #'
 #' * \eqn{SD_w} = sleep duration on workdays.
 #' * \eqn{SD_f} = sleep duration on work-free days.
-#' * \eqn{WD} = number of workdays per week.
+#' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+#' work ... days per week").
 #' * \eqn{FD} = number of work-free days per week.
 #'
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
-#'   days__ value from a standard or micro version of the MCTQ questionnaire
-#'   (you can use [mctq::sd()] to compute it).
+#'   days__ value from a standard or micro version of the MCTQ questionnaire.
+#'   You can use [mctq::sd()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
 #'   work-free days__ value from a standard or micro version of the MCTQ
-#'   questionnaire (you can use [mctq::sd()] to compute it).
+#'   questionnaire. You can use [mctq::sd()] to compute it.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `sd` and
-#'   `wd` and `fd(wd)` (weights).
+#' @return A `Duration` object corresponding to the weighted mean of `sd_w` and
+#'   `sd_f` with `wd` and `fd(wd)` as weights.
 #'
 #' @inheritParams fd
 #' @template details_b
@@ -297,7 +369,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_overall()` (\eqn{\emptyset
 #' SD^{M/E/N}}{OSD_M/E/N}) computation are as follow.
 #'
-#' ### Notes
+#' ## Notes
 #'
 #' * The computation below must be applied to each shift section of the
 #' questionnaire. If you are using the three shift design propose by the authors,
@@ -313,7 +385,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
-#' ### Computation
+#' ## Computation
 #'
 #' __\deqn{\frac{SD_W^{M/E/N} \times n_W^{M/E/N} + SD_F^{M/E/N} \times
 #' n_F^{M/E/N}}{n_W^{M/E/N} + n_F^{M/E/N}}}{(SD_W_M/E/N * n_W_M/E/N +
@@ -321,7 +393,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' Where:
 #'
-#' * \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = sleep duration in a particular shift.
+#' * \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = sleep duration between two days in a
+#' particular shift.
 #' * \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days after
 #' a particular shift.
 #' * \eqn{n_W^{M/E/N}}{n_W_M/E/N} = number of days worked in a particular shift
@@ -329,15 +402,15 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' * \eqn{n_F^{M/E/N}}{n_F_M/E/N} = number of free days after a particular shift
 #' within a shift cycle.
 #'
-#' \strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param sd_w A `Duration` object corresponding to the __sleep duration in a
-#'   particular shift__ value from a shift version of the MCTQ questionnaire
-#'   (you can use [mctq::sd()] to compute it).
+#' @param sd_w A `Duration` object corresponding to the __sleep duration between
+#'   two days in a particular shift__ value from a shift version of the MCTQ
+#'   questionnaire. You can use [mctq::sd()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration between
 #'   two free days after a particular shift__ value from a shift version of the
-#'   MCTQ questionnaire (you can use [mctq::sd()] to compute it).
+#'   MCTQ questionnaire. You can use [mctq::sd()] to compute it.
 #' @param n_w An [integerish][rlang::is_integerish()] `integer` or `numeric`
 #'   object corresponding to the __number of days worked in a particular shift
 #'   within a shift cycle__ value from a shift version of the MCTQ
@@ -347,8 +420,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'   within a shift cycle__ value from a shift version of the MCTQ
 #'   questionnaire.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `sd` and
-#'   `n` (weights).
+#' @return A `Duration` object corresponding to the weighted mean of `sd_w` and
+#'   `sd_f` with `n_w` and `n_f` as weights.
 #'
 #' @template details_b
 #' @template references_a

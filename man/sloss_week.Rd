@@ -8,12 +8,12 @@ sloss_week(sd_w, sd_f, wd)
 }
 \arguments{
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} value from a standard or micro version of the MCTQ questionnaire
-(you can use \code{\link[=sd]{sd()}} to compute it).}
+days} value from a standard or micro version of the MCTQ questionnaire.
+You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} value from a standard or micro version of the MCTQ
-questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
+questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
 object corresponding to the \strong{number of work days per week} value from a
@@ -27,9 +27,6 @@ A \code{Duration} object corresponding to the weekly sleep loss.
 
 \code{sloss_week()} computes the \strong{weekly sleep loss} for the standard and micro
 versions of the Munich Chronotype Questionnaire (MCTQ).
-
-Please note that this function is not appropriated for use with he MCTQ
-Shift.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -70,19 +67,36 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}) and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{sloss_week()} (\eqn{SLossweek}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}) and
+theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sloss_week()}
+(\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{If (SDweek > SDw): (SDweek - SDw) * WD}}
-\strong{\deqn{If (SDweek <= SDw): (SDweek - SDf) * (7 - WD)}}
+\subsection{Computation}{
+
+\strong{\deqn{\text{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
+If SD_week > SD_W, (SD_week - SD_W) * WD}}
+\strong{\deqn{\text{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
+FD}{If SD_week <= SD_W, (SD_week - SD_F) * FD}}
 
 Where:
 \itemize{
-\item \eqn{WD} = number of workdays per week.
-\item \eqn{SDw} = sleep duration on workdays.
-\item \eqn{SDf} = sleep duration on work-free days.
-\item \eqn{SDweek} = average weekly sleep duration.
+\item \eqn{SD_W} = sleep duration on workdays.
+\item \eqn{SD_F} = sleep duration on work-free days.
+\item \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
+\item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+work ... days per week").
+\item \eqn{FD} = number of work-free days per week.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 }
 }
 

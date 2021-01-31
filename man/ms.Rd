@@ -18,7 +18,7 @@ from a standard, micro, or shift version of the MCTQ questionnaire. You can
 use \code{\link[=sd]{sd()}} to compute it for any MCTQ version.}
 }
 \value{
-A \code{hms} object corresponding to the sum between \code{so} and (\code{sd} / 2)
+A \code{hms} object corresponding to the sum of \code{so} and \code{(sd / 2)}
 rolled in a 24-hour clock basis.
 }
 \description{
@@ -79,14 +79,36 @@ have some trouble to understand the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
 }
+}
 
-\strong{\deqn{SO + \frac{SD}{2}}{SO + (SD / 2)}}
+\subsection{For standard and micro versions of the MCTQ}{
+
+\strong{\deqn{SO_{W/F} + \frac{SD_{W/F}}{2}}{SO_W/F + (SD_W/F / 2)}}
 
 Where:
 \itemize{
-\item \eqn{SO} = sleep onset.
-\item \eqn{SD} = sleep duration.
+\item \eqn{SO_{W/F}}{SO_W/F} = sleep onset on work or work-free days.
+\item \eqn{SD_{W/F}}{SD_W/F} = sleep duration on work or work-free days.
 }
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+}
+
+\subsection{For the shift version of the MCTQ}{
+
+\strong{\deqn{SO_{W/F}^{M/E/N} + \frac{SD_{W/F}^{M/E/N}}{2}}{
+SO_W/F_M/E/N + (SD_W/F_M/E/N / 2)}}
+
+Where:
+\itemize{
+\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = sleep onset between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 }
 

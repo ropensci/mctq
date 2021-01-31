@@ -62,21 +62,38 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Juda, Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}),
-and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{napd()}
-(\eqn{NapD}) computation are as follow.
+Juda, Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{napd()} (\eqn{NapD})
+computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each shift section of the
+questionnaire.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{NapE - NapO}}
+\subsection{Computation}{
+
+\strong{\deqn{NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}{
+NapE_W/F_M/E/N - NapO_W/F_M/E/N}}
 
 Where:
 \itemize{
-\item \eqn{NapO} = local time of nap onset ("I take a nap from ... o'clock
-\link{...}").
-\item \eqn{NapE} = local time of nap end ("\link{...} to ... o'clock").
+\item \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = local time of nap onset between
+two days in a particular shift \strong{or} between two free days after a
+particular shift ("I take a nap from ... o'clock [...]").
+\item \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = local time of nap end between
+two days in a particular shift \strong{or} between two free days after a
+particular shift ("[...] to ... o'clock").
 }
 
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{NapEwm - NapOwm}).
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
 }
 
 \examples{

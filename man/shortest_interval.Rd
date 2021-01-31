@@ -38,22 +38,21 @@ finds the longer interval between two hours. It's just a wrapper for
 \details{
 \subsection{The two intervals problem}{
 
-Given two hours, \code{x} and \code{y}, without date references, there will be always
-two possible intervals between them, as illustrated below.
+Given two hours, \code{x} and \code{y}, in a two day timeline, without date references,
+there will be always two possible intervals between them, as illustrated
+below.
 
-To figure out what interval is the  shortest or longer, \code{shortest_interval()}
-checks two scenarios: 1. When \code{x} comes before \code{y}; and 2. when \code{x} comes
-after \code{y}. This only works if \code{x} value is smaller than \code{y}, therefore, the
-function will make sure to swap \code{x} and \code{y} values if the latter assumption
-is not true.
+To figure out what interval is the  shortest or the longer,
+\code{shortest_interval()} checks two scenarios: 1. When \code{x} comes before \code{y}; and
+2. when \code{x} comes after \code{y}. This only works if \code{x} value is smaller than
+\code{y}, therefore, the function will make sure to swap \code{x} and \code{y} values if the
+latter assumption is not true.
 
 Because \code{shortest_interval()} objective is to find the shortest interval, if
 \code{x} and \code{y} are equal, the shortest interval will have a length of 0 hours,
 resulting in a interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
 \code{longer_interval()} is use instead, the latter condition will return a
-interval with 24 hours of length (from \code{x} to \code{x} + 1 day).
-
-Note that this function assumes a limit of 24h for longer intervals.\preformatted{             day 1                        day 2
+interval with 24 hours of length (from \code{x} to \code{x} + 1 day).\preformatted{             day 1                        day 2
      x                  y         x                  y
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->

@@ -9,20 +9,50 @@
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `tbt()` (\eqn{TBT}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
+#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
+#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `tbt()` (\eqn{TBT})
+#' computation are as follow.
 #'
-#' __\deqn{GU - BT}__
+#' ## Notes
+#'
+#' * The computation below must be applied to each section of the
+#' questionnaire.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## For standard and micro versions of the MCTQ
+#'
+#' __\deqn{GU_{W/F} - BT_{W/F}}{GU_W/F - BT_W/F}__
 #'
 #' Where:
 #'
-#' * \eqn{BT} = Local time of going to bed ("I go to bed at ... o'clock").
-#' * \eqn{GU} = local time of getting out of bed.
+#' * \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work or work-free
+#' days ("I go to bed at ... o'clock").
+#' * \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
+#' work-free days.
 #'
-#' Note that this computation must be applied to each section of the
-#' questionnaire (_e.g._ \eqn{GUw - BTw}).
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#'
+#' ## For the shift version of the MCTQ
+#'
+#' __\deqn{GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}{GU_W/F_M/E/N - BT_W/F_M/E/N}__
+#'
+#' Where:
+#'
+#' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
+#' two days in a particular shift __or__ between two free days after a
+#' particular shift  ("I go to bed at ... o'clock").
+#' * \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
+#' between two days in a particular shift __or__ between two free days after a
+#' particular shift.
+#'
+#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+#'
 #'
 #' @param bt A `hms` object corresponding to the __local time of going to bed__
 #'   value from a standard or shift version of the MCTQ questionnaire.

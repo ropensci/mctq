@@ -8,25 +8,24 @@ le_week(le_w, le_f, wd)
 }
 \arguments{
 \item{le_w}{A \code{Duration} object corresponding to the \strong{light exposure on work
-days} value from a standard or micro version of the MCTQ questionnaire.}
+days} value from a standard version of the MCTQ questionnaire.}
 
 \item{le_f}{A \code{Duration} object corresponding to the \strong{light exposure on
-work-free days} value from a standard or micro version of the MCTQ
-questionnaire.}
+work-free days} value from a standard version of the MCTQ questionnaire.}
 
 \item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
 object corresponding to the \strong{number of work days per week} value from a
 standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{le} and
-\code{wd} and \code{fd(wd)} (weights).
+A \code{Duration} object corresponding to the weighted mean of \code{le_w} and
+\code{le_f} with \code{wd} and \code{fd(wd)} as weights.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
 \code{le_week()} computes the \strong{average weekly light exposure} for the standard
-and micro versions of the Munich Chronotype Questionnaire (MCTQ).
+version of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -67,12 +66,13 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), and theWeP
-\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{le_week()}
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}) and
+theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{le_week()}
 (\eqn{LE_{week}}{LE_week}) computation are as follow.
 \subsection{Notes}{
 \itemize{
+\item The average weekly light exposure is the weighted average of the light
+exposure on work and work-free days in a week.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble to understand the equations. If you want a better viewer,
 you can see this documentation on the package
@@ -89,11 +89,12 @@ Where:
 \itemize{
 \item \eqn{LE_W} = light exposure on workdays.
 \item \eqn{LE_F} = light exposure on work-free days.
-\item \eqn{WD} = number of workdays per week.
+\item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+work ... days per week").
 \item \eqn{FD} = number of work-free days per week.
 }
 
-\strong{*} \eqn{W} = work days; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 }
 }
 

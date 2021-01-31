@@ -14,18 +14,19 @@ values must be paired with \code{n} elements and values.}
 
 \item{n_w}{A \code{list} object with \link[rlang:is_integerish]{integerish}
 \code{integer} or \code{numeric} elements corresponding to the \strong{number of days
-worked in each shift} from a shift version of the MCTQ questionnaire. \code{n}
-elements and values must be paired with \code{sjl} elements and values.}
+worked in each shift within a shift cycle} from a shift version of the
+MCTQ questionnaire. \code{n} elements and values must be paired with \code{sjl}
+elements and values.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{sjl} and
-\code{n_w} (weights).
+A \code{Duration} object corresponding to the weighted mean of \code{sjl}
+with \code{n_w} as weights.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{sjl_weighted()} computes the \strong{absolute social jetlag across all shifts} for
-the shift version of the Munich Chronotype Questionnaire (MCTQ).
+\code{sjl_weighted()} computes the \strong{absolute social jetlag across all shifts}
+for the shift version of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -70,31 +71,43 @@ The shift version of the MCTQ was developed for shift-workers rotating
 through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
 schedules (Juda, Vetter, & Roenneberg, \href{https://bit.ly/38IEEk4}{2013}). For
-that reason, \code{sjl_weighted()} must operate considering any shift combination.
+that reason, \code{sjl_weighted()} must operate with any shift combination.
 
 Considering the requirement above, \code{sjl_weighted()} was developed to only
-accept lists values as arguments. For this approach to work, both \code{n} and
-\code{sjl} arguments must be lists with paired elements and values between \code{n} and
-\code{sjl}, \emph{i.e.} the first element of \code{n} (\emph{e.g.} \code{n_m}) must be paired with
-the first element of \code{sjl} (\emph{e.g.} \code{sjl_m}). The function will do the work
-of combining them and output a weighted mean.
+accept lists values as arguments. For this approach to work, both \code{sjl} and
+\code{n_w} arguments must be lists with paired elements and values, \emph{i.e.} the
+first element of \code{sjl} (\emph{e.g.} \code{sjl_m}) must be paired with the first element
+of \code{n_w} (\emph{e.g.} \code{n_w_m}). The function will do the work of combining them
+and output a weighted mean.
 }
 
 \section{Guidelines}{
 
 
-For reference, Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013})
+Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013})
 and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sjl_weighted()}
-computation are as follow.
-
-If you are visualizing this documentation in plain text (\code{ASCII}), you may
+(\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The absolute social jetlag across all shifts (\eqn{\emptyset
+SJL_{weighted}}{OSJL_weighted}) is the weighted average of all absolute
+social jetlags.
+\item The authors describe a equation for a three shift schedule, but that may
+not be your case. That's why this function works a little bit different (see
+Operation section), allowing you to compute a weighted average with any shift
+combination.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble to understand the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{(| SJL^M | * n_W^M + | SJL^E | * n_W^E + | SJL^N | * n_W^N) / (n_W^M
-+ n_W^E + n_W^N)}{(| SJL_M | * n_W_M + | SJL_E | * n_W_E + | SJL_N | * n_W_N)
-/ (n_W_M + n_W_E + n_W_N)}}
+\subsection{Computation}{
+
+\strong{\deqn{\frac{| SJL^M | \times n_W^M + | SJL^E | \times n_W^E + | SJL^N |
+\times n_W^N}{n_W^M + n_W^E + n_W^N}}{(| SJL_M | * n_W_M + | SJL_E | *
+n_W_E + | SJL_N | * n_W_N) / (n_W_M + n_W_E + n_W_N)}}
 
 Where:
 \itemize{
@@ -103,14 +116,9 @@ Where:
 shift cycle.
 }
 
-\strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
-
-Note that the absolute social jetlag across all shifts is the weighted
-average of all absolute social jetlags. The authors shows a formula for a
-three shift schedule, but that may not be your case. That's why this function
-works a little bit different (see Operation section), allowing to compute a
-weighted average of any shift combination.
+}
 }
 
 \examples{

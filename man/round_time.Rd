@@ -18,11 +18,12 @@ A time object with the time rounded at the seconds level.
 
 \code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, or \code{hms} object and
 round it at the seconds level.
-
-Note that \code{round_time()} convert time to seconds and them uses
-\code{\link[base:Round]{base::round()}} to round it. That is to say that \code{round_time()} uses the same
-IEC 60559 standard (\emph{"go to the even digit"}) for rounding off a 5. Therefore
-round(0.5) is 0 and round(-1.5) is -2. See \code{?round} to learn more.
+}
+\details{
+\code{round_time()} convert time to seconds and them uses \code{\link[base:Round]{base::round()}} to round
+it. That is to say that \code{round_time()} uses the same IEC 60559 standard (\emph{"go
+to the even digit"}) for rounding off a 5. Therefore round(0.5) is 0 and
+round(-1.5) is -2. See \code{?round} to learn more.
 }
 \examples{
 lubridate::dhours(1.45678696454)

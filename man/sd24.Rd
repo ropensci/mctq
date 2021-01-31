@@ -63,20 +63,36 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Juda, Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}),
-and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sd24()}
-(\eqn{SD24}) computation are as follow.
+Juda, Vetter & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sd24()} (\eqn{SD24})
+computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each shift section of the
+questionnaire.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{SD + Napd}}
+\subsection{Computation}{
+
+\strong{\deqn{SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}{
+SD_W/F_M/E/N + NapD_W/F_M/E/N}}
 
 Where:
 \itemize{
-\item \eqn{SD} = sleep duration.
-\item \eqn{NapD} = nap duration.
+\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{NapD_{W/F}^{M/E/N}}{NapD_W/F_M/E/N} = nap duration between two days in
+a particular shift \strong{or} between two free days after a particular shift.
 }
 
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{SDwm + NapDwm}).
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
 }
 
 \examples{

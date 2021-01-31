@@ -1297,12 +1297,12 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
             sd_f = sd(so_f, se_f),
             tbt_f = tbt(bt_f, gu_f),
             msf = ms(so_f, sd_f),
-            sd_week = sd_week(wd, sd_w, sd_f),
+            sd_week = sd_week(sd_w, sd_f, wd),
             msf_sc = msf_sc(msf, sd_w, sd_f, sd_week, alarm_f),
-            sloss_week = sloss_week(wd, sd_w, sd_f, sd_week),
+            sloss_week = sloss_week(sd_w, sd_f, wd),
             sjl_rel = sjl_rel(msw, msf),
             sjl = abs(sjl_rel),
-            le_week = le_week(wd, le_w, le_f)) %>%
+            le_week = le_week(le_w, le_f, wd)) %>%
         dplyr::relocate(
             id, work, wd, fd, bt_w, sprep_w, slat_w, so_w, se_w, si_w, gu_w,
             alarm_w, wake_before_w, le_w, sd_w, tbt_w, msw, bt_f, sprep_f,

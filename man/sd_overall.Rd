@@ -7,13 +7,13 @@
 sd_overall(sd_w, sd_f, n_w, n_f)
 }
 \arguments{
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration in a
-particular shift} value from a shift version of the MCTQ questionnaire
-(you can use \code{\link[=sd]{sd()}} to compute it).}
+\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration between
+two days in a particular shift} value from a shift version of the MCTQ
+questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration between
 two free days after a particular shift} value from a shift version of the
-MCTQ questionnaire (you can use \code{\link[=sd]{sd()}} to compute it).}
+MCTQ questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{n_w}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
 object corresponding to the \strong{number of days worked in a particular shift
@@ -26,8 +26,8 @@ within a shift cycle} value from a shift version of the MCTQ
 questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{sd} and
-\code{n} (weights).
+A \code{Duration} object corresponding to the weighted mean of \code{sd_w} and
+\code{sd_f} with \code{n_w} and \code{n_f} as weights.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -104,7 +104,8 @@ SD_F_M/E/N * n_F_M/E/N) / (n_W_M/E/N + n_F_M/E/N)}}
 
 Where:
 \itemize{
-\item \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = sleep duration in a particular shift.
+\item \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = sleep duration between two days in a
+particular shift.
 \item \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days after
 a particular shift.
 \item \eqn{n_W^{M/E/N}}{n_W_M/E/N} = number of days worked in a particular shift
@@ -113,7 +114,7 @@ within a shift cycle.
 within a shift cycle.
 }
 
-\strong{*} \eqn{W} = work days; \eqn{F} = work-free days, \eqn{M} =
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 }

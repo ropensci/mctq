@@ -68,17 +68,45 @@ For reference, Roenneberg, Allebrandt, Merrow, & Vetter
 (\href{https://bit.ly/34VhA0l}{2020}), Juda, Vetter, & Roenneberg
 (\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
 guidelines for \code{sd()} (\eqn{SD}) computation are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each section of the
+questionnaire.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{SE - SO}}
+\subsection{For standard and micro versions of the MCTQ}{
+
+\strong{\deqn{SE_{W/F} - SO_{W/F}}{SE_W/F - SO_W/F}}
 
 Where:
 \itemize{
-\item \eqn{SE} = sleep end.
-\item \eqn{SO} = sleep onset.
+\item \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
+\item \eqn{SO_{W/F}}{SO_W/F}  = sleep onset on work or work-free days.
 }
 
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{SEw - SOw}).
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+}
+
+\subsection{For the shift version of the MCTQ}{
+
+\strong{\deqn{SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}{SE_W/F_M/E/N - SO_W/F_M/E/N}}
+
+Where:
+\itemize{
+\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = sleep onset between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
 }
 
 \examples{

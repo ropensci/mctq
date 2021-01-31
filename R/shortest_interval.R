@@ -17,22 +17,21 @@
 #'
 #' ## The two intervals problem
 #'
-#' Given two hours, `x` and `y`, without date references, there will be always
-#' two possible intervals between them, as illustrated below.
+#' Given two hours, `x` and `y`, in a two day timeline, without date references,
+#' there will be always two possible intervals between them, as illustrated
+#' below.
 #'
-#' To figure out what interval is the  shortest or longer, `shortest_interval()`
-#' checks two scenarios: 1. When `x` comes before `y`; and 2. when `x` comes
-#' after `y`. This only works if `x` value is smaller than `y`, therefore, the
-#' function will make sure to swap `x` and `y` values if the latter assumption
-#' is not true.
+#' To figure out what interval is the  shortest or the longer,
+#' `shortest_interval()` checks two scenarios: 1. When `x` comes before `y`; and
+#' 2. when `x` comes after `y`. This only works if `x` value is smaller than
+#' `y`, therefore, the function will make sure to swap `x` and `y` values if the
+#' latter assumption is not true.
 #'
 #' Because `shortest_interval()` objective is to find the shortest interval, if
 #' `x` and `y` are equal, the shortest interval will have a length of 0 hours,
 #' resulting in a interval from `x` to `x`. But, if `inverse = TRUE` or
 #' `longer_interval()` is use instead, the latter condition will return a
 #' interval with 24 hours of length (from `x` to `x` + 1 day).
-#'
-#' Note that this function assumes a limit of 24h for longer intervals.
 #'
 #' ```
 #'              day 1                        day 2

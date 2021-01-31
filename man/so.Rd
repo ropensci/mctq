@@ -7,8 +7,8 @@
 so(sprep, slat)
 }
 \arguments{
-\item{sprep}{A \code{hms} object corresponding to the \strong{local time of getting out
-of bed} value from a standard or shift version of the MCTQ questionnaire.}
+\item{sprep}{A \code{hms} object corresponding to the \strong{local time of preparing to
+sleep} value from a standard or shift version of the MCTQ questionnaire.}
 
 \item{slat}{A \code{Duration} object corresponding to the \strong{sleep latency} value
 from a standard or shift version of the MCTQ questionnaire.}
@@ -20,8 +20,8 @@ in a 24-hour clock basis.
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 
-\code{so()} computes the \strong{time of sleep onset} for standard and shift
-versions of the Munich Chronotype Questionnaire (MCTQ).
+\code{so()} computes the \strong{sleep onset} for standard and shift versions of the
+Munich Chronotype Questionnaire (MCTQ).
 
 Note that this value is collected directly from the questionnaire if you're
 using the \eqn{\mu}MCTQ.
@@ -65,21 +65,55 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), Juda, Vetter, & Roenneberg
-(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{so()} (\eqn{SO}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
+\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{so()} (\eqn{SO}) computation
+are as follow.
+\subsection{Notes}{
+\itemize{
+\item The computation below must be applied to each section of the
+questionnaire.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble to understand the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://gipsousp.github.io/mctq/reference/}{website}.
+}
+}
 
-\strong{\deqn{SPrep + SLat}}
+\subsection{For standard and micro versions of the MCTQ}{
+
+\strong{\deqn{SPrep_{W/F} + SLat_{W/F}}{SPrep_W/F + SLat_W/F}}
 
 Where:
 \itemize{
-\item \eqn{SPrep} = local time of preparing to sleep.
-\item \eqn{SLat} = sleep latency ("I need ... min to fall asleep").
+\item \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work or
+work-free days ("I actually get ready to fall asleep at ... o'clock").
+\item \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency on work or work-free days ("I
+need ... min to fall asleep").
 }
 
-Note that this computation must be applied to each section of the
-questionnaire (\emph{e.g.} \eqn{SPrepw + SPrepw}).
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+}
+
+\subsection{For the shift version of the MCTQ}{
+
+\strong{\deqn{SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N +
+SLat_W/F_M/E/N}}
+
+Where:
+\itemize{
+\item \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = local time of preparing to
+sleep between two days in a particular shift \strong{or} between two free days
+after a particular shift ("I actually get ready to fall asleep at ...
+o'clock").
+\item \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency between two days
+in a particular shift \strong{or} between two free days after a particular shift
+("I need ... min to fall asleep").
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
 }
 
 \examples{
