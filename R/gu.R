@@ -36,7 +36,7 @@
 #'
 #' * \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
 #' * \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
-#' ... min, I get up").
+#' ___ min, I get up").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'

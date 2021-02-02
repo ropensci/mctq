@@ -6,6 +6,8 @@
 \alias{mctq-package}
 \title{mctq: The R Package for MCTQ data}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 A set of tools for processing Munich ChronoType Questionnaire 
     (MCTQ) data.
 }

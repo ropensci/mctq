@@ -31,7 +31,7 @@
 #' Where:
 #'
 #' * \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work or work-free
-#' days ("I go to bed at ... o'clock").
+#' days ("I go to bed at ___ o'clock").
 #' * \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
 #' work-free days.
 #'
@@ -45,7 +45,7 @@
 #'
 #' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
 #' two days in a particular shift __or__ between two free days after a
-#' particular shift  ("I go to bed at ... o'clock").
+#' particular shift  ("I go to bed at ___ o'clock").
 #' * \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
 #' between two days in a particular shift __or__ between two free days after a
 #' particular shift.

@@ -43,7 +43,7 @@ See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
+hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
@@ -89,7 +89,7 @@ Where:
 \itemize{
 \item \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
 \item \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
-... min, I get up").
+___ min, I get up").
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.

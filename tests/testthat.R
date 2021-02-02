@@ -28,3 +28,4 @@ test_check("mctq")
 
 # # Helpers:
 # normalizePath(readClipboard(), "/", mustWork = FALSE)
+# use_logo("./.archive/ai/hex-logo.png")

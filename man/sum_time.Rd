@@ -134,6 +134,7 @@ Other utility functions:
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
+\code{\link{raw_data}()},
 \code{\link{round_time}()},
 \code{\link{shortest_interval}()}
 }

@@ -47,7 +47,7 @@ See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
+hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
@@ -92,7 +92,7 @@ Where:
 \item \eqn{SD_F} = sleep duration on work-free days.
 \item \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
 \item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
-work ... days per week").
+work ___ days per week").
 \item \eqn{FD} = number of work-free days per week.
 }
 

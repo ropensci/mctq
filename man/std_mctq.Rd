@@ -9,28 +9,28 @@ A tibble with 37 columns and 50 rows:
 
 \describe{
 \item{id}{
-A unique numeric value for the purpose of identifying each subject in the
+A unique integer value for the purpose of identifying each subject in the
 dataset.
 \cr \cr
-Type: Control
+Type: Control.
 \cr \cr
 R class: \code{integer}.}
 
 \item{work}{
 A logical value indicating if the subject have a regular work schedule.
 \cr \cr
-Statement (EN): "I have a regular work schedule (this includes being, for
+Statement (\code{EN}): "I have a regular work schedule (this includes being, for
 example, a housewife or househusband)").
 \cr \cr
-Type: Basic
+Type: Basic.
 \cr \cr
 R class: \code{logical}.}
 
 \item{wd}{
 Number of workdays per week.
 \cr \cr
-Statement (EN): "I have a regular work schedule and work ___ days per
-week").
+Statement (\code{EN}): "I have a regular work schedule and work ___ days per
+week".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -39,14 +39,14 @@ R class: \code{integer}.}
 \item{fd}{
 Number of work-free days per week.
 \cr \cr
-Type: Computed (7 - wd).
+Type: Computed.
 \cr \cr
 R class: \code{integer}.}
 
 \item{bt_w}{
 Local time of going to bed on workdays.
 \cr \cr
-Statement (EN): "I go to bed at ___ o'clock'".
+Statement (\code{EN}): "I go to bed at ___ o'clock'".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -55,7 +55,7 @@ R class: \code{hms}.}
 \item{sprep_w}{
 Local time of preparing to sleep on workdays.
 \cr \cr
-Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
+Statement (\code{EN}): "I actually get ready to fall asleep at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -64,7 +64,7 @@ R class: \code{hms}.}
 \item{slat_w}{
 Sleep latency on workdays.
 \cr \cr
-Statement (EN): "I need ___ minutes to fall asleep".
+Statement (\code{EN}): "I need ___ minutes to fall asleep".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -73,14 +73,14 @@ R class: \code{Duration}.}
 \item{so_w}{
 Sleep onset on workdays.
 \cr \cr
-Type: Computed (sprep_w + slat_w).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{se_w}{
 Sleep end on workdays.
 \cr \cr
-Statement (EN): "I wake up at ___ o'clock".
+Statement (\code{EN}): "I wake up at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -89,7 +89,7 @@ R class: \code{hms}.}
 \item{si_w}{
 Sleep inertia on workdays.
 \cr \cr
-Statement (EN): "After ___ minutes, I get up".
+Statement (\code{EN}): "After ___ minutes, I get up".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -98,24 +98,24 @@ R class: \code{Duration}.}
 \item{gu_w}{
 Local time of getting out of bed on workdays.
 \cr \cr
-Type: Computed (se_w + si_w).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{alarm_w}{
 A logical value indicating if the subject use an alarm clock on workdays.
 \cr \cr
-Statement (EN): "I use an alarm clock on workdays".
+Statement (\code{EN}): "I use an alarm clock on workdays".
 \cr \cr
 Type: Basic.
 \cr \cr
 R class: \code{logical}.}
 
 \item{wake_before_w}{
-A logical value indicating if the subject regularly wake up BEFORE the
+A logical value indicating if the subject regularly wake up \strong{before} the
 alarm rings.
 \cr \cr
-Statement (EN): "I regularly wake up BEFORE the alarm rings".
+Statement (\code{EN}): "I regularly wake up BEFORE the alarm rings".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -124,38 +124,38 @@ R class: \code{logical}.}
 \item{le_w}{
 Light exposure on workdays.
 \cr \cr
-Statement (EN): "On average, I spend the following amount of time outdoors
-in daylight (without a roof above my head)".
+Statement (\code{EN}): "On average, I spend the following amount of time
+outdoors in daylight (without a roof above my head)".
 \cr \cr
-Type: Basic.
+Type: Extra.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{sd_w}{
 Sleep duration on workdays.
 \cr \cr
-Type: Computed (se_w - so_w).
+Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{tbt_w}{
 Total time in bed on workdays.
 \cr \cr
-Type: Computed (gu_w - bt_w).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{msw}{
 Mid-sleep on workdays.
 \cr \cr
-Type: Computed (so_w + (sd_w / 2)).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{bt_f}{
 Local time of going to bed on work-free days.
 \cr \cr
-Statement (EN): "I go to bed at ___ o'clock'".
+Statement (\code{EN}): "I go to bed at ___ o'clock'".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -164,7 +164,7 @@ R class: \code{hms}.}
 \item{sprep_f}{
 Local time of preparing to sleep on work-free days
 \cr \cr
-Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
+Statement (\code{EN}): "I actually get ready to fall asleep at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -173,7 +173,7 @@ R class: \code{hms}.}
 \item{slat_f}{
 Sleep latency on work-free days.
 \cr \cr
-Statement (EN): "I need ___ minutes to fall asleep".
+Statement (\code{EN}): "I need ___ minutes to fall asleep".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -182,14 +182,14 @@ R class: \code{Duration}.}
 \item{so_f}{
 Sleep onset on work-free days.
 \cr \cr
-Type: Computed (sprep_f + slat_f).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{se_f}{
 Sleep end on work-free days.
 \cr \cr
-Statement (EN): "I wake up at ___ o'clock".
+Statement (\code{EN}): "I wake up at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -198,7 +198,7 @@ R class: \code{hms}.}
 \item{si_f}{
 Sleep inertia on work-free days.
 \cr \cr
-Statement \strong{(EN)}: "After ___ minutes, I get up".
+Statement (\code{EN}): "After ___ minutes, I get up".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -207,7 +207,7 @@ R class: \code{Duration}.}
 \item{gu_f}{
 Local time of getting out of bed on work-free days.
 \cr \cr
-Type: Computed (se_f + si_f).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
@@ -215,7 +215,7 @@ R class: \code{hms}.}
 A logical value indicating if the subject use an alarm clock on work-free
 days.
 \cr \cr
-Statement (EN): "My wake-up time is due to the use of an alarm
+Statement (\code{EN}): "My wake-up time is due to the use of an alarm
 clock".
 \cr \cr
 Type: Basic.
@@ -224,21 +224,21 @@ R class: \code{logical}.}
 
 \item{reasons_f}{
 A logical value indicating if the subject have any particular reasons for
-why he cannot freely choose his sleep times on work-free days.
+why he/she \strong{cannot} freely choose his/her sleep times on work-free days.
 \cr \cr
-Statement (EN): "There are particular reasons why I cannot freely choose my
-sleep times on free days".
+Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
+choose my sleep times on free days".
 \cr \cr
 Type: Basic.
 \cr \cr
 R class: \code{logical}.}
 
 \item{reasons_why_f}{
-Particular reasons why the subject cannot freely choose his sleep times on
-work-free days.
+Particular reasons for why the subject cannot freely choose his/her sleep
+times on work-free days.
 \cr \cr
-Statement (EN): "There are particular reasons why I cannot freely choose my
-sleep times on free days".
+Statement (\code{EN}): "There are particular reasons why I cannot freely choose
+my sleep times on free days".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -247,31 +247,31 @@ R class: \code{character}.}
 \item{le_f}{
 Light exposure on work-free days.
 \cr \cr
-Statement (EN): "On average, I spend the following amount of time outdoors
-in daylight (without a roof above my head)".
+Statement (\code{EN}): "On average, I spend the following amount of time
+outdoors in daylight (without a roof above my head)".
 \cr \cr
-Type: Basic.
+Type: Extra.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{sd_f}{
 Sleep duration on work-free days.
 \cr \cr
-Type: Computed (se_f - so_f).
+Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{tbt_f}{
 Total time in bed on work-free days.
 \cr \cr
-Type: Computed (gu_f - bt_f).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{msf}{
 Mid-sleep on work-free days.
 \cr \cr
-Type: Computed (so_f + (sd_f / 2)).
+Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
@@ -283,7 +283,7 @@ Type: Computed.
 R class: \code{Duration}.}
 
 \item{msf_sc}{
-chronotype/corrected midsleep on work-free days.
+Chronotype or corrected mid-sleep on work-free days.
 \cr \cr
 Type: Computed.
 \cr \cr
@@ -299,14 +299,14 @@ R class: \code{Duration}.}
 \item{sjl_rel}{
 Relative social jetlag.
 \cr \cr
-Type: Computed (msf - msw).
+Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{sjl}{
 Absolute social jetlag.
 \cr \cr
-Type: Computed (abs(msf - msw)).
+Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
@@ -322,7 +322,7 @@ R class: \code{Duration}.}
 Prepared by Daniel Vartanian (package's author).
 }
 \usage{
-data(std_mctq)
+std_mctq
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -331,37 +331,57 @@ A fictional dataset composed by standard Munich Chronotype Questionnaire
 (MCTQ) basic/measurable and computed variables for testing and learning
 purposes.
 
-This data was created according to Roenneberg, Wirz-Justice, & Merrow
-(\href{https://bit.ly/3rLu195}{2003}), Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}), and guidelines of The World Wide
-Experimental Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See References
-and Details sections to learn more.
-
-The naming of the variables took into account the standard names used by
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}) and
-theWeP (\href{http://bit.ly/3pv8EH1}{n.d.}) and also guidelines of the
-\href{https://style.tidyverse.org/}{tidyverse style guide}.
+This data was created following the guidelines in Roenneberg, Wirz-Justice, &
+Merrow (\href{https://bit.ly/3rLu195}{2003}), Roenneberg, Allebrandt, Merrow, &
+Vetter (\href{http://bit.ly/3iGEgqX}{2012}), and The World Wide Experimental
+Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See References and Details
+sections to learn more.
 }
 \details{
 \code{std_mctq} is a tidied, validated, and transformed version of
-\code{mctq:::build_std_mctq()}. This dataset was created to demonstrate common
-cases and data issues that researchers may find in their MCTQ data.
-
-You can learn more about the \code{std_mctq} data cleaning process in
-\code{vignette("data-wrangling", package = "mctq")}.
+\code{raw_data("std_mctq.csv")}.
+\subsection{Guidelines}{
 
 To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
 \emph{cf.} Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}), and
-Roenneberg, T. \emph{et al.} (\href{http://bit.ly/2X37mqE}{2015}).
+Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
+Roenneberg \emph{et al.} (\href{http://bit.ly/2X37mqE}{2015}), and
+Roenneberg, Pilz, Zerbini, & Winnebeck (\href{http://bit.ly/3r6lBYr}{2019}).
 
-To know about different MCTQ versions, \emph{cf.} Juda, Vetter & Roenneberg
+To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
 (\href{https://bit.ly/38IEEk4}{2013}) and Ghotbi \emph{et.al}
 (\href{https://bit.ly/34VhA0l}{2020}).
 
 If you curious about the variable computations and want to have access to
 the full questionnaire, \emph{cf.} The Worldwide Experimental Platform
 (\href{http://bit.ly/3pv8EH1}{n.d.}).
+}
+
+\subsection{Data building and data wrangling}{
+
+This dataset was created by randomized sampling processes and by manual
+insertions of especial cases. Its purpose is to demonstrate common cases and
+data issues that researchers may find in their MCTQ data, in addition to be a
+suggested data structure for MCTQ data.
+
+You can see the \code{std_mctq} build and data wrangling processes at
+\url{https://bit.ly/3cvXxKL}.
+}
+
+\subsection{Variable naming}{
+
+The naming of the variables took into account the standard
+names/abbreviations used by Roenneberg, Allebrandt, Merrow, & Vetter
+(\href{http://bit.ly/3iGEgqX}{2012}) and theWeP (\href{http://bit.ly/3pv8EH1}{n.d.}),
+in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
+}
+
+\subsection{Variable classes}{
+
+The \code{mctq} package works with a set of object classes specially created to
+hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
+\link[lubridate:lubridate-package]{lubridate::lubridate-package}.
+}
 }
 \references{
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
@@ -382,6 +402,10 @@ Roenneberg, T., Keller, L. K., Fischer, D., Matera, J. L., Vetter, C., &
 Winnebeck, E. C. (2015). Human activity and rest in situ. In A. Sehgal (Ed.),
 \emph{Methods in enzymology} (Vol. 552, pp. 257-283). London, UK: Academic Press.
 \doi{10.1016/bs.mie.2014.11.028}.
+
+Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
+Chronotype and social jetlag: a (self-) critical review. \emph{Biology}, \emph{8}(3),
+54. \doi{10.3390/biology8030054}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological

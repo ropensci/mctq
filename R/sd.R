@@ -122,10 +122,10 @@ sd <- function(so, se) {
 #'
 #' * \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = local time of nap onset between
 #' two days in a particular shift __or__ between two free days after a
-#' particular shift ("I take a nap from ... o'clock \[...\]").
+#' particular shift ("I take a nap from ___ o'clock \[...\]").
 #' * \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = local time of nap end between
 #' two days in a particular shift __or__ between two free days after a
-#' particular shift ("\[...\] to ... o'clock").
+#' particular shift ("\[...\] to ___ o'clock").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
@@ -284,7 +284,7 @@ sd24 <- function(sd, napd) {
 #' * \eqn{SD_w} = sleep duration on workdays.
 #' * \eqn{SD_f} = sleep duration on work-free days.
 #' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
-#' work ... days per week").
+#' work ___ days per week").
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.

@@ -49,7 +49,8 @@ computation are as follow.
 
 Where:
 \itemize{
-\item \eqn{WD} = number of workdays.
+\item \eqn{WD} = number of workdays ("I have a regular work schedule and work ___
+days per week").
 }
 }
 

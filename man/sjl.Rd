@@ -19,8 +19,7 @@ days} value from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{abs}{(optional) a \code{logical} value indicating if the function must
-return an absolute social jetlag or a relative social jetlag (default:
-\code{TRUE}).}
+return an absolute social jetlag (default: \code{TRUE}).}
 
 \item{method}{(optional) a string indicating which method the function must
 use to compute the social jetlag. See Methods section to learn
@@ -57,7 +56,7 @@ See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
+hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
@@ -86,7 +85,7 @@ Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
 \item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
 each shift section of the questionnaire.
 \item Due to time arithmetic issues, \code{sjl()} does a slight different computation
-than those propose by the authors mentioned above. See
+by default than those propose by the authors mentioned above. See
 \code{vignette("social_jet_lag", package = "mctq")} for more details.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble to understand the equations. If you want a better viewer,
@@ -140,7 +139,7 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 \section{Methods for computing the social jet lag}{
 
 
-There are different approaches to compute the social jetlag \eqn{SJL}. By
+There are different approaches to compute the social jetlag (\eqn{SJL}). By
 default, \code{sjl()} uses an approach that we call by "the shortest interval
 approach" (\code{"shortest"}).
 
@@ -150,8 +149,8 @@ The topics below provide a simple explanation of each method supported by
 
 Please note that none of the approaches below are related to Jankowski's
 (\href{https://bit.ly/3ouBTbT}{2017}) social jet lag sleep-corrected proposal.
-Since the Jankowski's alternative is still disputed (Roenneberg, T., Pilz, L.
-K., Zerbini, G., & Winnebeck, E. C., \href{http://bit.ly/3r6lBYr}{2019}), the
+Since the Jankowski's alternative is still disputed (Roenneberg, Pilz,
+Zerbini, & Winnebeck, \href{http://bit.ly/3r6lBYr}{2019}), the
 \code{mctq} package currently don't provide a function for it. Future versions of
 the package may include it.
 \itemize{
@@ -281,8 +280,8 @@ and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
 \doi{10.1016/j.cub.2012.03.038}.
 
 Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
-Chronotype and social jetlag: a (self-) critical review. Biology, 8(3), 54.
-\doi{10.3390/biology8030054}.
+Chronotype and social jetlag: a (self-) critical review. \emph{Biology}, \emph{8}(3),
+54. \doi{10.3390/biology8030054}.
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological

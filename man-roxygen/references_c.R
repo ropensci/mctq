@@ -19,8 +19,8 @@
 #' \doi{10.1016/j.cub.2012.03.038}.
 #'
 #' Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
-#' Chronotype and social jetlag: a (self-) critical review. Biology, 8(3), 54.
-#' \doi{10.3390/biology8030054}.
+#' Chronotype and social jetlag: a (self-) critical review. _Biology_, _8_(3),
+#' 54. \doi{10.3390/biology8030054}.
 #'
 #' Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 #' daily temporal patterns of human chronotypes. _Journal of Biological

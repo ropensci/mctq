@@ -43,7 +43,7 @@ See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
+hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
@@ -85,7 +85,7 @@ you can see this documentation on the package
 Where:
 \itemize{
 \item \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work or work-free
-days ("I go to bed at ... o'clock").
+days ("I go to bed at ___ o'clock").
 \item \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
 work-free days.
 }
@@ -101,7 +101,7 @@ Where:
 \itemize{
 \item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
 two days in a particular shift \strong{or} between two free days after a
-particular shift  ("I go to bed at ... o'clock").
+particular shift  ("I go to bed at ___ o'clock").
 \item \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
 between two days in a particular shift \strong{or} between two free days after a
 particular shift.

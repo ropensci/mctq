@@ -8,32 +8,26 @@
 #' (MCTQ) basic/measurable and computed variables for testing and learning
 #' purposes.
 #'
-#' This data was created according to Roenneberg, Wirz-Justice, & Merrow
-#' ([2003](https://bit.ly/3rLu195)), Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), and guidelines of The World Wide
-#' Experimental Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)). See References
-#' and Details sections to learn more.
-#'
-#' The naming of the variables took into account the standard names used by
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
-#' theWeP ([n.d.](http://bit.ly/3pv8EH1)) and also guidelines of the
-#' [tidyverse style guide](https://style.tidyverse.org/).
+#' This data was created following the guidelines in Roenneberg, Wirz-Justice, &
+#' Merrow ([2003](https://bit.ly/3rLu195)), Roenneberg, Allebrandt, Merrow, &
+#' Vetter ([2012](http://bit.ly/3iGEgqX)), and The World Wide Experimental
+#' Platform (theWeP, [n.d.](http://bit.ly/3pv8EH1)). See References and Details
+#' sections to learn more.
 #'
 #' @details
 #'
 #' `std_mctq` is a tidied, validated, and transformed version of
-#' `mctq:::build_std_mctq()`. This dataset was created to demonstrate common
-#' cases and data issues that researchers may find in their MCTQ data.
+#' `raw_data("std_mctq.csv")`.
 #'
-#' You can learn more about the `std_mctq` data cleaning process in
-#' `vignette("data-wrangling", package = "mctq")`.
+#' ## Guidelines
 #'
 #' To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
 #' _cf._ Roenneberg, Wirz-Justice, & Merrow ([2003](https://bit.ly/3rLu195)),
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)), and
-#' Roenneberg, T. _et al._ ([2015](http://bit.ly/2X37mqE)).
+#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
+#' Roenneberg _et al._ ([2015](http://bit.ly/2X37mqE)), and
+#' Roenneberg, Pilz, Zerbini, & Winnebeck ([2019](http://bit.ly/3r6lBYr)).
 #'
-#' To know about different MCTQ versions, _cf._ Juda, Vetter & Roenneberg
+#' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' ([2013](https://bit.ly/38IEEk4)) and Ghotbi _et.al_
 #' ([2020](https://bit.ly/34VhA0l)).
 #'
@@ -41,14 +35,38 @@
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform
 #' ([n.d.](http://bit.ly/3pv8EH1)).
 #'
+#' ## Data building and data wrangling
+#'
+#' This dataset was created by randomized sampling processes and by manual
+#' insertions of especial cases. Its purpose is to demonstrate common cases and
+#' data issues that researchers may find in their MCTQ data, in addition to be a
+#' suggested data structure for MCTQ data.
+#'
+#' You can see the `std_mctq` build and data wrangling processes at
+#' <https://bit.ly/3cvXxKL>.
+#'
+#' ## Variable naming
+#'
+#' The naming of the variables took into account the standard
+#' names/abbreviations used by Roenneberg, Allebrandt, Merrow, & Vetter
+#' ([2012](http://bit.ly/3iGEgqX)) and theWeP ([n.d.](http://bit.ly/3pv8EH1)),
+#' in addition to the guidelines of the [tidyverse style
+#' guide](https://style.tidyverse.org/).
+#'
+#' ## Variable classes
+#'
+#' The `mctq` package works with a set of object classes specially created to
+#' hold time values. This classes can be found on the [hms::hms-package] and
+#' [lubridate::lubridate-package].
+#'
 #' @format A tibble with `r ncol(std_mctq)` columns and `r nrow(std_mctq)` rows:
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique numeric value for the purpose of identifying each subject in the
+#'   A unique integer value for the purpose of identifying each subject in the
 #'   dataset.
 #'   \cr \cr
-#'   Type: Control
+#'   Type: Control.
 #'   \cr \cr
 #'   R class: `integer`.}
 #'
@@ -56,18 +74,18 @@
 #'   \item{work}{
 #'   A logical value indicating if the subject have a regular work schedule.
 #'   \cr \cr
-#'   Statement (EN): "I have a regular work schedule (this includes being, for
+#'   Statement (`EN`): "I have a regular work schedule (this includes being, for
 #'   example, a housewife or househusband)").
 #'   \cr \cr
-#'   Type: Basic
+#'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{wd}{
 #'   Number of workdays per week.
 #'   \cr \cr
-#'   Statement (EN): "I have a regular work schedule and work ___ days per
-#'   week").
+#'   Statement (`EN`): "I have a regular work schedule and work ___ days per
+#'   week".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -76,7 +94,7 @@
 #'   \item{fd}{
 #'   Number of work-free days per week.
 #'   \cr \cr
-#'   Type: Computed (7 - wd).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `integer`.}
 #'
@@ -84,7 +102,7 @@
 #'   \item{bt_w}{
 #'   Local time of going to bed on workdays.
 #'   \cr \cr
-#'   Statement (EN): "I go to bed at ___ o'clock'".
+#'   Statement (`EN`): "I go to bed at ___ o'clock'".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -93,7 +111,7 @@
 #'   \item{sprep_w}{
 #'   Local time of preparing to sleep on workdays.
 #'   \cr \cr
-#'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
+#'   Statement (`EN`): "I actually get ready to fall asleep at ___ o'clock".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -102,7 +120,7 @@
 #'   \item{slat_w}{
 #'   Sleep latency on workdays.
 #'   \cr \cr
-#'   Statement (EN): "I need ___ minutes to fall asleep".
+#'   Statement (`EN`): "I need ___ minutes to fall asleep".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -111,14 +129,14 @@
 #'   \item{so_w}{
 #'   Sleep onset on workdays.
 #'   \cr \cr
-#'   Type: Computed (sprep_w + slat_w).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{se_w}{
 #'   Sleep end on workdays.
 #'   \cr \cr
-#'   Statement (EN): "I wake up at ___ o'clock".
+#'   Statement (`EN`): "I wake up at ___ o'clock".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -127,7 +145,7 @@
 #'   \item{si_w}{
 #'   Sleep inertia on workdays.
 #'   \cr \cr
-#'   Statement (EN): "After ___ minutes, I get up".
+#'   Statement (`EN`): "After ___ minutes, I get up".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -136,24 +154,24 @@
 #'   \item{gu_w}{
 #'   Local time of getting out of bed on workdays.
 #'   \cr \cr
-#'   Type: Computed (se_w + si_w).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_w}{
 #'   A logical value indicating if the subject use an alarm clock on workdays.
 #'   \cr \cr
-#'   Statement (EN): "I use an alarm clock on workdays".
+#'   Statement (`EN`): "I use an alarm clock on workdays".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{wake_before_w}{
-#'   A logical value indicating if the subject regularly wake up BEFORE the
+#'   A logical value indicating if the subject regularly wake up __before__ the
 #'   alarm rings.
 #'   \cr \cr
-#'   Statement (EN): "I regularly wake up BEFORE the alarm rings".
+#'   Statement (`EN`): "I regularly wake up BEFORE the alarm rings".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -162,31 +180,31 @@
 #'   \item{le_w}{
 #'   Light exposure on workdays.
 #'   \cr \cr
-#'   Statement (EN): "On average, I spend the following amount of time outdoors
-#'   in daylight (without a roof above my head)".
+#'   Statement (`EN`): "On average, I spend the following amount of time
+#'   outdoors in daylight (without a roof above my head)".
 #'   \cr \cr
-#'   Type: Basic.
+#'   Type: Extra.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{sd_w}{
 #'   Sleep duration on workdays.
 #'   \cr \cr
-#'   Type: Computed (se_w - so_w).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{tbt_w}{
 #'   Total time in bed on workdays.
 #'   \cr \cr
-#'   Type: Computed (gu_w - bt_w).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{msw}{
 #'   Mid-sleep on workdays.
 #'   \cr \cr
-#'   Type: Computed (so_w + (sd_w / 2)).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
@@ -194,7 +212,7 @@
 #'   \item{bt_f}{
 #'   Local time of going to bed on work-free days.
 #'   \cr \cr
-#'   Statement (EN): "I go to bed at ___ o'clock'".
+#'   Statement (`EN`): "I go to bed at ___ o'clock'".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -203,7 +221,7 @@
 #'   \item{sprep_f}{
 #'   Local time of preparing to sleep on work-free days
 #'   \cr \cr
-#'   Statement (EN): "I actually get ready to fall asleep at ___ o'clock".
+#'   Statement (`EN`): "I actually get ready to fall asleep at ___ o'clock".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -212,7 +230,7 @@
 #'   \item{slat_f}{
 #'   Sleep latency on work-free days.
 #'   \cr \cr
-#'   Statement (EN): "I need ___ minutes to fall asleep".
+#'   Statement (`EN`): "I need ___ minutes to fall asleep".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -221,14 +239,14 @@
 #'   \item{so_f}{
 #'   Sleep onset on work-free days.
 #'   \cr \cr
-#'   Type: Computed (sprep_f + slat_f).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{se_f}{
 #'   Sleep end on work-free days.
 #'   \cr \cr
-#'   Statement (EN): "I wake up at ___ o'clock".
+#'   Statement (`EN`): "I wake up at ___ o'clock".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -237,7 +255,7 @@
 #'   \item{si_f}{
 #'   Sleep inertia on work-free days.
 #'   \cr \cr
-#'   Statement __(EN)__: "After ___ minutes, I get up".
+#'   Statement (`EN`): "After ___ minutes, I get up".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -246,7 +264,7 @@
 #'   \item{gu_f}{
 #'   Local time of getting out of bed on work-free days.
 #'   \cr \cr
-#'   Type: Computed (se_f + si_f).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
@@ -254,7 +272,7 @@
 #'   A logical value indicating if the subject use an alarm clock on work-free
 #'   days.
 #'   \cr \cr
-#'   Statement (EN): "My wake-up time is due to the use of an alarm
+#'   Statement (`EN`): "My wake-up time is due to the use of an alarm
 #'   clock".
 #'   \cr \cr
 #'   Type: Basic.
@@ -263,21 +281,21 @@
 #'
 #'   \item{reasons_f}{
 #'   A logical value indicating if the subject have any particular reasons for
-#'   why he cannot freely choose his sleep times on work-free days.
+#'   why he/she __cannot__ freely choose his/her sleep times on work-free days.
 #'   \cr \cr
-#'   Statement (EN): "There are particular reasons why I cannot freely choose my
-#'   sleep times on free days".
+#'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
+#'   choose my sleep times on free days".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_f}{
-#'   Particular reasons why the subject cannot freely choose his sleep times on
-#'   work-free days.
+#'   Particular reasons for why the subject cannot freely choose his/her sleep
+#'   times on work-free days.
 #'   \cr \cr
-#'   Statement (EN): "There are particular reasons why I cannot freely choose my
-#'   sleep times on free days".
+#'   Statement (`EN`): "There are particular reasons why I cannot freely choose
+#'   my sleep times on free days".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -286,31 +304,31 @@
 #'   \item{le_f}{
 #'   Light exposure on work-free days.
 #'   \cr \cr
-#'   Statement (EN): "On average, I spend the following amount of time outdoors
-#'   in daylight (without a roof above my head)".
+#'   Statement (`EN`): "On average, I spend the following amount of time
+#'   outdoors in daylight (without a roof above my head)".
 #'   \cr \cr
-#'   Type: Basic.
+#'   Type: Extra.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{sd_f}{
 #'   Sleep duration on work-free days.
 #'   \cr \cr
-#'   Type: Computed (se_f - so_f).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{tbt_f}{
 #'   Total time in bed on work-free days.
 #'   \cr \cr
-#'   Type: Computed (gu_f - bt_f).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{msf}{
 #'   Mid-sleep on work-free days.
 #'   \cr \cr
-#'   Type: Computed (so_f + (sd_f / 2)).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
@@ -323,7 +341,7 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{msf_sc}{
-#'   chronotype/corrected midsleep on work-free days.
+#'   Chronotype or corrected mid-sleep on work-free days.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -339,14 +357,14 @@
 #'   \item{sjl_rel}{
 #'   Relative social jetlag.
 #'   \cr \cr
-#'   Type: Computed (msf - msw).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{sjl}{
 #'   Absolute social jetlag.
 #'   \cr \cr
-#'   Type: Computed (abs(msf - msw)).
+#'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
@@ -358,7 +376,6 @@
 #'   R class: `Duration`.}
 #' }
 #'
-#' @usage data(std_mctq)
 #' @source Prepared by Daniel Vartanian (package's author).
 #' @family datasets
 #' @template references_b
@@ -373,14 +390,15 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `build_std_mctq()` builds a fictional raw dataset composed by Munich
-#' Chronotype Questionnaire (MCTQ) (standard version) basic/measurable variables
-#' for testing and learning purposes. See [mctq::std_mctq] to learn more.
+#' `build_std_mctq()` builds a fictional raw dataset composed by by standard
+#' Munich Chronotype Questionnaire (MCTQ) basic/measurable and computed
+#' variables for testing and learning purposes. See [mctq::std_mctq] to learn
+#' more.
 #'
-#' @param write (optional) a logical value indicating if `build_std_mctq()` must
+#' @param write (optional) a logical value indicating if the function must
 #'   write a `std_mctq.csv` file to `"./inst/extdata/"` (default: `FALSE`).
 #' @param random_cases (optional) a logical value indicating if
-#'   `build_std_mctq()` must add random MCTQ cases besides the core ones.
+#'   the function must add random MCTQ cases besides the core ones.
 #'
 #' @return An invisible tibble with a raw standard MCTQ dataset.
 #'
@@ -884,9 +902,9 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'
 #' @details
 #'
-#' Here the process of _tiding_ a dataset is understood as transforming it in
+#' Here, the process of _tiding_ a dataset is understood as transforming it in
 #' input data, like described in Loo and Jonge ([2018](https://bit.ly/3pVuUdt)).
-#' Is a very similar process of tiding data described in the workflow proposed
+#' It's a very similar process of tiding data described in the workflow proposed
 #' by Wickham and Grolemund ([n.d.](https://r4ds.had.co.nz)).
 #'
 #' Please note that input data is not the same as valid data. To get a valid
@@ -902,23 +920,11 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' @return An invisible tibble with a tidied, but not validated, standard MCTQ
 #'   dataset.
 #'
+#' @template references_e
 #' @family data wrangling functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @noRd
-#'
-#' @references
-#'
-#' Van der Loo, M., & De Jonge, E. (2018).
-#' _Statistical data cleaning with applications in R_. Hooboken, NJ: John
-#' Wiley & Sons. doi:
-#' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
-#'
-#' Wickham, H. (2014). Tidy Data. _Journal of Statistical Software_, _59_(10),
-#' 1-23. doi: [10.18637/jss.v059.i10](http://dx.doi.org/10.18637/jss.v059.i10).
-#'
-#' Wickham, H, & Grolemund. (n.d.). _R for data science_. Sebastopol, CA:
-#' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
 #' \dontrun{
@@ -1064,37 +1070,24 @@ tidy_std_mctq <- function(write = FALSE) {
 #'
 #' @details
 #'
-#' Here the process of _validating_ a dataset is understood as detecting invalid
-#' data, by checking whether data satisfies certain assumptions from domain
-#' knowledge, to them removing or, if possible, fixing them. You can find
-#' more about data validation and error location in Loo and Jonge
+#' Here, the process of _validating_ a dataset is understood as detecting
+#' invalid data, by checking whether data satisfies certain assumptions
+#' from domain knowledge, to them removing or, if possible, fixing them. You can
+#' find more about data validation and error location in Loo and Jonge
 #' ([2018](https://bit.ly/3pVuUdt)).
 #'
 #' This process can be considered as a part of the process of transforming data,
 #' described in the workflow proposed by Wickham and Grolemund
 #' ([n.d.](https://r4ds.had.co.nz)).
 #'
-#' `mctq` provides a extensive list of validation parameters to ensure that
-#' common MCTQ data issues do not go unnoticed. See [mctq::validate_mctq()] to
-#' learn more.
-#'
 #' @return An invisible tibble with a validated standard MCTQ dataset.
 #'
-#' @family data wrangling functions
 #' @inheritParams tidy_std_mctq
+#' @template references_d
+#' @family data wrangling functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !!
 #' @noRd
-#'
-#' @references
-#'
-#' Van der Loo, M., & De Jonge, E. (2018).
-#' _Statistical data cleaning with applications in R_. Hooboken, NJ: John
-#' Wiley & Sons. doi:
-#' [10.1002/9781118897126](http://dx.doi.org/10.1002/9781118897126).
-#'
-#' Wickham, H, & Grolemund. (n.d.). _R for data science_. Sebastopol, CA:
-#' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
 #' \dontrun{
@@ -1191,7 +1184,7 @@ validate_std_mctq <- function(write = FALSE) {
 
     std_mctq <- std_mctq %>%
         dplyr::rowwise() %>%
-        dplyr::mutate(dplyr::across(-.data$id, .fns = ~ if_else(
+        dplyr::mutate(dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
                 .data$id %in% c(9, 21), na_as(.x), .x))) %>%
         dplyr::ungroup()
 
@@ -1240,7 +1233,7 @@ validate_std_mctq <- function(write = FALSE) {
 #' `r lifecycle::badge("experimental")`
 #'
 #' `analyse_std_mctq()` computes and creates the non-measured MCTQ variables
-#'  for the output of [mctq::validate_std_mctq()]. See [mctq::std_mctq] to
+#'  based on the output of [mctq::validate_std_mctq()]. See [mctq::std_mctq] to
 #'  learn more.
 #'
 #' @details
@@ -1253,10 +1246,10 @@ validate_std_mctq <- function(write = FALSE) {
 #' @return An invisible tibble with all the variables proposed for a standard
 #'   MCTQ dataset.
 #'
-#' @family data wrangling functions
 #' @inheritParams tidy_std_mctq
 #' @inheritParams pretty_mctq
-#' @inherit validate_std_mctq references
+#' @template references_d
+#' @family data wrangling functions
 #' @noRd
 #'
 #' @examples

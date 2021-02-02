@@ -17,7 +17,8 @@
 #'
 #' Where:
 #'
-#' * \eqn{WD} = number of workdays.
+#' * \eqn{WD} = number of workdays ("I have a regular work schedule and work ___
+#' days per week").
 #'
 #' @param wd An [integerish][rlang::is_integerish()] `integer` or `numeric`
 #'   object corresponding to the __number of work days per week__ value from a

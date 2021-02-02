@@ -33,7 +33,7 @@
 #' * \eqn{SD_F} = sleep duration on work-free days.
 #' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
 #' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
-#' work ... days per week").
+#' work ___ days per week").
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -81,11 +81,16 @@ sloss_week <- function(sd_w, sd_f, wd) {
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_identical(sd_w, sd_f, wd, type = "length")
 
+    ## `sum_1` and `sum_2` exists to remove unnecessary warnings of the
+    ## lubridate package when subtracting objects of class `Duration`.
+
     sd_week <- sd_week(sd_w, sd_f, wd)
+    sum_1 <- sum_time(sd_week, - sd_w, class = "Duration", vectorize = TRUE)
+    sum_2 <- sum_time(sd_week, - sd_f, class = "Duration", vectorize = TRUE)
 
     dplyr::case_when(
-        sd_week > sd_w ~ (sd_week - sd_w) * wd,
-        sd_week <= sd_w ~ (sd_week - sd_f) * fd(wd)
+        sd_week > sd_w ~ sum_1 * wd,
+        sd_week <= sd_w ~ sum_2 * fd(wd)
     )
 
 }

@@ -33,7 +33,7 @@
 #' * \eqn{LE_W} = light exposure on workdays.
 #' * \eqn{LE_F} = light exposure on work-free days.
 #' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
-#' work ... days per week").
+#' work ___ days per week").
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.

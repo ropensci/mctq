@@ -34,9 +34,9 @@
 #' Where:
 #'
 #' * \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work or
-#' work-free days ("I actually get ready to fall asleep at ... o'clock").
+#' work-free days ("I actually get ready to fall asleep at ___ o'clock").
 #' * \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency on work or work-free days ("I
-#' need ... min to fall asleep").
+#' need ___ min to fall asleep").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -49,11 +49,11 @@
 #'
 #' * \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = local time of preparing to
 #' sleep between two days in a particular shift __or__ between two free days
-#' after a particular shift ("I actually get ready to fall asleep at ...
+#' after a particular shift ("I actually get ready to fall asleep at ___
 #' o'clock").
 #' * \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency between two days
 #' in a particular shift __or__ between two free days after a particular shift
-#' ("I need ... min to fall asleep").
+#' ("I need ___ min to fall asleep").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.

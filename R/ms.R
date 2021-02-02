@@ -252,7 +252,7 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
     checkmate::assert_logical(alarm_f)
     assert_identical(msf, sd_w, sd_f, sd_week, alarm_f, type = "length")
 
-    ## `sc` exists to remove unnecessary warnings of lubridate package when
+    ## `sc` exists to remove unnecessary warnings of the lubridate package when
     ## subtracting objects of class `Duration`.
 
     sc <- sum_time(sd_f, - sd_week, class = "Duration", vectorize = TRUE)

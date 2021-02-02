@@ -22,7 +22,7 @@
 #' each shift section of the questionnaire.
 #'
 #' * Due to time arithmetic issues, `sjl()` does a slight different computation
-#' than those propose by the authors mentioned above. See
+#' by default than those propose by the authors mentioned above. See
 #' `vignette("social_jet_lag", package = "mctq")` for more details.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
@@ -69,7 +69,7 @@
 #'
 #' @section Methods for computing the social jet lag:
 #'
-#' There are different approaches to compute the social jetlag \eqn{SJL}. By
+#' There are different approaches to compute the social jetlag (\eqn{SJL}). By
 #' default, `sjl()` uses an approach that we call by "the shortest interval
 #' approach" (`"shortest"`).
 #'
@@ -79,8 +79,8 @@
 #'
 #' Please note that none of the approaches below are related to Jankowski's
 #' ([2017](https://bit.ly/3ouBTbT)) social jet lag sleep-corrected proposal.
-#' Since the Jankowski's alternative is still disputed (Roenneberg, T., Pilz, L.
-#' K., Zerbini, G., & Winnebeck, E. C., [2019](http://bit.ly/3r6lBYr)), the
+#' Since the Jankowski's alternative is still disputed (Roenneberg, Pilz,
+#' Zerbini, & Winnebeck, [2019](http://bit.ly/3r6lBYr)), the
 #' `mctq` package currently don't provide a function for it. Future versions of
 #' the package may include it.
 #'
@@ -112,8 +112,7 @@
 #'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
 #'   use [mctq::ms()] to compute it.
 #' @param abs (optional) a `logical` value indicating if the function must
-#'   return an absolute social jetlag or a relative social jetlag (default:
-#'   `TRUE`).
+#'   return an absolute social jetlag (default: `TRUE`).
 #' @param method (optional) a string indicating which method the function must
 #'   use to compute the social jetlag. See Methods section to learn
 #'   more (default: `"shortest"`).

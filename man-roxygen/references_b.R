@@ -19,6 +19,10 @@
 #' _Methods in enzymology_ (Vol. 552, pp. 257-283). London, UK: Academic Press.
 #' \doi{10.1016/bs.mie.2014.11.028}.
 #'
+#' Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
+#' Chronotype and social jetlag: a (self-) critical review. _Biology_, _8_(3),
+#' 54. \doi{10.3390/biology8030054}.
+#'
 #' Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 #' daily temporal patterns of human chronotypes. _Journal of Biological
 #' Rhythms_, _18_(1), 80-90. \doi{10.1177/0748730402239679}.

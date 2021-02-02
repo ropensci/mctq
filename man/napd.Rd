@@ -42,7 +42,7 @@ See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
+hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).
@@ -85,10 +85,10 @@ Where:
 \itemize{
 \item \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = local time of nap onset between
 two days in a particular shift \strong{or} between two free days after a
-particular shift ("I take a nap from ... o'clock [...]").
+particular shift ("I take a nap from ___ o'clock [...]").
 \item \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = local time of nap end between
 two days in a particular shift \strong{or} between two free days after a
-particular shift ("[...] to ... o'clock").
+particular shift ("[...] to ___ o'clock").
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
