@@ -29,3 +29,5 @@ test_check("mctq")
 # # Helpers:
 # normalizePath(readClipboard(), "/", mustWork = FALSE)
 # use_logo("./.archive/ai/hex-logo.png")
+# build_favicons(overwrite = TRUE)
+# covr::codecov(token = "59cf66a5-a137-4d7e-b515-af29acd17bf3")

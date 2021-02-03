@@ -332,12 +332,11 @@ close_round <- function(x, digits = 5) {
     pattern_9 <- paste0("\\.", paste(rep(9, digits), collapse = ""))
     pattern_0 <- paste0("\\.", paste(rep(0, digits), collapse = ""))
 
-    if (stringr::str_detect(x, pattern_9) ||
-        stringr::str_detect(x, pattern_0)) {
-        round(x)
-    } else {
-        x
-    }
+    dplyr::case_when(
+        stringr::str_detect(x, pattern_9) |
+            stringr::str_detect(x, pattern_0) ~ round(x),
+        TRUE ~ x
+    )
 
 }
 

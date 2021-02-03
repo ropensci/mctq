@@ -398,17 +398,17 @@ convert_tu(hms::parse_hm("15:45:00"), "H") # Wrapper function
 #> [1] 15.75 # Expected
 
 ## __ Conversion from units to date/time objects __
-convert(360, "period", input_unit = "deg")
+convert(360, "Period", input_unit = "deg")
 #> [1] "1d 0H 0M 0S" # Expected
-convert(6.5, "posixct", input_unit = "H")
+convert(6.5, "Posixct", input_unit = "H")
 #> [1] "1970-01-01 06:30:00 UTC" # Expected
 convert(365.25, "hms", input_unit = "d")
 #> 8766:00:00 # Expected
-convert(1, "posixlt", input_unit = "W")
+convert(1, "Posixlt", input_unit = "W")
 #> [1] "1970-01-08 UTC" # Expected
-convert(1.308997, "duration", input_unit = "rad")
+convert(1.308997, "Duration", input_unit = "rad")
 #> [1] "18000s (~5 hours)" # Expected
-convert_ut(1.308997, "duration", "rad") # Wrapper function
+convert_ut(1.308997, "Duration", "rad") # Wrapper function
 #> [1] "18000s (~5 hours)" # Expected
 
 ## __ Conversion between date/time objects __
@@ -441,7 +441,7 @@ convert_uu(40, "d", "deg") # Wrapper function
 #> [1] 14400 # Expected
 
 ## __ Conversion from character or numeric objects to date/time objects __
-convert("19:55:17", "duration", orders = "HMS")
+convert("19:55:17", "Duration", orders = "HMS")
 #> [1] "71717s (~19.92 hours)" # Expected
 convert("21:00", "Period", orders = "HM")
 #> [1] "21H 0M 0S" # Expected

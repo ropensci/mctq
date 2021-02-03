@@ -11,7 +11,6 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
 # mctq <a href='https://gipsousp.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
@@ -27,21 +26,21 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 
 ## Overview
 
-`mctq` provides a consistent and fast way to process Munich Chronotype Questionnaire (MCTQ) data in R. All of the three MCTQ versions (standard, micro, and shift) are supported.
+`mctq` provides a consistent and fast way to process Munich Chronotype Questionnaire (MCTQ) data in R for all of its three versions (standard, micro, and shift).
 
-`mctq` is currently on the development stage and had not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. That means that people can try it out and provide feedback, but the package comes with no promises for long term stability.
+Please note that this package is currently on the development stage and have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. That means that people can try it out and provide feedback, but it comes with no promises for long term stability.
 
-## Wait, a R package for a questionnaire?
+### Wait, a R package for a questionnaire?
 
 If you're familiar with MCTQ, you know that it is not a simple questionnaire, as it requires a lot of date/time manipulation. That can be real challenging, especially if you're dealing with a large set of data.
 
-One main advantage to use the `mctq` package in your research is that you will have reliable tools, thoroughly tested, at your disposition, made and supported by a sleep science research group (GIPSO) from a well know university ([USP](https://www5.usp.br/)). `mctq` can also help you with research reproducibility, as it's a free and open source package that anyone can find and use.
+The main advantage to use the `mctq` package in your research is that you will have reliable tools, thoroughly tested, at your disposition, made and supported by a sleep science research group (GIPSO) from a well know university ([USP](https://www5.usp.br/)). `mctq` also helps with research reproducibility, since it's a free and open source package that anyone can find and use.
 
-The package is also equip with several utility functions that allows you to easily convert and visualize your MCTQ data. It also provides fictional datasets for testing and learning purposes.
+This package is also equip with several utility functions that allows you to easily convert and visualize your MCTQ data. It also provides fictional datasets for testing and learning purposes.
 
 ## Installation
 
-The first stable `mctq` version is on the final development stage, we hope that it will be available on [CRAN](https://cran.r-project.org/) soon. Until that moment comes, you can install the development version from [GitHub](https://github.com/) with:
+The first stable `mctq` version is in its final development stage, we hope that it will be available on [CRAN](https://cran.r-project.org/) soon. Until that moment comes, you can install the development version from GitHub with:
 
 ``` {r, eval = FALSE}
 # install.packages("devtools")
@@ -50,7 +49,47 @@ devtools::install_github("gipsousp/mctq")
 
 ## Usage
 
-`mctq` uses similar naming abbreviations, as is used on the MCTQ articles.
+`mctq` works with a set of object classes specially created to hold time values. This classes can be found in the [hms](https://hms.tidyverse.org/) and [lubridate](https://lubridate.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/packages/). If your data do not conform to the object classes required, don't worry, just use `convert()` to convert it. You can always convert it back if you want.
+
+```{r, message = FALSE}
+library(mctq)
+library(lubridate)
+library(hms)
+
+# __ Conversion from units to date/time objects __
+## From decimal hours to `hms`
+convert(6.5, "hms", input_unit = "H")
+## From radians to `Duration`
+convert(1.308997, "Duration", input_unit = "rad")
+## From degrees to `Duration`
+convert(15, "Duration", input_unit = "deg")
+
+# __ Conversion from `character` or `numeric` objects to date/time objects __
+## From `character` `HMS` to `Duration`
+convert("19:55:17", "Duration", orders = "HMS")
+## From `character` `HM AM/PM ` to `hms`
+convert("10:00 PM", "hms", orders = "IMp")
+## From `numeric` decimal minutes (M) to `Period`
+convert(20.5, "Period", orders = "M")
+
+# __ Conversion between date/time objects __
+## From `Duration` to `hms`
+convert(lubridate::dseconds(120), "hms")
+## From `Date` to `POSIXct`
+convert(lubridate::as_date("1765-10-05"), "POSIXct")
+## From `POSIXct` to `Period`
+convert(lubridate::as_datetime("2020-01-01 10:00:00"), "Period")
+
+# __ Conversion columns of a data frame __
+## Converting a `hms` column to radians
+data <- data.frame(bt_w = std_mctq$bt_w, bt_w_rad = std_mctq$bt_w)
+data <- convert(data, "numeric", cols = "bt_w_rad", output_unit = "rad")
+head(data)
+```
+
+After you data is all set, just use the `mctq` functions below to process it. 
+
+Note that `mctq` uses a similar naming pattern as those used in the MCTQ articles, that make it easy to find and apply any computation necessary.
 
 For basic MCTQ computation, use:
 
@@ -68,19 +107,19 @@ library(mctq)
 library(lubridate)
 library(hms)
 
-# local time of preparing to sleep on workdays.
-sprep_w <- c(hms::parse_hms("22:00:00"), hms::parse_hms("01:15:00"))
-# sleep latency on workdays
-slat_w <- c(lubridate::dminutes(15), lubridate::dminutes(90))
-# sleep onset
+# Local time of preparing to sleep on workdays.
+sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
+# Sleep latency on workdays
+slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
+# Sleep onset
 so(sprep_w, slat_w)
 ```
 
-For computation combining workdays and work-free days or different shifts, use:
+For computation combining workdays and work-free days, use:
 
 * `sd_week()` compute MCTQ average weekly sleep duration
 * `sd_overall()` compute MCTQ overall sleep duration (only for MCTQ Shift)
-* `sjl() sjl_rel()` compute MCTQ social jet lag
+* `sjl()` and `sjl_rel()` compute MCTQ social jet lag
 * `sjl_weighted()` compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)
 * `sloss_week()` compute MCTQ weekly sleep loss
 * `msf_sc()` compute MCTQ chronotype or corrected mid-sleep on work-free days
@@ -91,34 +130,24 @@ library(mctq)
 library(lubridate)
 library(hms)
 
-# mid-sleep on workdays
+# Mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
-# mid-sleep on work-free days
+# Mid-sleep on work-free days
 msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
-# relative social jetlag
+# Relative social jetlag
 sjl_rel(msw, msf)
 ```
 
-`mctq` is also equip with many utilities function, like `convert()`.
-
-
-```{r, message = FALSE}
-library(mctq)
-library(lubridate)
-library(hms)
-
-## Convert from character or numeric objects to date/time objects
-convert("19:55:17", "Duration", orders = "HMS")
-convert("0145", "numeric", orders = "HM", output_unit = "M")
-convert(1.308997, "numeric", input_unit = "rad", output_unit = "H")
-```
+In addition to `convert()`, `mctq` is also equip with many other utilities functions.  All functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipsousp.github.io/mctq/reference/index.html) to view a list of them.
 
 ## Citation
 
-We put a lot a work to build and maintain a free and open source R package. If you use `mctq` on your research, please consider citing it. You can find `mctq` citation [here](https://gipsousp.github.io/mctq/authors.html).
+If you use `mctq` in your research, please consider citing it. We put a lot of work to build and maintain a free and open source R package. You can find `mctq` citation [here](https://gipsousp.github.io/mctq/authors.html).
 
 ## Contributing
 
-`mctq` is a community project, anyone and everyone is welcome to contribute. Take a moment to review the [Guidelines for Contributing](https://gipsousp.github.io/mctq/CONTRIBUTING.html).
+`mctq` is a community project, anyone and everyone is welcome to contribute. Take a moment to review our [Guidelines for Contributing](https://gipsousp.github.io/mctq/CONTRIBUTING.html).
 
-Please note that the `mctq` project is released with a [Contributor Code of Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that `mctq` is released with a [Contributor Code of
+Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By contributing
+to this project, you agree to abide by its terms.
