@@ -9,9 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
-#' theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sloss_week()`
-#' (\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
+#' for `sloss_week()` (\eqn{SLoss_{week}}{SLoss_week}) computation are as
+#' follow.
 #'
 #' ## Notes
 #'
@@ -78,12 +78,14 @@ sloss_week <- function(sd_w, sd_f, wd) {
 
     assert_duration(sd_w)
     assert_duration(sd_f)
+    checkmate::assert_integerish(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_identical(sd_w, sd_f, wd, type = "length")
 
     ## `sum_1` and `sum_2` exists to remove unnecessary warnings of the
     ## lubridate package when subtracting objects of class `Duration`.
 
+    wd <- as.integer(wd)
     sd_week <- sd_week(sd_w, sd_f, wd)
     sum_1 <- sum_time(sd_week, - sd_w, class = "Duration", vectorize = TRUE)
     sum_2 <- sum_time(sd_week, - sd_f, class = "Duration", vectorize = TRUE)

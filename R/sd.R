@@ -9,10 +9,8 @@
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter
-#' ([2012](http://bit.ly/3iGEgqX)), Ghotbi _et.al_
-#' ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
+#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi
+#' _et.al_ (2020), Juda, Vetter, & Roenneberg (2013), and theWeP (n.d.)
 #' guidelines for `sd()` (\eqn{SD}) computation are as follow.
 #'
 #' ## Notes
@@ -99,9 +97,8 @@ sd <- function(so, se) {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `napd()` (\eqn{NapD})
-#' computation are as follow.
+#' Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for `napd()`
+#' (\eqn{NapD}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -178,9 +175,8 @@ napd <- function(napo, nape) {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd24()` (\eqn{SD24})
-#' computation are as follow.
+#' Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for `sd24()`
+#' (\eqn{SD24}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -259,10 +255,9 @@ sd24 <- function(sd, napd) {
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
-#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_week()`
-#' (\eqn{SD_{week}}{SD_week}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), and
+#' theWeP (n.d.) guidelines for `sd_week()` (\eqn{SD_{week}}{SD_week})
+#' computation are as follow.
 #'
 #' ## Notes
 #'
@@ -344,8 +339,11 @@ sd_week <- function(sd_w, sd_f, wd) {
 
     assert_duration(sd_w)
     assert_duration(sd_f)
+    checkmate::assert_integerish(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_identical(wd, sd_w, sd_f, type = "length")
+
+    wd <- as.integer(wd)
 
     ((sd_w * wd) + (sd_f * fd(wd))) / 7
 
@@ -365,9 +363,9 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)) and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sd_overall()` (\eqn{\emptyset
-#' SD^{M/E/N}}{OSD_M/E/N}) computation are as follow.
+#' Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
+#' `sd_overall()` (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N}) computation are as
+#' follow.
 #'
 #' ## Notes
 #'
@@ -411,14 +409,14 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' @param sd_f A `Duration` object corresponding to the __sleep duration between
 #'   two free days after a particular shift__ value from a shift version of the
 #'   MCTQ questionnaire. You can use [mctq::sd()] to compute it.
-#' @param n_w An [integerish][rlang::is_integerish()] `integer` or `numeric`
-#'   object corresponding to the __number of days worked in a particular shift
-#'   within a shift cycle__ value from a shift version of the MCTQ
-#'   questionnaire.
-#' @param n_f An [integerish][rlang::is_integerish()] `integer` or `numeric`
-#'   object corresponding to the __number of free days after a particular shift
-#'   within a shift cycle__ value from a shift version of the MCTQ
-#'   questionnaire.
+#' @param n_w An [integerish][checkmate::test_integerish()] `integer` or
+#'   `numeric` object corresponding to the __number of days worked in a
+#'   particular shift within a shift cycle__ value from a shift version of the
+#'   MCTQ questionnaire.
+#' @param n_f An [integerish][checkmate::test_integerish()] `integer` or
+#'   `numeric` object corresponding to the __number of free days after a
+#'   particular shift within a shift cycle__ value from a shift version of the
+#'   MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the weighted mean of `sd_w` and
 #'   `sd_f` with `n_w` and `n_f` as weights.
@@ -467,9 +465,14 @@ sd_overall <- function(sd_w, sd_f, n_w, n_f) {
 
     assert_duration(sd_w)
     assert_duration(sd_f)
+    checkmate::assert_integerish(n_w)
+    checkmate::assert_integerish(n_f)
     checkmate::assert_numeric(n_w, lower = 0)
     checkmate::assert_numeric(n_f, lower = 0)
     assert_identical(n_w, n_f, sd_w, sd_f, type = "length")
+
+    n_w <- as.integer(n_w)
+    n_f <- as.integer(n_f)
 
     ((sd_w * n_w) + (sd_f * n_f)) / (n_w + n_f)
 

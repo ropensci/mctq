@@ -52,7 +52,7 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     }
 
     if (isTRUE(round)) {
-        data <- data %>% dplyr::mutate(dplyr::across(where(test), round_time))
+        data <- dplyr::mutate(data, dplyr::across(where(test), round_time))
     }
 
     if (isTRUE(hms)) {

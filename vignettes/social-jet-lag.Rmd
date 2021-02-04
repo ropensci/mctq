@@ -1,0 +1,92 @@
+---
+title: "The social jetlag computation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The social jetlag computation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+__UNDER DEVELOPMENT__
+
+Shows the rationale behind the social jetlag concept and computation, and how its signal must be interpreted.
+
+12h limit on the shortest interval. Unsolvable condition due to the problem
+of the two intervals.
+
+As you can see in the Guidelines section, the original MCTQ author (Till Roenneberg) proposes a method for estimating the social jetlag that is based on the difference between $MSF$ and $MSW$ (here we call this method by the term __`"difference"`__). Although that simple mathematical equation can work for most cases, it can also produce errors related to the circular nature of time.
+
+Example 1: A scenario where the `"difference"` method works well
+
+$MSW = \text{04:00}$
+
+$MSF = \text{06:00}$
+
+$MSF - MSW = \text{02:00}$
+
+$\text{Real difference: 02:00}$
+
+Example 2: A scenario where the `"difference"` method don't work
+
+$MSW = \text{23:00}$
+
+$MSF = \text{03:00}$
+
+$MSF - MSW = \text{-20:00}$
+
+$\text{Real difference: 04:00}$
+
+As you can see in example 2, the "difference" method uses a linear approach creating possible problems regarding the circularity of time.
+
+But the problem don't stop there. Even if we use a circular approach, we fall into a dilemma. That's because there's always two possible intervals between two hour values, considering a two day timeline. As illustrated below.
+
+```
+             day 1                        day 2
+     MSF               MSW       MSF                MSW
+   05:00              21:00     05:00              21:00
+-----|------------------|---------|------------------|----->
+              16h           8h             16h
+          longer int.   shorter int.    longer int.
+
+```
+
+For most cases, the real difference between $MSF$ and $MSW$ falls into the shortest interval between the two.
+
+When `abs == FALSE`, `sjl()` will set the output signal considering $MSW$ position in relation to $MSF$ in the shortest possible interval between the two. That is to say that the $SJL$ signal will be positive when $MSW$ comes before or are equal to $MSF$, and negative when $MSW$ comes after $MSF$, in that shortest interval window.
+
+The rationale showed above about the $SJL$ signal is the same one used on Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
+
+Example: A scenario where $SJL$ will be positive
+
+```
+             day 1                        day 2
+     MSF               MSW       MSF                MSW
+   07:00              23:00     07:00              23:00
+-----|------------------|---------|------------------|----->
+              16h           8h             16h
+          longer int.   shorter int.    longer int.
+```
+
+Example: A scenario where $SJL$ will be negative
+
+```
+             day 1                        day 2
+    MSW                MSF       MSW                MSF
+   07:00              23:00     07:00              23:00
+-----|------------------|---------|------------------|----->
+              16h           8h             16h
+          longer int.   shorter int.    longer int.
+```
+
+That's the best way we found to establish a reliable $SJL$ signal, considering the context of MCTQ data, but it comes with a limitation (see Function limitation section). If you find this hard to understand (and it is), see `vignette("social-jet-lag", package = "mctq")` for more details.
+
+This function uses the shortest interval between $MSW$ and $MSF$ to find the social jet lag ($SJL$) value. That means that, if $MSF$ and $MSW$ values distance themselves by more than 12h, this function can return a wrong output (function limitation).
+
+The situation described above is highly improbable to happen when dealing with MCTQ data and is irresolvable by only looking at the data. That's because there's always two possible intervals between two hour values, considering a two day timeline.

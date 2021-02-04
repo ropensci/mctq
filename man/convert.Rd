@@ -228,9 +228,8 @@ applications. However, please note that it may not work for all cases.
 Test it first before applying it to large datasets.
 
 To learn more about how to handle date and time objects, check chapter "Dates
-and Times" from Wickham and Grolemund (\href{https://r4ds.had.co.nz}{n.d.}) and
-chapter "Technical Representation of Data" from Loo and Jonge
-(\href{https://bit.ly/3pVuUdt}{2018}).
+and Times" from Wickham and Grolemund (n.d.) and chapter "Technical
+Representation of Data" from Loo and Jonge (2018).
 \subsection{Wrappers}{
 
 \code{convert()} have some wrappers functions for convenience.

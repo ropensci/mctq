@@ -9,9 +9,8 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
-#' theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `le_week()`
-#' (\eqn{LE_{week}}{LE_week}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
+#' for `le_week()` (\eqn{LE_{week}}{LE_week}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -92,8 +91,11 @@ le_week <- function(le_w, le_f, wd) {
 
     assert_duration(le_w)
     assert_duration(le_f)
+    checkmate::assert_integerish(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
     assert_identical(wd, le_w, le_f, type = "length")
+
+    wd <- as.integer(wd)
 
     ((le_w * wd) + (le_f * fd(wd))) / 7
 

@@ -9,9 +9,8 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)) and
-#' theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `fd()` (\eqn{FD})
-#' computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
+#' for `fd()` (\eqn{FD}) computation are as follow.
 #'
 #' __\deqn{7 - WD}__
 #'
@@ -20,12 +19,12 @@
 #' * \eqn{WD} = number of workdays ("I have a regular work schedule and work ___
 #' days per week").
 #'
-#' @param wd An [integerish][rlang::is_integerish()] `integer` or `numeric`
-#'   object corresponding to the __number of work days per week__ value from a
-#'   standard or micro version of the MCTQ questionnaire.
+#' @param wd An [integerish][checkmate::test_integerish()] `integer` or
+#'   `numeric` object corresponding to the __number of work days per week__
+#'   value from a standard or micro version of the MCTQ questionnaire.
 #'
-#' @return A numeric value equivalent to `7 - wd`, _i.e._ the difference between
-#'   the number of days in a week and the number of work days.
+#' @return An `integer` value equivalent to `7 - wd`, _i.e._ the difference
+#'   between the number of days in a week and the number of work days.
 #'
 #' @template details_a
 #' @template references_a
@@ -41,8 +40,10 @@
 #' #> [1]  6 NA # Expected
 fd <- function(wd) {
 
+    checkmate::assert_integerish(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
 
+    wd <- as.integer(wd)
     as.integer(7 - wd)
 
 }

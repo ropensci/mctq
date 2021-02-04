@@ -6,7 +6,6 @@
 ## usethis namespace: start
 #' @importFrom dplyr across
 #' @importFrom lubridate %within%
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data := !! !!!
 ## usethis namespace: end
 NULL

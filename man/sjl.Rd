@@ -26,8 +26,14 @@ use to compute the social jetlag. See Methods section to learn
 more (default: \code{"shortest"}).}
 }
 \value{
-A \code{Duration} object corresponding to the relative or absolute social
+\itemize{
+\item If \code{abs = TRUE}, a \code{Duration} object corresponding to the absolute social
 jetlag.
+\item If \code{abs = FALSE}, a \code{Duration} object corresponding to the relative social
+jetlag.
+}
+
+The output may vary depending on the \code{method} used.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -39,26 +45,24 @@ micro, and shift versions of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
-Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-and The World Wide Experimental Platform
-(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
+Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 
-\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
+\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
-guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
-addition to the guidelines used for the standard MCTQ.
+guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
+guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert]{convert()}} to convert it.
+hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
+conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
+convert it.
 }
 
 \subsection{Rounding and fractional time}{
@@ -75,10 +79,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), and theWeP
-\href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sjl()}
-(\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
+(2013), and theWeP (n.d.) guidelines for \code{sjl()} (\eqn{SJL_{rel}}{SJL_rel}
+and \eqn{SJL}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
@@ -147,11 +150,10 @@ The topics below provide a simple explanation of each method supported by
 \code{vignette("social-jet-lag", package = "mctq")}.
 
 Please note that none of the approaches below are related to Jankowski's
-(\href{https://bit.ly/3ouBTbT}{2017}) social jet lag sleep-corrected proposal.
-Since the Jankowski's alternative is still disputed (Roenneberg, Pilz,
-Zerbini, & Winnebeck, \href{http://bit.ly/3r6lBYr}{2019}), the
-\code{mctq} package currently don't provide a function for it. Future versions of
-the package may include it.
+(2017) social jet lag sleep-corrected proposal. Since the Jankowski's
+alternative is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019),
+the \code{mctq} package currently don't provide a function for it. Future versions
+of the package may include it.
 \itemize{
 \item \code{"difference"}
 }

@@ -51,26 +51,24 @@ When using the shift version of the MCTQ, replace the value of \code{sd_week} to
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
-Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-and The World Wide Experimental Platform
-(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
+Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 
-\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
+\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
-guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
-addition to the guidelines used for the standard MCTQ.
+guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
+guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert]{convert()}} to convert it.
+hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
+conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
+convert it.
 }
 
 \subsection{Rounding and fractional time}{
@@ -87,10 +85,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), Juda, Vetter, & Roenneberg
-(\href{https://bit.ly/38IEEk4}{2013}), and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)}
-guidelines for \code{msf_sc()} (\eqn{MSF_{sc}}{MSF_sc}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi \emph{et.al} (2020), Juda,
+Vetter, & Roenneberg (2013), and theWeP (n.d.) guidelines for \code{msf_sc()}
+(\eqn{MSF_{sc}}{MSF_sc}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item For all cases, \eqn{MSF_{sc}}{MSF_sc} cannot be computed if the participant
@@ -102,7 +99,7 @@ standard and micro versions of the MCTQ.
 \item The basis for estimating chronotype in shift-workers is the mid-sleep time
 on work-free days after evening shifts (\eqn{MSF^E}{MSF_E}).
 \item In case work schedules do not comprise evening shifts, Juda, Vetter, &
-Roenneberg (\href{https://bit.ly/38IEEk4}{2013}) propose to derive it from the
+Roenneberg (2013) propose to derive it from the
 \eqn{MSF_{sc}}{MSF_sc} of other shifts (\emph{e.g.} by using a linear model).
 Unfortunately the \code{mctq} package can't help you with that, as it requires a
 closer look at your data.
@@ -110,7 +107,7 @@ closer look at your data.
 conditions (\emph{e.g.} age; light exposure). For epidemiological and genetic
 studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 populations of different age and sex compositions comparable (Roenneberg,
-Allebrandt, Merrow, & Vetter, \href{http://bit.ly/3iGEgqX}{2012}).
+Allebrandt, Merrow, & Vetter, 2012).
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble to understand the equations. If you want a better viewer,
 you can see this documentation on the package

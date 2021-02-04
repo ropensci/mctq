@@ -7,13 +7,13 @@
 fd(wd)
 }
 \arguments{
-\item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
-object corresponding to the \strong{number of work days per week} value from a
-standard or micro version of the MCTQ questionnaire.}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{integer} or
+\code{numeric} object corresponding to the \strong{number of work days per week}
+value from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-A numeric value equivalent to \code{7 - wd}, \emph{i.e.} the difference between
-the number of days in a week and the number of work days.
+An \code{integer} value equivalent to \code{7 - wd}, \emph{i.e.} the difference
+between the number of days in a week and the number of work days.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
@@ -23,27 +23,23 @@ and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
-Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-and The World Wide Experimental Platform
-(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
+Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 
-\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
+\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
-guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
-addition to the guidelines used for the standard MCTQ.
+guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
+guidelines used for the standard MCTQ.
 
 See References section to learn more.
 }
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}) and
-theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{fd()} (\eqn{FD})
-computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
+for \code{fd()} (\eqn{FD}) computation are as follow.
 
 \strong{\deqn{7 - WD}}
 

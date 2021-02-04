@@ -7,7 +7,7 @@ Authors@R:
              role = c("aut", "cre", "cph"),
              email = "danvartan@gmail.com",
              comment = c(ORCID = "0000-0001-7782-759X")),
-      person(given = "Ana Amélia",
+      person(given = "Ana Amelia",
              family = "Benedito-Silva",
              email = "aamelia@usp.br",
              role = c("aut", "exp", "sad"),
@@ -25,7 +25,7 @@ Maintainer: Daniel Vartanian <danvartan@gmail.com>
 Description: A set of tools for processing Munich ChronoType Questionnaire 
     (MCTQ) data.
 License: MIT + file LICENSE
-URL: https://gipsousp.github.io/mctq, https://github.com/gipsousp/mctq
+URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
 BugReports: https://github.com/gipsousp/mctq/issues
 Encoding: UTF-8
 LazyData: true
@@ -35,24 +35,24 @@ Depends:
     R (>= 4.0)
 Imports: 
     checkmate,
-    crayon,
     dplyr,
-    ggplot2,
-    glue,
     hms,
     lifecycle,
     lubridate,
-    magrittr,
     rlang,
     stats,
-    stringr,
     utils,
-    validate
-Suggests: 
+    glue,
+    stringr
+Suggests:
+    spelling, 
     covr,
+    crayon,
+    ggplot2,
     grDevices,
     knitr,
     rmarkdown,
     testthat (>= 2.0.0)
 Config/testthat/edition: 2
 VignetteBuilder: knitr
+Language: en-US

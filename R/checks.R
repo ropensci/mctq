@@ -75,17 +75,43 @@ assert_has_length <- checkmate::makeAssertionFunction(check_has_length)
 
 #' @family check functions
 #' @noRd
+check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
+                             name = deparse(substitute(x))) {
+
+    checkmate::assert_flag(any.missing)
+    checkmate::assert_flag(null.ok)
+
+    if (is.null(x) && isTRUE(null.ok)) {
+        TRUE
+    } else if (any(is.na(x)) && isFALSE(any.missing)) {
+        glue::glue("{glue::backtick(name)} cannot have missing values")
+    } else if (is.null(x) && isFALSE(null.ok)) {
+        glue::glue("{glue::backtick(name)} cannot be `NULL`")
+    } else  if (!all(is_whole_number(x))) {
+        glue::glue("{glue::backtick(name)} must consist of whole numbers")
+    } else {
+        TRUE
+    }
+
+}
+
+#' @family check functions
+#' @noRd
+assert_whole_number <- checkmate::makeAssertionFunction(check_whole_number)
+
+#' @family check functions
+#' @noRd
 check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
 
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
-    if (any(is.null(x)) && isTRUE(null.ok)) {
+    if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
-    } else if (any(is.null(x)) && isFALSE(null.ok)) {
+    } else if (is.null(x) && isFALSE(null.ok)) {
         glue::glue("{glue::backtick(name)} cannot have `NULL` values")
     } else  if (!is_numeric_(x)) {
         glue::glue("Must be of type 'numeric', not {class_collapse(x)}")
@@ -107,11 +133,11 @@ check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
-    if (any(is.null(x)) && isTRUE(null.ok)) {
+    if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
-    } else if (any(is.null(x)) && isFALSE(null.ok)) {
+    } else if (is.null(x) && isFALSE(null.ok)) {
         glue::glue("{glue::backtick(name)} cannot have `NULL` values")
     } else  if (!lubridate::is.duration(x)) {
         glue::glue("Must be of type 'Duration', not {class_collapse(x)}")
@@ -133,11 +159,11 @@ check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
-    if (any(is.null(x)) && isTRUE(null.ok)) {
+    if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
-    } else if (any(is.null(x)) && isFALSE(null.ok)) {
+    } else if (is.null(x) && isFALSE(null.ok)) {
         glue::glue("{glue::backtick(name)} cannot have `NULL` values")
     } else  if (!lubridate::is.POSIXt(x)) {
         glue::glue("Must be of type 'POSIXct' or 'POSIXlt', not ",
@@ -167,11 +193,11 @@ check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
-    if (any(is.null(x)) && isTRUE(null.ok)) {
+    if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
-    } else if (any(is.null(x)) && isFALSE(null.ok)) {
+    } else if (is.null(x) && isFALSE(null.ok)) {
         glue::glue("{glue::backtick(name)} cannot have `NULL` values")
     } else if (!is_time(x)) {
         glue::glue("Must be a time object, not {class_collapse(x)}")
@@ -202,7 +228,7 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
         error_message <- glue::glue("Assertion failed: ",
                                     "{inline_collapse(names)} ",
                                     "must have identical lengths.")
-        check <- length(unique(sapply(out, length))) == 1
+        check <- length(unique(vapply(out, length, integer(1)))) == 1
     } else if (type == "class") {
         error_message <- glue::glue("Assertion failed: ",
                                     "{inline_collapse(names)} ",
@@ -241,11 +267,11 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
-    if (any(is.null(x)) && isTRUE(null.ok)) {
+    if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         glue::glue("{glue::backtick(name)} cannot have missing values")
-    } else if (any(is.null(x)) && isFALSE(null.ok)) {
+    } else if (is.null(x) && isFALSE(null.ok)) {
         glue::glue("{glue::backtick(name)} cannot have `NULL` values")
     } else if (!(is.character(x) || is_numeric_(x))) {
         glue::glue("Must inherit from class 'character'/'numeric', ",

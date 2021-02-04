@@ -8,14 +8,21 @@
 #' It uses [ggplot2::qplot()] to walk through each selected variable from a
 #' data frame.
 #'
+#' This function requires the [`grDevices`][grDevices::grDevices-package] and
+#' [`ggplot2`][ggplot2::ggplot2-package] packages and can only run in
+#' interactive mode.
+#'
 #' @details
 #'
 #' ## Requirements
 #'
-#' This function requires the [`grDevices`][grDevices::grDevices-package]
-#' package loaded and can only run in interactive mode. This wont be a issue for
-#' most people, since `grDevices` comes with a standard R installation and is
-#' typically loaded by default. Most people also run R interactively.
+#' This function requires the [`grDevices`][grDevices::grDevices-package] and
+#' [`ggplot2`][ggplot2::ggplot2-package] packages and can only run in
+#' interactive mode. The `grDevices` comes with a standard R installation and
+#' is typically loaded by default. Most people also run R interactively.
+#'
+#' If you don't have any of the two packages mentioned above, you can install
+#' them with `install.packages("grDevices")` and `install.packages("ggplot2")`.
 #'
 #' ## Plot recover
 #'
@@ -77,7 +84,6 @@
 #'   `22:00:00` (see Details section to learn more) (default: `TRUE`).
 #'
 #' @family utility functions
-#' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples
@@ -99,8 +105,13 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         rlang::abort("This function can only be used in interactive mode.")
     }
 
-    if(!isNamespaceLoaded("grDevices")) {
-        rlang::abort("This function requires the `grDevices` package to run.")
+    if(!isNamespaceLoaded("grDevices") || !isNamespaceLoaded("ggplot2")) {
+        stop(paste0(
+            'This function requires the `grDevices` and `ggplot2` packages to ',
+            'run. You can install them by running: \n \n',
+            'install.packages("grDevices") \n',
+            'install.packages("ggplot2")'
+            ), call. = FALSE)
     }
 
     if (any(c("x", "y", "data") %in% names(list(...)))) {
@@ -150,18 +161,20 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     if (is.atomic(data)) {
         assert_has_length(data)
 
-        rlang::warn(paste0(
+        warning(paste0(
             "`data` is atomic. All other arguments, except `...` and ",
             "`midday_change`, are ignored."
-            ))
+            ), call. = FALSE)
 
         x <- transform(data, midday_change)
         xlab <- deparse(substitute(data))
 
         if ("xlab" %in% names(list(...))) {
-            return(ggplot2::qplot(x, ...) %>% print %>% shush)
+            plot <- ggplot2::qplot(x, ...)
+            return(shush(print(plot)))
         } else {
-            return(ggplot2::qplot(x, xlab = xlab, ...) %>% print %>% shush)
+            plot <- ggplot2::qplot(x, xlab = xlab, ...)
+            return(shush(print(plot)))
         }
     }
 

@@ -1,4 +1,4 @@
-url: https://gipsousp.github.io/mctq
+url: https://gipsousp.github.io/mctq/
 
 template:
   opengraph:
@@ -9,6 +9,17 @@ template:
     bootswatch: cosmo
     ganalytics: G-CQHJT6E3K1
     noindex: true
+    mathjax: true
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, articles, news]
+    right: [github]
+  components:
+    home: ~
+    intro: ~
+    articles: ~
+    news: ~
 
 reference:
 - title: MCTQ

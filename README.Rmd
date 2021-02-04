@@ -18,8 +18,10 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
+[![Travis build status](https://travis-ci.com/gipsousp/mctq.svg?branch=master)](https://travis-ci.com/gipsousp/mctq)
 [![Codecov test coverage](https://codecov.io/gh/gipsousp/mctq/branch/master/graph/badge.svg)](https://codecov.io/gh/gipsousp/mctq?branch=master)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
 <!-- badges: end -->
@@ -29,6 +31,10 @@ knitr::opts_chunk$set(
 `mctq` provides a consistent and fast way to process Munich Chronotype Questionnaire (MCTQ) data in R for all of its three versions (standard, micro, and shift).
 
 Please note that this package is currently on the development stage and have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. That means that people can try it out and provide feedback, but it comes with no promises for long term stability.
+
+## About MCTQ
+
+
 
 ### Wait, a R package for a questionnaire?
 
@@ -80,7 +86,7 @@ convert(lubridate::as_date("1765-10-05"), "POSIXct")
 ## From `POSIXct` to `Period`
 convert(lubridate::as_datetime("2020-01-01 10:00:00"), "Period")
 
-# __ Conversion columns of a data frame __
+# __ Conversion of columns in a data frame __
 ## Converting a `hms` column to radians
 data <- data.frame(bt_w = std_mctq$bt_w, bt_w_rad = std_mctq$bt_w)
 data <- convert(data, "numeric", cols = "bt_w_rad", output_unit = "rad")
@@ -89,7 +95,7 @@ head(data)
 
 After you data is all set, just use the `mctq` functions below to process it. 
 
-Note that `mctq` uses a similar naming pattern as those used in the MCTQ articles, that make it easy to find and apply any computation necessary.
+Note that `mctq` uses a similar naming scheme as those used in the MCTQ articles, that make it easy to find and apply any computation necessary.
 
 For basic MCTQ computation, use:
 
@@ -115,7 +121,7 @@ slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
 so(sprep_w, slat_w)
 ```
 
-For computation combining workdays and work-free days, use:
+For computations combining workdays and work-free days, use:
 
 * `sd_week()` compute MCTQ average weekly sleep duration
 * `sd_overall()` compute MCTQ overall sleep duration (only for MCTQ Shift)
@@ -138,7 +144,9 @@ msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
 sjl_rel(msw, msf)
 ```
 
-In addition to `convert()`, `mctq` is also equip with many other utilities functions.  All functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipsousp.github.io/mctq/reference/index.html) to view a list of them.
+In addition to `convert()`, `mctq` is also equip with many other utilities functions. 
+
+The functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipsousp.github.io/mctq/reference/index.html) to view a list of them.
 
 ## Citation
 

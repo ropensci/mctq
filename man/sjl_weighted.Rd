@@ -12,7 +12,7 @@ sjl_weighted(sjl, n_w)
 questionnaire (you can use \code{\link[=sjl]{sjl()}} to compute it). \code{sjl} elements and
 values must be paired with \code{n} elements and values.}
 
-\item{n_w}{A \code{list} object with \link[rlang:is_integerish]{integerish}
+\item{n_w}{A \code{list} object with \link[checkmate:checkIntegerish]{integerish}
 \code{integer} or \code{numeric} elements corresponding to the \strong{number of days
 worked in each shift within a shift cycle} from a shift version of the
 MCTQ questionnaire. \code{n} elements and values must be paired with \code{sjl}
@@ -30,26 +30,24 @@ for the shift version of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
-Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-and The World Wide Experimental Platform
-(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
+Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 
-\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
+\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
-guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
-addition to the guidelines used for the standard MCTQ.
+guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
+guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert]{convert()}} to convert it.
+hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
+conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
+convert it.
 }
 
 \subsection{Rounding and fractional time}{
@@ -69,7 +67,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 The shift version of the MCTQ was developed for shift-workers rotating
 through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
-schedules (Juda, Vetter, & Roenneberg, \href{https://bit.ly/38IEEk4}{2013}). For
+schedules (Juda, Vetter, & Roenneberg, 2013). For
 that reason, \code{sjl_weighted()} must operate with any shift combination.
 
 Considering the requirement above, \code{sjl_weighted()} was developed to only
@@ -83,9 +81,9 @@ and output a weighted mean.
 \section{Guidelines}{
 
 
-Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013})
-and theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sjl_weighted()}
-(\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation are as follow.
+Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
+\code{sjl_weighted()} (\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation
+are as follow.
 \subsection{Notes}{
 \itemize{
 \item The absolute social jetlag across all shifts (\eqn{\emptyset

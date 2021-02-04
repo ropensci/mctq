@@ -6,9 +6,14 @@
 <!-- badges: start -->
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
 
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
+[![Travis build
+status](https://travis-ci.com/gipsousp/mctq.svg?branch=master)](https://travis-ci.com/gipsousp/mctq)
 [![Codecov test
 coverage](https://codecov.io/gh/gipsousp/mctq/branch/master/graph/badge.svg)](https://codecov.io/gh/gipsousp/mctq?branch=master)
 [![Contributor
@@ -26,6 +31,8 @@ have not been [peer
 reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
 That means that people can try it out and provide feedback, but it comes
 with no promises for long term stability.
+
+## About MCTQ
 
 ### Wait, a R package for a questionnaire?
 
@@ -105,7 +112,7 @@ convert(lubridate::as_date("1765-10-05"), "POSIXct")
 convert(lubridate::as_datetime("2020-01-01 10:00:00"), "Period")
 #> [1] "10H 0M 0S"
 
-# __ Conversion columns of a data frame __
+# __ Conversion of columns in a data frame __
 ## Converting a `hms` column to radians
 data <- data.frame(bt_w = std_mctq$bt_w, bt_w_rad = std_mctq$bt_w)
 data <- convert(data, "numeric", cols = "bt_w_rad", output_unit = "rad")
@@ -122,7 +129,7 @@ head(data)
 After you data is all set, just use the `mctq` functions below to
 process it.
 
-Note that `mctq` uses a similar naming pattern as those used in the MCTQ
+Note that `mctq` uses a similar naming scheme as those used in the MCTQ
 articles, that make it easy to find and apply any computation necessary.
 
 For basic MCTQ computation, use:
@@ -151,7 +158,7 @@ so(sprep_w, slat_w)
 #> 03:45:00
 ```
 
-For computation combining workdays and work-free days, use:
+For computations combining workdays and work-free days, use:
 
 -   `sd_week()` compute MCTQ average weekly sleep duration
 -   `sd_overall()` compute MCTQ overall sleep duration (only for MCTQ
@@ -179,8 +186,10 @@ sjl_rel(msw, msf)
 ```
 
 In addition to `convert()`, `mctq` is also equip with many other
-utilities functions. All functions are well documented, showing all the
-guidelines behind the computations. Click
+utilities functions.
+
+The functions are well documented, showing all the guidelines behind the
+computations. Click
 [here](https://gipsousp.github.io/mctq/reference/index.html) to view a
 list of them.
 

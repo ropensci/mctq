@@ -21,9 +21,8 @@
 #' Test it first before applying it to large datasets.
 #'
 #' To learn more about how to handle date and time objects, check chapter "Dates
-#' and Times" from Wickham and Grolemund ([n.d.](https://r4ds.had.co.nz)) and
-#' chapter "Technical Representation of Data" from Loo and Jonge
-#' ([2018](https://bit.ly/3pVuUdt)).
+#' and Times" from Wickham and Grolemund (n.d.) and chapter "Technical
+#' Representation of Data" from Loo and Jonge (2018).
 #'
 #' ## Wrappers
 #'
@@ -853,10 +852,10 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
     # Convert to class and return output -----
 
     if (!is.null(where)) {
-        out <- x %>% dplyr::mutate(dplyr::across(where(where_function), call))
+        out <- dplyr::mutate(x, dplyr::across(where(where_function), call))
         invisible(out)
     } else if (!is.null(cols)) {
-        out <- x %>% dplyr::mutate(dplyr::across(cols, call))
+        out <- dplyr::mutate(x, dplyr::across(cols, call))
         invisible(out)
     } else {
         rlang::abort("Critical error.")

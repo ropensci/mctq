@@ -15,9 +15,9 @@ You can use \code{\link[=sd]{sd()}} to compute it.}
 work-free days} value from a standard or micro version of the MCTQ
 questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
-\item{wd}{An \link[rlang:is_integerish]{integerish} \code{integer} or \code{numeric}
-object corresponding to the \strong{number of work days per week} value from a
-standard or micro version of the MCTQ questionnaire.}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{integer} or
+\code{numeric} object corresponding to the \strong{number of work days per week}
+value from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
 A \code{Duration} object corresponding to the weekly sleep loss.
@@ -30,26 +30,24 @@ versions of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
-Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-and The World Wide Experimental Platform
-(theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}).
+Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
+Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 
-\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in
-Ghotbi \emph{et.al} (\href{https://bit.ly/34VhA0l}{2020}), in addition to the
-guidelines used for the standard MCTQ.
+\strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
+\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
-guidelines in Juda, Vetter, & Roenneberg (\href{https://bit.ly/38IEEk4}{2013}), in
-addition to the guidelines used for the standard MCTQ.
+guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
+guidelines used for the standard MCTQ.
 
 See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert]{convert()}} to convert it.
+hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
+conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
+convert it.
 }
 
 \subsection{Rounding and fractional time}{
@@ -66,9 +64,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}) and
-theWeP \href{http://bit.ly/3pv8EH1}{(n.d.)} guidelines for \code{sloss_week()}
-(\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
+for \code{sloss_week()} (\eqn{SLoss_{week}}{SLoss_week}) computation are as
+follow.
 \subsection{Notes}{
 \itemize{
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may

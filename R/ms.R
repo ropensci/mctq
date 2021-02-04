@@ -9,10 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
-#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `ms()` (\eqn{MSW} or \eqn{MSF}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
+#' Vetter, & Roenneberg (2013), and theWeP (n.d.) guidelines for `ms()`
+#' (\eqn{MSW} or \eqn{MSF}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -108,10 +107,9 @@ ms <- function(so, sd) {
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
-#' Ghotbi _et.al_ ([2020](https://bit.ly/34VhA0l)), Juda, Vetter, & Roenneberg
-#' ([2013](https://bit.ly/38IEEk4)), and theWeP [(n.d.)](http://bit.ly/3pv8EH1)
-#' guidelines for `msf_sc()` (\eqn{MSF_{sc}}{MSF_sc}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
+#' Vetter, & Roenneberg (2013), and theWeP (n.d.) guidelines for `msf_sc()`
+#' (\eqn{MSF_{sc}}{MSF_sc}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -128,7 +126,7 @@ ms <- function(so, sd) {
 #' on work-free days after evening shifts (\eqn{MSF^E}{MSF_E}).
 #'
 #' * In case work schedules do not comprise evening shifts, Juda, Vetter, &
-#' Roenneberg ([2013](https://bit.ly/38IEEk4)) propose to derive it from the
+#' Roenneberg (2013) propose to derive it from the
 #' \eqn{MSF_{sc}}{MSF_sc} of other shifts (_e.g._ by using a linear model).
 #' Unfortunately the `mctq` package can't help you with that, as it requires a
 #' closer look at your data.
@@ -137,7 +135,7 @@ ms <- function(so, sd) {
 #' conditions (_e.g._ age; light exposure). For epidemiological and genetic
 #' studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 #' populations of different age and sex compositions comparable (Roenneberg,
-#' Allebrandt, Merrow, & Vetter, [2012](http://bit.ly/3iGEgqX)).
+#' Allebrandt, Merrow, & Vetter, 2012).
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble to understand the equations. If you want a better viewer,

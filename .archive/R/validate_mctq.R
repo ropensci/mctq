@@ -126,7 +126,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
                       "using breaks (default) for large datasets.")
     )
 
-    dialog_line(!breaks)
+    dialog_line(abort = !breaks)
     out <- vector(mode = "list")
 
     # Do class checks (critical!) -----
@@ -173,7 +173,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     print(export$summary)
 
     if (!is_valid_test(export$summary)) return(invisible(out))
-    if (dialog_line(!breaks) == 1) return(invisible(out))
+    if (dialog_line(abort = !breaks) == 1) return(invisible(out))
 
     # Do univariate checks (critical!) -----
 
@@ -220,7 +220,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 
     print(export$summary)
 
-    if (dialog_line(!breaks) == 1) return(invisible(out))
+    if (dialog_line(abort = !breaks) == 1) return(invisible(out))
 
     ## Do multivariate checks (critical!) -----
 
@@ -251,7 +251,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
 
     print(export$summary)
 
-    if (dialog_line(!breaks) == 1) return(invisible(out))
+    if (dialog_line(abort = !breaks) == 1) return(invisible(out))
     if (isTRUE(flag)) return(TRUE)
 
     # ## Check indicators (critical -----
@@ -274,7 +274,7 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     #
     # print(export$summary)
     #
-    # if (dialog_line(!breaks) == 1) return(invisible(out))
+    # if (dialog_line(abort = !breaks) == 1) return(invisible(out))
     # if (isTRUE(flag)) return(TRUE)
     #
     # # Check for missing values -----

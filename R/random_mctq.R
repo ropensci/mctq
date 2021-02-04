@@ -193,3 +193,41 @@ random_mctq <- function(model = "standard") {
     }
 
 }
+
+#' @family utility functions
+#' @noRd
+sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
+                        max = hms::parse_hms("23:59:59"),
+                        by = lubridate::dminutes(5), size = 1,
+                        replace = FALSE, prob = NULL) {
+
+    classes <- c("Duration", "Period", "difftime", "hms", "integer", "numeric")
+
+    checkmate::assert_choice(tolower(class), tolower(classes))
+    checkmate::assert_multi_class(min, classes)
+    checkmate::assert_multi_class(max, classes)
+    checkmate::assert_multi_class(by, classes)
+    assert_length_one(min)
+    assert_length_one(max)
+    assert_length_one(by)
+    checkmate::assert_flag(replace)
+    checkmate::assert_number(size, lower = 0)
+    checkmate::assert_numeric(prob, null.ok = TRUE)
+
+    min <- as.numeric(min)
+    max <- as.numeric(max)
+    by <- as.numeric(by)
+
+    if (size > length(seq(min, max, by)) && isFALSE(replace)) {
+        stop(paste0(
+            "You cannot take a sample larger than the population ",
+            "when 'replace = FALSE'."
+        ), call. = FALSE)
+    }
+
+    sample <- sample(seq(min, max, by), size = size, replace = replace,
+                     prob = prob)
+
+    convert(sample, class)
+
+}

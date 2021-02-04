@@ -14,8 +14,8 @@ A set of tools for processing Munich ChronoType Questionnaire
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://gipsousp.github.io/mctq}
-  \item \url{https://github.com/gipsousp/mctq}
+  \item \url{https://gipsousp.github.io/mctq/}
+  \item \url{https://github.com/gipsousp/mctq/}
   \item Report bugs at \url{https://github.com/gipsousp/mctq/issues}
 }
 
@@ -25,7 +25,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Ana Amélia Benedito-Silva \email{aamelia@usp.br} (\href{https://orcid.org/0000-0003-4976-2623}{ORCID}) [expert, scientific advisor]
+  \item Ana Amelia Benedito-Silva \email{aamelia@usp.br} (\href{https://orcid.org/0000-0003-4976-2623}{ORCID}) [expert, scientific advisor]
   \item Mario Pedrazzoli \email{pedrazzo@usp.br} (\href{https://orcid.org/0000-0002-5257-591X}{ORCID}) [expert, scientific advisor]
 }
 

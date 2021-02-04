@@ -1,12 +1,15 @@
 ^\.archive$
 ^\.github$
-^\.Rproj\.user$
+^data-raw$
 ^docs$
 ^man-roxygen$
 ^pkgdown$
+^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$
+^codemeta\.json$
 ^LICENSE\.md$
 ^mctq\.Rproj$
 ^README\.Rmd$
+^\.travis\.yml$

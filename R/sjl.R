@@ -11,10 +11,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
-#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sjl()`
-#' (\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
+#' (2013), and theWeP (n.d.) guidelines for `sjl()` (\eqn{SJL_{rel}}{SJL_rel}
+#' and \eqn{SJL}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -78,11 +77,10 @@
 #' `vignette("social-jet-lag", package = "mctq")`.
 #'
 #' Please note that none of the approaches below are related to Jankowski's
-#' ([2017](https://bit.ly/3ouBTbT)) social jet lag sleep-corrected proposal.
-#' Since the Jankowski's alternative is still disputed (Roenneberg, Pilz,
-#' Zerbini, & Winnebeck, [2019](http://bit.ly/3r6lBYr)), the
-#' `mctq` package currently don't provide a function for it. Future versions of
-#' the package may include it.
+#' (2017) social jet lag sleep-corrected proposal. Since the Jankowski's
+#' alternative is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019),
+#' the `mctq` package currently don't provide a function for it. Future versions
+#' of the package may include it.
 #'
 #' * `"difference"`
 #'
@@ -117,8 +115,14 @@
 #'   use to compute the social jetlag. See Methods section to learn
 #'   more (default: `"shortest"`).
 #'
-#' @return A `Duration` object corresponding to the relative or absolute social
-#'   jetlag.
+#' @return
+#'
+#' * If `abs = TRUE`, a `Duration` object corresponding to the absolute social
+#' jetlag.
+#' * If `abs = FALSE`, a `Duration` object corresponding to the relative social
+#' jetlag.
+#'
+#' The output may vary depending on the `method` used.
 #'
 #' @inheritParams msf_sc
 #' @template details_b
@@ -246,7 +250,7 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' The shift version of the MCTQ was developed for shift-workers rotating
 #' through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
 #' 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
-#' schedules (Juda, Vetter, & Roenneberg, [2013](https://bit.ly/38IEEk4)). For
+#' schedules (Juda, Vetter, & Roenneberg, 2013). For
 #' that reason, `sjl_weighted()` must operate with any shift combination.
 #'
 #' Considering the requirement above, `sjl_weighted()` was developed to only
@@ -258,9 +262,9 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4))
-#' and theWeP [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `sjl_weighted()`
-#' (\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation are as follow.
+#' Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
+#' `sjl_weighted()` (\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation
+#' are as follow.
 #'
 #' ## Notes
 #'
@@ -297,7 +301,7 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'   __absolute social jetlag in each shift__ from a shift version of the MCTQ
 #'   questionnaire (you can use [mctq::sjl()] to compute it). `sjl` elements and
 #'   values must be paired with `n` elements and values.
-#' @param n_w A `list` object with [integerish][rlang::is_integerish()]
+#' @param n_w A `list` object with [integerish][checkmate::test_integerish()]
 #'   `integer` or `numeric` elements corresponding to the __number of days
 #'   worked in each shift within a shift cycle__ from a shift version of the
 #'   MCTQ questionnaire. `n` elements and values must be paired with `sjl`
@@ -353,11 +357,12 @@ sjl_weighted <- function(sjl, n_w) {
     checkmate::assert_list(sjl, len = length(n_w))
     checkmate::assert_list(n_w, len = length(sjl))
     lapply(sjl, assert_duration)
-    lapply(n_w, checkmate::assert_integerish)
+    lapply(n_w, assert_whole_number)
     lapply(sjl, checkmate::assert_numeric)
     mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
 
     sjl <- lapply(sjl, abs)
+    n_w <- lapply(n_w, as.integer)
 
     foo <- function(x, y) {
         out <- Reduce("*", list(x, y))

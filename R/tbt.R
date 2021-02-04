@@ -9,10 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter ([2012](http://bit.ly/3iGEgqX)),
-#' Juda, Vetter, & Roenneberg ([2013](https://bit.ly/38IEEk4)), and theWeP
-#' [(n.d.)](http://bit.ly/3pv8EH1) guidelines for `tbt()` (\eqn{TBT})
-#' computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
+#' (2013), and theWeP (n.d.) guidelines for `tbt()` (\eqn{TBT}) computation are
+#' as follow.
 #'
 #' ## Notes
 #'

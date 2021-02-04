@@ -2,8 +2,6 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
-#'
 #' `midday_change()` changes the dates of `POSIXt` objects accordingly to the
 #' time of day registered in the object values. The function do this by flatting
 #' the date to `1970-01-01` and them adding a day if the hour is lower than 12.
@@ -55,8 +53,6 @@ mdc <- function(x) midday_change(x)
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
-#'
 #' `flat_posixt()` changes the dates of `POSIXt` objects to a base reference.
 #' This can be use to standardizing a point of origin to time values.
 #'
@@ -105,8 +101,6 @@ flat_posixt = function(x, force_utc = TRUE, base = "1970-01-01") {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
-#'
 #' `change_date()` help you change dates of `Date` or `POSIXt` objects without
 #' the need for a direct assignment.
 #'
@@ -142,8 +136,6 @@ change_date <- function(x, date) {
 #' Change day of `Date` or `POSIXt` objects
 #'
 #' @description
-#'
-#' `r lifecycle::badge("experimental")`
 #'
 #' `change_day()` help you change days of `Date` or `POSIXt` objects without the
 #' need for a direct assignment.
@@ -198,8 +190,6 @@ change_day <- function(x, day) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("deprecated")`
-#'
 #' `is_time()` returns a boolean flag testing for objects of class `Duration`,
 #' `Period`, `difftime`, `hms`, `Date`, `POSIXct`, `POSIXlt`, or `Interval`.
 #'
@@ -246,8 +236,6 @@ is_time <- function(x, rm = NULL) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
-#'
 #' `class_collapse()` is a utility function to help build return messages with
 #' [glue::glue()]. It collapses the value of `class(x)` with a `/` and single
 #' quote it.
@@ -292,6 +280,16 @@ hms_interval <- function(start, end, tz = "UTC") {
 is_numeric_ <- function(x) {
 
     any(class(x) %in% c("integer", "double", "numeric"))
+
+}
+
+#' @family utility functions
+#' @noRd
+is_whole_number <- function(x, tol = .Machine$double.eps^0.5) {
+
+    checkmate::assert_multi_class(x, c("integer", "numeric"))
+
+    abs(x - round(x)) < tol # Example function from ?integer
 
 }
 
@@ -411,53 +409,6 @@ get_names <- function(...) {
 
 #' @family utility functions
 #' @noRd
-check_that_ <- function(data, ...) {
-
-    checkmate::assert_data_frame(data)
-
-    confront <- validate::check_that(data, ...)
-    validate::summary(confront)
-
-}
-
-#' @family utility functions
-#' @noRd
-sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
-                        max = hms::parse_hms("23:59:59"),
-                        by = lubridate::dminutes(5), size = 1,
-                        replace = FALSE, prob = NULL) {
-
-    classes <- c("Duration", "Period", "difftime", "hms", "integer", "numeric")
-
-    checkmate::assert_choice(tolower(class), tolower(classes))
-    checkmate::assert_multi_class(min, classes)
-    checkmate::assert_multi_class(max, classes)
-    checkmate::assert_multi_class(by, classes)
-    assert_length_one(min)
-    assert_length_one(max)
-    assert_length_one(by)
-    checkmate::assert_flag(replace)
-    checkmate::assert_number(size, lower = 0)
-    checkmate::assert_numeric(prob, null.ok = TRUE)
-
-    min <- as.numeric(min)
-    max <- as.numeric(max)
-    by <- as.numeric(by)
-
-    if (size > length(seq(min, max, by)) && isFALSE(replace)) {
-        rlang::abort("You cannot take a sample larger than the population ",
-                     "when 'replace = FALSE'.")
-    }
-
-    sample <- sample(seq(min, max, by), size = size, replace = replace,
-                     prob = prob)
-
-    convert(sample, class)
-
-}
-
-#' @family utility functions
-#' @noRd
 clock_roll <- function(x, class = "hms") {
 
     out <- flat_posixt(lubridate::as_datetime(x))
@@ -477,9 +428,9 @@ na_as <- function(x) {
     } else if (checkmate::test_multi_class(x, classes)) {
         convert(NA, class(x)[1])
     } else {
-        rlang::abort(glue::glue(
-            "`na_as()` don't support objects of class {class_collapse(x)}."
-            ))
+        stop(paste0(
+            "`na_as()` don't support objects of class ", class_collapse(x), "."
+            ), call. = FALSE)
     }
 
 }

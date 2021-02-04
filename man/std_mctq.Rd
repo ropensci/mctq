@@ -332,9 +332,8 @@ A fictional dataset composed by standard Munich Chronotype Questionnaire
 purposes.
 
 This data was created following the guidelines in Roenneberg, Wirz-Justice, &
-Merrow (\href{https://bit.ly/3rLu195}{2003}), Roenneberg, Allebrandt, Merrow, &
-Vetter (\href{http://bit.ly/3iGEgqX}{2012}), and The World Wide Experimental
-Platform (theWeP, \href{http://bit.ly/3pv8EH1}{n.d.}). See References and Details
+Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
+World Wide Experimental Platform (theWeP, n.d.). See References and Details
 sections to learn more.
 }
 \details{
@@ -343,18 +342,15 @@ sections to learn more.
 \subsection{Guidelines}{
 
 To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
-\emph{cf.} Roenneberg, Wirz-Justice, & Merrow (\href{https://bit.ly/3rLu195}{2003}),
-Roenneberg, Allebrandt, Merrow, & Vetter (\href{http://bit.ly/3iGEgqX}{2012}),
-Roenneberg \emph{et al.} (\href{http://bit.ly/2X37mqE}{2015}), and
-Roenneberg, Pilz, Zerbini, & Winnebeck (\href{http://bit.ly/3r6lBYr}{2019}).
+\emph{cf.} Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+Merrow, & Vetter (2012), Roenneberg \emph{et al.} (2015), and Roenneberg, Pilz,
+Zerbini, & Winnebeck (2019).
 
 To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
-(\href{https://bit.ly/38IEEk4}{2013}) and Ghotbi \emph{et.al}
-(\href{https://bit.ly/34VhA0l}{2020}).
+(2013) and Ghotbi \emph{et.al} (2020).
 
-If you curious about the variable computations and want to have access to
-the full questionnaire, \emph{cf.} The Worldwide Experimental Platform
-(\href{http://bit.ly/3pv8EH1}{n.d.}).
+If you curious about the variable computations and want to have access to the
+full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 }
 
 \subsection{Data building and data wrangling}{
@@ -365,22 +361,20 @@ data issues that researchers may find in their MCTQ data, in addition to be a
 suggested data structure for MCTQ data.
 
 You can see the \code{std_mctq} build and data wrangling processes at
-\url{https://bit.ly/3cvXxKL}.
+\url{https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R}.
 }
 
 \subsection{Variable naming}{
 
-The naming of the variables took into account the standard
-names/abbreviations used by Roenneberg, Allebrandt, Merrow, & Vetter
-(\href{http://bit.ly/3iGEgqX}{2012}) and theWeP (\href{http://bit.ly/3pv8EH1}{n.d.}),
-in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
+The naming of the variables took into account the naming schemes used in MCTQ
+articles, in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
 }
 
 \subsection{Variable classes}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}.
+hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages.
 }
 }
 \references{
