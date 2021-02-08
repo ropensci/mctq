@@ -78,9 +78,9 @@ you can see this documentation on the package
 
 \subsection{Computation}{
 
-\strong{\deqn{\text{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
+\strong{\deqn{\textrm{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
 If SD_week > SD_W, (SD_week - SD_W) * WD}}
-\strong{\deqn{\text{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
+\strong{\deqn{\textrm{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
 FD}{If SD_week <= SD_W, (SD_week - SD_F) * FD}}
 
 Where:

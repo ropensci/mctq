@@ -117,8 +117,8 @@ you can see this documentation on the package
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{\text{If } SD_F \leq SD_W \; , \; MSF}{If SD_F <= SD_W, MSF}}
-\strong{\deqn{\text{If } SD_F > SD_W \; , \; MSF - \frac{SD_F - SD_{week}}{2}}{
+\strong{\deqn{\textrm{If } SD_F \leq SD_W \; , \; MSF}{If SD_F <= SD_W, MSF}}
+\strong{\deqn{\textrm{If } SD_F > SD_W \; , \; MSF - \frac{SD_F - SD_{week}}{2}}{
 If SD_F > SD_W, MSF - (SD_F - SD_week) / 2}}
 
 Where:
@@ -134,9 +134,9 @@ Where:
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{\text{If } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \; MSF^{M/E/N}}{
+\strong{\deqn{\textrm{If } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \; MSF^{M/E/N}}{
 If SD_F_M/E/N <= SD_W_M/E/N, MSF}}
-\strong{\deqn{\text{If } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \; MSF^{M/E/N} -
+\strong{\deqn{\textrm{If } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \; MSF^{M/E/N} -
 \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}{If SD_F_M/E/N > SD_W_M/E/N,
 MSF - (SD_F_M/E/N - OSD_M/E/N) / 2}}
 
