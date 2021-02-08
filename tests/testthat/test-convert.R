@@ -22,22 +22,22 @@ test_that("convert() | conversion from date/time objects to units", {
 })
 
 test_that("convert() | conversion from units to date/time objects", {
-    object <- convert(360, "period", input_unit = "deg")
+    object <- convert(360, "Period", input_unit = "deg")
     expect_equal(object, convert_ut(360, "period", "deg"))
 
-    object <- convert(6.5, "posixct", input_unit = "H")
+    object <- convert(6.5, "POSIXct", input_unit = "H")
     expect_equal(object, lubridate::ymd_hms("1970-01-01 06:30:00"))
 
     object <- convert(365.25, "hms", input_unit = "d")
     expect_equal(object, hms::as_hms(as.numeric(lubridate::dhours(8766))))
 
-    object <- convert(1, "posixlt", input_unit = "W")
+    object <- convert(1, "POSIXlt", input_unit = "W")
     expect_equal(object, lubridate::as_datetime("1970-01-08"))
 
-    object <- convert(1.308997, "duration", input_unit = "rad")
+    object <- convert(1.308997, "Duration", input_unit = "rad")
     expect_equal(object, lubridate::dhours(5))
 
-    object <- convert_ut(1.308997, "duration", "rad")
+    object <- convert_ut(1.308997, "Duration", "rad")
     expect_equal(object, lubridate::dhours(5))
 })
 
@@ -94,7 +94,7 @@ test_that("convert() | conversion from p. objects to date/time objects", {
     object <- convert("19:55:17", "duration", orders = "HMS")
     expect_equal(object, lubridate::dseconds(71717))
 
-    object <- convert("21:00", "Period", orders = "HM")
+    object <- convert("21:00", "period", orders = "HM")
     expect_equal(object, lubridate::hours(21))
 
     object <- convert(1, "difftime", orders = "H")
@@ -123,7 +123,7 @@ test_that("convert() | conversion from p. objects to date/time objects", {
         "03/07/1982 13:00", "dmy HM")))
 })
 
-test_that("convert() | conversion between units", {
+test_that("convert() | conversion from p. objects to units", {
     object <- convert("0145", "numeric", orders = "HM", output_unit = "M")
     expect_equal(object, 105)
 
@@ -142,4 +142,31 @@ test_that("convert() | conversion between units", {
 
     object <- convert_pu("01:00", "HM", "rad")
     expect_equal(object, 0.261799387799149)
+})
+
+test_that("convert() | conversion of columns of a data frame", {
+    data <- data.frame(a = c(1, 2), b = c(3, 4), c = c(5, 6))
+    object <- convert(data, "Duration", cols = c("a", "b"), orders = "H")
+    expected <- data.frame(a = c(lubridate::dhours(1), lubridate::dhours(2)),
+                           b = c(lubridate::dhours(3), lubridate::dhours(4)),
+                           c = c(5, 6))
+    expect_equal(object, expected)
+
+    data <- data.frame(a = c(1048, 225), b = c(3, 4), c = c(145, 2330))
+    object <- convert(data, "hms", cols = c("a", "c"), orders = "HM")
+    expected <- data.frame(a = c(hms::parse_hm("10:48"),
+                                 hms::parse_hm("02:25")),
+                           b = c(3, 4),
+                           c = c(hms::parse_hm("01:45"),
+                                 hms::parse_hm("23:30")))
+    expect_equal(object, expected)
+
+    data <- data.frame(a = c("x", "y"), b = c(105, 270), c = c(30, 450))
+    object <- convert(data, "posixct", where = is.numeric, input_unit = "deg")
+    expected <- data.frame(a = c("x", "y"),
+                           b = c(lubridate::as_datetime("1970-01-01 07:00:00"),
+                                 lubridate::as_datetime("1970-01-01 18:00:00")),
+                           c = c(lubridate::as_datetime("1970-01-01 02:00:00"),
+                                 lubridate::as_datetime("1970-01-02 06:00:00")))
+    expect_equal(object, expected)
 })

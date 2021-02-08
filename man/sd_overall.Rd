@@ -30,7 +30,7 @@ A \code{Duration} object corresponding to the weighted mean of \code{sd_w} and
 \code{sd_f} with \code{n_w} and \code{n_f} as weights.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{sd_overall()} computes the \strong{overall sleep duration in a particular shift}
 for the shift version of the Munich Chronotype Questionnaire (MCTQ).

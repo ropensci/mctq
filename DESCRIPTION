@@ -32,7 +32,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends:
-    R (>= 4.0)
+    R (>= 3.6)
 Imports: 
     checkmate,
     dplyr,
@@ -45,13 +45,13 @@ Imports:
     glue,
     stringr
 Suggests:
-    spelling, 
     covr,
     crayon,
     ggplot2,
     grDevices,
     knitr,
     rmarkdown,
+    spelling, 
     testthat (>= 2.0.0)
 Config/testthat/edition: 2
 VignetteBuilder: knitr

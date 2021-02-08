@@ -19,7 +19,7 @@ A \code{Duration} object corresponding to the difference between \code{gu} and
 \code{bt} rolled in a 24-hour clock basis.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{tbt()} computes the \strong{total time in bed} for standard and shift versions of
 the Munich Chronotype Questionnaire (MCTQ).

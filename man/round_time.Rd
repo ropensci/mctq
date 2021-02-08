@@ -14,7 +14,7 @@ round_time(x)
 A time object with the time rounded at the seconds level.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, or \code{hms} object and
 round it at the seconds level.

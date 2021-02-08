@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `tbt()` computes the __total time in bed__ for standard and shift versions of
 #' the Munich Chronotype Questionnaire (MCTQ).

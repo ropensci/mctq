@@ -1,10 +1,6 @@
 url: https://gipsousp.github.io/mctq/
 
 template:
-  opengraph:
-     twitter:
-       creator: "@danielvartan"
-       site: "@gipsousp"
   params:
     bootswatch: cosmo
     ganalytics: G-CQHJT6E3K1
@@ -13,7 +9,7 @@ template:
 
 navbar:
   structure:
-    left:  [intro, reference, articles, articles, news]
+    left:  [intro, reference, articles, news]
     right: [github]
   components:
     home: ~
@@ -56,11 +52,6 @@ reference:
   - shortest_interval
   - sum_time
 
-development:
-  mode: auto
-  destination: doc
-  version_label: warning
-
 authors:
   Daniel Vartanian:
     href: https://github.com/danielvartan
@@ -68,3 +59,8 @@ authors:
     href: http://each.usp.br/gipso
   USP:
     href: http://usp.br
+
+development:
+  mode: auto
+  destination: doc
+  version_label: warning

@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' A fictional dataset composed by standard Munich Chronotype Questionnaire
 #' (MCTQ) basic/measurable and computed variables for testing and learning

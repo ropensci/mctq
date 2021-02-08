@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `convert()` converts a R object to another object of a predefined class. Its
 #' mission is to facilitate conversions between any kind of R object in a
@@ -458,7 +458,7 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
             lubridate::as_date(rep(NA, length(x)))
         } else if (!lubridate::is.POSIXt(x) ||
                    (lubridate::is.POSIXt(x) && all(lubridate::year(x) == 0))) {
-            shush(rlang::warn("There is no date to parse."), quiet)
+            shush(rlang::warn("There's no date to parse."), quiet)
             lubridate::as_date(rep(NA, length(x)))
         } else {
             lubridate::as_date(lubridate::force_tz(x, tz))
@@ -540,7 +540,7 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::as_hms(as.numeric(x))
     } else if (class == "date") {
-        shush(rlang::warn("There is no date to parse."), quiet)
+        shush(rlang::warn("There's no date to parse."), quiet)
         lubridate::as_date(NA)
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
@@ -625,7 +625,7 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::as_hms(x)
     } else if (class == "date") {
-        shush(rlang::warn("There is no date to parse"), quiet)
+        shush(rlang::warn("There's no date to parse"), quiet)
         lubridate::as_date(NA)
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(x))
@@ -676,16 +676,16 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class %in% c("double", "numeric")) {
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
-        shush(rlang::warn("There is no time to parse."), quiet)
+        shush(rlang::warn("There's no time to parse."), quiet)
         lubridate::as.duration(NA)
     } else if (class == "period") {
-        shush(rlang::warn("There is no time to parse."), quiet)
+        shush(rlang::warn("There's no time to parse."), quiet)
         lubridate::as.period(NA)
     } else if (class == "difftime") {
-        shush(rlang::warn("There is no time to parse."), quiet)
+        shush(rlang::warn("There's no time to parse."), quiet)
         as.numeric(NA)
     } else if (class == "hms") {
-        shush(rlang::warn("There is no time to parse."), quiet)
+        shush(rlang::warn("There's no time to parse."), quiet)
         hms::as_hms(NA)
     } else if (class == "date") {
         lubridate::force_tz(x, tz)
@@ -802,7 +802,7 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::hms(x)
     } else if (class == "date") {
-        shush(rlang::warn("There is no date to parse."), quiet)
+        shush(rlang::warn("There's no date to parse."), quiet)
         lubridate::as_date(NA)
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))

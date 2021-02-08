@@ -18,7 +18,7 @@ A \code{hms} object corresponding to the sum of \code{sprep} and \code{slat} rol
 in a 24-hour clock basis.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{so()} computes the \strong{sleep onset} for standard and shift versions of the
 Munich Chronotype Questionnaire (MCTQ).

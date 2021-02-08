@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sloss_week()` computes the __weekly sleep loss__ for the standard and micro
 #' versions of the Munich Chronotype Questionnaire (MCTQ).
@@ -22,9 +22,9 @@
 #'
 #' ## Computation
 #'
-#' __\deqn{\text{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
+#' __\deqn{\textrm{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
 #' If SD_week > SD_W, (SD_week - SD_W) * WD}__
-#' __\deqn{\text{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
+#' __\deqn{\textrm{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
 #' FD}{If SD_week <= SD_W, (SD_week - SD_F) * FD}__
 #'
 #' Where:

@@ -22,7 +22,7 @@ A \code{Duration} object corresponding to the weighted mean of \code{le_w} and
 \code{le_f} with \code{wd} and \code{fd(wd)} as weights.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{le_week()} computes the \strong{average weekly light exposure} for the standard
 version of the Munich Chronotype Questionnaire (MCTQ).

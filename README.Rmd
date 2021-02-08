@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
 [![Travis build status](https://travis-ci.com/gipsousp/mctq.svg?branch=master)](https://travis-ci.com/gipsousp/mctq)
 [![Codecov test coverage](https://codecov.io/gh/gipsousp/mctq/branch/master/graph/badge.svg)](https://codecov.io/gh/gipsousp/mctq?branch=master)
@@ -34,7 +34,13 @@ Please note that this package is currently on the development stage and have not
 
 ## About MCTQ
 
+__UNDER DEVELOPMENT__
 
+To learn more about the standard Munich Chronotype Questionnaire (MCTQ), _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz, Zerbini, & Winnebeck (2019).
+
+To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg (2013) and Ghotbi _et.al_ (2020).
+
+If you curious about the variable computations and want to have access to the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 
 ### Wait, a R package for a questionnaire?
 
@@ -50,12 +56,14 @@ The first stable `mctq` version is in its final development stage, we hope that 
 
 ``` {r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("gipsousp/mctq")
+devtools::install_github("gipsousp/mctq", dependencies = TRUE)
 ```
 
 ## Usage
 
 `mctq` works with a set of object classes specially created to hold time values. This classes can be found in the [hms](https://hms.tidyverse.org/) and [lubridate](https://lubridate.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/packages/). If your data do not conform to the object classes required, don't worry, just use `convert()` to convert it. You can always convert it back if you want.
+
+Here are some examples of how to convert your data using `convert()`.
 
 ```{r, message = FALSE}
 library(mctq)

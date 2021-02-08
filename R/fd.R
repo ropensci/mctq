@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `fd()` computes the __number of work-free days per week__ for standard
 #' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
@@ -40,8 +40,9 @@
 #' #> [1]  6 NA # Expected
 fd <- function(wd) {
 
-    checkmate::assert_integerish(wd)
+    assert_numeric_(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
+    checkmate::assert_integerish(wd)
 
     wd <- as.integer(wd)
     as.integer(7 - wd)

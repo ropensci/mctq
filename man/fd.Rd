@@ -16,7 +16,7 @@ An \code{integer} value equivalent to \code{7 - wd}, \emph{i.e.} the difference
 between the number of days in a week and the number of work days.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{fd()} computes the \strong{number of work-free days per week} for standard
 and micro versions of the Munich Chronotype Questionnaire (MCTQ).

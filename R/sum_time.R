@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sum_time()` returns the sum of the time from different kinds of date/time
 #' objects.
@@ -140,21 +140,19 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
     lapply(out, check)
 
     if (isTRUE(vectorize) && !(length(unique(sapply(out, length))) == 1)) {
-        rlang::abort(paste0(
-            "When 'vetorize' is 'TRUE', all values in '...' must have the ",
-            "the same length.")
-            )
+        stop("When 'vetorize' is 'TRUE', all values in '...' must have the ",
+             "the same length.", call. = FALSE)
     }
 
     # Normalize values -----
 
     normalize <- function(x) {
-        ifelse(sapply(x, lubridate::is.POSIXt),
+        ifelse(vapply(x, lubridate::is.POSIXt, logical(1)),
                as.numeric(hms::as_hms(x)), as.numeric(x))
     }
 
     zero_nas <- function(x) {
-        ifelse(sapply(x, is.na), 0, as.numeric(x))
+        ifelse(vapply(x, is.na, logical(1)), 0, as.numeric(x))
     }
 
     out <- lapply(out, normalize)
@@ -172,7 +170,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 
     # Roll time -----
 
-    if (isTRUE(clock)) out <- flat_posixt(lubridate::as_datetime(out))
+    if (isTRUE(clock)) out <- lubridate::as_datetime(out)
 
     # Return output -----
 

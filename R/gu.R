@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `gu()` computes the __local time of getting out of bed__ for standard and
 #' shift versions of the Munich Chronotype Questionnaire (MCTQ).

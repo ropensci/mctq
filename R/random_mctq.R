@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `random_mctq` builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 #' composed by MCTQ basic/measurable variables.

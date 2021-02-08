@@ -4,7 +4,7 @@ citEntry(
   entry       = "Unpublished",
   title       = paste0("The R package for MCTQ data"),
   author      = personList(as.person("Daniel Vartanian"),
-                           as.person("Ana Amélia Benedito-Silva"),
+                           as.person("Ana Amelia Benedito-Silva"),
                            as.person("Mario Pedrazzoli")),
   year        = "2021",
   url         = "https://gipsousp.github.io/mctq/",

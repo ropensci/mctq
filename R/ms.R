@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `ms()` computes the __mid-sleep__ for standard, micro, and shift versions of
 #' the Munich Chronotype Questionnaire (MCTQ).
@@ -94,7 +94,7 @@ ms <- function(so, sd) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `msf_sc()` computes the __chronotype or corrected mid-sleep on work-free
 #' days__ for standard, micro, and shift versions of the Munich Chronotype
@@ -144,8 +144,8 @@ ms <- function(so, sd) {
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{\text{If } SD_F \leq SD_W \; , \; MSF}{If SD_F <= SD_W, MSF}__
-#' __\deqn{\text{If } SD_F > SD_W \; , \; MSF - \frac{SD_F - SD_{week}}{2}}{
+#' __\deqn{\textrm{If } SD_F \leq SD_W \; , \; MSF}{If SD_F <= SD_W, MSF}__
+#' __\deqn{\textrm{If } SD_F > SD_W \; , \; MSF - \frac{SD_F - SD_{week}}{2}}{
 #' If SD_F > SD_W, MSF - (SD_F - SD_week) / 2}__
 #'
 #' Where:
@@ -159,9 +159,9 @@ ms <- function(so, sd) {
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{\text{If } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \; MSF^{M/E/N}}{
+#' __\deqn{\textrm{If } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \; MSF^{M/E/N}}{
 #' If SD_F_M/E/N <= SD_W_M/E/N, MSF}__
-#' __\deqn{\text{If } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \; MSF^{M/E/N} -
+#' __\deqn{\textrm{If } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \; MSF^{M/E/N} -
 #' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}{If SD_F_M/E/N > SD_W_M/E/N,
 #' MSF - (SD_F_M/E/N - OSD_M/E/N) / 2}__
 #'

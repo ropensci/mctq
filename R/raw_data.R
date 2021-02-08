@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `mctq` comes bundled with raw fictional datasets for testing and learning
 #' purposes. `raw_data()` make it easy to access their paths.

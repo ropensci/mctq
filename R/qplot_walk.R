@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `qplot_walk()` helps you to visually assess the distribution of your data.
 #' It uses [ggplot2::qplot()] to walk through each selected variable from a

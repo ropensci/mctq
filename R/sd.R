@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sd()` computes the __sleep duration__ for standard, micro, and shift
 #' versions of the Munich Chronotype Questionnaire (MCTQ).
@@ -90,7 +90,7 @@ sd <- function(so, se) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `napd()` computes the __nap duration__ for the shift version of the Munich
 #' Chronotype Questionnaire (MCTQ).
@@ -168,7 +168,7 @@ napd <- function(napo, nape) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sd24()` computes the __24h sleep duration__ for the shift version of the
 #' Munich Chronotype Questionnaire (MCTQ).
@@ -245,7 +245,7 @@ sd24 <- function(sd, napd) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sd_week()` computes the __average weekly sleep duration__ for the standard
 #' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
@@ -353,7 +353,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sd_overall()` computes the __overall sleep duration in a particular shift__
 #' for the shift version of the Munich Chronotype Questionnaire (MCTQ).

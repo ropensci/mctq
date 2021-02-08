@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `assign_date()` assign dates to two sequential hour values. It can facilitate
 #' time arithmetic by locating time values without date reference on a
@@ -127,11 +127,9 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
 
     # Check arguments -----
 
-    checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
-    checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::assert_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::assert_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
     assert_identical(start, end, type = "length")
-    checkmate::assert_numeric(lubridate::hour(start), lower = 0, upper = 23)
-    checkmate::assert_numeric(lubridate::hour(end), lower = 0, upper = 23)
     checkmate::assert_choice(return, c("list", "interval", "start", "end"))
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     checkmate::assert_string(start_name)
@@ -153,6 +151,7 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
         is.na(start) | is.na(end) ~ lubridate::as.interval(NA),
         start < end ~ lubridate::interval(start, end),
         start > end ~ lubridate::interval(start, end + lubridate::days()),
+        is.na(ambiguity) ~ lubridate::as.interval(NA),
         TRUE ~ lubridate::as.interval(lubridate::hours(ambiguity), start)
     )
 

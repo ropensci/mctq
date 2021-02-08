@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sjl()` computes the __relative or absolute social jetlag__ for standard,
 #' micro, and shift versions of the Munich Chronotype Questionnaire (MCTQ).
@@ -240,7 +240,7 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `sjl_weighted()` computes the __absolute social jetlag across all shifts__
 #' for the shift version of the Munich Chronotype Questionnaire (MCTQ).

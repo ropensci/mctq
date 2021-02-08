@@ -325,7 +325,7 @@ Prepared by Daniel Vartanian (package's author).
 std_mctq
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 A fictional dataset composed by standard Munich Chronotype Questionnaire
 (MCTQ) basic/measurable and computed variables for testing and learning

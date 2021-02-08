@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `so()` computes the __sleep onset__ for standard and shift versions of the
 #' Munich Chronotype Questionnaire (MCTQ).

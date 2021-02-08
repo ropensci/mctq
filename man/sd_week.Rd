@@ -24,7 +24,7 @@ A \code{Duration} object corresponding to the weighted mean of \code{sd_w} and
 \code{sd_f} with \code{wd} and \code{fd(wd)} as weights.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{sd_week()} computes the \strong{average weekly sleep duration} for the standard
 and micro versions of the Munich Chronotype Questionnaire (MCTQ).

@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `round_time()` takes a `Duration`, `Period`, `difftime`, or `hms` object and
 #' round it at the seconds level.

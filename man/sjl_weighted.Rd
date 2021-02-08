@@ -23,7 +23,7 @@ A \code{Duration} object corresponding to the weighted mean of \code{sjl}
 with \code{n_w} as weights.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{sjl_weighted()} computes the \strong{absolute social jetlag across all shifts}
 for the shift version of the Munich Chronotype Questionnaire (MCTQ).

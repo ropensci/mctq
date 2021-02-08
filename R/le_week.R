@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `le_week()` computes the __average weekly light exposure__ for the standard
 #' version of the Munich Chronotype Questionnaire (MCTQ).

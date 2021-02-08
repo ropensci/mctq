@@ -15,7 +15,7 @@ A named list with elements representing each MCTQ basic/measurable
 variable of the model indicated in \code{model}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 composed by MCTQ basic/measurable variables.

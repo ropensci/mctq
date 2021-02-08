@@ -19,7 +19,7 @@ from the shift version of the MCTQ questionnaire. You can use
 A \code{Duration} object corresponding to the sum of \code{sd} and \code{napd}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{sd24()} computes the \strong{24h sleep duration} for the shift version of the
 Munich Chronotype Questionnaire (MCTQ).

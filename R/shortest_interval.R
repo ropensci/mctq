@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `shortest_interval()` finds and return the shortest interval between two
 #' `hms` or `POSIXt` objects hours. This is useful for time arithmetic, because

@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' `pretty_mctq()` helps you to transform your MCTQ data in many ways. See
 #' parameters and Details section to learn more.

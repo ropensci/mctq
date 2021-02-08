@@ -210,7 +210,7 @@ to transform (default: \code{NULL}).}
 A R object of the indicated class.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{convert()} converts a R object to another object of a predefined class. Its
 mission is to facilitate conversions between any kind of R object in a

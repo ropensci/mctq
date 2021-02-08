@@ -20,7 +20,7 @@ and \code{difftime} objects must be converted to \code{hms} (default: \code{TRUE
 A transformed data frame, as indicated in arguments.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
 \code{pretty_mctq()} helps you to transform your MCTQ data in many ways. See
 parameters and Details section to learn more.
