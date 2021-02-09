@@ -25,6 +25,15 @@ At the moment, \strong{only the standard MCTQ is available}.
 \details{
 The case structure (variable names and classes) are the same as the datasets
 provided by the \code{mctq} package. See \link{std_mctq} to learn more.
+\subsection{Requirements}{
+
+This function requires the \code{\link[stats:stats-package]{stats}} package. This wont
+be a issue for most people, since the package comes with a standard R
+installation.
+
+If you don't have the \code{\link[stats:stats-package]{stats}} package, you can
+install it with \code{install.packages("stats")}.
+}
 }
 \examples{
 \dontrun{

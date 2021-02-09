@@ -5,8 +5,8 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @importFrom dplyr across
-#' @importFrom lubridate %within%
-#' @importFrom rlang .data := !! !!!
+#' @importFrom lifecycle deprecate_soft
+#' @importFrom lubridate duration
+#' @importFrom hms hms
 ## usethis namespace: end
 NULL
-

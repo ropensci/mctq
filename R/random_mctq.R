@@ -14,6 +14,15 @@
 #' The case structure (variable names and classes) are the same as the datasets
 #' provided by the `mctq` package. See [mctq::std_mctq] to learn more.
 #'
+#' ## Requirements
+#'
+#' This function requires the [`stats`][stats::stats-package] package. This wont
+#' be a issue for most people, since the package comes with a standard R
+#' installation.
+#'
+#' If you don't have the [`stats`][stats::stats-package] package, you can
+#' install it with `install.packages("stats")`.
+#'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
 #'
@@ -29,9 +38,33 @@
 #' }
 random_mctq <- function(model = "standard") {
 
-    # Check arguments -----
+    if(!isNamespaceLoaded("stats")) {
+        stop('This function requires the `stats` package to run. ',
+             'You can install it by running: \n \n',
+             'install.packages("stats") \n', call. = FALSE)
+    }
 
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
+
+    if (model %in% c("std", "standard")) {
+        random_std_mctq()
+    } else {
+        stop("Critical error.", call. = FALSE)
+    }
+
+}
+
+#' @family utility functions
+#' @noRd
+random_std_mctq <- function() {
+
+    # Check requirements -----
+
+    if(!isNamespaceLoaded("stats")) {
+        stop('This function requires the `stats` package to run. ',
+             'You can install it by running: \n \n',
+             'install.packages("stats") \n', call. = FALSE)
+    }
 
     # Set values -----
 
@@ -166,31 +199,27 @@ random_mctq <- function(model = "standard") {
 
     # Create and return output -----
 
-    if (model %in% c("std", "standard")) {
-        list(
-            work = work,
-            wd = as.integer(wd),
-            bt_w = bt_w,
-            sprep_w = sprep_w,
-            slat_w = slat_w,
-            se_w = se_w,
-            si_w = si_w,
-            alarm_w = alarm_w,
-            wake_before_w = wake_before_w,
-            le_w = le_w,
-            bt_f = bt_f,
-            sprep_f = sprep_f,
-            slat_f = slat_f,
-            se_f = se_f,
-            si_f = si_f,
-            alarm_f = alarm_f,
-            reasons_f = reasons_f,
-            reasons_why_f = reasons_why_f,
-            le_f = le_f
-            )
-    } else {
-        NULL
-    }
+    list(
+        work = work,
+        wd = as.integer(wd),
+        bt_w = bt_w,
+        sprep_w = sprep_w,
+        slat_w = slat_w,
+        se_w = se_w,
+        si_w = si_w,
+        alarm_w = alarm_w,
+        wake_before_w = wake_before_w,
+        le_w = le_w,
+        bt_f = bt_f,
+        sprep_f = sprep_f,
+        slat_f = slat_f,
+        se_f = se_f,
+        si_f = si_f,
+        alarm_f = alarm_f,
+        reasons_f = reasons_f,
+        reasons_why_f = reasons_why_f,
+        le_f = le_f
+    )
 
 }
 
@@ -219,10 +248,8 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
     by <- as.numeric(by)
 
     if (size > length(seq(min, max, by)) && isFALSE(replace)) {
-        stop(paste0(
-            "You cannot take a sample larger than the population ",
-            "when 'replace = FALSE'."
-        ), call. = FALSE)
+        stop("You cannot take a sample larger than the population ",
+             "when 'replace = FALSE'", call. = FALSE)
     }
 
     sample <- sample(seq(min, max, by), size = size, replace = replace,

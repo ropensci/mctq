@@ -6,11 +6,11 @@
 <!-- badges: start -->
 <!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
 
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
 [![Travis build
 status](https://travis-ci.com/gipsousp/mctq.svg?branch=master)](https://travis-ci.com/gipsousp/mctq)
@@ -33,6 +33,20 @@ That means that people can try it out and provide feedback, but it comes
 with no promises for long term stability.
 
 ## About MCTQ
+
+**UNDER DEVELOPMENT**
+
+To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
+*cf.* Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+Merrow, & Vetter (2012), Roenneberg *et al.* (2015), and Roenneberg,
+Pilz, Zerbini, & Winnebeck (2019).
+
+To know about different MCTQ versions, *cf.* Juda, Vetter, & Roenneberg
+(2013) and Ghotbi *et.al* (2020).
+
+If you curious about the variable computations and want to have access
+to the full questionnaire, *cf.* The Worldwide Experimental Platform
+(n.d.).
 
 ### Wait, a R package for a questionnaire?
 
@@ -61,7 +75,7 @@ from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("gipsousp/mctq")
+devtools::install_github("gipsousp/mctq", dependencies = TRUE)
 ```
 
 ## Usage
@@ -73,6 +87,8 @@ values. This classes can be found in the
 [tidyverse](https://www.tidyverse.org/packages/). If your data do not
 conform to the object classes required, don’t worry, just use
 `convert()` to convert it. You can always convert it back if you want.
+
+Here are some examples of how to convert your data using `convert()`.
 
 ``` r
 library(mctq)

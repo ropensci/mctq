@@ -64,23 +64,18 @@ change_day <- function(x, day) {
     checkmate::assert_number(day, lower = 1, upper = 31)
 
     if (any(lubridate::month(x) %in% c(4, 6, 9, 11)) && day > 30) {
-        rlang::abort(paste0(
-            "You can't assign more than 30 days to April, June, ",
-            "September, or November."
-            ))
+        stop("You can't assign more than 30 days to April, June, ",
+             "September, or November.", call. = FALSE)
     }
 
     if (any(lubridate::month(x) == 2 & !lubridate::leap_year(x)) && day > 28) {
-        rlang::abort(paste0(
-            "You can't assign more than 28 days to February in ",
-            "non-leap years."
-        ))
+        stop("You can't assign more than 28 days to February in ",
+             "non-leap years.", call. = FALSE)
     }
 
     if (any(lubridate::month(x) == 2 & lubridate::leap_year(x)) && day > 29) {
-        rlang::abort(paste0(
-            "You can't assign more than 29 days to February in a leap year"
-        ))
+        stop("You can't assign more than 29 days to February in a leap year",
+             call. = FALSE)
     }
 
     lubridate::day(x) <- day
@@ -100,7 +95,7 @@ is_time <- function(x, rm = NULL) {
 
     if (!is.null(rm)) {
         rm <- paste0("^", rm, "$", collapse = "|")
-        classes <- stringr::str_subset(classes, rm, negate = TRUE)
+        classes <- str_subset_(classes, rm, negate = TRUE)
     }
 
     # if (circular::is.circular(x) && !("circular" %in% rm)) {
@@ -108,28 +103,6 @@ is_time <- function(x, rm = NULL) {
     # }
 
     checkmate::test_multi_class(x, classes)
-
-}
-
-#' @family utility functions
-#' @noRd
-class_collapse <- function(x) {
-
-    glue::single_quote(glue::glue_collapse(class(x), sep = '/'))
-
-}
-
-#' @family utility functions
-#' @noRd
-hms_interval <- function(start, end, tz = "UTC") {
-
-    checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
-    checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
-
-    start <- flat_posixt(convert(start, "posixct", tz = tz), FALSE)
-    end <- flat_posixt(convert(end, "posixct", tz = tz), FALSE)
-
-    lubridate::interval(start, end)
 
 }
 
@@ -153,18 +126,56 @@ is_whole_number <- function(x, tol = .Machine$double.eps^0.5) {
 
 #' @family utility functions
 #' @noRd
+single_quote_ <- function(x) {
+
+    paste0("'", x, "'")
+
+}
+
+#' @family utility functions
+#' @noRd
+backtick_ <- function(x) {
+
+    paste0("`", x, "`")
+
+}
+
+#' @family utility functions
+#' @noRd
+class_collapse <- function(x) {
+
+    single_quote_(paste0(class(x), collapse = "/"))
+
+}
+
+#' @family utility functions
+#' @noRd
+paste_collapse <- function(x, sep = "", last = "") {
+
+    checkmate::assert_string(sep)
+    checkmate::assert_string(last)
+
+    if (length(x) == 1) {
+        x
+    } else {
+        paste0(paste(x[-length(x)], collapse = sep), last, x[length(x)])
+    }
+
+}
+
+#' @family utility functions
+#' @noRd
 inline_collapse <- function(x, single_quote = TRUE, serial_comma = TRUE) {
 
-    checkmate::assert_character(x)
     checkmate::assert_flag(single_quote)
     checkmate::assert_flag(serial_comma)
 
-    if (isTRUE(single_quote)) x <- glue::single_quote(x)
+    if (isTRUE(single_quote)) x <- single_quote_(x)
 
     if (length(x) <= 2 || isFALSE(serial_comma)) {
-        glue::glue_collapse(x, sep = ", ", last = " and ")
+        paste_collapse(x, sep = ", ", last = " and ")
     } else {
-        glue::glue_collapse(x, sep = ", ", last = ", and ")
+        paste_collapse(x, sep = ", ", last = ", and ")
     }
 
 }
@@ -183,16 +194,28 @@ shush <- function(x, quiet = TRUE){
 
 #' @family utility functions
 #' @noRd
+hms_interval <- function(start, end, tz = "UTC") {
+
+    checkmate::check_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
+    checkmate::check_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
+
+    start <- flat_posixt(convert(start, "posixct", tz = tz), FALSE)
+    end <- flat_posixt(convert(end, "posixct", tz = tz), FALSE)
+
+    lubridate::interval(start, end)
+
+}
+
+#' @family utility functions
+#' @noRd
 close_round <- function(x, digits = 5) {
 
     pattern_9 <- paste0("\\.", paste(rep(9, digits), collapse = ""))
     pattern_0 <- paste0("\\.", paste(rep(0, digits), collapse = ""))
 
     dplyr::case_when(
-        stringr::str_detect(x, pattern_9) |
-            stringr::str_detect(x, pattern_0) ~ round(x),
-        TRUE ~ x
-    )
+        grepl(pattern_9, x) | grepl(pattern_0, x) ~ round(x),
+        TRUE ~ x)
 
 }
 
@@ -223,8 +246,8 @@ swap_if <- function(x, y, condition = "x > y") {
     assert_identical(x, y, type = "class")
     checkmate::assert_choice(condition, choices)
 
-    condition <- stringr::str_replace(condition, "x", "a")
-    condition <- stringr::str_replace(condition, "y", "b")
+    condition <- sub("x", "a", condition)
+    condition <- sub("y", "b", condition)
 
     a <- x
     b <- y
@@ -306,5 +329,62 @@ get_class <- function(x) {
     } else {
         class(x)[1]
     }
+
+}
+
+#' @family utility functions
+#' @noRd
+fix_character <- function(x) {
+
+    checkmate::assert_character(x)
+
+    x <- trimws(x)
+
+    for (i in c("", "NA")) {
+        x <- dplyr::na_if(x, i)
+    }
+
+    x
+
+}
+
+#' @family utility functions
+#' @noRd
+str_extract_ <- function(string, pattern, ignore.case = FALSE, perl = TRUE,
+                         fixed = FALSE, useBytes = FALSE, invert = FALSE) {
+
+    checkmate::assert_string(pattern)
+    checkmate::assert_flag(ignore.case)
+    checkmate::assert_flag(perl)
+    checkmate::assert_flag(fixed)
+    checkmate::assert_flag(useBytes)
+    checkmate::assert_flag(invert)
+
+    match <- regexpr(pattern, string, ignore.case = ignore.case, perl = perl,
+                     fixed = fixed, useBytes = useBytes)
+    out <- regmatches(string, match, invert = invert)
+
+    if (length(out) == 0) as.character(NA) else out
+
+}
+
+#' @family utility functions
+#' @noRd
+str_subset_ <- function(string, pattern, negate = FALSE, ignore.case = FALSE,
+                        perl = TRUE, fixed = FALSE, useBytes = FALSE) {
+
+    checkmate::assert_string(pattern)
+    checkmate::assert_flag(negate)
+
+    match <- grepl(pattern, string, ignore.case = ignore.case, perl = perl,
+                   fixed = fixed, useBytes = useBytes)
+
+    if (isTRUE(negate)) {
+        out <- subset(string, !match)
+    } else {
+        out <- subset(string, match)
+    }
+
+    if (length(out) == 0) as.character(NA) else out
 
 }

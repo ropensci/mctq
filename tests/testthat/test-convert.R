@@ -86,6 +86,9 @@ test_that("convert() | conversion between units", {
     object <- convert(40, "numeric", input_unit = "d", output_unit = "deg")
     expect_equal(object, 14400)
 
+    object <- convert(15, "integer", input_unit = "deg", output_unit = "H")
+    expect_equal(object, 1)
+
     object <- convert_uu(40, "d", "deg")
     expect_equal(object, 14400)
 })

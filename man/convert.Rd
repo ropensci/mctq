@@ -172,10 +172,10 @@ convert_pu(x, orders, output_unit, ...)
 
 \item{...}{Additional arguments to be passed to or from methods.}
 
-\item{quiet}{(optional) a logical value indicating if warnings or messages
+\item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
 must be suppressed (default: \code{FALSE}).}
 
-\item{orders}{(optional) a character vector of date/time formats to parse a
+\item{orders}{(optional) a \code{character} object of date/time formats to parse a
 \code{x} value of class \code{character} or \code{numeric}.}
 
 \item{tz}{(optional) a string indicating the time zone with which to
@@ -185,23 +185,26 @@ convert/parse \code{x} (default: \code{"UTC"}).}
 
 \item{output_unit}{(optional) a string indicating the desire output unit.}
 
-\item{month_length}{(optional) a \code{duration} object or a non negative numeric
-value with the number of seconds equivalent to the month length (default:
-\code{lubridate::dmonths()}, which is equivalent to 30.4375 days).}
+\item{month_length}{(optional) a \code{Duration} value \strong{or} a non negative
+\code{numeric} value corresponding to the number of seconds equivalent to the
+month length (default: \code{lubridate::dmonths()}, which is equivalent to
+30.4375 days).}
 
-\item{year_length}{(optional) a \code{duration} object or a non negative numeric
-value with the number of seconds equivalent to the year length (default:
-\code{lubridate::dyears()}, which is equivalent to 365.25 days).}
+\item{year_length}{(optional) a \code{Duration} value \strong{or} a non negative
+\code{numeric} value corresponding to the number of seconds equivalent to the
+year length (default: \code{lubridate::dyears()}, which is equivalent to 365.25
+days).}
 
-\item{ignore_date}{(optional) a logical value indicating if dates must be
-ignored from \code{Date} or \code{POSIXt} objects when converting they to \code{numeric}.}
+\item{ignore_date}{(optional) a \code{logical} value indicating if dates must be
+ignored from \code{Date} or \code{POSIXt} objects when converting they to \code{numeric}
+(default: \code{TRUE}).}
 
-\item{close_round}{(optional) a logical value indicating if numbers with
+\item{close_round}{(optional) a \code{logical} value indicating if numbers with
 decimals starting with five leading 0s or 9s must be rounded
 (\emph{e.g.} 1.99999) (default: \code{TRUE}).}
 
-\item{cols}{(optional) a character vector indicating the column names in \code{x}
-to transform (default: \code{NULL}).}
+\item{cols}{(optional) a \code{character} object indicating the column names in
+\code{x} to transform (default: \code{NULL}).}
 
 \item{where}{(optional) a function to apply in a \code{\link[tidyselect:where]{tidyselect::where()}} call
 (default: \code{NULL}).}
@@ -227,7 +230,7 @@ For a complete picture about how to convert your MCTQ data, see
 applications. However, please note that it may not work for all cases.
 Test it first before applying it to large datasets.
 
-To learn more about how to handle date and time objects, check chapter "Dates
+To learn more about how to handle date and time objects, see chapter "Dates
 and Times" from Wickham and Grolemund (n.d.) and chapter "Technical
 Representation of Data" from Loo and Jonge (2018).
 \subsection{Wrappers}{
@@ -293,7 +296,7 @@ Time zones (tz) are used only if \code{class} is set to \code{"Date"}, \code{"PO
 \subsection{Parsing limitations}{
 
 \code{convert()} uses \code{\link[lubridate:parse_date_time]{lubridate::parse_date_time()}} to parse \code{character} and
-\code{numeric} objects to date/time. Since parse_date_time() outputs a \code{POSIXt}
+\code{numeric} objects to date/time. Since \code{parse_date_time()} outputs a \code{POSIXt}
 object, \code{character} and \code{numeric} inputs cannot have time values equal or
 greater than 24 hours.
 

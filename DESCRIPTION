@@ -32,18 +32,13 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends:
+    hms,
+    lubridate,
     R (>= 3.6)
 Imports: 
     checkmate,
     dplyr,
-    hms,
-    lifecycle,
-    lubridate,
-    rlang,
-    stats,
-    utils,
-    glue,
-    stringr
+    lifecycle
 Suggests:
     covr,
     crayon,
@@ -51,8 +46,10 @@ Suggests:
     grDevices,
     knitr,
     rmarkdown,
-    spelling, 
-    testthat (>= 2.0.0)
+    spelling,
+    stats,
+    testthat (>= 2.0.0),
+    utils
 Config/testthat/edition: 2
 VignetteBuilder: knitr
 Language: en-US

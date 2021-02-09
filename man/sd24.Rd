@@ -4,7 +4,7 @@
 \alias{sd24}
 \title{Compute MCTQ 24h sleep duration (only for MCTQ Shift)}
 \usage{
-sd24(sd, napd)
+sd24(sd, napd, nap)
 }
 \arguments{
 \item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} value
@@ -14,9 +14,16 @@ to compute it.}
 \item{napd}{A \code{Duration} object corresponding to the \strong{nap duration} value
 from the shift version of the MCTQ questionnaire. You can use
 \code{\link[=napd]{napd()}} to compute it.}
+
+\item{nap}{A \code{logical} value corresponding to the \strong{"I usually take a nap"}
+value from the shift version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the sum of \code{sd} and \code{napd}.
+\itemize{
+\item If \code{nap == TRUE}, a \code{Duration} object corresponding to the sum of \code{sd} and
+\code{napd}.
+\item If \code{nap == FALSE}, a \code{Duration} object equal to \code{sd}.
+}
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
@@ -66,6 +73,9 @@ Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for \code{sd24()}
 \itemize{
 \item The computation below must be applied to each shift section of the
 questionnaire.
+\item If the subject don't usually take a nap in a particular shift \strong{or}
+between two free days after a particular shift, \code{sd24()} will return only
+\eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N}.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble to understand the equations. If you want a better viewer,
 you can see this documentation on the package
@@ -93,17 +103,20 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 \examples{
 ## __ Scalar example __
-sd24(lubridate::dhours(6), lubridate::dhours(0.5))
+sd24(lubridate::dhours(6), lubridate::dhours(0.5), TRUE)
 #> [1] "23400s (~6.5 hours)" # Expected
-sd24(lubridate::dhours(9), lubridate::dhours(1.5))
+sd24(lubridate::dhours(9), lubridate::dhours(1.5), TRUE)
 #> [1] "37800s (~10.5 hours)" # Expected
-sd24(lubridate::as.duration(NA), lubridate::dhours(2.3))
+sd24(lubridate::dhours(6.5), lubridate::as.duration(NA), FALSE)
+#> [1] "23400s (~6.5 hours)" # Expected
+sd24(lubridate::as.duration(NA), lubridate::dhours(2.3), TRUE)
 #> [1] NA # Expected
 
 ## __ Vectorized example __
 sd <- c(lubridate::dhours(7.5), lubridate::dhours(8))
 napd <- c(lubridate::dhours(0.75), lubridate::dhours(1))
-sd24(sd, napd)
+nap <- c(TRUE, TRUE)
+sd24(sd, napd, nap)
 #> [1] "29700s (~8.25 hours)" "32400s (~9 hours)"   # Expected
 }
 \references{

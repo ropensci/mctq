@@ -101,24 +101,21 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
     # Check arguments -----
 
-    if (isFALSE(rlang::is_interactive())) {
-        rlang::abort("This function can only be used in interactive mode.")
+    if (isFALSE(interactive())) {
+        stop("This function can only be used in interactive mode",
+             call. = FALSE)
     }
 
     if(!isNamespaceLoaded("grDevices") || !isNamespaceLoaded("ggplot2")) {
-        stop(paste0(
-            'This function requires the `grDevices` and `ggplot2` packages to ',
-            'run. You can install them by running: \n \n',
+        stop('This function requires the `grDevices` and `ggplot2` packages ',
+            'to run. You can install them by running: \n \n',
             'install.packages("grDevices") \n',
-            'install.packages("ggplot2")'
-            ), call. = FALSE)
+            'install.packages("ggplot2")' , call. = FALSE)
     }
 
     if (any(c("x", "y", "data") %in% names(list(...)))) {
-        rlang::abort(paste0(
-            "`x`, `y` and `data` are reserved arguments for ",
-            "`qplot_walk()`."
-            ))
+        stop("`x`, `y` and `data` are reserved arguments for ",
+            "`qplot_walk()`", call. = FALSE)
     }
 
     if (is.data.frame(data)) {
@@ -131,16 +128,15 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         checkmate::assert_flag(remove_id)
 
         if (!is.null(cols) && !is.null(pattern)) {
-            rlang::abort(paste0(
-                "`cols` and `pattern` can't both have values. ",
-                "You need to choose only one selection method."))
+            stop("`cols` and `pattern` can't both have values. ",
+                "You need to choose only one selection method.", call. = FALSE)
         }
     }
 
     checkmate::assert_flag(midday_change)
 
     if (!is.atomic(data) && !is.data.frame(data)) {
-        rlang::abort("`data` must be an atomic object or a data frame.")
+        stop("`data` must be an atomic object or a data frame", call. = FALSE)
     }
 
     # Return output for `atomic` `data` -----
@@ -186,27 +182,23 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- grep(pattern, names(data), value = TRUE)
 
         if (length(cols) == 0) {
-            rlang::abort("None match was found in `names(data)`.")
+            stop("None match was found in `names(data)`", call. = FALSE)
         }
     }
 
     if (!is.null(ignore)) {
         if (all(unique(get_class(data[cols])) %in% ignore)) {
-            rlang::abort(paste0(
-                "You can't ignore all variables in `cols` or in `data`. ",
+            stop("You can't ignore all variables in `cols` or in `data`. ",
                 "Note that `qplot_walk()` is set by default to ignore ",
-                "'character' objects. Please check your settings."
-            ))
+                "'character' objects. Please check your settings.",
+                call. = FALSE)
         }
 
         if (!identical(names(data[cols]), names(data)) &&
             any(ignore %in% get_class(data[cols]))) {
             match <- names(data[cols])[get_class(data[cols]) %in% ignore]
-            rlang::inform(paste0(
-                inline_collapse(match), " ",
-                "will be ignored due to the settings ",
-                "in `ignore` argument."
-            ))
+            warning(inline_collapse(match), " will be ignored due to the ",
+                    "settings in `ignore` argument.", call. = FALSE)
         }
 
         cols <- names(data[cols])[!(get_class(data[cols]) %in% ignore)]

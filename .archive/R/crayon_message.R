@@ -1,4 +1,4 @@
-#' @family dialog functions
+#' @family utility functions
 #' @noRd
 crayon_message <- function(text = NULL, title = NULL, tag = NULL,
                            space_above = TRUE, space_below = TRUE) {
@@ -43,24 +43,5 @@ crayon_message <- function(text = NULL, title = NULL, tag = NULL,
         ifelse(is.na(text), "", text),
         ifelse(isTRUE(space_below), "\n\n", "")
     ))
-
-}
-
-#' @family dialog functions
-#' @noRd
-message_generator <- function(type = "ok", funny = FALSE) {
-
-    type <- stringr::str_to_lower(type)
-
-    if (type == "ok") {
-        if (isTRUE(funny)) {
-            ok_messages <- c("Noice!", "Everything's A-OK",
-                             "Good job (yay!)",
-                             "Everything appears to be in order, Sr.!")
-        } else {
-            ok_messages <- c("Success", "All in order")
-        }
-        rlang::inform(sample(ok_messages, 1))
-    }
 
 }

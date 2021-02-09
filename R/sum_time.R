@@ -120,13 +120,9 @@
 sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
                      na.rm = FALSE) {
 
-    # List `...` -----
-
     out <- list(...)
 
-    # Check arguments -----
-
-    check <- function(x) {
+    assert_custom <- function(x) {
         classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
                      "POSIXlt", "Interval")
 
@@ -137,14 +133,12 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
     checkmate::assert_flag(clock)
     checkmate::assert_flag(vectorize)
     checkmate::assert_flag(na.rm)
-    lapply(out, check)
+    lapply(out, assert_custom)
 
     if (isTRUE(vectorize) && !(length(unique(sapply(out, length))) == 1)) {
-        stop("When 'vetorize' is 'TRUE', all values in '...' must have the ",
+        stop("When `vetorize` is `TRUE`, all values in `...` must have ",
              "the same length.", call. = FALSE)
     }
-
-    # Normalize values -----
 
     normalize <- function(x) {
         ifelse(vapply(x, lubridate::is.POSIXt, logical(1)),
@@ -156,10 +150,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
     }
 
     out <- lapply(out, normalize)
-
     if(isTRUE(na.rm)) out <- lapply(out, zero_nas)
-
-    # Sum time -----
 
     if (isTRUE(vectorize)) {
         out <- Reduce("+", out)
@@ -168,12 +159,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         out <- sum(out, na.rm = na.rm)
     }
 
-    # Roll time -----
-
     if (isTRUE(clock)) out <- lubridate::as_datetime(out)
-
-    # Return output -----
-
     convert(out, class)
 
 }

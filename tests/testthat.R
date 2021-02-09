@@ -2,8 +2,12 @@ library(testthat)
 library(mctq)
 
 library(checkmate)
-library(lubridate)
+library(crayon)
+library(grDevices)
 library(hms)
+library(lubridate)
+library(stats)
+library(utils)
 
 test_check("mctq")
 
