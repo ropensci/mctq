@@ -94,14 +94,22 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 \examples{
 ## __ Scalar example __
-napd(hms::parse_hms("12:30:00"), hms::parse_hms("14:20:00"))
+napo <- hms::parse_hms("12:30:00")
+nape <- hms::parse_hms("14:20:00")
+napd(napo, nape)
 #> [1] "6600s (~1.83 hours)"" # Expected
-napd(hms::parse_hms("23:45:00"), hms::parse_hms("00:30:00"))
+
+napo <- hms::parse_hms("23:45:00")
+nape <- hms::parse_hms("00:30:00")
+napd(napo, nape)
 #> [1] "2700s (~45 minutes)" # Expected
-napd(hms::parse_hms("10:20:00"), hms::as_hms(NA))
+
+napo <- hms::parse_hms("10:20:00")
+nape <- hms::as_hms(NA)
+napd(napo, nape)
 #> NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 napo <- c(hms::parse_hms("01:25:00"), hms::parse_hms("23:50:00"))
 nape <- c(hms::parse_hms("03:10:00"), hms::parse_hms("01:10:00"))
 napd(napo, nape)

@@ -161,8 +161,6 @@ For basic MCTQ computation, use:
 
 ``` r
 library(mctq)
-library(lubridate)
-library(hms)
 
 # Local time of preparing to sleep on workdays.
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
@@ -189,8 +187,6 @@ For computations combining workdays and work-free days, use:
 
 ``` r
 library(mctq)
-library(lubridate)
-library(hms)
 
 # Mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
@@ -213,8 +209,27 @@ list of them.
 
 If you use `mctq` in your research, please consider citing it. We put a
 lot of work to build and maintain a free and open source R package. You
-can find `mctq` citation
-[here](https://gipsousp.github.io/mctq/authors.html).
+can find `mctq` citation below.
+
+``` r
+citation("mctq")
+#> 
+#> To cite mctq in publications use:
+#> 
+#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). The R
+#>   package for MCTQ data. Retrieved from
+#>   https://gipsousp.github.io/mctq/ .
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Unpublished{,
+#>     title = {The R package for MCTQ data},
+#>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
+#>     year = {2021},
+#>     url = {https://gipsousp.github.io/mctq/},
+#>     note = {Lifecycle: experimental},
+#>   }
+```
 
 ## Contributing
 

@@ -26,6 +26,7 @@
 #' @export
 #'
 #' @examples
+#' ## __ Scalar example __
 #' lubridate::dhours(1.45678696454)
 #' #> [1] "5244.433072344s (~1.46 hours)" # Expected
 #' round_time(lubridate::dhours(1.45678696454))
@@ -42,6 +43,13 @@
 #' #> 03:25:45.6789 # Expected
 #' round_time(hms::as_hms(12345.6789))
 #' #> 03:25:46 # Expected
+#'
+#' ## __ Vector example __
+#' x <- c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))
+#' x
+#' #> [1] "20515.32s (~5.7 hours)"    "9675.05544s (~2.69 hours)" # Expected
+#' round_time(x)
+#' #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 round_time <- function(x) {
 
     classes <- c("Duration", "Period", "difftime", "hms")

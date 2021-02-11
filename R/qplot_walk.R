@@ -88,12 +88,23 @@
 #'
 #' @examples
 #' \dontrun{
+#' ## __ Ploting a single column from `data` __
 #' qplot_walk(mctq::std_mctq$bt_w)
-#' qplot_walk(mctq::std_mctq)
+#'
+#' ## __ Ploting all columns from `data` __
+#' qplot_walk(mctq::std_mctq, ignore = NULL, remove_id = FALSE)
+#'
+#' ## __ Ploting selected columns from `data` __
 #' qplot_walk(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
+#'
+#' ## __ Ploting selected columns from `data` using a name pattern__
 #' qplot_walk(mctq::std_mctq, pattern = "_w$")
-#' qplot_walk(datasets::iris)
-#' qplot_walk(datasets::mtcars)
+#'
+#' ## __ Examples using other datasets __
+#' if (requireNamespace("datasets", quietly = TRUE)) {
+#'     qplot_walk(datasets::iris)
+#'     qplot_walk(datasets::mtcars)
+#' }
 #' }
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
@@ -101,12 +112,12 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
     # Check arguments -----
 
-    if (isFALSE(interactive())) {
+    if (!is_interactive()) {
         stop("This function can only be used in interactive mode",
              call. = FALSE)
     }
 
-    if(!isNamespaceLoaded("grDevices") || !isNamespaceLoaded("ggplot2")) {
+    if(!is_namespace_loaded("grDevices") || !is_namespace_loaded("ggplot2")) {
         stop('This function requires the `grDevices` and `ggplot2` packages ',
             'to run. You can install them by running: \n \n',
             'install.packages("grDevices") \n',
@@ -157,10 +168,8 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     if (is.atomic(data)) {
         assert_has_length(data)
 
-        warning(paste0(
-            "`data` is atomic. All other arguments, except `...` and ",
-            "`midday_change`, are ignored."
-            ), call. = FALSE)
+        warning("`data` is `atomic`. All other arguments, except `...` and ",
+            "`midday_change`, are ignored.", call. = FALSE)
 
         x <- transform(data, midday_change)
         xlab <- deparse(substitute(data))
@@ -194,11 +203,11 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                 call. = FALSE)
         }
 
-        if (!identical(names(data[cols]), names(data)) &&
-            any(ignore %in% get_class(data[cols]))) {
+        if (any(ignore %in% get_class(data[cols]))) {
             match <- names(data[cols])[get_class(data[cols]) %in% ignore]
             warning(inline_collapse(match), " will be ignored due to the ",
-                    "settings in `ignore` argument.", call. = FALSE)
+                    "settings in the `ignore` argument.",
+                    call. = FALSE, immediate. = TRUE)
         }
 
         cols <- names(data[cols])[!(get_class(data[cols]) %in% ignore)]
@@ -211,12 +220,10 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
     # Show introductory message -----
 
-    if (requireNamespace("grDevices", quietly = TRUE)) {
-        dialog_line(line = paste0(
-            "WARNING: `qplot_walk()` clears all plots from your system \n",
+    dialog_line(line = paste0(
+            "Warning: `qplot_walk()` clears all plots from your system \n",
             "after it runs. If you don't agree with this, press `esc` to \n",
             "exit, or press `enter` to continue."))
-    }
 
     # Create qplots -----
 
@@ -233,9 +240,9 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             line = "Press `esc` to exit or `enter` to continue.",
             space_above = FALSE, space_below = FALSE)
 
-        if (requireNamespace("grDevices", quietly = TRUE)) {
-            grDevices::dev.off()
-        }
+        grDevices::dev.off()
     }
+
+    invisible(NULL)
 
 }

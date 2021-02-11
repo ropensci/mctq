@@ -2,7 +2,7 @@
 % Please edit documentation in R/assign_date.R
 \name{assign_date}
 \alias{assign_date}
-\title{Assign dates to two sequential hour values}
+\title{Assign dates to two sequential hours}
 \usage{
 assign_date(
   start,
@@ -37,7 +37,7 @@ with the \code{start} and \code{end} argument.}
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
-\code{assign_date()} assign dates to two sequential hour values. It can facilitate
+\code{assign_date()} assign dates to two sequential hours. It can facilitate
 time arithmetic by locating time values without date reference on a
 timeline.
 }
@@ -112,7 +112,30 @@ dates. Only the hours will be considered.
 }
 }
 \examples{
-## __ To return `start` and `end` as interval __
+## __ Scalar example __
+start <- hms::parse_hms("23:11:00")
+end <- hms::parse_hms("05:30:00")
+assign_date(start, end)
+#> [1] 1970-01-01 23:11:00 UTC--1970-01-02 05:30:00 UTC # Expected
+
+start <- hms::parse_hms("10:15:00")
+end <- hms::parse_hms("13:25:00")
+assign_date(start, end)
+#> [1] 1970-01-01 10:15:00 UTC--1970-01-01 13:25:00 UTC # Expected
+
+start <- hms::parse_hms("05:42:00")
+end <- hms::as_hms(NA)
+assign_date(start, end)
+#> [1] NA--NA # Expected
+
+## __ Vector example __
+start <- c(hms::parse_hms("09:45:00"), hms::parse_hms("20:30:00"))
+end <- c(hms::parse_hms("21:15:00"), hms::parse_hms("04:30:00"))
+assign_date(start, end)
+#> [1] 1970-01-01 09:45:00 UTC--1970-01-01 21:15:00 UTC # Expected
+#> [2] 1970-01-01 20:30:00 UTC--1970-01-02 04:30:00 UTC # Expected
+
+## __ To return `start` and `end` as interval (default)__
 start <- hms::parse_hms("12:34:00")
 end <- hms::parse_hms("01:25:00")
 assign_date(start, end)
@@ -128,11 +151,13 @@ assign_date(start, end, return = "list")
 #> $end # Expected
 #> [1] "1970-01-02 00:00:01 UTC" # Expected
 
-## __ To return only the `start` output __
+## __ To return only `start` or `end` __
 start <- lubridate::parse_date_time("01:10:00", "HMS")
 end <- lubridate::parse_date_time("11:45:00", "HMS")
 assign_date(start, end, return = "start")
 #> [1] "1970-01-01 01:10:00 UTC" # Expected
+assign_date(start, end, return = "end")
+#> [1] "1970-01-01 11:45:00 UTC" # Expected
 
 ## __ To assign a 24h interval to ambiguities __
 start <- lubridate::as_datetime("1985-01-15 12:00:00")

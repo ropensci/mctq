@@ -112,14 +112,25 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-le_week(lubridate::dhours(1.5), lubridate::dhours(3.7), 5)
+le_w <- lubridate::dhours(1.5)
+le_f <- lubridate::dhours(3.7)
+wd <- 5
+le_week(le_w, le_f, wd)
 #> [1] "7662.85714285714s (~2.13 hours)" # Expected
-le_week(lubridate::dhours(3), lubridate::dhours(1.5), 6)
+
+le_w <- lubridate::dhours(3)
+le_f <- lubridate::dhours(1.5)
+wd <- 6
+le_week(le_w, le_f, wd)
 #> [1] "10028.5714285714s (~2.79 hours)" # Expected
-le_week(lubridate::dhours(5.6), lubridate::as.duration(NA), 3)
+
+le_w <- lubridate::dhours(5.6)
+le_f <- lubridate::as.duration(NA)
+wd <- 3
+le_week(le_w, le_f, wd)
 #> [1] NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
 le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
 wd <- c(4, 5)
@@ -127,20 +138,30 @@ le_week(le_w, le_f, wd)
 #> [1] "10800s (~3 hours)" # Expected
 #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 
-## __ Checking second output from vectorized example __
-i <- 2
-x <- c(le_w[i], le_f[i])
-w <- c(wd[i], fd(wd[i]))
-lubridate::as.duration(stats::weighted.mean(x, w))
+## __ Checking second output from vector example __
+if (requireNamespace("stats", quietly = TRUE)) {
+    i <- 2
+    x <- c(le_w[i], le_f[i])
+    w <- c(wd[i], fd(wd[i]))
+    lubridate::as.duration(stats::weighted.mean(x, w))
 #> [1] "10157.1428571429s (~2.82 hours)" # Expected
+}
 
 ## __ Converting the output to `hms` __
-x <- le_week(lubridate::dhours(1.25), lubridate::dhours(6.23), 3)
+le_w <- lubridate::dhours(1.25)
+le_f <- lubridate::dhours(6.23)
+wd <- 3
+x <- le_week(le_w, le_f, wd)
+x
+#> [1] "14744.5714285714s (~4.1 hours)" # Expected
 convert(x, "hms")
 #> 04:05:44.571429 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- le_week(lubridate::dhours(3.4094), lubridate::dhours(6.2345), 2)
+le_w <- lubridate::dhours(3.4094)
+le_f <- lubridate::dhours(6.2345)
+wd <- 2
+x <- le_week(le_w, le_f, wd)
 x
 #> [1] "19538.3828571429s (~5.43 hours)" # Expected
 round_time(x)

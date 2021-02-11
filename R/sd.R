@@ -64,14 +64,22 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sd(hms::parse_hms("23:00:00"), hms::parse_hms("08:00:00"))
+#' so <- hms::parse_hms("23:00:00")
+#' se <- hms::parse_hms("08:00:00")
+#' sd(so, se)
 #' #> [1] "32400s (~9 hours)" # Expected
-#' sd(hms::parse_hms("02:00:00"), hms::parse_hms("12:30:00"))
+#'
+#' so <- hms::parse_hms("02:00:00")
+#' se <- hms::parse_hms("12:30:00")
+#' sd(so, se)
 #' #> [1] "37800s (~10.5 hours)" # Expected
-#' sd(hms::parse_hms("03:15:00"), hms::as_hms(NA))
+#'
+#' so <- hms::parse_hms("03:15:00")
+#' se <- hms::as_hms(NA)
+#' sd(so, se)
 #' #> NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' so <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
 #' se <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
 #' sd(so, se)
@@ -142,14 +150,22 @@ sd <- function(so, se) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' napd(hms::parse_hms("12:30:00"), hms::parse_hms("14:20:00"))
+#' napo <- hms::parse_hms("12:30:00")
+#' nape <- hms::parse_hms("14:20:00")
+#' napd(napo, nape)
 #' #> [1] "6600s (~1.83 hours)"" # Expected
-#' napd(hms::parse_hms("23:45:00"), hms::parse_hms("00:30:00"))
+#'
+#' napo <- hms::parse_hms("23:45:00")
+#' nape <- hms::parse_hms("00:30:00")
+#' napd(napo, nape)
 #' #> [1] "2700s (~45 minutes)" # Expected
-#' napd(hms::parse_hms("10:20:00"), hms::as_hms(NA))
+#'
+#' napo <- hms::parse_hms("10:20:00")
+#' nape <- hms::as_hms(NA)
+#' napd(napo, nape)
 #' #> NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' napo <- c(hms::parse_hms("01:25:00"), hms::parse_hms("23:50:00"))
 #' nape <- c(hms::parse_hms("03:10:00"), hms::parse_hms("01:10:00"))
 #' napd(napo, nape)
@@ -229,21 +245,36 @@ napd <- function(napo, nape) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sd24(lubridate::dhours(6), lubridate::dhours(0.5), TRUE)
+#' sd <- lubridate::dhours(6)
+#' napd <- lubridate::dhours(0.5)
+#' nap <- TRUE
+#' sd24(sd, napd, nap)
 #' #> [1] "23400s (~6.5 hours)" # Expected
-#' sd24(lubridate::dhours(9), lubridate::dhours(1.5), TRUE)
+#'
+#' sd <- lubridate::dhours(9)
+#' napd <- lubridate::dhours(1.5)
+#' nap <- TRUE
+#' sd24(sd, napd, nap)
 #' #> [1] "37800s (~10.5 hours)" # Expected
-#' sd24(lubridate::dhours(6.5), lubridate::as.duration(NA), FALSE)
+#'
+#' sd <- lubridate::dhours(6.5)
+#' napd <- lubridate::as.duration(NA)
+#' nap <- FALSE
+#' sd24(sd, napd, nap)
 #' #> [1] "23400s (~6.5 hours)" # Expected
-#' sd24(lubridate::as.duration(NA), lubridate::dhours(2.3), TRUE)
+#'
+#' sd <- lubridate::as.duration(NA)
+#' napd <- lubridate::dhours(2.3)
+#' nap <- TRUE
+#' sd24(sd, napd, nap)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' sd <- c(lubridate::dhours(7.5), lubridate::dhours(8))
 #' napd <- c(lubridate::dhours(0.75), lubridate::dhours(1))
 #' nap <- c(TRUE, TRUE)
 #' sd24(sd, napd, nap)
-#' #> [1] "29700s (~8.25 hours)" "32400s (~9 hours)"   # Expected
+#' #> [1] "29700s (~8.25 hours)" "32400s (~9 hours)" # Expected
 sd24 <- function(sd, napd, nap) {
 
     checkmate::assert_class(sd, "Duration")
@@ -324,34 +355,55 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sd_week(lubridate::dhours(4), lubridate::dhours(8), 5)
+#' sd_w <- lubridate::dhours(4)
+#' sd_f <- lubridate::dhours(8)
+#' wd <- 5
+#' sd_week(sd_w, sd_f, wd)
 #' #> [1] "18514.2857142857s (~5.14 hours)" # Expected
-#' sd_week(lubridate::dhours(7), lubridate::dhours(7), 4)
+#'
+#' sd_w <- lubridate::dhours(7)
+#' sd_f <- lubridate::dhours(7)
+#' wd <- 4
+#' sd_week(sd_w, sd_f, wd)
 #' #> [1] "25200s (~7 hours)" # Expected
-#' sd_week(lubridate::as.duration(NA), lubridate::dhours(10), 6)
+#'
+#' sd_w <- lubridate::as.duration(NA)
+#' sd_f <- lubridate::dhours(10)
+#' wd <- 6
+#' sd_week(sd_w, sd_f, wd)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 #' sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
 #' wd <- c(3, 7)
 #' sd_week(sd_w, sd_f, wd)
 #' #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 #'
-#' ## __ Checking second output from vectorized example __
-#' i <- 2
-#' x <- c(sd_w[i], sd_f[i])
-#' w <- c(wd[i], fd(wd[i]))
-#' lubridate::as.duration(stats::weighted.mean(x, w))
+#' ## __ Checking second output from vector example __
+#' if (requireNamespace("stats", quietly = TRUE)) {
+#'     i <- 2
+#'     x <- c(sd_w[i], sd_f[i])
+#'     w <- c(wd[i], fd(wd[i]))
+#'     lubridate::as.duration(stats::weighted.mean(x, w))
 #' #> [1] "19620s (~5.45 hours)" # Expected
+#' }
 #'
 #' ## __ Converting the output to hms __
-#' x <- sd_week(lubridate::dhours(5.45), lubridate::dhours(9.5), 5)
+#' sd_w <- lubridate::dhours(5.45)
+#' sd_f <- lubridate::dhours(9.5)
+#' wd <- 5
+#' x <- sd_week(sd_w, sd_f, wd)
+#' x
+#' #> [1] "23785.7142857143s (~6.61 hours)" # Expected
 #' convert(x, "hms")
 #' #> 06:36:25.714286 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- sd_week(lubridate::dhours(4.5), lubridate::dhours(7.8), 3)
+#' sd_w <- lubridate::dhours(4.5)
+#' sd_f <- lubridate::dhours(7.8)
+#' wd <- 3
+#' x <- sd_week(sd_w, sd_f, wd)
 #' x
 #' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 #' round_time(x)
@@ -449,14 +501,28 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sd_overall(lubridate::dhours(5), lubridate::dhours(9), 2, 2)
+#' sd_w <- lubridate::dhours(5)
+#' sd_f <- lubridate::dhours(9)
+#' n_w <- 2
+#' n_f <- 2
+#' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] "25200s (~7 hours)" # Expected
-#' sd_overall(lubridate::dhours(3.45), lubridate::dhours(10), 3, 1)
+#'
+#' sd_w <- lubridate::dhours(3.45)
+#' sd_f <- lubridate::dhours(10)
+#' n_w <- 3
+#' n_f <- 1
+#' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] "18315s (~5.09 hours)" # Expected
-#' sd_overall(lubridate::as.duration(NA), lubridate::dhours(12), 4, 4)
+#'
+#' sd_w <- lubridate::as.duration(NA)
+#' sd_f <- lubridate::dhours(12)
+#' n_w <- 4
+#' n_f <- 4
+#' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' sd_w <- c(lubridate::dhours(4), lubridate::dhours(7))
 #' sd_f <- c(lubridate::dhours(12), lubridate::dhours(9))
 #' n_w <- c(3, 4)
@@ -464,20 +530,32 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] "25920s (~7.2 hours)" "28800s (~8 hours)"  # Expected
 #'
-#' ## __ Checking second output from vectorized example __
-#' i <- 2
-#' x <- c(sd_w[i], sd_f[i])
-#' w <- c(n_w[i], n_f[i])
-#' lubridate::as.duration(stats::weighted.mean(x, w))
+#' ## __ Checking second output from vector example __
+#' if (requireNamespace("stats", quietly = TRUE)) {
+#'     i <- 2
+#'     x <- c(sd_w[i], sd_f[i])
+#'     w <- c(n_w[i], n_f[i])
+#'     lubridate::as.duration(stats::weighted.mean(x, w))
 #' #> [1] "28800s (~8 hours)" # Expected
+#' }
 #'
 #' ## __ Converting the output to hms __
-#' x <- sd_overall(lubridate::dhours(4.75), lubridate::dhours(10), 5, 2)
+#' sd_w <- lubridate::dhours(4.75)
+#' sd_f <- lubridate::dhours(10)
+#' n_w <- 5
+#' n_f <- 2
+#' x <- sd_overall(sd_w, sd_f, n_w, n_f)
+#' x
+#' #> [1] "22500s (~6.25 hours)" # Expected
 #' convert(x, "hms")
 #' #> 06:15:00 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- sd_overall(lubridate::dhours(5.9874), lubridate::dhours(9.3), 3, 2)
+#' sd_w <- lubridate::dhours(5.9874)
+#' sd_f <- lubridate::dhours(9.3)
+#' n_w <- 3
+#' n_f <- 2
+#' x <- sd_overall(sd_w, sd_f, n_w, n_f)
 #' x
 #' #> [1] "26324.784s (~7.31 hours)" # Expected
 #' round_time(x)

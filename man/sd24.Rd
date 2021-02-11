@@ -103,21 +103,36 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 \examples{
 ## __ Scalar example __
-sd24(lubridate::dhours(6), lubridate::dhours(0.5), TRUE)
+sd <- lubridate::dhours(6)
+napd <- lubridate::dhours(0.5)
+nap <- TRUE
+sd24(sd, napd, nap)
 #> [1] "23400s (~6.5 hours)" # Expected
-sd24(lubridate::dhours(9), lubridate::dhours(1.5), TRUE)
+
+sd <- lubridate::dhours(9)
+napd <- lubridate::dhours(1.5)
+nap <- TRUE
+sd24(sd, napd, nap)
 #> [1] "37800s (~10.5 hours)" # Expected
-sd24(lubridate::dhours(6.5), lubridate::as.duration(NA), FALSE)
+
+sd <- lubridate::dhours(6.5)
+napd <- lubridate::as.duration(NA)
+nap <- FALSE
+sd24(sd, napd, nap)
 #> [1] "23400s (~6.5 hours)" # Expected
-sd24(lubridate::as.duration(NA), lubridate::dhours(2.3), TRUE)
+
+sd <- lubridate::as.duration(NA)
+napd <- lubridate::dhours(2.3)
+nap <- TRUE
+sd24(sd, napd, nap)
 #> [1] NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 sd <- c(lubridate::dhours(7.5), lubridate::dhours(8))
 napd <- c(lubridate::dhours(0.75), lubridate::dhours(1))
 nap <- c(TRUE, TRUE)
 sd24(sd, napd, nap)
-#> [1] "29700s (~8.25 hours)" "32400s (~9 hours)"   # Expected
+#> [1] "29700s (~8.25 hours)" "32400s (~9 hours)" # Expected
 }
 \references{
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,

@@ -118,34 +118,55 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-sd_week(lubridate::dhours(4), lubridate::dhours(8), 5)
+sd_w <- lubridate::dhours(4)
+sd_f <- lubridate::dhours(8)
+wd <- 5
+sd_week(sd_w, sd_f, wd)
 #> [1] "18514.2857142857s (~5.14 hours)" # Expected
-sd_week(lubridate::dhours(7), lubridate::dhours(7), 4)
+
+sd_w <- lubridate::dhours(7)
+sd_f <- lubridate::dhours(7)
+wd <- 4
+sd_week(sd_w, sd_f, wd)
 #> [1] "25200s (~7 hours)" # Expected
-sd_week(lubridate::as.duration(NA), lubridate::dhours(10), 6)
+
+sd_w <- lubridate::as.duration(NA)
+sd_f <- lubridate::dhours(10)
+wd <- 6
+sd_week(sd_w, sd_f, wd)
 #> [1] NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
 wd <- c(3, 7)
 sd_week(sd_w, sd_f, wd)
 #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 
-## __ Checking second output from vectorized example __
-i <- 2
-x <- c(sd_w[i], sd_f[i])
-w <- c(wd[i], fd(wd[i]))
-lubridate::as.duration(stats::weighted.mean(x, w))
+## __ Checking second output from vector example __
+if (requireNamespace("stats", quietly = TRUE)) {
+    i <- 2
+    x <- c(sd_w[i], sd_f[i])
+    w <- c(wd[i], fd(wd[i]))
+    lubridate::as.duration(stats::weighted.mean(x, w))
 #> [1] "19620s (~5.45 hours)" # Expected
+}
 
 ## __ Converting the output to hms __
-x <- sd_week(lubridate::dhours(5.45), lubridate::dhours(9.5), 5)
+sd_w <- lubridate::dhours(5.45)
+sd_f <- lubridate::dhours(9.5)
+wd <- 5
+x <- sd_week(sd_w, sd_f, wd)
+x
+#> [1] "23785.7142857143s (~6.61 hours)" # Expected
 convert(x, "hms")
 #> 06:36:25.714286 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sd_week(lubridate::dhours(4.5), lubridate::dhours(7.8), 3)
+sd_w <- lubridate::dhours(4.5)
+sd_f <- lubridate::dhours(7.8)
+wd <- 3
+x <- sd_week(sd_w, sd_f, wd)
 x
 #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 round_time(x)

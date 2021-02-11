@@ -67,14 +67,22 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' ms(hms::parse_hms("23:30:00"), lubridate::dhours(8))
+#' so <- hms::parse_hms("23:30:00")
+#' sd <- lubridate::dhours(8)
+#' ms(so, sd)
 #' #> 03:30:00 # Expected
-#' ms(hms::parse_hms("01:00:00"), lubridate::dhours(10))
+#'
+#' so <- hms::parse_hms("01:00:00")
+#' sd <- lubridate::dhours(10)
+#' ms(so, sd)
 #' #> 06:00:00 # Expected
-#' ms(hms::as_hms(NA), lubridate::dhours(7.5))
+#'
+#' so <- hms::as_hms(NA)
+#' sd <- lubridate::dhours(7.5)
+#' ms(so, sd)
 #' #> NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' so <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
 #' sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
 #' ms(so, sd)
@@ -209,17 +217,31 @@ ms <- function(so, sd) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' msf_sc(hms::parse_hms("04:00:00"), lubridate::dhours(6),
-#'        lubridate::dhours(7), lubridate::dhours(6.29), FALSE)
+#' msf <- hms::parse_hms("04:00:00")
+#' sd_w <- lubridate::dhours(6)
+#' sd_f <- lubridate::dhours(7)
+#' sd_week <- lubridate::dhours(6.29)
+#' alarm_f <- FALSE
+#' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 03:38:42 # Expected
-#' msf_sc(hms::parse_hm("01:00:00"), lubridate::dhours(5.5),
-#'        lubridate::dhours(9), lubridate::dhours(6.75), FALSE)
-#' #> 23:52:30 # Expected
-#' msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(7.5),
-#'        lubridate::dhours(10), lubridate::dhours(8.5), TRUE)
-#' #> NA # Expected (msf_sc cannot be computed if `alarm_f == TRUE`)
 #'
-#' ## __ Vectorized example __
+#' msf <- hms::parse_hm("01:00:00")
+#' sd_w <- lubridate::dhours(5.5)
+#' sd_f <- lubridate::dhours(9)
+#' sd_week <- lubridate::dhours(6.75)
+#' alarm_f <- FALSE
+#' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
+#' #> 23:52:30 # Expected
+#'
+#' msf <- hms::parse_hms("05:40:00")
+#' sd_w <- lubridate::dhours(7.5)
+#' sd_f <- lubridate::dhours(10)
+#' sd_week <- lubridate::dhours(8.5)
+#' alarm_f <- TRUE
+#' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
+#' #> NA # Expected (`msf_sc` cannot be computed if `alarm_f == TRUE`)
+#'
+#' ## __ Vector example __
 #' msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
 #' sd_w <- c(lubridate::dhours(9), lubridate::dhours(6.45))
 #' sd_f <- c(lubridate::dhours(5), lubridate::dhours(10))
@@ -230,17 +252,25 @@ ms <- function(so, sd) {
 #' #> 04:21:00 # Expected
 #'
 #' ## __ A wrapper for msf_sc() __
-#' chronotype(hms::parse_hms("07:00:00"), lubridate::dhours(6),
-#'            lubridate::dhours(12), lubridate::dhours(9.45), FALSE)
+#' msf <- hms::parse_hms("07:00:00")
+#' sd_w <- lubridate::dhours(6)
+#' sd_f <- lubridate::dhours(12)
+#' sd_week <- lubridate::dhours(9.45)
+#' alarm_f <- FALSE
+#' chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 05:43:30 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- msf_sc(hms::parse_hms("05:40:00"), lubridate::dhours(5.43678),
-#'             lubridate::dhours(9.345111), lubridate::dhours(7.5453), FALSE)
+#' msf <- hms::parse_hms("05:40:00")
+#' sd_w <- lubridate::dhours(5.43678)
+#' sd_f <- lubridate::dhours(9.345111)
+#' sd_week <- lubridate::dhours(7.5453)
+#' alarm_f <- FALSE
+#' x <- msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' x
-#' #> 04:46:02.340202 # Expected
+#' #> 04:46:00.3402 # Expected
 #' round_time(x)
-#' #> 04:46:02 # Expected
+#' #> 04:46:00 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 
     checkmate::assert_class(msf, "hms")

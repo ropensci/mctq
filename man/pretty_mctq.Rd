@@ -44,9 +44,18 @@ standard. For more information see \code{?round_time}.
 }
 }
 \examples{
-\dontrun{
-pretty_mctq(mctq:::analyze_std_mctq(round = FALSE, hms = FALSE))
-}
+data <- data.frame(
+    a = 1,
+    b = lubridate::duration(1.12345),
+    c = lubridate::period(1.12345),
+    d = as.difftime(1.12345, units = "secs"),
+    e = hms::hms(1.12345))
+
+## __ Rounding time objects from `data` __
+pretty_mctq(data, round = TRUE, hms = FALSE)
+
+## __ Converting non-`hms` time objects from `data` to `hms` __
+pretty_mctq(data, round = FALSE, hms = TRUE)
 }
 \seealso{
 Other utility functions: 

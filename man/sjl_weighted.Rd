@@ -120,30 +120,41 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 \examples{
 ## __ Scalar example __
-sjl <- list(sjl_m = lubridate::dhours(1.25), sjl_e = lubridate::dhours(0.5),
-           sjl_n = lubridate::dhours(3))
+sjl <- list(sjl_m = lubridate::dhours(1.25),
+            sjl_e = lubridate::dhours(0.5),
+            sjl_n = lubridate::dhours(3))
 n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
 sjl_weighted(sjl, n_w)
 #> [1] "7312.5s (~2.03 hours)" # Expected
 
-## __ Vectorized example __
+sjl <- list(sjl_m = lubridate::dhours(1.25),
+            sjl_e = lubridate::as.duration(NA),
+            sjl_n = lubridate::dhours(3))
+n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+sjl_weighted(sjl, n_w)
+#> [1] NA # Expected
+
+## __ Vector example __
 sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
-            sjl_e = c(lubridate::dhours(3.21), lubridate::dhours(0)),
+            sjl_e = c(lubridate::dhours(3.21), lubridate::as.duration(NA)),
             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
 n_w <- list(n_w_m = c(1, 3), n_w_e = c(4, 1), n_w_n = c(3, 3))
 sjl_weighted(sjl, n_w)
-#> [1] "8298s (~2.31 hours)"  "11988s (~3.33 hours)"  # Expected
+#> [1] "8298s (~2.31 hours)" NA # Expected
 
-## __ Checking the second output from vectorized example __
-i <- 2
-x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
-w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
-lubridate::as.duration(stats::weighted.mean(x, w))
-#> [1] "11988s (~3.33 hours)" # Expected
+## __ Checking the first output from vector example __
+if (requireNamespace("stats", quietly = TRUE)) {
+    i <- 1
+    x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
+    w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
+    lubridate::as.duration(stats::weighted.mean(x, w))
+#> [1] "8298s (~2.31 hours)" # Expected
+}
 
 ## __ Converting the output to hms __
-sjl <- list(sjl_m = lubridate::dhours(0.25), sjl_e = lubridate::dhours(1.2),
-           sjl_n = lubridate::dhours(4.32))
+sjl <- list(sjl_m = lubridate::dhours(0.25),
+            sjl_e = lubridate::dhours(1.2),
+            sjl_n = lubridate::dhours(4.32))
 n_w <- list(n_w_m = 4, n_w_e = 2, n_w_n = 1)
 sjl_weighted(sjl, n_w)
 #> [1] "3970.28571428571s (~1.1 hours)" # Expected

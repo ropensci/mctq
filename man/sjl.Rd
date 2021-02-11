@@ -205,6 +205,10 @@ msw <- hms::parse_hms("03:30:00")
 msf <- hms::parse_hms("05:00:00")
 sjl(msw, msf)
 #> [1] "5400s (~1.5 hours)" # Expected
+sjl(msw, msf, abs = FALSE)
+#> [1] "5400s (~1.5 hours)" # Expected
+sjl_rel(msw, msf) # Wrapper function
+#> [1] "5400s (~1.5 hours)" # Expected
 
 msw <- hms::parse_hms("04:30:00")
 msf <- hms::parse_hms("23:30:00")
@@ -220,7 +224,7 @@ msf <- hms::parse_hms("05:15:00")
 sjl(msw, msf)
 #> NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
 msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("04:05:00"))
 sjl(msw, msf)
@@ -247,19 +251,25 @@ sjl(msw, msf, abs = FALSE, method = "difference")
 sjl(msw, msf, abs = FALSE, method = "shortest") # default method
 #> [1] "5400s (~1.5 hours)" # Expected
 sjl(msw, msf, abs = FALSE, method = "longer")
-#> [1] [1] "-81000s (~-22.5 hours)" # Expected
+#> [1] "-81000s (~-22.5 hours)" # Expected
 
 ## __ Converting the output to `hms` __
-x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
+msw <- hms::parse_hms("01:15:00")
+msf <- hms::parse_hms("03:25:05")
+x <- sjl(msw, msf)
+x
+#> [1] "7805s (~2.17 hours)" # Expected
 convert(x, "hms")
 #> 02:10:05 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sjl(hms::parse_hms("04:19:33.1234"), hms::parse_hms("2:55:05"))
+msw <- hms::parse_hms("04:19:33.1234")
+msf <- hms::parse_hms("02:55:05")
+x <- sjl(msw, msf)
 x
-#> [1] "5071.12339782715s (~1.41 hours)" # Expected
+#> [1] "5068.12339997292s (~1.41 hours)" # Expected
 round_time(x)
-#> [1] "5071s (~1.41 hours)" # Expected
+#> [1] "5068s (~1.41 hours)" # Expected
 }
 \references{
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,

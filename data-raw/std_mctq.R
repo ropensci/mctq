@@ -114,28 +114,30 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     if (isTRUE(random_cases)) {
         for (i in id[-1]) {
-            random_case <- dplyr::as_tibble(random_mctq()) %>% dplyr::transmute(
-                `ID` = as.character(i),
-                `WORK REGULAR` =  format_logical(.data$work),
-                `WORK DAYS` = as.character(.data$wd),
-                `W BED TIME` = format_hms(.data$bt_w),
-                `W SLEEP PREP` = format_hms(.data$sprep_w),
-                `W SLEEP LAT` = format_duration(.data$slat_w),
-                `W SLEEP END` = format_hms(.data$se_w),
-                `W SLEEP INERTIA` = format_duration(.data$si_w),
-                `W ALARM` = format_logical(.data$alarm_w),
-                `W WAKE BEFORE ALARM` = format_logical(.data$wake_before_w),
-                `W LIGHT EXPOSURE` = format_hms(.data$le_w),
-                `F BED TIME` = format_hms(.data$bt_f),
-                `F SLEEP PREP` = format_hms(.data$sprep_f),
-                `F SLEEP LAT` = format_duration(.data$slat_f),
-                `F SLEEP END` = format_hms(.data$se_f),
-                `F SLEEP INERTIA` = format_duration(.data$si_f),
-                `F ALARM` = format_logical(.data$alarm_f),
-                `F REASONS` = format_logical(.data$reasons_f),
-                `F REASONS WHY` = .data$reasons_why_f,
-                `F LIGHT EXPOSURE` = format_hms(.data$le_f)
-            )
+            random_case <- dplyr::as_tibble(
+                random_mctq(model = "standard", quiet = TRUE)) %>%
+                dplyr::transmute(
+                    `ID` = as.character(i),
+                    `WORK REGULAR` =  format_logical(.data$work),
+                    `WORK DAYS` = as.character(.data$wd),
+                    `W BED TIME` = format_hms(.data$bt_w),
+                    `W SLEEP PREP` = format_hms(.data$sprep_w),
+                    `W SLEEP LAT` = format_duration(.data$slat_w),
+                    `W SLEEP END` = format_hms(.data$se_w),
+                    `W SLEEP INERTIA` = format_duration(.data$si_w),
+                    `W ALARM` = format_logical(.data$alarm_w),
+                    `W WAKE BEFORE ALARM` = format_logical(.data$wake_before_w),
+                    `W LIGHT EXPOSURE` = format_hms(.data$le_w),
+                    `F BED TIME` = format_hms(.data$bt_f),
+                    `F SLEEP PREP` = format_hms(.data$sprep_f),
+                    `F SLEEP LAT` = format_duration(.data$slat_f),
+                    `F SLEEP END` = format_hms(.data$se_f),
+                    `F SLEEP INERTIA` = format_duration(.data$si_f),
+                    `F ALARM` = format_logical(.data$alarm_f),
+                    `F REASONS` = format_logical(.data$reasons_f),
+                    `F REASONS WHY` = .data$reasons_why_f,
+                    `F LIGHT EXPOSURE` = format_hms(.data$le_f)
+                )
 
             std_mctq <- dplyr::bind_rows(std_mctq, random_case)
         }

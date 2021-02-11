@@ -77,7 +77,7 @@
 #' gu(hms::as_hms(NA), lubridate::dminutes(90))
 #' #> NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("23:45:00"))
 #' si <- c(lubridate::dminutes(10), lubridate::dminutes(70))
 #' gu(se, si)

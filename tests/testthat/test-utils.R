@@ -1,9 +1,9 @@
-test_that("flat_posixct()", {
+test_that("flat_posixct() | general test", {
     object <- flat_posixt(lubridate::dmy_hms("17/04/1995 10:55:00"))
     expect_equal(object, lubridate::ymd_hms("1970-01-01 10:55:00"))
 })
 
-test_that("midday_change()", {
+test_that("midday_change() | general test", {
     object <- midday_change(lubridate::ymd_hms("2000-05-04 19:43:33"))
     expect_equal(object, lubridate::ymd_hms("1970-01-01 19:43:33"))
 
@@ -17,7 +17,7 @@ test_that("midday_change()", {
                            lubridate::ymd_hms("1970-01-02 06:00:00")))
 })
 
-test_that("is_time()", {
+test_that("is_time() | general test", {
     expect_true(is_time(lubridate::days(1)))
     expect_false(is_time(1))
     expect_false(is_time(letters))

@@ -118,8 +118,6 @@ For basic MCTQ computation, use:
 
 ```{r, message = FALSE}
 library(mctq)
-library(lubridate)
-library(hms)
 
 # Local time of preparing to sleep on workdays.
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
@@ -141,8 +139,6 @@ For computations combining workdays and work-free days, use:
 
 ```{r, message = FALSE}
 library(mctq)
-library(lubridate)
-library(hms)
 
 # Mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
@@ -158,7 +154,11 @@ The functions are well documented, showing all the guidelines behind the computa
 
 ## Citation
 
-If you use `mctq` in your research, please consider citing it. We put a lot of work to build and maintain a free and open source R package. You can find `mctq` citation [here](https://gipsousp.github.io/mctq/authors.html).
+If you use `mctq` in your research, please consider citing it. We put a lot of work to build and maintain a free and open source R package. You can find `mctq` citation below.
+
+```{r}
+citation("mctq")
+```
 
 ## Contributing
 

@@ -25,6 +25,8 @@
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
+#' @param quiet (optional) a `logical` value indicating if warnings or messages
+#'   must be suppressed (default: `FALSE`).
 #'
 #' @return A named list with elements representing each MCTQ basic/measurable
 #'   variable of the model indicated in `model`.
@@ -34,22 +36,24 @@
 #'
 #' @examples
 #' \dontrun{
-#' random_case()
+#' random_mctq("standard")
+#' random_mctq("shift")
+#' random_mctq("micro")
 #' }
-random_mctq <- function(model = "standard") {
+random_mctq <- function(model = "standard", quiet = FALSE) {
 
-    if(!isNamespaceLoaded("stats")) {
+    if (!is_namespace_loaded("stats")) {
         stop('This function requires the `stats` package to run. ',
              'You can install it by running: \n \n',
              'install.packages("stats") \n', call. = FALSE)
     }
 
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
+    checkmate::assert_flag(quiet)
 
     if (model %in% c("std", "standard")) {
+        shush(message("\nModel: Standard MCTQ\n"), quiet = quiet)
         random_std_mctq()
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -57,14 +61,6 @@ random_mctq <- function(model = "standard") {
 #' @family utility functions
 #' @noRd
 random_std_mctq <- function() {
-
-    # Check requirements -----
-
-    if(!isNamespaceLoaded("stats")) {
-        stop('This function requires the `stats` package to run. ',
-             'You can install it by running: \n \n',
-             'install.packages("stats") \n', call. = FALSE)
-    }
 
     # Set values -----
 

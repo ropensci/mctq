@@ -209,7 +209,7 @@
 #' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
-#' ## __ Conversion from date/time objects to units __
+#' ## __ Converting from date/time objects to units __
 #' convert(lubridate::dhours(), "numeric", output_unit = "M")
 #' #> [1] 60 # Expected
 #' convert(lubridate::days(), "numeric", output_unit = "rad")
@@ -225,7 +225,7 @@
 #' convert_tu(hms::parse_hm("15:45:00"), "H") # Wrapper function
 #' #> [1] 15.75 # Expected
 #'
-#' ## __ Conversion from units to date/time objects __
+#' ## __ Converting from units to date/time objects __
 #' convert(360, "Period", input_unit = "deg")
 #' #> [1] "1d 0H 0M 0S" # Expected
 #' convert(6.5, "Posixct", input_unit = "H")
@@ -239,7 +239,7 @@
 #' convert_ut(1.308997, "Duration", "rad") # Wrapper function
 #' #> [1] "18000s (~5 hours)" # Expected
 #'
-#' ## __ Conversion between date/time objects __
+#' ## __ Converting between date/time objects __
 #' convert(lubridate::dseconds(120), "hms")
 #' #> 00:02:00 # Expected
 #' convert(hms::as_hms("13:45:05"), "POSIXct")
@@ -254,7 +254,7 @@
 #' convert_tt(x, "Duration") # Wrapper function
 #' #> [1] "45065s (~12.52 hours)" # Expected
 #'
-#' ## __ Conversion between units __
+#' ## __ Converting between units __
 #' convert(1.308997, "numeric", input_unit = "rad", output_unit = "H")
 #' #> [1] 5 # Expected
 #' convert(60, "numeric", input_unit = "deg", output_unit = "rad")
@@ -268,7 +268,7 @@
 #' convert_uu(40, "d", "deg") # Wrapper function
 #' #> [1] 14400 # Expected
 #'
-#' ## __ Conversion from character or numeric objects to date/time objects __
+#' ## __ Converting from character or numeric objects to date/time objects __
 #' convert("19:55:17", "Duration", orders = "HMS")
 #' #> [1] "71717s (~19.92 hours)" # Expected
 #' convert("21:00", "Period", orders = "HM")
@@ -288,7 +288,7 @@
 #' convert_pt("03/07/1982 13:00", "POSIXlt", "dmy HM") # Wrapper function
 #' #> [1] "1982-07-03 13:00:00 UTC" # Expected
 #'
-#' ## __ Conversion from character or numeric objects to units __
+#' ## __ Converting from character or numeric objects to units __
 #' convert("0145", "numeric", orders = "HM", output_unit = "M")
 #' #> [1] 105 # Expected
 #' convert(45, "numeric", orders = "M", output_unit = "H")
@@ -302,7 +302,7 @@
 #' convert_pu("01:00", "HM", "rad") # Wrapper function
 #' #> [1] 0.2617994 # Expected
 #'
-#' ## __ Conversion of columns of a data frame __
+#' ## __ Converting columns of a data frame __
 #' \dontrun{
 #' out <- convert(datasets::mtcars, "posixct", cols = c("cyl", "carb"),
 #'                   orders = "H")
@@ -366,9 +366,6 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
                                  ignore_date = ignore_date,
                                  close_round = close_round,
                                  quiet = quiet)
-
-            if (class %in% "integer") return(as.integer(x))
-            if (class %in% c("double", "numeric")) return(x)
         } else if (!is.null(input_unit) && check &&
                    !(class %in% c("integer", "double", "numeric"))) {
             return(convert_to_date_time(shush(as.numeric(x)),
@@ -456,8 +453,6 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
             x <- as.POSIXlt(x)
             lubridate::force_tz(x, tz = tz)
         }
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -524,8 +519,6 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "posixlt") {
         x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
         lubridate::force_tz(x, tz = tz)
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -601,8 +594,6 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "posixlt") {
         x <- as.POSIXlt(hms::as_hms(x))
         lubridate::force_tz(x, tz = tz)
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -653,8 +644,6 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         lubridate::force_tz(lubridate::as_datetime(x), tz = tz)
     } else if (class == "posixlt") {
         as.POSIXlt(lubridate::force_tz(lubridate::as_datetime(x), tz = tz))
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -703,8 +692,6 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         lubridate::force_tz(as.POSIXct(x), tz = tz)
     } else if (class == "posixlt") {
         lubridate::force_tz(as.POSIXlt(x), tz = tz)
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -754,8 +741,6 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "posixlt") {
         x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
         lubridate::force_tz(x, tz = tz)
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -795,8 +780,6 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
     } else if (!is.null(cols)) {
         out <- dplyr::mutate(x, dplyr::across(cols, call))
         invisible(out)
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
 }
@@ -1121,8 +1104,6 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
         x <- x * rad_second
     } else if (output_unit == "deg") {
         x <- x * deg_second
-    } else {
-        stop("Critical error.", call. = FALSE)
     }
 
     if (isTRUE(close_round)) {

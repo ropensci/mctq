@@ -38,25 +38,42 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' pretty_mctq(mctq:::analyze_std_mctq(round = FALSE, hms = FALSE))
-#' }
+#' data <- data.frame(
+#'     a = 1,
+#'     b = lubridate::duration(1.12345),
+#'     c = lubridate::period(1.12345),
+#'     d = as.difftime(1.12345, units = "secs"),
+#'     e = hms::hms(1.12345))
+#'
+#' ## __ Rounding time objects from `data` __
+#' pretty_mctq(data, round = TRUE, hms = FALSE)
+#'
+#' ## __ Converting non-`hms` time objects from `data` to `hms` __
+#' pretty_mctq(data, round = FALSE, hms = TRUE)
 pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
+
+    checkmate::assert_data_frame(data)
+    checkmate::assert_flag(round)
+    checkmate::assert_flag(hms)
 
     where <- NULL # R CMD Check variable bindings fix
 
-    test <- function(x) {
-        classes <- c("Duration", "Period", "difftime", "hms")
-
-        checkmate::test_multi_class(x, classes)
-    }
-
     if (isTRUE(round)) {
-        data <- dplyr::mutate(data, dplyr::across(where(test), round_time))
+        check <- function(x) {
+            classes <- c("Duration", "Period", "difftime", "hms")
+            checkmate::test_multi_class(x, classes)
+        }
+
+        data <- dplyr::mutate(data, dplyr::across(where(check), round_time))
     }
 
     if (isTRUE(hms)) {
-        data <- convert(data, "hms", where = test)
+        check <- function(x) {
+            classes <- c("Duration", "Period", "difftime")
+            checkmate::test_multi_class(x, classes)
+        }
+
+        data <- convert(data, "hms", where = check)
     }
 
     data

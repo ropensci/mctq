@@ -51,8 +51,15 @@ days per week").
 }
 
 \examples{
+## __ Scalar example __
 fd(5)
 #> [1] 2 # Expected
+fd(4)
+#> [1] 3 # Expected
+fd(as.numeric(NA))
+#> [1] NA # Expected
+
+## __ Vector example __
 fd(0:7)
 #> [1] 7 6 5 4 3 2 1 0 # Expected
 fd(c(1, NA))

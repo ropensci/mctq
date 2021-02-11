@@ -47,13 +47,14 @@ test_that("le_week() | vector test", {
 
 test_that("le_week() | error test", {
     # Invalid values for `le_w`, `le_f`, and `wd`
-    expect_error(le_week(1, lubridate::dhours(), 1))
-    expect_error(le_week(lubridate::dhours(), 1, 1))
-    expect_error(le_week(lubridate::dhours(), lubridate::dhours(), "a"))
-    expect_error(le_week(lubridate::dhours(), lubridate::dhours(), 1.5))
-    expect_error(le_week(lubridate::dhours(), lubridate::dhours(), -1))
-    expect_error(le_week(lubridate::dhours(), lubridate::dhours(), 8))
+    expect_error(le_week(1, lubridate::duration(1), 1))
+    expect_error(le_week(lubridate::duration(1), 1, 1))
+    expect_error(le_week(lubridate::duration(1), lubridate::duration(1), "a"))
+    expect_error(le_week(lubridate::duration(1), lubridate::duration(1), 1.5))
+    expect_error(le_week(lubridate::duration(1), lubridate::duration(1), -1))
+    expect_error(le_week(lubridate::duration(1), lubridate::duration(1), 8))
 
     # `le_w`, `le_f`, and `wd` have different lengths
-    expect_error(le_week(lubridate::dhours(), lubridate::dhours(), c(1, 1)))
+    expect_error(le_week(lubridate::duration(1), lubridate::duration(1),
+                         c(1, 1)))
 })

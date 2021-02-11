@@ -22,7 +22,10 @@ purposes. \code{raw_data()} make it easy to access their paths.
 }
 \examples{
 \dontrun{
+## __ To list all raw dataset file names available __
 raw_data()
+
+## __ To get the file path from a specific raw dataset __
 raw_data(raw_data()[1])
 raw_data("std_mctq.csv")
 }

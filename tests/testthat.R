@@ -1,36 +1,15 @@
-library(testthat)
-library(mctq)
-
 library(checkmate)
-library(crayon)
-library(grDevices)
-library(hms)
-library(lubridate)
-library(stats)
-library(utils)
+library(mctq)
+library(mockr)
+library(testthat)
 
 test_check("mctq")
 
 # # For development use only (comment the code after use (Ctrl + Shift + C))
 #
-# library(checkmate)
-# library(crayon)
-# library(glue)
-# library(hms)
-# library(lubridate)
-# library(magrittr)
-# library(rlang)
-# library(tidyverse)
-# library(validate)
-#
-# library(devtools)
-# load_all()
-# document()
-#
-# ## Helpers:
-#
 # .rs.restartR()
 # devtools::install()
+# devtools::test_coverage_file()
 # covr::package_coverage()
 # covr::codecov(token = "59cf66a5-a137-4d7e-b515-af29acd17bf3")
 # pkgdown::build_site(preview = FALSE)

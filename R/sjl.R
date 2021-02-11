@@ -137,6 +137,10 @@
 #' msf <- hms::parse_hms("05:00:00")
 #' sjl(msw, msf)
 #' #> [1] "5400s (~1.5 hours)" # Expected
+#' sjl(msw, msf, abs = FALSE)
+#' #> [1] "5400s (~1.5 hours)" # Expected
+#' sjl_rel(msw, msf) # Wrapper function
+#' #> [1] "5400s (~1.5 hours)" # Expected
 #'
 #' msw <- hms::parse_hms("04:30:00")
 #' msf <- hms::parse_hms("23:30:00")
@@ -152,7 +156,7 @@
 #' sjl(msw, msf)
 #' #> NA # Expected
 #'
-#' ## __ Vectorized example __
+#' ## __ Vector example __
 #' msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
 #' msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("04:05:00"))
 #' sjl(msw, msf)
@@ -179,19 +183,25 @@
 #' sjl(msw, msf, abs = FALSE, method = "shortest") # default method
 #' #> [1] "5400s (~1.5 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE, method = "longer")
-#' #> [1] [1] "-81000s (~-22.5 hours)" # Expected
+#' #> [1] "-81000s (~-22.5 hours)" # Expected
 #'
 #' ## __ Converting the output to `hms` __
-#' x <- sjl(hms::parse_hms("01:15:00"), hms::parse_hms("03:25:05"))
+#' msw <- hms::parse_hms("01:15:00")
+#' msf <- hms::parse_hms("03:25:05")
+#' x <- sjl(msw, msf)
+#' x
+#' #> [1] "7805s (~2.17 hours)" # Expected
 #' convert(x, "hms")
 #' #> 02:10:05 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
-#' x <- sjl(hms::parse_hms("04:19:33.1234"), hms::parse_hms("2:55:05"))
+#' msw <- hms::parse_hms("04:19:33.1234")
+#' msf <- hms::parse_hms("02:55:05")
+#' x <- sjl(msw, msf)
 #' x
-#' #> [1] "5071.12339782715s (~1.41 hours)" # Expected
+#' #> [1] "5068.12339997292s (~1.41 hours)" # Expected
 #' round_time(x)
-#' #> [1] "5071s (~1.41 hours)" # Expected
+#' #> [1] "5068s (~1.41 hours)" # Expected
 sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
 
     choices <- c("difference", "shortest", "longer")
@@ -317,30 +327,41 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sjl <- list(sjl_m = lubridate::dhours(1.25), sjl_e = lubridate::dhours(0.5),
-#'            sjl_n = lubridate::dhours(3))
+#' sjl <- list(sjl_m = lubridate::dhours(1.25),
+#'             sjl_e = lubridate::dhours(0.5),
+#'             sjl_n = lubridate::dhours(3))
 #' n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
 #' sjl_weighted(sjl, n_w)
 #' #> [1] "7312.5s (~2.03 hours)" # Expected
 #'
-#' ## __ Vectorized example __
+#' sjl <- list(sjl_m = lubridate::dhours(1.25),
+#'             sjl_e = lubridate::as.duration(NA),
+#'             sjl_n = lubridate::dhours(3))
+#' n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+#' sjl_weighted(sjl, n_w)
+#' #> [1] NA # Expected
+#'
+#' ## __ Vector example __
 #' sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
-#'             sjl_e = c(lubridate::dhours(3.21), lubridate::dhours(0)),
+#'             sjl_e = c(lubridate::dhours(3.21), lubridate::as.duration(NA)),
 #'             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
 #' n_w <- list(n_w_m = c(1, 3), n_w_e = c(4, 1), n_w_n = c(3, 3))
 #' sjl_weighted(sjl, n_w)
-#' #> [1] "8298s (~2.31 hours)"  "11988s (~3.33 hours)"  # Expected
+#' #> [1] "8298s (~2.31 hours)" NA # Expected
 #'
-#' ## __ Checking the second output from vectorized example __
-#' i <- 2
-#' x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
-#' w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
-#' lubridate::as.duration(stats::weighted.mean(x, w))
-#' #> [1] "11988s (~3.33 hours)" # Expected
+#' ## __ Checking the first output from vector example __
+#' if (requireNamespace("stats", quietly = TRUE)) {
+#'     i <- 1
+#'     x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
+#'     w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
+#'     lubridate::as.duration(stats::weighted.mean(x, w))
+#' #> [1] "8298s (~2.31 hours)" # Expected
+#' }
 #'
 #' ## __ Converting the output to hms __
-#' sjl <- list(sjl_m = lubridate::dhours(0.25), sjl_e = lubridate::dhours(1.2),
-#'            sjl_n = lubridate::dhours(4.32))
+#' sjl <- list(sjl_m = lubridate::dhours(0.25),
+#'             sjl_e = lubridate::dhours(1.2),
+#'             sjl_n = lubridate::dhours(4.32))
 #' n_w <- list(n_w_m = 4, n_w_e = 2, n_w_n = 1)
 #' sjl_weighted(sjl, n_w)
 #' #> [1] "3970.28571428571s (~1.1 hours)" # Expected

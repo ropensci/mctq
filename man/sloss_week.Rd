@@ -115,14 +115,25 @@ approaches to deal with those cases. See \code{vignette("missing-sections", pack
 
 \examples{
 ## __ Scalar example __
-sloss_week(lubridate::dhours(6.5), lubridate::dhours(7), 4)
+sd_w <- lubridate::dhours(6.5)
+sd_f <- lubridate::dhours(7)
+wd <- 4
+sloss_week(sd_w, sd_f, wd)
 #> [1] "3085.71428571429s (~51.43 minutes)" # Expected
-sloss_week(lubridate::dhours(7), lubridate::dhours(8), 5)
+
+sd_w <- lubridate::dhours(7)
+sd_f <- lubridate::dhours(8)
+wd <- 5
+sloss_week(sd_w, sd_f, wd)
 #> [1] "5142.85714285714s (~1.43 hours)" # Expected
-sloss_week(lubridate::dhours(NA), lubridate::dhours(9.45), 7)
+
+sd_w <- lubridate::dhours(NA)
+sd_f <- lubridate::dhours(9.45)
+wd <- 7
+sloss_week(sd_w, sd_f, wd)
 #> [1] NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
 wd <- c(2, 0)
@@ -131,12 +142,20 @@ sloss_week(sd_w, sd_f, wd)
 #> [2] "0s"
 
 ## __ Converting the output to `hms` __
-x <- sloss_week(lubridate::dhours(4), lubridate::dhours(5), 3)
+sd_w <- lubridate::dhours(4)
+sd_f <- lubridate::dhours(5)
+wd <- 3
+x <- sloss_week(sd_w, sd_f, wd)
+x
+#> [1] "6171.42857142858s (~1.71 hours)" # Expected
 convert(x, "hms")
 #> 01:42:51.428571 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sloss_week(lubridate::dhours(5.8743), lubridate::dhours(7.4324), 6)
+sd_w <- lubridate::dhours(5.8743)
+sd_f <- lubridate::dhours(7.4324)
+wd <- 6
+x <- sloss_week(sd_w, sd_f, wd)
 x
 #> [1] "4807.85142857144s (~1.34 hours)" # Expected
 round_time(x)

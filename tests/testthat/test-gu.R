@@ -1,10 +1,20 @@
 test_that("gu() | scalar test", {
-    object <- gu(hms::parse_hm("08:00"), lubridate::dminutes(10))
+    se <- hms::parse_hm("08:00")
+    si <- lubridate::dminutes(10)
+    object <- gu(se, si)
     expected <- hms::parse_hm("08:10")
     expect_equal(object, expected)
 
-    object <- gu(hms::parse_hm("23:30"), lubridate::dminutes(90))
+    se <- hms::parse_hm("23:30")
+    si <- lubridate::dminutes(90)
+    object <- gu(se, si)
     expected <- hms::parse_hm("01:00")
+    expect_equal(object, expected)
+
+    se <- hms::parse_hm("23:30")
+    si <- lubridate::as.duration(NA)
+    object <- gu(se, si)
+    expected <- hms::as_hms(NA)
     expect_equal(object, expected)
 })
 
@@ -18,12 +28,10 @@ test_that("gu() | vector test", {
 
 test_that("gu() | error test", {
     # Invalid values for `se` and `si`
-    expect_error(gu(1, 2))
-    expect_error(gu(NA, NA))
-    expect_error(gu("a", lubridate::dminutes(10)))
-    expect_error(gu(hms::parse_hm("11:00"), lubridate::minutes(2)))
+    expect_error(gu(1, lubridate::duration(1)))
+    expect_error(gu(hms::hms(1), 1))
 
     # `se` and `si` have different lengths
-    expect_error(gu(hms::parse_hm("10:15"), c(lubridate::dminutes(15),
-                                              lubridate::dminutes(90))))
+    expect_error(gu(hms::hms(1), c(lubridate::duration(1),
+                                   lubridate::duration(1))))
 })

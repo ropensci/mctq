@@ -118,14 +118,28 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 \examples{
 ## __ Scalar example __
-sd_overall(lubridate::dhours(5), lubridate::dhours(9), 2, 2)
+sd_w <- lubridate::dhours(5)
+sd_f <- lubridate::dhours(9)
+n_w <- 2
+n_f <- 2
+sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] "25200s (~7 hours)" # Expected
-sd_overall(lubridate::dhours(3.45), lubridate::dhours(10), 3, 1)
+
+sd_w <- lubridate::dhours(3.45)
+sd_f <- lubridate::dhours(10)
+n_w <- 3
+n_f <- 1
+sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] "18315s (~5.09 hours)" # Expected
-sd_overall(lubridate::as.duration(NA), lubridate::dhours(12), 4, 4)
+
+sd_w <- lubridate::as.duration(NA)
+sd_f <- lubridate::dhours(12)
+n_w <- 4
+n_f <- 4
+sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] NA # Expected
 
-## __ Vectorized example __
+## __ Vector example __
 sd_w <- c(lubridate::dhours(4), lubridate::dhours(7))
 sd_f <- c(lubridate::dhours(12), lubridate::dhours(9))
 n_w <- c(3, 4)
@@ -133,20 +147,32 @@ n_f <- c(2, 4)
 sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] "25920s (~7.2 hours)" "28800s (~8 hours)"  # Expected
 
-## __ Checking second output from vectorized example __
-i <- 2
-x <- c(sd_w[i], sd_f[i])
-w <- c(n_w[i], n_f[i])
-lubridate::as.duration(stats::weighted.mean(x, w))
+## __ Checking second output from vector example __
+if (requireNamespace("stats", quietly = TRUE)) {
+    i <- 2
+    x <- c(sd_w[i], sd_f[i])
+    w <- c(n_w[i], n_f[i])
+    lubridate::as.duration(stats::weighted.mean(x, w))
 #> [1] "28800s (~8 hours)" # Expected
+}
 
 ## __ Converting the output to hms __
-x <- sd_overall(lubridate::dhours(4.75), lubridate::dhours(10), 5, 2)
+sd_w <- lubridate::dhours(4.75)
+sd_f <- lubridate::dhours(10)
+n_w <- 5
+n_f <- 2
+x <- sd_overall(sd_w, sd_f, n_w, n_f)
+x
+#> [1] "22500s (~6.25 hours)" # Expected
 convert(x, "hms")
 #> 06:15:00 # Expected
 
 ## __ Rounding the output at the seconds level __
-x <- sd_overall(lubridate::dhours(5.9874), lubridate::dhours(9.3), 3, 2)
+sd_w <- lubridate::dhours(5.9874)
+sd_f <- lubridate::dhours(9.3)
+n_w <- 3
+n_f <- 2
+x <- sd_overall(sd_w, sd_f, n_w, n_f)
 x
 #> [1] "26324.784s (~7.31 hours)" # Expected
 round_time(x)
