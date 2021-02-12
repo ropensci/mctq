@@ -51,7 +51,6 @@
 #' }
 validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
                           breaks = TRUE) {
-
     # To do --------------------
     #
     # * Give the user a option to choose types of validation
@@ -294,17 +293,12 @@ validate_mctq <- function(data, check = NULL, flag = FALSE, custom = NULL,
     # )
     #
     # ## Check for suspicious values -----
-
-
-
 }
 
 #' @rdname validate_mctq
 #' @noRd
 is_valid <- function(data, check = NULL, custom = NULL) {
-
     validate_mctq(data, check, flag = TRUE, custom)
-
 }
 
 
@@ -313,20 +307,17 @@ is_valid <- function(data, check = NULL, custom = NULL) {
 #' @family validation functions
 #' @noRd
 is_valid_test <- function(summary) {
-
     if (sum(summary$fails) > 0 || any(summary$error) ||
         any(summary$warning)) {
         FALSE
     } else {
         TRUE
     }
-
 }
 
 #' @family validation functions
 #' @noRd
 export_validation <- function(data, rules, check, name = NULL) {
-
     checkmate::assert_data_frame(data)
     checkmate::assert_class(rules, "validator")
     checkmate::assert_character(check, any.missing = FALSE, min.len = 1)
@@ -356,7 +347,6 @@ export_validation <- function(data, rules, check, name = NULL) {
         violating = violating)
 
     invisible(out)
-
 }
 
 

@@ -123,14 +123,14 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 sjl <- list(sjl_m = lubridate::dhours(1.25),
             sjl_e = lubridate::dhours(0.5),
             sjl_n = lubridate::dhours(3))
-n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+n_w <- list(n_w_m = 3, n_w_e = 1, n_w_n = 4)
 sjl_weighted(sjl, n_w)
 #> [1] "7312.5s (~2.03 hours)" # Expected
 
 sjl <- list(sjl_m = lubridate::dhours(1.25),
             sjl_e = lubridate::as.duration(NA),
             sjl_n = lubridate::dhours(3))
-n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+n_w <- list(n_w_m = 3, n_w_e = 1, n_w_n = 4)
 sjl_weighted(sjl, n_w)
 #> [1] NA # Expected
 

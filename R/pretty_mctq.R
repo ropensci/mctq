@@ -51,7 +51,6 @@
 #' ## __ Converting non-`hms` time objects from `data` to `hms` __
 #' pretty_mctq(data, round = FALSE, hms = TRUE)
 pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
-
     checkmate::assert_data_frame(data)
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
@@ -77,5 +76,4 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     }
 
     data
-
 }

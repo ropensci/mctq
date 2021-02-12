@@ -51,12 +51,10 @@
 #' round_time(x)
 #' #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 round_time <- function(x) {
-
     classes <- c("Duration", "Period", "difftime", "hms")
     checkmate::assert_multi_class(x, classes)
 
     class <- class(x)[1]
     x <- round(as.numeric(x))
     convert(x, class)
-
 }

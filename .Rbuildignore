@@ -4,6 +4,7 @@
 ^docs$
 ^man-roxygen$
 ^pkgdown$
+^\.travis\.yml$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^CODE_OF_CONDUCT\.md$
@@ -12,4 +13,3 @@
 ^LICENSE\.md$
 ^mctq\.Rproj$
 ^README\.Rmd$
-^\.travis\.yml$

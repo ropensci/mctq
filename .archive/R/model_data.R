@@ -23,7 +23,6 @@
 #' data <- model_data()
 #' }
 model_data <- function(model = "standard") {
-
     model <- stringr::str_to_lower(model)
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 
@@ -36,5 +35,4 @@ model_data <- function(model = "standard") {
     } else {
         rlang::abort("Critical error")
     }
-
 }

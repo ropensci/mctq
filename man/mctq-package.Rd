@@ -31,7 +31,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item GIPSO [funder, copyright holder]
+  \item GIPSO [funder]
   \item USP [funder]
 }
 

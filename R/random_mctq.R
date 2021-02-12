@@ -41,7 +41,6 @@
 #' random_mctq("micro")
 #' }
 random_mctq <- function(model = "standard", quiet = FALSE) {
-
     if (!is_namespace_loaded("stats")) {
         stop('This function requires the `stats` package to run. ',
              'You can install it by running: \n \n',
@@ -55,13 +54,11 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
         shush(message("\nModel: Standard MCTQ\n"), quiet = quiet)
         random_std_mctq()
     }
-
 }
 
 #' @family utility functions
 #' @noRd
 random_std_mctq <- function() {
-
     # Set values -----
 
     by <- as.numeric(lubridate::dminutes(5))
@@ -216,7 +213,6 @@ random_std_mctq <- function() {
         reasons_why_f = reasons_why_f,
         le_f = le_f
     )
-
 }
 
 #' @family utility functions
@@ -225,7 +221,6 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
                         max = hms::parse_hms("23:59:59"),
                         by = lubridate::dminutes(5), size = 1,
                         replace = FALSE, prob = NULL) {
-
     classes <- c("Duration", "Period", "difftime", "hms", "integer", "numeric")
 
     checkmate::assert_choice(tolower(class), tolower(classes))
@@ -252,5 +247,4 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
                      prob = prob)
 
     convert(sample, class)
-
 }

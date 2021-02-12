@@ -7,12 +7,19 @@ test_that("dialog_line() | general test", {
     # read_line <- mctq:::read_line
     # dialog_line <- mctq:::dialog_line
 
-    expect_equal(dialog_line(abort = TRUE), 999)
-
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) FALSE,
             dialog_line())
+    }
+
+    # x <- mock()
+    expect_equal(mock(), 999)
+
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            is_interactive = function(...) TRUE,
+            dialog_line(abort = TRUE))
     }
 
     # x <- mock()

@@ -3,7 +3,6 @@
 dialog_line <- function(line = paste0("Insert `quit` to exit or press enter ",
                                       "to continue > "),
                         space_above = TRUE, space_below = TRUE, abort = FALSE) {
-
     checkmate::assert_string(line, min.chars = 3)
     checkmate::assert_flag(space_above)
     checkmate::assert_flag(space_below)
@@ -21,5 +20,4 @@ dialog_line <- function(line = paste0("Insert `quit` to exit or press enter ",
     if(isTRUE(space_below)) cat("\n")
 
     answer
-
 }

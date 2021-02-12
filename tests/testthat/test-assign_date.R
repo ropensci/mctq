@@ -1,6 +1,6 @@
 test_that("assign_date() | scalar test", {
-  start <- hms::parse_hms("02:10:00")
-  end <- hms::parse_hms("05:30:00")
+  start <- hms::parse_hm("02:10")
+  end <- hms::parse_hm("05:30")
   object <- assign_date(start, end)
   expected <- lubridate::interval(
     lubridate::as_datetime("1970-01-01 02:10:00"),
@@ -43,15 +43,15 @@ test_that("assign_date() | `ambiguity` test", {
 })
 
 test_that("assign_date() | `return` test", {
-    start <- hms::parse_hms("22:15:00")
-    end <- hms::parse_hms("00:00:00")
+    start <- hms::parse_hm("22:15")
+    end <- hms::parse_hm("00:00")
     object <- assign_date(start, end, return = "list")
     expected <- list(start = lubridate::as_datetime("1970-01-01 22:15:00"),
                      end = lubridate::as_datetime("1970-01-02 00:00:00"))
     expect_equal(object, expected)
 
-    start <- hms::parse_hms("01:10:00")
-    end <- hms::parse_hms("11:45:00")
+    start <- hms::parse_hm("01:10")
+    end <- hms::parse_hm("11:45")
     object <- assign_date(start, end, return = "list")
     expected <- list(start = lubridate::as_datetime("1970-01-01 01:10:00"),
                      end = lubridate::as_datetime("1970-01-01 11:45:00"))
@@ -83,18 +83,17 @@ test_that("assign_date() | `start_name` and `end_name` test", {
 
 test_that("assign_date() | error test", {
   # Invalid values for `start` and `end`
-  expect_error(assign_date(1, 2))
-  expect_error(assign_date(NA, hms::parse_hm("01:00")))
-  expect_error(assign_date(lubridate::as_datetime(60), NA))
-  expect_error(assign_date(hms::parse_hm("11:00"), lubridate::minutes(2)))
+  expect_error(assign_date(1, hms::hms(1)))
+  expect_error(assign_date(hms::hms(1), 1))
+  expect_error(assign_date(lubridate::as_datetime(1), 1))
+  expect_error(assign_date(1, lubridate::as_datetime(1)))
 
   # `start` and `end` have different lengths
-  expect_error(assign_date(hms::parse_hm("05:20"),
-                           c(hms::parse_hm("22:05"), hms::parse_hm("05:25"))))
+  expect_error(assign_date(hms::hms(1), c(hms::hms(1), hms::hms(1))))
 
   # Invalid values for `return`, `ambiguity`, `start_name` and `end_name`
-  start <- hms::parse_hms("07:25:00")
-  end <- hms::parse_hms("01:05:00")
+  start <- hms::parse_hm("07:25")
+  end <- hms::parse_hm("01:05")
   expect_error(assign_date(start, end , return = "x"))
   expect_error(assign_date(start, end , ambiguity = "x"))
   expect_error(assign_date(start, end , start_name = 1))

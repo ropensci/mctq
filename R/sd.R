@@ -64,34 +64,32 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' so <- hms::parse_hms("23:00:00")
-#' se <- hms::parse_hms("08:00:00")
+#' so <- hms::parse_hm("23:00")
+#' se <- hms::parse_hm("08:00")
 #' sd(so, se)
 #' #> [1] "32400s (~9 hours)" # Expected
 #'
-#' so <- hms::parse_hms("02:00:00")
-#' se <- hms::parse_hms("12:30:00")
+#' so <- hms::parse_hm("02:00")
+#' se <- hms::parse_hm("12:30")
 #' sd(so, se)
 #' #> [1] "37800s (~10.5 hours)" # Expected
 #'
-#' so <- hms::parse_hms("03:15:00")
+#' so <- hms::parse_hm("03:15")
 #' se <- hms::as_hms(NA)
 #' sd(so, se)
 #' #> NA # Expected
 #'
 #' ## __ Vector example __
-#' so <- c(hms::parse_hms("04:12:00"), hms::parse_hms("21:20:00"))
-#' se <- c(hms::parse_hms("14:30:00"), hms::parse_hms("03:45:00"))
+#' so <- c(hms::parse_hm("04:12"), hms::parse_hm("21:20"))
+#' se <- c(hms::parse_hm("14:30"), hms::parse_hm("03:45"))
 #' sd(so, se)
 #' #> [1] "37080s (~10.3 hours)" "23100s (~6.42 hours)" # Expected
 sd <- function(so, se) {
-
     checkmate::assert_class(so, "hms")
     checkmate::assert_class(se, "hms")
     assert_identical(so, se, type = "length")
 
     sum_time(se, - so, class = "Duration", clock = TRUE, vectorize = TRUE)
-
 }
 
 #' Compute MCTQ nap duration (only for MCTQ Shift)
@@ -150,34 +148,32 @@ sd <- function(so, se) {
 #'
 #' @examples
 #' ## __ Scalar example __
-#' napo <- hms::parse_hms("12:30:00")
-#' nape <- hms::parse_hms("14:20:00")
+#' napo <- hms::parse_hm("12:30")
+#' nape <- hms::parse_hm("14:20")
 #' napd(napo, nape)
 #' #> [1] "6600s (~1.83 hours)"" # Expected
 #'
-#' napo <- hms::parse_hms("23:45:00")
-#' nape <- hms::parse_hms("00:30:00")
+#' napo <- hms::parse_hm("23:45")
+#' nape <- hms::parse_hm("00:30")
 #' napd(napo, nape)
 #' #> [1] "2700s (~45 minutes)" # Expected
 #'
-#' napo <- hms::parse_hms("10:20:00")
+#' napo <- hms::parse_hm("10:20")
 #' nape <- hms::as_hms(NA)
 #' napd(napo, nape)
 #' #> NA # Expected
 #'
 #' ## __ Vector example __
-#' napo <- c(hms::parse_hms("01:25:00"), hms::parse_hms("23:50:00"))
-#' nape <- c(hms::parse_hms("03:10:00"), hms::parse_hms("01:10:00"))
+#' napo <- c(hms::parse_hm("01:25"), hms::parse_hm("23:50"))
+#' nape <- c(hms::parse_hm("03:10"), hms::parse_hm("01:10"))
 #' napd(napo, nape)
 #' #> [1] "6300s (~1.75 hours)" "4800s (~1.33 hours)"  # Expected
 napd <- function(napo, nape) {
-
     checkmate::assert_class(napo, "hms")
     checkmate::assert_class(nape, "hms")
     assert_identical(napo, nape, type = "length")
 
     sum_time(nape, - napo, class = "Duration", clock = TRUE, vectorize = TRUE)
-
 }
 
 #' Compute MCTQ 24h sleep duration (only for MCTQ Shift)
@@ -276,7 +272,6 @@ napd <- function(napo, nape) {
 #' sd24(sd, napd, nap)
 #' #> [1] "29700s (~8.25 hours)" "32400s (~9 hours)" # Expected
 sd24 <- function(sd, napd, nap) {
-
     checkmate::assert_class(sd, "Duration")
     checkmate::assert_class(napd, "Duration")
     checkmate::assert_logical(nap)
@@ -290,7 +285,6 @@ sd24 <- function(sd, napd, nap) {
         TRUE ~ sum_time(sd, napd, class = "Duration", clock = FALSE,
                         vectorize = TRUE)
     )
-
 }
 
 #' Compute MCTQ average weekly sleep duration
@@ -409,17 +403,15 @@ sd24 <- function(sd, napd, nap) {
 #' round_time(x)
 #' #> [1] "22989s (~6.39 hours)" # Expected
 sd_week <- function(sd_w, sd_f, wd) {
-
     assert_duration(sd_w)
     assert_duration(sd_f)
     checkmate::assert_integerish(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
-    assert_identical(wd, sd_w, sd_f, type = "length")
+    assert_identical(sd_w, sd_f, wd, type = "length")
 
     wd <- as.integer(wd)
 
     ((sd_w * wd) + (sd_f * fd(wd))) / 7
-
 }
 
 #' Compute MCTQ overall sleep duration (only for MCTQ Shift)
@@ -561,18 +553,16 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' round_time(x)
 #' #> [1] "26325s (~7.31 hours)" # Expected
 sd_overall <- function(sd_w, sd_f, n_w, n_f) {
-
     assert_duration(sd_w)
     assert_duration(sd_f)
     checkmate::assert_integerish(n_w)
     checkmate::assert_integerish(n_f)
     checkmate::assert_numeric(n_w, lower = 0)
     checkmate::assert_numeric(n_f, lower = 0)
-    assert_identical(n_w, n_f, sd_w, sd_f, type = "length")
+    assert_identical(sd_w, sd_f, n_w, n_f, type = "length")
 
     n_w <- as.integer(n_w)
     n_f <- as.integer(n_f)
 
     ((sd_w * n_w) + (sd_f * n_f)) / (n_w + n_f)
-
 }

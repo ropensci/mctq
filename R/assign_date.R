@@ -111,27 +111,27 @@
 #' #> [1] NA--NA # Expected
 #'
 #' ## __ Vector example __
-#' start <- c(hms::parse_hms("09:45:00"), hms::parse_hms("20:30:00"))
-#' end <- c(hms::parse_hms("21:15:00"), hms::parse_hms("04:30:00"))
+#' start <- c(hms::parse_hm("09:45"), hms::parse_hm("20:30"))
+#' end <- c(hms::parse_hm("21:15"), hms::parse_hm("04:30"))
 #' assign_date(start, end)
 #' #> [1] 1970-01-01 09:45:00 UTC--1970-01-01 21:15:00 UTC # Expected
 #' #> [2] 1970-01-01 20:30:00 UTC--1970-01-02 04:30:00 UTC # Expected
 #'
 #' ## __ To return `start` and `end` as interval (default)__
-#' start <- hms::parse_hms("12:34:00")
-#' end <- hms::parse_hms("01:25:00")
+#' start <- hms::parse_hm("12:34")
+#' end <- hms::parse_hm("01:25")
 #' assign_date(start, end)
 #' #> [1] 1970-01-01 12:34:00 UTC--1970-01-02 01:25:00 UTC # Expected
 #'
 #' ## __ To return `start` and `end` as list __
-#' start <- hms::parse_hms("22:15:00")
-#' end <- hms::parse_hms("00:00:01")
+#' start <- hms::parse_hm("22:15")
+#' end <- hms::parse_hm("00:01")
 #' assign_date(start, end, return = "list")
 #' #> $start # Expected
 #' #> [1] "1970-01-01 22:15:00 UTC" # Expected
 #' #> # Expected
 #' #> $end # Expected
-#' #> [1] "1970-01-02 00:00:01 UTC" # Expected
+#' #> [1] "1970-01-02 00:01:00 UTC" # Expected
 #'
 #' ## __ To return only `start` or `end` __
 #' start <- lubridate::parse_date_time("01:10:00", "HMS")
@@ -149,7 +149,6 @@
 assign_date <- function(start, end, return = "interval", ambiguity = 0,
                         start_name = deparse(substitute(start)),
                         end_name = deparse(substitute(end))) {
-
     # Check arguments -----
 
     checkmate::assert_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
@@ -202,5 +201,4 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
 
         out
     }
-
 }

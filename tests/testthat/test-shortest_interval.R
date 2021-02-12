@@ -66,7 +66,7 @@ test_that("shortest_interval() | wrappers", {
     x <- lubridate::parse_date_time("01:10:00", "HMS")
     y <- lubridate::parse_date_time("11:45:00", "HMS")
     object <- longer_interval(x, y, "hms")
-    expect_equal(object, hms::parse_hms("13:25:00"))
+    expect_equal(object, hms::parse_hm("13:25"))
 
     # `x == y`
     x <- lubridate::as_datetime("1915-02-14 05:00:00")

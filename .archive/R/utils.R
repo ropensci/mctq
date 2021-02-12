@@ -42,7 +42,6 @@ check_that_ <- function(data, ...) {
 #' midday_change(x)
 #' #> [1] "1970-01-02 07:45:32 UTC" # Expected
 midday_change = function(x) {
-
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
 
     x <- flat_posixt(convert(x, "posixct"))
@@ -53,7 +52,6 @@ midday_change = function(x) {
     )
 
     x
-
 }
 
 #' @rdname midday_change
@@ -93,7 +91,6 @@ mdc <- function(x) midday_change(x)
 #' flat_posixt(x, base = "2020-01-01")
 #' #> [1] "2020-01-01 11:15:05 UTC"
 flat_posixt = function(x, force_utc = TRUE, base = "1970-01-01") {
-
     assert_posixt(x, null.ok = FALSE)
     checkmate::assert_flag(force_utc)
     checkmate::assert_string(base)
@@ -105,7 +102,6 @@ flat_posixt = function(x, force_utc = TRUE, base = "1970-01-01") {
     }
 
     x
-
 }
 
 #' Change date of `Date` or `POSIXt` objects
@@ -130,7 +126,6 @@ flat_posixt = function(x, force_utc = TRUE, base = "1970-01-01") {
 #' change_date(lubridate::ymd_hms("1987-12-24 07:45:32"), as.Date("1999-02-25"))
 #' #> [1] "1999-02-25 07:45:32 UTC" # Expected
 change_date <- function(x, date) {
-
     classes <- c("Date", "POSIXct", "POSIXlt")
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
 
@@ -141,7 +136,6 @@ change_date <- function(x, date) {
     lubridate::date(x) <- date
 
     x
-
 }
 
 #' Change day of `Date` or `POSIXt` objects
@@ -165,7 +159,6 @@ change_date <- function(x, date) {
 #' change_day(lubridate::ymd_hms("1987-12-24 07:45:32"), 15)
 #' #> [1] "1987-12-15 07:45:32 UTC" # Expected
 change_day <- function(x, day) {
-
     classes <- c("Date", "POSIXct", "POSIXlt")
 
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
@@ -194,7 +187,6 @@ change_day <- function(x, day) {
     lubridate::day(x) <- day
 
     x
-
 }
 
 #' Test if an object inherits a class from a set of date/time classes
@@ -224,7 +216,6 @@ change_day <- function(x, day) {
 #' is_time(datasets::iris)
 #' #> [1] FALSE # Expected
 is_time <- function(x, rm = NULL) {
-
     checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
 
     classes <- c("Duration", "Period", "difftime", "hms", "Date", "POSIXct",
@@ -240,7 +231,6 @@ is_time <- function(x, rm = NULL) {
     # }
 
     checkmate::test_multi_class(x, classes)
-
 }
 
 #' Collapse class names
@@ -267,7 +257,5 @@ is_time <- function(x, rm = NULL) {
 #' class_collapse(hms::parse_hm("00:00"))
 #' #> [1] "'hms/difftime'" # Expected
 class_collapse <- function(x) {
-
     glue::single_quote(glue::glue_collapse(class(x), sep = '/'))
-
 }

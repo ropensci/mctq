@@ -109,15 +109,13 @@
 #' round_time(x)
 #' #> [1] "19538s (~5.43 hours)" # Expected
 le_week <- function(le_w, le_f, wd) {
-
     assert_duration(le_w)
     assert_duration(le_f)
     checkmate::assert_integerish(wd)
     checkmate::assert_numeric(wd, lower = 0, upper = 7)
-    assert_identical(wd, le_w, le_f, type = "length")
+    assert_identical(le_w, le_f, wd, type = "length")
 
     wd <- as.integer(wd)
 
     ((le_w * wd) + (le_f * fd(wd))) / 7
-
 }

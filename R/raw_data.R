@@ -26,7 +26,6 @@
 #' raw_data("std_mctq.csv")
 #' }
 raw_data <- function(file = NULL) {
-
     checkmate::assert_string(file, null.ok = TRUE)
 
     if (is.null(file)) {
@@ -34,5 +33,4 @@ raw_data <- function(file = NULL) {
     } else {
         system.file("extdata", file, package = "mctq", mustWork = TRUE)
     }
-
 }

@@ -2,7 +2,6 @@
 #' @noRd
 crayon_message <- function(text = NULL, title = NULL, tag = NULL,
                            space_above = TRUE, space_below = TRUE) {
-
     checkmate::assert_string(text, null.ok = TRUE)
     checkmate::assert_string(title, null.ok = TRUE)
     checkmate::assert_string(tag, null.ok = TRUE)
@@ -43,5 +42,4 @@ crayon_message <- function(text = NULL, title = NULL, tag = NULL,
         ifelse(is.na(text), "", text),
         ifelse(isTRUE(space_below), "\n\n", "")
     ))
-
 }

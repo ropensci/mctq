@@ -64,9 +64,6 @@ load_data <- function(file = as.character(tcltk::tkgetOpenFile()),
                       trim_ws = TRUE,
                       skip = 0,
                       skip_empty_rows = TRUE) {
-
-    # Check arguments -----
-
     checkmate::assert_string(file)
     checkmate::assert_file_exists(file)
     checkmate::assert_string(delim)
@@ -75,8 +72,6 @@ load_data <- function(file = as.character(tcltk::tkgetOpenFile()),
     checkmate::assert_flag(trim_ws)
     checkmate::assert_count(skip)
     checkmate::assert_flag(skip_empty_rows)
-
-    # Load data and return output -----
 
     if (stringr::str_detect(file, "\\.RData$")) {
         invisible(readRDS(file))
@@ -92,7 +87,6 @@ load_data <- function(file = as.character(tcltk::tkgetOpenFile()),
 
         invisible(out)
     }
-
 }
 
 #' Write a delimited or a `.RData` file
@@ -177,7 +171,6 @@ write_data <- function(data,
                        append = FALSE,
                        col_names = !append,
                        decimal = ".") {
-
     # Check arguments -----
 
     checkmate::assert_data_frame(data)
@@ -247,7 +240,6 @@ write_data <- function(data,
     } else {
         rlang::abort("Critical error.")
     }
-
 }
 
 # HELPERS =====
@@ -287,7 +279,6 @@ write_data <- function(data,
 #' swap_decimal(c("6,2", NA, "5,43"), ".")
 #' #> [1] 6.20   NA 5.43 # Expected
 swap_decimal <- function(x, new_decimal = ",", quiet = FALSE) {
-
     # Check arguments -----
 
     assert_custom_1(x)
@@ -343,5 +334,4 @@ swap_decimal <- function(x, new_decimal = ",", quiet = FALSE) {
     } else {
         out
     }
-
 }

@@ -36,7 +36,6 @@ devtools::load_all() # or library(mctq)
 #' utils::View(mctq::build_std_mctq())
 #' }
 build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
-
     # Check arguments -----
 
     checkmate::assert_flag(write)
@@ -515,7 +514,6 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
     }
 
     invisible(std_mctq)
-
 }
 
 #' Tidy [mctq::build_std_mctq()] output
@@ -557,7 +555,6 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' utils::View(tidy_std_mctq())
 #' }
 tidy_std_mctq <- function(write = FALSE) {
-
     # Check arguments -----
 
     checkmate::assert_flag(write)
@@ -682,7 +679,6 @@ tidy_std_mctq <- function(write = FALSE) {
     }
 
     invisible(std_mctq)
-
 }
 
 #' Validate [mctq::tidy_std_mctq()] output
@@ -719,7 +715,6 @@ tidy_std_mctq <- function(write = FALSE) {
 #' utils::View(validate_std_mctq())
 #' }
 validate_std_mctq <- function(write = FALSE) {
-
     # To do -----
     #
     # * Adapt this process by using `errorlocate` package with `validate`.
@@ -848,7 +843,6 @@ validate_std_mctq <- function(write = FALSE) {
     }
 
     invisible(std_mctq)
-
 }
 
 #' Analyze [mctq::validate_std_mctq()] output
@@ -882,7 +876,6 @@ validate_std_mctq <- function(write = FALSE) {
 #' utils::View(analyze_std_mctq())
 #' }
 analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
-
     # Check arguments -----
 
     checkmate::assert_flag(write)
@@ -990,5 +983,4 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     }
 
     invisible(std_mctq)
-
 }

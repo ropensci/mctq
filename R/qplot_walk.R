@@ -109,7 +109,6 @@
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
                        midday_change = TRUE) {
-
     # Check arguments -----
 
     if (!is_interactive()) {
@@ -244,5 +243,4 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     }
 
     invisible(NULL)
-
 }

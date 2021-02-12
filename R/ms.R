@@ -67,12 +67,12 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' so <- hms::parse_hms("23:30:00")
+#' so <- hms::parse_hm("23:30")
 #' sd <- lubridate::dhours(8)
 #' ms(so, sd)
 #' #> 03:30:00 # Expected
 #'
-#' so <- hms::parse_hms("01:00:00")
+#' so <- hms::parse_hm("01:00")
 #' sd <- lubridate::dhours(10)
 #' ms(so, sd)
 #' #> 06:00:00 # Expected
@@ -83,19 +83,17 @@
 #' #> NA # Expected
 #'
 #' ## __ Vector example __
-#' so <- c(hms::parse_hms("00:10:00"), hms::parse_hms("01:15:00"))
+#' so <- c(hms::parse_hm("00:10"), hms::parse_hm("01:15"))
 #' sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
 #' ms(so, sd)
 #' #> [1] 04:47:30 # Expected
 #' #> [1] 03:58:30 # Expected
 ms <- function(so, sd) {
-
     checkmate::assert_class(so, "hms")
     assert_duration(sd)
     assert_identical(so, sd, type = "length")
 
     sum_time(so, (sd / 2), class = "hms", clock = TRUE, vectorize = TRUE)
-
 }
 
 #' Compute MCTQ chronotype or corrected mid-sleep on work-free days
@@ -272,7 +270,6 @@ ms <- function(so, sd) {
 #' round_time(x)
 #' #> 04:46:00 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
-
     checkmate::assert_class(msf, "hms")
     assert_duration(sd_w)
     assert_duration(sd_f)
@@ -292,13 +289,10 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
         sd_f > sd_w ~ sum_time(msf, - sc, class = "hms",
                                clock = TRUE, vectorize = TRUE)
     )
-
 }
 
 #' @rdname msf_sc
 #' @export
 chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
-
     msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
-
 }

@@ -1,13 +1,11 @@
 #' @family check functions
 #' @noRd
 check_any_na <- function(x, name = deparse(substitute(x))) {
-
     if (any(is.na(x))) {
         paste0(backtick_(name), " cannot have any missing values")
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -17,13 +15,11 @@ assert_any_na <- checkmate::makeAssertionFunction(check_any_na)
 #' @family check functions
 #' @noRd
 check_not_all_na <- function(x, name = deparse(substitute(x))) {
-
     if (all(is.na(x))) {
         paste0(backtick_(name), " cannot have all values as missing")
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -34,7 +30,6 @@ assert_not_all_na <- checkmate::makeAssertionFunction(check_not_all_na)
 #' @noRd
 check_length_one <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
 
     if (any(is.na(x)) && isFALSE(any.missing)) {
@@ -45,7 +40,6 @@ check_length_one <- function(x, any.missing = TRUE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -56,7 +50,6 @@ assert_length_one <- checkmate::makeAssertionFunction(check_length_one)
 #' @noRd
 check_has_length <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
 
     if (any(is.na(x)) && isFALSE(any.missing)) {
@@ -66,7 +59,6 @@ check_has_length <- function(x, any.missing = TRUE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -77,7 +69,6 @@ assert_has_length <- checkmate::makeAssertionFunction(check_has_length)
 #' @noRd
 check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
                              name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
@@ -92,7 +83,6 @@ check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -103,7 +93,6 @@ assert_whole_number <- checkmate::makeAssertionFunction(check_whole_number)
 #' @noRd
 check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
@@ -118,7 +107,6 @@ check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -129,7 +117,6 @@ assert_numeric_ <- checkmate::makeAssertionFunction(check_numeric_)
 #' @noRd
 check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
@@ -144,7 +131,6 @@ check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -155,7 +141,6 @@ assert_duration <- checkmate::makeAssertionFunction(check_duration)
 #' @noRd
 check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
@@ -171,7 +156,6 @@ check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -179,17 +163,14 @@ check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
 assert_posixt <- checkmate::makeAssertionFunction(check_posixt)
 
 test_time <- function(x, any.missing = TRUE, null.ok = FALSE) {
-
     out <- check_time(x, any.missing, null.ok)
     if (isTRUE(out)) TRUE else FALSE
-
 }
 
 #' @family check functions
 #' @noRd
 check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
                        name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
@@ -204,7 +185,6 @@ check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else {
         TRUE
     }
-
 }
 
 #' @family check functions
@@ -215,7 +195,6 @@ assert_time <- checkmate::makeAssertionFunction(check_time)
 #' @noRd
 assert_identical <- function(..., type = "value", any.missing = TRUE,
                             null.ok = FALSE) {
-
     checkmate::assert_list(list(...), min.len = 2)
     checkmate::assert_choice(type, c("value", "length", "class"))
     checkmate::assert_flag(any.missing)
@@ -251,7 +230,6 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
     } else {
        invisible(TRUE)
     }
-
 }
 
 #' Used in swap_decimal()
@@ -259,7 +237,6 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
 #' @noRd
 check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
-
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
 
@@ -275,7 +252,6 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else {
         TRUE
     }
-
 }
 
 #' Used in swap_decimal()

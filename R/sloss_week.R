@@ -94,7 +94,6 @@
 #' round_time(x)
 #' #> [1] "4808s (~1.34 hours)" # Expected
 sloss_week <- function(sd_w, sd_f, wd) {
-
     assert_duration(sd_w)
     assert_duration(sd_f)
     checkmate::assert_integerish(wd)
@@ -113,5 +112,4 @@ sloss_week <- function(sd_w, sd_f, wd) {
         sd_week > sd_w ~ sum_1 * wd,
         sd_week <= sd_w ~ sum_2 * fd(wd)
     )
-
 }

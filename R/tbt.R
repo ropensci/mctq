@@ -69,32 +69,30 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' bt <- hms::parse_hms("22:10:00")
-#' gu <- hms::parse_hms("06:15:00")
+#' bt <- hms::parse_hm("22:10")
+#' gu <- hms::parse_hm("06:15")
 #' tbt(bt, gu)
 #' #> [1] "29100s (~8.08 hours)" # Expected
 #'
-#' bt <- hms::parse_hms("01:20:00")
-#' gu <- hms::parse_hms("14:00:00")
+#' bt <- hms::parse_hm("01:20")
+#' gu <- hms::parse_hm("14:00")
 #' tbt(bt, gu)
 #' #> [1] "45600s (~12.67 hours)" # Expected
 #'
 #' bt <- hms::as_hms(NA)
-#' gu <- hms::parse_hms("07:20:00")
+#' gu <- hms::parse_hm("07:20")
 #' tbt(bt, gu)
 #' #> [1] NA # Expected
 #'
 #' ## __ Vector example __
-#' bt <- c(hms::parse_hms("23:50:00"), hms::parse_hms("02:30:00"))
-#' gu <- c(hms::parse_hms("09:30:00"), hms::parse_hms("11:25:00"))
+#' bt <- c(hms::parse_hm("23:50"), hms::parse_hm("02:30"))
+#' gu <- c(hms::parse_hm("09:30"), hms::parse_hm("11:25"))
 #' tbt(bt, gu)
 #' #> [1] "34800s (~9.67 hours)" "32100s (~8.92 hours)" # Expected
 tbt <- function(bt, gu) {
-
     checkmate::assert_class(bt, "hms")
     checkmate::assert_class(gu, "hms")
     assert_identical(bt, gu, type = "length")
 
     sum_time(gu, - bt, class = "Duration", clock = TRUE, vectorize = TRUE)
-
 }

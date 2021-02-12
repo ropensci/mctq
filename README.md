@@ -32,7 +32,7 @@ reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
 That means that people can try it out and provide feedback, but it comes
 with no promises for long term stability.
 
-## About MCTQ
+### About MCTQ
 
 **UNDER DEVELOPMENT**
 

@@ -111,15 +111,15 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 \examples{
 ## __ Scalar example __
-gu(hms::parse_hms("08:00:00"), lubridate::dminutes(10))
+gu(hms::parse_hm("08:00"), lubridate::dminutes(10))
 #> 08:10:00 # Expected
-gu(hms::parse_hms("11:45:00"), lubridate::dminutes(90))
+gu(hms::parse_hm("11:45"), lubridate::dminutes(90))
 #> 13:15:00 # Expected
 gu(hms::as_hms(NA), lubridate::dminutes(90))
 #> NA # Expected
 
 ## __ Vector example __
-se <- c(hms::parse_hms("12:30:00"), hms::parse_hms("23:45:00"))
+se <- c(hms::parse_hm("12:30"), hms::parse_hm("23:45"))
 si <- c(lubridate::dminutes(10), lubridate::dminutes(70))
 gu(se, si)
 #> 12:40:00 # Expected

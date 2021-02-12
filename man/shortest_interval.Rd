@@ -97,8 +97,8 @@ dates. Only the hours will be considered.
 }
 \examples{
 ## __ Scalar example __
-x <- hms::parse_hms("23:00:00")
-y <- hms::parse_hms("01:00:00")
+x <- hms::parse_hm("23:00")
+y <- hms::parse_hm("01:00")
 shortest_interval(x, y)
 #> 02:00:00 # Expected
 
@@ -108,8 +108,8 @@ shortest_interval(x, y, "hms")
 #> 00:00:00 # Expected
 
 ## __ Vector example __
-x <- c(hms::parse_hms("15:30:00"), hms::parse_hms("21:30:00"))
-y <- c(hms::parse_hms("19:30:00"), hms::parse_hms("04:00:00"))
+x <- c(hms::parse_hm("15:30"), hms::parse_hm("21:30"))
+y <- c(hms::parse_hm("19:30"), hms::parse_hm("04:00"))
 shortest_interval(x, y)
 #> 04:00:00 # Expected
 #> 06:30:00 # Expected

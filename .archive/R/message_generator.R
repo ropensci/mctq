@@ -1,7 +1,6 @@
 #' @family utility functions
 #' @noRd
 message_generator <- function(type = "ok", funny = FALSE) {
-
     type <- tolower(type)
 
     if (type == "ok") {
@@ -14,5 +13,4 @@ message_generator <- function(type = "ok", funny = FALSE) {
         }
         message(sample(ok_messages, 1))
     }
-
 }

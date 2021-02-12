@@ -133,8 +133,8 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' msw <- hms::parse_hms("03:30:00")
-#' msf <- hms::parse_hms("05:00:00")
+#' msw <- hms::parse_hm("03:30")
+#' msf <- hms::parse_hm("05:00")
 #' sjl(msw, msf)
 #' #> [1] "5400s (~1.5 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE)
@@ -142,8 +142,8 @@
 #' sjl_rel(msw, msf) # Wrapper function
 #' #> [1] "5400s (~1.5 hours)" # Expected
 #'
-#' msw <- hms::parse_hms("04:30:00")
-#' msf <- hms::parse_hms("23:30:00")
+#' msw <- hms::parse_hm("04:30")
+#' msf <- hms::parse_hm("23:30")
 #' sjl(msw, msf)
 #' #> [1] "18000s (~5 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE)
@@ -152,13 +152,13 @@
 #' #> [1] "18000s (~-5 hours)" # Expected
 #'
 #' msw <- hms::as_hms(NA)
-#' msf <- hms::parse_hms("05:15:00")
+#' msf <- hms::parse_hm("05:15")
 #' sjl(msw, msf)
 #' #> NA # Expected
 #'
 #' ## __ Vector example __
-#' msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
-#' msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("04:05:00"))
+#' msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
+#' msf <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
 #' sjl(msw, msf)
 #' #> [1] "-10800s (~3 hours)" "0s" # Expected
 #' sjl(msw, msf, abs = FALSE)
@@ -167,8 +167,8 @@
 #' #> [1] "-10800s (~-3 hours)" "0s" # Expected
 #'
 #' ## __ Using different methods __
-#' msw <- hms::parse_hms("19:15:00")
-#' msf <- hms::parse_hms("02:30:00")
+#' msw <- hms::parse_hm("19:15")
+#' msf <- hms::parse_hm("02:30")
 #' sjl(msw, msf, abs = FALSE, method = "difference")
 #' #> [1] "-60300s (~-16.75 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE, method = "shortest") # default method
@@ -176,8 +176,8 @@
 #' sjl(msw, msf, abs = FALSE, method = "longer")
 #' #> [1] "-60300s (~-16.75 hours)" # Expected
 #'
-#' msw <- hms::parse_hms("02:45:00")
-#' msf <- hms::parse_hms("04:15:00")
+#' msw <- hms::parse_hm("02:45")
+#' msf <- hms::parse_hm("04:15")
 #' sjl(msw, msf, abs = FALSE, method = "difference")
 #' #> [1] "5400s (~1.5 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE, method = "shortest") # default method
@@ -186,13 +186,13 @@
 #' #> [1] "-81000s (~-22.5 hours)" # Expected
 #'
 #' ## __ Converting the output to `hms` __
-#' msw <- hms::parse_hms("01:15:00")
-#' msf <- hms::parse_hms("03:25:05")
+#' msw <- hms::parse_hm("01:15")
+#' msf <- hms::parse_hm("03:25")
 #' x <- sjl(msw, msf)
 #' x
-#' #> [1] "7805s (~2.17 hours)" # Expected
+#' #> [1] "7800s (~2.17 hours)" # Expected
 #' convert(x, "hms")
-#' #> 02:10:05 # Expected
+#' #> 02:10:00 # Expected
 #'
 #' ## __ Rounding the output at the seconds level __
 #' msw <- hms::parse_hms("04:19:33.1234")
@@ -203,7 +203,6 @@
 #' round_time(x)
 #' #> [1] "5068s (~1.41 hours)" # Expected
 sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
-
     choices <- c("difference", "shortest", "longer")
 
     checkmate::assert_class(msw, "hms")
@@ -220,8 +219,6 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
             interval <- shortest_interval(msw, msf, class = "Interval")
         } else if (method == "longer") {
             interval <- longer_interval(msw, msf, class = "Interval")
-        } else {
-            stop("Critical error", call. = FALSE)
         }
 
         int_start <- convert(lubridate::int_start(interval), "hms")
@@ -235,15 +232,12 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
     }
 
     if (isTRUE(abs)) abs(out) else out
-
 }
 
 #' @rdname sjl
 #' @export
 sjl_rel <- function(msw, msf, method = "shortest") {
-
     sjl(msw, msf, abs = FALSE, method = method)
-
 }
 
 #' Compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)
@@ -330,14 +324,14 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' sjl <- list(sjl_m = lubridate::dhours(1.25),
 #'             sjl_e = lubridate::dhours(0.5),
 #'             sjl_n = lubridate::dhours(3))
-#' n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+#' n_w <- list(n_w_m = 3, n_w_e = 1, n_w_n = 4)
 #' sjl_weighted(sjl, n_w)
 #' #> [1] "7312.5s (~2.03 hours)" # Expected
 #'
 #' sjl <- list(sjl_m = lubridate::dhours(1.25),
 #'             sjl_e = lubridate::as.duration(NA),
 #'             sjl_n = lubridate::dhours(3))
-#' n_w <- list(n__w_m = 3, n_w_e = 1, n_w_n = 4)
+#' n_w <- list(n_w_m = 3, n_w_e = 1, n_w_n = 4)
 #' sjl_weighted(sjl, n_w)
 #' #> [1] NA # Expected
 #'
@@ -374,12 +368,10 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' round_time(convert(sjl_weighted(sjl, n_w), "hms"))
 #' #> 01:06:10 # Expected
 sjl_weighted <- function(sjl, n_w) {
-
     checkmate::assert_list(sjl, len = length(n_w))
     checkmate::assert_list(n_w, len = length(sjl))
     lapply(sjl, assert_duration)
     lapply(n_w, assert_whole_number)
-    lapply(sjl, checkmate::assert_numeric)
     mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
 
     sjl <- lapply(sjl, abs)
@@ -395,5 +387,4 @@ sjl_weighted <- function(sjl, n_w) {
     n_w <- Reduce("+", n_w)
 
     sjl / n_w
-
 }

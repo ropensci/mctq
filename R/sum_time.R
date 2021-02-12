@@ -119,7 +119,6 @@
 #' #> 10:00:00 # Expected
 sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
                      na.rm = FALSE) {
-
     out <- list(...)
 
     assert_custom <- function(x) {
@@ -135,18 +134,22 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
     checkmate::assert_flag(na.rm)
     lapply(out, assert_custom)
 
-    if (isTRUE(vectorize) && !(length(unique(sapply(out, length))) == 1)) {
+    if (isTRUE(vectorize) &&
+        !(length(unique(vapply(out, length, integer(1)))) == 1)) {
         stop("When `vetorize` is `TRUE`, all values in `...` must have ",
              "the same length.", call. = FALSE)
     }
 
     normalize <- function(x) {
-        ifelse(vapply(x, lubridate::is.POSIXt, logical(1)),
-               as.numeric(hms::as_hms(x)), as.numeric(x))
+        if (lubridate::is.POSIXt(x) || lubridate::is.difftime(x)) {
+            as.numeric(hms::as_hms(x))
+        } else {
+            as.numeric(x)
+        }
     }
 
     zero_nas <- function(x) {
-        ifelse(vapply(x, is.na, logical(1)), 0, as.numeric(x))
+        ifelse(is.na(x), 0, as.numeric(x))
     }
 
     out <- lapply(out, normalize)
@@ -159,7 +162,6 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         out <- sum(out, na.rm = na.rm)
     }
 
-    if (isTRUE(clock)) out <- lubridate::as_datetime(out)
+    if (isTRUE(clock)) out <- flat_posixt(lubridate::as_datetime(out))
     convert(out, class)
-
 }

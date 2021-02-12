@@ -73,33 +73,31 @@
 #'
 #' @examples
 #' ## __ Scalar example __
-#' sprep <- hms::parse_hms("22:00:00")
+#' sprep <- hms::parse_hm("22:00")
 #' slat <- lubridate::dminutes(15)
 #' so(sprep, slat)
 #' #> 22:15:00 # Expected
 #'
-#' sprep <- hms::parse_hms("23:30:00")
+#' sprep <- hms::parse_hm("23:30")
 #' slat <- lubridate::dminutes(45)
 #' so(sprep, slat)
 #' #> 00:15:00 # Expected
 #'
-#' sprep <- hms::parse_hms("20:45:00")
+#' sprep <- hms::parse_hm("20:45")
 #' slat <- lubridate::as.duration(NA)
 #' so(sprep, slat)
 #' #> NA # Expected
 #'
 #' ## __ Vector example __
-#' sprep <- c(hms::parse_hms("21:30:00"), hms::parse_hms("22:15:00"))
+#' sprep <- c(hms::parse_hm("21:30"), hms::parse_hm("22:15"))
 #' slat <- c(lubridate::dminutes(45), lubridate::dminutes(5))
 #' so(sprep, slat)
 #' #> 22:15:00 # Expected
 #' #> 22:20:00 # Expected
 so <- function(sprep, slat) {
-
     checkmate::assert_class(sprep, "hms")
     assert_duration(slat)
     assert_identical(sprep, slat, type = "length")
 
     sum_time(sprep, slat, class = "hms", clock = TRUE, vectorize = TRUE)
-
 }

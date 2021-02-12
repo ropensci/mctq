@@ -313,7 +313,6 @@
 #' head(out)
 #' }
 convert <- function(x, class, ..., quiet = FALSE) {
-
     choices <- tolower(
         c("character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
@@ -327,7 +326,6 @@ convert <- function(x, class, ..., quiet = FALSE) {
     } else {
         UseMethod("convert")
     }
-
 }
 
 #' @rdname convert
@@ -338,7 +336,6 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
                               year_length = lubridate::dyears(),
                               ignore_date = TRUE, close_round = TRUE,
                               quiet = FALSE) {
-
     # Check arguments -----
 
     checkmate::assert_character(orders, min.chars = 1, any.missing = FALSE,
@@ -454,7 +451,6 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
             lubridate::force_tz(x, tz = tz)
         }
     }
-
 }
 
 #' @rdname convert
@@ -465,13 +461,11 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
                             year_length = lubridate::dyears(),
                             ignore_date = TRUE, close_round = TRUE,
                             quiet = FALSE) {
-
     convert.character(x, class, orders = orders, tz = tz,
                       input_unit = input_unit, output_unit = output_unit,
                       month_length = month_length, year_length = year_length,
                       ignore_date = ignore_date,
                       close_round = close_round, quiet = quiet)
-
 }
 
 #' @rdname convert
@@ -480,7 +474,6 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              month_length = lubridate::dmonths(),
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
-
     checkmate::assert_string(tz)
 
     class <- tolower(class)
@@ -520,7 +513,6 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
         lubridate::force_tz(x, tz = tz)
     }
-
 }
 
 #' @rdname convert
@@ -529,11 +521,9 @@ convert.Period <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                            month_length = lubridate::dmonths(),
                            year_length = lubridate::dyears(),
                            close_round = TRUE, quiet = FALSE) {
-
     convert.Duration(x, class, tz = tz, output_unit = output_unit,
                      month_length = month_length, year_length = year_length,
                      close_round = close_round, quiet = quiet)
-
 }
 
 #' @rdname convert
@@ -542,11 +532,9 @@ convert.difftime <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              month_length = lubridate::dmonths(),
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
-
     convert.hms(x, class, tz = tz, output_unit = output_unit,
                 month_length = month_length, year_length = year_length,
                 close_round = close_round, quiet = quiet)
-
 }
 
 #' @rdname convert
@@ -555,7 +543,6 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                         month_length = lubridate::dmonths(),
                         year_length = lubridate::dyears(),
                         close_round = TRUE, quiet = FALSE) {
-
     checkmate::assert_string(tz)
 
     class <- tolower(class)
@@ -595,7 +582,6 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         x <- as.POSIXlt(hms::as_hms(x))
         lubridate::force_tz(x, tz = tz)
     }
-
 }
 
 #' @rdname convert
@@ -604,7 +590,6 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                          month_length = lubridate::dmonths(),
                          year_length = lubridate::dyears(),
                          close_round = TRUE, quiet = FALSE) {
-
     checkmate::assert_string(tz)
 
     class <- tolower(class)
@@ -645,7 +630,6 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "posixlt") {
         as.POSIXlt(lubridate::force_tz(lubridate::as_datetime(x), tz = tz))
     }
-
 }
 
 #' @rdname convert
@@ -655,7 +639,6 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                            year_length = lubridate::dyears(),
                            ignore_date = TRUE, close_round = TRUE,
                            quiet = FALSE) {
-
     checkmate::assert_string(tz)
 
     class <- tolower(class)
@@ -693,7 +676,6 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "posixlt") {
         lubridate::force_tz(as.POSIXlt(x), tz = tz)
     }
-
 }
 
 #' @rdname convert
@@ -702,7 +684,6 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              month_length = lubridate::dmonths(),
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
-
     checkmate::assert_string(tz)
 
     class <- tolower(class)
@@ -742,7 +723,6 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
         x <- as.POSIXlt(hms::as_hms(as.numeric(x)))
         lubridate::force_tz(x, tz = tz)
     }
-
 }
 
 #' @rdname convert
@@ -753,7 +733,6 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
                                month_length = lubridate::dmonths(),
                                year_length = lubridate::dyears(),
                                close_round = TRUE, quiet = FALSE) {
-
     checkmate::assert_function(where, null.ok = TRUE)
     checkmate::assert_string(tz)
 
@@ -781,7 +760,6 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
         out <- dplyr::mutate(x, dplyr::across(cols, call))
         invisible(out)
     }
-
 }
 
 
@@ -790,42 +768,34 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
 #' @rdname convert
 #' @export
 convert_tu <- function(x, output_unit, ...) {
-
     assert_time(x)
 
     convert(x, class = "numeric", output_unit = output_unit, ... = ...)
-
 }
 
 #' @rdname convert
 #' @export
 convert_ut <- function(x, class, input_unit, ...) {
-
     checkmate::assert_numeric(x)
 
     convert(x, class, input_unit = input_unit, ... = ...)
-
 }
 
 #' @rdname convert
 #' @export
 convert_tt <- function(x, class, ...) {
-
     assert_time(x)
 
     convert(x, class, ... = ...)
-
 }
 
 #' @rdname convert
 #' @export
 convert_uu <- function(x, input_unit, output_unit, ...) {
-
     checkmate::assert_numeric(x)
 
     convert(x, class = "numeric", input_unit = input_unit,
             output_unit = output_unit, ... = ...)
-
 }
 
 #' @rdname convert
@@ -856,7 +826,6 @@ convert_pu <- function(x, orders, output_unit, ...) {
 #' @noRd
 parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                                quiet = FALSE) {
-
     # Check arguments -----
 
     checkmate::assert_multi_class(x, c("character", "integer", "numeric"))
@@ -969,7 +938,6 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
     }
 
     out
-
 }
 
 #' @family utility functions
@@ -978,7 +946,6 @@ convert_to_seconds <- function(x, input_unit = NULL,
                                month_length = lubridate::dmonths(),
                                year_length = lubridate::dyears(),
                                ignore_date = TRUE, quiet = FALSE) {
-
     classes <- c("integer", "double", "numeric", "Duration",  "Period",
                  "difftime", "hms", "Date", "POSIXct", "POSIXlt", "Interval")
 
@@ -1052,7 +1019,6 @@ convert_to_seconds <- function(x, input_unit = NULL,
         shush(warning("NAs introduced by coercion.", call. = FALSE), quiet)
         as.numeric(rep(NA, length(x)))
     }
-
 }
 
 #' @family utility functions
@@ -1062,7 +1028,6 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
                             year_length = lubridate:: dyears(),
                             ignore_date = TRUE, close_round = TRUE,
                             quiet = FALSE) {
-
     choices <- c("S", "M", "H", "d", "W", "m", "y", "date_decimal",
                  "rad", "deg")
 
@@ -1111,7 +1076,6 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
     } else {
         x
     }
-
 }
 
 #' @family utility functions
@@ -1121,7 +1085,6 @@ convert_to_date_time <- function(x, class, input_unit = NULL,
                                  year_length = lubridate:: dyears(),
                                  close_round = TRUE, tz = "UTC",
                                  quiet = FALSE) {
-
     checkmate::assert_numeric(x)
 
     x <- convert_to_unit(x, input_unit = input_unit, output_unit = "H",
@@ -1130,5 +1093,4 @@ convert_to_date_time <- function(x, class, input_unit = NULL,
                          close_round = TRUE)
 
     convert(lubridate::dhours(x), class, tz = tz)
-
 }

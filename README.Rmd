@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
 
 Please note that this package is currently on the development stage and have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. That means that people can try it out and provide feedback, but it comes with no promises for long term stability.
 
-## About MCTQ
+### About MCTQ
 
 __UNDER DEVELOPMENT__
 
