@@ -1,6 +1,4 @@
-#' @family utility functions
-#' @noRd
-dialog_line <- function(line = paste0("Insert `quit` to exit or press enter ",
+dialog_line <- function(line = paste0("Insert 'q' to exit or press 'enter' ",
                                       "to continue > "),
                         space_above = TRUE, space_below = TRUE, abort = FALSE) {
     checkmate::assert_string(line, min.chars = 3)
@@ -10,6 +8,8 @@ dialog_line <- function(line = paste0("Insert `quit` to exit or press enter ",
 
     if (!is_interactive()) return(999)
     if (isTRUE(abort)) return(999)
+
+    line <- paste(strwrap(line), collapse = "\n")
 
     if (is_namespace_loaded("crayon")) {
         line <- crayon::red(line)

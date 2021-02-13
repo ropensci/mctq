@@ -1,3 +1,26 @@
+test_that("convert() | general test", {
+    expect_equal(convert(NA, "character"), NA)
+})
+
+
+
+
+
+test_that("convert.Duration() | transform test", {
+    x <- lubridate::dhours()
+    quiet <- TRUE
+    output_unit <- "M"
+
+    object <- convert(x, "integer", output_unit = output_unit, quiet = quiet)
+    expect_identical(object, 60L)
+    object <- convert(x, "double", output_unit = output_unit, quiet = quiet)
+    expect_identical(object, 60)
+    object <- convert(x, "numeric", output_unit = output_unit, quiet = quiet)
+    expect_identical(object, 60)
+})
+
+
+
 test_that("convert() | conversion from date/time objects to units", {
     object <- convert(lubridate::dhours(), "numeric", output_unit = "M")
     expect_equal(object, 60)
@@ -6,15 +29,15 @@ test_that("convert() | conversion from date/time objects to units", {
     expect_equal(object, 6.28318530717959)
 
     object <- convert(lubridate::as_datetime("1985-10-20 12:00:00"),
-                         "numeric", output_unit = "d")
+                      "numeric", output_unit = "d")
     expect_equal(object, 0.5)
 
     object <- convert(lubridate::as_datetime("1985-10-20 12:00:00"),
-                         "numeric", output_unit = "d", ignore_date = FALSE)
+                      "numeric", output_unit = "d", ignore_date = FALSE)
     expect_equal(object, 5771.5)
 
     object <- convert(hms::parse_hm("15:45:00"), "numeric",
-                         output_unit = "H")
+                      output_unit = "H")
     expect_equal(object, 15.75)
 
     object <- convert_tu(hms::parse_hm("15:45:00"), "H")
@@ -55,7 +78,7 @@ test_that("convert() | conversion between date/time objects", {
     expect_equal(object, lubridate::as_datetime("1765-10-05"))
 
     object <- convert(lubridate::ymd_hms("2020-01-01 12:31:05", tz = "EST"),
-                         "POSIXct")
+                      "POSIXct")
     expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
                                                     "ymd HMS"))
 
@@ -63,14 +86,14 @@ test_that("convert() | conversion between date/time objects", {
     expect_equal(object, lubridate::force_tz(as.POSIXct(NA), "UTC"))
 
     object <- convert_tt(lubridate::ymd_hms("2020-01-01 12:31:05",
-                                               tz = "EST"), "POSIXct")
+                                            tz = "EST"), "POSIXct")
     expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
                                                     "ymd HMS"))
 })
 
 test_that("convert() | conversion between units", {
     object <- convert(1.308997, "numeric", input_unit = "rad",
-                         output_unit = "H")
+                      output_unit = "H")
     expect_equal(object, 5)
 
     object <- convert(60, "numeric", input_unit = "deg", output_unit = "rad")
@@ -80,7 +103,7 @@ test_that("convert() | conversion between units", {
     expect_equal(object, 0.0833333333333333)
 
     object <- convert(0.2617994, "numeric", input_unit = "rad",
-                         output_unit = "H")
+                      output_unit = "H")
     expect_equal(object, 1)
 
     object <- convert(40, "numeric", input_unit = "d", output_unit = "deg")
@@ -113,7 +136,7 @@ test_that("convert() | conversion from p. objects to date/time objects", {
     expect_equal(object, lubridate::as_datetime("1970-01-01 13:00:00 UTC"))
 
     object <- convert("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS",
-                         tz = "EST")
+                      tz = "EST")
     expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
                                                     "ymd HMS", "EST"))
 
@@ -137,7 +160,7 @@ test_that("convert() | conversion from p. objects to units", {
     expect_equal(object, 1.875)
 
     object <- convert("2020-03-15 02", "numeric", orders = "ymd H",
-                         output_unit = "H")
+                      output_unit = "H")
     expect_equal(object, 2)
 
     object <- convert("01:00", "numeric", orders = "HM", output_unit = "rad")

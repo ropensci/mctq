@@ -1,5 +1,3 @@
-#' @family utility functions
-#' @noRd
 flat_posixt <- function(x, force_utc = TRUE, base = "1970-01-01") {
     assert_posixt(x, null.ok = FALSE)
     checkmate::assert_flag(force_utc)
@@ -14,8 +12,6 @@ flat_posixt <- function(x, force_utc = TRUE, base = "1970-01-01") {
     x
 }
 
-#' @family utility functions
-#' @noRd
 midday_change <- function(x) {
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
 
@@ -29,12 +25,8 @@ midday_change <- function(x) {
     x
 }
 
-#' @rdname midday_change
-#' @noRd
 mdc <- function(x) midday_change(x)
 
-#' @family utility functions
-#' @noRd
 change_date <- function(x, date) {
     classes <- c("Date", "POSIXct", "POSIXlt")
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
@@ -48,8 +40,6 @@ change_date <- function(x, date) {
     x
 }
 
-#' @family utility functions
-#' @noRd
 change_day <- function(x, day) {
     classes <- c("Date", "POSIXct", "POSIXlt")
 
@@ -67,7 +57,7 @@ change_day <- function(x, day) {
     }
 
     if (any(lubridate::month(x) == 2 & lubridate::leap_year(x)) && day > 29) {
-        stop("You can't assign more than 29 days to February in a leap year",
+        stop("You can't assign more than 29 days to February in a leap year.",
              call. = FALSE)
     }
 
@@ -76,8 +66,6 @@ change_day <- function(x, day) {
     x
 }
 
-#' @family utility functions
-#' @noRd
 is_time <- function(x, rm = NULL) {
     checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
 
@@ -92,15 +80,11 @@ is_time <- function(x, rm = NULL) {
     checkmate::test_subset(class(x)[1], classes)
 }
 
-#' @family utility functions
-#' @noRd
 is_numeric_ <- function(x) {
     classes <- c("integer", "double", "numeric")
     checkmate::test_subset(class(x)[1], classes)
 }
 
-#' @family utility functions
-#' @noRd
 is_whole_number <- function(x, tol = .Machine$double.eps^0.5) {
     if (!is_numeric_(x) || !identical(x, abs(x))) {
         FALSE
@@ -109,26 +93,18 @@ is_whole_number <- function(x, tol = .Machine$double.eps^0.5) {
     }
 }
 
-#' @family utility functions
-#' @noRd
 single_quote_ <- function(x) {
     paste0("'", x, "'")
 }
 
-#' @family utility functions
-#' @noRd
 backtick_ <- function(x) {
     paste0("`", x, "`")
 }
 
-#' @family utility functions
-#' @noRd
 class_collapse <- function(x) {
     single_quote_(paste0(class(x), collapse = "/"))
 }
 
-#' @family utility functions
-#' @noRd
 paste_collapse <- function(x, sep = "", last = sep) {
     checkmate::assert_string(sep)
     checkmate::assert_string(last)
@@ -140,8 +116,6 @@ paste_collapse <- function(x, sep = "", last = sep) {
     }
 }
 
-#' @family utility functions
-#' @noRd
 inline_collapse <- function(x, single_quote = TRUE, serial_comma = TRUE) {
     checkmate::assert_flag(single_quote)
     checkmate::assert_flag(serial_comma)
@@ -155,9 +129,7 @@ inline_collapse <- function(x, single_quote = TRUE, serial_comma = TRUE) {
     }
 }
 
-#' @family utility functions
-#' @noRd
-shush <- function(x, quiet = TRUE){
+shush <- function(x, quiet = TRUE) {
     if (isTRUE(quiet)) {
         suppressMessages(suppressWarnings(x))
     } else {
@@ -165,8 +137,6 @@ shush <- function(x, quiet = TRUE){
     }
 }
 
-#' @family utility functions
-#' @noRd
 close_round <- function(x, digits = 5) {
     checkmate::assert_numeric(x)
     checkmate::assert_number(digits)
@@ -179,8 +149,6 @@ close_round <- function(x, digits = 5) {
         TRUE ~ x)
 }
 
-#' @family utility functions
-#' @noRd
 swap <- function(x, y) {
     a <- x
     b <- y
@@ -191,8 +159,6 @@ swap <- function(x, y) {
     list(x = x, y = y)
 }
 
-#' @family utility functions
-#' @noRd
 swap_if <- function(x, y, condition = "x > y") {
     choices <- c("x == y", "x < y", "x <= y", "x > y", "x >= y")
     checkmate::assert_choice(condition, choices)
@@ -209,20 +175,14 @@ swap_if <- function(x, y, condition = "x > y") {
     list(x = x, y = y)
 }
 
-#' @family utility functions
-#' @noRd
 count_na <- function(x) {
     length(which(is.na(x)))
 }
 
-#' @family utility functions
-#' @noRd
 escape_regex <- function(x) {
     gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
 }
 
-#' @family utility functions
-#' @noRd
 get_names <- function(...) {
     out <- lapply(substitute(list(...))[-1], deparse)
     out <- vapply(out, unlist, character(1))
@@ -232,32 +192,47 @@ get_names <- function(...) {
     out
 }
 
-#' @family utility functions
-#' @noRd
 clock_roll <- function(x, class = "hms") {
     out <- flat_posixt(lubridate::as_datetime(x))
     convert(out, class)
 }
 
-#' @family utility functions
-#' @noRd
 na_as <- function(x) {
     classes <- c("character", "integer", "double", "numeric", "Duration",
                  "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt")
 
     if (is.logical(x)) {
         as.logical(NA)
-    } else if (checkmate::test_multi_class(x, classes)) {
-        convert(NA, class(x)[1])
+    } else if (is.character(x)) {
+        as.character(NA)
+    } else if (is.integer(x)) {
+        as.integer(NA)
+    } else if (is_numeric_(x)) {
+        as.numeric(NA)
+    } else if (lubridate::is.duration(x)) {
+        lubridate::as.duration(NA)
+    } else if (lubridate::is.period(x)) {
+        lubridate::as.period(NA)
+    } else if (class(x)[1] == "difftime") {
+        as.difftime(as.numeric(NA), units = attributes(x)$units)
+    } else if (hms::is_hms(x)) {
+        hms::as_hms(NA)
+    } else if (lubridate::is.Date(x)) {
+        as.Date(NA)
+    } else if (lubridate::is.POSIXct(x)) {
+        out <- as.POSIXct(NA)
+        attributes(out)$tzone <- attributes(x)$tzone
+        out
+    } else if (lubridate::is.POSIXlt(x)) {
+        out <- as.POSIXlt(NA)
+        attributes(out)$tzone <- attributes(x)$tzone
+        out
     } else {
-        stop(paste0(
-            "`na_as()` don't support objects of class ", class_collapse(x), "."
-            ), call. = FALSE)
+        stop("`na_as()` don't support objects of class ",
+             class_collapse(x), ".", call. = FALSE)
     }
 }
 
-#' @family utility functions
-#' @noRd
 get_class <- function(x) {
     foo <- function(x) {
         class(x)[1]
@@ -270,8 +245,6 @@ get_class <- function(x) {
     }
 }
 
-#' @family utility functions
-#' @noRd
 fix_character <- function(x) {
     checkmate::assert_character(x)
 
@@ -284,8 +257,6 @@ fix_character <- function(x) {
     x
 }
 
-#' @family utility functions
-#' @noRd
 str_extract_ <- function(string, pattern, ignore.case = FALSE, perl = TRUE,
                          fixed = FALSE, useBytes = FALSE, invert = FALSE) {
     checkmate::assert_string(pattern)
@@ -302,8 +273,6 @@ str_extract_ <- function(string, pattern, ignore.case = FALSE, perl = TRUE,
     if (length(out) == 0) as.character(NA) else out
 }
 
-#' @family utility functions
-#' @noRd
 str_subset_ <- function(string, pattern, negate = FALSE, ignore.case = FALSE,
                         perl = TRUE, fixed = FALSE, useBytes = FALSE) {
     checkmate::assert_string(pattern)

@@ -46,7 +46,7 @@
 #' ## `class` argument
 #'
 #' The `class` argument indicates the desired class of the output object . It
-#' accepts the following values: `"character"`, `"integer"`, `"double"`,
+#' can accept the following values: `"character"`, `"integer"`, `"double"`,
 #' `"numeric"`, `"Duration"`, `"Period"`, `"difftime"`, `"hms"`, `"Date"`,
 #' `"POSIXct"`, and `"POSIXlt"` (case insensitive).
 #'
@@ -72,7 +72,6 @@
 #' * `"W"`: for decimal weeks.
 #' * `"m"`: for decimal months.
 #' * `"y"`: for decimal years.
-#' * `"date_decimal"`: for decimal dates.
 #' * `"rad"`: for radians.
 #' * `"deg"`: for degrees.
 #'
@@ -150,19 +149,6 @@
 #' `month_length` and `year_length` values must be assigned with the number of
 #' seconds equivalent to the unit duration. You can also assign a lubridate
 #' duration object if you like (see [lubridate::duration()]).
-#'
-#' ## Decimal dates
-#'
-#' `convert()` can be used as a wrapper to [lubridate::decimal_date()]
-#' by creating decimal dates that can be used on [lubridate::date_decimal()].
-#'
-#' Decimal dates are a kind of decimal time where the year corresponds to the
-#' integer part of the value. The months, days, hours, minutes, and seconds
-#' elements are picked so the date-time will represent the fraction of the year
-#' expressed by decimal.
-#'
-#' Beware that decimal dates are not very precise! It cannot be used as a way
-#' to store time data.
 #'
 #' @param x Any R object, provided that it has an assigned method.
 #' @param class A string indicating the class of the output.
@@ -312,17 +298,9 @@
 #'                   input_unit = "H")
 #' head(out)
 #' }
-convert <- function(x, class, ..., quiet = FALSE) {
-    choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
-          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
-
-    checkmate::assert_choice(tolower(class), choices)
-    checkmate::assert_flag(quiet)
-
-    if (any(is.na(x)) && length(x) == 1) {
-        x <- as.character(NA)
-        return(convert.character(x, class, ... = ..., quiet = quiet))
+convert <- function(x, class, ...) {
+    if (identical(x, NA)) {
+        NA
     } else {
         UseMethod("convert")
     }
@@ -336,86 +314,26 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
                               year_length = lubridate::dyears(),
                               ignore_date = TRUE, close_round = TRUE,
                               quiet = FALSE) {
-    # Check arguments -----
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_character(orders, min.chars = 1, any.missing = FALSE,
                                 all.missing = FALSE, min.len = 1, unique = TRUE,
                                 null.ok = TRUE)
     checkmate::assert_string(tz)
-
-    # Set values -----
+    checkmate::assert_flag(quiet)
 
     class <- tolower(class)
     if (is.character(x)) fix_character(x)
 
-    # Parse and/or transform values -----
-
-    check <- identical(count_na(x), count_na(shush(as.numeric(x))))
-
-    if (is.null(orders)) {
-        if (!is.null(input_unit) && !is.null(output_unit) && check &&
-            class %in% c("integer", "double", "numeric")) {
-            x <- convert_to_unit(shush(as.numeric(x)),
-                                 input_unit = input_unit,
-                                 output_unit = output_unit,
-                                 month_length = month_length,
-                                 year_length = year_length,
-                                 ignore_date = ignore_date,
-                                 close_round = close_round,
-                                 quiet = quiet)
-        } else if (!is.null(input_unit) && check &&
-                   !(class %in% c("integer", "double", "numeric"))) {
-            return(convert_to_date_time(shush(as.numeric(x)),
-                                        class = class,
-                                        input_unit = input_unit,
-                                        month_length = month_length,
-                                        year_length = year_length,
-                                        close_round = close_round,
-                                        tz = tz, quiet = quiet))
-        }
-    } else {
-        x <- parse_to_date_time(x, orders, tz, quiet)
-
-        if (class %in% c("integer", "double", "numeric") && is_time(x) &&
-            !is.null(output_unit) && !all(is.na(x))) {
-            x <- convert_to_unit(x, input_unit = NULL,
-                                 output_unit = output_unit,
-                                 month_length = month_length,
-                                 year_length = year_length,
-                                 ignore_date = ignore_date,
-                                 close_round = close_round,
-                                 quiet = quiet)
-
-            if (class %in% "integer") return(as.integer(x))
-            if (class %in% c("double", "numeric")) return(x)
-        }
+    args <- as.list(match.call()[-1])
+    if (is.null(orders) && (!is.null(input_unit) || !is.null(output_unit))) {
+        return(do.call("parser_1", args))
+    } else if (!is.null(orders)) {
+        return(do.call("parser_2", args))
     }
-
-    # Fix values -----
-
-    if (class %in% c("character", "integer", "double", "numeric") &&
-        !is.null(orders) && all(lubridate::year(x) %in% c(0))) {
-        x <- hms::as_hms(x)
-    }
-
-    if (class %in% c("posixct", "posixct") &&
-        hms::is_hms(x)) {
-        x <- flat_posixt(as.POSIXct(x))
-    }
-
-    # Check inconsistencies -----
-
-    if (is.null(orders) && !all(is.na(x)) &&
-        (is.numeric(x) || is.character(x))  &&
-        !(class %in% c("character", "integer", "double", "numeric",
-                       "duration", "period", "difftime", "hms"))) {
-        shush(stop(
-            "Non-parsed ", class(x)[1], " vectors cannot be converted to ",
-            class, ". Did you forget to assign values to `orders`?",
-            call. = FALSE), quiet)
-    }
-
-    # Convert to class and return output -----
 
     if (class == "character") {
         as.character(x)
@@ -423,33 +341,10 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
         shush(as.numeric(x), quiet)
-    } else if (class == "duration") {
-        lubridate::as.duration(hms::as_hms(x))
-    } else if (class == "period") {
-        lubridate::as.period(hms::as_hms(x))
-    } else if (class == "difftime") {
-        lubridate::as.difftime(lubridate::as.duration(hms::as_hms(x)))
-    } else if (class == "hms") {
-        hms::as_hms(x)
-    } else if (class == "date") {
-        if (all(is.na(x))) {
-            lubridate::as_date(rep(NA, length(x)))
-        } else if (!lubridate::is.POSIXt(x) ||
-                   (lubridate::is.POSIXt(x) && all(lubridate::year(x) == 0))) {
-            shush(warning("There's no date to parse.", call. = FALSE), quiet)
-            lubridate::as_date(rep(NA, length(x)))
-        } else {
-            lubridate::as_date(lubridate::force_tz(x, tz))
-        }
-    } else if (class == "posixct") {
-        lubridate::force_tz(as.POSIXct(x), tz = tz)
-    } else if (class == "posixlt") {
-        if (lubridate::is.POSIXct(x)) {
-            lubridate::force_tz(as.POSIXlt(x), tz = tz)
-        } else {
-            x <- as.POSIXlt(x)
-            lubridate::force_tz(x, tz = tz)
-        }
+    } else {
+        shush(stop("You must assign a value to 'orders' or 'input_unit' ",
+                   "to convert from ", class_collapse(x), " to ",
+                   single_quote_(class), ".",  call. = FALSE), quiet)
     }
 }
 
@@ -464,8 +359,8 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
     convert.character(x, class, orders = orders, tz = tz,
                       input_unit = input_unit, output_unit = output_unit,
                       month_length = month_length, year_length = year_length,
-                      ignore_date = ignore_date,
-                      close_round = close_round, quiet = quiet)
+                      ignore_date = ignore_date, close_round = close_round,
+                      quiet = quiet)
 }
 
 #' @rdname convert
@@ -474,38 +369,42 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              month_length = lubridate::dmonths(),
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_string(tz)
+    checkmate::assert_flag(quiet)
 
     class <- tolower(class)
 
-    if (class %in% c("integer", "double", "numeric") &&
-        !is.null(output_unit) && !all(is.na(x))) {
-        x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
-                             month_length = month_length,
-                             year_length = year_length, ignore_date = TRUE,
-                             close_round = close_round, quiet = quiet)
-
-        if (class %in% "integer") return(as.integer(x))
-        if (class %in% c("double", "numeric")) return(x)
-    }
+    args <- c(ignore_date = TRUE, as.list(match.call()[-1]))
+    if (!is.null(output_unit)) return(do.call("parser_3", args))
 
     if (class == "character") {
+        shush(warning("'x' was formatted as HMS.", call. = FALSE), quiet)
         as.character(hms::as_hms(as.numeric(x)))
     } else if (class == "integer") {
-        shush(as.integer(x), quiet)
+        shush(warning("'x' was converted to total of full seconds.",
+                      call. = FALSE), quiet)
+        as.integer(x)
     } else if (class %in% c("double", "numeric")) {
+        shush(warning("'x' was converted to total of seconds.",
+                      call. = FALSE), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(x)
     } else if (class == "period") {
         lubridate::as.period(x)
     } else if (class == "difftime") {
+        shush(warning("'difftime' was set to seconds.", call. = FALSE), quiet)
         lubridate::as.difftime(x)
     } else if (class == "hms") {
         hms::as_hms(as.numeric(x))
     } else if (class == "date") {
         shush(warning("There's no date to parse.", call. = FALSE), quiet)
-        lubridate::as_date(NA)
+        lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
         lubridate::force_tz(x, tz = tz)
@@ -543,20 +442,18 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                         month_length = lubridate::dmonths(),
                         year_length = lubridate::dyears(),
                         close_round = TRUE, quiet = FALSE) {
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_string(tz)
+    checkmate::assert_flag(quiet)
 
     class <- tolower(class)
 
-    if (class %in% c("integer", "double", "numeric") &&
-        !is.null(output_unit) && !all(is.na(x))) {
-        x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
-                             month_length = month_length,
-                             year_length = year_length, ignore_date = TRUE,
-                             close_round = close_round, quiet = quiet)
-
-        if (class %in% "integer") return(as.integer(x))
-        if (class %in% c("double", "numeric")) return(x)
-    }
+    args <- c(ignore_date = TRUE, as.list(match.call()[-1]))
+    if (!is.null(output_unit)) return(do.call("parser_3", args))
 
     if (class == "character") {
         as.character(x)
@@ -573,8 +470,8 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::as_hms(x)
     } else if (class == "date") {
-        shush(warning("There's no date to parse", call. = FALSE), quiet)
-        lubridate::as_date(NA)
+        shush(warning("There's no date to parse.", call. = FALSE), quiet)
+        lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(x))
         lubridate::force_tz(x, tz = tz)
@@ -590,23 +487,21 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                          month_length = lubridate::dmonths(),
                          year_length = lubridate::dyears(),
                          close_round = TRUE, quiet = FALSE) {
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_string(tz)
+    checkmate::assert_flag(quiet)
 
     class <- tolower(class)
 
-    if (class %in% c("integer", "double", "numeric") &&
-        !is.null(output_unit) && !all(is.na(x))) {
-        x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
-                             month_length = month_length,
-                             year_length = year_length, ignore_date = FALSE,
-                             close_round = close_round, quiet = quiet)
-
-        if (class %in% "integer") return(as.integer(x))
-        if (class %in% c("double", "numeric")) return(x)
-    }
+    args <- c(ignore_date = FALSE, as.list(match.call()[-1]))
+    if (!is.null(output_unit)) return(do.call("parser_3", args))
 
     if (class %in% c("duration", "period", "difftime", "hms")) {
-        shush(warning("There's no time to parse", call. = FALSE), quiet)
+        shush(warning("There's no time to parse.", call. = FALSE), quiet)
     }
 
     if (class == "character") {
@@ -616,13 +511,13 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class %in% c("double", "numeric")) {
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
-        lubridate::as.duration(NA)
+        lubridate::as.duration(rep(NA, length(x)))
     } else if (class == "period") {
-        lubridate::as.period(NA)
+        lubridate::as.period(rep(NA, length(x)))
     } else if (class == "difftime") {
-        as.numeric(NA)
+        lubridate::as.difftime(lubridate::as.duration(rep(NA, length(x))))
     } else if (class == "hms") {
-        hms::as_hms(NA)
+        hms::as_hms(rep(NA, length(x)))
     } else if (class == "date") {
         lubridate::force_tz(x, tz)
     } else if (class == "posixct") {
@@ -639,21 +534,18 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                            year_length = lubridate::dyears(),
                            ignore_date = TRUE, close_round = TRUE,
                            quiet = FALSE) {
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_string(tz)
+    checkmate::assert_flag(quiet)
 
     class <- tolower(class)
 
-    if (class %in% c("integer", "double", "numeric") &&
-        !is.null(output_unit) && !all(is.na(x))) {
-        x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
-                             month_length = month_length,
-                             year_length = year_length,
-                             ignore_date = ignore_date,
-                             close_round = close_round, quiet = quiet)
-
-        if (class %in% "integer") return(as.integer(x))
-        if (class %in% c("double", "numeric")) return(x)
-    }
+    args <- as.list(match.call()[-1])
+    if (!is.null(output_unit)) return(do.call("parser_3", args))
 
     if (class == "character") {
         as.character(x)
@@ -684,20 +576,18 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              month_length = lubridate::dmonths(),
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_string(tz)
+    checkmate::assert_flag(quiet)
 
     class <- tolower(class)
 
-    if (class %in% c("integer", "double", "numeric") &&
-        !is.null(output_unit) && !all(is.na(x))) {
-        x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
-                             month_length = month_length,
-                             year_length = year_length, ignore_date = NULL,
-                             close_round = close_round, quiet = quiet)
-
-        if (class %in% "integer") return(as.integer(x))
-        if (class %in% c("double", "numeric")) return(x)
-    }
+    args <- c(ignore_date = NULL, as.list(match.call()[-1]))
+    if (!is.null(output_unit)) return(do.call("parser_3", args))
 
     if (class == "character") {
         as.character(x)
@@ -714,8 +604,8 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::hms(x)
     } else if (class == "date") {
-        shush(warning("There's no date to parse", call. = FALSE), quiet)
-        lubridate::as_date(NA)
+        shush(warning("There's no date to parse.", call. = FALSE), quiet)
+        lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
         lubridate::force_tz(x, tz = tz)
@@ -733,8 +623,14 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
                                month_length = lubridate::dmonths(),
                                year_length = lubridate::dyears(),
                                close_round = TRUE, quiet = FALSE) {
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_function(where, null.ok = TRUE)
     checkmate::assert_string(tz)
+    checkmate::assert_flag(quiet)
 
     if (!is.null(cols)) {
         checkmate::assert_names(cols, "unique", subset.of = names(x))
@@ -822,8 +718,110 @@ convert_pu <- function(x, orders, output_unit, ...) {
 
 # HELPERS =====
 
-#' @family utility functions
-#' @noRd
+parser_1 <- function(x, class, ..., orders = NULL, tz = "UTC",
+                     input_unit = NULL, output_unit = NULL,
+                     month_length = lubridate::dmonths(),
+                     year_length = lubridate::dyears(),
+                     ignore_date = TRUE, close_round = TRUE, quiet = FALSE) {
+    if (!identical(count_na(x), count_na(shush(as.numeric(x))))) {
+        stop("To convert 'character' objects to units, all values must be ",
+             "able to be coerced to 'numeric'. Try `as.numeric(x)` to check ",
+             "for errors.", call. = FALSE)
+    }
+
+    if (!is.null(output_unit) && is.null(input_unit)) {
+        stop("'x' can only be converted to 'output_unit' if 'input_unit' ",
+             "is assigned.", call. = FALSE)
+    }
+
+    if (!is.null(output_unit) &&
+        !(class %in% c("integer", "double", "numeric"))) {
+        stop("'x' can only be converted to 'output_unit' if 'class' ",
+             "is 'integer', 'double' or 'numeric'.", call. = FALSE)
+    }
+
+    if (class %in% c("integer", "double", "numeric") &&
+        (is.null(input_unit) || is.null(output_unit))) {
+        stop("input_unit' and 'output_unit' must both be assigned, or be ",
+             "'NULL', when 'class' is equal to ", single_quote_(class), ".",
+             call. = FALSE)
+    }
+
+    class <- tolower(class)
+    check <- identical(count_na(x), count_na(shush(as.numeric(x))))
+    if (is.character(x)) fix_character(x)
+
+    if (!is.null(input_unit) && !is.null(output_unit)) {
+        x <- convert_to_unit(shush(as.numeric(x)),
+                             input_unit = input_unit,
+                             output_unit = output_unit,
+                             month_length = month_length,
+                             year_length = year_length,
+                             ignore_date = ignore_date,
+                             close_round = close_round,
+                             quiet = quiet)
+
+        convert(x, class, tz = tz, quiet = quiet)
+    } else if (!is.null(input_unit)) {
+        convert_to_date_time(shush(as.numeric(x)),
+                             class = class, tz = tz,
+                             input_unit = input_unit,
+                             month_length = month_length,
+                             year_length = year_length,
+                             close_round = close_round,
+                             quiet = quiet)
+    }
+}
+
+parser_2 <- function(x, class, ..., orders = NULL, tz = "UTC",
+                     input_unit = NULL, output_unit = NULL,
+                     month_length = lubridate::dmonths(),
+                     year_length = lubridate::dyears(),
+                     ignore_date = TRUE, close_round = TRUE, quiet = FALSE) {
+    class <- tolower(class)
+    if (is.character(x)) fix_character(x)
+    x <- parse_to_date_time(x, orders, tz, quiet)
+
+    if (class %in% c("integer", "double", "numeric") &&
+        !is.null(output_unit) && !all(is.na(x))) {
+        x <- convert_to_unit(x, input_unit = NULL,
+                             output_unit = output_unit,
+                             month_length = month_length,
+                             year_length = year_length,
+                             ignore_date = ignore_date,
+                             close_round = close_round,
+                             quiet = quiet)
+
+        if (class == "integer") return(as.integer(x))
+        if (class %in% c("double", "numeric")) return(x)
+    } else {
+        convert(x, class, tz = tz, quiet = quiet)
+    }
+}
+
+parser_3 <- function(x, class, ..., output_unit = NULL,
+                     month_length = lubridate::dmonths(),
+                     year_length = lubridate::dyears(),
+                     ignore_date = TRUE, close_round = TRUE, quiet = FALSE) {
+    class <- tolower(class)
+
+    if (!(class %in% c("integer", "double", "numeric"))) {
+        stop("'x' can be only be converted to 'output_unit' if 'class' ",
+             "is 'integer', 'double' or 'numeric'.", call. = FALSE)
+    }
+
+    x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
+                         month_length = month_length,
+                         year_length = year_length, ignore_date = ignore_date,
+                         close_round = close_round, quiet = quiet)
+
+    if (class == "integer") {
+        as.integer(x)
+    } else {
+        x
+    }
+}
+
 parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                                quiet = FALSE) {
     # Check arguments -----
@@ -940,8 +938,6 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
     out
 }
 
-#' @family utility functions
-#' @noRd
 convert_to_seconds <- function(x, input_unit = NULL,
                                month_length = lubridate::dmonths(),
                                year_length = lubridate::dyears(),
@@ -949,8 +945,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
     classes <- c("integer", "double", "numeric", "Duration",  "Period",
                  "difftime", "hms", "Date", "POSIXct", "POSIXlt", "Interval")
 
-    choices <- c("S", "M", "H", "d", "W", "m", "y", "date_decimal",
-                 "rad", "deg")
+    choices <- c("S", "M", "H", "d", "W", "m", "y", "rad", "deg")
 
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
     checkmate::assert_choice(input_unit, choices, null.ok = TRUE)
@@ -984,8 +979,6 @@ convert_to_seconds <- function(x, input_unit = NULL,
             x * as.numeric(month_length)
         } else if (input_unit == "y") {
             x * as.numeric(year_length)
-        } else if (input_unit == "date_decimal") {
-            as.numeric(hms::as_hms(lubridate::date_decimal(x)))
         } else if (input_unit == "rad") {
             x / rad_second
         } else if (input_unit == "deg") {
@@ -1021,32 +1014,20 @@ convert_to_seconds <- function(x, input_unit = NULL,
     }
 }
 
-#' @family utility functions
-#' @noRd
 convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
                             month_length = lubridate::dmonths(),
                             year_length = lubridate:: dyears(),
                             ignore_date = TRUE, close_round = TRUE,
                             quiet = FALSE) {
-    choices <- c("S", "M", "H", "d", "W", "m", "y", "date_decimal",
-                 "rad", "deg")
+    choices <- c("S", "M", "H", "d", "W", "m", "y", "rad", "deg")
 
     checkmate::assert_choice(output_unit, choices, null.ok = TRUE)
+    checkmate::assert_flag(close_round)
 
     ## rad_second <- (2 * pi) / 24 / 60 / 60
     rad_second <- pi / 43200 # rad equivalent to 1 second
     ## deg_second <- 15 / (60 * 60)
     deg_second <- 15 / 3600 # degree equivalent to 1 second
-
-    if (output_unit == "date_decimal") {
-        if (lubridate::is.Date(x) || lubridate::is.POSIXt(x)) {
-            return(lubridate::decimal_date(x))
-        } else {
-            stop('When `output_unit` is equal to "date_decimal" ',
-                 '`x` must be class `Date` or `POSIXt`.',
-                 call. = FALSE)
-        }
-    }
 
     x <- convert_to_seconds(x, input_unit, month_length, year_length,
                             ignore_date, quiet)
@@ -1078,13 +1059,10 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
     }
 }
 
-#' @family utility functions
-#' @noRd
-convert_to_date_time <- function(x, class, input_unit = NULL,
+convert_to_date_time <- function(x, class, tz = "UTC", input_unit = NULL,
                                  month_length = lubridate::dmonths(),
                                  year_length = lubridate:: dyears(),
-                                 close_round = TRUE, tz = "UTC",
-                                 quiet = FALSE) {
+                                 close_round = TRUE, quiet = FALSE) {
     checkmate::assert_numeric(x)
 
     x <- convert_to_unit(x, input_unit = input_unit, output_unit = "H",

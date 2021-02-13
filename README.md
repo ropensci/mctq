@@ -4,7 +4,6 @@
 # mctq <a href='https://gipsousp.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
-<!-- To do: Add Code coverage (when possible) <https://docs.codecov.io/> -->
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -32,21 +31,11 @@ reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
 That means that people can try it out and provide feedback, but it comes
 with no promises for long term stability.
 
-### About MCTQ
-
-**UNDER DEVELOPMENT**
-
-To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
-*cf.* Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-Merrow, & Vetter (2012), Roenneberg *et al.* (2015), and Roenneberg,
-Pilz, Zerbini, & Winnebeck (2019).
-
-To know about different MCTQ versions, *cf.* Juda, Vetter, & Roenneberg
-(2013) and Ghotbi *et.al* (2020).
-
-If you curious about the variable computations and want to have access
-to the full questionnaire, *cf.* The Worldwide Experimental Platform
-(n.d.).
+<!-- ### About MCTQ -->
+<!-- __UNDER DEVELOPMENT__ -->
+<!-- To learn more about the standard Munich Chronotype Questionnaire (MCTQ), _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz, Zerbini, & Winnebeck (2019). -->
+<!-- To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg (2013) and Ghotbi _et.al_ (2020). -->
+<!-- If you curious about the variable computations and want to have access to the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.). -->
 
 ### Wait, a R package for a questionnaire?
 
@@ -92,8 +81,6 @@ Here are some examples of how to convert your data using `convert()`.
 
 ``` r
 library(mctq)
-library(lubridate)
-library(hms)
 
 # __ Conversion from units to date/time objects __
 ## From decimal hours to `hms`
@@ -102,44 +89,15 @@ convert(6.5, "hms", input_unit = "H")
 ## From radians to `Duration`
 convert(1.308997, "Duration", input_unit = "rad")
 #> [1] "18000s (~5 hours)"
-## From degrees to `Duration`
-convert(15, "Duration", input_unit = "deg")
-#> [1] "3600s (~1 hours)"
-
-# __ Conversion from `character` or `numeric` objects to date/time objects __
+## From radians to decimal minutes
+convert(0.2617994, "numeric", input_unit = "rad", output_unit = "M")
+#> [1] 60
 ## From `character` `HMS` to `Duration`
 convert("19:55:17", "Duration", orders = "HMS")
 #> [1] "71717s (~19.92 hours)"
 ## From `character` `HM AM/PM ` to `hms`
 convert("10:00 PM", "hms", orders = "IMp")
 #> 22:00:00
-## From `numeric` decimal minutes (M) to `Period`
-convert(20.5, "Period", orders = "M")
-#> [1] "20M 30S"
-
-# __ Conversion between date/time objects __
-## From `Duration` to `hms`
-convert(lubridate::dseconds(120), "hms")
-#> 00:02:00
-## From `Date` to `POSIXct`
-convert(lubridate::as_date("1765-10-05"), "POSIXct")
-#> [1] "1765-10-05 UTC"
-## From `POSIXct` to `Period`
-convert(lubridate::as_datetime("2020-01-01 10:00:00"), "Period")
-#> [1] "10H 0M 0S"
-
-# __ Conversion of columns in a data frame __
-## Converting a `hms` column to radians
-data <- data.frame(bt_w = std_mctq$bt_w, bt_w_rad = std_mctq$bt_w)
-data <- convert(data, "numeric", cols = "bt_w_rad", output_unit = "rad")
-head(data)
-#>       bt_w  bt_w_rad
-#> 1       NA        NA
-#> 2 00:30:00 0.1308997
-#> 3 23:15:00 6.0868358
-#> 4 23:00:00 6.0213859
-#> 5 23:35:00 6.1741022
-#> 6 02:00:00 0.5235988
 ```
 
 After you data is all set, just use the `mctq` functions below to
@@ -159,8 +117,12 @@ For basic MCTQ computation, use:
 -   `ms()` compute MCTQ mid-sleep
 -   `sd24()` compute MCTQ 24h sleep duration (only for MCTQ Shift)
 
+Example:
+
 ``` r
 library(mctq)
+library(lubridate)
+library(hms)
 
 # Local time of preparing to sleep on workdays.
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
@@ -185,8 +147,12 @@ For computations combining workdays and work-free days, use:
     work-free days
 -   `le_week()` compute MCTQ average weekly light exposure
 
+Example:
+
 ``` r
 library(mctq)
+library(lubridate)
+library(hms)
 
 # Mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
@@ -200,7 +166,7 @@ sjl_rel(msw, msf)
 In addition to `convert()`, `mctq` is also equip with many other
 utilities functions.
 
-The functions are well documented, showing all the guidelines behind the
+All functions are well documented, showing all the guidelines behind the
 computations. Click
 [here](https://gipsousp.github.io/mctq/reference/index.html) to view a
 list of them.

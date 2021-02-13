@@ -136,7 +136,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 
     if (isTRUE(vectorize) &&
         !(length(unique(vapply(out, length, integer(1)))) == 1)) {
-        stop("When `vetorize` is `TRUE`, all values in `...` must have ",
+        stop("When 'vetorize' is 'TRUE', all values in '...' must have ",
              "the same length.", call. = FALSE)
     }
 
@@ -162,6 +162,10 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         out <- sum(out, na.rm = na.rm)
     }
 
-    if (isTRUE(clock)) out <- flat_posixt(lubridate::as_datetime(out))
-    convert(out, class)
+    if (isTRUE(clock)) {
+        out <- flat_posixt(lubridate::as_datetime(out))
+        convert(out, class)
+    } else {
+        convert(out, class, input_unit = "S")
+    }
 }

@@ -1,72 +1,54 @@
-#' @family check functions
-#' @noRd
 check_any_na <- function(x, name = deparse(substitute(x))) {
     if (any(is.na(x))) {
-        paste0(backtick_(name), " cannot have any missing values")
+        paste0(single_quote_(name), " cannot have any missing values")
     } else {
         TRUE
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_any_na <- checkmate::makeAssertionFunction(check_any_na)
 
-#' @family check functions
-#' @noRd
 check_not_all_na <- function(x, name = deparse(substitute(x))) {
     if (all(is.na(x))) {
-        paste0(backtick_(name), " cannot have all values as missing")
+        paste0(single_quote_(name), " cannot have all values as missing")
     } else {
         TRUE
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_not_all_na <- checkmate::makeAssertionFunction(check_not_all_na)
 
-#' @family check functions
-#' @noRd
 check_length_one <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
 
     if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (!(length(x) == 1)) {
-        paste0(backtick_(name), " must have length 1, not length ",
+        paste0(single_quote_(name), " must have length 1, not length ",
                    "{length(x)}")
     } else {
         TRUE
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_length_one <- checkmate::makeAssertionFunction(check_length_one)
 
-#' @family check functions
-#' @noRd
 check_has_length <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
 
     if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (length(x) < 1) {
-        paste0(backtick_(name), " must have length greater than zero")
+        paste0(single_quote_(name), " must have length greater than zero")
     } else {
         TRUE
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_has_length <- checkmate::makeAssertionFunction(check_has_length)
 
-#' @family check functions
-#' @noRd
 check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
                              name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -75,22 +57,18 @@ check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
     if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(backtick_(name), " cannot be `NULL`")
+        paste0(single_quote_(name), " cannot be 'NULL'")
     } else  if (!all(is_whole_number(x))) {
-        paste0(backtick_(name), " must consist of whole numbers")
+        paste0(single_quote_(name), " must consist of whole numbers")
     } else {
         TRUE
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_whole_number <- checkmate::makeAssertionFunction(check_whole_number)
 
-#' @family check functions
-#' @noRd
 check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -99,9 +77,9 @@ check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
     if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(backtick_(name), " cannot have `NULL` values")
+        paste0(single_quote_(name), " cannot have 'NULL' values")
     } else  if (!is_numeric_(x)) {
         paste0("Must be of type 'numeric', not ", class_collapse(x))
     } else {
@@ -109,12 +87,8 @@ check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_numeric_ <- checkmate::makeAssertionFunction(check_numeric_)
 
-#' @family check functions
-#' @noRd
 check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -123,9 +97,9 @@ check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
     if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(backtick_(name), " cannot have `NULL` values")
+        paste0(single_quote_(name), " cannot have 'NULL' values")
     } else  if (!lubridate::is.duration(x)) {
         paste0("Must be of type 'Duration', not ", class_collapse(x))
     } else {
@@ -133,12 +107,8 @@ check_duration <- function(x, any.missing = TRUE, null.ok = FALSE,
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_duration <- checkmate::makeAssertionFunction(check_duration)
 
-#' @family check functions
-#' @noRd
 check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -147,9 +117,9 @@ check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
     if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(backtick_(name), " cannot have `NULL` values")
+        paste0(single_quote_(name), " cannot have 'NULL' values")
     } else  if (!lubridate::is.POSIXt(x)) {
         paste0("Must be of type 'POSIXct' or 'POSIXlt', not ",
                class_collapse(x))
@@ -158,8 +128,6 @@ check_posixt <- function(x, any.missing = TRUE, null.ok = FALSE,
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_posixt <- checkmate::makeAssertionFunction(check_posixt)
 
 test_time <- function(x, any.missing = TRUE, null.ok = FALSE) {
@@ -167,8 +135,6 @@ test_time <- function(x, any.missing = TRUE, null.ok = FALSE) {
     if (isTRUE(out)) TRUE else FALSE
 }
 
-#' @family check functions
-#' @noRd
 check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
                        name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -177,9 +143,9 @@ check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
     if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(backtick_(name), " cannot have `NULL` values")
+        paste0(single_quote_(name), " cannot have 'NULL' values")
     } else if (!is_time(x)) {
         paste0("Must be a time object, not ", class_collapse(x))
     } else {
@@ -187,12 +153,8 @@ check_time <- function(x, any.missing = TRUE, null.ok = FALSE,
     }
 }
 
-#' @family check functions
-#' @noRd
 assert_time <- checkmate::makeAssertionFunction(check_time)
 
-#' @family check functions
-#' @noRd
 assert_identical <- function(..., type = "value", any.missing = TRUE,
                             null.ok = FALSE) {
     checkmate::assert_list(list(...), min.len = 2)
@@ -205,25 +167,25 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
 
     if (type == "length") {
         error_message <- paste0("Assertion failed: ", inline_collapse(names),
-                                " must have identical lengths")
+                                " must have identical lengths.")
         check <- length(unique(vapply(out, length, integer(1)))) == 1
     } else if (type == "class") {
         error_message <- paste0("Assertion failed: ", inline_collapse(names),
-                                " must have identical classes")
+                                " must have identical classes.")
         check <- length(unique(lapply(out, class))) == 1
     } else {
         error_message <- paste0("Assertion failed: ", inline_collapse(names),
-                                " must be identical")
+                                " must be identical.")
         check <- length(unique(out)) == 1
     }
 
     if (any(unlist(lapply(out, is.null))) && isTRUE(null.ok)) {
         invisible(TRUE)
     } else if (any(is.na(unlist(out))) && isFALSE(any.missing)) {
-        stop(inline_collapse(names), " cannot have missing values",
+        stop(inline_collapse(names), " cannot have missing values.",
              call. = FALSE)
     } else if (any(is.null(unlist(out))) && isFALSE(null.ok)) {
-        stop(inline_collapse(names), " cannot have 'NULL' values",
+        stop(inline_collapse(names), " cannot have 'NULL' values.",
              call. = FALSE)
     } else if (isFALSE(check)) {
         stop(error_message, call. = FALSE)
@@ -232,9 +194,7 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
     }
 }
 
-#' Used in swap_decimal()
-#' @family check functions
-#' @noRd
+# Used in swap_decimal()
 check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -243,18 +203,16 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
     if (is.null(x) && isTRUE(null.ok)) {
         TRUE
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(backtick_(name), " cannot have missing values")
+        paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(backtick_(name), " cannot have `NULL` values")
+        paste0(single_quote_(name), " cannot have 'NULL' values")
     } else if (!(is.character(x) || is_numeric_(x))) {
-        paste0(backtick_(name), " must inherit from class 'character' or ",
+        paste0(single_quote_(name), " must inherit from class 'character' or ",
                "'numeric', but has class ", class_collapse(x))
     } else {
         TRUE
     }
 }
 
-#' Used in swap_decimal()
-#' @family check functions
-#' @noRd
+# Used in swap_decimal()
 assert_custom_1 <- checkmate::makeAssertionFunction(check_custom_1)

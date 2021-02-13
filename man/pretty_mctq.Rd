@@ -10,8 +10,7 @@ pretty_mctq(data, round = TRUE, hms = TRUE)
 \item{data}{A data frame.}
 
 \item{round}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
-\code{difftime}, and \code{hms} objects must be rounded at the seconds level
-(default: \code{TRUE}).}
+and \code{hms} objects must be rounded at the seconds level (default: \code{TRUE}).}
 
 \item{hms}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
 and \code{difftime} objects must be converted to \code{hms} (default: \code{TRUE}).}
@@ -48,8 +47,7 @@ data <- data.frame(
     a = 1,
     b = lubridate::duration(1.12345),
     c = lubridate::period(1.12345),
-    d = as.difftime(1.12345, units = "secs"),
-    e = hms::hms(1.12345))
+    d = hms::hms(1.12345))
 
 ## __ Rounding time objects from `data` __
 pretty_mctq(data, round = TRUE, hms = FALSE)

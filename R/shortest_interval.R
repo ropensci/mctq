@@ -143,23 +143,15 @@ shortest_interval <- function(x, y, class = base::class(x)[1], inverse = FALSE) 
     checkmate::assert_choice(tolower(class), tolower(choices))
     checkmate::assert_flag(inverse)
 
-    # Set values -----
-
     class <- tolower(class)
-
-    # Convert `x` and `y` -----
 
     x <- flat_posixt(convert(x, "posixct"))
     y <- flat_posixt(convert(y, "posixct"))
 
     list2env(swap_if(x, y, "x > y"), envir = environment())
 
-    # Create intervals -----
-
     x1_y1_interval <- lubridate::interval(x, y)
     y1_x2_interval <- lubridate::interval(y, x + lubridate::days())
-
-    # Find shortest interval -----
 
     if (isFALSE(inverse)) {
         out <- dplyr::case_when(
@@ -176,8 +168,6 @@ shortest_interval <- function(x, y, class = base::class(x)[1], inverse = FALSE) 
             x1_y1_interval < y1_x2_interval ~ y1_x2_interval,
         )
     }
-
-    # Return output -----
 
     if (class == "interval") {
         out

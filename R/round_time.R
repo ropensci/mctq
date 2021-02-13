@@ -4,8 +4,8 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `round_time()` takes a `Duration`, `Period`, `difftime`, or `hms` object and
-#' round it at the seconds level.
+#' `round_time()` takes a `Duration`, `Period`, or `hms` object and round it at
+#' the seconds level.
 #'
 #' @details
 #'
@@ -15,7 +15,7 @@
 #' round(-1.5) is -2. See `?round` to learn more.
 #'
 #' @param x An object belonging to one of the following classes: `Duration`,
-#'   `Period`, `difftime`, `hms`.
+#'   `Period`, or `hms`.
 #'
 #' @return A time object with the time rounded at the seconds level.
 #'
@@ -51,10 +51,10 @@
 #' round_time(x)
 #' #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 round_time <- function(x) {
-    classes <- c("Duration", "Period", "difftime", "hms")
+    classes <- c("Duration", "Period", "hms")
     checkmate::assert_multi_class(x, classes)
 
     class <- class(x)[1]
     x <- round(as.numeric(x))
-    convert(x, class)
+    convert(x, class, input_unit = "S")
 }

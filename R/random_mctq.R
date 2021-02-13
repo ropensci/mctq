@@ -42,7 +42,7 @@
 #' }
 random_mctq <- function(model = "standard", quiet = FALSE) {
     if (!is_namespace_loaded("stats")) {
-        stop('This function requires the `stats` package to run. ',
+        stop("This function requires the 'stats' package to run. ",
              'You can install it by running: \n \n',
              'install.packages("stats") \n', call. = FALSE)
     }
@@ -56,8 +56,6 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
     }
 }
 
-#' @family utility functions
-#' @noRd
 random_std_mctq <- function() {
     # Set values -----
 
@@ -215,13 +213,11 @@ random_std_mctq <- function() {
     )
 }
 
-#' @family utility functions
-#' @noRd
 sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
                         max = hms::parse_hms("23:59:59"),
                         by = lubridate::dminutes(5), size = 1,
                         replace = FALSE, prob = NULL) {
-    classes <- c("Duration", "Period", "difftime", "hms", "integer", "numeric")
+    classes <- c("Duration", "Period", "hms", "integer", "numeric")
 
     checkmate::assert_choice(tolower(class), tolower(classes))
     checkmate::assert_multi_class(min, classes)
@@ -246,5 +242,5 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
     sample <- sample(seq(min, max, by), size = size, replace = replace,
                      prob = prob)
 
-    convert(sample, class)
+    convert(sample, class, input_unit = "S")
 }

@@ -20,7 +20,7 @@
 \alias{convert_pu}
 \title{Convert a R object to another}
 \usage{
-convert(x, class, ..., quiet = FALSE)
+convert(x, class, ...)
 
 \method{convert}{character}(
   x,
@@ -172,9 +172,6 @@ convert_pu(x, orders, output_unit, ...)
 
 \item{...}{Additional arguments to be passed to or from methods.}
 
-\item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
-must be suppressed (default: \code{FALSE}).}
-
 \item{orders}{(optional) a \code{character} object of date/time formats to parse a
 \code{x} value of class \code{character} or \code{numeric}.}
 
@@ -202,6 +199,9 @@ ignored from \code{Date} or \code{POSIXt} objects when converting they to \code{
 \item{close_round}{(optional) a \code{logical} value indicating if numbers with
 decimals starting with five leading 0s or 9s must be rounded
 (\emph{e.g.} 1.99999) (default: \code{TRUE}).}
+
+\item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
+must be suppressed (default: \code{FALSE}).}
 
 \item{cols}{(optional) a \code{character} object indicating the column names in
 \code{x} to transform (default: \code{NULL}).}
@@ -252,7 +252,7 @@ to units.
 \subsection{\code{class} argument}{
 
 The \code{class} argument indicates the desired class of the output object . It
-accepts the following values: \code{"character"}, \code{"integer"}, \code{"double"},
+can accept the following values: \code{"character"}, \code{"integer"}, \code{"double"},
 \code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, \code{"hms"}, \code{"Date"},
 \code{"POSIXct"}, and \code{"POSIXlt"} (case insensitive).
 }
@@ -280,7 +280,6 @@ Valid values for this two arguments are:
 \item \code{"W"}: for decimal weeks.
 \item \code{"m"}: for decimal months.
 \item \code{"y"}: for decimal years.
-\item \code{"date_decimal"}: for decimal dates.
 \item \code{"rad"}: for radians.
 \item \code{"deg"}: for degrees.
 }
@@ -366,20 +365,6 @@ values to \code{month_length} and \code{year_length} arguments.
 \code{month_length} and \code{year_length} values must be assigned with the number of
 seconds equivalent to the unit duration. You can also assign a lubridate
 duration object if you like (see \code{\link[lubridate:duration]{lubridate::duration()}}).
-}
-
-\subsection{Decimal dates}{
-
-\code{convert()} can be used as a wrapper to \code{\link[lubridate:decimal_date]{lubridate::decimal_date()}}
-by creating decimal dates that can be used on \code{\link[lubridate:date_decimal]{lubridate::date_decimal()}}.
-
-Decimal dates are a kind of decimal time where the year corresponds to the
-integer part of the value. The months, days, hours, minutes, and seconds
-elements are picked so the date-time will represent the fraction of the year
-expressed by decimal.
-
-Beware that decimal dates are not very precise! It cannot be used as a way
-to store time data.
 }
 }
 \examples{

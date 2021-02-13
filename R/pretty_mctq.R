@@ -27,8 +27,7 @@
 #'
 #' @param data A data frame.
 #' @param round (optional) a `logical` value indicating if `Duration`, `Period`,
-#'   `difftime`, and `hms` objects must be rounded at the seconds level
-#'   (default: `TRUE`).
+#'   and `hms` objects must be rounded at the seconds level (default: `TRUE`).
 #' @param hms (optional) a `logical` value indicating if `Duration`, `Period`,
 #'   and `difftime` objects must be converted to `hms` (default: `TRUE`).
 #'
@@ -42,8 +41,7 @@
 #'     a = 1,
 #'     b = lubridate::duration(1.12345),
 #'     c = lubridate::period(1.12345),
-#'     d = as.difftime(1.12345, units = "secs"),
-#'     e = hms::hms(1.12345))
+#'     d = hms::hms(1.12345))
 #'
 #' ## __ Rounding time objects from `data` __
 #' pretty_mctq(data, round = TRUE, hms = FALSE)
@@ -59,7 +57,7 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
 
     if (isTRUE(round)) {
         check <- function(x) {
-            classes <- c("Duration", "Period", "difftime", "hms")
+            classes <- c("Duration", "Period", "hms")
             checkmate::test_multi_class(x, classes)
         }
 

@@ -8,7 +8,7 @@ round_time(x)
 }
 \arguments{
 \item{x}{An object belonging to one of the following classes: \code{Duration},
-\code{Period}, \code{difftime}, \code{hms}.}
+\code{Period}, or \code{hms}.}
 }
 \value{
 A time object with the time rounded at the seconds level.
@@ -16,8 +16,8 @@ A time object with the time rounded at the seconds level.
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
-\code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, or \code{hms} object and
-round it at the seconds level.
+\code{round_time()} takes a \code{Duration}, \code{Period}, or \code{hms} object and round it at
+the seconds level.
 }
 \details{
 \code{round_time()} convert time to seconds and them uses \code{\link[base:Round]{base::round()}} to round

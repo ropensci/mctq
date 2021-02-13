@@ -112,20 +112,20 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     # Check arguments -----
 
     if (!is_interactive()) {
-        stop("This function can only be used in interactive mode",
+        stop("This function can only be used in interactive mode.",
              call. = FALSE)
     }
 
     if(!is_namespace_loaded("grDevices") || !is_namespace_loaded("ggplot2")) {
-        stop('This function requires the `grDevices` and `ggplot2` packages ',
+        stop("This function requires the 'grDevices' and 'ggplot2' packages ",
             'to run. You can install them by running: \n \n',
             'install.packages("grDevices") \n',
             'install.packages("ggplot2")' , call. = FALSE)
     }
 
     if (any(c("x", "y", "data") %in% names(list(...)))) {
-        stop("`x`, `y` and `data` are reserved arguments for ",
-            "`qplot_walk()`", call. = FALSE)
+        stop("'x', 'y' and `data` are reserved arguments for ",
+            "`qplot_walk()`.", call. = FALSE)
     }
 
     if (is.data.frame(data)) {
@@ -138,7 +138,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         checkmate::assert_flag(remove_id)
 
         if (!is.null(cols) && !is.null(pattern)) {
-            stop("`cols` and `pattern` can't both have values. ",
+            stop("'cols' and 'pattern' can't both have values. ",
                 "You need to choose only one selection method.", call. = FALSE)
         }
     }
@@ -146,7 +146,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     checkmate::assert_flag(midday_change)
 
     if (!is.atomic(data) && !is.data.frame(data)) {
-        stop("`data` must be an atomic object or a data frame", call. = FALSE)
+        stop("'data' must be an 'atomic' object or a data frame.", call. = FALSE)
     }
 
     # Return output for `atomic` `data` -----
@@ -167,8 +167,8 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     if (is.atomic(data)) {
         assert_has_length(data)
 
-        warning("`data` is `atomic`. All other arguments, except `...` and ",
-            "`midday_change`, are ignored.", call. = FALSE)
+        warning("'data' is 'atomic'. All other arguments, except '...' and ",
+            "'midday_change', are ignored.", call. = FALSE)
 
         x <- transform(data, midday_change)
         xlab <- deparse(substitute(data))
@@ -190,13 +190,13 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- grep(pattern, names(data), value = TRUE)
 
         if (length(cols) == 0) {
-            stop("None match was found in `names(data)`", call. = FALSE)
+            stop("None match was found in `names(data)`.", call. = FALSE)
         }
     }
 
     if (!is.null(ignore)) {
         if (all(unique(get_class(data[cols])) %in% ignore)) {
-            stop("You can't ignore all variables in `cols` or in `data`. ",
+            stop("You can't ignore all variables in 'cols' or in 'data'. ",
                 "Note that `qplot_walk()` is set by default to ignore ",
                 "'character' objects. Please check your settings.",
                 call. = FALSE)
@@ -205,7 +205,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         if (any(ignore %in% get_class(data[cols]))) {
             match <- names(data[cols])[get_class(data[cols]) %in% ignore]
             warning(inline_collapse(match), " will be ignored due to the ",
-                    "settings in the `ignore` argument.",
+                    "settings in the 'ignore' argument.",
                     call. = FALSE, immediate. = TRUE)
         }
 
@@ -221,8 +221,8 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
     dialog_line(line = paste0(
             "Warning: `qplot_walk()` clears all plots from your system \n",
-            "after it runs. If you don't agree with this, press `esc` to \n",
-            "exit, or press `enter` to continue."))
+            "after it runs. If you don't agree with this, press 'esc' to \n",
+            "exit, or press 'enter' to continue."))
 
     # Create qplots -----
 
@@ -236,7 +236,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         }
 
         dialog <- dialog_line(
-            line = "Press `esc` to exit or `enter` to continue.",
+            line = "Press 'esc' to exit or 'enter' to continue.",
             space_above = FALSE, space_below = FALSE)
 
         grDevices::dev.off()
