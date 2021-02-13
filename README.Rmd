@@ -61,29 +61,28 @@ devtools::install_github("gipsousp/mctq", dependencies = TRUE)
 
 `mctq` works with a set of object classes specially created to hold time values. This classes can be found in the [hms](https://hms.tidyverse.org/) and [lubridate](https://lubridate.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/packages/). If your data do not conform to the object classes required, don't worry, just use `convert()` to convert it. You can always convert it back if you want.
 
-Here are some examples of how to convert your data using `convert()`.
+Here are some examples of how to convert your data using `convert()`:
 
 ```{r, message = FALSE}
 library(mctq)
 
-# __ Conversion from units to date/time objects __
-## From decimal hours to `hms`
+# From decimal hours to `hms`
 convert(6.5, "hms", input_unit = "H")
-## From radians to `Duration`
+# From radians to `Duration`
 convert(1.308997, "Duration", input_unit = "rad")
-## From radians to decimal minutes
+# From radians to decimal minutes
 convert(0.2617994, "numeric", input_unit = "rad", output_unit = "M")
-## From `character` `HMS` to `Duration`
+# From `character` `HMS` to `Duration`
 convert("19:55:17", "Duration", orders = "HMS")
-## From `character` `HM AM/PM ` to `hms`
+# From `character` `HM AM/PM ` to `hms`
 convert("10:00 PM", "hms", orders = "IMp")
 ```
+
+### Basic MCTQ computation
 
 After you data is all set, just use the `mctq` functions below to process it. 
 
 Note that `mctq` uses a similar naming scheme as those used in the MCTQ articles, that make it easy to find and apply any computation necessary.
-
-For basic MCTQ computation, use:
 
 * `fd()` compute MCTQ work-free days
 * `so()` compute MCTQ sleep onset
@@ -109,6 +108,8 @@ slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
 so(sprep_w, slat_w)
 ```
 
+### MCTQ analysis
+
 For computations combining workdays and work-free days, use:
 
 * `sd_week()` compute MCTQ average weekly sleep duration
@@ -133,6 +134,8 @@ msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
 # Relative social jetlag
 sjl_rel(msw, msf)
 ```
+
+### Utilities
 
 In addition to `convert()`, `mctq` is also equip with many other utilities functions. 
 

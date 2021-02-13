@@ -5,14 +5,14 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "mctq",
-  "description": "A set of tools for processing Munich ChronoType Questionnaire \n    (MCTQ) data.",
-  "name": "mctq: The R Package for MCTQ data",
+  "description": "A set of tools to process Munich ChronoType Questionnaire \n    (MCTQ) data.",
+  "name": "mctq: The R Package for Munich ChronoType Questionnaire (MCTQ) Data",
   "codeRepository": "https://github.com/gipsousp/mctq/",
   "relatedLink": [
     "https://gipsousp.github.io/mctq",
     "https://gipsousp.github.io/mctq/"
   ],
-  "issueTracker": "https://github.com/gipsousp/mctq/issues",
+  "issueTracker": "https://github.com/gipsousp/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9000",
   "programmingLanguage": {
@@ -52,16 +52,20 @@
       "familyName": "Vartanian",
       "email": "danvartan@gmail.com",
       "@id": "https://orcid.org/0000-0001-7782-759X"
+    },
+    {
+      "@type": "Organization",
+      "name": "Interdisciplinary Sleep Research Group (GIPSO)"
     }
   ],
   "funder": [
     {
       "@type": "Organization",
-      "name": "GIPSO"
+      "name": "Interdisciplinary Sleep Research Group (GIPSO)"
     },
     {
       "@type": "Organization",
-      "name": "USP"
+      "name": "University of Sao Paulo (USP)"
     }
   ],
   "maintainer": [
@@ -262,7 +266,7 @@
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
   "readme": "https://github.com/gipsousp/mctq/blob/master/README.md",
-  "fileSize": "1423.19KB",
+  "fileSize": "1421.295KB",
   "contIntegration": ["https://travis-ci.com/gipsousp/mctq", "https://codecov.io/gh/gipsousp/mctq?branch=master"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
@@ -292,9 +296,9 @@
           "familyName": "Pedrazzoli"
         }
       ],
-      "name": "The R package for MCTQ data",
+      "name": "mctq: a R package for the Munich ChronoType Questionnaire (MCTQ)",
       "url": "https://gipsousp.github.io/mctq/",
-      "description": "Lifecycle: experimental"
+      "description": "Lifecycle: maturing"
     }
   ]
 }

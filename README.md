@@ -77,36 +77,35 @@ values. This classes can be found in the
 conform to the object classes required, don’t worry, just use
 `convert()` to convert it. You can always convert it back if you want.
 
-Here are some examples of how to convert your data using `convert()`.
+Here are some examples of how to convert your data using `convert()`:
 
 ``` r
 library(mctq)
 
-# __ Conversion from units to date/time objects __
-## From decimal hours to `hms`
+# From decimal hours to `hms`
 convert(6.5, "hms", input_unit = "H")
 #> 06:30:00
-## From radians to `Duration`
+# From radians to `Duration`
 convert(1.308997, "Duration", input_unit = "rad")
 #> [1] "18000s (~5 hours)"
-## From radians to decimal minutes
+# From radians to decimal minutes
 convert(0.2617994, "numeric", input_unit = "rad", output_unit = "M")
 #> [1] 60
-## From `character` `HMS` to `Duration`
+# From `character` `HMS` to `Duration`
 convert("19:55:17", "Duration", orders = "HMS")
 #> [1] "71717s (~19.92 hours)"
-## From `character` `HM AM/PM ` to `hms`
+# From `character` `HM AM/PM ` to `hms`
 convert("10:00 PM", "hms", orders = "IMp")
 #> 22:00:00
 ```
+
+### Basic MCTQ computation
 
 After you data is all set, just use the `mctq` functions below to
 process it.
 
 Note that `mctq` uses a similar naming scheme as those used in the MCTQ
 articles, that make it easy to find and apply any computation necessary.
-
-For basic MCTQ computation, use:
 
 -   `fd()` compute MCTQ work-free days
 -   `so()` compute MCTQ sleep onset
@@ -133,6 +132,8 @@ so(sprep_w, slat_w)
 #> 00:15:00
 #> 03:45:00
 ```
+
+### MCTQ analysis
 
 For computations combining workdays and work-free days, use:
 
@@ -163,6 +164,8 @@ sjl_rel(msw, msf)
 #> [1] "-10800s (~-3 hours)"  "15900s (~4.42 hours)"
 ```
 
+### Utilities
+
 In addition to `convert()`, `mctq` is also equip with many other
 utilities functions.
 
@@ -182,18 +185,18 @@ citation("mctq")
 #> 
 #> To cite mctq in publications use:
 #> 
-#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). The R
-#>   package for MCTQ data. Retrieved from
-#>   https://gipsousp.github.io/mctq/ .
+#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: a R
+#>   package for the Munich ChronoType Questionnaire (MCTQ). Retrieved
+#>   from https://gipsousp.github.io/mctq/ .
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
-#>     title = {The R package for MCTQ data},
+#>     title = {mctq: a R package for the Munich ChronoType Questionnaire (MCTQ)},
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2021},
 #>     url = {https://gipsousp.github.io/mctq/},
-#>     note = {Lifecycle: experimental},
+#>     note = {Lifecycle: maturing},
 #>   }
 ```
 

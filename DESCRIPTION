@@ -1,5 +1,5 @@
 Package: mctq
-Title: The R Package for MCTQ data
+Title: The R Package for Munich ChronoType Questionnaire (MCTQ) Data
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Daniel",
@@ -17,12 +17,12 @@ Authors@R:
              email = "pedrazzo@usp.br",
              role = c("aut", "sad"),
              comment = c(ORCID = "0000-0002-5257-591X")),
-      person(given = "GIPSO",
-             role = c("fnd")),
-      person(given = "USP",
+      person(given = "Interdisciplinary Sleep Research Group (GIPSO)",
+             role = c("cph", "fnd")),
+      person(given = "University of Sao Paulo (USP)",
              role = c("fnd")))
 Maintainer: Daniel Vartanian <danvartan@gmail.com>
-Description: A set of tools for processing Munich ChronoType Questionnaire 
+Description: A set of tools to process Munich ChronoType Questionnaire 
     (MCTQ) data.
 License: MIT + file LICENSE
 URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
