@@ -32,33 +32,33 @@ test_that("random_mctq() | message test", {
 })
 
 test_that("random_std_mctq() | general test", {
-    Finder
-    for (i in seq_len(100)) {
-        set.seed(i)
-        x <- random_std_mctq()
-
-        # x <- x$bt_f
-        # if (x == FALSE) break
-
-        # check <- shortest_interval(x$bt_w, x$bt_f, "interval")
-        # check <- lubridate::int_end(check)
-        # if (hms::as_hms(check) == x$bt_f) break
-
-        # check_w <- shortest_interval(x$bt_w, x$sprep_w)
-        # check_f <- shortest_interval(x$bt_f, x$sprep_f)
-        # if (check_f >= check_w) break
-
-        # if (x$slat_f >= x$slat_w) break
-        # if (x$si_f >= x$si_w) break
-
-        # check_w <- shortest_interval(x$sprep_w, x$se_w)
-        # check_f <- shortest_interval(x$sprep_f, x$se_f)
-        # if (check_f >= check_w) break
-
-        # if (x$le_f >= x$le_w) break
-        # if (isFALSE(x$alarm_w)) break
-        if (isFALSE(x$reasons_f)) break
-    }
+    # Finder
+    # for (i in seq_len(100)) {
+    #     set.seed(i)
+    #     x <- random_std_mctq()
+    #
+    #     # x <- x$bt_f
+    #     # if (x == FALSE) break
+    #
+    #     # check <- shortest_interval(x$bt_w, x$bt_f, "interval")
+    #     # check <- lubridate::int_end(check)
+    #     # if (hms::as_hms(check) == x$bt_f) break
+    #
+    #     # check_w <- shortest_interval(x$bt_w, x$sprep_w)
+    #     # check_f <- shortest_interval(x$bt_f, x$sprep_f)
+    #     # if (check_f >= check_w) break
+    #
+    #     # if (x$slat_f >= x$slat_w) break
+    #     # if (x$si_f >= x$si_w) break
+    #
+    #     # check_w <- shortest_interval(x$sprep_w, x$se_w)
+    #     # check_f <- shortest_interval(x$sprep_f, x$se_f)
+    #     # if (check_f >= check_w) break
+    #
+    #     # if (x$le_f >= x$le_w) break
+    #     # if (isFALSE(x$alarm_w)) break
+    #     if (isFALSE(x$reasons_f)) break
+    # }
 
     # "if (work == FALSE)"
     set.seed(7)
