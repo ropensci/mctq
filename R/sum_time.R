@@ -164,8 +164,8 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 
     if (isTRUE(clock)) {
         out <- flat_posixt(lubridate::as_datetime(out))
-        convert(out, class)
+        convert(out, class, quiet = TRUE)
     } else {
-        convert(out, class, input_unit = "S")
+        convert(out, class, input_unit = "S", quiet = TRUE)
     }
 }

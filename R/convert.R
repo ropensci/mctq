@@ -18,7 +18,7 @@
 #'
 #' `convert()` was designed to be a simple to use function with powerful
 #' applications. However, please note that it may not work for all cases.
-#' Test it first before applying it to large datasets.
+#' Test it first before applying it to your code.
 #'
 #' To learn more about how to handle date and time objects, see chapter "Dates
 #' and Times" from Wickham and Grolemund (n.d.) and chapter "Technical
@@ -32,9 +32,6 @@
 #'
 #' * `convert_ut()` help make conversions from units to date/time objects.
 #'
-#' * `convert_tt()` help make conversions from date/time objects to other
-#' date/time objects.
-#'
 #' * `convert_uu()` help make conversions from unit to other units.
 #'
 #' * `convert_pt()` help make conversions from `character` or `numeric` objects
@@ -45,10 +42,10 @@
 #'
 #' ## `class` argument
 #'
-#' The `class` argument indicates the desired class of the output object . It
-#' can accept the following values: `"character"`, `"integer"`, `"double"`,
-#' `"numeric"`, `"Duration"`, `"Period"`, `"difftime"`, `"hms"`, `"Date"`,
-#' `"POSIXct"`, and `"POSIXlt"` (case insensitive).
+#' The `class` argument indicates the desired class of the output object . Most
+#' of the methods can accept the following values: `"character"`, `"integer"`,
+#' `"double"`, `"numeric"`, `"Duration"`, `"Period"`, `"difftime"`, `"hms"`,
+#' `"Date"`, `"POSIXct"`, and `"POSIXlt"` (case insensitive).
 #'
 #' ## `orders` argument
 #'
@@ -63,7 +60,7 @@
 #' time, radians, or degrees, `convert()` need to know the unit of `x` and the
 #' output unit. Conversions of date/time objects only need the latter.
 #'
-#' Valid values for this two arguments are:
+#' Valid values for those two arguments are:
 #'
 #' * `"S"`: for decimal seconds.
 #' * `"M"`: for decimal minutes.
@@ -84,21 +81,21 @@
 #' ## Parsing limitations
 #'
 #' `convert()` uses [lubridate::parse_date_time()] to parse `character` and
-#' `numeric` objects to date/time. Since `parse_date_time()` outputs a `POSIXt`
+#' `numeric` objects to date/time. Since `parse_date_time()` outputs a `POSIXct`
 #' object, `character` and `numeric` inputs cannot have time values equal or
 #' greater than 24 hours.
 #'
 #' That limits the set of `convert()` applications (_e.g_ when you want to
-#' parse a `character` to a `Duration` object of 35 minutes and 30 seconds). To
-#' get around this, some exceptions were made to orders __equal__ to `"H"`,
+#' parse a `character` to a `Duration` object of 35 hours). To
+#' get around this, some exceptions were made to `orders` __equal__ to `"H"`,
 #' `"M"`, `"S"`, `HM`, or `HMS`. For `HM` and `HMS` exceptions, minutes and
 #' seconds are limited to `[0-59]`, and, when hours exceeds 2 digits, a `:` must
 #' be allocated between hours and minutes.
 #'
 #' ## Converting columns of a data frame
 #'
-#' `convert()` also allow conversions of data frame variables. This is made
-#' with the help of [dplyr::mutate()].
+#' `convert()` also allow direct conversions of data frame variables. This is
+#' made with the help of [dplyr::mutate()].
 #'
 #' Operations with data frames are only column-wise and can be made by
 #' selecting individual columns (using the `col` argument) or group of columns
@@ -118,13 +115,15 @@
 #' You can also parse a `character` object and transform it direct to an unit.
 #' See Examples section to know how.
 #'
-#' * When `class = "numeric"`
+#' * When `class = "numeric"` or `class = "double"`
 #'
 #' `convert()` will return a [base::as.numeric()] output if `class` is set to
-#' `"numeric"`. For dates or date-time objects, the output will be the total of
-#' seconds from the UNIX origin (`1970-01-01 00:00:00 UTC`) (See [Unix
-#' time](https://en.wikipedia.org/wiki/Unix_time) to know more). For time
-#' values, the output will be the total of seconds.
+#' `"numeric"` or `"double"`. For `Date` objects, the output will be the total
+#' of days since '1970-01-01' (UNIX origin date). For date-time objects (_e.g._
+#' `POSIXt`), the output will be the total of seconds from the UNIX origin
+#' (`1970-01-01 00:00:00 UTC`) (See
+#' [Unix time](https://en.wikipedia.org/wiki/Unix_time) to know more). For time
+#' objects (_e.g._ `hms`), the output will be the total of seconds.
 #'
 #' The output `class = "numeric"` can also be different if `input_unit` and
 #' `output_unit` are assigned.
@@ -150,11 +149,11 @@
 #' seconds equivalent to the unit duration. You can also assign a lubridate
 #' duration object if you like (see [lubridate::duration()]).
 #'
-#' @param x Any R object, provided that it has an assigned method.
+#' @param x Any R object, provided that it has a method.
 #' @param class A string indicating the class of the output.
-#' @param ... Additional arguments to be passed to or from methods.
+#' @param ... (optional) additional arguments to be passed to or from methods.
 #' @param orders (optional) a `character` object of date/time formats to parse a
-#'   `x` value of class `character` or `numeric`.
+#'   `x` object of class `character` or `numeric`.
 #' @param tz (optional) a string indicating the time zone with which to
 #'   convert/parse `x` (default: `"UTC"`).
 #' @param input_unit (optional) a string indicating the unit of `x`.
@@ -162,25 +161,23 @@
 #' @param month_length (optional) a `Duration` value __or__ a non negative
 #'   `numeric` value corresponding to the number of seconds equivalent to the
 #'   month length (default: `lubridate::dmonths()`, which is equivalent to
-#'   30.4375 days).
+#'   30.4375 days or 2629800 seconds).
 #' @param year_length (optional) a `Duration` value __or__ a non negative
 #'   `numeric` value corresponding to the number of seconds equivalent to the
 #'   year length (default: `lubridate::dyears()`, which is equivalent to 365.25
-#'   days).
-#' @param ignore_date (optional) a `logical` value indicating if dates must be
-#' ignored from `Date` or `POSIXt` objects when converting they to `numeric`
-#' (default: `TRUE`).
+#'   days or 31557600 seconds).
 #' @param close_round (optional) a `logical` value indicating if numbers with
 #' decimals starting with five leading 0s or 9s must be rounded
 #' (_e.g._ 1.99999) (default: `TRUE`).
 #' @param cols (optional) a `character` object indicating the column names in
 #'   `x` to transform (default: `NULL`).
 #' @param where (optional) a function to apply in a [tidyselect::where()] call
+#'   that flags the column names in `x` for the purpose of transforming them
 #'   (default: `NULL`).
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
-#' @return A R object of the indicated class.
+#' @return A R object of the indicated class in `class`.
 #'
 #' @family utility functions
 #' @export
@@ -208,8 +205,6 @@
 #' #> [1] 5771.5 # Expected (days since UNIX origin)
 #' convert(hms::parse_hm("15:45:00"), "numeric", output_unit = "H")
 #' #> [1] 15.75 # Expected
-#' convert_tu(hms::parse_hm("15:45:00"), "H") # Wrapper function
-#' #> [1] 15.75 # Expected
 #'
 #' ## __ Converting from units to date/time objects __
 #' convert(360, "Period", input_unit = "deg")
@@ -221,8 +216,6 @@
 #' convert(1, "Posixlt", input_unit = "W")
 #' #> [1] "1970-01-08 UTC" # Expected
 #' convert(1.308997, "Duration", input_unit = "rad")
-#' #> [1] "18000s (~5 hours)" # Expected
-#' convert_ut(1.308997, "Duration", "rad") # Wrapper function
 #' #> [1] "18000s (~5 hours)" # Expected
 #'
 #' ## __ Converting between date/time objects __
@@ -237,8 +230,6 @@
 #' x <- lubridate::ymd_hms("2020-01-01 12:31:05", tz = "EST")
 #' convert(x, "POSIXct", tz = "UTC")
 #' #> [1] "2020-01-01 12:31:05 UTC" # Expected
-#' convert_tt(x, "Duration") # Wrapper function
-#' #> [1] "45065s (~12.52 hours)" # Expected
 #'
 #' ## __ Converting between units __
 #' convert(1.308997, "numeric", input_unit = "rad", output_unit = "H")
@@ -251,27 +242,23 @@
 #' #> [1] 1 # Expected
 #' convert(40, "numeric", input_unit = "d", output_unit = "deg")
 #' #> [1] 14400 # Expected
-#' convert_uu(40, "d", "deg") # Wrapper function
-#' #> [1] 14400 # Expected
 #'
 #' ## __ Converting from character or numeric objects to date/time objects __
 #' convert("19:55:17", "Duration", orders = "HMS")
 #' #> [1] "71717s (~19.92 hours)" # Expected
 #' convert("21:00", "Period", orders = "HM")
 #' #> [1] "21H 0M 0S" # Expected
-#' convert(1, "difftime", orders = "H")
+#' convert(1, "difftime", orders = "H", quiet = TRUE)
 #' #> Time difference of 3600 secs # Expected
-#' convert("10:00 PM", "hms", orders = "IMp")
+#' convert("10:00 PM", "hms", orders = "IMp", quiet = TRUE)
 #' #> 22:00:00 # Expected
-#' convert("2020-01-01 10:00:00", "Date", orders = "ymd HMS")
+#' convert("2020-01-01 10:00:00", "Date", orders = "ymd HMS", quiet = TRUE)
 #' #> [1] "2020-01-01" # Expected
 #' convert(13, "POSIXct", orders = "H")
 #' #> [1] "1970-01-01 13:00:00 UTC" # Expected
 #' convert("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS", tz = "EST")
 #' #> [1] "2020-01-01 12:31:05 EST" # Expected
 #' convert("03/07/1982 13:00", "POSIXlt", orders = "dmy HM")
-#' #> [1] "1982-07-03 13:00:00 UTC" # Expected
-#' convert_pt("03/07/1982 13:00", "POSIXlt", "dmy HM") # Wrapper function
 #' #> [1] "1982-07-03 13:00:00 UTC" # Expected
 #'
 #' ## __ Converting from character or numeric objects to units __
@@ -285,19 +272,16 @@
 #' #> [1] 2 # Expected
 #' convert("01:00", "numeric", orders = "HM", output_unit = "rad")
 #' #> [1] 0.261799 # Expected
-#' convert_pu("01:00", "HM", "rad") # Wrapper function
-#' #> [1] 0.2617994 # Expected
 #'
 #' ## __ Converting columns of a data frame __
-#' \dontrun{
-#' out <- convert(datasets::mtcars, "posixct", cols = c("cyl", "carb"),
-#'                   orders = "H")
-#' head(out)
+#' data <- data.frame(a = 1, b = 2)
+#' data
 #'
-#' out <- convert(datasets::iris, "duration", where = is.numeric,
-#'                   input_unit = "H")
-#' head(out)
-#' }
+#' out <- convert(data, "duration", cols = c("a"), orders = "H")
+#' out
+#'
+#' out <- convert(data, "hms", where = is.numeric, input_unit = "H")
+#' out
 convert <- function(x, class, ...) {
     if (identical(x, NA)) {
         NA
@@ -312,8 +296,7 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
                               input_unit = NULL, output_unit = NULL,
                               month_length = lubridate::dmonths(),
                               year_length = lubridate::dyears(),
-                              ignore_date = TRUE, close_round = TRUE,
-                              quiet = FALSE) {
+                              close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
         c("character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
@@ -354,13 +337,11 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
                             input_unit = NULL, output_unit = NULL,
                             month_length = lubridate::dmonths(),
                             year_length = lubridate::dyears(),
-                            ignore_date = TRUE, close_round = TRUE,
-                            quiet = FALSE) {
+                            close_round = TRUE, quiet = FALSE) {
     convert.character(x, class, orders = orders, tz = tz,
                       input_unit = input_unit, output_unit = output_unit,
                       month_length = month_length, year_length = year_length,
-                      ignore_date = ignore_date, close_round = close_round,
-                      quiet = quiet)
+                      close_round = close_round, quiet = quiet)
 }
 
 #' @rdname convert
@@ -398,12 +379,13 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "period") {
         lubridate::as.period(x)
     } else if (class == "difftime") {
-        shush(warning("'difftime' was set to seconds.", call. = FALSE), quiet)
+        shush(warning("'difftime' units was set to seconds.",
+                      call. = FALSE), quiet)
         lubridate::as.difftime(x)
     } else if (class == "hms") {
         hms::as_hms(as.numeric(x))
     } else if (class == "date") {
-        shush(warning("There's no date to parse.", call. = FALSE), quiet)
+        shush(warning("There's no date to convert.", call. = FALSE), quiet)
         lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
@@ -456,21 +438,28 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     if (!is.null(output_unit)) return(do.call("parser_3", args))
 
     if (class == "character") {
-        as.character(x)
+        shush(warning("'x' was formatted as HMS.", call. = FALSE), quiet)
+        as.character(hms::as_hms(x))
     } else if (class == "integer") {
+        shush(warning("'x' was converted to total of full seconds.",
+                      call. = FALSE), quiet)
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
+        shush(warning("'x' was converted to total of seconds.",
+                      call. = FALSE), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(x)
     } else if (class == "period") {
         lubridate::as.period(x)
     } else if (class == "difftime") {
+        shush(warning("'difftime' units was set to seconds.",
+                      call. = FALSE), quiet)
         lubridate::as.difftime(lubridate::as.duration(x))
     } else if (class == "hms") {
         hms::as_hms(x)
     } else if (class == "date") {
-        shush(warning("There's no date to parse.", call. = FALSE), quiet)
+        shush(warning("There's no date to convert.", call. = FALSE), quiet)
         lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(x))
@@ -483,10 +472,7 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 
 #' @rdname convert
 #' @export
-convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
-                         month_length = lubridate::dmonths(),
-                         year_length = lubridate::dyears(),
-                         close_round = TRUE, quiet = FALSE) {
+convert.Date <- function(x, class, ..., tz = "UTC", quiet = FALSE) {
     choices <- tolower(
         c("character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
@@ -497,11 +483,13 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 
     class <- tolower(class)
 
-    args <- c(ignore_date = FALSE, as.list(match.call()[-1]))
-    if (!is.null(output_unit)) return(do.call("parser_3", args))
+    if (class %in% c("integer", "double", "numeric")) {
+        shush(warning("'x' was converted to total of days since ",
+                      "'1970-01-01' (UNIX time origin).", call. = FALSE), quiet)
+    }
 
     if (class %in% c("duration", "period", "difftime", "hms")) {
-        shush(warning("There's no time to parse.", call. = FALSE), quiet)
+        shush(warning("There's no time to convert.", call. = FALSE), quiet)
     }
 
     if (class == "character") {
@@ -519,7 +507,7 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::as_hms(rep(NA, length(x)))
     } else if (class == "date") {
-        lubridate::force_tz(x, tz)
+        lubridate::as_date(x)
     } else if (class == "posixct") {
         lubridate::force_tz(lubridate::as_datetime(x), tz = tz)
     } else if (class == "posixlt") {
@@ -532,8 +520,7 @@ convert.Date <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                            month_length = lubridate::dmonths(),
                            year_length = lubridate::dyears(),
-                           ignore_date = TRUE, close_round = TRUE,
-                           quiet = FALSE) {
+                           close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
         c("character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
@@ -547,11 +534,20 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     args <- as.list(match.call()[-1])
     if (!is.null(output_unit)) return(do.call("parser_3", args))
 
+    if (class %in% c("duration", "period", "difftime", "hms")) {
+        shush(warning("'x' date was discarded. Only 'x' time ",
+                      "was considered.", call. = FALSE), quiet)
+    }
+
     if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
+        shush(warning("'x' was converted to total of full seconds since ",
+                      "'1970-01-01' (UNIX time origin).", call. = FALSE), quiet)
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
+        shush(warning("'x' was converted to total of seconds since ",
+                      "'1970-01-01' (UNIX time origin).", call. = FALSE), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(hms::as_hms(x))
@@ -562,7 +558,7 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::as_hms(x)
     } else if (class == "date") {
-        lubridate::as_date(lubridate::force_tz(x, tz))
+        lubridate::as_date(x)
     } else if (class == "posixct") {
         lubridate::force_tz(as.POSIXct(x), tz = tz)
     } else if (class == "posixlt") {
@@ -589,11 +585,26 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     args <- c(ignore_date = NULL, as.list(match.call()[-1]))
     if (!is.null(output_unit)) return(do.call("parser_3", args))
 
+    if (class %in% c("duration", "period", "difftime", "hms")) {
+        shush(warning("'x' was converted to the interval time span.",
+                      call. = FALSE), quiet)
+    }
+
+    if (class %in% c("posixct", "posixlt")) {
+        shush(warning("'x' was converted to the interval time span with",
+                      "'1970-01-01 as origin (UNIX time origin).",
+                      call. = FALSE), quiet)
+    }
+
     if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
+        shush(warning("'x' was converted to total of full seconds of the ",
+                      "interval time span.", call. = FALSE), quiet)
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
+        shush(warning("'x' was converted to total of seconds of the interval ",
+                      "time span.", call. = FALSE), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(x)
@@ -604,7 +615,8 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     } else if (class == "hms") {
         hms::hms(x)
     } else if (class == "date") {
-        shush(warning("There's no date to parse.", call. = FALSE), quiet)
+        shush(warning("There's no sigle date to convert.", call. = FALSE),
+              quiet)
         lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
@@ -637,7 +649,7 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
     }
 
     if (is.null(cols) & is.null(where)) {
-        stop("`cols` and `where` cannot both be `NULL`.", call. = FALSE)
+        stop("'cols' and 'where' cannot both be 'NULL'.", call. = FALSE)
     }
 
     call <- function(x) {
@@ -679,14 +691,6 @@ convert_ut <- function(x, class, input_unit, ...) {
 
 #' @rdname convert
 #' @export
-convert_tt <- function(x, class, ...) {
-    assert_time(x)
-
-    convert(x, class, ... = ...)
-}
-
-#' @rdname convert
-#' @export
 convert_uu <- function(x, input_unit, output_unit, ...) {
     checkmate::assert_numeric(x)
 
@@ -723,6 +727,9 @@ parser_1 <- function(x, class, ..., orders = NULL, tz = "UTC",
                      month_length = lubridate::dmonths(),
                      year_length = lubridate::dyears(),
                      ignore_date = TRUE, close_round = TRUE, quiet = FALSE) {
+    class <- tolower(class)
+    if (is.character(x)) fix_character(x)
+
     if (!identical(count_na(x), count_na(shush(as.numeric(x))))) {
         stop("To convert 'character' objects to units, all values must be ",
              "able to be coerced to 'numeric'. Try `as.numeric(x)` to check ",
@@ -737,7 +744,7 @@ parser_1 <- function(x, class, ..., orders = NULL, tz = "UTC",
     if (!is.null(output_unit) &&
         !(class %in% c("integer", "double", "numeric"))) {
         stop("'x' can only be converted to 'output_unit' if 'class' ",
-             "is 'integer', 'double' or 'numeric'.", call. = FALSE)
+             "is 'integer', 'double', or 'numeric'.", call. = FALSE)
     }
 
     if (class %in% c("integer", "double", "numeric") &&
@@ -746,10 +753,6 @@ parser_1 <- function(x, class, ..., orders = NULL, tz = "UTC",
              "'NULL', when 'class' is equal to ", single_quote_(class), ".",
              call. = FALSE)
     }
-
-    class <- tolower(class)
-    check <- identical(count_na(x), count_na(shush(as.numeric(x))))
-    if (is.character(x)) fix_character(x)
 
     if (!is.null(input_unit) && !is.null(output_unit)) {
         x <- convert_to_unit(shush(as.numeric(x)),
@@ -826,7 +829,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                                quiet = FALSE) {
     # Check arguments -----
 
-    checkmate::assert_multi_class(x, c("character", "integer", "numeric"))
+    assert_custom_1(x)
     checkmate::assert_character(orders, min.chars = 1, any.missing = FALSE,
                                 all.missing = FALSE, min.len = 1, unique = TRUE)
     checkmate::assert_string(tz)
@@ -835,12 +838,12 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
     # Set values -----
 
     out <- x
-    if (is.character(out)) fix_character(out)
+    if (is.character(out)) out <- fix_character(out)
 
     # Parse to date/time -----
 
     if ((any(is.na(out)) || any(is.null(out))) && length(out) == 1) {
-        as.POSIXct(NA)
+        out <- lubridate::as_datetime(NA)
     } else if (length(orders) == 1 && grepl("^(H)?(M)?(S)?$", orders[1])) {
         pattern_1 <- "^([-+])?\\d+(.\\d+)?$"
         pattern_2 <- paste0("^([-+])?\\d{1,2}(:)?[0-5]\\d$", "|",
@@ -878,8 +881,8 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
             }
 
             out <- dplyr::case_when(
-                grepl(pattern_1, out) | is.na(out) ~
-                    parse_1(out, x, orders)
+                grepl(pattern_1, out) | is.na(out) ~ parse_1(out, x, orders),
+                TRUE ~ hms::as_hms(NA)
             )
 
             check_nas(out, x, quiet = quiet)
@@ -897,8 +900,8 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
             }
 
             out <- dplyr::case_when(
-                grepl(pattern_2, out) | is.na(out) ~
-                    parse_2(out, x)
+                grepl(pattern_2, out) | is.na(out) ~ parse_2(out, x),
+                TRUE ~ hms::as_hms(NA)
             )
 
             check_nas(out, x, quiet = quiet)
@@ -923,8 +926,8 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
             }
 
             out <- dplyr::case_when(
-                grepl(pattern_3, out) | is.na(out) ~
-                    parse_3(out, x)
+                grepl(pattern_3, out) | is.na(out) ~ parse_3(out, x),
+                TRUE ~ hms::as_hms(NA)
             )
 
             check_nas(out, x, quiet = quiet)
@@ -955,8 +958,8 @@ convert_to_seconds <- function(x, input_unit = NULL,
     checkmate::assert_flag(quiet)
 
     if (!is_time(x) && is.null(input_unit)) {
-        stop("When `x` is numeric, `input_unit` cannot be `NULL`.",
-             call. = FALSE)
+        stop("When 'x' is 'integer' or 'numeric', 'input_unit' cannot be ",
+             "'NULL'.", call. = FALSE)
     }
 
     ## rad_second <- (2 * pi) / 24 / 60 / 60
@@ -989,7 +992,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
             as.numeric(x)
         } else if (lubridate::is.period(x)) {
             as.numeric(x)
-        } else if (lubridate::is.difftime(x)) {
+        } else if (class(x)[1] == "difftime") {
             as.numeric(x)
         } else if (hms::is_hms(x)) {
             as.numeric(x)
@@ -1008,9 +1011,6 @@ convert_to_seconds <- function(x, input_unit = NULL,
         } else if (lubridate::is.interval(x)) {
             as.numeric(x)
         }
-    } else {
-        shush(warning("NAs introduced by coercion.", call. = FALSE), quiet)
-        as.numeric(rep(NA, length(x)))
     }
 }
 
@@ -1059,11 +1059,11 @@ convert_to_unit <- function(x, input_unit = NULL, output_unit = "H",
     }
 }
 
-convert_to_date_time <- function(x, class, tz = "UTC", input_unit = NULL,
+convert_to_date_time <- function(x, class, input_unit, tz = "UTC",
                                  month_length = lubridate::dmonths(),
                                  year_length = lubridate:: dyears(),
                                  close_round = TRUE, quiet = FALSE) {
-    checkmate::assert_numeric(x)
+    assert_numeric_(x)
 
     x <- convert_to_unit(x, input_unit = input_unit, output_unit = "H",
                          month_length = month_length,

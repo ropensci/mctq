@@ -61,8 +61,8 @@
 #' `shortest_interval()` is integrated with [mctq::convert()]. That way you
 #' can choose what class of object your prefer as output.
 #'
-#' Valid `class` values are: `"Duration"`, `"Period"`, `"hms"`, `"POSIXct"`,
-#' `"POSIXlt"`, and `"Interval"` (case insensitive).
+#' Valid `class` values are: `"Duration"`, `"Period"`, `"difftime"`, `"hms"`,
+#' and `"Interval"` (case insensitive).
 #'
 #' ## `POSIXt` objects
 #'
@@ -75,7 +75,7 @@
 #'
 #' @param x,y A `hms` or `POSIXt` object.
 #' @param class (optional) a string indicating the object class of the output
-#'   (default: `class(x)[1]`).
+#'   (default: `"hms"`).
 #' @param inverse (optional) a `logical` value indicating if the function must
 #'   return a inverse output, _i.e_ the longer interval between `x` and `y`.
 #'
@@ -95,7 +95,7 @@
 #'
 #' x <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' y <- lubridate::as_datetime("2020-09-10 12:00:00")
-#' shortest_interval(x, y, "hms")
+#' shortest_interval(x, y)
 #' #> 00:00:00 # Expected
 #'
 #' ## __ Vector example __
@@ -108,12 +108,12 @@
 #' ## __ Finding the longer interval between two hours __
 #' x <- lubridate::parse_date_time("01:10:00", "HMS")
 #' y <- lubridate::parse_date_time("11:45:00", "HMS")
-#' shortest_interval(x, y, "hms", inverse = TRUE)
+#' shortest_interval(x, y, inverse = TRUE)
 #' #> 13:25:00 # Expected
 #'
 #' x <- lubridate::as_datetime("1915-02-14 05:00:00")
 #' y <- lubridate::as_datetime("1970-07-01 05:00:00")
-#' longer_interval(x, y, "hms")
+#' longer_interval(x, y)
 #' #> 24:00:00 # Expected
 #'
 #' ## __ Changing the output object class __
@@ -121,17 +121,16 @@
 #' y <- as.POSIXlt("2100-05-07 13:30:00")
 #' shortest_interval(x, y, "Interval")
 #' #> [1] 1970-01-01 02:00:00 UTC--1970-01-01 13:30:00 UTC # Expected
-#'
 #' longer_interval(x, y, "Duration")
 #' #> [1] "45000s (~12.5 hours)" # Expected
 #' shortest_interval(x, y, "Period")
 #' #> [1] "11H 30M 0S" # Expected
-#' longer_interval(x, y, "POSIXlt")
-#' #> [1] "1970-01-01 12:30:00 UTC" # Expected
-shortest_interval <- function(x, y, class = base::class(x)[1], inverse = FALSE) {
+#' longer_interval(x, y, "hms")
+#' #> 12:30:00" # Expected
+shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
     # Check arguments -----
 
-    choices <- c("Duration", "Period", "hms", "POSIXct", "POSIXlt", "Interval")
+    choices <- c("Duration", "Period", "difftime", "hms", "Interval")
 
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
     checkmate::assert_multi_class(y, c("hms", "POSIXct", "POSIXlt"))
@@ -145,8 +144,8 @@ shortest_interval <- function(x, y, class = base::class(x)[1], inverse = FALSE) 
 
     class <- tolower(class)
 
-    x <- flat_posixt(convert(x, "posixct"))
-    y <- flat_posixt(convert(y, "posixct"))
+    x <- flat_posixt(convert(x, "posixct", quiet = TRUE))
+    y <- flat_posixt(convert(y, "posixct", quiet = TRUE))
 
     list2env(swap_if(x, y, "x > y"), envir = environment())
 
@@ -172,12 +171,12 @@ shortest_interval <- function(x, y, class = base::class(x)[1], inverse = FALSE) 
     if (class == "interval") {
         out
     } else {
-        convert(out, class)
+        convert(out, class, quiet = TRUE)
     }
 }
 
 #' @rdname shortest_interval
 #' @export
-longer_interval <- function(x, y, class = base::class(x)[1]) {
+longer_interval <- function(x, y, class = "hms") {
     shortest_interval(x, y, class, inverse = TRUE)
 }

@@ -212,7 +212,7 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
     assert_identical(msw, msf, type = "length")
 
     if (method == "difference") {
-        out <- sum_time(msf, - msw, class = "duration", clock = FALSE,
+        out <- sum_time(msf, - msw, class = "Duration", clock = FALSE,
                  vectorize = TRUE)
     } else {
         if (method == "shortest") {
@@ -221,8 +221,9 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
             interval <- longer_interval(msw, msf, class = "Interval")
         }
 
-        int_start <- convert(lubridate::int_start(interval), "hms")
-        out <- convert(interval, class = "Duration")
+        int_start <- convert(lubridate::int_start(interval), "hms",
+                             quiet = TRUE)
+        out <- convert(interval, class = "Duration", quiet = TRUE)
 
         out <- dplyr::case_when(
             msw == msf ~ out,

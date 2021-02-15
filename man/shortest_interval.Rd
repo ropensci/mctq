@@ -5,15 +5,15 @@
 \alias{longer_interval}
 \title{Find the shortest interval between two hours}
 \usage{
-shortest_interval(x, y, class = base::class(x)[1], inverse = FALSE)
+shortest_interval(x, y, class = "hms", inverse = FALSE)
 
-longer_interval(x, y, class = base::class(x)[1])
+longer_interval(x, y, class = "hms")
 }
 \arguments{
 \item{x, y}{A \code{hms} or \code{POSIXt} object.}
 
 \item{class}{(optional) a string indicating the object class of the output
-(default: \code{class(x)[1]}).}
+(default: \code{"hms"}).}
 
 \item{inverse}{(optional) a \code{logical} value indicating if the function must
 return a inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
@@ -80,8 +80,8 @@ interval with 24 hours of length (from \code{x} to \code{x} + 1 day).\preformatt
 \code{shortest_interval()} is integrated with \code{\link[=convert]{convert()}}. That way you
 can choose what class of object your prefer as output.
 
-Valid \code{class} values are: \code{"Duration"}, \code{"Period"}, \code{"hms"}, \code{"POSIXct"},
-\code{"POSIXlt"}, and \code{"Interval"} (case insensitive).
+Valid \code{class} values are: \code{"Duration"}, \code{"Period"}, \code{"difftime"}, \code{"hms"},
+and \code{"Interval"} (case insensitive).
 }
 
 \subsection{\code{POSIXt} objects}{
@@ -104,7 +104,7 @@ shortest_interval(x, y)
 
 x <- lubridate::as_datetime("1985-01-15 12:00:00")
 y <- lubridate::as_datetime("2020-09-10 12:00:00")
-shortest_interval(x, y, "hms")
+shortest_interval(x, y)
 #> 00:00:00 # Expected
 
 ## __ Vector example __
@@ -117,12 +117,12 @@ shortest_interval(x, y)
 ## __ Finding the longer interval between two hours __
 x <- lubridate::parse_date_time("01:10:00", "HMS")
 y <- lubridate::parse_date_time("11:45:00", "HMS")
-shortest_interval(x, y, "hms", inverse = TRUE)
+shortest_interval(x, y, inverse = TRUE)
 #> 13:25:00 # Expected
 
 x <- lubridate::as_datetime("1915-02-14 05:00:00")
 y <- lubridate::as_datetime("1970-07-01 05:00:00")
-longer_interval(x, y, "hms")
+longer_interval(x, y)
 #> 24:00:00 # Expected
 
 ## __ Changing the output object class __
@@ -130,13 +130,12 @@ x <- as.POSIXct("1988-10-05 02:00:00")
 y <- as.POSIXlt("2100-05-07 13:30:00")
 shortest_interval(x, y, "Interval")
 #> [1] 1970-01-01 02:00:00 UTC--1970-01-01 13:30:00 UTC # Expected
-
 longer_interval(x, y, "Duration")
 #> [1] "45000s (~12.5 hours)" # Expected
 shortest_interval(x, y, "Period")
 #> [1] "11H 30M 0S" # Expected
-longer_interval(x, y, "POSIXlt")
-#> [1] "1970-01-01 12:30:00 UTC" # Expected
+longer_interval(x, y, "hms")
+#> 12:30:00" # Expected
 }
 \seealso{
 Other utility functions: 

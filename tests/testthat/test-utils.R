@@ -322,14 +322,10 @@ test_that("get_names() | general test", {
 
 test_that("clock_roll() | general test", {
     x <- lubridate::dhours(24)
-    class <- "hms"
-    object <- clock_roll(x, class = class)
-    expect_equal(object, hms::parse_hm("00:00"))
+    expect_equal(clock_roll(x), lubridate::dhours(0))
 
     x <- lubridate::dhours(36)
-    class <- "duration"
-    object <- clock_roll(x, class = class)
-    expect_equal(object, lubridate::dhours(12))
+    expect_equal(clock_roll(x), lubridate::dhours(12))
 })
 
 test_that("na_as() | general test", {
@@ -356,8 +352,7 @@ test_that("get_class() | general test", {
         class(x)[1]
     }
 
-    x <- 1
-    expect_equal(get_class(x), "numeric")
+    expect_equal(get_class(1), "numeric")
 
     x <- datasets::iris
     expect_equal(get_class(x), vapply(x, foo, character(1)))

@@ -4,12 +4,12 @@
 \name{mctq-package}
 \alias{mctq}
 \alias{mctq-package}
-\title{mctq: The R Package for MCTQ data}
+\title{mctq: The R Package for Munich ChronoType Questionnaire (MCTQ) Data}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-A set of tools for processing Munich ChronoType Questionnaire 
-    (MCTQ) data.
+A set of tools to process and analyze Munich ChronoType 
+    Questionnaire (MCTQ) data.
 }
 \seealso{
 Useful links:
@@ -31,8 +31,8 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item GIPSO [funder]
-  \item USP [funder]
+  \item Interdisciplinary Sleep Research Group (GIPSO) [funder, copyright holder]
+  \item University of Sao Paulo (USP) [funder]
 }
 
 }

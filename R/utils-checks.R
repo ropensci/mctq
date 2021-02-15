@@ -194,7 +194,7 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
     }
 }
 
-# Used in swap_decimal()
+# Used in swap_decimal() and parse_to_date_time()
 check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -207,12 +207,12 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
     } else if (is.null(x) && isFALSE(null.ok)) {
         paste0(single_quote_(name), " cannot have 'NULL' values")
     } else if (!(is.character(x) || is_numeric_(x))) {
-        paste0(single_quote_(name), " must inherit from class 'character' or ",
-               "'numeric', but has class ", class_collapse(x))
+        paste0(single_quote_(name), " must inherit from class 'character', ",
+               "'integer', or 'numeric', but has class ", class_collapse(x))
     } else {
         TRUE
     }
 }
 
-# Used in swap_decimal()
+# Used in swap_decimal() and parse_to_date_time()
 assert_custom_1 <- checkmate::makeAssertionFunction(check_custom_1)

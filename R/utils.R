@@ -192,9 +192,12 @@ get_names <- function(...) {
     out
 }
 
-clock_roll <- function(x, class = "hms") {
+clock_roll <- function(x) {
+    classes <- c("Duration", "Period", "difftime", "hms")
+    checkmate::assert_multi_class(x, classes)
+
     out <- flat_posixt(lubridate::as_datetime(x))
-    convert(out, class)
+    convert(out, class(x)[1], quiet = TRUE)
 }
 
 na_as <- function(x) {

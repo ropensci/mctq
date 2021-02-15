@@ -18,12 +18,12 @@ Authors@R:
              role = c("aut", "sad"),
              comment = c(ORCID = "0000-0002-5257-591X")),
       person(given = "Interdisciplinary Sleep Research Group (GIPSO)",
-             role = c("cph", "fnd")),
+             role = c("fnd", "cph")),
       person(given = "University of Sao Paulo (USP)",
              role = c("fnd")))
 Maintainer: Daniel Vartanian <danvartan@gmail.com>
-Description: A set of tools to process Munich ChronoType Questionnaire 
-    (MCTQ) data.
+Description: A set of tools to process and analyze Munich ChronoType 
+    Questionnaire (MCTQ) data.
 License: MIT + file LICENSE
 URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
 BugReports: https://github.com/gipsousp/mctq/issues/

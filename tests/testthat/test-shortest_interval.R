@@ -2,19 +2,19 @@ test_that("shortest_interval() | scalar test", {
     x <- hms::parse_hm("23:00")
     y <- hms::parse_hm("01:00")
     object <- shortest_interval(x, y)
-    expect_equal(object, hms::parse_hms("02:00:00"))
+    expect_equal(object, hms::parse_hm("02:00"))
 
     # `x == y`
     x <- lubridate::as_datetime("1985-01-15 12:00:00")
     y <- lubridate::as_datetime("2020-09-10 12:00:00")
     object <- shortest_interval(x, y)
-    expect_equal(object, lubridate::as_datetime("1970-01-01 00:00:00"))
+    expect_equal(object, hms::parse_hm("00:00"))
 
     # `inverse = TRUE` (longer interval)
     x <- lubridate::as_datetime("1985-01-15 12:00:00")
     y <- lubridate::as_datetime("2020-09-10 12:00:00")
     object <- shortest_interval(x, y, inverse = TRUE)
-    expect_equal(object, lubridate::as_datetime("1970-01-02 00:00:00"))
+    expect_equal(object, hms::parse_hm("24:00"))
 
     # `NA` cases
     x <- hms::parse_hm("23:00")
@@ -35,20 +35,23 @@ test_that("shortest_interval() | `class` test", {
     x <- as.POSIXct("1988-10-05 02:00:00")
     y <- as.POSIXlt("2100-05-07 13:30:00")
 
-    object <- shortest_interval(x, y, "Interval")
-    expected <- lubridate::as.interval(
-        lubridate::ymd_hms("1970-01-01 02:00:00"),
-        lubridate::ymd_hms("1970-01-01 13:30:00"))
-    expect_equal(object, expected)
-
     object <- longer_interval(x, y, "Duration")
     expect_equal(object, lubridate::dhours(12.5))
 
     object <- shortest_interval(x, y, "Period")
     expect_equal(object, lubridate::hours(11) + lubridate::minutes(30))
 
-    object <- longer_interval(x, y, "POSIXct")
-    expect_equal(object, lubridate::ymd_hms("1970-01-01 12:30:00"))
+    object <- longer_interval(x, y, "difftime")
+    expect_equal(object, lubridate::as.difftime(lubridate::dhours(12.5)))
+
+    object <- shortest_interval(x, y, "hms")
+    expect_equal(object, hms::parse_hm("11:30"))
+
+    object <- longer_interval(x, y, "Interval")
+    expected <- lubridate::as.interval(
+        lubridate::ymd_hms("1970-01-01 13:30:00"),
+        lubridate::ymd_hms("1970-01-02 02:00:00"))
+    expect_equal(object, expected)
 })
 
 test_that("shortest_interval() | error test", {
@@ -72,5 +75,5 @@ test_that("shortest_interval() | wrappers", {
     x <- lubridate::as_datetime("1915-02-14 05:00:00")
     y <- lubridate::as_datetime("1970-07-01 05:00:00")
     object <- longer_interval(x, y)
-    expect_equal(object, lubridate::as_datetime("1970-01-01 24:00:00"))
+    expect_equal(object, hms::parse_hm("24:00"))
 })

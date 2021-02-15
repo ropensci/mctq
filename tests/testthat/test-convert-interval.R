@@ -1,12 +1,13 @@
-test_that("convert.Duration() | convert test", {
-    x <- lubridate::dhours()
+test_that("convert.Interval() | convert test", {
+    x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
     quiet <- TRUE
 
-    expect_equal(convert(x, "character", quiet = quiet), "01:00:00")
+    expect_equal(convert(x, "character", quiet = quiet),
+                 "2020-01-01 UTC--2020-01-01 01:00:00 UTC")
     expect_equal(convert(x, "integer", quiet = quiet), 3600L)
     expect_equal(convert(x, "double", quiet = quiet), 3600)
     expect_equal(convert(x, "numeric", quiet = quiet), 3600)
-    expect_equal(convert(x, "Duration", quiet = quiet), x)
+    expect_equal(convert(x, "Duration", quiet = quiet), lubridate::dhours())
     expect_equal(convert(x, "Period", quiet = quiet), lubridate::hours())
     expect_equal(convert(x, "difftime", quiet = quiet),
                  as.difftime(3600, units = "secs"))
@@ -25,30 +26,34 @@ test_that("convert.Duration() | convert test", {
     expect_equal(object, expected)
 })
 
-test_that("convert.Duration() | transform test", {
-    x <- lubridate::dhours()
+test_that("convert.Interval() | transform test", {
+    x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
     object <- convert(x, "numeric", output_unit = "M", quiet = TRUE)
     expect_identical(object, 60)
 })
 
-test_that("convert.Duration() | warning test", {
-    x <- lubridate::dhours()
+test_that("convert.Interval() | warning test", {
+    x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
 
-    # "'x' was formatted as HMS."
-    expect_warning(convert(x, "character"))
-    # "'x' was converted to total of full seconds."
+    # "'x' was converted to total of full seconds of the [...]"
     expect_warning(convert(x, "integer"))
-    # "'x' was converted to total of seconds."
+    # "'x' was converted to total of seconds of the interval  [...]"
     expect_warning(convert(x, "double"))
     expect_warning(convert(x, "numeric"))
-    # "'difftime' units was set to seconds."
-    expect_warning(convert(x, "difftime"))
-    # "There's no date to convert."
+    # "There's no sigle date to convert."
     expect_warning(convert(x, "date"))
+
+    # "'x' was converted to the interval time span."
+    classes <- c("duration", "period", "difftime", "hms")
+    for (i in classes) expect_warning(convert(x, i))
+
+    # "'x' was converted to the interval time span with [...]"
+    classes <- c("posixct", "posixlt")
+    for (i in classes) expect_warning(convert(x, i))
 })
 
-test_that("convert.Duration() | error test", {
-    x <- lubridate::dhours()
+test_that("convert.Interval() | error test", {
+    x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
 
     # Invalid values for `class, `tz`, and `quiet`
     expect_error(convert(x, 1, tz = "", quiet = TRUE))

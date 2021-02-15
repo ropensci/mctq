@@ -17,7 +17,7 @@ assign_date(
 \item{start, end}{A \code{hms} or \code{POSIXt} vector indicating the start or end
 hour.}
 
-\item{return}{(optional) a string indicating the class of the output (see
+\item{return}{(optional) a string indicating the type of the output (see
 Details) (default: \code{"interval"}).}
 
 \item{ambiguity}{(optional) a \code{numeric} value to instruct \code{assign_date()} on

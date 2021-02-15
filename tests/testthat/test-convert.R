@@ -2,197 +2,227 @@ test_that("convert() | general test", {
     expect_equal(convert(NA, "character"), NA)
 })
 
-
-
-
-
-test_that("convert.Duration() | transform test", {
-    x <- lubridate::dhours()
-    quiet <- TRUE
-    output_unit <- "M"
-
-    object <- convert(x, "integer", output_unit = output_unit, quiet = quiet)
-    expect_identical(object, 60L)
-    object <- convert(x, "double", output_unit = output_unit, quiet = quiet)
-    expect_identical(object, 60)
-    object <- convert(x, "numeric", output_unit = output_unit, quiet = quiet)
-    expect_identical(object, 60)
+test_that("convert.numeric() | general test", {
+    expect_equal(convert(1, "character", quiet = TRUE), "1")
 })
 
+test_that("convert.Period() | general test", {
+    x <- lubridate::hours()
+    expect_equal(convert(x, "character", quiet = TRUE), "01:00:00")
+})
 
+test_that("convert.difftime() | general test", {
+    x <- as.difftime(1, units = "hours")
+    expect_equal(convert(x, "character", quiet = TRUE), "01:00:00")
+})
 
-test_that("convert() | conversion from date/time objects to units", {
-    object <- convert(lubridate::dhours(), "numeric", output_unit = "M")
+test_that("convert_tu() | general test", {
+    expect_equal(convert_tu(lubridate::dhours(), "M", quiet = TRUE), 60)
+})
+
+test_that("convert_ut() | general test", {
+    expected <- hms::parse_hm("01:00")
+    expect_equal(convert_ut(1, "hms", "H", quiet = TRUE), expected)
+})
+
+test_that("convert_uu() | general test", {
+    expect_equal(convert_uu(1, "rad", "H", quiet = TRUE), (12 / pi))
+})
+
+test_that("convert_pt() | general test", {
+    expected <- hms::parse_hm("01:00")
+    expect_equal(convert_pt(1, "hms", "H", quiet = TRUE), expected)
+})
+
+test_that("convert_pu() | general test", {
+    expect_equal(convert_pu(1, "H", "deg", quiet = TRUE), 15)
+})
+
+test_that("parser_1() | general test", {
+    object <- parser_1(" 1 ", "duration", input_unit = "H")
+    expect_equal(object, lubridate::dhours())
+
+    object <- parser_1(1, "double", input_unit = "H", output_unit = "deg")
+    expect_equal(object, 15)
+
+    object <- parser_1(1, "hms", input_unit = "H")
+    expect_equal(object, hms::parse_hm("01:00"))
+})
+
+test_that("parser_1() | error test", {
+    # "To convert 'character' objects to units, all values must be [...]"
+    expect_error(parser_1(c("1", " NA", "a"), "hms"))
+
+    # "'x' can only be converted to 'output_unit' if 'input_unit' [...]"
+    expect_error(parser_1(1, "hms", output_unit = "deg"))
+
+    # "'x' can only be converted to 'output_unit' if 'class' [...]"
+    expect_error(parser_1(1, "hms", input_unit = "H",  output_unit = "rad"))
+
+    # "input_unit' and 'output_unit' must both be assigned, or be [...]"
+    expect_error(parser_1(1, "integer"))
+})
+
+test_that("parser_2() | general test", {
+    object <- parser_2(" 1 ", "duration", orders = "H")
+    expect_equal(object, lubridate::dhours())
+
+    object <- parser_2(1, "integer", orders = "H", output_unit = "deg")
+    expect_equal(object, 15L)
+
+    object <- parser_2(1, "numeric", orders = "H", output_unit = "rad")
+    expect_equal(object, (2 * pi) / 24)
+
+    object <- parser_2(1, "hms", orders = "H")
+    expect_equal(object, hms::parse_hm("01:00:00"))
+})
+
+test_that("parser_3() | general test", {
+    object <- parser_3(lubridate::dhours(), "integer", output_unit = "H")
+    expect_equal(object, 1L)
+
+    object <- parser_3(lubridate::dhours(), "numeric", output_unit = "M")
     expect_equal(object, 60)
-
-    object <- convert(lubridate::days(), "numeric", output_unit = "rad")
-    expect_equal(object, 6.28318530717959)
-
-    object <- convert(lubridate::as_datetime("1985-10-20 12:00:00"),
-                      "numeric", output_unit = "d")
-    expect_equal(object, 0.5)
-
-    object <- convert(lubridate::as_datetime("1985-10-20 12:00:00"),
-                      "numeric", output_unit = "d", ignore_date = FALSE)
-    expect_equal(object, 5771.5)
-
-    object <- convert(hms::parse_hm("15:45:00"), "numeric",
-                      output_unit = "H")
-    expect_equal(object, 15.75)
-
-    object <- convert_tu(hms::parse_hm("15:45:00"), "H")
-    expect_equal(object, 15.75)
 })
 
-test_that("convert() | conversion from units to date/time objects", {
-    object <- convert(360, "Period", input_unit = "deg")
-    expect_equal(object, convert_ut(360, "period", "deg"))
-
-    object <- convert(6.5, "POSIXct", input_unit = "H")
-    expect_equal(object, lubridate::ymd_hms("1970-01-01 06:30:00"))
-
-    object <- convert(365.25, "hms", input_unit = "d")
-    expect_equal(object, hms::as_hms(as.numeric(lubridate::dhours(8766))))
-
-    object <- convert(1, "POSIXlt", input_unit = "W")
-    expect_equal(object, lubridate::as_datetime("1970-01-08"))
-
-    object <- convert(1.308997, "Duration", input_unit = "rad")
-    expect_equal(object, lubridate::dhours(5))
-
-    object <- convert_ut(1.308997, "Duration", "rad")
-    expect_equal(object, lubridate::dhours(5))
+test_that("parser_3() | error test", {
+    # "'x' can be only be converted to 'output_unit' if 'class' [...]"
+    expect_error(parser_3(lubridate::dhours(), "hms"))
 })
 
-test_that("convert() | conversion between date/time objects", {
-    object <- convert(lubridate::duration(120), "hms")
-    expect_equal(object, hms::parse_hm("00:02"))
+test_that("parse_to_date_time() | general test", {
+    expect_equal(parse_to_date_time(" 1", "H"), hms::parse_hm("01:00"))
+    expect_equal(parse_to_date_time("NA", "H"), lubridate::as_datetime(NA))
+    expect_equal(parse_to_date_time(1, "H"), hms::parse_hm("01:00"))
+    expect_equal(parse_to_date_time("01:59", "HM"), hms::parse_hm("01:59"))
 
-    object <- convert(hms::as_hms("13:45:05"), "POSIXct")
-    expect_equal(object, lubridate::as_datetime("1970-01-01 13:45:05"))
+    expected <- hms::parse_hms("01:59:59")
+    expect_equal(parse_to_date_time("01:59:59", "HMS"), expected)
 
-    object <- convert(lubridate::period(60), "POSIXct")
-    expect_equal(object, lubridate::as_datetime("1970-01-01 00:01:00"))
+    expected <- lubridate::ymd_hms("0000-01-01 01:00:59")
+    expect_equal(parse_to_date_time("01:59", "HS"), expected)
 
-    object <- convert(lubridate::as_date("1765-10-05"), "POSIXct")
-    expect_equal(object, lubridate::as_datetime("1765-10-05"))
-
-    object <- convert(lubridate::ymd_hms("2020-01-01 12:31:05", tz = "EST"),
-                      "POSIXct")
-    expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
-                                                    "ymd HMS"))
-
-    object <- convert(as.POSIXct(NA), "POSIXct")
-    expect_equal(object, lubridate::force_tz(as.POSIXct(NA), "UTC"))
-
-    object <- convert_tt(lubridate::ymd_hms("2020-01-01 12:31:05",
-                                            tz = "EST"), "POSIXct")
-    expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
-                                                    "ymd HMS"))
+    expected <- lubridate::ymd_hms("2000-01-01 01:00:00")
+    expect_equal(parse_to_date_time("2000 1", "YH"), expected)
 })
 
-test_that("convert() | conversion between units", {
-    object <- convert(1.308997, "numeric", input_unit = "rad",
-                      output_unit = "H")
-    expect_equal(object, 5)
+test_that("parse_to_date_time() | warning test", {
+    # "All formats failed to parse. No formats found."
+    expect_warning(parse_to_date_time("a", "H"))
 
-    object <- convert(60, "numeric", input_unit = "deg", output_unit = "rad")
-    expect_equal(object, 1.0471975511966)
-
-    object <- convert(1, "numeric", input_unit = "m", output_unit = "y")
-    expect_equal(object, 0.0833333333333333)
-
-    object <- convert(0.2617994, "numeric", input_unit = "rad",
-                      output_unit = "H")
-    expect_equal(object, 1)
-
-    object <- convert(40, "numeric", input_unit = "d", output_unit = "deg")
-    expect_equal(object, 14400)
-
-    object <- convert(15, "integer", input_unit = "deg", output_unit = "H")
-    expect_equal(object, 1)
-
-    object <- convert_uu(40, "d", "deg")
-    expect_equal(object, 14400)
+    # na_diff, " failed to parse."
+    expect_warning(parse_to_date_time(c("1", "a"), "H"))
 })
 
-test_that("convert() | conversion from p. objects to date/time objects", {
-    object <- convert("19:55:17", "duration", orders = "HMS")
-    expect_equal(object, lubridate::dseconds(71717))
-
-    object <- convert("21:00", "period", orders = "HM")
-    expect_equal(object, lubridate::hours(21))
-
-    object <- convert(1, "difftime", orders = "H")
-    expect_equal(object, lubridate::as.difftime(lubridate::dhours(1)))
-
-    object <- convert("10:00 PM", "hms", orders = "IMp")
-    expect_equal(object, hms::parse_hm("22:00"))
-
-    object <- convert("2020-01-01 10:00:00", "Date", orders = "ymd HMS")
-    expect_equal(object, lubridate::as_date("2020-01-01"))
-
-    object <- convert(13, "POSIXct", orders = "H")
-    expect_equal(object, lubridate::as_datetime("1970-01-01 13:00:00 UTC"))
-
-    object <- convert("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS",
-                      tz = "EST")
-    expect_equal(object, lubridate::parse_date_time("2020-01-01 12:31:05",
-                                                    "ymd HMS", "EST"))
-
-    object <- convert("03/07/1982 13:00", "POSIXlt", orders = "dmy HM")
-    expect_equal(object, as.POSIXlt(lubridate::parse_date_time(
-        "03/07/1982 13:00", "dmy HM")))
-
-    object <- convert_pt("03/07/1982 13:00", "POSIXlt", "dmy HM")
-    expect_equal(object, as.POSIXlt(lubridate::parse_date_time(
-        "03/07/1982 13:00", "dmy HM")))
+test_that("parse_to_date_time() | error test", {
+    # Invalid values for `x`, `orders`, `tz`, and `quiet`
+    expect_error(parse_to_date_time(lubridate::dhours()))
+    expect_error(parse_to_date_time(1, orders = 1))
+    expect_error(parse_to_date_time(1, tz = 1))
+    expect_error(parse_to_date_time(x, quiet = ""))
 })
 
-test_that("convert() | conversion from p. objects to units", {
-    object <- convert("0145", "numeric", orders = "HM", output_unit = "M")
-    expect_equal(object, 105)
+test_that("convert_to_seconds() | general test", {
+    month_length <- 30 * 24 * 60 * 60
+    year_length <- month_length * 12
 
-    object <- convert(45, "numeric", orders = "M", output_unit = "H")
-    expect_equal(object, 0.75)
+    # if (any(class(x) %in% c("integer", "double", "numeric")))
+    expect_equal(convert_to_seconds(1, input_unit = "S"), 1)
+    expect_equal(convert_to_seconds(1, input_unit = "M"), 60)
+    expect_equal(convert_to_seconds(1, input_unit = "H"), 3600)
+    expect_equal(convert_to_seconds(1, input_unit = "d"), 3600 * 24)
+    expect_equal(convert_to_seconds(1, input_unit = "W"), 3600 * (24 * 7))
+    expect_equal(convert_to_seconds(
+        1, input_unit = "m", month_length = month_length), 3600 * (24 * 30))
+    expect_equal(convert_to_seconds(
+        1, input_unit = "y", year_length = year_length), 3600 * (24 * 30 * 12))
+    # pi = C / d; d = 2r; C = 24; pi = 24 / 2r; pi = 12 / r; r = 12 / pi
+    expect_equal(convert_to_seconds
+                 (1, input_unit = "rad"), (12 / pi) * 60 * 60)
+    # 360 deg = 24h; 360 deg = (24 * 60 * 60)s; deg = (24 * 60 * 60) / 360
+    expect_equal(convert_to_seconds(
+        1, input_unit = "deg"), (24 * 60 * 60) / 360)
 
-    object <- convert(4500, "numeric", orders = "HM", output_unit = "d")
-    expect_equal(object, 1.875)
+    # if (is_time(x))
+    expect_equal(convert_to_seconds(lubridate::dhours()), 3600)
+    expect_equal(convert_to_seconds(lubridate::hours()), 3600)
+    expect_equal(convert_to_seconds(as.difftime(3600, units = "secs")), 3600)
+    expect_equal(convert_to_seconds(hms::parse_hm("01:00")), 3600)
 
-    object <- convert("2020-03-15 02", "numeric", orders = "ymd H",
-                      output_unit = "H")
-    expect_equal(object, 2)
+    object <- convert_to_seconds( as.Date("2000-01-01"), ignore_date = FALSE)
+    expect_equal(object, 946684800)
 
-    object <- convert("01:00", "numeric", orders = "HM", output_unit = "rad")
-    expect_equal(object, 0.261799387799149)
+    object <- convert_to_seconds( as.Date("2000-01-01"), ignore_date = TRUE)
+    expect_equal(object, 0)
 
-    object <- convert_pu("01:00", "HM", "rad")
-    expect_equal(object, 0.261799387799149)
+    object <- convert_to_seconds(
+        lubridate::as_datetime("2020-01-01 01:00:00"), ignore_date = FALSE)
+    expect_equal(object, 1577840400)
+
+    object <- convert_to_seconds(
+        lubridate::as_datetime("2020-01-01 01:00:00"), ignore_date = TRUE)
+    expect_equal(object, 3600)
+
+    object <- convert_to_seconds(
+        lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01")))
+    expect_equal(object, 3600)
 })
 
-test_that("convert() | conversion of columns of a data frame", {
-    data <- data.frame(a = c(1, 2), b = c(3, 4), c = c(5, 6))
-    object <- convert(data, "Duration", cols = c("a", "b"), orders = "H")
-    expected <- data.frame(a = c(lubridate::dhours(1), lubridate::dhours(2)),
-                           b = c(lubridate::dhours(3), lubridate::dhours(4)),
-                           c = c(5, 6))
-    expect_equal(object, expected)
+test_that("convert_to_seconds() | error test", {
+    x <- lubridate::dhours()
 
-    data <- data.frame(a = c(1048, 225), b = c(3, 4), c = c(145, 2330))
-    object <- convert(data, "hms", cols = c("a", "c"), orders = "HM")
-    expected <- data.frame(a = c(hms::parse_hm("10:48"),
-                                 hms::parse_hm("02:25")),
-                           b = c(3, 4),
-                           c = c(hms::parse_hm("01:45"),
-                                 hms::parse_hm("23:30")))
-    expect_equal(object, expected)
+    # Invalid values for `x`, `input_unit`, `month_length`, `year_length`,
+    # `ignore_date`, and `quiet`
+    expect_error(convert_to_seconds(list()))
+    expect_error(convert_to_seconds(x, input_unit = "Z"))
+    expect_error(convert_to_seconds(x, month_length = ""))
+    expect_error(convert_to_seconds(x, month_length = -1))
+    expect_error(convert_to_seconds(x, year_length = ""))
+    expect_error(convert_to_seconds(x, year_length = -1))
+    expect_error(convert_to_seconds(x, ignore_date = ""))
+    expect_error(convert_to_seconds(x, quiet = ""))
 
-    data <- data.frame(a = c("x", "y"), b = c(105, 270), c = c(30, 450))
-    object <- convert(data, "posixct", where = is.numeric, input_unit = "deg")
-    expected <- data.frame(a = c("x", "y"),
-                           b = c(lubridate::as_datetime("1970-01-01 07:00:00"),
-                                 lubridate::as_datetime("1970-01-01 18:00:00")),
-                           c = c(lubridate::as_datetime("1970-01-01 02:00:00"),
-                                 lubridate::as_datetime("1970-01-02 06:00:00")))
-    expect_equal(object, expected)
+    # !is_time(x) && is.null(input_unit)
+    expect_error(convert_to_seconds(1))
+})
+
+test_that("convert_to_unit() | general test", {
+    x <- lubridate::dhours()
+    month_length <- 30 * 24 * 60 * 60
+    year_length <- month_length * 12
+
+    expect_equal(convert_to_unit(x, output_unit = "S"), 3600)
+    expect_equal(convert_to_unit(x, output_unit = "M"), 60)
+    expect_equal(convert_to_unit(x, output_unit = "H"), 1)
+    expect_equal(convert_to_unit(x, output_unit = "d"), 1 / 24)
+    expect_equal(convert_to_unit(x, output_unit = "W"), 1 / (24 * 7))
+    expect_equal(convert_to_unit(x, output_unit = "m",
+                                 month_length = month_length), 1 / (24 * 30))
+    expect_equal(convert_to_unit(x, output_unit = "y",
+                                 year_length = year_length), 1 / (24 * 30 * 12))
+    expect_equal(convert_to_unit(x, output_unit = "rad"), 0.2617994)
+    expect_equal(convert_to_unit(x, output_unit = "deg"), 15)
+
+    x <- lubridate::dhours(1.99999)
+    object <- convert_to_unit(x, output_unit = "H", close_round = FALSE)
+    expect_equal(object, 1.99999)
+})
+
+test_that("convert_to_unit() | error test", {
+    x <- lubridate::dhours()
+
+    # Invalid values for `output_unit` and `close_round`
+    expect_error(convert_to_unit(x, output_unit = "Z", close_round = TRUE))
+    expect_error(convert_to_unit(x, output_unit = "H", close_round = ""))
+})
+
+test_that("convert_to_date_time() | general test", {
+    x <- 1
+    object <- convert_to_date_time(x, "hms", input_unit = "H", quiet = TRUE)
+    expect_equal(object, hms::parse_hm("01:00:00"))
+})
+
+test_that("convert_to_date_time() | error test", {
+    # Invalid value for `x`
+    expect_error(convert_to_date_time(lubridate::dhours(), "hms", "H"))
 })

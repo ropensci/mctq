@@ -78,7 +78,7 @@
 #'   hour.
 #' @param ambiguity (optional) a `numeric` value to instruct `assign_date()` on
 #'   how to deal with ambiguities (see Details) (default: `0`).
-#' @param return (optional) a string indicating the class of the output (see
+#' @param return (optional) a string indicating the type of the output (see
 #'   Details) (default: `"interval"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
 #'   with the `start` and `end` argument.
@@ -170,8 +170,8 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
 
     # Convert `start` and `end` -----
 
-    start <- flat_posixt(convert(start, "posixct"))
-    end <- flat_posixt(convert(end, "posixct"))
+    start <- flat_posixt(convert(start, "posixct", quiet = TRUE))
+    end <- flat_posixt(convert(end, "posixct", quiet = TRUE))
 
     # Create intervals -----
 
