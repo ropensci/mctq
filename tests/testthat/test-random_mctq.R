@@ -32,33 +32,33 @@ test_that("random_mctq() | message test", {
 })
 
 test_that("random_std_mctq() | general test", {
-    # Finder
-    # for (i in seq_len(100)) {
-    #     set.seed(i)
-    #     x <- random_std_mctq()
-    #
-    #     # x <- x$bt_f
-    #     # if (x == FALSE) break
-    #
-    #     # check <- shortest_interval(x$bt_w, x$bt_f, "interval")
-    #     # check <- lubridate::int_end(check)
-    #     # if (hms::as_hms(check) == x$bt_f) break
-    #
-    #     # check_w <- shortest_interval(x$bt_w, x$sprep_w)
-    #     # check_f <- shortest_interval(x$bt_f, x$sprep_f)
-    #     # if (check_f >= check_w) break
-    #
-    #     # if (x$slat_f >= x$slat_w) break
-    #     # if (x$si_f >= x$si_w) break
-    #
-    #     # check_w <- shortest_interval(x$sprep_w, x$se_w)
-    #     # check_f <- shortest_interval(x$sprep_f, x$se_f)
-    #     # if (check_f >= check_w) break
-    #
-    #     # if (x$le_f >= x$le_w) break
-    #     # if (isFALSE(x$alarm_w)) break
-    #     # if (isFALSE(x$reasons_f)) break
-    # }
+    Finder
+    for (i in seq_len(100)) {
+        set.seed(i)
+        x <- random_std_mctq()
+
+        # x <- x$bt_f
+        # if (x == FALSE) break
+
+        # check <- shortest_interval(x$bt_w, x$bt_f, "interval")
+        # check <- lubridate::int_end(check)
+        # if (hms::as_hms(check) == x$bt_f) break
+
+        # check_w <- shortest_interval(x$bt_w, x$sprep_w)
+        # check_f <- shortest_interval(x$bt_f, x$sprep_f)
+        # if (check_f >= check_w) break
+
+        # if (x$slat_f >= x$slat_w) break
+        # if (x$si_f >= x$si_w) break
+
+        # check_w <- shortest_interval(x$sprep_w, x$se_w)
+        # check_f <- shortest_interval(x$sprep_f, x$se_f)
+        # if (check_f >= check_w) break
+
+        # if (x$le_f >= x$le_w) break
+        # if (isFALSE(x$alarm_w)) break
+        if (isFALSE(x$reasons_f)) break
+    }
 
     # "if (work == FALSE)"
     set.seed(7)
@@ -68,7 +68,6 @@ test_that("random_std_mctq() | general test", {
     # "if (hms::as_hms(check) == bt_f)", "if (check_f >= check_w) [bt-sprep]",
     # "if (si_f >= si_w)", "if (check_f >= check_w) [sprep-se]",
     # "if (le_f >= le_w)", "if (isFALSE(alarm_w))", and
-    # "if (isFALSE(reasons_f))"
     set.seed(1)
     x <- random_std_mctq()
     expect_equal(x$si_f >= x$si_w, TRUE)
@@ -77,6 +76,11 @@ test_that("random_std_mctq() | general test", {
     set.seed(2)
     x <- random_std_mctq()
     expect_equal(x$slat_f >= x$slat_w, TRUE)
+
+    # "if (isFALSE(reasons_f))"
+    set.seed(6)
+    x <- random_std_mctq()
+    expect_equal(x$reasons_f == FALSE, TRUE)
 })
 
 test_that("sample_time() | general test", {
