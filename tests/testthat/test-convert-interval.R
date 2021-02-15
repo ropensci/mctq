@@ -36,20 +36,20 @@ test_that("convert.Interval() | warning test", {
     x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
 
     # "'x' was converted to total of full seconds of the [...]"
-    expect_warning(convert(x, "integer"))
+    expect_warning(convert(x, "integer", quiet = FALSE))
     # "'x' was converted to total of seconds of the interval  [...]"
-    expect_warning(convert(x, "double"))
-    expect_warning(convert(x, "numeric"))
+    expect_warning(convert(x, "double", quiet = FALSE))
+    expect_warning(convert(x, "numeric", quiet = FALSE))
     # "There's no sigle date to convert."
-    expect_warning(convert(x, "date"))
+    expect_warning(convert(x, "date", quiet = FALSE))
 
     # "'x' was converted to the interval time span."
     classes <- c("duration", "period", "difftime", "hms")
-    for (i in classes) expect_warning(convert(x, i))
+    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
 
     # "'x' was converted to the interval time span with [...]"
     classes <- c("posixct", "posixlt")
-    for (i in classes) expect_warning(convert(x, i))
+    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
 })
 
 test_that("convert.Interval() | error test", {

@@ -5,9 +5,9 @@
 \alias{longer_interval}
 \title{Find the shortest interval between two hours}
 \usage{
-shortest_interval(x, y, class = "hms", inverse = FALSE)
+shortest_interval(x, y, class = "hms", inverse = FALSE, quiet = FALSE)
 
-longer_interval(x, y, class = "hms")
+longer_interval(x, y, class = "hms", quiet = FALSE)
 }
 \arguments{
 \item{x, y}{A \code{hms} or \code{POSIXt} object.}
@@ -17,6 +17,9 @@ longer_interval(x, y, class = "hms")
 
 \item{inverse}{(optional) a \code{logical} value indicating if the function must
 return a inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
+
+\item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
+must be suppressed (default: \code{FALSE}).}
 }
 \value{
 A R object, of class indicated on \code{class}, with the shortest or
@@ -52,7 +55,11 @@ Because \code{shortest_interval()} objective is to find the shortest interval, i
 \code{x} and \code{y} are equal, the shortest interval will have a length of 0 hours,
 resulting in a interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
 \code{longer_interval()} is use instead, the latter condition will return a
-interval with 24 hours of length (from \code{x} to \code{x} + 1 day).\preformatted{             day 1                        day 2
+interval with 24 hours of length (from \code{x} to \code{x} + 1 day).
+
+In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no
+shortest or longer interval (they are equal). In this cases,
+\code{shortest_interval()} and \code{longer_interval()} will return the same value.\preformatted{             day 1                        day 2
      x                  y         x                  y
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->
@@ -72,6 +79,12 @@ interval with 24 hours of length (from \code{x} to \code{x} + 1 day).\preformatt
 -----|---------------|---------------|---------------|----->
     0h              0h              0h              0h
             24h             24h             24h
+
+              day 1                      day 2
+     y               x               y               x
+   12:00           00:00           12:00           00:00
+-----|---------------|---------------|---------------|----->
+            12h             12h             12h
 }
 }
 

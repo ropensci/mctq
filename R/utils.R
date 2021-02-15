@@ -46,7 +46,8 @@ change_day <- function(x, day) {
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
     checkmate::assert_number(day, lower = 1, upper = 31)
 
-    if (any(lubridate::month(x) %in% c(4, 6, 9, 11)) && day > 30) {
+    if (any(lubridate::month(x) %in% c(4, 6, 9, 11), na.rm = TRUE)
+        && day > 30) {
         stop("You can't assign more than 30 days to April, June, ",
              "September, or November.", call. = FALSE)
     }
@@ -56,7 +57,8 @@ change_day <- function(x, day) {
              "non-leap years.", call. = FALSE)
     }
 
-    if (any(lubridate::month(x) == 2 & lubridate::leap_year(x)) && day > 29) {
+    if (any(lubridate::month(x) == 2 & lubridate::leap_year(x), na.rm = TRUE) &&
+        day > 29) {
         stop("You can't assign more than 29 days to February in a leap year.",
              call. = FALSE)
     }
@@ -271,9 +273,10 @@ str_extract_ <- function(string, pattern, ignore.case = FALSE, perl = TRUE,
 
     match <- regexpr(pattern, string, ignore.case = ignore.case, perl = perl,
                      fixed = fixed, useBytes = useBytes)
-    out <- regmatches(string, match, invert = invert)
-
-    if (length(out) == 0) as.character(NA) else out
+    out <- rep(NA, length(string))
+    out[match != -1 & !is.na(match)] <- regmatches(string, match,
+                                                   invert = invert)
+    out
 }
 
 str_subset_ <- function(string, pattern, negate = FALSE, ignore.case = FALSE,

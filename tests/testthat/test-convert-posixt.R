@@ -35,14 +35,14 @@ test_that("convert.POSIXt() | warning test", {
     x <- lubridate::as_datetime("2000-01-01 01:00:00")
 
     # "'x' was converted to total of full seconds since [...]"
-    expect_warning(convert(x, "integer"))
+    expect_warning(convert(x, "integer", quiet = FALSE))
     # "'x' was converted to total of seconds since [...]"
-    expect_warning(convert(x, "double"))
-    expect_warning(convert(x, "numeric"))
+    expect_warning(convert(x, "double", quiet = FALSE))
+    expect_warning(convert(x, "numeric", quiet = FALSE))
 
     # "'x' date was discarded. Only 'x' time  [...]"
     classes <- c("duration", "period", "difftime", "hms")
-    for (i in classes) expect_warning(convert(x, i))
+    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
 })
 
 test_that("convert.POSIXt() | error test", {

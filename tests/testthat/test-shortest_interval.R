@@ -54,6 +54,12 @@ test_that("shortest_interval() | `class` test", {
     expect_equal(object, expected)
 })
 
+test_that("shortest_interval() | warning test", {
+    expect_warning(shortest_interval(
+        hms::parse_hm("00:00"), hms::parse_hm("12:00"), "Interval",
+        quiet = FALSE))
+})
+
 test_that("shortest_interval() | error test", {
     # Invalid values for `x`, `y`, `class`, and `inverse`
     expect_error(shortest_interval(1, hms::hms(1), "hms", TRUE))

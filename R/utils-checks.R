@@ -60,7 +60,7 @@ check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
         paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
         paste0(single_quote_(name), " cannot be 'NULL'")
-    } else  if (!all(is_whole_number(x))) {
+    } else  if (!all(is_whole_number(x), na.rm = TRUE)) {
         paste0(single_quote_(name), " must consist of whole numbers")
     } else {
         TRUE
@@ -179,12 +179,12 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
         check <- length(unique(out)) == 1
     }
 
-    if (any(unlist(lapply(out, is.null))) && isTRUE(null.ok)) {
+    if (any(unlist(lapply(out, is.null)), na.rm = TRUE) && isTRUE(null.ok)) {
         invisible(TRUE)
     } else if (any(is.na(unlist(out))) && isFALSE(any.missing)) {
         stop(inline_collapse(names), " cannot have missing values.",
              call. = FALSE)
-    } else if (any(is.null(unlist(out))) && isFALSE(null.ok)) {
+    } else if (any(is.null(unlist(out)), na.rm = TRUE) && isFALSE(null.ok)) {
         stop(inline_collapse(names), " cannot have 'NULL' values.",
              call. = FALSE)
     } else if (isFALSE(check)) {

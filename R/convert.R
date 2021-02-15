@@ -764,7 +764,7 @@ parser_1 <- function(x, class, ..., orders = NULL, tz = "UTC",
                              close_round = close_round,
                              quiet = quiet)
 
-        convert(x, class, tz = tz, quiet = quiet)
+        convert(x, class, tz = tz, quiet = TRUE)
     } else if (!is.null(input_unit)) {
         convert_to_date_time(shush(as.numeric(x)),
                              class = class, tz = tz,
@@ -798,7 +798,7 @@ parser_2 <- function(x, class, ..., orders = NULL, tz = "UTC",
         if (class == "integer") return(as.integer(x))
         if (class %in% c("double", "numeric")) return(x)
     } else {
-        convert(x, class, tz = tz, quiet = quiet)
+        convert(x, class, tz = tz, quiet = TRUE)
     }
 }
 
@@ -842,7 +842,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
 
     # Parse to date/time -----
 
-    if ((any(is.na(out)) || any(is.null(out))) && length(out) == 1) {
+    if ((any(is.na(out)) || is.null(out)) && length(out) == 1) {
         out <- lubridate::as_datetime(NA)
     } else if (length(orders) == 1 && grepl("^(H)?(M)?(S)?$", orders[1])) {
         pattern_1 <- "^([-+])?\\d+(.\\d+)?$"
@@ -852,13 +852,13 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                             "|", "^([-+])?\\d{3,}:[0-5]\\d(:)?[0-5]\\d$")
 
         assign_signal <- function(out, x) {
-            out <- dplyr::case_when(
+            dplyr::case_when(
                 grepl("^-", x) ~ - out,
                 TRUE ~ out
             )
         }
 
-        check_nas <- function(out, x, quiet = FALSE) {
+        check_nas <- function(out, x, quiet = quiet) {
 
             if (isTRUE(quiet)) return()
             na_diff <- length(which(is.na(out))) - length(which(is.na(x)))
@@ -876,8 +876,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
             parse_1 <- function(out, x, orders){
                 out <- paste(out, orders)
                 out <- hms::as_hms(as.integer(lubridate::duration(out)))
-                out <- assign_signal(out, x)
-                out
+                assign_signal(out, x)
             }
 
             out <- dplyr::case_when(
@@ -895,8 +894,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
 
                 out <- lubridate::dhours(hours) + lubridate::dminutes(minutes)
                 out <- hms::as_hms(as.integer(out))
-                out <- assign_signal(out, x)
-                out
+                assign_signal(out, x)
             }
 
             out <- dplyr::case_when(
@@ -921,8 +919,7 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
                 out <- lubridate::dhours(hours) + lubridate::dminutes(minutes) +
                     lubridate::dseconds(seconds)
                 out <- hms::as_hms(as.integer(out))
-                out <- assign_signal(out, x)
-                out
+                assign_signal(out, x)
             }
 
             out <- dplyr::case_when(
@@ -1070,5 +1067,5 @@ convert_to_date_time <- function(x, class, input_unit, tz = "UTC",
                          year_length = year_length, quiet = quiet,
                          close_round = TRUE)
 
-    convert(lubridate::dhours(x), class, tz = tz)
+    convert(lubridate::dhours(x), class, tz = tz, quiet = quiet)
 }

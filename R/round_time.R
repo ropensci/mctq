@@ -54,7 +54,9 @@ round_time <- function(x) {
     classes <- c("Duration", "Period", "hms")
     checkmate::assert_multi_class(x, classes)
 
-    class <- class(x)[1]
-    x <- round(as.numeric(x))
-    convert(x, class, input_unit = "S")
+    vctrs::vec_restore(round(as.numeric(x)), x)
+
+    # class <- class(x)[1]
+    # x <- round(as.numeric(x))
+    # convert(x, class, input_unit = "S", quiet = TRUE)
 }

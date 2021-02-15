@@ -33,6 +33,10 @@
 #' `longer_interval()` is use instead, the latter condition will return a
 #' interval with 24 hours of length (from `x` to `x` + 1 day).
 #'
+#' In cases when `x` and `y` distance themselves by 12 hours, there will be no
+#' shortest or longer interval (they are equal). In this cases,
+#' `shortest_interval()` and `longer_interval()` will return the same value.
+#'
 #' ```
 #'              day 1                        day 2
 #'      x                  y         x                  y
@@ -54,6 +58,12 @@
 #' -----|---------------|---------------|---------------|----->
 #'     0h              0h              0h              0h
 #'             24h             24h             24h
+#'
+#'               day 1                      day 2
+#'      y               x               y               x
+#'    12:00           00:00           12:00           00:00
+#' -----|---------------|---------------|---------------|----->
+#'             12h             12h             12h
 #' ```
 #'
 #' ## `class` argument
@@ -78,6 +88,8 @@
 #'   (default: `"hms"`).
 #' @param inverse (optional) a `logical` value indicating if the function must
 #'   return a inverse output, _i.e_ the longer interval between `x` and `y`.
+#' @param quiet (optional) a `logical` value indicating if warnings or messages
+#'   must be suppressed (default: `FALSE`).
 #'
 #' @return A R object, of class indicated on `class`, with the shortest or
 #'   longer interval (if `inverse = TRUE` or `longer_interval()` is used)
@@ -127,7 +139,8 @@
 #' #> [1] "11H 30M 0S" # Expected
 #' longer_interval(x, y, "hms")
 #' #> 12:30:00" # Expected
-shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
+shortest_interval <- function(x, y, class = "hms", inverse = FALSE,
+                              quiet = FALSE) {
     # Check arguments -----
 
     choices <- c("Duration", "Period", "difftime", "hms", "Interval")
@@ -156,19 +169,30 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
         out <- dplyr::case_when(
             is.na(x) | is.na(y) ~ lubridate::as.interval(NA),
             x == y ~ lubridate::as.interval(lubridate::hours(0), x),
-            x1_y1_interval < y1_x2_interval ~ x1_y1_interval,
+            x1_y1_interval <= y1_x2_interval ~ x1_y1_interval,
             x1_y1_interval > y1_x2_interval ~ y1_x2_interval,
         )
     } else {
         out <- dplyr::case_when(
             is.na(x) | is.na(y) ~ lubridate::as.interval(NA),
             x == y ~ lubridate::as.interval(lubridate::hours(24), x),
-            x1_y1_interval > y1_x2_interval ~ x1_y1_interval,
+            x1_y1_interval >= y1_x2_interval ~ x1_y1_interval,
             x1_y1_interval < y1_x2_interval ~ y1_x2_interval,
         )
     }
 
     if (class == "interval") {
+        if (any(x1_y1_interval == y1_x2_interval, na.rm = TRUE)) {
+            flags <- which(x1_y1_interval == y1_x2_interval)
+            shush(warning(
+                "Element(s) ", inline_collapse(flags), " of 'x' ",
+                "and 'y' have intervals equal to 12 hours, i.e. ",
+                "there's no shortest or longer interval ",
+                "between the two hours (they are equal). Only one ",
+                "possible interval will be returned.",
+                call. = FALSE), quiet = quiet)
+        }
+
         out
     } else {
         convert(out, class, quiet = TRUE)
@@ -177,6 +201,6 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE) {
 
 #' @rdname shortest_interval
 #' @export
-longer_interval <- function(x, y, class = "hms") {
-    shortest_interval(x, y, class, inverse = TRUE)
+longer_interval <- function(x, y, class = "hms", quiet = FALSE) {
+    shortest_interval(x, y, class, inverse = TRUE, quiet = quiet)
 }

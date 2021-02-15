@@ -35,16 +35,16 @@ test_that("convert.hms() | warning test", {
     x <- hms::parse_hm("01:00")
 
     # "'x' was formatted as HMS."
-    expect_warning(convert(x, "character"))
+    expect_warning(convert(x, "character", quiet = FALSE))
     # "'x' was converted to total of full seconds."
-    expect_warning(convert(x, "integer"))
+    expect_warning(convert(x, "integer", quiet = FALSE))
     # "'x' was converted to total of seconds."
-    expect_warning(convert(x, "double"))
-    expect_warning(convert(x, "numeric"))
+    expect_warning(convert(x, "double", quiet = FALSE))
+    expect_warning(convert(x, "numeric", quiet = FALSE))
     # "'difftime' units was set to seconds."
-    expect_warning(convert(x, "difftime"))
+    expect_warning(convert(x, "difftime", quiet = FALSE))
     # "There's no date to convert."
-    expect_warning(convert(x, "date"))
+    expect_warning(convert(x, "date", quiet = FALSE))
 })
 
 test_that("convert.hms() | error test", {

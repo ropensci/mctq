@@ -1,5 +1,5 @@
 test_that("convert() | general test", {
-    expect_equal(convert(NA, "character"), NA)
+    expect_equal(convert(NA, "character", quiet = TRUE), NA)
 })
 
 test_that("convert.numeric() | general test", {
@@ -39,13 +39,14 @@ test_that("convert_pu() | general test", {
 })
 
 test_that("parser_1() | general test", {
-    object <- parser_1(" 1 ", "duration", input_unit = "H")
+    object <- parser_1(" 1 ", "duration", input_unit = "H", quiet = TRUE)
     expect_equal(object, lubridate::dhours())
 
-    object <- parser_1(1, "double", input_unit = "H", output_unit = "deg")
+    object <- parser_1(1, "double", input_unit = "H", output_unit = "deg",
+                       quiet = TRUE)
     expect_equal(object, 15)
 
-    object <- parser_1(1, "hms", input_unit = "H")
+    object <- parser_1(1, "hms", input_unit = "H", quiet = TRUE)
     expect_equal(object, hms::parse_hm("01:00"))
 })
 
@@ -64,24 +65,28 @@ test_that("parser_1() | error test", {
 })
 
 test_that("parser_2() | general test", {
-    object <- parser_2(" 1 ", "duration", orders = "H")
+    object <- parser_2(" 1 ", "duration", orders = "H", quiet = TRUE)
     expect_equal(object, lubridate::dhours())
 
-    object <- parser_2(1, "integer", orders = "H", output_unit = "deg")
+    object <- parser_2(1, "integer", orders = "H", output_unit = "deg",
+                       quiet = TRUE)
     expect_equal(object, 15L)
 
-    object <- parser_2(1, "numeric", orders = "H", output_unit = "rad")
+    object <- parser_2(1, "numeric", orders = "H", output_unit = "rad",
+                       quiet = TRUE)
     expect_equal(object, (2 * pi) / 24)
 
-    object <- parser_2(1, "hms", orders = "H")
+    object <- parser_2(1, "hms", orders = "H", quiet = TRUE)
     expect_equal(object, hms::parse_hm("01:00:00"))
 })
 
 test_that("parser_3() | general test", {
-    object <- parser_3(lubridate::dhours(), "integer", output_unit = "H")
+    object <- parser_3(lubridate::dhours(), "integer", output_unit = "H",
+                       quiet = TRUE)
     expect_equal(object, 1L)
 
-    object <- parser_3(lubridate::dhours(), "numeric", output_unit = "M")
+    object <- parser_3(lubridate::dhours(), "numeric", output_unit = "M",
+                       quiet = TRUE)
     expect_equal(object, 60)
 })
 
@@ -108,10 +113,10 @@ test_that("parse_to_date_time() | general test", {
 
 test_that("parse_to_date_time() | warning test", {
     # "All formats failed to parse. No formats found."
-    expect_warning(parse_to_date_time("a", "H"))
+    expect_warning(parse_to_date_time("a", "H", quiet = FALSE))
 
     # na_diff, " failed to parse."
-    expect_warning(parse_to_date_time(c("1", "a"), "H"))
+    expect_warning(parse_to_date_time(c("1", "a"), "H", quiet = FALSE))
 })
 
 test_that("parse_to_date_time() | error test", {

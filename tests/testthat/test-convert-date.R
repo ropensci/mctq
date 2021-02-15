@@ -30,11 +30,11 @@ test_that("convert.Date() | warning test", {
 
     # "'x' was converted to total of days since  [...]"
     classes <- c("integer", "double", "numeric")
-    for (i in classes) expect_warning(convert(x, i))
+    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
 
     # "There's no time to convert."
     classes <- c("duration", "period", "difftime", "hms")
-    for (i in classes) expect_warning(convert(x, i))
+    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
 })
 
 test_that("convert.Date() | error test", {

@@ -216,14 +216,15 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
                  vectorize = TRUE)
     } else {
         if (method == "shortest") {
-            interval <- shortest_interval(msw, msf, class = "Interval")
+            interval <- shortest_interval(msw, msf, class = "Interval",
+                                          quiet = TRUE)
         } else if (method == "longer") {
-            interval <- longer_interval(msw, msf, class = "Interval")
+            interval <- longer_interval(msw, msf, class = "Interval",
+                                        quiet = TRUE)
         }
 
-        int_start <- convert(lubridate::int_start(interval), "hms",
-                             quiet = TRUE)
-        out <- convert(interval, class = "Duration", quiet = TRUE)
+        int_start <- hms::as_hms(lubridate::int_start(interval))
+        out <- lubridate::as.duration(interval)
 
         out <- dplyr::case_when(
             msw == msf ~ out,

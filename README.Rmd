@@ -100,7 +100,7 @@ library(mctq)
 library(lubridate)
 library(hms)
 
-# Local time of preparing to sleep on workdays.
+# Local time of preparing to sleep on workdays
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
 # Sleep latency on workdays
 slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
