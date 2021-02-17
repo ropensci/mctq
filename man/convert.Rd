@@ -177,8 +177,8 @@ year length (default: \code{lubridate::dyears()}, which is equivalent to 365.25
 days or 31557600 seconds).}
 
 \item{close_round}{(optional) a \code{logical} value indicating if numbers with
-decimals starting with five leading 0s or 9s must be rounded
-(\emph{e.g.} 1.99999) (default: \code{TRUE}).}
+decimals starting with three leading 0s or 9s must be rounded
+(\emph{e.g.} 1.999) (default: \code{TRUE}).}
 
 \item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
 must be suppressed (default: \code{FALSE}).}
@@ -316,8 +316,8 @@ See Examples section to know how.
 
 \code{convert()} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class} is set to
 \code{"numeric"} or \code{"double"}. For \code{Date} objects, the output will be the total
-of days since '1970-01-01' (UNIX origin date). For date-time objects (\emph{e.g.}
-\code{POSIXt}), the output will be the total of seconds from the UNIX origin
+of days since '1970-01-01' (UNIX epoch date). For date-time objects (\emph{e.g.}
+\code{POSIXt}), the output will be the total of seconds from the UNIX epoch
 (\verb{1970-01-01 00:00:00 UTC}) (See
 \href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to know more). For time
 objects (\emph{e.g.} \code{hms}), the output will be the total of seconds.
@@ -329,7 +329,7 @@ The output \code{class = "numeric"} can also be different if \code{input_unit} a
 }
 
 \code{Interval} objects are treated like \code{difftime} objects. That is,
-\code{Interval} objects will be converted to the time difference of the interval.
+\code{Interval} objects will be converted to the interval time span.
 }
 
 \subsection{Year and month lengths}{

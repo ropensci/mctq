@@ -35,7 +35,8 @@
 #'
 #' In cases when `x` and `y` distance themselves by 12 hours, there will be no
 #' shortest or longer interval (they are equal). In this cases,
-#' `shortest_interval()` and `longer_interval()` will return the same value.
+#' `shortest_interval()` and `longer_interval()` will return the same value
+#' (a interval of 12 hours).
 #'
 #' ```
 #'              day 1                        day 2
@@ -78,10 +79,6 @@
 #'
 #' `POSIXt` values passed as argument to `x` or `y` will be strip of their
 #' dates. Only the hours will be considered.
-#'
-#' ## `NA` values
-#'
-#' `shortest_interval()` will return `NA` if `x` or `y` are `NA`.
 #'
 #' @param x,y A `hms` or `POSIXt` object.
 #' @param class (optional) a string indicating the object class of the output
@@ -141,8 +138,6 @@
 #' #> 12:30:00" # Expected
 shortest_interval <- function(x, y, class = "hms", inverse = FALSE,
                               quiet = FALSE) {
-    # Check arguments -----
-
     choices <- c("Duration", "Period", "difftime", "hms", "Interval")
 
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
@@ -189,7 +184,7 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE,
                 "and 'y' have intervals equal to 12 hours, i.e. ",
                 "there's no shortest or longer interval ",
                 "between the two hours (they are equal). Only one ",
-                "possible interval will be returned.",
+                "possible interval was returned.",
                 call. = FALSE), quiet = quiet)
         }
 

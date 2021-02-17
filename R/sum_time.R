@@ -15,7 +15,11 @@
 #' ## `class` argument
 #'
 #' `sum_time()` is integrated with [mctq::convert()]. That way you can choose
-#' what class of object will prefer as output.
+#' what class of object you prefer as output.
+#'
+#' Valid `class` values are: `"character"`, `"integer"`, `"double"`,
+#' `"numeric"`, `"Duration"`, `"Period"`, `"difftime"`, and `"hms"`
+#' (case insensitive).
 #'
 #' ## `vectorize` argument
 #'
@@ -128,7 +132,11 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         checkmate::assert_multi_class(x, classes)
     }
 
-    checkmate::assert_string(class)
+    choices <- tolower(
+        c("character", "integer", "double", "numeric", "Duration",
+          "Period", "difftime", "hms"))
+
+    checkmate::assert_choice(tolower(class), choices)
     checkmate::assert_flag(clock)
     checkmate::assert_flag(vectorize)
     checkmate::assert_flag(na.rm)
@@ -148,9 +156,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         }
     }
 
-    zero_nas <- function(x) {
-        ifelse(is.na(x), 0, as.numeric(x))
-    }
+    zero_nas <- function(x) dplyr::if_else(is.na(x), 0, x)
 
     out <- lapply(out, normalize)
     if(isTRUE(na.rm)) out <- lapply(out, zero_nas)
@@ -162,10 +168,6 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         out <- sum(out, na.rm = na.rm)
     }
 
-    if (isTRUE(clock)) {
-        out <- flat_posixt(lubridate::as_datetime(out))
-        convert(out, class, quiet = TRUE)
-    } else {
-        convert(out, class, input_unit = "S", quiet = TRUE)
-    }
+    if (isTRUE(clock)) out <- flat_posixt(lubridate::as_datetime(out))
+    convert(out, class, quiet = TRUE)
 }

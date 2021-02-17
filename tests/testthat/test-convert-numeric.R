@@ -1,5 +1,5 @@
-test_that("convert.character() | convert test", {
-    x <- "1"
+test_that("convert.numeric() | convert test", {
+    x <- 1
     quiet <- TRUE
 
     expect_equal(convert(x, "character", quiet = quiet), "1")
@@ -8,27 +8,25 @@ test_that("convert.character() | convert test", {
     expect_equal(convert(x, "numeric", quiet = quiet), 1)
 
     expect_equal(convert(x, "Duration", quiet = quiet),
-                 lubridate::duration("1"))
-    expect_equal(convert(x, "Period", quiet = quiet), lubridate::period("1"))
+                 lubridate::duration(1))
+    expect_equal(convert(x, "Period", quiet = quiet), lubridate::period(1))
     expect_equal(convert(x, "difftime", quiet = quiet),
-                 lubridate::as.difftime("NA", units = "secs"))
-    expect_equal(convert(x, "hms", quiet = quiet), hms::hms(NA))
-    expect_equal(convert(x, "Date", quiet = quiet), lubridate::as_date(NA))
+                 lubridate::as.difftime(1, units = "secs"))
+    expect_equal(convert(x, "hms", quiet = quiet), hms::hms(1))
+    expect_equal(convert(x, "Date", quiet = quiet), lubridate::as_date(1))
 
     tz <- "EST"
     object <- convert(x, "POSIXct", tz = tz, quiet = quiet)
-    expected <- lubridate::force_tz(
-        lubridate::as_datetime(NA), tz)
+    expected <- lubridate::as_datetime(1, tz = tz)
     expect_equal(object, expected)
 
     object <- convert(x, "POSIXlt", tz = tz, quiet = quiet)
-    expected <- as.POSIXlt(lubridate::force_tz(
-        lubridate::as_datetime(NA), tz))
+    expected <- as.POSIXlt(lubridate::as_datetime(1, tz = tz))
     expect_equal(object, expected)
 })
 
-test_that("convert.character() | transform test", {
-    x <- "1"
+test_that("convert.numeric() | transform test", {
+    x <- 1
 
     object <- convert(x, "numeric", input_unit = "H", output_unit = "M",
                       quiet = TRUE)
@@ -39,16 +37,20 @@ test_that("convert.character() | transform test", {
 })
 
 test_that("convert.Duration() | warning test", {
-    x <- "1"
+    x <- 1
 
     # "'x' was converted 'as is'. This can produce [...]"
     expect_warning(convert(x, "duration", quiet = FALSE))
     # "'difftime' units was set to seconds."
     expect_warning(convert(x, "difftime", quiet = FALSE))
+    # "'POSIXct' origin was set as '1970-01-01 UTC'."
+    expect_warning(convert(x, "posixct", quiet = FALSE))
+    # "'POSIXlt' origin was set as '1970-01-01 UTC'."
+    expect_warning(convert(x, "posixlt", quiet = FALSE))
 })
 
-test_that("convert.character() | error test", {
-    x <- "1"
+test_that("convert.numeric() | error test", {
+    x <- 1
 
     # Invalid values for `class, `tz`, and `quiet`
     expect_error(convert(x, 1, tz = "", quiet = TRUE))

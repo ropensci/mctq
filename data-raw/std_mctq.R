@@ -32,7 +32,9 @@ devtools::load_all() # or library(mctq)
 #'
 #' @examples
 #' \dontrun{
-#' utils::View(mctq::build_std_mctq())
+#' if (requireNamespace("utils", quietly = TRUE)) {
+#'     utils::View(mctq::build_std_mctq())
+#' }
 #' }
 build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Check arguments -----
@@ -48,7 +50,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     # Create cases -----
 
-    ## Base subject: Sleeps less than the recommended for an adult on workdays
+    ## Base subject: sleeps less than the recommended for an adult on workdays
     ##               and stretches during work-free days
 
     std_mctq <- dplyr::tibble(
@@ -57,21 +59,21 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `WORK DAYS` = "5", # integer | [0-7]
         `W BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
         `W SLEEP PREP` = "01:30", # hms | HMS, HM, H [0-24h]
-        `W SLEEP LAT` = "15", # duration | M
+        `W SLEEP LAT` = "15", # Duration | M
         `W SLEEP END` = "06:30", # hms | HMS, HM, H [0-24h]
-        `W SLEEP INERTIA` = "5", # duration | M
+        `W SLEEP INERTIA` = "5", # Duration | M
         `W ALARM` = "Yes", # logical | Yes/No
         `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-        `W LIGHT EXPOSURE` = "02:00", # duration | [H]MS, [H]M, [H]
+        `W LIGHT EXPOSURE` = "02:00", # Duration | [H]MS, [H]M, [H]
         `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
         `F SLEEP PREP` = "02:30", # hms | HMS, HM, H [0-24h]
-        `F SLEEP LAT` = "15", # duration | M
+        `F SLEEP LAT` = "15", # Duration | M
         `F SLEEP END` = "12:00", # hms | HMS, HM, H [0-24h]
-        `F SLEEP INERTIA` = "30", # duration | M
+        `F SLEEP INERTIA` = "30", # Duration | M
         `F ALARM` = "No", # logical | Yes/No
         `F REASONS` = "No", # logical |  Yes/No
         `F REASONS WHY` = "", # character
-        `F LIGHT EXPOSURE` = "04:00" # duration | [H]MS, [H]M, [H]
+        `F LIGHT EXPOSURE` = "04:00" # Duration | [H]MS, [H]M, [H]
     )
 
     ## Random cases
@@ -100,8 +102,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
     }
 
     format_duration <- function(x) {
-        out <- convert(x, "duration")
-        as.character(convert_tu(out, "M"))
+        as.character(convert_tu(x, "M"))
     }
 
     if (isTRUE(random_cases)) {
@@ -143,24 +144,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `WORK DAYS` = "4", # integer | [0-7]
         `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h] # INVERSION
         `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
-        `W SLEEP LAT` = "10", # duration | M
+        `W SLEEP LAT` = "10", # Duration | M
         `W SLEEP END` = "05:00", # hms | HMS, HM, H [0-24h]
-        `W SLEEP INERTIA` = "5", # duration | M
+        `W SLEEP INERTIA` = "5", # Duration | M
         `W ALARM` = "Yes", # logical | Yes/No
         `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-        `W LIGHT EXPOSURE` = "04:00", # duration | [H]MS, [H]M, [H]
+        `W LIGHT EXPOSURE` = "04:00", # Duration | [H]MS, [H]M, [H]
         `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
         `F SLEEP PREP` = "01:30", # hms | HMS, HM, H [0-24h]
-        `F SLEEP LAT` = "15", # duration | M
+        `F SLEEP LAT` = "15", # Duration | M
         `F SLEEP END` = "11:00", # hms | HMS, HM, H [0-24h]
-        `F SLEEP INERTIA` = "5", # duration | M
+        `F SLEEP INERTIA` = "5", # Duration | M
         `F ALARM` = "No", # logical | Yes/No
         `F REASONS` = "Yes", # logical | Yes/No
         `F REASONS WHY` = "Child(ren)/pet(s)", # character
-        `F LIGHT EXPOSURE` = "06:00" # duration | [H]MS, [H]M, [H]
+        `F LIGHT EXPOSURE` = "06:00" # Duration | [H]MS, [H]M, [H]
     ) %>%
 
-        ## Inverted values for bed time and sleep preparing on work-free days
+    ## Inverted values for bed time and sleep preparing on work-free days
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
@@ -168,24 +169,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "5", # integer | [0-7]
             `W BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "30", # duration | M
+            `W SLEEP LAT` = "30", # Duration | M
             `W SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "10", # duration | M
+            `W SLEEP INERTIA` = "10", # Duration | M
             `W ALARM` = "Yes", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:00", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "01:00", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
             `F SLEEP PREP` = "22:30", # hms | HMS, HM, H [0-24h] # INVERSION
-            `F SLEEP LAT` = "45", # duration | M
+            `F SLEEP LAT` = "45", # Duration | M
             `F SLEEP END` = "08:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # duration | M
+            `F SLEEP INERTIA` = "5", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "No", # logical | Yes/No
             `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "00:00" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "00:00" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Presence of invalid values
+    ## Presence of invalid values
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
@@ -193,24 +194,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "10", # integer | [0-7] # INVALID
             `W BED TIME` = "27:00", # hms | HMS, HM, H [0-24h] # INVALID
             `W SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "30", # duration | M
+            `W SLEEP LAT` = "30", # Duration | M
             `W SLEEP END` = "12:15", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "20", # duration | M
+            `W SLEEP INERTIA` = "20", # Duration | M
             `W ALARM` = "No", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No # INVALID
-            `W LIGHT EXPOSURE` = "02:15", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "02:15", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "34:00", # hms | HMS, HM, H [0-24h] # INVALID
             `F SLEEP PREP` = "04:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "No", # duration | M
+            `F SLEEP LAT` = "No", # Duration | M
             `F SLEEP END` = "14:12", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "30", # duration | M
+            `F SLEEP INERTIA` = "30", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "Yes", # logical | Yes/No
             `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "-01:30" # duration | [H]MS, [H]M, [H] # INVALID
+            `F LIGHT EXPOSURE` = "-01:30" # Duration | [H]MS, [H]M, [H] # INVALID
         ) %>%
 
-        ## Sleeps more on workdays than on work-free days
+    ## Sleeps more on workdays than on work-free days
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
@@ -218,24 +219,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "2", # integer | [0-7]
             `W BED TIME` = "21:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "2130", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "15", # duration | M
+            `W SLEEP LAT` = "15", # Duration | M
             `W SLEEP END` = "09:15", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "10", # duration | M
+            `W SLEEP INERTIA` = "10", # Duration | M
             `W ALARM` = "No", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "0500", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "0500", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "5", # duration | M
+            `F SLEEP LAT` = "5", # Duration | M
             `F SLEEP END` = "0600", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # duration | M
+            `F SLEEP INERTIA` = "5", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "Yes", # logical | Yes/No
             `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "07:00" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "07:00" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Uses an alarm clock on work-free days
+    ## Uses an alarm clock on work-free days
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
@@ -243,24 +244,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "5", # integer | [0-7]
             `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "15", # duration | M
+            `W SLEEP LAT` = "15", # Duration | M
             `W SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "5", # duration | M
+            `W SLEEP INERTIA` = "5", # Duration | M
             `W ALARM` = "Yes", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:55", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "01:55", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "01:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "30", # duration | M
+            `F SLEEP LAT` = "30", # Duration | M
             `F SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "0", # duration | M
+            `F SLEEP INERTIA` = "0", # Duration | M
             `F ALARM` = "Yes", # logical | Yes/No
             `F REASONS` = "Yes", # logical | Yes/No
             `F REASONS WHY` = "Child(ren)/pet(s)", # character
-            `F LIGHT EXPOSURE` = "04:45" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "04:45" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Null MCTQ (invalid case)
+    ## Null MCTQ (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
@@ -268,24 +269,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "", # integer | [0-7]
             `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "", # duration | M
+            `W SLEEP LAT` = "", # Duration | M
             `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "", # duration | M
+            `W SLEEP INERTIA` = "", # Duration | M
             `W ALARM` = "", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "", # duration | M
+            `F SLEEP LAT` = "", # Duration | M
             `F SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "", # duration | M
+            `F SLEEP INERTIA` = "", # Duration | M
             `F ALARM` = "", # logical | Yes/No
             `F REASONS` = "", # logical | Yes/No
             `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Did not answer workdays questions
+    ## Did not answer workdays questions
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
@@ -293,25 +294,25 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "", # integer | [0-7]
             `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "", # duration | M
+            `W SLEEP LAT` = "", # Duration | M
             `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "", # duration | M
+            `W SLEEP INERTIA` = "", # Duration | M
             `W ALARM` = "", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "03:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "04:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "90", # duration | M
+            `F SLEEP LAT` = "90", # Duration | M
             `F SLEEP END` = "15:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "30", # duration | M
+            `F SLEEP INERTIA` = "30", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "No", # logical | Yes/No
             `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "00:30" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "00:30" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## All, or almost all, basic variables have the same values
-        ## (invalid case)
+    ## All, or almost all, basic variables have the same values
+    ## (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
@@ -319,24 +320,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "0", # integer | [0-7]
             `W BED TIME` = "0", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "0", # duration | M
+            `W SLEEP LAT` = "0", # Duration | M
             `W SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "0", # duration | M
+            `W SLEEP INERTIA` = "0", # Duration | M
             `W ALARM` = "0", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "0", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "0", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "0", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "0", # duration | M
+            `F SLEEP LAT` = "0", # Duration | M
             `F SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "0", # duration | M
+            `F SLEEP INERTIA` = "0", # Duration | M
             `F ALARM` = "0", # logical | Yes/No
             `F REASONS` = "0", # logical | Yes/No
             `F REASONS WHY` = "0", # character
-            `F LIGHT EXPOSURE` = "0" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "0" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Works 7 days a week and didn't answer work-free days section
+    ## Works 7 days a week and didn't answer the work-free days section
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
@@ -344,24 +345,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "7", # integer | [0-7]
             `W BED TIME` = "23:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "23:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "10", # duration | M
+            `W SLEEP LAT` = "10", # Duration | M
             `W SLEEP END` = "06:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "5", # duration | M
+            `W SLEEP INERTIA` = "5", # Duration | M
             `W ALARM` = "Yes", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "02:00", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "02:00", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "", # duration | M
+            `F SLEEP LAT` = "", # Duration | M
             `F SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "", # duration | M
+            `F SLEEP INERTIA` = "", # Duration | M
             `F ALARM` = "", # logical | Yes/No
             `F REASONS` = "", # logical | Yes/No
             `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Suspicious values (removed case)
+    ## Suspicious values (removed case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
@@ -369,24 +370,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "6", # integer | [0-7]
             `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "120", # duration | M
+            `W SLEEP LAT` = "120", # Duration | M
             `W SLEEP END` = "04:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
-            `W SLEEP INERTIA` = "0", # duration | M
+            `W SLEEP INERTIA` = "0", # Duration | M
             `W ALARM` = "Yes", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "18:00", # duration | [H]MS, [H]M, [H] # SUSP.
+            `W LIGHT EXPOSURE` = "18:00", # Duration | [H]MS, [H]M, [H] # SUSP.
             `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "30", # duration | M
+            `F SLEEP LAT` = "30", # Duration | M
             `F SLEEP END` = "09:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # duration | M
+            `F SLEEP INERTIA` = "5", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "No", # logical | Yes/No
             `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "17:00" # duration | [H]MS, [H]M, [H] # SUSP.
+            `F LIGHT EXPOSURE` = "17:00" # Duration | [H]MS, [H]M, [H] # SUSP.
         ) %>%
 
-        ## Different formats
+    ## Different formats
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[12]), # integer | [auto-increment]
@@ -394,24 +395,24 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "5", # integer | [0-7]
             `W BED TIME` = "11:00 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `W SLEEP PREP` = "0000", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `W SLEEP LAT` = "00:15", # duration | M #AMBIGUOUS
+            `W SLEEP LAT` = "00:15", # Duration | M #AMBIGUOUS
             `W SLEEP END` = "07:15 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `W SLEEP INERTIA` = "30", # duration | M
+            `W SLEEP INERTIA` = "30", # Duration | M
             `W ALARM` = "No", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "3", # duration | [H]MS, [H]M, [H] # AMBIGUOUS
+            `W LIGHT EXPOSURE` = "3", # Duration | [H]MS, [H]M, [H] # AMBIGUOUS
             `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "0130 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `F SLEEP LAT` = "60", # duration | M
+            `F SLEEP LAT` = "60", # Duration | M
             `F SLEEP END` = "10:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "00:15", # duration | M # AMBIGUOUS
+            `F SLEEP INERTIA` = "00:15", # Duration | M # AMBIGUOUS
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "Yes", # logical | Yes/No
             `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "04:30" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "04:30" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Possible filling error
+    ## Possible filling error
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[13]), # integer | [auto-increment]
@@ -419,25 +420,25 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "6", # integer | [0-7]
             `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "", # duration | M
+            `W SLEEP LAT` = "", # Duration | M
             `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "", # duration | M
+            `W SLEEP INERTIA` = "", # Duration | M
             `W ALARM` = "", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "22:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "15", # duration | M
+            `F SLEEP LAT` = "15", # Duration | M
             `F SLEEP END` = "06:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "3", # duration | M
+            `F SLEEP INERTIA` = "3", # Duration | M
             `F ALARM` = "Yes", # logical | Yes/No
             `F REASONS` = "Yes", # logical | Yes/No
             `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "01:30" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "01:30" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Repeated workdays and work-free days values (possible carryover
-        ## effect)
+    ## Repeated workdays and work-free days values (possible carryover
+    ## effect)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[14]), # integer | [auto-increment]
@@ -445,25 +446,25 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "5", # integer | [0-7]
             `W BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "10", # duration | M
+            `W SLEEP LAT` = "10", # Duration | M
             `W SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "5", # duration | M
+            `W SLEEP INERTIA` = "5", # Duration | M
             `W ALARM` = "Yes", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:00", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "01:00", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "10", # duration | M
+            `F SLEEP LAT` = "10", # Duration | M
             `F SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # duration | M
+            `F SLEEP INERTIA` = "5", # Duration | M
             `F ALARM` = "Yes", # logical | Yes/No
             `F REASONS` = "No", # logical | Yes/No
             `F REASONS WHY` = "No", # character
-            `F LIGHT EXPOSURE` = "01:00" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "01:00" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-        ## Sleep onset is equal or greater than sleep end
-        ## [(s_prep + s_lat) >= se] (invalid case)
+    ## Sleep onset is equal or greater than sleep end
+    ## [(s_prep + s_lat) >= se] (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[15]), # integer | [auto-increment]
@@ -471,21 +472,21 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK DAYS` = "2", # integer | [0-7]
             `W BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "00:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "60", # duration | M
+            `W SLEEP LAT` = "60", # Duration | M
             `W SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "10", # duration | M
+            `W SLEEP INERTIA` = "10", # Duration | M
             `W ALARM` = "No", # logical | Yes/No
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:20", # duration | [H]MS, [H]M, [H]
+            `W LIGHT EXPOSURE` = "01:20", # Duration | [H]MS, [H]M, [H]
             `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "120", # duration | M
+            `F SLEEP LAT` = "120", # Duration | M
             `F SLEEP END` = "04:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "15", # duration | M
+            `F SLEEP INERTIA` = "15", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "No", # logical | Yes/No
             `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "04:00" # duration | [H]MS, [H]M, [H]
+            `F LIGHT EXPOSURE` = "04:00" # Duration | [H]MS, [H]M, [H]
         )
 
     std_mctq <- std_mctq %>% dplyr::arrange(as.integer(.data$`ID`))
@@ -493,9 +494,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Write and return output -----
 
     if (isTRUE(write)) {
-        if (!(dir.exists("./inst/extdata/"))) {
-            dir.create("./inst/extdata/")
-        }
+        if (!(dir.exists("./inst/extdata/"))) dir.create("./inst/extdata/")
 
         std_mctq %>%
             utils::write.csv(paste0("./inst/extdata/", "std_mctq", ".csv"),
@@ -545,7 +544,10 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#' utils::View(tidy_std_mctq())
+#' \dontrun{
+#' if (requireNamespace("utils", quietly = TRUE)) {
+#'     utils::View(mctq::tidy_std_mctq())
+#' }
 #' }
 tidy_std_mctq <- function(write = FALSE) {
     # Check arguments -----
@@ -554,8 +556,18 @@ tidy_std_mctq <- function(write = FALSE) {
 
     # Clean NULL cases -----
 
+    fix_character <- function(x) {
+        x <- trimws(x)
+
+        for (i in c("", "NA")) {
+            x <- dplyr::na_if(x, i)
+        }
+
+        x
+    }
+
     std_mctq <- build_std_mctq() %>%
-        dplyr::mutate(dplyr::across(.fns = ~ dplyr::na_if(.x, ""))) %>%
+        dplyr::mutate(dplyr::across(.fns = fix_character)) %>%
         dplyr::rowwise() %>%
         dplyr::mutate(length =
                           dplyr::n_distinct(dplyr::c_across(-.data$ID))) %>%
@@ -604,19 +616,19 @@ tidy_std_mctq <- function(write = FALSE) {
             tolower(.data$`WORK REGULAR`) == "no" ~ FALSE),
         wd = as.integer(.data$`WORK DAYS`),
         bt_w = dplyr::case_when(
-            stringr::str_detect(.data$`W BED TIME`, pattern_1) ~
+            grepl(pattern_1, .data$`W BED TIME`, perl = TRUE) ~
                 convert_pt(.data$`W BED TIME`, "hms",
                            c("HM", "IMp"), quiet = TRUE),
-            stringr::str_detect(.data$`W BED TIME`, pattern_4) ~
+            grepl(pattern_4, .data$`W BED TIME`, perl = TRUE) ~
                 convert_pt(.data$`W BED TIME`, "hms", "HM",
                            quiet = TRUE)),
         sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms",
                              c("HMS", "HM", "H")),
         slat_w = dplyr::case_when(
-            stringr::str_detect(.data$`W SLEEP LAT`, pattern_2) ~
+            grepl(pattern_2, .data$`W SLEEP LAT`, perl = TRUE) ~
                 convert_pt(.data$`W SLEEP LAT`, "Duration", "M",
                            quiet = TRUE),
-            stringr::str_detect(.data$`W SLEEP LAT`, pattern_1) ~
+            grepl(pattern_1, .data$`W SLEEP LAT`) ~
                 convert_pt(.data$`W SLEEP LAT`, "Duration",
                            c("HMS", "HM", "H"), quiet = TRUE)),
         se_w = convert_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
@@ -630,10 +642,10 @@ tidy_std_mctq <- function(write = FALSE) {
         le_w = convert_pt(.data$`W LIGHT EXPOSURE`, "Duration",
                           c("HMS", "HM", "H")),
         bt_f = dplyr::case_when(
-            stringr::str_detect(.data$`F BED TIME`, pattern_1) ~
+            grepl(pattern_1, .data$`F BED TIME`, perl = TRUE) ~
                 convert_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
                            quiet = TRUE),
-            stringr::str_detect(.data$`F BED TIME`, pattern_4) ~
+            grepl(pattern_4, .data$`F BED TIME`, perl = TRUE) ~
                 convert_pt(.data$`F BED TIME`, "hms", "HM",
                            quiet = TRUE)),
         sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms",
@@ -642,10 +654,10 @@ tidy_std_mctq <- function(write = FALSE) {
                             quiet = TRUE),
         se_f = convert_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
         si_f = dplyr::case_when(
-            stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_2) ~
+            grepl(pattern_2, .data$`F SLEEP INERTIA`) ~
                 convert_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
                            quiet = TRUE),
-            stringr::str_detect(.data$`F SLEEP INERTIA`, pattern_1) ~
+            grepl(pattern_1, .data$`F SLEEP INERTIA`) ~
                 convert_pt(.data$`F SLEEP INERTIA`, "Duration",
                            c("HMS", "HM", "H"), quiet = TRUE)),
         alarm_f = dplyr::case_when(
@@ -663,12 +675,12 @@ tidy_std_mctq <- function(write = FALSE) {
     file <- paste0("./data/", "std_mctq", ".rda")
 
     if (isTRUE(write)) {
-        if(!(dir.exists("./data/"))) {
-            dir.create("./data/")
-        }
+        if(!(dir.exists("./data/"))) dir.create("./data/")
 
-        save(std_mctq, file = file,
-             envir = environment(), compress = "bzip2", version = 2)
+        usethis::use_data(std_mctq, overwrite = TRUE)
+
+        # save(std_mctq, file = file,
+        #      envir = environment(), compress = "bzip2", version = 2)
     }
 
     invisible(std_mctq)
@@ -689,7 +701,7 @@ tidy_std_mctq <- function(write = FALSE) {
 #' find more about data validation and error location in Loo and Jonge
 #' (2018).
 #'
-#' This process can be considered as a part of the process of transforming data,
+#' This process can be considered as part of the process of transforming data,
 #' described in the workflow proposed by Wickham and Grolemund (n.d.).
 #'
 #' @return An invisible tibble with a validated standard MCTQ dataset.
@@ -703,7 +715,9 @@ tidy_std_mctq <- function(write = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#' utils::View(validate_std_mctq())
+#' if (requireNamespace("utils", quietly = TRUE)) {
+#'     utils::View(mctq::validate_std_mctq())
+#' }
 #' }
 validate_std_mctq <- function(write = FALSE) {
     # To do -----
@@ -778,7 +792,7 @@ validate_std_mctq <- function(write = FALSE) {
         std_mctq <- std_mctq %>%
             dplyr::mutate(
                 dummy = dplyr::case_when(
-                    assign_date(!!as.symbol(bt_i), !!as.symbol(sprep_i)) >
+                    mctq::assign_date(!!as.symbol(bt_i), !!as.symbol(sprep_i)) >
                         lubridate::dhours(12) ~ TRUE,
                     TRUE ~ FALSE
                 ),
@@ -828,12 +842,12 @@ validate_std_mctq <- function(write = FALSE) {
     file <- paste0("./data/", "std_mctq", ".rda")
 
     if (isTRUE(write)) {
-        if(!(dir.exists("./data/"))) {
-            dir.create("./data/")
-        }
+        if(!(dir.exists("./data/"))) dir.create("./data/")
 
-        save(std_mctq, file = file,
-             envir = environment(), compress = "bzip2", version = 2)
+        usethis::use_data(std_mctq, overwrite = TRUE)
+
+        # save(std_mctq, file = file,
+        #      envir = environment(), compress = "bzip2", version = 2)
     }
 
     invisible(std_mctq)
@@ -844,15 +858,15 @@ validate_std_mctq <- function(write = FALSE) {
 #' @description
 #'
 #' `analyse_std_mctq()` computes and creates the non-measured MCTQ variables
-#'  based on the output of [mctq::validate_std_mctq()]. See [mctq::std_mctq] to
-#'  learn more.
+#' based on the output of [mctq::validate_std_mctq()]. See [mctq::std_mctq] to
+#' learn more.
 #'
 #' @details
 #'
 #' Computing and creating new variables is part of the process of producing
-#' statistics, like described in Loo and Jonge (2018).
-#' It is also a part of the process of transforming data, described in the
-#' workflow proposed by Wickham and Grolemund (n.d.).
+#' statistics, like described in Loo and Jonge (2018). It's also a part of the
+#' process of transforming data, described in the workflow proposed by Wickham
+#' and Grolemund (n.d.).
 #'
 #' @return An invisible tibble with all the variables proposed for a standard
 #'   MCTQ dataset.
@@ -865,7 +879,9 @@ validate_std_mctq <- function(write = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#' utils::View(analyze_std_mctq())
+#' if (requireNamespace("utils", quietly = TRUE)) {
+#'     utils::View(mctq::analyze_std_mctq())
+#' }
 #' }
 analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     # Check arguments -----
@@ -917,8 +933,8 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
 
     ## See `vignette("missing_sections", "mctq")` to learn more.
 
-    count_w <- length(subset(names(std_mctq),  grepl("_w$", names(std_mctq))))
-    count_f <- length(subset(names(std_mctq),  grepl("_f$", names(std_mctq))))
+    count_w <- length(names(std_mctq)[grepl("_w$", names(std_mctq))])
+    count_f <- length(names(std_mctq)[grepl("_f$", names(std_mctq))])
     count_w <- count_w * 2/3
     count_f <- count_f * 2/3
 
@@ -926,11 +942,11 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
         dplyr::mutate(dplyr::across(.fns = as.character)) %>%
         dplyr::rowwise() %>%
         dplyr::mutate(
-            dummy_0_a = as.integer(wd) == 0 & !is.na(wd),
+            dummy_0_a = as.integer(wd) == 0,
             dummy_0_b = count_na(
                 dplyr::c_across(dplyr::ends_with("_w"))) >= count_w,
-            dummy_0_c = alarm_f == as.logical(FALSE) | is.na(alarm_f),
-            dummy_7_a = as.integer(wd) == 7 & !is.na(wd),
+            dummy_0_c = alarm_f == FALSE,
+            dummy_7_a = as.integer(wd) == 7,
             dummy_7_b = count_na(
                 dplyr::c_across(dplyr::ends_with("_f"))) >= count_f,
             dummy_0 = dummy_0_a & dummy_0_b & dummy_0_c & dummy_7_b == FALSE,
@@ -964,9 +980,7 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     file <- paste0("./data/", "std_mctq", ".rda")
 
     if (isTRUE(write)) {
-        if(!(dir.exists("./data/"))) {
-            dir.create("./data/")
-        }
+        if(!(dir.exists("./data/"))) dir.create("./data/")
 
         usethis::use_data(std_mctq, overwrite = TRUE)
 
@@ -976,3 +990,8 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
 
     invisible(std_mctq)
 }
+
+# raw <- build_std_mctq()
+# tidy <- tidy_std_mctq()
+# valid <- validate_std_mctq()
+# analysis <- analyze_std_mctq()

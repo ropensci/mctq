@@ -109,8 +109,6 @@
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
                        midday_change = TRUE) {
-    # Check arguments -----
-
     if (!is_interactive()) {
         stop("This function can only be used in interactive mode.",
              call. = FALSE)
@@ -149,8 +147,6 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         stop("'data' must be an 'atomic' object or a data frame.", call. = FALSE)
     }
 
-    # Return output for `atomic` `data` -----
-
     transform <- function(x, midday_change = TRUE) {
         classes <- c("Duration", "Period", "difftime")
 
@@ -181,8 +177,6 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             return(shush(print(plot)))
         }
     }
-
-    # Set values -----
 
     if (is.null(cols) && is.null(pattern)) cols <- names(data)
 
@@ -217,14 +211,10 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- cols[!grepl("^id$|[\\._-]id$", cols, ignore.case = TRUE)]
     }
 
-    # Show introductory message -----
-
     dialog_line(line = paste0(
             "Warning: `qplot_walk()` clears all plots from your system \n",
             "after it runs. If you don't agree with this, press 'esc' to \n",
             "exit, or press 'enter' to continue."))
-
-    # Create qplots -----
 
     for (i in cols) {
         x <- transform(data[[i]], midday_change)

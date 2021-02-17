@@ -15,7 +15,7 @@ flat_posixt <- function(x, force_utc = TRUE, base = "1970-01-01") {
 midday_change <- function(x) {
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
 
-    x <- flat_posixt(convert(x, "posixct"))
+    x <- flat_posixt(convert(x, "POSIXct"))
 
     x <- dplyr::case_when(
         lubridate::hour(x) < 12 ~ change_day(x, 2),
@@ -139,7 +139,7 @@ shush <- function(x, quiet = TRUE) {
     }
 }
 
-close_round <- function(x, digits = 5) {
+close_round <- function(x, digits = 3) {
     checkmate::assert_numeric(x)
     checkmate::assert_number(digits)
 
@@ -198,8 +198,27 @@ clock_roll <- function(x) {
     classes <- c("Duration", "Period", "difftime", "hms")
     checkmate::assert_multi_class(x, classes)
 
-    out <- flat_posixt(lubridate::as_datetime(x))
-    convert(out, class(x)[1], quiet = TRUE)
+    class <- class(x)[1]
+    out <- x
+
+    if (class == "difftime") {
+        out <- hms::as_hms(x)
+        units <- units(x)
+    }
+
+    if (all(as.numeric(out) < 86400, na.rm = TRUE)) {
+        x
+    } else {
+        out <- flat_posixt(lubridate::as_datetime(out))
+        out <- convert(out, class, quiet = TRUE)
+
+        if (class == "difftime") {
+            units(out) <- units
+            out
+        } else {
+            out
+        }
+    }
 }
 
 na_as <- function(x) {

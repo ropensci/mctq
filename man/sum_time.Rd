@@ -52,7 +52,11 @@ sum in a 24 hours clock basis, helping with time arithmetic issues.
 \subsection{\code{class} argument}{
 
 \code{sum_time()} is integrated with \code{\link[=convert]{convert()}}. That way you can choose
-what class of object will prefer as output.
+what class of object you prefer as output.
+
+Valid \code{class} values are: \code{"character"}, \code{"integer"}, \code{"double"},
+\code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, and \code{"hms"}
+(case insensitive).
 }
 
 \subsection{\code{vectorize} argument}{

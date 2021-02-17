@@ -8,41 +8,54 @@ round_time(x)
 }
 \arguments{
 \item{x}{An object belonging to one of the following classes: \code{Duration},
-\code{Period}, or \code{hms}.}
+\code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or \code{POSIXlt}.}
 }
 \value{
-A time object with the time rounded at the seconds level.
+An object of the same class of 'x' with it \code{numeric} value rounded at
+the ones place.
 }
 \description{
 \ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
 
-\code{round_time()} takes a \code{Duration}, \code{Period}, or \code{hms} object and round it at
-the seconds level.
+\code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or
+\code{POSIXlt} object and round it \code{numeric} value at the ones place.
 }
 \details{
-\code{round_time()} convert time to seconds and them uses \code{\link[base:Round]{base::round()}} to round
-it. That is to say that \code{round_time()} uses the same IEC 60559 standard (\emph{"go
-to the even digit"}) for rounding off a 5. Therefore round(0.5) is 0 and
-round(-1.5) is -2. See \code{?round} to learn more.
+\code{round_time()} uses \code{\link[base:Round]{base::round()}} for rounding. That is to say that
+\code{round_time()} uses the same IEC 60559 standard (\emph{"go to the even digit"})
+for rounding off a 5. Therefore, \code{round(0.5)} is 0 and \code{round(-1.5)} is -2.
+See \code{?round} to learn more.
 }
 \examples{
 ## __ Scalar example __
-lubridate::dhours(1.45678696454)
-#> [1] "5244.433072344s (~1.46 hours)" # Expected
-round_time(lubridate::dhours(1.45678696454))
-#> [1] "5244s (~1.46 hours)" # Expected
+lubridate::dmilliseconds(123456789)
+#> [1] "123456.789s (~1.43 days)" # Expected
+round_time(lubridate::dmilliseconds(123456789))
+#> [1] "123457s (~1.43 days)" # Expected
 
-lubridate::microseconds(2454876956)
-#> [1] "2454.876956S" # Expected
-hms::as_hms(as.numeric(lubridate::microseconds(2454876956)))
-#> 00:40:54.876956 # Expected
-round_time(lubridate::microseconds(2454876956))
-#> [1] "40M 55S" # Expected
+lubridate::microseconds(123456789)
+#> [1] "123.456789S" # Expected
+round_time(lubridate::microseconds(123456789))
+#> [1] "123S" # Expected
+
+as.difftime(12345.6789, units = "hours")
+#> Time difference of 12345.68 hours # Expected
+round_time(as.difftime(12345.6789, units = "hours"))
+#> Time difference of 12346 hours # Expected
 
 hms::as_hms(12345.6789)
 #> 03:25:45.6789 # Expected
 round_time(hms::as_hms(12345.6789))
 #> 03:25:46 # Expected
+
+lubridate::as_datetime(12345.6789, tz = "EST")
+#> [1] "1969-12-31 22:25:45 EST" # Expected
+as.numeric(lubridate::as_datetime(12345.6789, tz = "EST"))
+#> [1] 12345.68 # Expected
+round_time(lubridate::as_datetime(12345.6789, tz = "EST"))
+#> [1] "1969-12-31 22:25:46 EST" # Expected
+as.numeric(round_time(lubridate::as_datetime(12345.6789, tz = "EST")))
+#> [1] 12346 # Expected
 
 ## __ Vector example __
 x <- c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))

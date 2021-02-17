@@ -242,5 +242,5 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
     sample <- sample(seq(min, max, by), size = size, replace = replace,
                      prob = prob)
 
-    convert(sample, class, input_unit = "S")
+    convert(sample, class, quiet = TRUE)
 }

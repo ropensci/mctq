@@ -46,13 +46,13 @@ test_that("sum_time() | non-vectorized test", {
     expect_equal(object, expected) # 30:00:00
 
     i <- hms::as_hms(NA)
-    class <- "posixct"
+    class <- "difftime"
     clock <- TRUE
     vectorize <- FALSE
     na.rm <- TRUE
     object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
                        vectorize = vectorize, na.rm = na.rm)
-    expected <- lubridate::as_datetime("1970-01-01 06:00:00")
+    expected <- lubridate::as.difftime(21600, units = "secs")
     expect_equal(object, expected)
 })
 
@@ -109,14 +109,14 @@ test_that("sum_time()| vectorized test", {
     expect_equal(object, expected) # 30:00:00 | 17:00:00
 
     i <- c(hms::as_hms(NA), hms::as_hms(NA))
-    class <- "posixct"
+    class <- "difftime"
     clock <- TRUE
     vectorize <- TRUE
     na.rm <- TRUE
     object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
                        vectorize = vectorize, na.rm = na.rm)
-    expected <- c(lubridate::as_datetime("1970-01-01 06:00:00"),
-                  lubridate::as_datetime("1970-01-01 17:00:00"))
+    expected <- c(lubridate::as.difftime(21600, units = "secs"),
+                  lubridate::as.difftime(61200, units = "secs"))
     expect_equal(object, expected)
 })
 

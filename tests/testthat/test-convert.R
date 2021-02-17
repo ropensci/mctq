@@ -204,13 +204,14 @@ test_that("convert_to_unit() | general test", {
     expect_equal(convert_to_unit(x, output_unit = "m",
                                  month_length = month_length), 1 / (24 * 30))
     expect_equal(convert_to_unit(x, output_unit = "y",
-                                 year_length = year_length), 1 / (24 * 30 * 12))
+                                 year_length = year_length,
+                                 close_round = FALSE), 1 / (24 * 30 * 12))
     expect_equal(convert_to_unit(x, output_unit = "rad"), 0.2617994)
     expect_equal(convert_to_unit(x, output_unit = "deg"), 15)
 
-    x <- lubridate::dhours(1.99999)
+    x <- lubridate::dhours(1.999)
     object <- convert_to_unit(x, output_unit = "H", close_round = FALSE)
-    expect_equal(object, 1.99999)
+    expect_equal(object, 1.999)
 })
 
 test_that("convert_to_unit() | error test", {
@@ -225,6 +226,11 @@ test_that("convert_to_date_time() | general test", {
     x <- 1
     object <- convert_to_date_time(x, "hms", input_unit = "H", quiet = TRUE)
     expect_equal(object, hms::parse_hm("01:00:00"))
+
+    x <- 3600
+    object <- convert_to_date_time(x, "duration", input_unit = "S",
+                                   quiet = TRUE)
+    expect_equal(object, lubridate::dhours(1))
 })
 
 test_that("convert_to_date_time() | error test", {

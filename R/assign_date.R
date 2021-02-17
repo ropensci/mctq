@@ -149,8 +149,6 @@
 assign_date <- function(start, end, return = "interval", ambiguity = 0,
                         start_name = deparse(substitute(start)),
                         end_name = deparse(substitute(end))) {
-    # Check arguments -----
-
     checkmate::assert_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
     checkmate::assert_multi_class(end, c("hms", "POSIXct", "POSIXlt"))
     assert_identical(start, end, type = "length")
@@ -163,17 +161,11 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
     checkmate::assert_string(start_name)
     checkmate::assert_string(end_name)
 
-    # Set values -----
-
     start_name <- start_name[1]
     end_name <- end_name[1]
 
-    # Convert `start` and `end` -----
-
     start <- flat_posixt(convert(start, "posixct", quiet = TRUE))
     end <- flat_posixt(convert(end, "posixct", quiet = TRUE))
-
-    # Create intervals -----
 
     out <- dplyr::case_when(
         is.na(start) | is.na(end) ~ lubridate::as.interval(NA),
@@ -182,8 +174,6 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
         is.na(ambiguity) ~ lubridate::as.interval(NA),
         TRUE ~ lubridate::as.interval(lubridate::hours(ambiguity), start)
     )
-
-    # Return output -----
 
     if (return == "interval") {
         return(out)

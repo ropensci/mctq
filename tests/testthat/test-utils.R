@@ -321,11 +321,17 @@ test_that("get_names() | general test", {
 })
 
 test_that("clock_roll() | general test", {
-    x <- lubridate::dhours(24)
-    expect_equal(clock_roll(x), lubridate::dhours(0))
+    expect_equal(clock_roll(lubridate::dhours(6)), lubridate::dhours(6))
+    expect_equal(clock_roll(lubridate::dhours(24)), lubridate::dhours(0))
+    expect_equal(clock_roll(lubridate::dhours(36)), lubridate::dhours(12))
 
-    x <- lubridate::dhours(36)
-    expect_equal(clock_roll(x), lubridate::dhours(12))
+    x <- as.difftime(32, units = "hours")
+    expect_equal(clock_roll(x), as.difftime(8, units = "hours"))
+
+    x <- c(hms::parse_hm("02:00"), hms::hms(86401)) # 24:00:01
+    object <- clock_roll(x)
+    expected <- c(hms::parse_hm("02:00"), hms::parse_hms("00:00:01"))
+    expect_equal(object, expected)
 })
 
 test_that("na_as() | general test", {
