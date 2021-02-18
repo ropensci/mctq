@@ -1,23 +1,23 @@
 test_that("convert.data.frame() | convert test", {
-    x <- data.frame(a = c(1, 1), b = c("1", "1"))
+    x <- dplyr::tibble(a = c(1, 1), b = c("1", "1"))
     quiet <- TRUE
 
     object <- convert(x, "hms", cols = "a", input_unit = "H", quiet = quiet)
-    expected <- data.frame(
+    expected <- dplyr::tibble(
         a = c(hms::parse_hm("01:00"), hms::parse_hm("01:00")),
         b = c("1", "1"))
     expect_equal(object, expected)
 
     object <- convert(x, "duration", where = is.character, input_unit = "H",
                       quiet = quiet)
-    expected <- data.frame(
+    expected <- dplyr::tibble(
         a = c(1, 1),
         b = c(lubridate::dhours(), lubridate::dhours()))
     expect_equal(object, expected)
 })
 
 test_that("convert.data.frame() | error test", {
-    x <- data.frame(a = c(1, 1), b = c("1", "1"))
+    x <- dplyr::tibble(a = c(1, 1), b = c("1", "1"))
 
     # Invalid values for `class, `where`, `tz`, and `quiet`
     expect_error(convert(x, 1, tz = "", quiet = TRUE))
