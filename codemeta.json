@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "mctq",
-  "description": "A set of tools to process Munich ChronoType Questionnaire \n    (MCTQ) data.",
+  "description": "A set of tools to process and analyze Munich ChronoType \n    Questionnaire (MCTQ) data.",
   "name": "mctq: The R Package for Munich ChronoType Questionnaire (MCTQ) Data",
   "codeRepository": "https://github.com/gipsousp/mctq/",
   "relatedLink": [
@@ -266,7 +266,7 @@
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
   "readme": "https://github.com/gipsousp/mctq/blob/master/README.md",
-  "fileSize": "1421.469KB",
+  "fileSize": "1600.804KB",
   "contIntegration": ["https://travis-ci.com/gipsousp/mctq", "https://codecov.io/gh/gipsousp/mctq?branch=master"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [

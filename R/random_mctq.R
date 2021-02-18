@@ -51,8 +51,13 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
     checkmate::assert_flag(quiet)
 
     if (model %in% c("std", "standard")) {
-        shush(message("\nModel: Standard MCTQ\n"), quiet = quiet)
+        shush(crayon_message("\nModel: Standard MCTQ\n", c("bold", "red")),
+              quiet = quiet)
         random_std_mctq()
+    } else if (model == "micro") {
+        shush(crayon_message("\nModel: Micro MCTQ\n", c("bold", "red")),
+              quiet = quiet)
+        random_micro_mctq()
     }
 }
 
@@ -69,14 +74,15 @@ random_std_mctq <- function() {
 
     # Create `bt_w` and `bt_f` -----
 
-    min <- as.numeric(hms::parse_hms("21:00:00"))
-    max <- as.numeric(sum_time(hms::as_hms(min),
-                               lubridate::dhours(10))) # 06:00:00
+    # [stats::dnorm()] if the `mean` value represents the day after, add 1
+    ## day (86400s) to it
+
+    min <- as.numeric(hms::parse_hm("21:00"))
+    max <- as.numeric(hms::hms(min) + lubridate::dhours(10)) # 06:00
     prob <- stats::dnorm(seq(min, max, by),
-                         mean = as.numeric(hms::parse_hms("23:30:00")),
+                         mean = as.numeric(hms::parse_hm("23:30")),
                          sd = as.numeric(lubridate::dhours(2)))
-    bt_w <- clock_roll(sample_time(min = min, max = max, by = by,
-                                   prob = prob))
+    bt_w <- clock_roll(sample_time(min = min, max = max, by = by, prob = prob))
 
     for (i in seq(3)) { # Bias
         bt_f <- clock_roll(sample_time(min = min, max = max, by = by,
@@ -210,6 +216,74 @@ random_std_mctq <- function() {
         reasons_f = reasons_f,
         reasons_why_f = reasons_why_f,
         le_f = le_f
+    )
+}
+
+random_micro_mctq <- function() {
+    # Set values -----
+
+    by <- as.numeric(lubridate::dminutes(5))
+
+    # Create `shift_work` and `wd` -----
+
+    shift_work <- sample(c(TRUE, FALSE), 1, prob = c(1, 15))
+    wd <- sample(0:7, 1, prob = c(1, rep(2, 4), 10, 2, 1))
+
+    # Create `so_w` and so_f` -----
+
+    # [stats::dnorm()] if the `mean` value represents the day after, add 1
+    ## day (86400s) to it
+
+    min <- as.numeric(hms::parse_hm("21:00"))
+    max <- as.numeric(hms::hms(min) + lubridate::dhours(10)) # 06:00
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:00") +
+                                               lubridate::ddays()),
+                         sd = as.numeric(lubridate::dhours(2)))
+    so_w <- clock_roll(sample_time(min = min, max = max, by = by,
+                                   prob = prob))
+
+    for (i in seq(3)) { # Bias
+        so_f <- clock_roll(sample_time(min = min, max = max, by = by,
+                                       prob = prob))
+        check <- shortest_interval(so_w, so_f, "interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == so_f) break
+    }
+
+    # Create `se_w` and `se_f` -----
+
+    min <- as.numeric(so_w + lubridate::dhours(4))
+    max <- as.numeric(so_w + lubridate::dhours(14))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(so_w + lubridate::dhours(6)),
+                         sd = as.numeric(lubridate::dhours(1.5)))
+    se_w <- clock_roll(sample_time(min = min, max = max, by = by,
+                                   prob = prob))
+
+    min <- as.numeric(so_f + lubridate::dhours(4))
+    max <- as.numeric(so_f + lubridate::dhours(14))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(so_f + lubridate::dhours(9)),
+                         sd = as.numeric(lubridate::dhours(1.5)))
+
+    for (i in seq(3)) { # Bias
+        se_f <- clock_roll(sample_time(min = min, max = max, by = by,
+                                       prob = prob))
+        check_w <- shortest_interval(so_w, se_w)
+        check_f <- shortest_interval(so_f, se_f)
+        if (check_f >= check_w) break
+    }
+
+    # Create and return output -----
+
+    list(
+        shift_work = shift_work,
+        wd = as.integer(wd),
+        so_w = so_w,
+        se_w = se_w,
+        so_f = so_f,
+        se_f = se_f
     )
 }
 

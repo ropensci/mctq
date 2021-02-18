@@ -31,7 +31,10 @@ of the MCTQ questionnaire (you can use \code{\link[=sd_overall]{sd_overall()}} t
 \item{alarm_f}{A \code{logical} object corresponding to the \strong{alarm clock use on
 work-free days} value from a standard, micro, or shift version of the MCTQ
 questionnaire. Note that, if \code{alarm_f == TRUE}, \code{msf_sc} cannot be
-computed, \code{msf_sc()} will return \code{NA} for those cases.}
+computed, \code{msf_sc()} will return \code{NA} for those cases. For the
+\eqn{\mu}MCTQ this value must be set as \code{FALSE} all times, since the
+questionnaire consider only the work-free days when the subject do not use
+an alarm.}
 }
 \value{
 A \code{hms} object corresponding to the MCTQ chronotype or corrected
@@ -65,7 +68,7 @@ See References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+hold time values. This classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
 conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
 convert it.

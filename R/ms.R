@@ -202,7 +202,10 @@ ms <- function(so, sd) {
 #' @param alarm_f A `logical` object corresponding to the __alarm clock use on
 #'   work-free days__ value from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
-#'   computed, `msf_sc()` will return `NA` for those cases.
+#'   computed, `msf_sc()` will return `NA` for those cases. For the
+#'   \eqn{\mu}MCTQ this value must be set as `FALSE` all times, since the
+#'   questionnaire consider only the work-free days when the subject do not use
+#'   an alarm.
 #'
 #' @return A `hms` object corresponding to the MCTQ chronotype or corrected
 #'   mid-sleep on work-free days.

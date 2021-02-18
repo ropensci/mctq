@@ -9,7 +9,7 @@ dialog_line <- function(line = paste0("Insert 'q' to exit or press 'enter' ",
     if (!is_interactive()) return(999)
     if (isTRUE(abort)) return(999)
 
-    line <- paste(strwrap(line), collapse = "\n")
+    line <- paste0(paste(strwrap(line), collapse = "\n"), " ")
 
     if (is_namespace_loaded("crayon")) {
         line <- crayon::red(line)
@@ -20,4 +20,29 @@ dialog_line <- function(line = paste0("Insert 'q' to exit or press 'enter' ",
     if(isTRUE(space_below)) cat("\n")
 
     answer
+}
+
+crayon_message <- function(message, combined_styles, abort = FALSE) {
+
+    styles <- c("reset", "bold", "blurred", "italic", "underline", "inverse",
+                "hidden", "strikethrough")
+    color <- c("black", "red", "green", "yellow", "blue", "magenta", "cyan",
+               "white", "silver")
+    bg_colors <- c("bgBlack", "bgRed", "bgGreen", "bgYellow", "bgBlue",
+                   "bgMagenta", "bgCyan", "bgWhite")
+
+    checkmate::assert_string(message)
+    checkmate::assert_subset(combined_styles, c(styles, color, bg_colors))
+    checkmate::assert_flag(abort)
+
+    if (isTRUE(abort)) return(invisible(NULL))
+
+    if (is_namespace_loaded("crayon")) {
+        alert <- shush(crayon::combine_styles(combined_styles))
+        message <- (alert(message))
+    }
+
+    message(message)
+
+    invisible(NULL)
 }

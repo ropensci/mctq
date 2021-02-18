@@ -9,7 +9,7 @@ A tibble with 37 columns and 50 rows:
 
 \describe{
 \item{id}{
-A unique integer value for the purpose of identifying each subject in the
+A unique \code{integer} value for the purpose of identifying each subject in the
 dataset.
 \cr \cr
 Type: Control.
@@ -17,10 +17,10 @@ Type: Control.
 R class: \code{integer}.}
 
 \item{work}{
-A logical value indicating if the subject have a regular work schedule.
+A \code{logical} value indicating if the subject have a regular work schedule.
 \cr \cr
 Statement (\code{EN}): "I have a regular work schedule (this includes being, for
-example, a housewife or househusband)").
+example, a housewife or househusband)".
 \cr \cr
 Type: Basic.
 \cr \cr
@@ -341,7 +341,7 @@ sections to learn more.
 \code{raw_data("std_mctq.csv")}.
 \subsection{Guidelines}{
 
-To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
+To learn more about the Munich Chronotype Questionnaire (MCTQ),
 \emph{cf.} Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
 Merrow, & Vetter (2012), Roenneberg \emph{et al.} (2015), and Roenneberg, Pilz,
 Zerbini, & Winnebeck (2019).
@@ -349,16 +349,16 @@ Zerbini, & Winnebeck (2019).
 To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
 (2013) and Ghotbi \emph{et.al} (2020).
 
-If you curious about the variable computations and want to have access to the
-full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
+If you are curious about the variable computations and want to have access to
+the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 }
 
 \subsection{Data building and data wrangling}{
 
-This dataset was created by randomized sampling processes and by manual
-insertions of especial cases. Its purpose is to demonstrate common cases and
-data issues that researchers may find in their MCTQ data, in addition to be a
-suggested data structure for MCTQ data.
+This dataset was created by randomized sampling and by manual insertions of
+especial cases. Its purpose is to demonstrate common cases and data issues
+that researchers may find in their MCTQ data, in addition to be a suggested
+data structure for MCTQ data.
 
 You can see the \code{std_mctq} build and data wrangling processes at
 \url{https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R}.
@@ -373,7 +373,7 @@ articles, in addition to the guidelines of the \href{https://style.tidyverse.org
 \subsection{Variable classes}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on the \link[hms:hms-package]{hms}
+hold time values. This classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages.
 }
 }
@@ -407,6 +407,10 @@ Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 \url{https://www.thewep.org/documentations/mctq/}.
+}
+\seealso{
+Other datasets: 
+\code{\link{micro_mctq}}
 }
 \concept{datasets}
 \keyword{datasets}

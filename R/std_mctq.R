@@ -20,7 +20,7 @@
 #'
 #' ## Guidelines
 #'
-#' To learn more about the standard Munich Chronotype Questionnaire (MCTQ),
+#' To learn more about the Munich Chronotype Questionnaire (MCTQ),
 #' _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
 #' Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz,
 #' Zerbini, & Winnebeck (2019).
@@ -28,15 +28,15 @@
 #' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' (2013) and Ghotbi _et.al_ (2020).
 #'
-#' If you curious about the variable computations and want to have access to the
-#' full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
+#' If you are curious about the variable computations and want to have access to
+#' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
 #'
-#' This dataset was created by randomized sampling processes and by manual
-#' insertions of especial cases. Its purpose is to demonstrate common cases and
-#' data issues that researchers may find in their MCTQ data, in addition to be a
-#' suggested data structure for MCTQ data.
+#' This dataset was created by randomized sampling and by manual insertions of
+#' especial cases. Its purpose is to demonstrate common cases and data issues
+#' that researchers may find in their MCTQ data, in addition to be a suggested
+#' data structure for MCTQ data.
 #'
 #' You can see the `std_mctq` build and data wrangling processes at
 #' <https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R>.
@@ -50,14 +50,14 @@
 #' ## Variable classes
 #'
 #' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found on the [hms][hms::hms-package]
+#' hold time values. This classes can be found in the [hms][hms::hms-package]
 #' and [lubridate][lubridate::lubridate-package] packages.
 #'
 #' @format A tibble with `r ncol(std_mctq)` columns and `r nrow(std_mctq)` rows:
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique integer value for the purpose of identifying each subject in the
+#'   A unique `integer` value for the purpose of identifying each subject in the
 #'   dataset.
 #'   \cr \cr
 #'   Type: Control.
@@ -66,10 +66,10 @@
 #'
 #'
 #'   \item{work}{
-#'   A logical value indicating if the subject have a regular work schedule.
+#'   A `logical` value indicating if the subject have a regular work schedule.
 #'   \cr \cr
 #'   Statement (`EN`): "I have a regular work schedule (this includes being, for
-#'   example, a housewife or househusband)").
+#'   example, a housewife or househusband)".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr

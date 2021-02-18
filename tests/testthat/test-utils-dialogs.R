@@ -44,3 +44,26 @@ test_that("dialog_line() | error test", {
     expect_error(dialog_line(space_below = ""))
     expect_error(dialog_line(abort = ""))
 })
+
+test_that("crayon_message() | general test", {
+    # is_namespace_loaded <- mctq:::is_namespace_loaded
+
+    expect_equal(crayon_message("test", "bold", abort = TRUE), NULL)
+    expect_message(crayon_message("test", "bold"))
+
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            is_namespace_loaded = function(...) TRUE,
+            crayon_message("test", "bold"))
+    }
+
+    # x <- mock()
+    expect_message(mock())
+})
+
+test_that("crayon_message() | error test", {
+    # Invalid values for `message`, "combined_styles", and `abort`
+    expect_error(crayon_message(1, "bold", TRUE))
+    expect_error(crayon_message("", 1, TRUE))
+    expect_error(crayon_message("", "bold", ""))
+})

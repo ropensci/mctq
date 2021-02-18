@@ -45,7 +45,7 @@ timeline.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found on \link[hms:hms-package]{hms::hms-package} and
+hold time values. This classes can be found in \link[hms:hms-package]{hms::hms-package} and
 \link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
 classes required, you can use \code{\link[=convert]{convert()}} to convert it
 (see \code{vignette("converting-data", package = "mctq")}).

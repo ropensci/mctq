@@ -86,19 +86,9 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
     }
 
     format_hms <- function(x) {
-        # format <- sample(list(c(1, 5), c(1, 8)), 1, prob = c(10, 1))
-        # format <- unlist(format)
         format <- c(1, 5)
-
-        out <- convert(x, "hms")
-        # out <- hms::trunc_hms(x, 60)
-        out <- substr(as.character(out), format[1], format[2])
-
-        # if (sample(c(TRUE, FALSE), 1, prob = c(1, 5)) && nchar(out) != 8){
-        #     stringr::str_remove_all(out, ":")
-        # }
-
-        out
+        x <- convert(x, "hms")
+        substr(as.character(x), format[1], format[2])
     }
 
     format_duration <- function(x) {
@@ -136,7 +126,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         }
     }
 
-    ## Inverted values for bed time and sleep preparing on workdays.
+    ## Inverted values for bed time and sleep preparing on workdays
 
     std_mctq <- std_mctq %>% dplyr::add_row(
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]
@@ -228,7 +218,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "5", # Duration | M
-            `F SLEEP END` = "0600", # hms | HMS, HM, H [0-24h]
+            `F SLEEP END` = "06:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP INERTIA` = "5", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
             `F REASONS` = "Yes", # logical | Yes/No
@@ -500,11 +490,6 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             utils::write.csv(paste0("./inst/extdata/", "std_mctq", ".csv"),
                              row.names = FALSE,
                              quote = FALSE)
-
-        # std_mctq %>%
-        #     readr::write_delim(paste0("./inst/extdata/", "std_mctq", ".csv"),
-        #                 delim = ",",
-        #                 col_names = TRUE)
     }
 
     invisible(std_mctq)
@@ -576,29 +561,7 @@ tidy_std_mctq <- function(write = FALSE) {
         dplyr::ungroup() %>%
         dplyr::select(-length)
 
-    # Convert variables -----
-
-    ## Note 1: `base::ifelse()`, `dplyr::if_else()`, and `dplyr::case_when()` do
-    ## vectorised if/else operations, but don't do lazy evaluation, _i.e_ all
-    ## parts of the statement are evaluated and then the condition is used to
-    ## splice together the results to be returned. This can results in erroneous
-    ## warnings. That's why you may see some `suppressWarnings()` or `quiet`
-    ## arguments below. You must be very careful while using this kind of
-    ## evaluations. __c.f.__ <http://bit.ly/2X1J4x0> and
-    ## <http://bit.ly/2X5MUFC>.
-
-    ## Note 2: "base::ifelse() evaluate both possible responses, except in
-    ## cases where the test is either all `TRUE` or all `FALSE`". __c.f__.
-    ## <http://bit.ly/2X1J4x0>.
-
-    ## Note 3: Some if/else functions, like `data.table::fcase()`, do lazy
-    ## evaluation, but that still produces a warning if some of the conditions
-    ## are `TRUE` and the true value contain a vectorised function. That's
-    ## because the function is evaluated once and, due to the vectorised nature,
-    ## it evaluates all values of the object.
-
-    ## Note 4: It appears that no one have a way to go around some of this
-    ## problems (last Stack Overflow search: 2021-01-03).
+    # Convert columns -----
 
     pattern_1 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?"
     pattern_2 <- "^\\d{1,3}$"
@@ -672,16 +635,7 @@ tidy_std_mctq <- function(write = FALSE) {
 
     # Write and output dataset -----
 
-    file <- paste0("./data/", "std_mctq", ".rda")
-
-    if (isTRUE(write)) {
-        if(!(dir.exists("./data/"))) dir.create("./data/")
-
-        usethis::use_data(std_mctq, overwrite = TRUE)
-
-        # save(std_mctq, file = file,
-        #      envir = environment(), compress = "bzip2", version = 2)
-    }
+    if (isTRUE(write)) usethis::use_data(std_mctq, overwrite = TRUE)
 
     invisible(std_mctq)
 }
@@ -728,24 +682,17 @@ validate_std_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
-    # R CMD Check variable bindings fix -----
+    # R CMD Check variable bindings fix (see <http://bit.ly/3bliuam>) -----
 
-    ## See: <http://bit.ly/3bliuam>
-
-    dummy <- bkp <- NULL
-
-    # Set values -----
-
-    std_mctq <- tidy_std_mctq()
+    dummy <- bkp <- so_i <- sd_i <-  NULL
 
     # Do univariate validation -----
 
-    std_mctq <- std_mctq %>% dplyr::mutate(
-        wd = dplyr::case_when(validate::in_range(wd, min = 0, max = 7) ~ wd)
-    )
-
     hms_0 <- hms::parse_hm("00:00")
     hms_24 <- hms::parse_hm("24:00")
+    duration_0 <- lubridate::dhours(0)
+    duration_6 <- lubridate::dhours(6)
+    duration_24 <- lubridate::dhours(24)
 
     foo <- function(x) {
         dplyr::case_when(
@@ -754,34 +701,29 @@ validate_std_mctq <- function(write = FALSE) {
         )
     }
 
-    cols <- c("bt_w", "sprep_w", "se_w", "bt_f", "sprep_f", "se_f")
-    std_mctq <- std_mctq %>%
-        dplyr::mutate(dplyr::across(dplyr::all_of(cols), foo))
-
-    duration_0 <- lubridate::dhours(0)
-    duration_6 <- lubridate::dhours(6)
-
-    foo <- function(x) {
+    bar <- function(x) {
         dplyr::case_when(
             validate::in_range(x, min = duration_0, max = duration_6) ~ x
         )
     }
 
-    cols <- c("slat_w", "si_w", "slat_f", "si_f")
-    std_mctq <- std_mctq %>%
-        dplyr::mutate(dplyr::across(dplyr::all_of(cols), foo))
-
-    duration_24 <- lubridate::dhours(24)
-
-    foo <- function(x) {
+    baz <- function(x) {
         dplyr::case_when(
             validate::in_range(x, min = duration_0, max = duration_24) ~ x
         )
     }
 
-    cols <- c("le_w", "le_f")
-    std_mctq <- std_mctq %>%
-        dplyr::mutate(dplyr::across(dplyr::all_of(cols), foo))
+    cols_1 <- c("bt_w", "sprep_w", "se_w", "bt_f", "sprep_f", "se_f")
+    cols_2 <- c("slat_w", "si_w", "slat_f", "si_f")
+    cols_3 <- c("le_w", "le_f")
+
+    std_mctq <- tidy_std_mctq() %>% dplyr::mutate(
+        wd = dplyr::case_when(validate::in_range(wd, min = 0, max = 7) ~ wd)
+    ) %>% dplyr::mutate(
+        dplyr::across(dplyr::all_of(cols_1), foo),
+        dplyr::across(dplyr::all_of(cols_2), bar),
+        dplyr::across(dplyr::all_of(cols_3), baz)
+    )
 
     # Do multivariate validation -----
 
@@ -805,6 +747,31 @@ validate_std_mctq <- function(write = FALSE) {
             dplyr::select(-dummy, -bkp)
     }
 
+    for (i in c("w", "f")) {
+        sprep_i <- paste0("sprep_", i)
+        slat_i <- paste0("slat_", i)
+        se_i <- paste0("se_", i)
+
+        test <- std_mctq %>%
+            dplyr::mutate(
+                so_i = so(!!as.symbol(sprep_i), !!as.symbol(slat_i)),
+                sd_i = sd(so_i, !!as.symbol(se_i)),
+                dummy = dplyr::case_when(
+                    sd_i <= lubridate::dhours(2) |
+                        sd_i >= lubridate::dhours(18) ~ TRUE,
+                    TRUE ~ FALSE
+                )
+            ) %>%
+            dplyr::select(dummy)
+
+        std_mctq <- dplyr::bind_cols(std_mctq, test) %>%
+            dplyr::mutate(
+                dplyr::across(dplyr::ends_with("_w"), ~ dplyr::if_else(
+                    dummy, na_as(.x), .x))
+            ) %>%
+            dplyr::select(-dummy)
+    }
+
     # Clean invalid cases -----
 
     ## Cases: "Suspicious values (removed case)" and "Sleep onset is equal or
@@ -812,8 +779,10 @@ validate_std_mctq <- function(write = FALSE) {
 
     std_mctq <- std_mctq %>%
         dplyr::rowwise() %>%
-        dplyr::mutate(dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-            .data$id %in% c(15, 41), na_as(.x), .x))) %>%
+        dplyr::mutate(
+            dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
+                .data$id %in% c(15, 41), na_as(.x), .x))
+            ) %>%
         dplyr::ungroup()
 
     # Fix/impute linked data -----
@@ -839,16 +808,7 @@ validate_std_mctq <- function(write = FALSE) {
 
     # Write and output dataset -----
 
-    file <- paste0("./data/", "std_mctq", ".rda")
-
-    if (isTRUE(write)) {
-        if(!(dir.exists("./data/"))) dir.create("./data/")
-
-        usethis::use_data(std_mctq, overwrite = TRUE)
-
-        # save(std_mctq, file = file,
-        #      envir = environment(), compress = "bzip2", version = 2)
-    }
+    if (isTRUE(write)) usethis::use_data(std_mctq, overwrite = TRUE)
 
     invisible(std_mctq)
 }
@@ -977,16 +937,7 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
 
     # Write and output dataset -----
 
-    file <- paste0("./data/", "std_mctq", ".rda")
-
-    if (isTRUE(write)) {
-        if(!(dir.exists("./data/"))) dir.create("./data/")
-
-        usethis::use_data(std_mctq, overwrite = TRUE)
-
-        # save(std_mctq, file = file,
-        #      envir = environment(), compress = "bzip2", version = 2)
-    }
+    if (isTRUE(write)) usethis::use_data(std_mctq, overwrite = TRUE)
 
     invisible(std_mctq)
 }

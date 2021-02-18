@@ -3,8 +3,11 @@
 
 test_that("random_mctq() | general test", {
     checkmate::expect_list(shush(random_mctq(model = "standard")))
+    checkmate::expect_list(shush(random_mctq(model = "micro")))
     checkmate::expect_subset(c("bt_w", "le_w"),
                              names(shush(random_mctq(model = "standard"))))
+    checkmate::expect_subset(c("so_w", "se_w"),
+                             names(shush(random_mctq(model = "micro"))))
 })
 
 test_that("random_mctq() | error test", {
@@ -32,7 +35,7 @@ test_that("random_mctq() | message test", {
 })
 
 test_that("random_std_mctq() | general test", {
-    # Finder
+    ## Finder
     # for (i in seq_len(100)) {
     #     set.seed(i)
     #     x <- random_std_mctq()
@@ -57,7 +60,7 @@ test_that("random_std_mctq() | general test", {
     #
     #     # if (x$le_f >= x$le_w) break
     #     # if (isFALSE(x$alarm_w)) break
-    #     if (isFALSE(x$reasons_f)) break
+    #     # if (isFALSE(x$reasons_f)) break
     # }
 
     # "if (work == FALSE)"
@@ -67,7 +70,7 @@ test_that("random_std_mctq() | general test", {
 
     # "if (hms::as_hms(check) == bt_f)", "if (check_f >= check_w) [bt-sprep]",
     # "if (si_f >= si_w)", "if (check_f >= check_w) [sprep-se]",
-    # "if (le_f >= le_w)", "if (isFALSE(alarm_w))", and
+    # "if (le_f >= le_w)", and "if (isFALSE(alarm_w))"
     set.seed(1)
     x <- random_std_mctq()
     expect_equal(x$si_f >= x$si_w, TRUE)
@@ -81,6 +84,32 @@ test_that("random_std_mctq() | general test", {
     set.seed(6)
     x <- random_std_mctq()
     expect_equal(x$reasons_f == FALSE, TRUE)
+})
+
+test_that("random_micro_mctq() | general test", {
+    ## Finder
+    # for (i in seq_len(100)) {
+    #     set.seed(i)
+    #     x <- random_micro_mctq()
+    #
+    #     # check <- shortest_interval(x$so_w, x$so_f, "interval")
+    #     # check <- lubridate::int_end(check)
+    #     # if (hms::as_hms(check) == x$so_f) break
+    #
+    #     # check_w <- shortest_interval(x$so_w, x$se_w)
+    #     # check_f <- shortest_interval(x$so_f, x$se_f)
+    #     # if (check_f >= check_w) break
+    # }
+
+    # "if (hms::as_hms(check) == x$so_f)"
+    set.seed(2)
+    x <- random_micro_mctq()
+    expect_equal(x$so_f, hms::parse_hm("03:15"))
+
+    # "if (check_f >= check_w)"
+    set.seed(1)
+    x <- random_micro_mctq()
+    expect_equal(x$se_f, hms::parse_hm("07:35"))
 })
 
 test_that("sample_time() | general test", {

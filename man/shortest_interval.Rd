@@ -59,7 +59,8 @@ interval with 24 hours of length (from \code{x} to \code{x} + 1 day).
 
 In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no
 shortest or longer interval (they are equal). In this cases,
-\code{shortest_interval()} and \code{longer_interval()} will return the same value.\preformatted{             day 1                        day 2
+\code{shortest_interval()} and \code{longer_interval()} will return the same value
+(a interval of 12 hours).\preformatted{             day 1                        day 2
      x                  y         x                  y
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->
@@ -88,6 +89,15 @@ shortest or longer interval (they are equal). In this cases,
 }
 }
 
+\subsection{Class requirements}{
+
+The \code{mctq} package works with a set of object classes specially created to
+hold time values. This classes can be found in \link[hms:hms-package]{hms::hms-package} and
+\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
+classes required, you can use \code{\link[=convert]{convert()}} to convert it
+(see \code{vignette("converting-data", package = "mctq")}).
+}
+
 \subsection{\code{class} argument}{
 
 \code{shortest_interval()} is integrated with \code{\link[=convert]{convert()}}. That way you
@@ -101,11 +111,6 @@ and \code{"Interval"} (case insensitive).
 
 \code{POSIXt} values passed as argument to \code{x} or \code{y} will be strip of their
 dates. Only the hours will be considered.
-}
-
-\subsection{\code{NA} values}{
-
-\code{shortest_interval()} will return \code{NA} if \code{x} or \code{y} are \code{NA}.
 }
 }
 \examples{

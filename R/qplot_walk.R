@@ -211,10 +211,15 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- cols[!grepl("^id$|[\\._-]id$", cols, ignore.case = TRUE)]
     }
 
-    dialog_line(line = paste0(
-            "Warning: `qplot_walk()` clears all plots from your system \n",
-            "after it runs. If you don't agree with this, press 'esc' to \n",
-            "exit, or press 'enter' to continue."))
+    crayon_message(paste0(
+        "\nWarning: `qplot_walk()` clears all plots from your system ",
+        "after it runs. If you don't agree with this, press 'esc' to ",
+        "exit.\n"),
+        c("bold", "red"))
+
+    dialog <- dialog_line(
+        line = "Press 'esc' to exit or 'enter' to continue >",
+        space_above = FALSE, space_below = FALSE)
 
     for (i in cols) {
         x <- transform(data[[i]], midday_change)
@@ -226,7 +231,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         }
 
         dialog <- dialog_line(
-            line = "Press 'esc' to exit or 'enter' to continue.",
+            line = "Press 'esc' to exit or 'enter' to continue > ",
             space_above = FALSE, space_below = FALSE)
 
         grDevices::dev.off()

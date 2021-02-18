@@ -39,6 +39,7 @@ reference:
 - title: Data
   contents:
   - std_mctq
+  - micro_mctq
 
 - title: Utilities
   contents:
