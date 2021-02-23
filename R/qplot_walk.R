@@ -210,11 +210,11 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- cols[!grepl("^id$|[\\._-]id$", cols, ignore.case = TRUE)]
     }
 
-    crayon_message(paste0(
+    alert(
         "\nWarning: `qplot_walk()` clears all plots from your system ",
         "after it runs. If you don't agree with this, press 'esc' to ",
-        "exit.\n"),
-        c("bold", "red"))
+        "exit.\n", combined_styles = c("bold", "red")
+        )
 
     dialog <- dialog_line(
         line = "Press 'esc' to exit or 'enter' to continue >",
@@ -230,7 +230,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         }
 
         dialog <- dialog_line(
-            line = "Press 'esc' to exit or 'enter' to continue > ",
+            "Press 'esc' to exit or 'enter' to continue > ",
             space_above = FALSE, space_below = FALSE)
 
         grDevices::dev.off()

@@ -4,6 +4,7 @@
 test_that("random_mctq() | general test", {
     checkmate::expect_list(shush(random_mctq(model = "standard")))
     checkmate::expect_list(shush(random_mctq(model = "micro")))
+    expect_equal(shush(random_mctq(model = "shift")), NULL)
     # checkmate::expect_list(shush(random_mctq(model = "shift")))
 
     checkmate::expect_subset(c("bt_w", "le_w"),

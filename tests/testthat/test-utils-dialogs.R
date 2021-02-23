@@ -10,7 +10,7 @@ test_that("dialog_line() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) FALSE,
-            dialog_line())
+            dialog_line(1))
     }
 
     # x <- mock()
@@ -19,7 +19,7 @@ test_that("dialog_line() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            dialog_line(abort = TRUE))
+            dialog_line(1, abort = TRUE))
     }
 
     # x <- mock()
@@ -30,7 +30,7 @@ test_that("dialog_line() | general test", {
             is_interactive = function(...) TRUE,
             is_namespace_loaded = function(...) TRUE,
             read_line = function(...) TRUE,
-            dialog_line(space_above = TRUE, space_below = TRUE))
+            dialog_line(1, space_above = TRUE, space_below = TRUE))
     }
 
     # x <- mock()
@@ -38,32 +38,36 @@ test_that("dialog_line() | general test", {
 })
 
 test_that("dialog_line() | error test", {
-    # Invalid values for `line` and `abort`
-    expect_error(dialog_line(line = ""))
-    expect_error(dialog_line(space_above = ""))
-    expect_error(dialog_line(space_below = ""))
-    expect_error(dialog_line(abort = ""))
+    # Invalid values for `...`, `combined_styles`, `space_above`,
+    # `space_below`, and `abort`
+    expect_error(dialog_line())
+    expect_error(dialog_line(1, combined_styles = ""))
+    expect_error(dialog_line(1, space_above = ""))
+    expect_error(dialog_line(1, space_below = ""))
+    expect_error(dialog_line(1, abort = ""))
 })
 
-test_that("crayon_message() | general test", {
+test_that("alert() | general test", {
     # is_namespace_loaded <- mctq:::is_namespace_loaded
 
-    expect_equal(crayon_message("test", "bold", abort = TRUE), NULL)
-    expect_message(crayon_message("test", "bold"))
+    expect_equal(alert(1, abort = TRUE), NULL)
+    expect_message(alert(1))
+    expect_message(alert(c(1, 2)))
+    expect_message(alert(1, 2))
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_namespace_loaded = function(...) TRUE,
-            crayon_message("test", "bold"))
+            alert("test"))
     }
 
     # x <- mock()
     expect_message(mock())
 })
 
-test_that("crayon_message() | error test", {
-    # Invalid values for `message`, "combined_styles", and `abort`
-    expect_error(crayon_message(1, "bold", TRUE))
-    expect_error(crayon_message("", 1, TRUE))
-    expect_error(crayon_message("", "bold", ""))
+test_that("alert() | error test", {
+    # Invalid values for `...`, `combined_styles`, and `abort`
+    expect_error(alert())
+    expect_error(alert(1, combined_styles = ""))
+    expect_error(alert(1, abort = ""))
 })

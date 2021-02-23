@@ -43,9 +43,10 @@ Random \emph{standard} and \emph{micro} MCTQ cases were created with the general
 population in mind. The data was set to fit the distributions shown in
 Roenneberg, Wirz-Justice, & Merrow (2003).
 
-\emph{MCTQ\eqn{^{Shift}}{ Shift}} random cases were created based on the
-shift configuration shown in Vetter, Juda, & Roenneberg (2012) (it's also
-present in Juda, Vetter, & Roenneberg (2013) supplemental materials).
+\emph{MCTQ\eqn{^{Shift}}{ Shift}} random cases were created based on the shift
+configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012)
+(it's also present in Juda, Vetter, & Roenneberg (2013) supplemental
+materials).
 
 \emph{MCTQ\eqn{^{Shift}}{ Shift}} can be applied to the general population,
 considering a survey with conditional branching made for shift-workers
@@ -83,7 +84,7 @@ you can see this documentation on the package
 
 \subsection{Workdays}{
 \itemize{
-\item Midsleep (\strong{\eqn{MSW}})
+\item Mid-sleep (\strong{\eqn{MSW}})
 \itemize{
 \item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \textrm{03:10:00}}{= 03:10:00}
 (extracted from the base article)
@@ -108,29 +109,29 @@ base article)
 \item Sleep onset (\strong{\eqn{SO}})
 \itemize{
 \item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} -
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{23:29:00}}{= Mean_MSW - (Mean_SD /
+  \frac{\overline{X}_{SD}}{2} = \textrm{23:29:00}}{= Mean_MSW - (Mean_SD /
   2) = 23:29:00}
-\item \strong{\eqn{s}} \eqn{= \dfrac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
+\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
   (s_MSW + s_SD) / 2 = 00:59:30}
 \item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} -
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{20:59:00}}{= Min_MSW - (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{20:59:00}}{= Min_MSW - (Mean_SD / 2)
   = 20:59:00}
 \item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} -
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{01:59:00}}{= Max_MSW - (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{01:59:00}}{= Max_MSW - (Mean_SD / 2)
   = 01:59:00}
 }
 \item Sleep end (\strong{\eqn{SE}})
 \itemize{
 \item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} +
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{06:51:00}}{= Mean_MSW + (Mean_SD /
+  \frac{\overline{X}_{SD}}{2} = \textrm{06:51:00}}{= Mean_MSW + (Mean_SD /
   2) = 06:51:00}
-\item \strong{\eqn{s}} \eqn{= \dfrac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
+\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
   (s_MSW + s_SD) / 2 = 00:59:30}
 \item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} +
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{04:21:00}}{= Min_MSW + (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{04:21:00}}{= Min_MSW + (Mean_SD / 2)
   = 04:21:00}
 \item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} +
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{09:21:00}}{= Max_MSW + (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{09:21:00}}{= Max_MSW + (Mean_SD / 2)
   = 09:21:00}
 }
 }
@@ -138,7 +139,7 @@ base article)
 
 \subsection{Work-free days}{
 \itemize{
-\item Midsleep (\strong{\eqn{MSW}})
+\item Mid-sleep (\strong{\eqn{MSW}})
 \itemize{
 \item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \textrm{05:02:00}}{= 05:02:00}
 (extracted from the base article)
@@ -163,29 +164,29 @@ base article)
 \item Sleep onset (\strong{\eqn{SO}})
 \itemize{
 \item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} -
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{00:48:30}}{= Mean_MSW - (Mean_SD /
+  \frac{\overline{X}_{SD}}{2} = \textrm{00:48:30}}{= Mean_MSW - (Mean_SD /
   2) = 00:48:30}
-\item \strong{\eqn{s}} \eqn{= \dfrac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
+\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
   (s_MSW + s_SD) / 2 = 01:32:00}
 \item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} -
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{20:12:30}}{= Min_MSW - (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{20:12:30}}{= Min_MSW - (Mean_SD / 2)
   = 20:12:30}
 \item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} -
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{05:24:30}}{= Max_MSW - (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{05:24:30}}{= Max_MSW - (Mean_SD / 2)
   = 05:24:30}
 }
 \item Sleep end (\strong{\eqn{SE}})
 \itemize{
 \item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} +
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{09:15:30}}{= Mean_MSW + (Mean_SD /
+  \frac{\overline{X}_{SD}}{2} = \textrm{09:15:30}}{= Mean_MSW + (Mean_SD /
   2) = 09:15:30}
-\item \strong{\eqn{s}} \eqn{= \dfrac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
+\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
   (s_MSW + s_SD) / 2 = 01:32:00}
 \item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} +
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{04:39:30}}{= Min_MSW + (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{04:39:30}}{= Min_MSW + (Mean_SD / 2)
   = 04:39:30}
 \item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} +
-  \dfrac{\overline{X}_{SD}}{2} = \textrm{13:51:30}}{= Max_MSW + (Mean_SD / 2)
+  \frac{\overline{X}_{SD}}{2} = \textrm{13:51:30}}{= Max_MSW + (Mean_SD / 2)
   = 13:51:30}
 }
 }
