@@ -1,4 +1,4 @@
-#' A fictional micro MCTQ dataset
+#' A fictional \eqn{\mu}MCTQ dataset
 #'
 #' @description
 #'
@@ -34,10 +34,10 @@
 #'
 #' ## Data building and data wrangling
 #'
-#' This dataset was created by randomized sampling and by manual insertions of
-#' especial cases. Its purpose is to demonstrate common cases and data issues
-#' that researchers may find in their MCTQ data, in addition to be a suggested
-#' data structure for MCTQ data.
+#' This dataset was created by randomized sampling (see [random_mctq()]) and by
+#' manual insertions of especial cases. Its purpose is to demonstrate common
+#' cases and data issues that researchers may find in their MCTQ data, in
+#' addition to be a suggested data structure for MCTQ data.
 #'
 #' You can see the `micro_mctq` build and data wrangling processes at
 #' <https://github.com/gipsousp/mctq/blob/master/data-raw/micro_mctq.R>.

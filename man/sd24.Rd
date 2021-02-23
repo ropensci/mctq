@@ -26,7 +26,7 @@ value from the shift version of the MCTQ questionnaire.}
 }
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sd24()} computes the \strong{24h sleep duration} for the shift version of the
 Munich Chronotype Questionnaire (MCTQ).

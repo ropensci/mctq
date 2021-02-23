@@ -4,10 +4,14 @@
 test_that("random_mctq() | general test", {
     checkmate::expect_list(shush(random_mctq(model = "standard")))
     checkmate::expect_list(shush(random_mctq(model = "micro")))
+    # checkmate::expect_list(shush(random_mctq(model = "shift")))
+
     checkmate::expect_subset(c("bt_w", "le_w"),
                              names(shush(random_mctq(model = "standard"))))
     checkmate::expect_subset(c("so_w", "se_w"),
                              names(shush(random_mctq(model = "micro"))))
+    # checkmate::expect_subset(c("napd_w", "sjl_weighted"),
+    #                          names(shush(random_mctq(model = "shift"))))
 })
 
 test_that("random_mctq() | error test", {
@@ -32,67 +36,74 @@ test_that("random_mctq() | error test", {
 test_that("random_mctq() | message test", {
     # "\nModel: Standard MCTQ\n"
     expect_message(random_mctq(model = "standard"))
+
+    # "\nModel: Micro MCTQ\n"
+    expect_message(random_mctq(model = "micro"))
+
+    # "\nModel: MCTQ Shift\n"
+    # expect_message(random_mctq(model = "shift"))
 })
 
 test_that("random_std_mctq() | general test", {
-    ## Finder
+    # # Finder
     # for (i in seq_len(100)) {
     #     set.seed(i)
     #     x <- random_std_mctq()
     #
-    #     # x <- x$bt_f
-    #     # if (x == FALSE) break
+    #     # if (x$work == FALSE) break # 7
     #
-    #     # check <- shortest_interval(x$bt_w, x$bt_f, "interval")
+    #     # check <- shortest_interval(x$bt_w, x$bt_f, "Interval")
     #     # check <- lubridate::int_end(check)
-    #     # if (hms::as_hms(check) == x$bt_f) break
+    #     # if (hms::as_hms(check) == x$bt_f) break # 2
     #
     #     # check_w <- shortest_interval(x$bt_w, x$sprep_w)
     #     # check_f <- shortest_interval(x$bt_f, x$sprep_f)
-    #     # if (check_f >= check_w) break
+    #     # if (check_f >= check_w) break # 1
     #
-    #     # if (x$slat_f >= x$slat_w) break
-    #     # if (x$si_f >= x$si_w) break
+    #     # if (x$slat_f >= x$slat_w) break # 1
+    #     # if (x$si_f >= x$si_w) break # 1
     #
     #     # check_w <- shortest_interval(x$sprep_w, x$se_w)
     #     # check_f <- shortest_interval(x$sprep_f, x$se_f)
-    #     # if (check_f >= check_w) break
+    #     # if (check_f >= check_w) break # 1
     #
-    #     # if (x$le_f >= x$le_w) break
-    #     # if (isFALSE(x$alarm_w)) break
-    #     # if (isFALSE(x$reasons_f)) break
+    #     # if (x$le_f >= x$le_w) break # 1
+    #     # if (isFALSE(x$alarm_w)) break # 7
+    #     # if (isFALSE(x$reasons_f)) break # 3
     # }
 
-    # "if (work == FALSE)"
+    # "if (work == FALSE)" and "if (isFALSE(alarm_w))"
     set.seed(7)
     x <- random_std_mctq()
-    expect_equal(x$work, FALSE)
+    expect_false(x$work)
 
-    # "if (hms::as_hms(check) == bt_f)", "if (check_f >= check_w) [bt-sprep]",
-    # "if (si_f >= si_w)", "if (check_f >= check_w) [sprep-se]",
-    # "if (le_f >= le_w)", and "if (isFALSE(alarm_w))"
-    set.seed(1)
-    x <- random_std_mctq()
-    expect_equal(x$si_f >= x$si_w, TRUE)
-
-    # "if (slat_f >= slat_w)"
+    # "if (hms::as_hms(check) == bt_f)" OK
     set.seed(2)
     x <- random_std_mctq()
-    expect_equal(x$slat_f >= x$slat_w, TRUE)
+    check <- shortest_interval(x$bt_w, x$bt_f, "Interval")
+    check <- lubridate::int_end(check)
+    expect_true(hms::as_hms(check) == x$bt_f)
+
+    # "if (check_f >= check_w) [bt-sprep]", "if (slat_f >= slat_w)"
+    # "if (si_f >= si_w)", "if (check_f >= check_w) [sprep-se]", and
+    # "if (le_f >= le_w)"
+    set.seed(1)
+    x <- random_std_mctq()
+    expect_true(x$si_f >= x$si_w)
 
     # "if (isFALSE(reasons_f))"
-    set.seed(6)
+    set.seed(3)
     x <- random_std_mctq()
-    expect_equal(x$reasons_f == FALSE, TRUE)
+    expect_true(x$reasons_f == FALSE)
 })
 
 test_that("random_micro_mctq() | general test", {
-    ## Finder
+    # # Finder
     # for (i in seq_len(100)) {
     #     set.seed(i)
     #     x <- random_micro_mctq()
     #
-    #     # check <- shortest_interval(x$so_w, x$so_f, "interval")
+    #     # check <- shortest_interval(x$so_w, x$so_f, "Interval")
     #     # check <- lubridate::int_end(check)
     #     # if (hms::as_hms(check) == x$so_f) break
     #
@@ -101,15 +112,12 @@ test_that("random_micro_mctq() | general test", {
     #     # if (check_f >= check_w) break
     # }
 
-    # "if (hms::as_hms(check) == x$so_f)"
-    set.seed(2)
-    x <- random_micro_mctq()
-    expect_equal(x$so_f, hms::parse_hm("03:15"))
-
-    # "if (check_f >= check_w)"
+    # "if (hms::as_hms(check) == x$so_f)" and (check_f >= check_w)"
     set.seed(1)
     x <- random_micro_mctq()
-    expect_equal(x$se_f, hms::parse_hm("07:35"))
+    check <- shortest_interval(x$so_w, x$so_f, "Interval")
+    check <- lubridate::int_end(check)
+    expect_true(hms::as_hms(check) == x$so_f)
 })
 
 test_that("sample_time() | general test", {

@@ -1,12 +1,12 @@
-library(checkmate)
-library(hms)
-library(lubridate)
-library(magrittr)
-library(rlang)
-library(dplyr)
-library(usethis)
-library(utils)
-library(validate)
+# library(checkmate)
+# library(hms)
+# library(lubridate)
+# library(magrittr)
+# library(rlang)
+# library(dplyr)
+# library(usethis)
+# library(utils)
+# library(validate)
 
 devtools::load_all() # or library(mctq)
 
@@ -34,8 +34,7 @@ devtools::load_all() # or library(mctq)
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::build_micro_mctq())
-#' }
-#' }
+#' }}
 build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Check arguments -----
 
@@ -101,7 +100,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
                     `W SLEEP END` = format_hms(.data$se_w),
                     `F SLEEP ONSET` = format_hms(.data$so_f),
                     `F SLEEP END` = format_hms(.data$se_f)
-                )
+                    )
 
             micro_mctq <- dplyr::bind_rows(micro_mctq, random_case)
         }
@@ -119,7 +118,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F SLEEP END` = "14:12 PM" # hms | IMp [0-12h]
     ) %>%
 
-        ## Sleeps more on workdays than on work-free days
+    ## Sleeps more on workdays than on work-free days
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
@@ -131,7 +130,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "06:00 AM" # hms | IMp [0-12h]
         ) %>%
 
-        ## Null MCTQ (invalid case)
+    ## Null MCTQ (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
@@ -143,7 +142,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "" # hms | IMp [0-12h]
         ) %>%
 
-        ## Did not answer workdays questions
+    ## Did not answer workdays questions
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
@@ -155,8 +154,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "15:00 PM" # hms | IMp [0-12h]
         ) %>%
 
-        ## All, or almost all, basic variables have the same values
-        ## (invalid case)
+    ## All, or almost all, basic variables have the same values
+    ## (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
@@ -168,7 +167,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "0" # hms | IMp [0-12h]
         ) %>%
 
-        ## Works 7 days a week and didn't answer the work-free days section
+    ## Works 7 days a week and didn't answer the work-free days section
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
@@ -180,7 +179,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "" # hms | IMp [0-12h]
         ) %>%
 
-        ## Suspicious values (removed case)
+    ## Suspicious values (removed case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
@@ -192,7 +191,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "03:00 AM" # hms | IMp [0-12h] # SUSPICIOUS
         ) %>%
 
-        ## Different formats
+    ## Different formats
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
@@ -204,7 +203,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "10:00 AM" # hms | IMp [0-12h]
         ) %>%
 
-        ## Possible filling error
+    ## Possible filling error
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
@@ -216,8 +215,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "06:00 AM" # hms | IMp [0-12h]
         ) %>%
 
-        ## Repeated workdays and work-free days values (possible carryover
-        ## effect)
+    ## Repeated workdays and work-free days values (possible carryover
+    ## effect)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
@@ -229,7 +228,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "07:00 AM" # hms | IMp [0-12h]
         ) %>%
 
-        ## Sleep onset is equal or greater than sleep end (invalid case)
+    ## Sleep onset is equal or greater than sleep end (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[12]), # integer | [auto-increment]
@@ -252,11 +251,6 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             utils::write.csv(paste0("./inst/extdata/", "micro_mctq", ".csv"),
                              row.names = FALSE,
                              quote = FALSE)
-
-        # micro_mctq %>%
-        #     readr::write_delim(paste0("./inst/extdata/", "micro_mctq", ".csv"),
-        #                 delim = ",",
-        #                 col_names = TRUE)
     }
 
     invisible(micro_mctq)
@@ -299,8 +293,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::tidy_micro_mctq())
-#' }
-#' }
+#' }}
 tidy_micro_mctq <- function(write = FALSE) {
     # Check arguments -----
 
@@ -346,7 +339,7 @@ tidy_micro_mctq <- function(write = FALSE) {
         se_w = convert_pt(.data$`W SLEEP END`, "hms", orders),
         so_f = convert_pt(.data$`F SLEEP ONSET`, "hms",orders, quiet = TRUE),
         se_f = convert_pt(.data$`F SLEEP END`, "hms", orders)
-    )
+        )
 
     # Write and output dataset -----
 
@@ -386,8 +379,7 @@ tidy_micro_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::validate_micro_mctq())
-#' }
-#' }
+#' }}
 validate_micro_mctq <- function(write = FALSE) {
     # To do -----
     #
@@ -409,17 +401,16 @@ validate_micro_mctq <- function(write = FALSE) {
     foo <- function(x) {
         dplyr::case_when(
             x == hms_24 ~ hms_0,
-            x >= hms_0 & x < hms_24 ~ x
-        )
+            x >= hms_0 & x < hms_24 ~ x)
     }
 
     cols_1 <- c("so_w", "se_w", "so_f", "se_f")
 
-    micro_mctq <- tidy_micro_mctq() %>% dplyr::mutate(
-        wd = dplyr::case_when(validate::in_range(wd, min = 0, max = 7) ~ wd)
-    ) %>% dplyr::mutate(
-        dplyr::across(dplyr::all_of(cols_1), foo)
-    )
+    micro_mctq <- tidy_micro_mctq() %>%
+        dplyr::mutate(
+            wd = dplyr::case_when(
+                validate::in_range(wd, min = 0, max = 7) ~ wd)) %>%
+        dplyr::mutate(dplyr::across(dplyr::all_of(cols_1), foo))
 
     # Do multivariate validation -----
 
@@ -438,8 +429,8 @@ validate_micro_mctq <- function(write = FALSE) {
                 !!as.symbol(so_i) :=
                     dplyr::if_else(dummy, hms::as_hms(NA), !!as.symbol(so_i)),
                 !!as.symbol(se_i) :=
-                    dplyr::if_else(dummy, hms::as_hms(NA), !!as.symbol(se_i))
-                ) %>%
+                    dplyr::if_else(dummy, hms::as_hms(NA),
+                                   !!as.symbol(se_i))) %>%
             dplyr::select(-dummy, -sd_i)
     }
 
@@ -455,8 +446,7 @@ validate_micro_mctq <- function(write = FALSE) {
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
                 .data$id %in% c(18, 10), na_as(.x), .x)),
             dplyr::across(-c(id:shift_work), .fns = ~ dplyr::if_else(
-                shift_work, na_as(.x), .x)),
-            ) %>%
+                shift_work, na_as(.x), .x))) %>%
         dplyr::ungroup()
 
 
@@ -495,8 +485,7 @@ validate_micro_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::analyze_micro_mctq())
-#' }
-#' }
+#' }}
 analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     # Check arguments -----
 
@@ -565,8 +554,7 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
             sloss_week = dplyr::if_else(dummy_0, lubridate::dhours(0),
                                         sloss_week),
             sjl_rel = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_rel),
-            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl)
-            ) %>%
+            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl)) %>%
         dplyr::select(-dummy_0, -dummy_7)
 
     # Make MCTQ pretty -----

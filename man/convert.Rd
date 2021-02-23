@@ -194,7 +194,7 @@ that flags the column names in \code{x} for the purpose of transforming them
 A R object of the indicated class in \code{class}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{convert()} converts a R object to another object of a predefined class. Its
 mission is to facilitate conversions between any kind of R object in a

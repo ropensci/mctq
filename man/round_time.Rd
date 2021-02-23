@@ -15,7 +15,7 @@ An object of the same class of 'x' with it \code{numeric} value rounded at
 the ones place.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or
 \code{POSIXlt} object and round it \code{numeric} value at the ones place.

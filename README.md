@@ -39,7 +39,7 @@ with no promises for long term stability.
 
 ### Wait, a R package for a questionnaire?
 
-If you’re familiar with MCTQ, you know that it is not a simple
+If you’re familiar with MCTQ, you know that it’s not a simple
 questionnaire, as it requires a lot of date/time manipulation. That can
 be real challenging, especially if you’re dealing with a large set of
 data.
@@ -80,8 +80,6 @@ conform to the object classes required, don’t worry, just use
 Here are some examples of how to convert your data using `convert()`:
 
 ``` r
-library(mctq)
-
 # From decimal hours to `hms`
 convert(6.5, "hms", input_unit = "H")
 #> 06:30:00
@@ -119,11 +117,7 @@ articles, that make it easy to find and apply any computation necessary.
 Example:
 
 ``` r
-library(mctq)
-library(lubridate)
-library(hms)
-
-# Local time of preparing to sleep on workdays.
+# Local time of preparing to sleep on workdays
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
 # Sleep latency on workdays
 slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
@@ -151,10 +145,6 @@ For computations combining workdays and work-free days, use:
 Example:
 
 ``` r
-library(mctq)
-library(lubridate)
-library(hms)
-
 # Mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
 # Mid-sleep on work-free days

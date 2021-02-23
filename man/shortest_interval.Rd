@@ -27,7 +27,7 @@ longer interval (if \code{inverse = TRUE} or \code{longer_interval()} is used)
 between \code{x} and \code{y}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{shortest_interval()} finds and return the shortest interval between two
 \code{hms} or \code{POSIXt} objects hours. This is useful for time arithmetic, because
@@ -54,7 +54,7 @@ latter assumption is not true.
 Because \code{shortest_interval()} objective is to find the shortest interval, if
 \code{x} and \code{y} are equal, the shortest interval will have a length of 0 hours,
 resulting in a interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
-\code{longer_interval()} is use instead, the latter condition will return a
+\code{longer_interval()} is used instead, the latter condition will return a
 interval with 24 hours of length (from \code{x} to \code{x} + 1 day).
 
 In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no

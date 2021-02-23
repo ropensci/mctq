@@ -7,7 +7,7 @@
 assign_date(
   start,
   end,
-  return = "interval",
+  return = "Interval",
   ambiguity = 0,
   start_name = deparse(substitute(start)),
   end_name = deparse(substitute(end))
@@ -18,7 +18,7 @@ assign_date(
 hour.}
 
 \item{return}{(optional) a string indicating the type of the output (see
-Details) (default: \code{"interval"}).}
+Details) (default: \code{"Interval"}).}
 
 \item{ambiguity}{(optional) a \code{numeric} value to instruct \code{assign_date()} on
 how to deal with ambiguities (see Details) (default: \code{0}).}
@@ -28,14 +28,14 @@ with the \code{start} and \code{end} argument.}
 }
 \value{
 \itemize{
-\item If \code{return = "interval"}, a \code{start}---\code{end} \code{interval} object.
+\item If \code{return = "Interval"}, a \code{start}---\code{end} \code{Interval} object.
 \item If \code{return = "list"}, a named list with \code{start} and \code{end} outputs.
 \item If \verb{return = "start}, only the \code{start} output.
 \item If \code{return = "end"}, only the \code{end} output.
 }
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{assign_date()} assign dates to two sequential hours. It can facilitate
 time arithmetic by locating time values without date reference on a
@@ -80,7 +80,7 @@ hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day.
 
 \code{assign_date()} can return different outputs:
 \itemize{
-\item \code{return = "interval"}: returns a \code{start}---\code{end} \code{interval} object.
+\item \code{return = "Interval"}: returns a \code{start}---\code{end} \code{Interval} object.
 \item \code{return = "list"}: returns a \code{list} object with two named elements
 corresponding to \code{start} and \code{end} output.
 \item \code{return = "start"}: returns only the \code{start} output.

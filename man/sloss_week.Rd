@@ -23,7 +23,7 @@ value from a standard or micro version of the MCTQ questionnaire.}
 A \code{Duration} object corresponding to the weekly sleep loss.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sloss_week()} computes the \strong{weekly sleep loss} for the standard and micro
 versions of the Munich Chronotype Questionnaire (MCTQ).

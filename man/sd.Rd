@@ -19,7 +19,7 @@ A \code{Duration} object corresponding to the difference between
 \code{se} and \code{so} rolled in a 24-hour clock basis.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sd()} computes the \strong{sleep duration} for standard, micro, and shift
 versions of the Munich Chronotype Questionnaire (MCTQ).

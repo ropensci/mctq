@@ -18,7 +18,7 @@ A \code{Duration} object corresponding to the difference between
 \code{nape} and \code{napo} rolled in a 24-hour clock basis.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{napd()} computes the \strong{nap duration} for the shift version of the Munich
 Chronotype Questionnaire (MCTQ).

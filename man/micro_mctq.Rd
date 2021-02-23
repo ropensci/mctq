@@ -3,7 +3,7 @@
 \docType{data}
 \name{micro_mctq}
 \alias{micro_mctq}
-\title{A fictional micro MCTQ dataset}
+\title{A fictional \eqn{\mu}MCTQ dataset}
 \format{
 A tibble with 17 columns and 50
 rows:
@@ -158,7 +158,7 @@ Prepared by Daniel Vartanian (package's author).
 micro_mctq
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 A fictional dataset composed by micro Munich Chronotype Questionnaire
 (MCTQ) basic/measurable and computed variables for testing and learning
@@ -189,10 +189,10 @@ the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 
 \subsection{Data building and data wrangling}{
 
-This dataset was created by randomized sampling and by manual insertions of
-especial cases. Its purpose is to demonstrate common cases and data issues
-that researchers may find in their MCTQ data, in addition to be a suggested
-data structure for MCTQ data.
+This dataset was created by randomized sampling (see \code{\link[=random_mctq]{random_mctq()}}) and by
+manual insertions of especial cases. Its purpose is to demonstrate common
+cases and data issues that researchers may find in their MCTQ data, in
+addition to be a suggested data structure for MCTQ data.
 
 You can see the \code{micro_mctq} build and data wrangling processes at
 \url{https://github.com/gipsousp/mctq/blob/master/data-raw/micro_mctq.R}.

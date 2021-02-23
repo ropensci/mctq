@@ -41,7 +41,7 @@ A \code{hms} object corresponding to the MCTQ chronotype or corrected
 mid-sleep on work-free days.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{msf_sc()} computes the \strong{chronotype or corrected mid-sleep on work-free
 days} for standard, micro, and shift versions of the Munich Chronotype

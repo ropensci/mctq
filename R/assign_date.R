@@ -48,7 +48,7 @@
 #'
 #' `assign_date()` can return different outputs:
 #'
-#' * `return = "interval"`: returns a `start`---`end` `interval` object.
+#' * `return = "Interval"`: returns a `start`---`end` `Interval` object.
 #' * `return = "list"`: returns a `list` object with two named elements
 #' corresponding to `start` and `end` output.
 #' * `return = "start"`: returns only the `start` output.
@@ -79,13 +79,13 @@
 #' @param ambiguity (optional) a `numeric` value to instruct `assign_date()` on
 #'   how to deal with ambiguities (see Details) (default: `0`).
 #' @param return (optional) a string indicating the type of the output (see
-#'   Details) (default: `"interval"`).
+#'   Details) (default: `"Interval"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
 #'   with the `start` and `end` argument.
 #'
 #' @return
 #'
-#' * If `return = "interval"`, a `start`---`end` `interval` object.
+#' * If `return = "Interval"`, a `start`---`end` `Interval` object.
 #' * If `return = "list"`, a named list with `start` and `end` outputs.
 #' * If `return = "start`, only the `start` output.
 #' * If `return = "end"`, only the `end` output.
@@ -146,7 +146,7 @@
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)
 #' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
-assign_date <- function(start, end, return = "interval", ambiguity = 0,
+assign_date <- function(start, end, return = "Interval", ambiguity = 0,
                         start_name = deparse(substitute(start)),
                         end_name = deparse(substitute(end))) {
     checkmate::assert_multi_class(start, c("hms", "POSIXct", "POSIXlt"))
@@ -156,11 +156,13 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
                               lower = 0, upper = 86400)
     checkmate::assert_numeric(as.numeric(hms::as_hms(end)),
                               lower = 0, upper = 86400)
-    checkmate::assert_choice(return, c("list", "interval", "start", "end"))
+    checkmate::assert_choice(tolower(return),
+                             c("list", "interval", "start", "end"))
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     checkmate::assert_string(start_name)
     checkmate::assert_string(end_name)
 
+    return <- tolower(return)
     start_name <- start_name[1]
     end_name <- end_name[1]
 
@@ -176,11 +178,11 @@ assign_date <- function(start, end, return = "interval", ambiguity = 0,
     )
 
     if (return == "interval") {
-        return(out)
+        out
     } else if (return == "start") {
-        return(lubridate::int_start(out))
+        lubridate::int_start(out)
     } else if (return == "end") {
-        return(lubridate::int_end(out))
+        lubridate::int_end(out)
     } else {
         out <- list(start = lubridate::int_start(out),
                     end = lubridate::int_end(out))

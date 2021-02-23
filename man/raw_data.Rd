@@ -15,7 +15,7 @@ If \code{path = NULL}, returns a character vector with all raw dataset
 file names available. Else, returns the \code{file} path.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{mctq} comes bundled with raw fictional datasets for testing and learning
 purposes. \code{raw_data()} make it easy to access their paths.
@@ -27,8 +27,7 @@ raw_data()
 
 ## __ To get the file path from a specific raw dataset __
 raw_data(raw_data()[1])
-raw_data("std_mctq.csv")
-}
+raw_data("std_mctq.csv")}
 }
 \seealso{
 Other utility functions: 

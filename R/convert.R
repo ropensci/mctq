@@ -857,7 +857,7 @@ parser_2 <- function(x, class, ..., orders = NULL, tz = "UTC",
                      input_unit = NULL, output_unit = NULL,
                      month_length = lubridate::dmonths(),
                      year_length = lubridate::dyears(),
-                     ignore_date = TRUE, close_round = TRUE, quiet = FALSE) {
+                     ignore_date = TRUE, close_round = TRUE, quiet = TRUE) {
     class <- tolower(class)
     if (is.character(x)) fix_character(x)
     x <- parse_to_date_time(x, orders, tz, quiet)
@@ -1134,5 +1134,5 @@ convert_to_date_time <- function(x, class, input_unit, tz = "UTC",
     }
 
     if (isTRUE(close_round)) x <- close_round(x, 3)
-    convert(lubridate::dseconds(x), class, tz = tz, quiet = quiet)
+    convert(lubridate::dseconds(x), class, tz = tz, quiet = TRUE)
 }

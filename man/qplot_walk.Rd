@@ -43,7 +43,7 @@ must apply a midday change for \code{hms} variables with values greater than
 \code{22:00:00} (see Details section to learn more) (default: \code{TRUE}).}
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>}}{\strong{Maturing}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{qplot_walk()} helps you to visually assess the distribution of your data.
 It uses \code{\link[ggplot2:qplot]{ggplot2::qplot()}} to walk through each selected variable from a
@@ -126,8 +126,7 @@ qplot_walk(mctq::std_mctq, pattern = "_w$")
 if (requireNamespace("datasets", quietly = TRUE)) {
     qplot_walk(datasets::iris)
     qplot_walk(datasets::mtcars)
-}
-}
+}}
 }
 \seealso{
 Other utility functions: 

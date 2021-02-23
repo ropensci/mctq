@@ -30,7 +30,7 @@
 #' Because `shortest_interval()` objective is to find the shortest interval, if
 #' `x` and `y` are equal, the shortest interval will have a length of 0 hours,
 #' resulting in a interval from `x` to `x`. But, if `inverse = TRUE` or
-#' `longer_interval()` is use instead, the latter condition will return a
+#' `longer_interval()` is used instead, the latter condition will return a
 #' interval with 24 hours of length (from `x` to `x` + 1 day).
 #'
 #' In cases when `x` and `y` distance themselves by 12 hours, there will be no

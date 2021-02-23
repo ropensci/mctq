@@ -11,6 +11,10 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+library(mctq)
+library(lubridate)
+library(hms)
 ```
 
 # mctq <a href='https://gipsousp.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
@@ -42,7 +46,7 @@ Please note that this package is currently on the development stage and have not
 
 ### Wait, a R package for a questionnaire?
 
-If you're familiar with MCTQ, you know that it is not a simple questionnaire, as it requires a lot of date/time manipulation. That can be real challenging, especially if you're dealing with a large set of data.
+If you're familiar with MCTQ, you know that it's not a simple questionnaire, as it requires a lot of date/time manipulation. That can be real challenging, especially if you're dealing with a large set of data.
 
 The main advantage to use the `mctq` package in your research is that you will have reliable tools, thoroughly tested, at your disposition, made and supported by a sleep science research group (GIPSO) from a well know university ([USP](https://www5.usp.br/)). `mctq` also helps with research reproducibility, since it's a free and open source package that anyone can find and use.
 
@@ -64,8 +68,6 @@ devtools::install_github("gipsousp/mctq", dependencies = TRUE)
 Here are some examples of how to convert your data using `convert()`:
 
 ```{r, message = FALSE}
-library(mctq)
-
 # From decimal hours to `hms`
 convert(6.5, "hms", input_unit = "H")
 # From radians to `Duration`
@@ -96,10 +98,6 @@ Note that `mctq` uses a similar naming scheme as those used in the MCTQ articles
 Example:
 
 ```{r, message = FALSE}
-library(mctq)
-library(lubridate)
-library(hms)
-
 # Local time of preparing to sleep on workdays
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
 # Sleep latency on workdays
@@ -123,10 +121,6 @@ For computations combining workdays and work-free days, use:
 Example:
 
 ```{r, message = FALSE}
-library(mctq)
-library(lubridate)
-library(hms)
-
 # Mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
 # Mid-sleep on work-free days

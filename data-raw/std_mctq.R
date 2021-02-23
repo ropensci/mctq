@@ -1,12 +1,12 @@
-library(checkmate)
-library(hms)
-library(lubridate)
-library(magrittr)
-library(rlang)
-library(dplyr)
-library(usethis)
-library(utils)
-library(validate)
+# library(checkmate)
+# library(hms)
+# library(lubridate)
+# library(magrittr)
+# library(rlang)
+# library(dplyr)
+# library(usethis)
+# library(utils)
+# library(validate)
 
 devtools::load_all() # or library(mctq)
 
@@ -34,8 +34,7 @@ devtools::load_all() # or library(mctq)
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::build_std_mctq())
-#' }
-#' }
+#' }}
 build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Check arguments -----
 
@@ -532,8 +531,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::tidy_std_mctq())
-#' }
-#' }
+#' }}
 tidy_std_mctq <- function(write = FALSE) {
     # Check arguments -----
 
@@ -671,8 +669,7 @@ tidy_std_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::validate_std_mctq())
-#' }
-#' }
+#' }}
 validate_std_mctq <- function(write = FALSE) {
     # To do -----
     #
@@ -697,8 +694,7 @@ validate_std_mctq <- function(write = FALSE) {
     foo <- function(x) {
         dplyr::case_when(
             x == hms_24 ~ hms_0,
-            x >= hms_0 & x < hms_24 ~ x
-        )
+            x >= hms_0 & x < hms_24 ~ x)
     }
 
     bar <- function(x) {
@@ -709,8 +705,7 @@ validate_std_mctq <- function(write = FALSE) {
 
     baz <- function(x) {
         dplyr::case_when(
-            validate::in_range(x, min = duration_0, max = duration_24) ~ x
-        )
+            validate::in_range(x, min = duration_0, max = duration_24) ~ x)
     }
 
     cols_1 <- c("bt_w", "sprep_w", "se_w", "bt_f", "sprep_f", "se_f")
@@ -718,12 +713,12 @@ validate_std_mctq <- function(write = FALSE) {
     cols_3 <- c("le_w", "le_f")
 
     std_mctq <- tidy_std_mctq() %>% dplyr::mutate(
-        wd = dplyr::case_when(validate::in_range(wd, min = 0, max = 7) ~ wd)
-    ) %>% dplyr::mutate(
-        dplyr::across(dplyr::all_of(cols_1), foo),
-        dplyr::across(dplyr::all_of(cols_2), bar),
-        dplyr::across(dplyr::all_of(cols_3), baz)
-    )
+        wd = dplyr::case_when(
+            validate::in_range(wd, min = 0, max = 7) ~ wd)) %>%
+        dplyr::mutate(
+            dplyr::across(dplyr::all_of(cols_1), foo),
+            dplyr::across(dplyr::all_of(cols_2), bar),
+            dplyr::across(dplyr::all_of(cols_3), baz))
 
     # Do multivariate validation -----
 
@@ -736,8 +731,7 @@ validate_std_mctq <- function(write = FALSE) {
                 dummy = dplyr::case_when(
                     mctq::assign_date(!!as.symbol(bt_i), !!as.symbol(sprep_i)) >
                         lubridate::dhours(12) ~ TRUE,
-                    TRUE ~ FALSE
-                ),
+                    TRUE ~ FALSE),
                 bkp = !!as.symbol(bt_i),
                 !!as.symbol(bt_i) :=
                     dplyr::if_else(dummy, !!as.symbol(sprep_i),
@@ -759,16 +753,13 @@ validate_std_mctq <- function(write = FALSE) {
                 dummy = dplyr::case_when(
                     sd_i <= lubridate::dhours(2) |
                         sd_i >= lubridate::dhours(18) ~ TRUE,
-                    TRUE ~ FALSE
-                )
-            ) %>%
+                    TRUE ~ FALSE)) %>%
             dplyr::select(dummy)
 
         std_mctq <- dplyr::bind_cols(std_mctq, test) %>%
             dplyr::mutate(
-                dplyr::across(dplyr::ends_with("_w"), ~ dplyr::if_else(
-                    dummy, na_as(.x), .x))
-            ) %>%
+                dplyr::across(dplyr::ends_with("_w"),
+                              ~ dplyr::if_else(dummy, na_as(.x), .x))) %>%
             dplyr::select(-dummy)
     }
 
@@ -781,8 +772,7 @@ validate_std_mctq <- function(write = FALSE) {
         dplyr::rowwise() %>%
         dplyr::mutate(
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-                .data$id %in% c(15, 41), na_as(.x), .x))
-            ) %>%
+                .data$id %in% c(15, 41), na_as(.x), .x))) %>%
         dplyr::ungroup()
 
     # Fix/impute linked data -----
@@ -841,8 +831,7 @@ validate_std_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::analyze_std_mctq())
-#' }
-#' }
+#' }}
 analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     # Check arguments -----
 

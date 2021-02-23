@@ -104,8 +104,7 @@
 #' if (requireNamespace("datasets", quietly = TRUE)) {
 #'     qplot_walk(datasets::iris)
 #'     qplot_walk(datasets::mtcars)
-#' }
-#' }
+#' }}
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
                        midday_change = TRUE) {
