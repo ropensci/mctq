@@ -1,3 +1,6 @@
+# Source the file before running the functions
+# Don't forget to uncomment the `library` functions
+
 # library(checkmate)
 # library(hms)
 # library(lubridate)
@@ -7,8 +10,7 @@
 # library(usethis)
 # library(utils)
 # library(validate)
-
-devtools::load_all() # or library(mctq)
+# library(mctq)
 
 #' Build a fictional standard MCTQ raw dataset
 #'

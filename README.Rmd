@@ -50,7 +50,7 @@ If you're familiar with MCTQ, you know that it's not a simple questionnaire, as 
 
 The main advantage to use the `mctq` package in your research is that you will have reliable tools, thoroughly tested, at your disposition, made and supported by a sleep science research group (GIPSO) from a well know university ([USP](https://www5.usp.br/)). `mctq` also helps with research reproducibility, since it's a free and open source package that anyone can find and use.
 
-This package is also equip with several utility functions that allows you to easily convert and visualize your MCTQ data. It also provides fictional datasets for testing and learning purposes.
+This package is also equipped with several utility functions that allows you to easily convert and visualize your MCTQ data. It also provides fictional datasets for testing and learning purposes.
 
 ## Installation
 
@@ -82,7 +82,7 @@ convert("10:00 PM", "hms", orders = "IMp")
 
 ### Basic MCTQ computation
 
-After you data is all set, just use the `mctq` functions below to process it. 
+After your data is all set, just use the `mctq` functions below to process it. 
 
 Note that `mctq` uses a similar naming scheme as those used in the MCTQ articles, that make it easy to find and apply any computation necessary.
 
@@ -131,7 +131,7 @@ sjl_rel(msw, msf)
 
 ### Utilities
 
-In addition to `convert()`, `mctq` is also equip with many other utilities functions. 
+In addition to `convert()`, `mctq` is also equipped with many other utilities functions. 
 
 All functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipsousp.github.io/mctq/reference/index.html) to view a list of them.
 

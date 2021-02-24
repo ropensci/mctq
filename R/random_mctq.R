@@ -25,31 +25,24 @@
 #' ## Cases
 #'
 #' Random _standard_ and _micro_ MCTQ cases were created with the general
-#' population in mind. The data was set to fit the distributions shown in
+#' population in mind. The data was set to resemble the distributions shown in
 #' Roenneberg, Wirz-Justice, & Merrow (2003).
 #'
 #' _MCTQ\eqn{^{Shift}}{ Shift}_ random cases were created based on the shift
-#' configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012)
-#' (it's also present in Juda, Vetter, & Roenneberg (2013) supplemental
-#' materials).
-#'
-#' _MCTQ\eqn{^{Shift}}{ Shift}_ can be applied to the general population,
-#' considering a survey with conditional branching made for shift-workers
-#' respondents, but it would be difficult to analyze or even to interpret the
-#' data in this case, due to peculiarities of this version of the questionnaire.
-#' Given that a fictitious dataset would not be of much use if it did not come
-#' close to a real world application, we decided to stick with a configuration
-#' that could represent the full potential of the scale.
+#' configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012).
+#' The data was set to resemble the distribution parameters shown in Juda,
+#' Vetter, & Roenneberg (2013).
 #'
 #' @section Standard and micro MCTQ distribution parameters:
 #'
-#' Based on the general sample distributions shown in Roenneberg, Wirz-Justice,
-#' & Merrow (2003) (Table 1, Figure 2, and Figure 7) and assuming normal
-#' distributions where the minimal and maximum values are, respectively,
-#' __\eqn{-3 s}__ and __\eqn{+3 s}__ from the mean (where __\eqn{s}__ is the
-#' standard deviation of the sample), the distribution values for workdays and
-#' work-free days for `random_mctq(model = "standard")` and `random_mctq(model =
-#' "micro")`are as follow.
+#' The distributions were based on the general sample distributions shown in
+#' Roenneberg, Wirz-Justice, & Merrow (2003) (Table 1, Figure 2, and Figure 7).
+#'
+#' Assuming that all variables have normal distributions and that the minimal
+#' and maximum values are, respectively, __\eqn{-3 s}__ and __\eqn{+3 s}__ from
+#' the mean (where __\eqn{s}__ is the standard deviation of the sample), the
+#' distribution values for workdays and work-free days for `random_mctq(model =
+#' "standard")` and `random_mctq(model = "micro")`are as follow.
 #'
 #' ## Notes
 #'
@@ -86,9 +79,9 @@
 #'   * __\eqn{s}__ \eqn{= \textrm{01:09:00}}{= 01:09:00} (extracted from the
 #'   base article)
 #'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{SD} - (3 \times
-#'   s_{SD}) = \textrm{03:53:00}}{= Mean_SD - (3 * s_SD) = 03:53:00}
+#'   s_{SD}) = \textrm{03:55:00}}{= Mean_SD - (3 * s_SD) = 03:55:00}
 #'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{SD} + (3 \times
-#'   s_{SD}) = \textrm{10:47:00}}{= Mean_SD + (3 * s_SD) = 10:47:00}
+#'   s_{SD}) = \textrm{10:49:00}}{= Mean_SD + (3 * s_SD) = 10:49:00}
 #'
 #' * Sleep onset (__\eqn{SO}__)
 #'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \overline{X}_{MSW} -
@@ -164,12 +157,60 @@
 #'   \frac{\overline{X}_{SD}}{2} = \textrm{13:51:30}}{= Max_MSW + (Mean_SD / 2)
 #'   = 13:51:30}
 #'
+#' @section MCTQ\eqn{^{Shift}}{ Shift} distribution parameters:
+#'
+#' The distributions were based on the sample distributions shown in Juda,
+#' Vetter, & Roenneberg (2013) (Table 2 and Table 3) - including those who
+#' indicated to be woken up involuntarily (by an alarm clock or other
+#' disturbances). For consistency, the shift configuration is always the same
+#' and was based on the "Study Site 1" shown in Vetter, Juda, & Roenneberg
+#' (2012).
+#'
+#' Assuming that all variables have normal distributions and that the minimal
+#' and maximum values are, respectively, __\eqn{-3 s}__ and __\eqn{+3 s}__ from
+#' the mean (where __\eqn{s}__ is the standard deviation of the sample), the
+#' distribution values for particular shifts and between two free days after a
+#' particular shift for `random_mctq(model = "shift")` are as follow.
+#'
+#' ## Notes
+#'
+#' * Please note that this is just a rough approximation, it by no means
+#' represents the same distributions from the mentioned articles.
+#'
+#' * This distribution values include those who indicated to be woken up
+#' involuntarily (by an alarm clock or other disturbances). This can shift these
+#' values down.
+#'
+#' * The distribution parameters from other variables not shown here (like bed
+#' time) were created based on the experience of the package authors with
+#' MCTQ data.
+#'
+#' * This values are just for reference while building the random cases. If you
+#' group several random MCTQ cases, this numbers can have some variation.
+#'
+#' * If you are visualizing this documentation in plain text (`ASCII`), you may
+#' have some trouble to understand the equations. If you want a better viewer,
+#' you can see this documentation on the package
+#' [website](https://gipsousp.github.io/mctq/reference/).
+#'
+#' ## Between two morning shifts
+#'
+#' * Local time of preparing to sleep (__\eqn{SPrep}__)
+#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \textrm{22:28:00}}{= 22:28:00}
+#'   (extracted from the base article)
+#'   * __\eqn{s}__ \eqn{= \textrm{01:04:00}}{= 01:04:00} (extracted from the
+#'   base article)
+#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{SPrep} - (3 \times
+#'   s_{SPrep}) = \textrm{19:16:00}}{= Mean_SPrep - (3 * s_SPrep) = 19:16:00}
+#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{MSW} + (3 \times
+#'   s_{MSW}) = \textrm{01:40:00}}{= Mean_MSW + (3 * s_MSW) = 01:40:00}
+#'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
-#' @return A named list with elements representing each MCTQ basic/measurable
+#' @return A named `list` with elements representing each MCTQ basic/measurable
 #'   variable of the model indicated in `model`.
 #'
 #' @template references_f
@@ -310,7 +351,7 @@ random_std_mctq <- function() {
     # min = sprep_w + slat_w + ~ min_sd_w; max = sprep_w + slat_w + ~ max_sd_w;
     # mean = sprep_w + slat_w + ~ mean_sd_w; sd = ~ s_sd_w
     min <- as.numeric(sprep_w + slat_w + hms::parse_hm("03:55"))
-    max <- as.numeric(sprep_w + slat_w + hms::parse_hm("10:45"))
+    max <- as.numeric(sprep_w + slat_w + hms::parse_hm("10:50"))
     prob <- stats::dnorm(seq(min, max, by),
                          mean = as.numeric(
                              sprep_w + slat_w + hms::parse_hm("07:20")),
@@ -438,7 +479,7 @@ random_micro_mctq <- function() {
     # min = so_w + ~ min_sd_w; max = so_w + ~ max_sd_w;
     # mean = so_w + ~ mean_sd_w; sd = ~ s_sd_w
     min <- as.numeric(so_w + hms::parse_hm("03:55"))
-    max <- as.numeric(so_w + hms::parse_hm("10:45"))
+    max <- as.numeric(so_w + hms::parse_hm("10:50"))
     prob <- stats::dnorm(seq(min, max, by),
                          mean = as.numeric(so_w + hms::parse_hm("07:20")),
                          sd = as.numeric(hms::parse_hm("01:10")))

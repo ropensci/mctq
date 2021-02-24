@@ -51,7 +51,7 @@ know university ([USP](https://www5.usp.br/)). `mctq` also helps with
 research reproducibility, since it’s a free and open source package that
 anyone can find and use.
 
-This package is also equip with several utility functions that allows
+This package is also equipped with several utility functions that allows
 you to easily convert and visualize your MCTQ data. It also provides
 fictional datasets for testing and learning purposes.
 
@@ -99,7 +99,7 @@ convert("10:00 PM", "hms", orders = "IMp")
 
 ### Basic MCTQ computation
 
-After you data is all set, just use the `mctq` functions below to
+After your data is all set, just use the `mctq` functions below to
 process it.
 
 Note that `mctq` uses a similar naming scheme as those used in the MCTQ
@@ -156,7 +156,7 @@ sjl_rel(msw, msf)
 
 ### Utilities
 
-In addition to `convert()`, `mctq` is also equip with many other
+In addition to `convert()`, `mctq` is also equipped with many other
 utilities functions.
 
 All functions are well documented, showing all the guidelines behind the
