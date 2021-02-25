@@ -206,7 +206,7 @@ clock_roll <- function(x) {
         units <- units(x)
     }
 
-    if (all(as.numeric(out) < 86400, na.rm = TRUE)) {
+    if (all(as.numeric(out) > 0 & as.numeric(out) < 86400, na.rm = TRUE)) {
         x
     } else {
         out <- flat_posixt(lubridate::as_datetime(out))

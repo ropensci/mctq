@@ -33,177 +33,8 @@
 #' The data was set to resemble the distribution parameters shown in Juda,
 #' Vetter, & Roenneberg (2013).
 #'
-#' @section Standard and micro MCTQ distribution parameters:
-#'
-#' The distributions were based on the general sample distributions shown in
-#' Roenneberg, Wirz-Justice, & Merrow (2003) (Table 1, Figure 2, and Figure 7).
-#'
-#' Assuming that all variables have normal distributions and that the minimal
-#' and maximum values are, respectively, __\eqn{-3 s}__ and __\eqn{+3 s}__ from
-#' the mean (where __\eqn{s}__ is the standard deviation of the sample), the
-#' distribution values for workdays and work-free days for `random_mctq(model =
-#' "standard")` and `random_mctq(model = "micro")`are as follow.
-#'
-#' ## Notes
-#'
-#' * Please note that this is just a rough approximation, it by no means
-#' represents the same distributions from the base article.
-#'
-#' * The distribution parameters from other variables not shown here (like sleep
-#' latency) were created based on the experience of the package authors with
-#' MCTQ data.
-#'
-#' * This values are just for reference while building the random cases. If you
-#' group several random MCTQ cases, this numbers can have some variation.
-#'
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://gipsousp.github.io/mctq/reference/).
-#'
-#' ## Workdays
-#'
-#' * Mid-sleep (__\eqn{MSW}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \textrm{03:10:00}}{= 03:10:00}
-#'   (extracted from the base article)
-#'   * __\eqn{s}__ \eqn{= \textrm{00:50:00}}{= 00:50:00} (extracted from the
-#'   base article)
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{MSW} - (3 \times
-#'   s_{MSW}) = \textrm{00:40:00}}{= Mean_MSW - (3 * s_MSW) = 00:40:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{MSW} + (3 \times
-#'   s_{MSW}) = \textrm{05:40:00}}{= Mean_MSW + (3 * s_MSW) = 05:40:00}
-#'
-#' * Sleep duration (__\eqn{SD}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \textrm{07:22:00}}{= 07:22:00}
-#'   (extracted from the base article)
-#'   * __\eqn{s}__ \eqn{= \textrm{01:09:00}}{= 01:09:00} (extracted from the
-#'   base article)
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{SD} - (3 \times
-#'   s_{SD}) = \textrm{03:55:00}}{= Mean_SD - (3 * s_SD) = 03:55:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{SD} + (3 \times
-#'   s_{SD}) = \textrm{10:49:00}}{= Mean_SD + (3 * s_SD) = 10:49:00}
-#'
-#' * Sleep onset (__\eqn{SO}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \overline{X}_{MSW} -
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{23:29:00}}{= Mean_MSW - (Mean_SD /
-#'   2) = 23:29:00}
-#'   * __\eqn{s}__ \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
-#'   (s_MSW + s_SD) / 2 = 00:59:30}
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \textrm{Min}_{MSW} -
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{20:59:00}}{= Min_MSW - (Mean_SD / 2)
-#'   = 20:59:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \textrm{Max}_{MSW} -
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{01:59:00}}{= Max_MSW - (Mean_SD / 2)
-#'   = 01:59:00}
-#'
-#' * Sleep end (__\eqn{SE}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \overline{X}_{MSW} +
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{06:51:00}}{= Mean_MSW + (Mean_SD /
-#'   2) = 06:51:00}
-#'   * __\eqn{s}__ \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
-#'   (s_MSW + s_SD) / 2 = 00:59:30}
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \textrm{Min}_{MSW} +
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{04:21:00}}{= Min_MSW + (Mean_SD / 2)
-#'   = 04:21:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \textrm{Max}_{MSW} +
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{09:21:00}}{= Max_MSW + (Mean_SD / 2)
-#'   = 09:21:00}
-#'
-#' ## Work-free days
-#'
-#' * Mid-sleep (__\eqn{MSW}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \textrm{05:02:00}}{= 05:02:00}
-#'   (extracted from the base article)
-#'   * __\eqn{s}__ \eqn{= \textrm{01:32:00}}{= 01:32:00} (extracted from the
-#'   base article)
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{MSW} - (3 \times
-#'   s_{MSW}) = \textrm{00:26:00}}{= Mean_MSW - (3 * s_MSW) = 00:26:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{MSW} + (3 \times
-#'   s_{MSW}) = \textrm{09:38:00}}{= Mean_MSW + (3 * s_MSW) = 09:38:00}
-#'
-#' * Sleep duration (__\eqn{SD}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \textrm{08:27:00}}{= 08:27:00}
-#'   (extracted from the base article)
-#'   * __\eqn{s}__ \eqn{= \textrm{01:32:00}}{= 01:32:00} (extracted from the
-#'   base article)
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{SD} - (3 \times
-#'   s_{SD}) = \textrm{03:51:00}}{= Mean_SD - (3 * s_SD) = 03:51:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{SD} + (3 \times
-#'   s_{SD}) = \textrm{13:03:00}}{= Mean_SD + (3 * s_SD) = 13:03:00}
-#'
-#' * Sleep onset (__\eqn{SO}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \overline{X}_{MSW} -
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{00:48:30}}{= Mean_MSW - (Mean_SD /
-#'   2) = 00:48:30}
-#'   * __\eqn{s}__ \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
-#'   (s_MSW + s_SD) / 2 = 01:32:00}
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \textrm{Min}_{MSW} -
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{20:12:30}}{= Min_MSW - (Mean_SD / 2)
-#'   = 20:12:30}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \textrm{Max}_{MSW} -
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{05:24:30}}{= Max_MSW - (Mean_SD / 2)
-#'   = 05:24:30}
-#'
-#' * Sleep end (__\eqn{SE}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \overline{X}_{MSW} +
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{09:15:30}}{= Mean_MSW + (Mean_SD /
-#'   2) = 09:15:30}
-#'   * __\eqn{s}__ \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
-#'   (s_MSW + s_SD) / 2 = 01:32:00}
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \textrm{Min}_{MSW} +
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{04:39:30}}{= Min_MSW + (Mean_SD / 2)
-#'   = 04:39:30}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \textrm{Max}_{MSW} +
-#'   \frac{\overline{X}_{SD}}{2} = \textrm{13:51:30}}{= Max_MSW + (Mean_SD / 2)
-#'   = 13:51:30}
-#'
-#' @section MCTQ\eqn{^{Shift}}{ Shift} distribution parameters:
-#'
-#' The distributions were based on the sample distributions shown in Juda,
-#' Vetter, & Roenneberg (2013) (Table 2 and Table 3) - including those who
-#' indicated to be woken up involuntarily (by an alarm clock or other
-#' disturbances). For consistency, the shift configuration is always the same
-#' and was based on the "Study Site 1" shown in Vetter, Juda, & Roenneberg
-#' (2012).
-#'
-#' Assuming that all variables have normal distributions and that the minimal
-#' and maximum values are, respectively, __\eqn{-3 s}__ and __\eqn{+3 s}__ from
-#' the mean (where __\eqn{s}__ is the standard deviation of the sample), the
-#' distribution values for particular shifts and between two free days after a
-#' particular shift for `random_mctq(model = "shift")` are as follow.
-#'
-#' ## Notes
-#'
-#' * Please note that this is just a rough approximation, it by no means
-#' represents the same distributions from the mentioned articles.
-#'
-#' * This distribution values include those who indicated to be woken up
-#' involuntarily (by an alarm clock or other disturbances). This can shift these
-#' values down.
-#'
-#' * The distribution parameters from other variables not shown here (like bed
-#' time) were created based on the experience of the package authors with
-#' MCTQ data.
-#'
-#' * This values are just for reference while building the random cases. If you
-#' group several random MCTQ cases, this numbers can have some variation.
-#'
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://gipsousp.github.io/mctq/reference/).
-#'
-#' ## Between two morning shifts
-#'
-#' * Local time of preparing to sleep (__\eqn{SPrep}__)
-#'   * __\eqn{\overline{X}}{Mean}__ \eqn{= \textrm{22:28:00}}{= 22:28:00}
-#'   (extracted from the base article)
-#'   * __\eqn{s}__ \eqn{= \textrm{01:04:00}}{= 01:04:00} (extracted from the
-#'   base article)
-#'   * __\eqn{\textrm{Min}}{Min}__ \eqn{= \overline{X}_{SPrep} - (3 \times
-#'   s_{SPrep}) = \textrm{19:16:00}}{= Mean_SPrep - (3 * s_SPrep) = 19:16:00}
-#'   * __\eqn{\textrm{Max}}{Max}__ \eqn{= \overline{X}_{MSW} + (3 \times
-#'   s_{MSW}) = \textrm{01:40:00}}{= Mean_MSW + (3 * s_MSW) = 01:40:00}
+#' You can see more about the distribution parameters used at
+#' <https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R>.
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
@@ -241,12 +72,9 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
                     combined_styles = c("bold", "red")), quiet = quiet)
         random_micro_mctq()
     } else if (model == "shift") {
-        shush(alert("\nNot available yet\n",
+        shush(alert("\nModel: MCTQ Shift\n",
                     combined_styles = c("bold", "red")), quiet = quiet)
-        invisible(NULL)
-        # shush(alert("\nModel: MCTQ Shift\n",
-        #             combined_styles = c("bold", "red")), quiet = quiet)
-        # random_shift_mctq()
+        random_shift_mctq()
     }
 }
 
@@ -266,8 +94,8 @@ random_std_mctq <- function() {
     ## [stats::dnorm()] if the `mean` or `max` value represents the day after,
     ## add 1 day (86400s) to it
 
-    # min = ~ min_so_w - 01:00; max = ~ max_so_w - 01:00;
-    # mean = ~ mean_so_w - 01:00; sd = ~ s_so_w
+    ## min = ~ so_w_min - 01:00; max = ~ so_w_max - 01:00;
+    ## mean = ~ so_w_mean - 01:00; sd = ~ so_w_sd
     min <- as.numeric(hms::parse_hm("20:00"))
     max <- as.numeric(hms::parse_hm("01:00") + lubridate::ddays())
     prob <- stats::dnorm(seq(min, max, by),
@@ -275,8 +103,8 @@ random_std_mctq <- function() {
                          sd = as.numeric(hms::parse_hm("01:00")))
     bt_w <- clock_roll(sample_time(min = min, max = max, by = by, prob = prob))
 
-    # min = ~ min_so_f - 01:00; max = ~ max_so_f - 02:00;
-    # mean = ~ mean_so_f - 02:00; sd = ~ s_so_f
+    ## min = ~ so_f_min - 01:00; max = ~ so_f_max - 02:00;
+    ## mean = ~ so_f_mean - 02:00; sd = ~ so_f_sd
     min <- as.numeric(hms::parse_hm("19:15"))
     max <- as.numeric(hms::parse_hm("03:25") + lubridate::ddays())
     prob <- stats::dnorm(seq(min, max, by),
@@ -348,8 +176,8 @@ random_std_mctq <- function() {
 
     # Create `se_w` and `se_f` -----
 
-    # min = sprep_w + slat_w + ~ min_sd_w; max = sprep_w + slat_w + ~ max_sd_w;
-    # mean = sprep_w + slat_w + ~ mean_sd_w; sd = ~ s_sd_w
+    ## min = sprep_w + slat_w + ~ sd_w_min; max = sprep_w + slat_w + ~ sd_w_max;
+    ## mean = sprep_w + slat_w + ~ sd_w_mean; sd = ~ sd_w_sd
     min <- as.numeric(sprep_w + slat_w + hms::parse_hm("03:55"))
     max <- as.numeric(sprep_w + slat_w + hms::parse_hm("10:50"))
     prob <- stats::dnorm(seq(min, max, by),
@@ -359,8 +187,8 @@ random_std_mctq <- function() {
     se_w <- clock_roll(sample_time(min = min, max = max, by = by,
                                    prob = prob))
 
-    # min = sprep_f + slat_f + ~ min_sd_f; max = sprep_f + slat_f + ~ max_sd_f;
-    # mean = sprep_f + slat_f + ~ mean_sd_f; sd = ~ s_sd_f
+    ## min = sprep_f + slat_f + ~ sd_f_min; max = sprep_f + slat_f + ~ sd_f_max;
+    ## mean = sprep_f + slat_f + ~ sd_f_mean; sd = ~ sd_f_sd
     min <- as.numeric(sprep_f + slat_f + hms::parse_hm("03:50"))
     max <- as.numeric(sprep_f + slat_f + hms::parse_hm("13:05"))
     prob <- stats::dnorm(seq(min, max, by),
@@ -404,7 +232,7 @@ random_std_mctq <- function() {
     # Create `alarm_f`, `reasons_f`, and `reasons_why_f` -----
 
     alarm_f <- sample(c(TRUE, FALSE), 1, prob = c(1, 10))
-    reasons_f <- sample(c(TRUE, FALSE), 1)
+    reasons_f <- sample(c(TRUE, FALSE), 1, prob = c(1, 10))
     reasons_why_f <- sample(c("Child(ren)/pet(s)", "Hobbies"), 1)
     if (isFALSE(reasons_f)) reasons_why_f <- as.character(NA)
 
@@ -450,7 +278,7 @@ random_micro_mctq <- function() {
     ## [stats::dnorm()] if the `mean` or `max` value represents the day after,
     ## add 1 day (86400s) to it
 
-    # min = ~ min_so_w; max = ~ max_so_w; mean = ~ mean_so_w; sd = ~ s_so_w
+    ## min = ~ so_w_min; max = ~ so_w_max; mean = ~ so_w_mean; sd = ~ so_w_sd
     min <- as.numeric(hms::parse_hm("21:00"))
     max <- as.numeric(hms::parse_hm("02:00") + lubridate::ddays())
     prob <- stats::dnorm(seq(min, max, by),
@@ -458,7 +286,7 @@ random_micro_mctq <- function() {
                          sd = as.numeric(hms::parse_hm("01:00")))
     so_w <- clock_roll(sample_time(min = min, max = max, by = by, prob = prob))
 
-    # min = ~ min_so_f; max = ~ max_so_f; mean = ~ mean_so_f; sd = ~ s_so_f
+    ## min = ~ so_f_min; max = ~ so_f_max; mean = ~ so_f_mean; sd = ~ so_f_sd
     min <- as.numeric(hms::parse_hm("20:15"))
     max <- as.numeric(hms::parse_hm("05:25") + lubridate::ddays())
     prob <- stats::dnorm(seq(min, max, by),
@@ -476,8 +304,8 @@ random_micro_mctq <- function() {
 
     # Create `se_w` and `se_f` -----
 
-    # min = so_w + ~ min_sd_w; max = so_w + ~ max_sd_w;
-    # mean = so_w + ~ mean_sd_w; sd = ~ s_sd_w
+    ## min = so_w + ~ sd_w_min; max = so_w + ~ sd_w_max;
+    ## mean = so_w + ~ sd_w_mean; sd = ~ sd_w_sd
     min <- as.numeric(so_w + hms::parse_hm("03:55"))
     max <- as.numeric(so_w + hms::parse_hm("10:50"))
     prob <- stats::dnorm(seq(min, max, by),
@@ -486,8 +314,8 @@ random_micro_mctq <- function() {
     se_w <- clock_roll(sample_time(min = min, max = max, by = by,
                                    prob = prob))
 
-    # min = so_f + ~ min_sd_f; max = so_f + ~ max_sd_f;
-    # mean = so_f + ~ mean_sd_f; sd = ~ s_sd_f
+    ## min = so_f + ~ sd_f_min; max = so_f + ~ sd_f_max;
+    ## mean = so_f + ~ sd_f_mean; sd = ~ sd_f_sd
     min <- as.numeric(so_f + hms::parse_hm("03:50"))
     max <- as.numeric(so_f + hms::parse_hm("13:05"))
     prob <- stats::dnorm(seq(min, max, by),
@@ -516,221 +344,484 @@ random_micro_mctq <- function() {
     )
 }
 
-# random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
-#                               n_f = c(n_f_m = 2, n_f_e = 2, n_f_n = 8)) {
-#     # Check arguments -----
-#
-#     checkmate::assert_integerish(n_w, lower = 0, any.missing = FALSE, len = 3)
-#     checkmate::assert_integerish(n_f, lower = 0, any.missing = FALSE, len = 3)
-#
-#     # Set values -----
-#
-#     by <- as.numeric(lubridate::dminutes(5))
-#
-#     # Create `bt_w_*` and `bt_f_*` -----
-#
-#     ## [stats::dnorm()] if the `mean` or `max` value represents the day after,
-#     ## add 1 day (86400s) to it
-#
-#     min <- as.numeric(hms::parse_hm("20:00"))
-#     max <- as.numeric(hms::hms(min) + lubridate::dhours(5)) # 06:00
-#     prob <- stats::dnorm(seq(min, max, by),
-#                          mean = as.numeric(hms::parse_hm("23:30")),
-#                          sd = as.numeric(lubridate::dhours(2)))
-#     bt_w_m <- clock_roll(sample_time(min = min, max = max, by = by, prob = prob))
-#
-#     for (i in seq(3)) { # Bias
-#         bt_f <- clock_roll(sample_time(min = min, max = max, by = by,
-#                                        prob = prob))
-#         check <- shortest_interval(bt_w, bt_f, "interval")
-#         check <- lubridate::int_end(check)
-#         if (hms::as_hms(check) == bt_f) break
-#     }
-#
-#     # Create `sprep_w` and `sprep_f` -----
-#
-#     min <- as.numeric(bt_w)
-#     max <- as.numeric(bt_w + lubridate::dhours(2))
-#     prob <- stats::dnorm(seq(min, max, by),
-#                          mean = as.numeric(bt_w + lubridate::dhours(1)),
-#                          sd = as.numeric(lubridate::dhours(0.5)))
-#     sprep_w <- clock_roll(sample_time(min = min, max = max, by = by,
-#                                       prob = prob))
-#
-#     min <- as.numeric(bt_f)
-#     max <- as.numeric(bt_f + lubridate::dhours(2))
-#     prob <- stats::dnorm(seq(min, max, by),
-#                          mean = as.numeric(bt_f + lubridate::dhours(1)),
-#                          sd = as.numeric(lubridate::dhours(0.5)))
-#
-#     for (i in seq(3)) { # Bias
-#         sprep_f <- clock_roll(sample_time(min = min, max = max, by = by,
-#                                           prob = prob))
-#         check_w <- shortest_interval(bt_w, sprep_w)
-#         check_f <- shortest_interval(bt_f, sprep_f)
-#         if (check_f >= check_w) break
-#     }
-#
-#     # Create `slat_w`, `slat_f`, `si_w`, and `si_f` -----
-#
-#     min <- as.numeric(lubridate::dminutes(0))
-#     max <- as.numeric(lubridate::dminutes(120))
-#     prob <- stats::dnorm(seq(min, max, by),
-#                          mean = as.numeric(lubridate::dminutes(20)),
-#                          sd = as.numeric(lubridate::dminutes(15)))
-#     slat_w <- sample_time("duration", min = min, max = max, by = by,
-#                           prob = prob)
-#
-#     for (i in seq(3)) { # Bias
-#         slat_f <- sample_time("duration", min = min, max = max, by = by,
-#                               prob = prob)
-#         if (slat_f >= slat_w) break
-#     }
-#
-#     si_w <- sample_time("duration", min = min, max = max, by = by,
-#                         prob = prob)
-#
-#     for (i in seq(3)) { # Bias
-#         si_f <- sample_time("duration", min = min, max = max, by = by,
-#                             prob = prob)
-#         if (si_f >= si_w) break
-#     }
-#
-#     # Create `se_w` and `se_f` -----
-#
-#     min <- as.numeric(sprep_w + slat_w + lubridate::dhours(4))
-#     max <- as.numeric(sprep_w + slat_w + lubridate::dhours(14))
-#     prob <- stats::dnorm(seq(min, max, by),
-#                          mean = as.numeric(
-#                              sprep_w + + slat_w + lubridate::dhours(6)),
-#                          sd = as.numeric(lubridate::dhours(1.5)))
-#     se_w <- clock_roll(sample_time(min = min, max = max, by = by,
-#                                    prob = prob))
-#
-#     min <- as.numeric(sprep_f + slat_f + lubridate::dhours(4))
-#     max <- as.numeric(sprep_f + slat_f + lubridate::dhours(14))
-#     prob <- stats::dnorm(seq(min, max, by),
-#                          mean = as.numeric(
-#                              sprep_f + slat_f + lubridate::dhours(9)),
-#                          sd = as.numeric(lubridate::dhours(1.5)))
-#
-#     for (i in seq(3)) { # Bias
-#         se_f <- clock_roll(sample_time(min = min, max = max, by = by,
-#                                        prob = prob))
-#         check_w <- shortest_interval(sprep_w, se_w)
-#         check_f <- shortest_interval(sprep_f, se_f)
-#         if (check_f >= check_w) break
-#     }
-#
-#     # Create `le_w` and `le_f` -----
-#
-#     min <-as.numeric(lubridate::dhours(0))
-#     max <- as.numeric(lubridate::dhours(12))
-#     prob <- stats::dnorm(seq(min, max, by), mean = lubridate::dhours(3),
-#                          sd = lubridate::dhours(1))
-#     le_w <- sample_time("duration", min = min, max = max, by = by, prob = prob)
-#
-#     for (i in seq(3)) { # Bias
-#         le_f <- sample_time("duration", min = min, max = max, by = by,
-#                             prob = prob)
-#         if (le_f >= le_w) break
-#     }
-#
-#     # Create `alarm_w` and `wake_before_f` -----
-#
-#     alarm_w <- sample(c(TRUE, FALSE), 1, prob = c(5, 1))
-#     wake_before_w <- sample(c(TRUE, FALSE), 1, prob = c(1, 5))
-#     if (isFALSE(alarm_w)) wake_before_w <- as.logical(NA)
-#
-#     # Create `alarm_f`, `reasons_f`, and `reasons_why_f` -----
-#
-#     alarm_f <- sample(c(TRUE, FALSE), 1, prob = c(1, 5))
-#     reasons_f <- sample(c(TRUE, FALSE), 1)
-#     reasons_why_f <- sample(c("Child(ren)/pet(s)", "Hobbies"), 1)
-#     if (isFALSE(reasons_f)) reasons_why_f <- as.character(NA)
-#
-#     # Create and return output -----
-#
-#     list(
-#         n_w_m = as.integer(n_w[1]),
-#         bt_w_m = bt_w_m,
-#         sprep_w_m = sprep_w_m,
-#         slat_w_m = slat_w_m,
-#         se_w_m = se_w_m,
-#         tgu_w_m = tgu_w_m,
-#         alarm_w_m = alarm_w_m,
-#         nap_w_m = nap_w_m,
-#         napo_w_m = napo_w_m,
-#         nape_w_m = nape_w_m,
-#         reasons_w_m = reasons_w_m,
-#         reasons_why_w_m = reasons_why_w_m,
-#
-#         n_f_m = as.integer(n_f[1]),
-#         bt_f_m = bt_f_m,
-#         sprep_f_m = sprep_f_m,
-#         slat_f_m = slat_f_m,
-#         se_f_m = se_f_m,
-#         tgu_f_m = tgu_f_m,
-#         alarm_f_m = alarm_f_m,
-#         nap_f_m = nap_f_m,
-#         napo_f_m = napo_f_m,
-#         nape_f_m = nape_f_m,
-#         reasons_f_m = reasons_f_m,
-#         reasons_why_f_m = reasons_why_f_m,
-#
-#         n_w_e = as.integer(n_w[2]),
-#         bt_w_e = bt_w_e,
-#         sprep_w_e = sprep_w_e,
-#         slat_w_e = slat_w_e,
-#         se_w_e = se_w_e,
-#         tgu_w_e = tgu_w_e,
-#         alarm_w_e = alarm_w_e,
-#         nap_w_e = nap_w_e,
-#         napo_w_e = napo_w_e,
-#         nape_w_e = nape_w_e,
-#         reasons_w_e = reasons_w_e,
-#         reasons_why_w_e = reasons_why_w_e,
-#
-#         n_f_e = as.integer(n_f[2]),
-#         bt_f_e = bt_f_e,
-#         sprep_f_e = sprep_f_e,
-#         slat_f_e = slat_f_e,
-#         se_f_e = se_f_e,
-#         tgu_f_e = tgu_f_e,
-#         alarm_f_e = alarm_f_e,
-#         nap_f_e = nap_f_e,
-#         napo_f_e = napo_f_e,
-#         nape_f_e = nape_f_e,
-#         reasons_f_e = reasons_f_e,
-#         reasons_why_f_e = reasons_why_f_e,
-#
-#         n_w_n = as.integer(n_w[3]),
-#         bt_w_n = bt_w_n,
-#         sprep_w_n = sprep_w_n,
-#         slat_w_n = slat_w_n,
-#         se_w_n = se_w_n,
-#         tgu_w_n = tgu_w_n,
-#         alarm_w_n = alarm_w_n,
-#         nap_w_n = nap_w_n,
-#         napo_w_n = napo_w_n,
-#         nape_w_n = nape_w_n,
-#         reasons_w_n = reasons_w_n,
-#         reasons_why_w_n = reasons_why_w_n,
-#
-#         n_f_n = as.integer(n_f[3]),
-#         bt_f_n = bt_f_n,
-#         sprep_f_n = sprep_f_n,
-#         slat_f_n = slat_f_n,
-#         se_f_n = se_f_n,
-#         tgu_f_n = tgu_f_n,
-#         alarm_f_n = alarm_f_n,
-#         nap_f_n = nap_f_n,
-#         napo_f_n = napo_f_n,
-#         nape_f_n = nape_f_n,
-#         reasons_f_n = reasons_f_n,
-#         reasons_why_f_n = reasons_why_f_n,
-#     )
-# }
+random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
+                              n_f = c(n_f_m = 2, n_f_e = 2, n_f_n = 8)) {
+    # Check arguments -----
+
+    checkmate::assert_integerish(n_w, lower = 0, any.missing = FALSE, len = 3)
+    checkmate::assert_integerish(n_f, lower = 0, any.missing = FALSE, len = 3)
+
+    # Set values -----
+
+    by <- as.numeric(lubridate::dminutes(5))
+    envir <- environment()
+
+    # Create `sprep_w_*` and `sprep_f_*` -----
+
+    ## [stats::dnorm()] if the `mean` or `max` value represents the day after,
+    ## add 1 day (86400s) to it
+
+    min <- as.numeric(hms::parse_hm("19:15"))
+    max <- as.numeric(hms::parse_hm("01:40") + lubridate::ddays())
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("22:30")),
+                         sd = as.numeric(hms::parse_hm("01:05")))
+    sprep_w_m <- clock_roll(sample_time(min = min, max = max, by = by,
+                                     prob = prob))
+
+    min <- as.numeric(hms::parse_hm("21:40"))
+    max <- as.numeric(hms::parse_hm("03:35") + lubridate::ddays())
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:40") +
+                                               lubridate::ddays()),
+                         sd = as.numeric(hms::parse_hm("01:00")))
+    sprep_w_e <- clock_roll(sample_time(min = min, max = max, by = by,
+                                     prob = prob))
+
+    min <- as.numeric(hms::parse_hm("04:30"))
+    max <- as.numeric(hms::parse_hm("10:10"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("07:20")),
+                         sd = as.numeric(hms::parse_hm("01:00")))
+    sprep_w_n <- clock_roll(sample_time(min = min, max = max, by = by,
+                                     prob = prob))
+
+    min <- as.numeric(hms::parse_hm("19:50"))
+    max <- as.numeric(hms::parse_hm("03:45") + lubridate::ddays())
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("23:45")),
+                         sd = as.numeric(hms::parse_hm("01:20")))
+
+    for (i in seq(3)) { # Bias
+        sprep_f_m <- clock_roll(sample_time(min = min, max = max, by = by,
+                                            prob = prob))
+        check <- shortest_interval(sprep_w_m, sprep_f_m, class = "Interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == sprep_f_m) break
+    }
+
+    min <- as.numeric(hms::parse_hm("19:50"))
+    max <- as.numeric(hms::parse_hm("04:30") + lubridate::ddays())
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:10") +
+                                               lubridate::ddays()),
+                         sd = as.numeric(hms::parse_hm("01:25")))
+
+    for (i in seq(3)) { # Bias
+        sprep_f_e <- clock_roll(sample_time(min = min, max = max, by = by,
+                                            prob = prob))
+        check <- shortest_interval(sprep_w_e, sprep_f_e, class = "Interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == sprep_f_e) break
+    }
+
+    min <- as.numeric(hms::parse_hm("17:45"))
+    max <- as.numeric(hms::parse_hm("07:35") + lubridate::ddays())
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:40")),
+                         sd = as.numeric(hms::parse_hm("02:20")))
+
+    for (i in seq(3)) { # Bias
+        sprep_f_n <- clock_roll(sample_time(min = min, max = max, by = by,
+                                            prob = prob))
+        check <- shortest_interval(sprep_w_n, sprep_f_n, class = "Interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == sprep_f_n) break
+    }
+
+    # Create `bt_w_*` and `bt_f_*` -----
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("02:00"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:30")),
+                         sd = as.numeric(hms::parse_hm("00:30")))
+
+    for (i in c("bt_w_m", "bt_w_e", "bt_w_n", "bt_f_m", "bt_f_e", "bt_f_n")) {
+        sample <- sample_time(min = min, max = max, by = by, prob = prob)
+        x <- paste0("sprep_", str_extract_(i, "._.$"))
+        assign(i, sum_time(get(x), - sample, clock = TRUE))
+    }
+
+    # Create `slat_w_*` and `slat_f_*` -----
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("01:30"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:20")),
+                         sd = as.numeric(hms::parse_hm("00:25")))
+
+    slat_w_m <- sample_time("Duration", min = min, max = max, by = by,
+                            prob = prob)
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("01:10"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:20")))
+
+    slat_w_e <- sample_time("Duration", min = min, max = max, by = by,
+                            prob = prob)
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("01:10"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:20")))
+
+    slat_w_n <- sample_time("Duration", min = min, max = max, by = by,
+                            prob = prob)
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("01:00"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:15")))
+
+    for (i in seq(3)) { # Bias
+        slat_f_m <- sample_time("Duration", min = min, max = max, by = by,
+                                prob = prob)
+        if (slat_f_m >= slat_w_m) break
+    }
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("01:05"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:15")))
+
+    for (i in seq(3)) { # Bias
+        slat_f_e <- sample_time("Duration", min = min, max = max, by = by,
+                                prob = prob)
+        if (slat_f_e >= slat_w_e) break
+    }
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- as.numeric(hms::parse_hm("02:15"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:25")),
+                         sd = as.numeric(hms::parse_hm("00:35")))
+
+    for (i in seq(3)) { # Bias
+        slat_f_n <- sample_time("Duration", min = min, max = max, by = by,
+                                prob = prob)
+        if (slat_f_n >= slat_w_n) break
+    }
+
+    # Create `se_w_*` and `se_f_*` -----
+
+    ## [stats::dnorm()] if the `mean` or `max` value represents the day after,
+    ## add 1 day (86400s) to it
+
+    ## Transition times: 06:00, 14:00, and 22:00
+
+    ## se must be greater than sprep + slat; se + tgu cannot be greater than
+    ## the transition time - 00:30
+
+    ## min = sprep_w + slat_w + ~ sd_w_min; max = ~ se_w; mean = ~ se_w;
+    ## sd = ~ se_sd
+
+    min <- sum_time(sprep_w_m, slat_w_m, hms::parse_hm("01:45"), clock = TRUE)
+    min <- as.numeric(min)
+    max <- as.numeric(hms::parse_hm("05:00"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("04:35")),
+                         sd = as.numeric(hms::parse_hm("00:35")))
+    se_w_m <- clock_roll(sample_time(min = min, max = max, by = by,
+                                        prob = prob))
+
+    min <- sum_time(sprep_w_e, slat_w_e, hms::parse_hm("03:40"), clock = TRUE)
+    min <- as.numeric(min)
+    max <- as.numeric(hms::parse_hm("12:25"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("08:25")),
+                         sd = as.numeric(hms::parse_hm("01:20")))
+    se_w_e <- clock_roll(sample_time(min = min, max = max, by = by,
+                                        prob = prob))
+
+    min <- sum_time(sprep_w_n, slat_w_n, hms::parse_hm("01:35"), clock = TRUE)
+    min <- as.numeric(min)
+    max <- as.numeric(hms::parse_hm("18:05"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("13:30")),
+                         sd = as.numeric(hms::parse_hm("01:30")))
+    se_w_n <- clock_roll(sample_time(min = min, max = max, by = by,
+                                        prob = prob))
+
+    ## min = sprep_f + slat_f + ~ sd_f_min; max = sprep_f + slat_f + ~ sd_f_max
+    ## mean = sprep_f + slat_f + ~ sd_f_mean; sd = ~ sd_sd
+
+    min <- as.numeric(sprep_f_m + slat_f_m + hms::parse_hm("03:20"))
+    max <- as.numeric(sprep_f_m + slat_f_m + hms::parse_hm("12:45"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(
+                             sprep_f_m + slat_f_m + hms::parse_hm("08:05")),
+                         sd = as.numeric(hms::parse_hm("01:35")))
+
+    for (i in seq(3)) { # Bias
+        se_f_m <- clock_roll(sample_time(min = min, max = max, by = by,
+                                            prob = prob))
+        check <- shortest_interval(se_w_m, se_f_m, class = "Interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == se_f_m) break
+    }
+
+    min <- as.numeric(sprep_f_e + slat_f_e + hms::parse_hm("04:15"))
+    max <- as.numeric(sprep_f_e + slat_f_e + hms::parse_hm("12:00"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(
+                             sprep_f_e + slat_f_e + hms::parse_hm("08:10")),
+                         sd = as.numeric(hms::parse_hm("01:20")))
+
+    for (i in seq(3)) { # Bias
+        se_f_e <- clock_roll(sample_time(min = min, max = max, by = by,
+                                            prob = prob))
+        check <- shortest_interval(se_w_e, se_f_e, class = "Interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == se_f_e) break
+    }
+
+    min <- as.numeric(sprep_f_n + slat_f_n + hms::parse_hm("02:15"))
+    max <- as.numeric(sprep_f_n + slat_f_n + hms::parse_hm("13:35"))
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(
+                             sprep_f_n + slat_f_n + hms::parse_hm("07:55")),
+                         sd = as.numeric(hms::parse_hm("01:55")))
+
+    for (i in seq(3)) { # Bias
+        se_f_n <- clock_roll(sample_time(min = min, max = max, by = by,
+                                            prob = prob))
+        check <- shortest_interval(se_w_n, se_f_n, class = "Interval")
+        check <- lubridate::int_end(check)
+        if (hms::as_hms(check) == se_f_n) break
+    }
+
+    # Create `tgu_w_*` and `tgu_f_*` -----
+
+    values <- list(
+        tgu_w_m = list(
+            name = "tgu_w_m",
+            min = as.numeric(hms::parse_hm("00:00")),
+            max = as.numeric(hms::parse_hm("00:30")),
+            mean = as.numeric(hms::parse_hm("00:05")),
+            sd = as.numeric(hms::parse_hm("00:10"))),
+        tgu_w_e = list(
+            name = "tgu_w_e",
+            min = as.numeric(hms::parse_hm("00:00")),
+            max = as.numeric(hms::parse_hm("00:50")),
+            mean = as.numeric(hms::parse_hm("00:10")),
+            sd = as.numeric(hms::parse_hm("00:15"))),
+        tgu_w_n = list(
+            name = "tgu_w_n",
+            min = as.numeric(hms::parse_hm("00:00")),
+            max = as.numeric(hms::parse_hm("01:00")),
+            mean = as.numeric(hms::parse_hm("00:15")),
+            sd = as.numeric(hms::parse_hm("00:15"))),
+        tgu_f_m = list(
+            name = "tgu_f_m",
+            min = as.numeric(hms::parse_hm("00:00")),
+            max = as.numeric(hms::parse_hm("01:25")),
+            mean = as.numeric(hms::parse_hm("00:15")),
+            sd = as.numeric(hms::parse_hm("00:25"))),
+        tgu_f_e = list(
+            name = "tgu_f_e",
+            min = as.numeric(hms::parse_hm("00:00")),
+            max = as.numeric(hms::parse_hm("00:45")),
+            mean = as.numeric(hms::parse_hm("00:10")),
+            sd = as.numeric(hms::parse_hm("00:10"))),
+        tgu_f_n = list(
+            name = "tgu_f_n",
+            min = as.numeric(hms::parse_hm("00:00")),
+            max = as.numeric(hms::parse_hm("00:55")),
+            mean = as.numeric(hms::parse_hm("00:15")),
+            sd = as.numeric(hms::parse_hm("00:15")))
+    )
+
+    lapply(values, sampler_2, by = by, envir = envir)
+
+    # Create `napo_w_*` and `napo_f_*` -----
+
+    ## Transition times: 06:00, 14:00, and 22:00
+
+    ## min = transition time + 03:00
+
+    min <- as.numeric(hms::parse_hm("09:00"))
+    max <- sum_time(bt_w_m, - hms::parse_hm("05:00"), clock = TRUE)
+    max <- as.numeric(max)
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:10")))
+
+    napo_w_m <- sample_time(min = min, max = max, by = by, prob = prob)
+
+    min <- as.numeric(hms::parse_hm("15:00"))
+    max <- sum_time(bt_w_e, - hms::parse_hm("05:00"), clock = TRUE)
+    max <- as.numeric(max)
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:10")),
+                         sd = as.numeric(hms::parse_hm("00:15")))
+
+    napo_w_e <- sample_time(min = min, max = max, by = by, prob = prob)
+
+    min <- as.numeric(hms::parse_hm("01:00"))
+    max <- sum_time(bt_w_n, - hms::parse_hm("05:00"), clock = TRUE)
+    max <- as.numeric(max)
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:15")))
+
+    napo_w_n <- sample_time(min = min, max = max, by = by, prob = prob)
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- sum_time(bt_f_m, - hms::parse_hm("05:00"), clock = TRUE)
+    max <- as.numeric(max)
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:25")))
+
+    min <- as.numeric(hms::parse_hm("00:00"))
+    max <- sum_time(bt_f_e, - hms::parse_hm("05:00"), clock = TRUE)
+    max <- as.numeric(max)
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:10")),
+                         sd = as.numeric(hms::parse_hm("00:10")))
+
+    min <- as.numeric(se + hms::parse_hm("00:00"))
+    max <- sum_time(bt_f_n, - hms::parse_hm("05:00"), clock = TRUE)
+    max <- as.numeric(max)
+    prob <- stats::dnorm(seq(min, max, by),
+                         mean = as.numeric(hms::parse_hm("00:15")),
+                         sd = as.numeric(hms::parse_hm("00:15")))
+
+    # Create `nap_w_*` and `nap_f_*` -----
+
+    for (i in c("nap_w_m", "nap_w_e", "nap_w_n")) {
+        assign(i, sample(c(TRUE, FALSE), 1, prob = c(1, 1)))
+    }
+
+    for (i in c("nap_f_m", "nap_f_e", "nap_f_n")) {
+        assign(i, sample(c(TRUE, FALSE), 1, prob = c(1, 1)))
+    }
+
+    # Create `alarm_w_*` and `alarm_f_*` -----
+
+    for (i in c("alarm_w_m", "alarm_w_e", "alarm_w_n")) {
+        assign(i, sample(c(TRUE, FALSE), 1, prob = c(10, 1)))
+    }
+
+    for (i in c("alarm_f_m", "alarm_f_e", "alarm_f_n")) {
+        assign(i, sample(c(TRUE, FALSE), 1, prob = c(1, 10)))
+    }
+
+    # Create `reasons_w_*`, `reasons_f_*`, `reasons_why_w`, and
+    # `reasons_why_f` -----
+
+    for (i in c("reasons_w_m", "reasons_w_e", "reasons_w_n",
+                "reasons_f_m", "reasons_f_e", "reasons_f_n")) {
+        assign(i, sample(c(TRUE, FALSE), 1, prob = c(1, 10)))
+    }
+
+    for (i in c("reasons_why_w_m", "reasons_why_w_e", "reasons_why_w_n",
+                "reasons_why_f_m", "reasons_why_f_e", "reasons_why_f_n")) {
+        assign(i, sample(c("Child(ren)/pet(s)", "Hobbies"), 1))
+    }
+
+    for (i in c("reasons_w_m", "reasons_w_e", "reasons_w_n",
+                "reasons_f_m", "reasons_f_e", "reasons_f_n")) {
+        if (isFALSE(get(i))) {
+            x <- paste0("reasons_why_", str_extract_("reasons_w_m", "._.$"))
+            assign(x, as.character(NA))
+        }
+    }
+
+    # Check inconsistencies
+
+    if (sum_time(sprep_w_m, slat_w_m, clock = TRUE) > se_w_m) {
+        stop("Critical error.", call. = FALSE)
+    }
+
+    # Create and return output -----
+
+    list(
+        n_w_m = as.integer(n_w[1]),
+        bt_w_m = bt_w_m,
+        sprep_w_m = sprep_w_m,
+        slat_w_m = slat_w_m,
+        se_w_m = se_w_m,
+        tgu_w_m = tgu_w_m,
+        alarm_w_m = alarm_w_m,
+        nap_w_m = nap_w_m,
+        napo_w_m = napo_w_m,
+        nape_w_m = nape_w_m,
+        reasons_w_m = reasons_w_m,
+        reasons_why_w_m = reasons_why_w_m,
+
+        n_f_m = as.integer(n_f[1]),
+        bt_f_m = bt_f_m,
+        sprep_f_m = sprep_f_m,
+        slat_f_m = slat_f_m,
+        se_f_m = se_f_m,
+        tgu_f_m = tgu_f_m,
+        alarm_f_m = alarm_f_m,
+        nap_f_m = nap_f_m,
+        napo_f_m = napo_f_m,
+        nape_f_m = nape_f_m,
+        reasons_f_m = reasons_f_m,
+        reasons_why_f_m = reasons_why_f_m,
+
+        n_w_e = as.integer(n_w[2]),
+        bt_w_e = bt_w_e,
+        sprep_w_e = sprep_w_e,
+        slat_w_e = slat_w_e,
+        se_w_e = se_w_e,
+        tgu_w_e = tgu_w_e,
+        alarm_w_e = alarm_w_e,
+        nap_w_e = nap_w_e,
+        napo_w_e = napo_w_e,
+        nape_w_e = nape_w_e,
+        reasons_w_e = reasons_w_e,
+        reasons_why_w_e = reasons_why_w_e,
+
+        n_f_e = as.integer(n_f[2]),
+        bt_f_e = bt_f_e,
+        sprep_f_e = sprep_f_e,
+        slat_f_e = slat_f_e,
+        se_f_e = se_f_e,
+        tgu_f_e = tgu_f_e,
+        alarm_f_e = alarm_f_e,
+        nap_f_e = nap_f_e,
+        napo_f_e = napo_f_e,
+        nape_f_e = nape_f_e,
+        reasons_f_e = reasons_f_e,
+        reasons_why_f_e = reasons_why_f_e,
+
+        n_w_n = as.integer(n_w[3]),
+        bt_w_n = bt_w_n,
+        sprep_w_n = sprep_w_n,
+        slat_w_n = slat_w_n,
+        se_w_n = se_w_n,
+        tgu_w_n = tgu_w_n,
+        alarm_w_n = alarm_w_n,
+        nap_w_n = nap_w_n,
+        napo_w_n = napo_w_n,
+        nape_w_n = nape_w_n,
+        reasons_w_n = reasons_w_n,
+        reasons_why_w_n = reasons_why_w_n,
+
+        n_f_n = as.integer(n_f[3]),
+        bt_f_n = bt_f_n,
+        sprep_f_n = sprep_f_n,
+        slat_f_n = slat_f_n,
+        se_f_n = se_f_n,
+        tgu_f_n = tgu_f_n,
+        alarm_f_n = alarm_f_n,
+        nap_f_n = nap_f_n,
+        napo_f_n = napo_f_n,
+        nape_f_n = nape_f_n,
+        reasons_f_n = reasons_f_n,
+        reasons_why_f_n = reasons_why_f_n,
+    )
+}
 
 sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
                         max = hms::parse_hms("23:59:59"),
@@ -762,4 +853,53 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
                      prob = prob)
 
     convert(sample, class, quiet = TRUE)
+}
+
+sampler_1 <- function(x, by, envir) {
+    min <- x$min
+    max <- x$max
+    prob <- stats::dnorm(seq(min, max, by), mean = x$mean, sd = x$sd)
+    sample <- sample_time("Duration", min = min, max = max, by = by,
+                          prob = prob)
+
+    assign(x$name, sample, envir = envir)
+
+    if (grepl("_f", x$name)) {
+        work <- get(sub("_f", "_w", x$name), envir = envir)
+
+        for (i in seq(3)) { # Bias
+            free <- get(x$name, envir = envir)
+
+            check <- shush(shortest_interval(free, work, class = "Interval"))
+            check <- lubridate::int_end(check)
+            if (hms::as_hms(check) == free) break
+
+            sample <- sample_time("Duration", min = min, max = max, by = by,
+                                  prob = prob)
+
+            assign(x$name, sample, envir = envir)
+        }
+    }
+}
+
+sampler_2 <- function(x, by, envir) {
+    min <- x$min
+    max <- x$max
+    prob <- stats::dnorm(seq(min, max, by), mean = x$mean, sd = x$sd)
+    sample <- sample_time("Duration", min = min, max = max, by = by, prob = prob)
+
+    assign(x$name, sample, envir = envir)
+
+    if (grepl("_f", x$name)) {
+        work <- get(sub("_f", "_w", x$name), envir = envir)
+
+        for (j in seq(3)) { # Bias
+            free <- get(x$name, envir = envir)
+            if (free >= work) break
+
+            sample <- sample_time("Duration", min = min, max = max, by = by,
+                             prob = prob)
+            assign(x$name, sample, envir = envir)
+        }
+    }
 }
