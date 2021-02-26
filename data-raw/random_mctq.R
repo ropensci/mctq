@@ -1,5 +1,5 @@
 # Source the file before running the functions
-# Don't forget to uncomment the `library` functions
+# Don't forget to uncomment the `library` functions below
 
 # library(lubridate)
 # library(hms)
@@ -16,12 +16,6 @@
 #' [mctq::random_mctq] to learn more.
 #'
 #' @details
-#'
-#' ## Requirements
-#'
-#' This function works only in interactive mode.
-#'
-#' ## Guidelines
 #'
 #' The parameters were based on the distributions shown in Roenneberg,
 #' Wirz-Justice, & Merrow (2003) (Table 1, Figure 2, and Figure 7).
@@ -49,20 +43,9 @@
 #' \dontrun{
 #' std_mctq_par()}
 std_mctq_par <- function() {
-    # Check requirements -----
-
-    if (!is_interactive()) {
-        stop("This function can only be used in interactive mode.",
-             call. = FALSE)
-    }
-
-    # Title message -----
-
     alert("\nStandard and micro MCTQ distribution parameters\n")
 
-    # Set values -----
-
-    values <- list( # extracted from the base article
+    values <- list( # Extracted from the base article
         w = list(
             suffix = "W",
             title = "Workdays (W)\n",
@@ -78,8 +61,6 @@ std_mctq_par <- function() {
             ms_mean = hms::parse_hms("05:02:00"),
             ms_sd = hms::parse_hms("01:32:00"))
     )
-
-    # Compute and print variables -----
 
     for (i in values) {
         alert(i$title, combined_styles = c("black", "bold"))
@@ -100,7 +81,7 @@ std_mctq_par <- function() {
         sd <- sum_time((ms_sd + sd_sd) / 2, clock = TRUE)
         min <- sum_time(ms_min, - (sd_mean / 2), clock = TRUE)
         max <- sum_time(ms_max, - (sd_mean / 2), clock = TRUE)
-        cat_(mean, sd, min, max)
+        cat_(min, max, mean, sd)
 
         message <- paste0("\nSleep end (SE_", i$suffix, ")\n\n")
         cat(message)
@@ -108,15 +89,15 @@ std_mctq_par <- function() {
         sd <- sum_time((ms_sd + sd_sd) / 2, clock = TRUE)
         min <- sum_time(ms_min, + (sd_mean / 2), clock = TRUE)
         max <- sum_time(ms_max, + (sd_mean / 2), clock = TRUE)
-        cat_(mean, sd, min, max)
+        cat_(min, max, mean, sd)
 
         message <- paste0("\nSleep duration (SD_", i$suffix, ")\n\n")
         cat(message)
-        cat_(sd_mean, sd_sd, sd_min, sd_max)
+        cat_(sd_min, sd_max, sd_mean, sd_sd)
 
         message <- paste0("\nMid-sleep (MS", i$suffix, ")\n\n")
         cat(message)
-        cat_(ms_mean, ms_sd, ms_min, ms_max)
+        cat_(ms_min, ms_max, ms_mean, ms_sd)
     }
 
     invisible(NULL)
@@ -132,12 +113,6 @@ std_mctq_par <- function() {
 #' learn more.
 #'
 #' @details
-#'
-#' ## Requirements
-#'
-#' This function works only in interactive mode.
-#'
-#' ## Guidelines
 #'
 #' The parameters were based on the distributions shown in Juda, Vetter, &
 #' Roenneberg (2013) (Table 2 and Table 3).
@@ -169,20 +144,9 @@ std_mctq_par <- function() {
 #' \dontrun{
 #' shift_mctq_par()}
 shift_mctq_par <- function() {
-    # Check requirements -----
-
-    if (!is_interactive()) {
-        stop("This function can only be used in interactive mode.",
-             call. = FALSE)
-    }
-
-    # Title message -----
-
     alert("\nMCTQ Shift distribution parameters\n")
 
-    # Set values -----
-
-    values <- list( # extracted from the base article
+    values <- list( # Extracted from the base article
         w_m = list(
             suffix = "W_M",
             title = "Between two morning shifts (W_M)\n",
@@ -275,8 +239,6 @@ shift_mctq_par <- function() {
             ms_sd = hms::parse_hms("02:11:00"))
     )
 
-    # Compute and print variables -----
-
     for (i in values) {
         alert(i$title, combined_styles = c("black", "bold"))
 
@@ -287,7 +249,7 @@ shift_mctq_par <- function() {
         sprep_sd <- i$sprep_sd
         sprep_min <- sum_time(sprep_mean, - (3 * sprep_sd), clock = TRUE)
         sprep_max <- sum_time(sprep_mean, + (3 * sprep_sd), clock = TRUE)
-        cat_(sprep_mean, sprep_sd, sprep_min, sprep_max)
+        cat_(sprep_min, sprep_max, sprep_mean, sprep_sd)
 
         message <- paste0("\nSleep latency (SLat_", i$suffix, ")\n\n")
         cat(message)
@@ -296,7 +258,7 @@ shift_mctq_par <- function() {
         slat_min <- sum_time(slat_mean, - (3 * slat_sd))
         if (slat_min <= 0) slat_min <- hms::as_hms(0)
         slat_max <- sum_time(slat_mean, + (3 * slat_sd))
-        cat_(slat_mean, slat_sd, slat_min, slat_max)
+        cat_(slat_min, slat_max, slat_mean, slat_sd)
 
         message <- paste0("\nSleep onset (SO_", i$suffix, ")\n\n")
         cat(message)
@@ -304,7 +266,7 @@ shift_mctq_par <- function() {
         sd <- sum_time(sprep_sd + slat_sd)
         min <- sum_time(sprep_min, slat_min, clock = TRUE)
         max <- sum_time(sprep_max, slat_max, clock = TRUE)
-        cat_(mean, sd, min, max)
+        cat_(min, max, mean, sd)
 
         message <- paste0("\nSleep end (SE_", i$suffix, ")\n\n")
         cat(message)
@@ -319,8 +281,7 @@ shift_mctq_par <- function() {
         min <- sum_time(mean, - (3 * sd))
         if (min <= 0) min <- hms::as_hms(0)
         max <- sum_time(mean, + (3 * sd))
-        cat_(mean, sd, min, max)
-
+        cat_(min, max, mean, sd)
 
         message <- paste0("\nSleep duration (SD_", i$suffix, ")\n\n")
         cat(message)
@@ -338,21 +299,73 @@ shift_mctq_par <- function() {
     invisible(NULL)
 }
 
+#' Test the creation of [mctq::random_mctq] cases
+#'
+#' @description
+#'
+#' `force_random_mctq()` tests [mctq::random_mctq] ability to create cases
+#' by forcing it to produce a number of sequential cases.
+#'
+#' @param model A string indicating the data model to return. Valid values are:
+#'   `"standard"`, "`shift"`, and `"micro"`.
+#' @param iterations An [integerish][checkmate::test_integerish()] `numeric`
+#'   object or an `integer` object, of length `1`, corresponding to the number
+#'   of iterations while running [mctq::random_mctq] (default: `100`).
+#' @param seed An [integerish][checkmate::test_integerish()] `numeric` object or
+#'   an `integer` object, of length `1`, corresponding to the seed number for
+#'   random generation (see [base::set.seed] to learn more) (default: `1`).
+#'
+#' @return An invisible `tibble` with rows representing each iteration.
+#'
+#' @family random_mctq functions
+#' @noRd
+#'
+#' @examples
+#' \dontrun{
+#' force_random_mctq("standard")
+#' force_random_mctq("micro", iterations = 100)
+#' force_random_mctq("shift", iterations = 100)}
+force_random_mctq <- function(model, iterations = 100, seed = 1) {
+    checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
+    assert_numeric_(iterations)
+    checkmate::assert_numeric(iterations, lower = 0, upper = 500)
+    checkmate::assert_integerish(iterations)
+    assert_numeric_(seed)
+    checkmate::assert_numeric(seed, lower = 0, upper = 500)
+    checkmate::assert_integerish(seed)
+
+    iterations <- as.integer(iterations)
+    seed <- as.integer(seed)
+
+    set.seed(seed)
+    out <- dplyr::as_tibble(random_mctq(model = model, quiet = TRUE))
+
+    for (i in seq_len(iterations - 1)) {
+        random_case <- random_mctq(model = model, quiet = TRUE)
+        out <- dplyr::bind_rows(out, dplyr::as_tibble(random_case))
+    }
+
+    invisible(out)
+}
+
 alert <- mctq:::alert
 
-cat_ <- function(mean, sd, min, max) {
-    cat("Mean:", as.character(mean), "\n")
-    cat("SD:", as.character(sd), "\n")
+cat_ <- function(min, max, mean, sd) {
     cat("Min:", as.character(min), "\n")
     cat("Max:", as.character(max), "\n")
+    cat("Mean:", as.character(mean), "\n")
+    cat("SD:", as.character(sd), "\n")
 }
 
 min_max <- function(mean, sd) {
     min <- sum_time(mean, - (3 * sd), clock = TRUE)
     max <- sum_time(mean, + (3 * sd), clock = TRUE)
 
-    cat_(mean, sd, min, max)
+    cat_(min, max, mean, sd)
 }
 
 # std_mctq_par()
 # shift_mctq_par()
+# force_random_mctq("standard")
+# force_random_mctq("micro")
+# force_random_mctq("shift")

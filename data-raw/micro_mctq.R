@@ -1,5 +1,5 @@
 # Source the file before running the functions
-# Don't forget to uncomment the `library` functions
+# Don't forget to uncomment the `library` functions below
 
 # library(checkmate)
 # library(hms)

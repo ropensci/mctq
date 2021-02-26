@@ -14,7 +14,7 @@ random_mctq(model = "standard", quiet = FALSE)
 must be suppressed (default: \code{FALSE}).}
 }
 \value{
-A named list with elements representing each MCTQ basic/measurable
+A named \code{list} with elements representing each MCTQ basic/measurable
 variable of the model indicated in \code{model}.
 }
 \description{
@@ -22,6 +22,8 @@ variable of the model indicated in \code{model}.
 
 \code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 composed by MCTQ basic/measurable variables.
+
+This function is for testing and learning purposes, please don't misuse it.
 }
 \details{
 The case structure (variable names and classes) are the same as the datasets
@@ -40,159 +42,18 @@ install it with \code{install.packages("stats")}.
 \subsection{Cases}{
 
 Random \emph{standard} and \emph{micro} MCTQ cases were created with the general
-population in mind. The data was set to fit the distributions shown in
+population in mind. The data was set to resemble the distributions shown in
 Roenneberg, Wirz-Justice, & Merrow (2003).
 
 \emph{MCTQ\eqn{^{Shift}}{ Shift}} random cases were created based on the shift
-configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012)
-(it's also present in Juda, Vetter, & Roenneberg (2013) supplemental
-materials).
+configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012).
+The data was set to resemble the distribution parameters shown in Juda,
+Vetter, & Roenneberg (2013).
 
-\emph{MCTQ\eqn{^{Shift}}{ Shift}} can be applied to the general population,
-considering a survey with conditional branching made for shift-workers
-respondents, but it would be difficult to analyze or even to interpret the
-data in this case, due to peculiarities of this version of the questionnaire.
-Given that a fictitious dataset would not be of much use if it did not come
-close to a real world application, we decided to stick with a configuration
-that could represent the full potential of the scale.
+You can see more about the distribution parameters used at
+\url{https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R}.
 }
 }
-\section{Standard and micro MCTQ distribution parameters}{
-
-
-Based on the general sample distributions shown in Roenneberg, Wirz-Justice,
-& Merrow (2003) (Table 1, Figure 2, and Figure 7) and assuming normal
-distributions where the minimal and maximum values are, respectively,
-\strong{\eqn{-3 s}} and \strong{\eqn{+3 s}} from the mean (where \strong{\eqn{s}} is the
-standard deviation of the sample), the distribution values for workdays and
-work-free days for \code{random_mctq(model = "standard")} and \code{random_mctq(model = "micro")}are as follow.
-\subsection{Notes}{
-\itemize{
-\item Please note that this is just a rough approximation, it by no means
-represents the same distributions from the base article.
-\item The distribution parameters from other variables not shown here (like sleep
-latency) were created based on the experience of the package authors with
-MCTQ data.
-\item This values are just for reference while building the random cases. If you
-group several random MCTQ cases, this numbers can have some variation.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble to understand the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://gipsousp.github.io/mctq/reference/}{website}.
-}
-}
-
-\subsection{Workdays}{
-\itemize{
-\item Mid-sleep (\strong{\eqn{MSW}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \textrm{03:10:00}}{= 03:10:00}
-(extracted from the base article)
-\item \strong{\eqn{s}} \eqn{= \textrm{00:50:00}}{= 00:50:00} (extracted from the
-base article)
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \overline{X}_{MSW} - (3 \times
-  s_{MSW}) = \textrm{00:40:00}}{= Mean_MSW - (3 * s_MSW) = 00:40:00}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \overline{X}_{MSW} + (3 \times
-  s_{MSW}) = \textrm{05:40:00}}{= Mean_MSW + (3 * s_MSW) = 05:40:00}
-}
-\item Sleep duration (\strong{\eqn{SD}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \textrm{07:22:00}}{= 07:22:00}
-(extracted from the base article)
-\item \strong{\eqn{s}} \eqn{= \textrm{01:09:00}}{= 01:09:00} (extracted from the
-base article)
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \overline{X}_{SD} - (3 \times
-  s_{SD}) = \textrm{03:53:00}}{= Mean_SD - (3 * s_SD) = 03:53:00}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \overline{X}_{SD} + (3 \times
-  s_{SD}) = \textrm{10:47:00}}{= Mean_SD + (3 * s_SD) = 10:47:00}
-}
-\item Sleep onset (\strong{\eqn{SO}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} -
-  \frac{\overline{X}_{SD}}{2} = \textrm{23:29:00}}{= Mean_MSW - (Mean_SD /
-  2) = 23:29:00}
-\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
-  (s_MSW + s_SD) / 2 = 00:59:30}
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} -
-  \frac{\overline{X}_{SD}}{2} = \textrm{20:59:00}}{= Min_MSW - (Mean_SD / 2)
-  = 20:59:00}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} -
-  \frac{\overline{X}_{SD}}{2} = \textrm{01:59:00}}{= Max_MSW - (Mean_SD / 2)
-  = 01:59:00}
-}
-\item Sleep end (\strong{\eqn{SE}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} +
-  \frac{\overline{X}_{SD}}{2} = \textrm{06:51:00}}{= Mean_MSW + (Mean_SD /
-  2) = 06:51:00}
-\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{00:59:30}}{=
-  (s_MSW + s_SD) / 2 = 00:59:30}
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} +
-  \frac{\overline{X}_{SD}}{2} = \textrm{04:21:00}}{= Min_MSW + (Mean_SD / 2)
-  = 04:21:00}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} +
-  \frac{\overline{X}_{SD}}{2} = \textrm{09:21:00}}{= Max_MSW + (Mean_SD / 2)
-  = 09:21:00}
-}
-}
-}
-
-\subsection{Work-free days}{
-\itemize{
-\item Mid-sleep (\strong{\eqn{MSW}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \textrm{05:02:00}}{= 05:02:00}
-(extracted from the base article)
-\item \strong{\eqn{s}} \eqn{= \textrm{01:32:00}}{= 01:32:00} (extracted from the
-base article)
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \overline{X}_{MSW} - (3 \times
-  s_{MSW}) = \textrm{00:26:00}}{= Mean_MSW - (3 * s_MSW) = 00:26:00}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \overline{X}_{MSW} + (3 \times
-  s_{MSW}) = \textrm{09:38:00}}{= Mean_MSW + (3 * s_MSW) = 09:38:00}
-}
-\item Sleep duration (\strong{\eqn{SD}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \textrm{08:27:00}}{= 08:27:00}
-(extracted from the base article)
-\item \strong{\eqn{s}} \eqn{= \textrm{01:32:00}}{= 01:32:00} (extracted from the
-base article)
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \overline{X}_{SD} - (3 \times
-  s_{SD}) = \textrm{03:51:00}}{= Mean_SD - (3 * s_SD) = 03:51:00}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \overline{X}_{SD} + (3 \times
-  s_{SD}) = \textrm{13:03:00}}{= Mean_SD + (3 * s_SD) = 13:03:00}
-}
-\item Sleep onset (\strong{\eqn{SO}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} -
-  \frac{\overline{X}_{SD}}{2} = \textrm{00:48:30}}{= Mean_MSW - (Mean_SD /
-  2) = 00:48:30}
-\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
-  (s_MSW + s_SD) / 2 = 01:32:00}
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} -
-  \frac{\overline{X}_{SD}}{2} = \textrm{20:12:30}}{= Min_MSW - (Mean_SD / 2)
-  = 20:12:30}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} -
-  \frac{\overline{X}_{SD}}{2} = \textrm{05:24:30}}{= Max_MSW - (Mean_SD / 2)
-  = 05:24:30}
-}
-\item Sleep end (\strong{\eqn{SE}})
-\itemize{
-\item \strong{\eqn{\overline{X}}{Mean}} \eqn{= \overline{X}_{MSW} +
-  \frac{\overline{X}_{SD}}{2} = \textrm{09:15:30}}{= Mean_MSW + (Mean_SD /
-  2) = 09:15:30}
-\item \strong{\eqn{s}} \eqn{= \frac{s_{MSW} + s_{SD}}{2} = \textrm{01:32:00}}{=
-  (s_MSW + s_SD) / 2 = 01:32:00}
-\item \strong{\eqn{\textrm{Min}}{Min}} \eqn{= \textrm{Min}_{MSW} +
-  \frac{\overline{X}_{SD}}{2} = \textrm{04:39:30}}{= Min_MSW + (Mean_SD / 2)
-  = 04:39:30}
-\item \strong{\eqn{\textrm{Max}}{Max}} \eqn{= \textrm{Max}_{MSW} +
-  \frac{\overline{X}_{SD}}{2} = \textrm{13:51:30}}{= Max_MSW + (Mean_SD / 2)
-  = 13:51:30}
-}
-}
-}
-}
-
 \examples{
 \dontrun{
 random_mctq("standard")
@@ -200,6 +61,10 @@ random_mctq("micro")
 random_mctq("shift")}
 }
 \references{
+Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
+Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
+Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
+
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological
 Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.

@@ -308,9 +308,9 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'   questionnaire (you can use [mctq::sjl()] to compute it). `sjl` elements and
 #'   values must be paired with `n` elements and values.
 #' @param n_w A `list` object with [integerish][checkmate::test_integerish()]
-#'   `integer` or `numeric` elements corresponding to the __number of days
-#'   worked in each shift within a shift cycle__ from a shift version of the
-#'   MCTQ questionnaire. `n` elements and values must be paired with `sjl`
+#'   `numeric` elements or `integer` elements corresponding to the __number of
+#'   days worked in each shift within a shift cycle__ from a shift version of
+#'   the MCTQ questionnaire. `n` elements and values must be paired with `sjl`
 #'   elements and values.
 #'
 #' @return A `Duration` object corresponding to the weighted mean of `sjl`

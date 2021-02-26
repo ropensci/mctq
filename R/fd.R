@@ -19,8 +19,8 @@
 #' * \eqn{WD} = number of workdays ("I have a regular work schedule and work ___
 #' days per week").
 #'
-#' @param wd An [integerish][checkmate::test_integerish()] `integer` or
-#'   `numeric` object corresponding to the __number of work days per week__
+#' @param wd An [integerish][checkmate::test_integerish()] `numeric` object or
+#'   an `integer` object corresponding to the __number of work days per week__
 #'   value from a standard or micro version of the MCTQ questionnaire.
 #'
 #' @return An `integer` value equivalent to `7 - wd`, _i.e._ the difference

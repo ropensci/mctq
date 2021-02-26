@@ -432,3 +432,29 @@ test_that("str_subset_() | general test", {
     expect_error(str_subset_(1, TRUE, TRUE, TRUE, TRUE, "", TRUE))
     expect_error(str_subset_(1, TRUE, TRUE, TRUE, TRUE, TRUE, ""))
 })
+
+test_that("interval_mean() | general test", {
+    start <- hms::parse_hm("22:00")
+    end <- hms::parse_hm("06:00")
+
+    object <- interval_mean(start, end)
+    expect_equal(object, hms::hms(26 * 3600))
+
+    object <- interval_mean(start, end, class = "Duration")
+    expect_equal(object, lubridate::dhours(26))
+
+    object <- interval_mean(start, end, clock = TRUE)
+    expect_equal(object, hms::parse_hm("02:00"))
+
+    start <- hms::parse_hm("00:00")
+    end <- hms::parse_hm("10:00")
+    object <- interval_mean(start, end)
+    expect_equal(object, hms::parse_hm("05:00"))
+
+    # Error test
+    expect_error(interval_mean(1, hms::hms(1)))
+    expect_error(interval_mean(hms::hms(1), 1))
+    expect_error(interval_mean(hms::hms(1), hms::hms(1), class = 1))
+    expect_error(interval_mean(hms::hms(1), hms::hms(1), ambiguity = 1))
+    expect_error(interval_mean(hms::hms(1), hms::hms(1), clock = ""))
+})

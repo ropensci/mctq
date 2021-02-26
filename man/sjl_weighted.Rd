@@ -13,9 +13,9 @@ questionnaire (you can use \code{\link[=sjl]{sjl()}} to compute it). \code{sjl} 
 values must be paired with \code{n} elements and values.}
 
 \item{n_w}{A \code{list} object with \link[checkmate:checkIntegerish]{integerish}
-\code{integer} or \code{numeric} elements corresponding to the \strong{number of days
-worked in each shift within a shift cycle} from a shift version of the
-MCTQ questionnaire. \code{n} elements and values must be paired with \code{sjl}
+\code{numeric} elements or \code{integer} elements corresponding to the \strong{number of
+days worked in each shift within a shift cycle} from a shift version of
+the MCTQ questionnaire. \code{n} elements and values must be paired with \code{sjl}
 elements and values.}
 }
 \value{

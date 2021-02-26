@@ -474,12 +474,12 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' @param sd_f A `Duration` object corresponding to the __sleep duration between
 #'   two free days after a particular shift__ value from a shift version of the
 #'   MCTQ questionnaire. You can use [mctq::sd()] to compute it.
-#' @param n_w An [integerish][checkmate::test_integerish()] `integer` or
-#'   `numeric` object corresponding to the __number of days worked in a
+#' @param n_w An [integerish][checkmate::test_integerish()] `numeric` object or
+#'   an `integer` object corresponding to the __number of days worked in a
 #'   particular shift within a shift cycle__ value from a shift version of the
 #'   MCTQ questionnaire.
-#' @param n_f An [integerish][checkmate::test_integerish()] `integer` or
-#'   `numeric` object corresponding to the __number of free days after a
+#' @param n_f An [integerish][checkmate::test_integerish()] `numeric` object or
+#'   an `integer` object corresponding to the __number of free days after a
 #'   particular shift within a shift cycle__ value from a shift version of the
 #'   MCTQ questionnaire.
 #'

@@ -15,8 +15,8 @@ You can use \code{\link[=sd]{sd()}} to compute it.}
 work-free days} value from a standard or micro version of the MCTQ
 questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
-\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{integer} or
-\code{numeric} object corresponding to the \strong{number of work days per week}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
+an \code{integer} object corresponding to the \strong{number of work days per week}
 value from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{

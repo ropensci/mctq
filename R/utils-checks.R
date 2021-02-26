@@ -26,7 +26,7 @@ check_length_one <- function(x, any.missing = TRUE,
         paste0(single_quote_(name), " cannot have missing values")
     } else if (!(length(x) == 1)) {
         paste0(single_quote_(name), " must have length 1, not length ",
-                   "{length(x)}")
+               length(x))
     } else {
         TRUE
     }

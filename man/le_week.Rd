@@ -13,8 +13,8 @@ days} value from a standard version of the MCTQ questionnaire.}
 \item{le_f}{A \code{Duration} object corresponding to the \strong{light exposure on
 work-free days} value from a standard version of the MCTQ questionnaire.}
 
-\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{integer} or
-\code{numeric} object corresponding to the \strong{number of work days per week}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
+an \code{integer} object corresponding to the \strong{number of work days per week}
 value from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{

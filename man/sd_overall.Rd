@@ -15,13 +15,13 @@ questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 two free days after a particular shift} value from a shift version of the
 MCTQ questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
-\item{n_w}{An \link[checkmate:checkIntegerish]{integerish} \code{integer} or
-\code{numeric} object corresponding to the \strong{number of days worked in a
+\item{n_w}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
+an \code{integer} object corresponding to the \strong{number of days worked in a
 particular shift within a shift cycle} value from a shift version of the
 MCTQ questionnaire.}
 
-\item{n_f}{An \link[checkmate:checkIntegerish]{integerish} \code{integer} or
-\code{numeric} object corresponding to the \strong{number of free days after a
+\item{n_f}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
+an \code{integer} object corresponding to the \strong{number of free days after a
 particular shift within a shift cycle} value from a shift version of the
 MCTQ questionnaire.}
 }

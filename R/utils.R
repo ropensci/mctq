@@ -27,6 +27,59 @@ midday_change <- function(x) {
 
 mdc <- function(x) midday_change(x)
 
+clock_roll <- function(x) {
+    classes <- c("Duration", "Period", "difftime", "hms")
+    checkmate::assert_multi_class(x, classes)
+
+    class <- class(x)[1]
+    out <- x
+
+    if (class == "difftime") {
+        out <- hms::as_hms(x)
+        units <- units(x)
+    }
+
+    if (all(as.numeric(out) > 0 & as.numeric(out) < 86400, na.rm = TRUE)) {
+        x
+    } else {
+        out <- flat_posixt(lubridate::as_datetime(out))
+        out <- convert(out, class, quiet = TRUE)
+
+        if (class == "difftime") {
+            units(out) <- units
+            out
+        } else {
+            out
+        }
+    }
+}
+
+interval_mean <- function(start, end, class = "hms", ambiguity = 24,
+                          clock = FALSE) {
+    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct", "POSIXlt")
+
+    checkmate::assert_multi_class(start, classes)
+    checkmate::assert_multi_class(end, classes)
+
+    classes <- c("character", "integer", "double", "numeric", "Duration",
+                 "Period", "difftime", "hms", "POSIXct", "POSIXlt")
+
+    checkmate::assert_choice(tolower(class), tolower(classes))
+    checkmate::assert_choice(ambiguity, c(0, 24 , NA))
+    checkmate::assert_flag(clock)
+
+    start <- convert(start, "hms", quiet = TRUE)
+    end <- convert(end, "hms", quiet = TRUE)
+    interval <- shush(assign_date(start, end, ambiguity = ambiguity))
+    mean <- as.numeric(start) + (as.numeric(interval) / 2)
+
+    if (isTRUE(clock)) {
+        convert(hms::as_hms(lubridate::as_datetime(mean)), class, quiet = TRUE)
+    } else {
+        convert(mean, class, quiet = TRUE)
+    }
+}
+
 change_date <- function(x, date) {
     classes <- c("Date", "POSIXct", "POSIXlt")
     checkmate::assert_multi_class(x, classes, null.ok = FALSE)
@@ -192,33 +245,6 @@ get_names <- function(...) {
     out <- gsub("\\\"","", out)
 
     out
-}
-
-clock_roll <- function(x) {
-    classes <- c("Duration", "Period", "difftime", "hms")
-    checkmate::assert_multi_class(x, classes)
-
-    class <- class(x)[1]
-    out <- x
-
-    if (class == "difftime") {
-        out <- hms::as_hms(x)
-        units <- units(x)
-    }
-
-    if (all(as.numeric(out) > 0 & as.numeric(out) < 86400, na.rm = TRUE)) {
-        x
-    } else {
-        out <- flat_posixt(lubridate::as_datetime(out))
-        out <- convert(out, class, quiet = TRUE)
-
-        if (class == "difftime") {
-            units(out) <- units
-            out
-        } else {
-            out
-        }
-    }
 }
 
 na_as <- function(x) {
