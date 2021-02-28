@@ -4,6 +4,7 @@
 # library(lubridate)
 # library(hms)
 # library(crayon)
+# library(glue)
 # library(mctq)
 
 #' Compute and print standard and micro MCTQ distribution parameters
@@ -348,6 +349,214 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
     invisible(out)
 }
 
+#' Print a [mctq::random_mctq] raw case code
+#'
+#' @description
+#'
+#' `random_mctq_raw_code()` prints a [mctq::random_mctq] raw case code to be
+#' used with `build_<model>_mctq`. It's purpose is to help programming special
+#' mctq cases for [mctq::std_mctq], [mctq::micro_mctq], and [mctq::shift_mctq]
+#' datasets.
+#'
+#' @details
+#'
+#' The seed used for random generation is the result of `sample(100:200, 1)`
+#' (see [base::set.seed]).
+#'
+#' @param model A string indicating the data model to return. Valid values are:
+#'   `"standard"`, "`shift"`, and `"micro"`.
+#'
+#' @family random_mctq functions
+#' @noRd
+#'
+#' @examples
+#' \dontrun{
+#' random_mctq_raw_code("standard")
+#' random_mctq_raw_code("micro")
+#' random_mctq_raw_code("shift")}
+random_mctq_raw_code <- function(model) {
+    checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
+
+    set.seed(sample(100:200, 1))
+    data <- random_mctq(model = model, quiet = TRUE)
+
+    if (model == "standard") {
+        cat(bt("WORK REGULAR"), " = ",
+            dq(format_logical(data$work)),
+            ", # logical | Yes/No", "\n",
+
+            bt("WORK DAYS"), " = ",
+            dq(format_na(data$wd)),
+            ", # integer | [0-7]", "\n\n",
+
+
+            bt("W BED TIME"), " = ",
+            dq(format_hms(data$bt_w)),
+            ", # hms | HMS, HM, H [0-24h]", "\n",
+
+            bt("W SLEEP PREP"), " = ",
+            dq(format_hms(data$sprep_w)),
+            ", # hms | HMS, HM, H [0-24h]", "\n",
+
+            bt("W SLEEP LAT"), " = ",
+            dq(format_duration(data$slat_w)),
+            ", # Duration | M", "\n",
+
+            bt("W SLEEP END"), " = ",
+            dq(format_hms(data$se_w)),
+            ", # hms | HMS, HM, H [0-24h]", "\n",
+
+            bt("W SLEEP INERTIA"), " = ",
+            dq(format_duration(data$si_w)),
+            ", # Duration | M", "\n",
+
+            bt("W ALARM"), " = ",
+            dq(format_logical(data$alarm_w)),
+            ", # logical | Yes/No", "\n",
+
+            bt("W WAKE BEFORE ALARM"), " = ",
+            dq(format_logical(data$wake_before_w)),
+            ", # logical | Yes/No", "\n",
+
+            bt("W LIGHT EXPOSURE"), " = ",
+            dq(format_hms(data$le_w)),
+            ", # Duration | [H]MS, [H]M, [H]", "\n\n",
+
+
+            bt("F BED TIME"), " = ",
+            dq(format_hms(data$bt_f)),
+            ", # hms | HMS, HM, H [0-24h]", "\n",
+
+            bt("F SLEEP PREP"), " = ",
+            dq(format_hms(data$sprep_f)),
+            ", # hms | HMS, HM, H [0-24h]", "\n",
+
+            bt("F SLEEP LAT"), " = ",
+            dq(format_duration(data$slat_f)),
+            ", # Duration | M", "\n",
+
+            bt("F SLEEP END"), " = ",
+            dq(format_hms(data$se_f)),
+            ", # hms | HMS, HM, H [0-24h]", "\n",
+
+            bt("F SLEEP INERTIA"), " = ",
+            dq(format_duration(data$si_f)),
+            ", # Duration | M", "\n",
+
+            bt("F ALARM"), " = ",
+            dq(format_logical(data$alarm_f)),
+            ", # logical | Yes/No", "\n",
+
+            bt("F REASONS"), " = ",
+            dq(format_logical(data$reasons_f)),
+            ", # logical | Yes/No", "\n",
+
+            bt("F REASONS WHY"), " = ",
+            dq(format_na(data$reasons_why_f)),
+            ", # character", "\n",
+
+            bt("F LIGHT EXPOSURE"), " = ",
+            dq(format_hms(data$le_f)),
+            " # Duration | [H]MS, [H]M, [H]",
+
+            sep = ""
+        )
+    } else if (model == "micro") {
+        cat(bt("SHIFT WORK"), " = ",
+            dq(format_logical(data$shift_work)),
+            ", # logical | Yes/No", "\n",
+
+            bt("WORK DAYS"), " = ",
+            dq(format_na(data$wd)),
+            ", # integer | [0-7]", "\n\n",
+
+
+            bt("W SLEEP ONSET"), " = ",
+            dq(format_hms_imp(data$so_w)),
+            ", # hms | IMp [0-12h]", "\n",
+
+            bt("W SLEEP END"), " = ",
+            dq(format_hms_imp(data$se_w)),
+            ", # hms | IMp [0-12h]", "\n\n",
+
+            bt("F SLEEP ONSET"), " = ",
+            dq(format_hms_imp(data$so_f)),
+            ", # hms | IMp [0-12h]", "\n",
+
+            bt("F SLEEP END"), " = ",
+            dq(format_hms_imp(data$se_f)),
+            " # hms | IMp [0-12h]",
+
+            sep = ""
+        )
+    } else if (model == "shift") {
+        values <- list(
+            w_m = c("W M", "_w_m"),
+            f_m = c("F M", "_f_m"),
+            w_e = c("W E", "_w_e"),
+            f_r = c("F E", "_f_e"),
+            w_n = c("W N", "_w_n"),
+            f_n = c("F N", "_f_n")
+            )
+
+        for (i in values) {
+            cat(bt(paste(i[1], "N DAYS")), " = ",
+                dq(format_na(data[[paste0("n", i[2])]])),
+                ", # integer | [0-7]", "\n",
+
+                bt(paste(i[1], "BED TIME")), " = ",
+                dq(format_hms(data[[paste0("bt", i[2])]])),
+                ", # hms | HMS, HM, H [0-24h]", "\n",
+
+                bt(paste(i[1], "SLEEP PREP")), " = ",
+                dq(format_hms(data[[paste0("sprep", i[2])]])),
+                ", # hms | HMS, HM, H [0-24h]", "\n",
+
+                bt(paste(i[1], "SLEEP LAT")), " = ",
+                dq(format_duration(data[[paste0("slat", i[2])]])),
+                ", # Duration | M", "\n",
+
+                bt(paste(i[1], "SLEEP END")), " = ",
+                dq(format_hms(data[[paste0("se", i[2])]])),
+                ", # hms | HMS, HM, H [0-24h]", "\n",
+
+                bt(paste(i[1], "TIME GU")), " = ",
+                dq(format_duration(data[[paste0("tgu", i[2])]])),
+                ", # Duration | M", "\n",
+
+                bt(paste(i[1], "ALARM")), " = ",
+                dq(format_logical(data[[paste0("alarm", i[2])]])),
+                ", # logical | Yes/No", "\n",
+
+                bt(paste(i[1], "REASONS")), " = ",
+                dq(format_logical(data[[paste0("reasons", i[2])]])),
+                ", # logical | Yes/No", "\n",
+
+                bt(paste(i[1], "REASONS WHY")), " = ",
+                dq(format_na(data[[paste0("reasons_why", i[2])]])),
+                ", # character", "\n",
+
+                bt(paste(i[1], "NAP")), " = ",
+                dq(format_logical(data[[paste0("nap", i[2])]])),
+                ", # logical | Yes/No", "\n",
+
+                bt(paste(i[1], "NAP ONSET")), " = ",
+                dq(format_hms(data[[paste0("napo", i[2])]])),
+                ", # hms | HMS, HM, H [0-24h]", "\n",
+
+                bt(paste(i[1], "NAP END")), " = ",
+                dq(format_hms(data[[paste0("nape", i[2])]])),
+                ifelse(i[1] == "F N", " ", ", "),
+                "# hms | HMS, HM, H [0-24h]", "\n",
+
+                ifelse(i[1] == "F N", "", "\n"), sep = ""
+                )
+        }
+    }
+
+    invisible(NULL)
+}
+
 alert <- mctq:::alert
 
 cat_ <- function(min, max, mean, sd) {
@@ -364,8 +573,72 @@ min_max <- function(mean, sd) {
     cat_(min, max, mean, sd)
 }
 
+format_logical <- function(x) {
+    if(is.na(x)) {
+        as.character("")
+    } else {
+        dplyr::case_when(
+            x == TRUE ~ "Yes",
+            x == FALSE ~ "No"
+        )
+    }
+}
+
+format_hms <- function(x) {
+    if(is.na(x)) {
+        as.character("")
+    } else {
+        format <- c(1, 5)
+        x <- convert(x, "hms")
+        substr(as.character(x), format[1], format[2])
+    }
+}
+
+format_hms_imp <- function(x) {
+    if(is.na(x)) {
+        as.character("")
+    } else {
+        if (lubridate::hour(x) == 12) {
+            am_pm <- "PM"
+        } else if (lubridate::hour(x) == 0) {
+            x <- hms::parse_hm("12:00")
+            am_pm <- "AM"
+        } else if (lubridate::hour(x) > 12) {
+            x <- hms::as_hms(x - lubridate::dhours(12))
+            am_pm <- "PM"
+        } else {
+            am_pm <- "AM"
+        }
+
+        format <- c(1, 5)
+        paste(substr(as.character(x), format[1], format[2]), am_pm)
+    }
+}
+
+format_duration <- function(x) {
+    if(is.na(x)) {
+        as.character("")
+    } else {
+        as.character(convert_tu(x, "M"))
+    }
+}
+
+format_na <- function(x) {
+    if(is.na(x)) {
+        as.character("")
+    } else {
+        as.character(x)
+    }
+}
+
+bt <- function(x) glue::backtick(x)
+dq <- function(x) glue::double_quote(x)
+
 # std_mctq_par()
 # shift_mctq_par()
 # force_random_mctq("standard")
 # force_random_mctq("micro")
 # force_random_mctq("shift")
+# random_mctq_raw_code("standard")
+# random_mctq_raw_code("micro")
+# random_mctq_raw_code("shift")

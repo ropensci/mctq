@@ -4,7 +4,6 @@ template:
   params:
     bootswatch: cosmo
     ganalytics: G-CQHJT6E3K1
-    noindex: true
     mathjax: true
 
 navbar:

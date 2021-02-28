@@ -57,7 +57,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     micro_mctq <- dplyr::tibble(
         `ID` = as.character(reserved_id[1]), # integer | [auto-increment]
-        `SHIFT WORK` = "no", # logical | yes/no
+
+        `SHIFT WORK` = "No", # logical | Yes/no
         `WORK DAYS` = "5", # integer | [0-7]
 
         `W SLEEP ONSET` = "01:45 AM", # hms | IMp [0-12h]
@@ -71,8 +72,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     format_logical <- function(x) {
         dplyr::case_when(
-            x == TRUE ~ "yes",
-            x == FALSE ~ "no"
+            x == TRUE ~ "Yes",
+            x == FALSE ~ "No"
         )
     }
 
@@ -99,6 +100,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
                 random_mctq(model = "micro", quiet = TRUE)) %>%
                 dplyr::transmute(
                     `ID` = as.character(i),
+
                     `SHIFT WORK` =  format_logical(.data$shift_work),
                     `WORK DAYS` = as.character(.data$wd),
 
@@ -117,7 +119,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     micro_mctq <- micro_mctq %>% dplyr::add_row(
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]
-        `SHIFT WORK` = "no", # logical | yes/no
+
+        `SHIFT WORK` = "No", # logical | Yes/No
         `WORK DAYS` = "10", # integer | [0-7] # INVALID
 
         `W SLEEP ONSET` = "27:00 PM", # hms | IMp [0-12h] # INVALID
@@ -131,7 +134,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "2", # integer | [0-7]
 
             `W SLEEP ONSET` = "09:45 PM", # hms | IMp [0-12h]
@@ -145,7 +149,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
-            `SHIFT WORK` = "", # logical | yes/no
+
+            `SHIFT WORK` = "", # logical | Yes/No
             `WORK DAYS` = "", # integer | [0-7]
 
             `W SLEEP ONSET` = "", # hms | IMp [0-12h]
@@ -159,7 +164,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "", # integer | [0-7]
 
             `W SLEEP ONSET` = "", # hms | IMp [0-12h]
@@ -174,7 +180,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
-            `SHIFT WORK` = "0", # logical | yes/no
+
+            `SHIFT WORK` = "0", # logical | Yes/No
             `WORK DAYS` = "0", # integer | [0-7]
 
             `W SLEEP ONSET` = "0", # hms | IMp [0-12h]
@@ -188,7 +195,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "7", # integer | [0-7]
 
             `W SLEEP ONSET` = "11:40 PM", # hms | IMp [0-12h]
@@ -202,7 +210,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "6", # integer | [0-7]
 
             `W SLEEP ONSET` = "02:30 AM", # hms | IMp [0-12h]
@@ -216,7 +225,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
-            `SHIFT WORK` = "false", # logical | yes/no # AMBIGUOUS
+
+            `SHIFT WORK` = "false", # logical | Yes/No # AMBIGUOUS
             `WORK DAYS` = "5", # integer | [0-7]
 
             `W SLEEP ONSET` = "2315", # hms | IMp [0-12h] # AMBIGUOUS
@@ -230,7 +240,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "6", # integer | [0-7]
 
             `W SLEEP ONSET` = "", # hms | IMp [0-12h]
@@ -245,7 +256,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "5", # integer | [0-7]
 
             `W SLEEP ONSET` = "11:10 PM", # hms | IMp [0-12h]
@@ -259,7 +271,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[12]), # integer | [auto-increment]
-            `SHIFT WORK` = "no", # logical | yes/no
+
+            `SHIFT WORK` = "No", # logical | Yes/No
             `WORK DAYS` = "2", # integer | [0-7]
 
             `W SLEEP ONSET` = "01:00 AM", # hms | IMp [0-12h]
@@ -359,6 +372,7 @@ tidy_micro_mctq <- function(write = FALSE) {
 
     micro_mctq <- micro_mctq %>% dplyr::transmute(
         id = as.integer(.data$`ID`),
+
         shift_work = dplyr::case_when(
             tolower(.data$`SHIFT WORK`) == "yes" ~ TRUE,
             tolower(.data$`SHIFT WORK`) == "false" ~ FALSE,
@@ -423,6 +437,11 @@ validate_micro_mctq <- function(write = FALSE) {
 
     dummy <- sd_i <- id <- shift_work <- NULL
 
+    # Set values -----
+
+    set.seed(1)
+    reserved_id <- sample(50, 12)
+
     # Do univariate validation -----
 
     hms_0 <- hms::parse_hm("00:00")
@@ -470,11 +489,13 @@ validate_micro_mctq <- function(write = FALSE) {
     ## Cases: "Suspicious values (removed case)" and "Sleep onset is equal or
     ##        greater than sleep end [(s_prep + s_lat) >= se] (invalid case)"
 
+    invalid <- c(reserved_id[8], reserved_id[12])
+
     micro_mctq <- micro_mctq %>%
         dplyr::rowwise() %>%
         dplyr::mutate(
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-                .data$id %in% c(18, 10), na_as(.x), .x)),
+                .data$id %in% invalid, na_as(.x), .x)),
             dplyr::across(-c(id:shift_work), .fns = ~ dplyr::if_else(
                 shift_work, na_as(.x), .x))) %>%
         dplyr::ungroup()

@@ -68,8 +68,8 @@ interval_mean <- function(start, end, class = "hms", ambiguity = 24,
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     checkmate::assert_flag(clock)
 
-    start <- convert(start, "hms", quiet = TRUE)
-    end <- convert(end, "hms", quiet = TRUE)
+    start <- clock_roll(convert(start, "hms", quiet = TRUE))
+    end <- clock_roll(convert(end, "hms", quiet = TRUE))
     interval <- shush(assign_date(start, end, ambiguity = ambiguity))
     mean <- as.numeric(start) + (as.numeric(interval) / 2)
 

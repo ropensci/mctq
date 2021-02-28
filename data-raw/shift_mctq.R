@@ -47,37 +47,94 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Set IDs -----
 
     set.seed(1)
-    reserved_id <- sample(50, 15)
+    reserved_id <- sample(50, 11)
     id <- seq(50)[!(seq(50) %in% reserved_id)]
 
     # Create cases -----
 
-    ## Base subject: sleeps less than the recommended for an adult on workdays
-    ##               and stretches during work-free days
+    ## Base subject: sleeps less than the recommended on workdays and
+    ##               stretches during work-free days
 
     shift_mctq <- dplyr::tibble(
         `ID` = as.character(reserved_id[1]), # integer | [auto-increment]
-        `WORK REGULAR` = "Yes", # logical | Yes/No
 
-        `W M N DAYS` = "5", # integer | [0-7]
-        `W BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
-        `W SLEEP PREP` = "01:30", # hms | HMS, HM, H [0-24h]
-        `W SLEEP LAT` = "15", # Duration | M
-        `W SLEEP END` = "06:30", # hms | HMS, HM, H [0-24h]
-        `W SLEEP INERTIA` = "5", # Duration | M
-        `W ALARM` = "Yes", # logical | Yes/No
-        `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-        `W LIGHT EXPOSURE` = "02:00", # Duration | [H]MS, [H]M, [H]
+        `W M N DAYS` = "6", # integer | [0-7]
+        `W M BED TIME` = "23:20", # hms | HMS, HM, H [0-24h]
+        `W M SLEEP PREP` = "00:05", # hms | HMS, HM, H [0-24h]
+        `W M SLEEP LAT` = "5", # Duration | M
+        `W M SLEEP END` = "03:40", # hms | HMS, HM, H [0-24h]
+        `W M TIME GU` = "10", # Duration | M
+        `W M ALARM` = "Yes", # logical | Yes/No
+        `W M REASONS` = "No", # logical | Yes/No
+        `W M REASONS WHY` = "", # character
+        `W M NAP` = "Yes", # logical | Yes/No
+        `W M NAP ONSET` = "14:00", # hms | HMS, HM, H [0-24h]
+        `W M NAP END` = "14:40", # hms | HMS, HM, H [0-24h]
 
-        `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
-        `F SLEEP PREP` = "02:30", # hms | HMS, HM, H [0-24h]
-        `F SLEEP LAT` = "15", # Duration | M
-        `F SLEEP END` = "12:00", # hms | HMS, HM, H [0-24h]
-        `F SLEEP INERTIA` = "30", # Duration | M
-        `F ALARM` = "No", # logical | Yes/No
-        `F REASONS` = "No", # logical |  Yes/No
-        `F REASONS WHY` = "", # character
-        `F LIGHT EXPOSURE` = "04:00" # Duration | [H]MS, [H]M, [H]
+        `F M N DAYS` = "2", # integer | [0-7]
+        `F M BED TIME` = "23:05", # hms | HMS, HM, H [0-24h]
+        `F M SLEEP PREP` = "00:20", # hms | HMS, HM, H [0-24h]
+        `F M SLEEP LAT` = "10", # Duration | M
+        `F M SLEEP END` = "10:00", # hms | HMS, HM, H [0-24h]
+        `F M TIME GU` = "25", # Duration | M
+        `F M ALARM` = "No", # logical | Yes/No
+        `F M REASONS` = "Yes", # logical | Yes/No
+        `F M REASONS WHY` = "Child(ren)/pet(s)", # character
+        `F M NAP` = "No", # logical | Yes/No
+        `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+        `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+        `W E N DAYS` = "4", # integer | [0-7]
+        `W E BED TIME` = "01:45", # hms | HMS, HM, H [0-24h]
+        `W E SLEEP PREP` = "02:50", # hms | HMS, HM, H [0-24h]
+        `W E SLEEP LAT` = "30", # Duration | M
+        `W E SLEEP END` = "08:15", # hms | HMS, HM, H [0-24h]
+        `W E TIME GU` = "10", # Duration | M
+        `W E ALARM` = "Yes", # logical | Yes/No
+        `W E REASONS` = "Yes", # logical | Yes/No
+        `W E REASONS WHY` = "Child(ren)/pet(s)", # character
+        `W E NAP` = "No", # logical | Yes/No
+        `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+        `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+        `F E N DAYS` = "2", # integer | [0-7]
+        `F E BED TIME` = "00:55", # hms | HMS, HM, H [0-24h]
+        `F E SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
+        `F E SLEEP LAT` = "35", # Duration | M
+        `F E SLEEP END` = "11:20", # hms | HMS, HM, H [0-24h]
+        `F E TIME GU` = "15", # Duration | M
+        `F E ALARM` = "No", # logical | Yes/No
+        `F E REASONS` = "Yes", # logical | Yes/No
+        `F E REASONS WHY` = "Hobbies", # character
+        `F E NAP` = "Yes", # logical | Yes/No
+        `F E NAP ONSET` = "18:40", # hms | HMS, HM, H [0-24h]
+        `F E NAP END` = "19:20", # hms | HMS, HM, H [0-24h]
+
+        `W N N DAYS` = "6", # integer | [0-7]
+        `W N BED TIME` = "07:30", # hms | HMS, HM, H [0-24h]
+        `W N SLEEP PREP` = "07:55", # hms | HMS, HM, H [0-24h]
+        `W N SLEEP LAT` = "55", # Duration | M
+        `W N SLEEP END` = "12:35", # hms | HMS, HM, H [0-24h]
+        `W N TIME GU` = "25", # Duration | M
+        `W N ALARM` = "Yes", # logical | Yes/No
+        `W N REASONS` = "No", # logical | Yes/No
+        `W N REASONS WHY` = "", # character
+        `W N NAP` = "No", # logical | Yes/No
+        `W N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+        `W N NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+        `F N N DAYS` = "8", # integer | [0-7]
+        `F N BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+        `F N SLEEP PREP` = "22:55", # hms | HMS, HM, H [0-24h]
+        `F N SLEEP LAT` = "75", # Duration | M
+        `F N SLEEP END` = "06:20", # hms | HMS, HM, H [0-24h]
+        `F N TIME GU` = "30", # Duration | M
+        `F N ALARM` = "No", # logical | Yes/No
+        `F N REASONS` = "No", # logical | Yes/No
+        `F N REASONS WHY` = "", # character
+        `F N NAP` = "Yes", # logical | Yes/No
+        `F N NAP ONSET` = "12:45", # hms | HMS, HM, H [0-24h]
+        `F N NAP END` = "13:10" # hms | HMS, HM, H [0-24h]
     )
 
     ## Random cases
@@ -102,385 +159,982 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
     if (isTRUE(random_cases)) {
         for (i in id) {
             random_case <- dplyr::as_tibble(
-                random_mctq(model = "standard", quiet = TRUE)) %>%
-                dplyr::transmute(
-                    `ID` = as.character(i),
-                    `WORK REGULAR` =  format_logical(.data$work),
-                    `WORK DAYS` = as.character(.data$wd),
-                    `W BED TIME` = format_hms(.data$bt_w),
-                    `W SLEEP PREP` = format_hms(.data$sprep_w),
-                    `W SLEEP LAT` = format_duration(.data$slat_w),
-                    `W SLEEP END` = format_hms(.data$se_w),
-                    `W SLEEP INERTIA` = format_duration(.data$si_w),
-                    `W ALARM` = format_logical(.data$alarm_w),
-                    `W WAKE BEFORE ALARM` = format_logical(.data$wake_before_w),
-                    `W LIGHT EXPOSURE` = format_hms(.data$le_w),
-                    `F BED TIME` = format_hms(.data$bt_f),
-                    `F SLEEP PREP` = format_hms(.data$sprep_f),
-                    `F SLEEP LAT` = format_duration(.data$slat_f),
-                    `F SLEEP END` = format_hms(.data$se_f),
-                    `F SLEEP INERTIA` = format_duration(.data$si_f),
-                    `F ALARM` = format_logical(.data$alarm_f),
-                    `F REASONS` = format_logical(.data$reasons_f),
-                    `F REASONS WHY` = .data$reasons_why_f,
-                    `F LIGHT EXPOSURE` = format_hms(.data$le_f)
-                )
+                random_mctq(model = "shift", quiet = TRUE))
+
+            values <- list(
+                w_m = c("W M", "_w_m"),
+                f_m = c("F M", "_f_m"),
+                w_e = c("W E", "_w_e"),
+                f_r = c("F E", "_f_e"),
+                w_n = c("W N", "_w_n"),
+                f_n = c("F N", "_f_n")
+            )
+
+            random_case <- random_case %>%
+                dplyr::mutate(`ID` = as.character(i)) %>%
+                dplyr::relocate(.data$`ID`, .before = .data$n_w_m)
+
+            for (i in values) {
+                random_case <- random_case %>%
+                    dplyr::mutate(
+                        !!as.symbol(paste(i[1], "N DAYS")) :=
+                            as.character(.data[[paste0("n", i[2])]]),
+                        !!as.symbol(paste(i[1], "BED TIME")) :=
+                            format_hms(.data[[paste0("bt", i[2])]]),
+                        !!as.symbol(paste(i[1], "SLEEP PREP")) :=
+                            format_hms(.data[[paste0("sprep", i[2])]]),
+                        !!as.symbol(paste(i[1], "SLEEP LAT")) :=
+                            format_duration(.data[[paste0("slat", i[2])]]),
+                        !!as.symbol(paste(i[1], "SLEEP END")) :=
+                            format_hms(.data[[paste0("se", i[2])]]),
+                        !!as.symbol(paste(i[1], "TIME GU")) :=
+                            format_duration(.data[[paste0("tgu", i[2])]]),
+                        !!as.symbol(paste(i[1], "ALARM")) :=
+                            format_logical(.data[[paste0("alarm", i[2])]]),
+                        !!as.symbol(paste(i[1], "REASONS")) :=
+                            format_logical(.data[[paste0("reasons", i[2])]]),
+                        !!as.symbol(paste(i[1], "REASONS WHY")) :=
+                            as.character(.data[[paste0("reasons_why", i[2])]]),
+                        !!as.symbol(paste(i[1], "NAP")) :=
+                            format_logical(.data[[paste0("nap", i[2])]]),
+                        !!as.symbol(paste(i[1], "NAP ONSET")) :=
+                            format_hms(.data[[paste0("napo", i[2])]]),
+                        !!as.symbol(paste(i[1], "NAP END")) :=
+                            format_hms(.data[[paste0("nape", i[2])]])
+
+                    ) %>%
+                    dplyr::select(-dplyr::ends_with(i[2]))
+            }
+
+            # random_case <- dplyr::as_tibble(
+            #     random_mctq(model = "shift", quiet = TRUE)) %>%
+            #     dplyr::transmute(
+            #         `ID` = as.character(i),
+            #
+            #         `W M N DAYS` = as.character(.data$n_w_m),
+            #         `W M BED TIME` = format_hms(.data$bt_w_m),
+            #         `W M SLEEP PREP` = format_hms(.data$sprep_w_m),
+            #         `W M SLEEP LAT` = format_duration(.data$slat_w_m),
+            #         `W M SLEEP END` = format_hms(.data$se_w_m),
+            #         `W M TIME GU` = format_duration(.data$tgu_w_m),
+            #         `W M ALARM` = format_logical(.data$alarm_w_m),
+            #         `W M REASONS` = format_logical(.data$reasons_w_m),
+            #         `W M REASONS WHY` = as.character(.data$reasons_why_w_m),
+            #         `W M NAP` = format_logical(.data$nap_w_m),
+            #         `W M NAP ONSET` = format_hms(.data$napo_w_m),
+            #         `W M NAP END` = format_hms(.data$nape_w_m),
+            #
+            #         `F M N DAYS` = as.character(.data$n_f_m),
+            #         `F M BED TIME` = format_hms(.data$bt_f_m),
+            #         `F M SLEEP PREP` = format_hms(.data$sprep_f_m),
+            #         `F M SLEEP LAT` = format_duration(.data$slat_f_m),
+            #         `F M SLEEP END` = format_hms(.data$se_f_m),
+            #         `F M TIME GU` = format_duration(.data$tgu_f_m),
+            #         `F M ALARM` = format_logical(.data$alarm_f_m),
+            #         `F M REASONS` = format_logical(.data$reasons_f_m),
+            #         `F M REASONS WHY` = as.character(.data$reasons_why_f_m),
+            #         `F M NAP` = format_logical(.data$nap_f_m),
+            #         `F M NAP ONSET` = format_hms(.data$napo_f_m),
+            #         `F M NAP END` = format_hms(.data$nape_f_m),
+            #
+            #         `W E N DAYS` = as.character(.data$n_w_e),
+            #         `W E BED TIME` = format_hms(.data$bt_w_e),
+            #         `W E SLEEP PREP` = format_hms(.data$sprep_w_e),
+            #         `W E SLEEP LAT` = format_duration(.data$slat_w_e),
+            #         `W E SLEEP END` = format_hms(.data$se_w_e),
+            #         `W E TIME GU` = format_duration(.data$tgu_w_e),
+            #         `W E ALARM` = format_logical(.data$alarm_w_e),
+            #         `W E REASONS` = format_logical(.data$reasons_w_e),
+            #         `W E REASONS WHY` = as.character(.data$reasons_why_w_e),
+            #         `W E NAP` = format_logical(.data$nap_w_e),
+            #         `W E NAP ONSET` = format_hms(.data$napo_w_e),
+            #         `W E NAP END` = format_hms(.data$nape_w_e),
+            #
+            #         `F E N DAYS` = as.character(.data$n_f_e),
+            #         `F E BED TIME` = format_hms(.data$bt_f_e),
+            #         `F E SLEEP PREP` = format_hms(.data$sprep_f_e),
+            #         `F E SLEEP LAT` = format_duration(.data$slat_f_e),
+            #         `F E SLEEP END` = format_hms(.data$se_f_e),
+            #         `F E TIME GU` = format_duration(.data$tgu_f_e),
+            #         `F E ALARM` = format_logical(.data$alarm_f_e),
+            #         `F E REASONS` = format_logical(.data$reasons_f_e),
+            #         `F E REASONS WHY` = as.character(.data$reasons_why_f_e),
+            #         `F E NAP` = format_logical(.data$nap_f_e),
+            #         `F E NAP ONSET` = format_hms(.data$napo_f_e),
+            #         `F E NAP END` = format_hms(.data$nape_f_e),
+            #
+            #         `W N N DAYS` = as.character(.data$n_w_n),
+            #         `W N BED TIME` = format_hms(.data$bt_w_n),
+            #         `W N SLEEP PREP` = format_hms(.data$sprep_w_n),
+            #         `W N SLEEP LAT` = format_duration(.data$slat_w_n),
+            #         `W N SLEEP END` = format_hms(.data$se_w_n),
+            #         `W N TIME GU` = format_duration(.data$tgu_w_n),
+            #         `W N ALARM` = format_logical(.data$alarm_w_n),
+            #         `W N REASONS` = format_logical(.data$reasons_w_n),
+            #         `W N REASONS WHY` = as.character(.data$reasons_why_w_n),
+            #         `W N NAP` = format_logical(.data$nap_w_n),
+            #         `W N NAP ONSET` = format_hms(.data$napo_w_n),
+            #         `W N NAP END` = format_hms(.data$nape_w_n),
+            #
+            #         `F N N DAYS` = as.character(.data$n_f_n),
+            #         `F N BED TIME` = format_hms(.data$bt_f_n),
+            #         `F N SLEEP PREP` = format_hms(.data$sprep_f_n),
+            #         `F N SLEEP LAT` = format_duration(.data$slat_f_n),
+            #         `F N SLEEP END` = format_hms(.data$se_f_n),
+            #         `F N TIME GU` = format_duration(.data$tgu_f_n),
+            #         `F N ALARM` = format_logical(.data$alarm_f_n),
+            #         `F N REASONS` = format_logical(.data$reasons_f_n),
+            #         `F N REASONS WHY` = as.character(.data$reasons_why_f_n),
+            #         `F N NAP` = format_logical(.data$nap_f_n),
+            #         `F N NAP ONSET` = format_hms(.data$napo_f_n),
+            #         `F N NAP END` = format_hms(.data$nape_f_n)
+            #     )
 
             shift_mctq <- dplyr::bind_rows(shift_mctq, random_case)
         }
     }
 
-    ## Inverted values for bed time and sleep preparing on workdays
+    ## Inverted values for bed time and sleep preparing
 
     shift_mctq <- shift_mctq %>% dplyr::add_row(
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]
-        `WORK REGULAR` = "Yes", # logical | Yes/No
-        `WORK DAYS` = "4", # integer | [0-7]
-        `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h] # INVERSION
-        `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
-        `W SLEEP LAT` = "10", # Duration | M
-        `W SLEEP END` = "05:00", # hms | HMS, HM, H [0-24h]
-        `W SLEEP INERTIA` = "5", # Duration | M
-        `W ALARM` = "Yes", # logical | Yes/No
-        `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-        `W LIGHT EXPOSURE` = "04:00", # Duration | [H]MS, [H]M, [H]
-        `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
-        `F SLEEP PREP` = "01:30", # hms | HMS, HM, H [0-24h]
-        `F SLEEP LAT` = "15", # Duration | M
-        `F SLEEP END` = "11:00", # hms | HMS, HM, H [0-24h]
-        `F SLEEP INERTIA` = "5", # Duration | M
-        `F ALARM` = "No", # logical | Yes/No
-        `F REASONS` = "Yes", # logical | Yes/No
-        `F REASONS WHY` = "Child(ren)/pet(s)", # character
-        `F LIGHT EXPOSURE` = "06:00" # Duration | [H]MS, [H]M, [H]
+
+        `W M N DAYS` = "6", # integer | [0-7]
+        `W M BED TIME` = "20:20", # hms | HMS, HM, H [0-24h]  # INVERSION
+        `W M SLEEP PREP` = "19:40", # hms | HMS, HM, H [0-24h]  # INVERSION
+        `W M SLEEP LAT` = "5", # Duration | M
+        `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+        `W M TIME GU` = "5", # Duration | M
+        `W M ALARM` = "Yes", # logical | Yes/No
+        `W M REASONS` = "Yes", # logical | Yes/No
+        `W M REASONS WHY` = "Hobbies", # character
+        `W M NAP` = "Yes", # logical | Yes/No
+        `W M NAP ONSET` = "13:30", # hms | HMS, HM, H [0-24h]
+        `W M NAP END` = "14:10", # hms | HMS, HM, H [0-24h]
+
+        `F M N DAYS` = "2", # integer | [0-7]
+        `F M BED TIME` = "23:25", # hms | HMS, HM, H [0-24h]
+        `F M SLEEP PREP` = "23:50", # hms | HMS, HM, H [0-24h]
+        `F M SLEEP LAT` = "20", # Duration | M
+        `F M SLEEP END` = "09:05", # hms | HMS, HM, H [0-24h]
+        `F M TIME GU` = "70", # Duration | M
+        `F M ALARM` = "No", # logical | Yes/No
+        `F M REASONS` = "No", # logical | Yes/No
+        `F M REASONS WHY` = "", # character
+        `F M NAP` = "No", # logical | Yes/No
+        `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+        `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+        `W E N DAYS` = "4", # integer | [0-7]
+        `W E BED TIME` = "00:25", # hms | HMS, HM, H [0-24h]
+        `W E SLEEP PREP` = "01:05", # hms | HMS, HM, H [0-24h]
+        `W E SLEEP LAT` = "15", # Duration | M
+        `W E SLEEP END` = "08:15", # hms | HMS, HM, H [0-24h]
+        `W E TIME GU` = "25", # Duration | M
+        `W E ALARM` = "No", # logical | Yes/No
+        `W E REASONS` = "No", # logical | Yes/No
+        `W E REASONS WHY` = "", # character
+        `W E NAP` = "Yes", # logical | Yes/No
+        `W E NAP ONSET` = "19:25", # hms | HMS, HM, H [0-24h]
+        `W E NAP END` = "19:55", # hms | HMS, HM, H [0-24h]
+
+        `F E N DAYS` = "2", # integer | [0-7]
+        `F E BED TIME` = "02:25", # hms | HMS, HM, H [0-24h] # INVERSION
+        `F E SLEEP PREP` = "01:55", # hms | HMS, HM, H [0-24h] # INVERSION
+        `F E SLEEP LAT` = "25", # Duration | M
+        `F E SLEEP END` = "08:55", # hms | HMS, HM, H [0-24h]
+        `F E TIME GU` = "25", # Duration | M
+        `F E ALARM` = "No", # logical | Yes/No
+        `F E REASONS` = "No", # logical | Yes/No
+        `F E REASONS WHY` = "", # character
+        `F E NAP` = "Yes", # logical | Yes/No
+        `F E NAP ONSET` = "15:35", # hms | HMS, HM, H [0-24h]
+        `F E NAP END` = "16:10", # hms | HMS, HM, H [0-24h]
+
+        `W N N DAYS` = "6", # integer | [0-7]
+        `W N BED TIME` = "08:00", # hms | HMS, HM, H [0-24h]
+        `W N SLEEP PREP` = "08:15", # hms | HMS, HM, H [0-24h]
+        `W N SLEEP LAT` = "35", # Duration | M
+        `W N SLEEP END` = "15:10", # hms | HMS, HM, H [0-24h]
+        `W N TIME GU` = "35", # Duration | M
+        `W N ALARM` = "No", # logical | Yes/No
+        `W N REASONS` = "No", # logical | Yes/No
+        `W N REASONS WHY` = "", # character
+        `W N NAP` = "Yes", # logical | Yes/No
+        `W N NAP ONSET` = "01:55", # hms | HMS, HM, H [0-24h]
+        `W N NAP END` = "02:40", # hms | HMS, HM, H [0-24h]
+
+        `F N N DAYS` = "8", # integer | [0-7]
+        `F N BED TIME` = "18:05", # hms | HMS, HM, H [0-24h]
+        `F N SLEEP PREP` = "18:45", # hms | HMS, HM, H [0-24h]
+        `F N SLEEP LAT` = "75", # Duration | M
+        `F N SLEEP END` = "02:00", # hms | HMS, HM, H [0-24h]
+        `F N TIME GU` = "45", # Duration | M
+        `F N ALARM` = "No", # logical | Yes/No
+        `F N REASONS` = "No", # logical | Yes/No
+        `F N REASONS WHY` = "", # character
+        `F N NAP` = "No", # logical | Yes/No
+        `F N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+        `F N NAP END` = "" # hms | HMS, HM, H [0-24h]
     ) %>%
-
-    ## Inverted values for bed time and sleep preparing on work-free days
-
-        dplyr::add_row(
-            `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "5", # integer | [0-7]
-            `W BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "30", # Duration | M
-            `W SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "10", # Duration | M
-            `W ALARM` = "Yes", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:00", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
-            `F SLEEP PREP` = "22:30", # hms | HMS, HM, H [0-24h] # INVERSION
-            `F SLEEP LAT` = "45", # Duration | M
-            `F SLEEP END` = "08:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # Duration | M
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "No", # logical | Yes/No
-            `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "00:00" # Duration | [H]MS, [H]M, [H]
-        ) %>%
 
     ## Presence of invalid values
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
-            `WORK REGULAR` = "No", # logical | Yes/No
-            `WORK DAYS` = "10", # integer | [0-7] # INVALID
-            `W BED TIME` = "27:00", # hms | HMS, HM, H [0-24h] # INVALID
-            `W SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "30", # Duration | M
-            `W SLEEP END` = "12:15", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "20", # Duration | M
-            `W ALARM` = "No", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No # INVALID
-            `W LIGHT EXPOSURE` = "02:15", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "34:00", # hms | HMS, HM, H [0-24h] # INVALID
-            `F SLEEP PREP` = "04:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "No", # Duration | M
-            `F SLEEP END` = "14:12", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "30", # Duration | M
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "Yes", # logical | Yes/No
-            `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "-01:30" # Duration | [H]MS, [H]M, [H] # INV.
-        ) %>%
+            `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
 
-    ## Sleeps more on workdays than on work-free days
+            `W M N DAYS` = "6", # integer | [0-7]
+            `W M BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "22:25", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "20", # Duration | M
+            `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "5", # Duration | M
+            `W M ALARM` = "Yes", # logical | Yes/No
+            `W M REASONS` = "Yes", # logical | Yes/No
+            `W M REASONS WHY` = "Hobbies", # character
+            `W M NAP` = "Yes", # logical | Yes/No
+            `W M NAP ONSET` = "11:20", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "11:45", # hms | HMS, HM, H [0-24h]
 
-        dplyr::add_row(
-            `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "2", # integer | [0-7]
-            `W BED TIME` = "21:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "2130", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "15", # Duration | M
-            `W SLEEP END` = "09:15", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "10", # Duration | M
-            `W ALARM` = "No", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "0500", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "5", # Duration | M
-            `F SLEEP END` = "06:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # Duration | M
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "Yes", # logical | Yes/No
-            `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "07:00" # Duration | [H]MS, [H]M, [H]
+            `F M N DAYS` = "2", # integer | [0-7]
+            `F M BED TIME` = "00:45", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "35:00", # hms | HMS, HM, H [0-24h] # INVALID
+            `F M SLEEP LAT` = "30", # Duration | M
+            `F M SLEEP END` = "08:40", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "10", # Duration | M
+            `F M ALARM` = "No", # logical | Yes/No
+            `F M REASONS` = "No", # logical | Yes/No
+            `F M REASONS WHY` = "", # character
+            `F M NAP` = "Yes", # logical | Yes/No
+            `F M NAP ONSET` = "17:35", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "18:05", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "4", # integer | [0-7]
+            `W E BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "00:55", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "10", # Duration | M
+            `W E SLEEP END` = "08:20", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "30", # Duration | M
+            `W E ALARM` = "Yes", # logical | Yes/No
+            `W E REASONS` = "No", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "No", # logical | Yes/No
+            `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "2", # integer | [0-7]
+            `F E BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "01:05", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "30", # Duration | M
+            `F E SLEEP END` = "09:20", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "10", # Duration | M
+            `F E ALARM` = "No", # logical | Yes/No
+            `F E REASONS` = "Yes", # logical | Yes/No
+            `F E REASONS WHY` = "Hobbies", # character
+            `F E NAP` = "Yes", # logical | Yes/No
+            `F E NAP ONSET` = "14:35", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "14:55", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "06:05", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "06:50", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "30", # Duration | M
+            `W N SLEEP END` = "42:05", # hms | HMS, HM, H [0-24h] # INVALID
+            `W N TIME GU` = "30", # Duration | M
+            `W N ALARM` = "Yes", # logical | Yes/No
+            `W N REASONS` = "No", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "Yes", # logical | Yes/No
+            `W N NAP ONSET` = "03:30", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "04:20", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "8", # integer | [0-7]
+            `F N BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "21:55", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "50", # Duration | M
+            `F N SLEEP END` = "01:55", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "40", # Duration | M
+            `F N ALARM` = "No", # logical | Yes/No
+            `F N REASONS` = "Yes", # logical | Yes/No
+            `F N REASONS WHY` = "Hobbies", # character
+            `F N NAP` = "No", # logical | Yes/No
+            `F N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Uses an alarm clock on work-free days
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "5", # integer | [0-7]
-            `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "15", # Duration | M
-            `W SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "5", # Duration | M
-            `W ALARM` = "Yes", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:55", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "01:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "30", # Duration | M
-            `F SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "0", # Duration | M
-            `F ALARM` = "Yes", # logical | Yes/No
-            `F REASONS` = "Yes", # logical | Yes/No
-            `F REASONS WHY` = "Child(ren)/pet(s)", # character
-            `F LIGHT EXPOSURE` = "04:45" # Duration | [H]MS, [H]M, [H]
+            `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
+
+            `W M N DAYS` = "6", # integer | [0-7]
+            `W M BED TIME` = "23:25", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "23:35", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "30", # Duration | M
+            `W M SLEEP END` = "04:15", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "5", # Duration | M
+            `W M ALARM` = "Yes", # logical | Yes/No
+            `W M REASONS` = "No", # logical | Yes/No
+            `W M REASONS WHY` = "", # character
+            `W M NAP` = "Yes", # logical | Yes/No
+            `W M NAP ONSET` = "15:55", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "16:30", # hms | HMS, HM, H [0-24h]
+
+            `F M N DAYS` = "2", # integer | [0-7]
+            `F M BED TIME` = "01:25", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "01:50", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP LAT` = "30", # Duration | M
+            `F M SLEEP END` = "08:05", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "65", # Duration | M
+            `F M ALARM` = "Yes", # logical | Yes/No # ALARM == "Yes"
+            `F M REASONS` = "Yes", # logical | Yes/No
+            `F M REASONS WHY` = "Hobbies", # character
+            `F M NAP` = "No", # logical | Yes/No
+            `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "4", # integer | [0-7]
+            `W E BED TIME` = "23:10", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "23:40", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "30", # Duration | M
+            `W E SLEEP END` = "05:45", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "30", # Duration | M
+            `W E ALARM` = "No", # logical | Yes/No
+            `W E REASONS` = "No", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "No", # logical | Yes/No
+            `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "2", # integer | [0-7]
+            `F E BED TIME` = "23:10", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "00:15", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "35", # Duration | M
+            `F E SLEEP END` = "08:45", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "5", # Duration | M
+            `F E ALARM` = "Yes", # logical | Yes/No # ALARM == "Yes"
+            `F E REASONS` = "No", # logical | Yes/No
+            `F E REASONS WHY` = "", # character
+            `F E NAP` = "Yes", # logical | Yes/No
+            `F E NAP ONSET` = "17:20", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "18:00", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "07:10", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "07:20", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "15", # Duration | M
+            `W N SLEEP END` = "12:40", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "20", # Duration | M
+            `W N ALARM` = "No", # logical | Yes/No
+            `W N REASONS` = "No", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "Yes", # logical | Yes/No
+            `W N NAP ONSET` = "23:45", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "00:00", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "8", # integer | [0-7]
+            `F N BED TIME` = "22:25", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "22:50", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "80", # Duration | M
+            `F N SLEEP END` = "10:55", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "35", # Duration | M
+            `F N ALARM` = "Yes", # logical | Yes/No # ALARM == "Yes"
+            `F N REASONS` = "No", # logical | Yes/No
+            `F N REASONS WHY` = "", # character
+            `F N NAP` = "Yes", # logical | Yes/No
+            `F N NAP ONSET` = "17:50", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "18:25" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Null MCTQ (invalid case)
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
-            `WORK REGULAR` = "", # logical | Yes/No
-            `WORK DAYS` = "", # integer | [0-7]
-            `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "", # Duration | M
-            `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "", # Duration | M
-            `W ALARM` = "", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "", # Duration | M
-            `F SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "", # Duration | M
-            `F ALARM` = "", # logical | Yes/No
-            `F REASONS` = "", # logical | Yes/No
-            `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "" # Duration | [H]MS, [H]M, [H]
-        ) %>%
+            `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
 
-    ## Did not answer workdays questions
+            `W M N DAYS` = "", # integer | [0-7]
+            `W M BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "", # Duration | M
+            `W M SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "", # Duration | M
+            `W M ALARM` = "", # logical | Yes/No
+            `W M REASONS` = "", # logical | Yes/No
+            `W M REASONS WHY` = "", # character
+            `W M NAP` = "", # logical | Yes/No
+            `W M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
-        dplyr::add_row(
-            `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
-            `WORK REGULAR` = "No", # logical | Yes/No
-            `WORK DAYS` = "", # integer | [0-7]
-            `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "", # Duration | M
-            `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "", # Duration | M
-            `W ALARM` = "", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "03:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "04:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "90", # Duration | M
-            `F SLEEP END` = "15:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "30", # Duration | M
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "No", # logical | Yes/No
-            `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "00:30" # Duration | [H]MS, [H]M, [H]
+            `F M N DAYS` = "", # integer | [0-7]
+            `F M BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP LAT` = "", # Duration | M
+            `F M SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "", # Duration | M
+            `F M ALARM` = "", # logical | Yes/No
+            `F M REASONS` = "", # logical | Yes/No
+            `F M REASONS WHY` = "", # character
+            `F M NAP` = "", # logical | Yes/No
+            `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "", # integer | [0-7]
+            `W E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "", # Duration | M
+            `W E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "", # Duration | M
+            `W E ALARM` = "", # logical | Yes/No
+            `W E REASONS` = "", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "", # logical | Yes/No
+            `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "", # integer | [0-7]
+            `F E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "", # Duration | M
+            `F E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "", # Duration | M
+            `F E ALARM` = "", # logical | Yes/No
+            `F E REASONS` = "", # logical | Yes/No
+            `F E REASONS WHY` = "", # character
+            `F E NAP` = "", # logical | Yes/No
+            `F E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "", # integer | [0-7]
+            `W N BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "", # Duration | M
+            `W N SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "", # Duration | M
+            `W N ALARM` = "", # logical | Yes/No
+            `W N REASONS` = "", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "", # logical | Yes/No
+            `W N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "", # integer | [0-7]
+            `F N BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "", # Duration | M
+            `F N SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "", # Duration | M
+            `F N ALARM` = "", # logical | Yes/No
+            `F N REASONS` = "", # logical | Yes/No
+            `F N REASONS WHY` = "", # character
+            `F N NAP` = "", # logical | Yes/No
+            `F N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## All, or almost all, basic variables have the same values
     ## (invalid case)
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
-            `WORK REGULAR` = "0", # logical | Yes/No
-            `WORK DAYS` = "0", # integer | [0-7]
-            `W BED TIME` = "0", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "0", # Duration | M
-            `W SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "0", # Duration | M
-            `W ALARM` = "0", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "0", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "0", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "0", # Duration | M
-            `F SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "0", # Duration | M
-            `F ALARM` = "0", # logical | Yes/No
-            `F REASONS` = "0", # logical | Yes/No
-            `F REASONS WHY` = "0", # character
-            `F LIGHT EXPOSURE` = "0" # Duration | [H]MS, [H]M, [H]
-        ) %>%
+            `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
 
-    ## Works 7 days a week and didn't answer the work-free days section
+            `W M N DAYS` = "0", # integer | [0-7]
+            `W M BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "0", # Duration | M
+            `W M SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "0", # Duration | M
+            `W M ALARM` = "0", # logical | Yes/No
+            `W M REASONS` = "0", # logical | Yes/No
+            `W M REASONS WHY` = "0", # character
+            `W M NAP` = "0", # logical | Yes/No
+            `W M NAP ONSET` = "0", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "0", # hms | HMS, HM, H [0-24h]
 
-        dplyr::add_row(
-            `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "7", # integer | [0-7]
-            `W BED TIME` = "23:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "23:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "10", # Duration | M
-            `W SLEEP END` = "06:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "5", # Duration | M
-            `W ALARM` = "Yes", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "02:00", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "", # Duration | M
-            `F SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "", # Duration | M
-            `F ALARM` = "", # logical | Yes/No
-            `F REASONS` = "", # logical | Yes/No
-            `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "" # Duration | [H]MS, [H]M, [H]
+            `F M N DAYS` = "0", # integer | [0-7]
+            `F M BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP LAT` = "0", # Duration | M
+            `F M SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "0", # Duration | M
+            `F M ALARM` = "0", # logical | Yes/No
+            `F M REASONS` = "0", # logical | Yes/No
+            `F M REASONS WHY` = "0", # character
+            `F M NAP` = "0", # logical | Yes/No
+            `F M NAP ONSET` = "0", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "0", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "0", # integer | [0-7]
+            `W E BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "0", # Duration | M
+            `W E SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "0", # Duration | M
+            `W E ALARM` = "0", # logical | Yes/No
+            `W E REASONS` = "0", # logical | Yes/No
+            `W E REASONS WHY` = "0", # character
+            `W E NAP` = "0", # logical | Yes/No
+            `W E NAP ONSET` = "0", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "0", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "0", # integer | [0-7]
+            `F E BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "0", # Duration | M
+            `F E SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "0", # Duration | M
+            `F E ALARM` = "0", # logical | Yes/No
+            `F E REASONS` = "0", # logical | Yes/No
+            `F E REASONS WHY` = "0", # character
+            `F E NAP` = "0", # logical | Yes/No
+            `F E NAP ONSET` = "0", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "0", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "0", # integer | [0-7]
+            `W N BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "0", # Duration | M
+            `W N SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "0", # Duration | M
+            `W N ALARM` = "0", # logical | Yes/No
+            `W N REASONS` = "0", # logical | Yes/No
+            `W N REASONS WHY` = "0", # character
+            `W N NAP` = "0", # logical | Yes/No
+            `W N NAP ONSET` = "0", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "0", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "0", # integer | [0-7]
+            `F N BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "0", # Duration | M
+            `F N SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "0", # Duration | M
+            `F N ALARM` = "0", # logical | Yes/No
+            `F N REASONS` = "0", # logical | Yes/No
+            `F N REASONS WHY` = "0", # character
+            `F N NAP` = "0", # logical | Yes/No
+            `F N NAP ONSET` = "0", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "0" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Suspicious values (removed case)
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
-            `WORK REGULAR` = "No", # logical | Yes/No
-            `WORK DAYS` = "6", # integer | [0-7]
-            `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "120", # Duration | M
-            `W SLEEP END` = "04:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
-            `W SLEEP INERTIA` = "0", # Duration | M
-            `W ALARM` = "Yes", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "18:00", # Duration | [H]MS, [H]M, [H] # SUSP.
-            `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "30", # Duration | M
-            `F SLEEP END` = "09:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # Duration | M
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "No", # logical | Yes/No
-            `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "17:00" # Duration | [H]MS, [H]M, [H] # SUSP.
+            `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
+
+            `W M N DAYS` = "6", # integer | [0-7]
+            `W M BED TIME` = "02:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `W M SLEEP PREP` = "04:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `W M SLEEP LAT` = "20", # Duration | M
+            `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `W M TIME GU` = "5", # Duration | M
+            `W M ALARM` = "Yes", # logical | Yes/No
+            `W M REASONS` = "Yes", # logical | Yes/No
+            `W M REASONS WHY` = "Hobbies", # character
+            `W M NAP` = "Yes", # logical | Yes/No
+            `W M NAP ONSET` = "11:20", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "11:45", # hms | HMS, HM, H [0-24h]
+
+            `F M N DAYS` = "2", # integer | [0-7]
+            `F M BED TIME` = "11:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `F M SLEEP PREP` = "12:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `F M SLEEP LAT` = "30", # Duration | M
+            `F M SLEEP END` = "16:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `F M TIME GU` = "10", # Duration | M
+            `F M ALARM` = "No", # logical | Yes/No
+            `F M REASONS` = "No", # logical | Yes/No
+            `F M REASONS WHY` = "", # character
+            `F M NAP` = "Yes", # logical | Yes/No
+            `F M NAP ONSET` = "17:35", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "18:05", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "4", # integer | [0-7]
+            `W E BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "00:55", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "10", # Duration | M
+            `W E SLEEP END` = "08:20", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "30", # Duration | M
+            `W E ALARM` = "Yes", # logical | Yes/No
+            `W E REASONS` = "No", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "No", # logical | Yes/No
+            `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "2", # integer | [0-7]
+            `F E BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "01:05", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "30", # Duration | M
+            `F E SLEEP END` = "09:20", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "10", # Duration | M
+            `F E ALARM` = "No", # logical | Yes/No
+            `F E REASONS` = "Yes", # logical | Yes/No
+            `F E REASONS WHY` = "Hobbies", # character
+            `F E NAP` = "Yes", # logical | Yes/No
+            `F E NAP ONSET` = "10:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `F E NAP END` = "19:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "06:05", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "06:50", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "30", # Duration | M
+            `W N SLEEP END` = "16:05", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "30", # Duration | M
+            `W N ALARM` = "Yes", # logical | Yes/No
+            `W N REASONS` = "No", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "Yes", # logical | Yes/No
+            `W N NAP ONSET` = "03:30", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "04:20", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "8", # integer | [0-7]
+            `F N BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "21:55", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "50", # Duration | M
+            `F N SLEEP END` = "01:55", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "40", # Duration | M
+            `F N ALARM` = "No", # logical | Yes/No
+            `F N REASONS` = "Yes", # logical | Yes/No
+            `F N REASONS WHY` = "Hobbies", # character
+            `F N NAP` = "No", # logical | Yes/No
+            `F N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Different formats
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[12]), # integer | [auto-increment]
-            `WORK REGULAR` = "true", # logical | Yes/No # AMBIGUOUS
-            `WORK DAYS` = "5", # integer | [0-7]
-            `W BED TIME` = "11:00 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `W SLEEP PREP` = "0000", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `W SLEEP LAT` = "00:15", # Duration | M #AMBIGUOUS
-            `W SLEEP END` = "07:15 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `W SLEEP INERTIA` = "30", # Duration | M
-            `W ALARM` = "No", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "3", # Duration | [H]MS, [H]M, [H] # AMBIGUOUS
-            `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "0130 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `F SLEEP LAT` = "60", # Duration | M
-            `F SLEEP END` = "10:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "00:15", # Duration | M # AMBIGUOUS
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "Yes", # logical | Yes/No
-            `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "04:30" # Duration | [H]MS, [H]M, [H]
+            `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
+
+            `W M N DAYS` = "6", # integer | [0-7]
+            `W M BED TIME` = "11:25 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W M SLEEP PREP` = "2335", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W M SLEEP LAT` = "00:30", # Duration | M # AMBIGUOUS
+            `W M SLEEP END` = "0415", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W M TIME GU` = "5", # Duration | M
+            `W M ALARM` = "Yes", # logical | Yes/No
+            `W M REASONS` = "No", # logical | Yes/No
+            `W M REASONS WHY` = "", # character
+            `W M NAP` = "Yes", # logical | Yes/No
+            `W M NAP ONSET` = "15:55", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "16:30", # hms | HMS, HM, H [0-24h]
+
+            `F M N DAYS` = "2", # integer | [0-7]
+            `F M BED TIME` = "01:25", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "01:50", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP LAT` = "30", # Duration | M
+            `F M SLEEP END` = "08:05", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "65", # Duration | M
+            `F M ALARM` = "No", # logical | Yes/No
+            `F M REASONS` = "Yes", # logical | Yes/No
+            `F M REASONS WHY` = "Hobbies", # character
+            `F M NAP` = "No", # logical | Yes/No
+            `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "4", # integer | [0-7]
+            `W E BED TIME` = "11:10 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W E SLEEP PREP` = "23:40 PM", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "30", # Duration | M
+            `W E SLEEP END` = "0545", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W E TIME GU` = "30", # Duration | M
+            `W E ALARM` = "No", # logical | Yes/No
+            `W E REASONS` = "No", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "No", # logical | Yes/No
+            `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "2", # integer | [0-7]
+            `F E BED TIME` = "23:10", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "00:15", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "35", # Duration | M
+            `F E SLEEP END` = "08:45", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "5", # Duration | M
+            `F E ALARM` = "No", # logical | Yes/No
+            `F E REASONS` = "No", # logical | Yes/No
+            `F E REASONS WHY` = "", # character
+            `F E NAP` = "Yes", # logical | Yes/No
+            `F E NAP ONSET` = "17:20 PM", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "18:00", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "07:10", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "07:20", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "00:15", # Duration | M # AMBIGUOUS
+            `W N SLEEP END` = "1240", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W N TIME GU` = "20", # Duration | M
+            `W N ALARM` = "No", # logical | Yes/No
+            `W N REASONS` = "No", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "Yes", # logical | Yes/No
+            `W N NAP ONSET` = "23:45", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "00:00", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "8", # integer | [0-7]
+            `F N BED TIME` = "22:25", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "22:50", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "80", # Duration | M
+            `F N SLEEP END` = "10:55", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "35", # Duration | M
+            `F N ALARM` = "No", # logical | Yes/No
+            `F N REASONS` = "No", # logical | Yes/No
+            `F N REASONS WHY` = "", # character
+            `F N NAP` = "Yes", # logical | Yes/No
+            `F N NAP ONSET` = "17:50", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "18:25" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Possible filling error
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[13]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "6", # integer | [0-7]
-            `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "", # Duration | M
-            `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "", # Duration | M
-            `W ALARM` = "", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "22:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "15", # Duration | M
-            `F SLEEP END` = "06:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "3", # Duration | M
-            `F ALARM` = "Yes", # logical | Yes/No
-            `F REASONS` = "Yes", # logical | Yes/No
-            `F REASONS WHY` = "Hobbies", # character
-            `F LIGHT EXPOSURE` = "01:30" # Duration | [H]MS, [H]M, [H]
+            `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
+
+            `W M N DAYS` = "", # integer | [0-7]
+            `W M BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "", # Duration | M
+            `W M SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "", # Duration | M
+            `W M ALARM` = "", # logical | Yes/No
+            `W M REASONS` = "", # logical | Yes/No
+            `W M REASONS WHY` = "", # character
+            `W M NAP` = "", # logical | Yes/No
+            `W M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F M N DAYS` = "2", # integer | [0-7]
+            `F M BED TIME` = "23:40", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "00:45", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP LAT` = "45", # Duration | M
+            `F M SLEEP END` = "10:35", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "40", # Duration | M
+            `F M ALARM` = "No", # logical | Yes/No
+            `F M REASONS` = "No", # logical | Yes/No
+            `F M REASONS WHY` = "", # character
+            `F M NAP` = "No", # logical | Yes/No
+            `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "", # integer | [0-7]
+            `W E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "", # Duration | M
+            `W E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "", # Duration | M
+            `W E ALARM` = "", # logical | Yes/No
+            `W E REASONS` = "", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "", # logical | Yes/No
+            `W E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "", # integer | [0-7]
+            `F E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "", # Duration | M
+            `F E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "", # Duration | M
+            `F E ALARM` = "", # logical | Yes/No
+            `F E REASONS` = "", # logical | Yes/No
+            `F E REASONS WHY` = "", # character
+            `F E NAP` = "", # logical | Yes/No
+            `F E NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "07:40", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "08:15", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "35", # Duration | M
+            `W N SLEEP END` = "13:20", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "40", # Duration | M
+            `W N ALARM` = "No", # logical | Yes/No
+            `W N REASONS` = "No", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "No", # logical | Yes/No
+            `W N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "", # integer | [0-7]
+            `F N BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "", # Duration | M
+            `F N SLEEP END` = "", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "", # Duration | M
+            `F N ALARM` = "", # logical | Yes/No
+            `F N REASONS` = "", # logical | Yes/No
+            `F N REASONS WHY` = "", # character
+            `F N NAP` = "", # logical | Yes/No
+            `F N NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "" # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Repeated workdays and work-free days values (possible carryover
-    ## effect)
+    ## effect) (removed case)
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[14]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "5", # integer | [0-7]
-            `W BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "10", # Duration | M
-            `W SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "5", # Duration | M
-            `W ALARM` = "Yes", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:00", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "10", # Duration | M
-            `F SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "5", # Duration | M
-            `F ALARM` = "Yes", # logical | Yes/No
-            `F REASONS` = "No", # logical | Yes/No
-            `F REASONS WHY` = "No", # character
-            `F LIGHT EXPOSURE` = "01:00" # Duration | [H]MS, [H]M, [H]
+            `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
+
+            `W M N DAYS` = "6", # integer | [0-7]
+            `W M BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "25", # Duration | M
+            `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "10", # Duration | M
+            `W M ALARM` = "Yes", # logical | Yes/No
+            `W M REASONS` = "No", # logical | Yes/No
+            `W M REASONS WHY` = "", # character
+            `W M NAP` = "Yes", # logical | Yes/No
+            `W M NAP ONSET` = "11:25", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
+
+            `F M N DAYS` = "6", # integer | [0-7]
+            `F M BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP LAT` = "25", # Duration | M
+            `F M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `F M TIME GU` = "10", # Duration | M
+            `F M ALARM` = "Yes", # logical | Yes/No
+            `F M REASONS` = "No", # logical | Yes/No
+            `F M REASONS WHY` = "", # character
+            `F M NAP` = "Yes", # logical | Yes/No
+            `F M NAP ONSET` = "11:25", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "6", # integer | [0-7]
+            `W E BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "25", # Duration | M
+            `W E SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "10", # Duration | M
+            `W E ALARM` = "Yes", # logical | Yes/No
+            `W E REASONS` = "No", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "Yes", # logical | Yes/No
+            `W E NAP ONSET` = "11:25", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "6", # integer | [0-7]
+            `F E BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP LAT` = "25", # Duration | M
+            `F E SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `F E TIME GU` = "10", # Duration | M
+            `F E ALARM` = "Yes", # logical | Yes/No
+            `F E REASONS` = "No", # logical | Yes/No
+            `F E REASONS WHY` = "", # character
+            `F E NAP` = "Yes", # logical | Yes/No
+            `F E NAP ONSET` = "11:25", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "25", # Duration | M
+            `W N SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "10", # Duration | M
+            `W N ALARM` = "Yes", # logical | Yes/No
+            `W N REASONS` = "No", # logical | Yes/No
+            `W N REASONS WHY` = "", # character
+            `W N NAP` = "Yes", # logical | Yes/No
+            `W N NAP ONSET` = "11:25", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "6", # integer | [0-7]
+            `F N BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "25", # Duration | M
+            `F N SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "10", # Duration | M
+            `F N ALARM` = "Yes", # logical | Yes/No
+            `F N REASONS` = "No", # logical | Yes/No
+            `F N REASONS WHY` = "", # character
+            `F N NAP` = "Yes", # logical | Yes/No
+            `F N NAP ONSET` = "11:25", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
         ) %>%
 
     ## Sleep onset is equal or greater than sleep end
     ## [(s_prep + s_lat) >= se] (invalid case)
 
         dplyr::add_row(
-            `ID` = as.character(reserved_id[15]), # integer | [auto-increment]
-            `WORK REGULAR` = "Yes", # logical | Yes/No
-            `WORK DAYS` = "2", # integer | [0-7]
-            `W BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
-            `W SLEEP PREP` = "00:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP LAT` = "60", # Duration | M
-            `W SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
-            `W SLEEP INERTIA` = "10", # Duration | M
-            `W ALARM` = "No", # logical | Yes/No
-            `W WAKE BEFORE ALARM` = "", # logical | Yes/No
-            `W LIGHT EXPOSURE` = "01:20", # Duration | [H]MS, [H]M, [H]
-            `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "120", # Duration | M
-            `F SLEEP END` = "04:00", # hms | HMS, HM, H [0-24h]
-            `F SLEEP INERTIA` = "15", # Duration | M
-            `F ALARM` = "No", # logical | Yes/No
-            `F REASONS` = "No", # logical | Yes/No
-            `F REASONS WHY` = "", # character
-            `F LIGHT EXPOSURE` = "04:00" # Duration | [H]MS, [H]M, [H]
+            `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
+
+            `W M N DAYS` = "6", # integer | [0-7]
+            `W M BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP PREP` = "22:50", # hms | HMS, HM, H [0-24h]
+            `W M SLEEP LAT` = "15", # Duration | M
+            `W M SLEEP END` = "04:15", # hms | HMS, HM, H [0-24h]
+            `W M TIME GU` = "15", # Duration | M
+            `W M ALARM` = "No", # logical | Yes/No
+            `W M REASONS` = "No", # logical | Yes/No
+            `W M REASONS WHY` = "", # character
+            `W M NAP` = "Yes", # logical | Yes/No
+            `W M NAP ONSET` = "13:35", # hms | HMS, HM, H [0-24h]
+            `W M NAP END` = "14:00", # hms | HMS, HM, H [0-24h]
+
+            `F M N DAYS` = "2", # integer | [0-7]
+            `F M BED TIME` = "05:30", # hms | HMS, HM, H [0-24h]
+            `F M SLEEP PREP` = "07:00", # hms | HMS, HM, H [0-24h] # ERROR
+            `F M SLEEP LAT` = "45", # Duration | M # ERROR
+            `F M SLEEP END` = "07:45", # hms | HMS, HM, H [0-24h] # ERROR
+            `F M TIME GU` = "20", # Duration | M
+            `F M ALARM` = "Yes", # logical | Yes/No
+            `F M REASONS` = "No", # logical | Yes/No
+            `F M REASONS WHY` = "", # character
+            `F M NAP` = "No", # logical | Yes/No
+            `F M NAP ONSET` = "", # hms | HMS, HM, H [0-24h]
+            `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
+
+            `W E N DAYS` = "4", # integer | [0-7]
+            `W E BED TIME` = "23:35", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP PREP` = "23:35", # hms | HMS, HM, H [0-24h]
+            `W E SLEEP LAT` = "40", # Duration | M
+            `W E SLEEP END` = "06:55", # hms | HMS, HM, H [0-24h]
+            `W E TIME GU` = "25", # Duration | M
+            `W E ALARM` = "Yes", # logical | Yes/No
+            `W E REASONS` = "No", # logical | Yes/No
+            `W E REASONS WHY` = "", # character
+            `W E NAP` = "Yes", # logical | Yes/No
+            `W E NAP ONSET` = "17:00", # hms | HMS, HM, H [0-24h]
+            `W E NAP END` = "17:40", # hms | HMS, HM, H [0-24h]
+
+            `F E N DAYS` = "2", # integer | [0-7]
+            `F E BED TIME` = "10:05", # hms | HMS, HM, H [0-24h]
+            `F E SLEEP PREP` = "12:10", # hms | HMS, HM, H [0-24h] # ERROR
+            `F E SLEEP LAT` = "5", # Duration | M # ERROR
+            `F E SLEEP END` = "11:00", # hms | HMS, HM, H [0-24h] # ERROR
+            `F E TIME GU` = "25", # Duration | M
+            `F E ALARM` = "No", # logical | Yes/No
+            `F E REASONS` = "No", # logical | Yes/No
+            `F E REASONS WHY` = "", # character
+            `F E NAP` = "Yes", # logical | Yes/No
+            `F E NAP ONSET` = "17:35", # hms | HMS, HM, H [0-24h]
+            `F E NAP END` = "17:55", # hms | HMS, HM, H [0-24h]
+
+            `W N N DAYS` = "6", # integer | [0-7]
+            `W N BED TIME` = "07:20", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP PREP` = "07:45", # hms | HMS, HM, H [0-24h]
+            `W N SLEEP LAT` = "20", # Duration | M
+            `W N SLEEP END` = "12:45", # hms | HMS, HM, H [0-24h]
+            `W N TIME GU` = "15", # Duration | M
+            `W N ALARM` = "No", # logical | Yes/No
+            `W N REASONS` = "Yes", # logical | Yes/No
+            `W N REASONS WHY` = "Hobbies", # character
+            `W N NAP` = "Yes", # logical | Yes/No
+            `W N NAP ONSET` = "04:05", # hms | HMS, HM, H [0-24h]
+            `W N NAP END` = "04:30", # hms | HMS, HM, H [0-24h]
+
+            `F N N DAYS` = "8", # integer | [0-7]
+            `F N BED TIME` = "19:40", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP PREP` = "20:25", # hms | HMS, HM, H [0-24h]
+            `F N SLEEP LAT` = "55", # Duration | M
+            `F N SLEEP END` = "04:40", # hms | HMS, HM, H [0-24h]
+            `F N TIME GU` = "20", # Duration | M
+            `F N ALARM` = "No", # logical | Yes/No
+            `F N REASONS` = "No", # logical | Yes/No
+            `F N REASONS WHY` = "", # character
+            `F N NAP` = "Yes", # logical | Yes/No
+            `F N NAP ONSET` = "14:05", # hms | HMS, HM, H [0-24h]
+            `F N NAP END` = "14:45" # hms | HMS, HM, H [0-24h]
         )
 
     shift_mctq <- shift_mctq %>% dplyr::arrange(as.integer(.data$`ID`))
@@ -528,7 +1182,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' @template references_e
 #' @family data wrangling functions
 #' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' @importFrom rlang .data !! :=
 #' @noRd
 #'
 #' @examples
@@ -574,67 +1228,69 @@ tidy_shift_mctq <- function(write = FALSE) {
     pattern_6 <- "^[0-1][0-2](:)?[0-5]\\d(AM|PM)"
     pattern_7 <- "(AM|PM)$"
 
-    shift_mctq <- shift_mctq %>% dplyr::transmute(
-        id = as.integer(.data$`ID`),
-        work = dplyr::case_when(
-            tolower(.data$`WORK REGULAR`) == "yes" ~ TRUE,
-            tolower(.data$`WORK REGULAR`) == "true" ~ TRUE,
-            tolower(.data$`WORK REGULAR`) == "no" ~ FALSE),
-        wd = as.integer(.data$`WORK DAYS`),
-        bt_w = dplyr::case_when(
-            grepl(pattern_1, .data$`W BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`W BED TIME`, "hms",
-                           c("HM", "IMp"), quiet = TRUE),
-            grepl(pattern_4, .data$`W BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`W BED TIME`, "hms", "HM",
-                           quiet = TRUE)),
-        sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms",
-                             c("HMS", "HM", "H")),
-        slat_w = dplyr::case_when(
-            grepl(pattern_2, .data$`W SLEEP LAT`, perl = TRUE) ~
-                convert_pt(.data$`W SLEEP LAT`, "Duration", "M",
-                           quiet = TRUE),
-            grepl(pattern_1, .data$`W SLEEP LAT`) ~
-                convert_pt(.data$`W SLEEP LAT`, "Duration",
-                           c("HMS", "HM", "H"), quiet = TRUE)),
-        se_w = convert_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
-        si_w = convert_pt(.data$`W SLEEP INERTIA`, "Duration", "M"),
-        alarm_w = dplyr::case_when(
-            tolower(.data$`W ALARM`) == "yes" ~ TRUE,
-            tolower(.data$`W ALARM`) == "no" ~ FALSE),
-        wake_before_w = dplyr::case_when(
-            tolower(.data$`W WAKE BEFORE ALARM`) == "yes" ~ TRUE,
-            tolower(.data$`W WAKE BEFORE ALARM`) == "no" ~ FALSE),
-        le_w = convert_pt(.data$`W LIGHT EXPOSURE`, "Duration",
-                          c("HMS", "HM", "H")),
-        bt_f = dplyr::case_when(
-            grepl(pattern_1, .data$`F BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
-                           quiet = TRUE),
-            grepl(pattern_4, .data$`F BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`F BED TIME`, "hms", "HM",
-                           quiet = TRUE)),
-        sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms",
-                             c("HMS", "HM", "H")),
-        slat_f = convert_pt(.data$`F SLEEP LAT`, "Duration", "M",
-                            quiet = TRUE),
-        se_f = convert_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
-        si_f = dplyr::case_when(
-            grepl(pattern_2, .data$`F SLEEP INERTIA`) ~
-                convert_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
-                           quiet = TRUE),
-            grepl(pattern_1, .data$`F SLEEP INERTIA`) ~
-                convert_pt(.data$`F SLEEP INERTIA`, "Duration",
-                           c("HMS", "HM", "H"), quiet = TRUE)),
-        alarm_f = dplyr::case_when(
-            tolower(.data$`F ALARM`) == "yes" ~ TRUE,
-            tolower(.data$`F ALARM`) == "no" ~ FALSE),
-        reasons_f = dplyr::case_when(
-            tolower(.data$`F REASONS`) == "yes" ~ TRUE,
-            tolower(.data$`F REASONS`) == "no" ~ FALSE),
-        reasons_why_f = .data$`F REASONS WHY`,
-        le_f = convert_pt(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
+    values <- list(
+        w_m = c("W M", "_w_m"),
+        f_m = c("F M", "_f_m"),
+        w_e = c("W E", "_w_e"),
+        f_r = c("F E", "_f_e"),
+        w_n = c("W N", "_w_n"),
+        f_n = c("F N", "_f_n")
     )
+
+    shift_mctq <- shift_mctq %>%
+        dplyr::mutate(id = as.integer(.data$`ID`)) %>%
+        dplyr::select(-.data$`ID`) %>%
+        dplyr::relocate(.data$id, .before = .data$`W M N DAYS`)
+
+    for (i in values) {
+        shift_mctq <- shift_mctq %>% dplyr::mutate(
+             !!as.symbol(paste0("n", i[2])) :=
+                as.integer(.data[[paste(i[1], "N DAYS")]]),
+            !!as.symbol(paste0("bt", i[2])) :=
+                convert_pt(.data[[paste(i[1], "BED TIME")]], "hms",
+                                   c("HM", "IMp")),
+            !!as.symbol(paste0("sprep", i[2])) :=
+                dplyr::case_when(
+                    grepl(pattern_4, .data[[paste(i[1], "SLEEP PREP")]],
+                          perl = TRUE) ~
+                        convert_pt(.data[[paste(i[1], "SLEEP PREP")]], "hms",
+                                   "HM"),
+                    TRUE ~
+                        convert_pt(.data[[paste(i[1], "SLEEP PREP")]], "hms",
+                                   c("HM", "IMp"))),
+            !!as.symbol(paste0("slat", i[2])) :=
+                convert_pt(.data[[paste(i[1], "SLEEP LAT")]], "Duration", "M"),
+            !!as.symbol(paste0("se", i[2])) :=
+                dplyr::case_when(
+                    grepl(pattern_4, .data[[paste(i[1], "SLEEP END")]],
+                          perl = TRUE) ~
+                        convert_pt(.data[[paste(i[1], "SLEEP END")]], "hms",
+                                   "HM"),
+                    TRUE ~
+                        convert_pt(.data[[paste(i[1], "SLEEP END")]], "hms",
+                                   c("HM", "IMp"))),
+            !!as.symbol(paste0("tgu", i[2])) :=
+                convert_pt(.data[[paste(i[1], "TIME GU")]], "Duration", "M"),
+            !!as.symbol(paste0("alarm", i[2])) := dplyr::case_when(
+                tolower(.data[[paste(i[1], "ALARM")]]) == "yes" ~ TRUE,
+                tolower(.data[[paste(i[1], "ALARM")]]) == "no" ~ FALSE),
+            !!as.symbol(paste0("reasons", i[2])) := dplyr::case_when(
+                tolower(.data[[paste(i[1], "REASONS")]]) == "yes" ~ TRUE,
+                tolower(.data[[paste(i[1], "REASONS")]]) == "no" ~ FALSE),
+            !!as.symbol(paste0("reasons_why", i[2])) :=
+                .data[[paste(i[1], "REASONS WHY")]],
+            !!as.symbol(paste0("nap", i[2])) := dplyr::case_when(
+                tolower(.data[[paste(i[1], "NAP")]]) == "yes" ~ TRUE,
+                tolower(.data[[paste(i[1], "NAP")]]) == "no" ~ FALSE),
+            !!as.symbol(paste0("napo", i[2])) :=
+                convert_pt(.data[[paste(i[1], "NAP ONSET")]], "hms",
+                           c("HM", "IMp")),
+            !!as.symbol(paste0("nape", i[2])) :=
+                convert_pt(.data[[paste(i[1], "NAP END")]], "hms",
+                           c("HM", "IMp")),
+        ) %>%
+            dplyr::select(-dplyr::starts_with(i[1]))
+    }
 
     # Write and output dataset -----
 
@@ -687,6 +1343,11 @@ validate_shift_mctq <- function(write = FALSE) {
     # R CMD Check variable bindings fix (see <http://bit.ly/3bliuam>) -----
 
     dummy <- bkp <- so_i <- sd_i <-  NULL
+
+    # Set values -----
+
+    set.seed(1)
+    reserved_id <- sample(50, 11)
 
     # Do univariate validation -----
 
@@ -773,11 +1434,13 @@ validate_shift_mctq <- function(write = FALSE) {
     ## Cases: "Suspicious values (removed case)" and "Sleep onset is equal or
     ##        greater than sleep end [(s_prep + s_lat) >= se] (invalid case)"
 
+    invalid <- c(reserved_id[7], reserved_id[10], reserved_id[11])
+
     shift_mctq <- shift_mctq %>%
         dplyr::rowwise() %>%
         dplyr::mutate(
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-                .data$id %in% c(15, 41), na_as(.x), .x))) %>%
+                .data$id %in% invalid, na_as(.x), .x))) %>%
         dplyr::ungroup()
 
     # Fix/impute linked data -----
