@@ -2,23 +2,24 @@
 # Don't forget to uncomment the `library` functions below
 
 # library(checkmate)
+# library(dplyr)
 # library(hms)
 # library(lubridate)
 # library(magrittr)
+# library(mctq)
 # library(rlang)
-# library(dplyr)
 # library(usethis)
 # library(utils)
 # library(validate)
-# library(mctq)
 
 #' Build a fictional micro MCTQ raw dataset
 #'
 #' @description
 #'
-#' `build_micro_mctq()` builds a fictional raw dataset composed by micro Munich
-#' Chronotype Questionnaire (MCTQ) basic/measurable for testing and learning
-#' purposes. See [mctq::micro_mctq] to learn more.
+#' `build_micro_mctq()` builds a fictional raw dataset, __for testing and
+#' learning purposes__, composed by basic/measurable variables of the Munich
+#' Chronotype Questionnaire (MCTQ) standard version. See [mctq::micro_mctq] to
+#' learn more.
 #'
 #' @param write (optional) a `logical` value indicating if the function must
 #'   write a `micro_mctq.csv` file to `"./inst/extdata/"` (default: `FALSE`).
@@ -58,8 +59,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
         `ID` = as.character(reserved_id[1]), # integer | [auto-increment]
         `SHIFT WORK` = "no", # logical | yes/no
         `WORK DAYS` = "5", # integer | [0-7]
+
         `W SLEEP ONSET` = "01:45 AM", # hms | IMp [0-12h]
         `W SLEEP END` = "06:30 AM", # hms | IMp [0-12h]
+
         `F SLEEP ONSET` = "02:45 AM", # hms | IMp [0-12h]
         `F SLEEP END` = "12:00 PM" # hms | IMp [0-12h]
     )
@@ -98,8 +101,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
                     `ID` = as.character(i),
                     `SHIFT WORK` =  format_logical(.data$shift_work),
                     `WORK DAYS` = as.character(.data$wd),
+
                     `W SLEEP ONSET` = format_hms(.data$so_w),
                     `W SLEEP END` = format_hms(.data$se_w),
+
                     `F SLEEP ONSET` = format_hms(.data$so_f),
                     `F SLEEP END` = format_hms(.data$se_f)
                     )
@@ -114,8 +119,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]
         `SHIFT WORK` = "no", # logical | yes/no
         `WORK DAYS` = "10", # integer | [0-7] # INVALID
+
         `W SLEEP ONSET` = "27:00 PM", # hms | IMp [0-12h] # INVALID
         `W SLEEP END` = "12:15 PM", # hms | IMp [0-12h]
+
         `F SLEEP ONSET` = "34:00 AM", # hms | IMp [0-12h] # INVALID
         `F SLEEP END` = "14:12 PM" # hms | IMp [0-12h]
     ) %>%
@@ -126,8 +133,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "2", # integer | [0-7]
+
             `W SLEEP ONSET` = "09:45 PM", # hms | IMp [0-12h]
             `W SLEEP END` = "09:15 AM", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "00:35 AM", # hms | IMp [0-12h]
             `F SLEEP END` = "06:00 AM" # hms | IMp [0-12h]
         ) %>%
@@ -138,8 +147,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
             `SHIFT WORK` = "", # logical | yes/no
             `WORK DAYS` = "", # integer | [0-7]
+
             `W SLEEP ONSET` = "", # hms | IMp [0-12h]
             `W SLEEP END` = "", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "", # hms | IMp [0-12h]
             `F SLEEP END` = "" # hms | IMp [0-12h]
         ) %>%
@@ -150,8 +161,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "", # integer | [0-7]
+
             `W SLEEP ONSET` = "", # hms | IMp [0-12h]
             `W SLEEP END` = "", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "05:30 AM", # hms | IMp [0-12h]
             `F SLEEP END` = "15:00 PM" # hms | IMp [0-12h]
         ) %>%
@@ -163,8 +176,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
             `SHIFT WORK` = "0", # logical | yes/no
             `WORK DAYS` = "0", # integer | [0-7]
+
             `W SLEEP ONSET` = "0", # hms | IMp [0-12h]
             `W SLEEP END` = "0", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "0", # hms | IMp [0-12h]
             `F SLEEP END` = "0" # hms | IMp [0-12h]
         ) %>%
@@ -175,8 +190,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "7", # integer | [0-7]
+
             `W SLEEP ONSET` = "11:40 PM", # hms | IMp [0-12h]
             `W SLEEP END` = "06:30 AM", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "", # hms | IMp [0-12h]
             `F SLEEP END` = "" # hms | IMp [0-12h]
         ) %>%
@@ -187,8 +204,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "6", # integer | [0-7]
+
             `W SLEEP ONSET` = "02:30 AM", # hms | IMp [0-12h]
             `W SLEEP END` = "04:00 AM", # hms | IMp [0-12h] # SUSPICIOUS
+
             `F SLEEP ONSET` = "01:00 AM", # hms | IMp [0-12h]
             `F SLEEP END` = "03:00 AM" # hms | IMp [0-12h] # SUSPICIOUS
         ) %>%
@@ -199,8 +218,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
             `SHIFT WORK` = "false", # logical | yes/no # AMBIGUOUS
             `WORK DAYS` = "5", # integer | [0-7]
+
             `W SLEEP ONSET` = "2315", # hms | IMp [0-12h] # AMBIGUOUS
             `W SLEEP END` = "7:15", # hms | IMp [0-12h] # AMBIGUOUS
+
             `F SLEEP ONSET` = "02:30 AM", # hms | IMp [0-12h]
             `F SLEEP END` = "10:00 AM" # hms | IMp [0-12h]
         ) %>%
@@ -211,8 +232,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "6", # integer | [0-7]
+
             `W SLEEP ONSET` = "", # hms | IMp [0-12h]
             `W SLEEP END` = "", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "10:45 PM", # hms | IMp [0-12h]
             `F SLEEP END` = "06:00 AM" # hms | IMp [0-12h]
         ) %>%
@@ -224,8 +247,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "5", # integer | [0-7]
+
             `W SLEEP ONSET` = "11:10 PM", # hms | IMp [0-12h]
             `W SLEEP END` = "07:00 AM", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "11:10 PM", # hms | IMp [0-12h]
             `F SLEEP END` = "07:00 AM" # hms | IMp [0-12h]
         ) %>%
@@ -236,8 +261,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[12]), # integer | [auto-increment]
             `SHIFT WORK` = "no", # logical | yes/no
             `WORK DAYS` = "2", # integer | [0-7]
+
             `W SLEEP ONSET` = "01:00 AM", # hms | IMp [0-12h]
             `W SLEEP END` = "08:00 AM", # hms | IMp [0-12h]
+
             `F SLEEP ONSET` = "04:00 AM", # hms | IMp [0-12h]
             `F SLEEP END` = "04:00 AM", # hms | IMp [0-12h]
         )
@@ -268,15 +295,15 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' @details
 #'
 #' Here the process of _tiding_ a dataset is understood as transforming it in
-#' input data, like described in Loo and Jonge (2018).
-#' It's a very similar process of tiding data described in the workflow proposed
-#' by Wickham and Grolemund (n.d.).
+#' input data, like described in Loo and Jonge (2018). It's a very similar
+#' process of tiding data described in the workflow proposed by Wickham and
+#' Grolemund (n.d.).
 #'
 #' Please note that input data is not the same as valid data. To get a valid
 #' `micro_mctq` data, run [mctq::validate_micro_mctq()].
 #'
-#' To learn more about the concept of tidy data, _c.f._ Wickham
-#' (2014) and Wickham and Grolemund (n.d.).
+#' To learn more about the concept of tidy data, _c.f._ Wickham (2014) and
+#' Wickham and Grolemund (n.d.).
 #'
 #' @param write (optional) a `logical` value indicating if the function must
 #'   write a `micro_mctq.rda` file to `"./data/"` (default: `FALSE`).
@@ -337,8 +364,10 @@ tidy_micro_mctq <- function(write = FALSE) {
             tolower(.data$`SHIFT WORK`) == "false" ~ FALSE,
             tolower(.data$`SHIFT WORK`) == "no" ~ FALSE),
         wd = as.integer(.data$`WORK DAYS`),
+
         so_w = convert_pt(.data$`W SLEEP ONSET`, "hms", orders, quiet = TRUE),
         se_w = convert_pt(.data$`W SLEEP END`, "hms", orders),
+
         so_f = convert_pt(.data$`F SLEEP ONSET`, "hms",orders, quiet = TRUE),
         se_f = convert_pt(.data$`F SLEEP END`, "hms", orders)
         )
@@ -360,15 +389,14 @@ tidy_micro_mctq <- function(write = FALSE) {
 #' @details
 #'
 #' Here, the process of _validating_ a dataset is understood as detecting
-#' invalid data, by checking whether data satisfies certain assumptions
-#' from domain knowledge, to them removing or, if possible, fixing them. You can
-#' find more about data validation and error location in Loo and Jonge
-#' (2018).
+#' invalid data, by checking whether data satisfies certain assumptions from
+#' domain knowledge, to them removing or, if possible, fixing them. You can find
+#' more about data validation and error location in Loo and Jonge (2018).
 #'
 #' This process can be considered as part of the process of transforming data,
 #' described in the workflow proposed by Wickham and Grolemund (n.d.).
 #'
-#' @return An invisible tibble with a validated micro MCTQ dataset.
+#' @return An invisible `tibble` with a validated micro MCTQ dataset.
 #'
 #' @inheritParams tidy_micro_mctq
 #' @template references_d
@@ -474,13 +502,15 @@ validate_micro_mctq <- function(write = FALSE) {
 #' process of transforming data, described in the workflow proposed by Wickham
 #' and Grolemund (n.d.).
 #'
-#' @return An invisible tibble with all the variables proposed for a micro
+#' @return An invisible `tibble` with all the variables proposed for a micro
 #'   MCTQ dataset.
 #'
 #' @inheritParams tidy_micro_mctq
 #' @inheritParams pretty_mctq
 #' @template references_d
 #' @family data wrangling functions
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data := !!
 #' @noRd
 #'
 #' @examples
@@ -488,19 +518,27 @@ validate_micro_mctq <- function(write = FALSE) {
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::analyze_micro_mctq())
 #' }}
-analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
+analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     # Check arguments -----
 
     checkmate::assert_flag(write)
+    checkmate::assert_flag(round)
+    checkmate::assert_flag(hms)
 
     # R CMD Check variable bindings fix -----
 
     ## See: <http://bit.ly/3bliuam>
 
     id <- NULL
-    shift_work <- wd <- so_w <- so_f <- se_w <- se_f <- NULL
-    sd_w <- sd_f <- msw <- msf <- sd_week <- msf_sc <- sloss_week <- NULL
-    sjl_rel <- sjl <- NULL
+
+    shift_work <- wd <- fd <- NULL
+
+    so_w <- se_w <- sd_w <- msw <- NULL
+
+    so_f <- se_f <- sd_f <- msf <- NULL
+
+    sd_week <- msf_sc <- sloss_week <- sjl_rel <- sjl <- NULL
+
     dummy_0_a <- dummy_0_b <- dummy_7_a <- dummy_7_b <- NULL
     dummy_0 <- dummy_7 <- NULL
 
@@ -509,18 +547,26 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = TRUE) {
     micro_mctq <- validate_micro_mctq() %>%
         dplyr::mutate(
             fd = fd(wd),
+
             sd_w = sd(so_w, se_w),
             msw = ms(so_w, sd_w),
+
             sd_f = sd(so_f, se_f),
             msf = ms(so_f, sd_f),
+
             sd_week = sd_week(sd_w, sd_f, wd),
             msf_sc = msf_sc(msf, sd_w, sd_f, sd_week, rep(FALSE, length(id))),
             sloss_week = sloss_week(sd_w, sd_f, wd),
             sjl_rel = sjl_rel(msw, msf),
             sjl = abs(sjl_rel)) %>%
         dplyr::relocate(
-            id, shift_work, wd, fd, so_w, se_w, sd_w, msw, so_f, se_f,
-            sd_f, msf, sd_week, msf_sc, sloss_week, sjl_rel, sjl)
+            id, shift_work, wd, fd,
+
+            so_w, se_w, sd_w, msw,
+
+            so_f, se_f, sd_f, msf,
+
+            sd_week, msf_sc, sloss_week, sjl_rel, sjl)
 
     # Fix missing sections -----
 

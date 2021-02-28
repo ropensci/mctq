@@ -40,6 +40,7 @@ reference:
   contents:
   - std_mctq
   - micro_mctq
+  - shift_mctq
 
 - title: Utilities
   contents:

@@ -7,13 +7,14 @@
 #' `random_mctq` builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 #' composed by MCTQ basic/measurable variables.
 #'
-#' This function is for testing and learning purposes, please don't misuse it.
+#' This function is __for testing and learning purposes__, please don't misuse
+#' it.
 #'
 #' @details
 #'
 #' The case structure (variable names and classes) are the same as the datasets
 #' provided by the `mctq` package. See [mctq::std_mctq], [mctq::micro_mctq] and
-#' `mctq::shift_mctq` to learn more.
+#' [mctq::shift_mctq] to learn more.
 #'
 #' ## Requirements
 #'
@@ -744,78 +745,78 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
         sprep_w_m = sprep_w_m,
         slat_w_m = slat_w_m,
         se_w_m = se_w_m,
-        alarm_w_m = alarm_w_m,
         tgu_w_m = tgu_w_m,
+        alarm_w_m = alarm_w_m,
+        reasons_w_m = reasons_w_m,
+        reasons_why_w_m = reasons_why_w_m,
         nap_w_m = nap_w_m,
         napo_w_m = napo_w_m,
         nape_w_m = nape_w_m,
-        reasons_w_m = reasons_w_m,
-        reasons_why_w_m = reasons_why_w_m,
 
         n_f_m = as.integer(n_f[1]),
         bt_f_m = bt_f_m,
         sprep_f_m = sprep_f_m,
         slat_f_m = slat_f_m,
         se_f_m = se_f_m,
-        alarm_f_m = alarm_f_m,
         tgu_f_m = tgu_f_m,
+        alarm_f_m = alarm_f_m,
+        reasons_f_m = reasons_f_m,
+        reasons_why_f_m = reasons_why_f_m,
         nap_f_m = nap_f_m,
         napo_f_m = napo_f_m,
         nape_f_m = nape_f_m,
-        reasons_f_m = reasons_f_m,
-        reasons_why_f_m = reasons_why_f_m,
 
         n_w_e = as.integer(n_w[2]),
         bt_w_e = bt_w_e,
         sprep_w_e = sprep_w_e,
         slat_w_e = slat_w_e,
         se_w_e = se_w_e,
-        alarm_w_e = alarm_w_e,
         tgu_w_e = tgu_w_e,
+        alarm_w_e = alarm_w_e,
+        reasons_w_e = reasons_w_e,
+        reasons_why_w_e = reasons_why_w_e,
         nap_w_e = nap_w_e,
         napo_w_e = napo_w_e,
         nape_w_e = nape_w_e,
-        reasons_w_e = reasons_w_e,
-        reasons_why_w_e = reasons_why_w_e,
 
         n_f_e = as.integer(n_f[2]),
         bt_f_e = bt_f_e,
         sprep_f_e = sprep_f_e,
         slat_f_e = slat_f_e,
         se_f_e = se_f_e,
-        alarm_f_e = alarm_f_e,
         tgu_f_e = tgu_f_e,
+        alarm_f_e = alarm_f_e,
+        reasons_f_e = reasons_f_e,
+        reasons_why_f_e = reasons_why_f_e,
         nap_f_e = nap_f_e,
         napo_f_e = napo_f_e,
         nape_f_e = nape_f_e,
-        reasons_f_e = reasons_f_e,
-        reasons_why_f_e = reasons_why_f_e,
 
         n_w_n = as.integer(n_w[3]),
         bt_w_n = bt_w_n,
         sprep_w_n = sprep_w_n,
         slat_w_n = slat_w_n,
         se_w_n = se_w_n,
-        alarm_w_n = alarm_w_n,
         tgu_w_n = tgu_w_n,
+        alarm_w_n = alarm_w_n,
+        reasons_w_n = reasons_w_n,
+        reasons_why_w_n = reasons_why_w_n,
         nap_w_n = nap_w_n,
         napo_w_n = napo_w_n,
         nape_w_n = nape_w_n,
-        reasons_w_n = reasons_w_n,
-        reasons_why_w_n = reasons_why_w_n,
 
         n_f_n = as.integer(n_f[3]),
         bt_f_n = bt_f_n,
         sprep_f_n = sprep_f_n,
         slat_f_n = slat_f_n,
         se_f_n = se_f_n,
-        alarm_f_n = alarm_f_n,
         tgu_f_n = tgu_f_n,
+        alarm_f_n = alarm_f_n,
+        reasons_f_n = reasons_f_n,
+        reasons_why_f_n = reasons_why_f_n,
         nap_f_n = nap_f_n,
         napo_f_n = napo_f_n,
-        nape_f_n = nape_f_n,
-        reasons_f_n = reasons_f_n,
-        reasons_why_f_n = reasons_why_f_n
+        nape_f_n = nape_f_n
     )
 }
 

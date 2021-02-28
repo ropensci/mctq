@@ -23,12 +23,13 @@ variable of the model indicated in \code{model}.
 \code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
 composed by MCTQ basic/measurable variables.
 
-This function is for testing and learning purposes, please don't misuse it.
+This function is \strong{for testing and learning purposes}, please don't misuse
+it.
 }
 \details{
 The case structure (variable names and classes) are the same as the datasets
 provided by the \code{mctq} package. See \link{std_mctq}, \link{micro_mctq} and
-\code{mctq::shift_mctq} to learn more.
+\link{shift_mctq} to learn more.
 \subsection{Requirements}{
 
 This function requires the \code{\link[stats:stats-package]{stats}} package. This wont

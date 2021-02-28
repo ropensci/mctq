@@ -4,9 +4,9 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' A fictional dataset composed by standard Munich Chronotype Questionnaire
-#' (MCTQ) basic/measurable and computed variables for testing and learning
-#' purposes.
+#' A fictional dataset, __for testing and learning purposes__, composed by
+#' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
+#' standard version.
 #'
 #' This data was created following the guidelines in Roenneberg, Wirz-Justice, &
 #' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
@@ -28,14 +28,14 @@
 #' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' (2013) and Ghotbi _et.al_ (2020).
 #'
-#' If you are curious about the variable computations and want to have access to
+#' If you are curious about variable computations and want to have access to
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
 #'
-#' This dataset was created by randomized sampling (see [random_mctq()]) and by
-#' manual insertions of especial cases. Its purpose is to demonstrate common
-#' cases and data issues that researchers may find in their MCTQ data, in
+#' This dataset was created by randomized sampling (see [mctq::random_mctq()])
+#' and by manual insertions of especial cases. Its purpose is to demonstrate
+#' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
 #' You can see the `std_mctq` build and data wrangling processes at
@@ -53,6 +53,11 @@
 #' hold time values. This classes can be found in the [hms][hms::hms-package]
 #' and [lubridate][lubridate::lubridate-package] packages.
 #'
+#' ## `Duration` objects
+#'
+#' If you prefer to view `Duration` objects as `hms` objects, run
+#' `pretty_mctq(std_mctq)`.
+#'
 #' @format A tibble with `r ncol(std_mctq)` columns and `r nrow(std_mctq)` rows:
 #'
 #' \describe{
@@ -69,14 +74,14 @@
 #'   A `logical` value indicating if the subject have a regular work schedule.
 #'   \cr \cr
 #'   Statement (`EN`): "I have a regular work schedule (this includes being, for
-#'   example, a housewife or househusband)".
+#'   example, a housewife or househusband): Yes ( ___ ) No ( ___ )".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{wd}{
-#'   Number of workdays per week.
+#'   Number of __workdays__ per week.
 #'   \cr \cr
 #'   Statement (`EN`): "I have a regular work schedule and work ___ days per
 #'   week".
@@ -86,7 +91,7 @@
 #'   R class: `integer`.}
 #'
 #'   \item{fd}{
-#'   Number of work-free days per week.
+#'   Number of __work-free days__ per week.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -94,7 +99,7 @@
 #'
 #'
 #'   \item{bt_w}{
-#'   Local time of going to bed on workdays.
+#'   Local time of going to bed on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "I go to bed at ___ o'clock'".
 #'   \cr \cr
@@ -103,7 +108,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{sprep_w}{
-#'   Local time of preparing to sleep on workdays.
+#'   Local time of preparing to sleep on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "I actually get ready to fall asleep at ___ o'clock".
 #'   \cr \cr
@@ -112,7 +117,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{slat_w}{
-#'   Sleep latency on workdays.
+#'   Sleep latency or time to fall asleep after preparing to sleep on
+#'   __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "I need ___ minutes to fall asleep".
 #'   \cr \cr
@@ -121,14 +127,14 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{so_w}{
-#'   Sleep onset on workdays.
+#'   Local time of sleep onset on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{se_w}{
-#'   Sleep end on workdays.
+#'   Local time of sleep end on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "I wake up at ___ o'clock".
 #'   \cr \cr
@@ -137,7 +143,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{si_w}{
-#'   Sleep inertia on workdays.
+#'   "Sleep inertia" on __workday__s. Despite the name, this variable represents
+#'   the time the subject takes to get up after sleep end.
 #'   \cr \cr
 #'   Statement (`EN`): "After ___ minutes, I get up".
 #'   \cr \cr
@@ -146,33 +153,57 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{gu_w}{
-#'   Local time of getting out of bed on workdays.
+#'   Local time of getting out of bed on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_w}{
-#'   A logical value indicating if the subject use an alarm clock on workdays.
+#'   A `logical` value indicating if the subject uses an alarm clock to wake up
+#'   on __workdays__.
 #'   \cr \cr
-#'   Statement (`EN`): "I use an alarm clock on workdays".
+#'   Statement (`EN`): "I use an alarm clock on workdays: Yes ( ___ ) No ( ___
+#'   )".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{wake_before_w}{
-#'   A logical value indicating if the subject regularly wake up __before__ the
-#'   alarm rings.
+#'   A `logical` value indicating if the subject regularly wake up __before__
+#'   the alarm rings on __workdays__.
 #'   \cr \cr
-#'   Statement (`EN`): "I regularly wake up BEFORE the alarm rings".
+#'   Statement (`EN`): "If "Yes": I regularly wake up BEFORE the alarm rings:
+#'   Yes ( ___ ) No ( ___ )".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
+#'   \item{sd_w}{
+#'   Sleep duration on __workdays__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `Duration`.}
+#'
+#'   \item{tbt_w}{
+#'   Total time in bed on __workdays__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `Duration`.}
+#'
+#'   \item{msw}{
+#'   Local time of mid-sleep on __workdays__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `hms`.}
+#'
 #'   \item{le_w}{
-#'   Light exposure on workdays.
+#'   Light exposure on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "On average, I spend the following amount of time
 #'   outdoors in daylight (without a roof above my head)".
@@ -181,30 +212,9 @@
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
-#'   \item{sd_w}{
-#'   Sleep duration on workdays.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `Duration`.}
-#'
-#'   \item{tbt_w}{
-#'   Total time in bed on workdays.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
-#'
-#'   \item{msw}{
-#'   Mid-sleep on workdays.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
-#'
 #'
 #'   \item{bt_f}{
-#'   Local time of going to bed on work-free days.
+#'   Local time of going to bed on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "I go to bed at ___ o'clock'".
 #'   \cr \cr
@@ -213,7 +223,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{sprep_f}{
-#'   Local time of preparing to sleep on work-free days
+#'   Local time of preparing to sleep on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "I actually get ready to fall asleep at ___ o'clock".
 #'   \cr \cr
@@ -222,7 +232,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{slat_f}{
-#'   Sleep latency on work-free days.
+#'   Sleep latency or time to fall asleep after preparing to sleep on
+#'   __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "I need ___ minutes to fall asleep".
 #'   \cr \cr
@@ -231,14 +242,14 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{so_f}{
-#'   Sleep onset on work-free days.
+#'   Local time of sleep onset on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{se_f}{
-#'   Sleep end on work-free days.
+#'   Local time of sleep end on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "I wake up at ___ o'clock".
 #'   \cr \cr
@@ -247,7 +258,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{si_f}{
-#'   Sleep inertia on work-free days.
+#'   Sleep inertia on __work-free days__. Despite the name, this variable
+#'   represents the time the subject takes to get up after sleep end.
 #'   \cr \cr
 #'   Statement (`EN`): "After ___ minutes, I get up".
 #'   \cr \cr
@@ -256,29 +268,30 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{gu_f}{
-#'   Local time of getting out of bed on work-free days.
+#'   Local time of getting out of bed on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_f}{
-#'   A logical value indicating if the subject use an alarm clock on work-free
-#'   days.
+#'   A `logical` value indicating if the subject uses an alarm clock to wake up
+#'   on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "My wake-up time is due to the use of an alarm
-#'   clock".
+#'   clock: Yes ( ___ ) No ( ___ )".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_f}{
-#'   A logical value indicating if the subject have any particular reasons for
-#'   why he/she __cannot__ freely choose his/her sleep times on work-free days.
+#'   A `logical` value indicating if the subject have any particular reasons for
+#'   why he/she __cannot__ freely choose his/her sleep times on __work-free
+#'   days__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
-#'   choose my sleep times on free days".
+#'   choose my sleep times on free days: Yes ( ___ ) No ( ___ )".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
@@ -286,17 +299,38 @@
 #'
 #'   \item{reasons_why_f}{
 #'   Particular reasons for why the subject cannot freely choose his/her sleep
-#'   times on work-free days.
+#'   times on __work-free days__.
 #'   \cr \cr
-#'   Statement (`EN`): "There are particular reasons why I cannot freely choose
-#'   my sleep times on free days".
+#'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
+#'   Others ( ___ ), for example: ___".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `character`.}
 #'
+#'   \item{sd_f}{
+#'   Sleep duration on __work-free days__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `Duration`.}
+#'
+#'   \item{tbt_f}{
+#'   Total time in bed on __work-free days__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `Duration`.}
+#'
+#'   \item{msf}{
+#'   Local time of mid-sleep on __work-free days__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `hms`.}
+#'
 #'   \item{le_f}{
-#'   Light exposure on work-free days.
+#'   Light exposure on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "On average, I spend the following amount of time
 #'   outdoors in daylight (without a roof above my head)".
@@ -304,27 +338,6 @@
 #'   Type: Extra.
 #'   \cr \cr
 #'   R class: `Duration`.}
-#'
-#'   \item{sd_f}{
-#'   Sleep duration on work-free days.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `Duration`.}
-#'
-#'   \item{tbt_f}{
-#'   Total time in bed on work-free days.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
-#'
-#'   \item{msf}{
-#'   Mid-sleep on work-free days.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
 #'
 #'
 #'   \item{sd_week}{
@@ -335,7 +348,7 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{msf_sc}{
-#'   Chronotype or corrected mid-sleep on work-free days.
+#'   Chronotype or corrected local time of mid-sleep on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -370,7 +383,7 @@
 #'   R class: `Duration`.}
 #' }
 #'
-#' @source Prepared by Daniel Vartanian (package's author).
+#' @source Created by Daniel Vartanian (package's author).
 #' @family datasets
 #' @template references_b
 "std_mctq"

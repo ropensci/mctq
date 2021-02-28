@@ -22,14 +22,14 @@ A \code{logical} value indicating if the subject have been a shift- or
 night-worker in the past three months.
 \cr \cr
 Statement (\code{EN}): "I have been a a shift- or night-worker in the past three
-months".
+months: Yes ( ___ ) No ( ___ )".
 \cr \cr
 Type: Basic.
 \cr \cr
 R class: \code{logical}.}
 
 \item{wd}{
-Number of workdays per week.
+Number of \strong{workdays} per week.
 \cr \cr
 Statement (\code{EN}): "Normally, I work ___ days/week".
 \cr \cr
@@ -38,14 +38,14 @@ Type: Basic.
 R class: \code{integer}.}
 
 \item{fd}{
-Number of work-free days per week.
+Number of \strong{work-free days} per week.
 \cr \cr
 Type: Computed.
 \cr \cr
 R class: \code{integer}.}
 
 \item{so_w}{
-Sleep onset on workdays.
+Local time of sleep onset on \strong{workdays}.
 \cr \cr
 Statement (\code{EN}): "On WORKDAYS ... I normally fall asleep at ___ : ___
 AM/PM (this is NOT when you get into bed, but rather when you fall
@@ -56,7 +56,7 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{se_w}{
-Sleep end on workdays.
+Local time of sleep end on \strong{workdays}.
 \cr \cr
 Statement (\code{EN}): "On WORKDAYS ... I normally wake up at ___ : ___ AM/PM
 (this is NOT when you get out of bed, but rather when you wake up)".
@@ -66,21 +66,22 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{sd_w}{
-Sleep duration on workdays.
+Sleep duration on \strong{workdays}.
 \cr \cr
 Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{msw}{
-Mid-sleep on workdays.
+Local time of mid-sleep on \strong{workdays}.
 \cr \cr
 Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
 \item{so_f}{
-Sleep onset on work-free days when the subject DON'T use an alarm clock.
+Local time of sleep onset on \strong{work-free days} when the subject DON'T use
+an alarm clock to wake up.
 \cr \cr
 Statement (\code{EN}): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 normally fall asleep at ___ : ___ AM/PM (this is NOT when you get into bed,
@@ -91,7 +92,8 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{se_f}{
-Sleep end on work-free days when the subject DON'T use an alarm clock.
+Local time of sleep end on \strong{work-free days} when the subject DON'T use an
+alarm clock to wake up.
 \cr \cr
 Statement (\code{EN}): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 normally wake up at ___ : ___ AM/PM (this is NOT when you get out of bed,
@@ -102,14 +104,16 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{sd_f}{
-Sleep duration on work-free days when the subject DON'T use an alarm clock.
+Sleep duration on \strong{work-free days} when the subject DON'T use an alarm
+clock to wake up.
 \cr \cr
 Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{msf}{
-Mid-sleep on work-free days when the subject DON'T use an alarm clock.
+Local time of mid-sleep on \strong{work-free days} when the subject DON'T use an
+alarm clock to wake up.
 \cr \cr
 Type: Computed.
 \cr \cr
@@ -123,7 +127,7 @@ Type: Computed.
 R class: \code{Duration}.}
 
 \item{msf_sc}{
-Chronotype or corrected mid-sleep on work-free days.
+Chronotype or corrected local time of mid-sleep on \strong{work-free days}.
 \cr \cr
 Type: Computed.
 \cr \cr
@@ -152,7 +156,7 @@ R class: \code{Duration}.}
 }
 }
 \source{
-Prepared by Daniel Vartanian (package's author).
+Created by Daniel Vartanian (package's author).
 }
 \usage{
 micro_mctq
@@ -160,9 +164,9 @@ micro_mctq
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-A fictional dataset composed by micro Munich Chronotype Questionnaire
-(MCTQ) basic/measurable and computed variables for testing and learning
-purposes.
+A fictional dataset, \strong{for testing and learning purposes}, composed by
+basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
+micro version.
 
 This data was created following the guidelines in Ghotbi \emph{et.al} (2020), in
 addition to the guidelines in Roenneberg, Wirz-Justice, & Merrow (2003),
@@ -183,15 +187,15 @@ Zerbini, & Winnebeck (2019).
 To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
 (2013) and Ghotbi \emph{et.al} (2020).
 
-If you are curious about the variable computations and want to have access to
+If you are curious about variable computations and want to have access to
 the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 }
 
 \subsection{Data building and data wrangling}{
 
-This dataset was created by randomized sampling (see \code{\link[=random_mctq]{random_mctq()}}) and by
-manual insertions of especial cases. Its purpose is to demonstrate common
-cases and data issues that researchers may find in their MCTQ data, in
+This dataset was created by randomized sampling (see \code{\link[=random_mctq]{random_mctq()}})
+and by manual insertions of especial cases. Its purpose is to demonstrate
+common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
 You can see the \code{micro_mctq} build and data wrangling processes at
@@ -209,6 +213,12 @@ articles, in addition to the guidelines of the \href{https://style.tidyverse.org
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. This classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages.
+}
+
+\subsection{\code{Duration} objects}{
+
+If you prefer to view \code{Duration} objects as \code{hms} objects, run
+\code{pretty_mctq(micro_mctq)}.
 }
 }
 \references{
@@ -244,6 +254,7 @@ The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
 }
 \seealso{
 Other datasets: 
+\code{\link{shift_mctq}},
 \code{\link{std_mctq}}
 }
 \concept{datasets}

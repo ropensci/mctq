@@ -4,9 +4,9 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' A fictional dataset composed by micro Munich Chronotype Questionnaire
-#' (MCTQ) basic/measurable and computed variables for testing and learning
-#' purposes.
+#' A fictional dataset, __for testing and learning purposes__, composed by
+#' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
+#' micro version.
 #'
 #' This data was created following the guidelines in Ghotbi _et.al_ (2020), in
 #' addition to the guidelines in Roenneberg, Wirz-Justice, & Merrow (2003),
@@ -29,14 +29,14 @@
 #' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' (2013) and Ghotbi _et.al_ (2020).
 #'
-#' If you are curious about the variable computations and want to have access to
+#' If you are curious about variable computations and want to have access to
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
 #'
-#' This dataset was created by randomized sampling (see [random_mctq()]) and by
-#' manual insertions of especial cases. Its purpose is to demonstrate common
-#' cases and data issues that researchers may find in their MCTQ data, in
+#' This dataset was created by randomized sampling (see [mctq::random_mctq()])
+#' and by manual insertions of especial cases. Its purpose is to demonstrate
+#' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
 #' You can see the `micro_mctq` build and data wrangling processes at
@@ -53,6 +53,11 @@
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. This classes can be found in the [hms][hms::hms-package]
 #' and [lubridate][lubridate::lubridate-package] packages.
+#'
+#' ## `Duration` objects
+#'
+#' If you prefer to view `Duration` objects as `hms` objects, run
+#' `pretty_mctq(micro_mctq)`.
 #'
 #' @format A tibble with `r ncol(micro_mctq)` columns and `r nrow(micro_mctq)`
 #'   rows:
@@ -72,14 +77,14 @@
 #'   night-worker in the past three months.
 #'   \cr \cr
 #'   Statement (`EN`): "I have been a a shift- or night-worker in the past three
-#'   months".
+#'   months: Yes ( ___ ) No ( ___ )".
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
 #'   R class: `logical`.}
 #'
 #'   \item{wd}{
-#'   Number of workdays per week.
+#'   Number of __workdays__ per week.
 #'   \cr \cr
 #'   Statement (`EN`): "Normally, I work ___ days/week".
 #'   \cr \cr
@@ -88,7 +93,7 @@
 #'   R class: `integer`.}
 #'
 #'   \item{fd}{
-#'   Number of work-free days per week.
+#'   Number of __work-free days__ per week.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -96,7 +101,7 @@
 #'
 #'
 #'   \item{so_w}{
-#'   Sleep onset on workdays.
+#'   Local time of sleep onset on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORKDAYS ... I normally fall asleep at ___ : ___
 #'   AM/PM (this is NOT when you get into bed, but rather when you fall
@@ -107,7 +112,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{se_w}{
-#'   Sleep end on workdays.
+#'   Local time of sleep end on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORKDAYS ... I normally wake up at ___ : ___ AM/PM
 #'   (this is NOT when you get out of bed, but rather when you wake up)".
@@ -117,14 +122,14 @@
 #'   R class: `hms`.}
 #'
 #'   \item{sd_w}{
-#'   Sleep duration on workdays.
+#'   Sleep duration on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{msw}{
-#'   Mid-sleep on workdays.
+#'   Local time of mid-sleep on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -132,7 +137,8 @@
 #'
 #'
 #'   \item{so_f}{
-#'   Sleep onset on work-free days when the subject DON'T use an alarm clock.
+#'   Local time of sleep onset on __work-free days__ when the subject DON'T use
+#'   an alarm clock to wake up.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 #'   normally fall asleep at ___ : ___ AM/PM (this is NOT when you get into bed,
@@ -143,7 +149,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{se_f}{
-#'   Sleep end on work-free days when the subject DON'T use an alarm clock.
+#'   Local time of sleep end on __work-free days__ when the subject DON'T use an
+#'   alarm clock to wake up.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 #'   normally wake up at ___ : ___ AM/PM (this is NOT when you get out of bed,
@@ -154,14 +161,16 @@
 #'   R class: `hms`.}
 #'
 #'   \item{sd_f}{
-#'   Sleep duration on work-free days when the subject DON'T use an alarm clock.
+#'   Sleep duration on __work-free days__ when the subject DON'T use an alarm
+#'   clock to wake up.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{msf}{
-#'   Mid-sleep on work-free days when the subject DON'T use an alarm clock.
+#'   Local time of mid-sleep on __work-free days__ when the subject DON'T use an
+#'   alarm clock to wake up.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -176,7 +185,7 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{msf_sc}{
-#'   Chronotype or corrected mid-sleep on work-free days.
+#'   Chronotype or corrected local time of mid-sleep on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -204,7 +213,7 @@
 #'   R class: `Duration`.}
 #' }
 #'
-#' @source Prepared by Daniel Vartanian (package's author).
+#' @source Created by Daniel Vartanian (package's author).
 #' @family datasets
 #' @template references_b
 "micro_mctq"
