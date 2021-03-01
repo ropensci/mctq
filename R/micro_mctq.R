@@ -184,19 +184,19 @@
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
-#'   \item{msf_sc}{
-#'   Chronotype or corrected local time of mid-sleep on __work-free days__.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
-#'
 #'   \item{sloss_week}{
 #'   Weekly sleep loss.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
+#'
+#'   \item{msf_sc}{
+#'   Chronotype or corrected local time of mid-sleep on __work-free days__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `hms`.}
 #'
 #'   \item{sjl_rel}{
 #'   Relative social jetlag.

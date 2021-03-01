@@ -18,8 +18,8 @@
 #' what class of object you prefer as output.
 #'
 #' Valid `class` values are: `"character"`, `"integer"`, `"double"`,
-#' `"numeric"`, `"Duration"`, `"Period"`, `"difftime"`, and `"hms"`
-#' (case insensitive).
+#' `"numeric"`, `"Duration"`, `"Period"`, `"difftime"`, and `"hms"` (case
+#' insensitive).
 #'
 #' ## `vectorize` argument
 #'
@@ -39,11 +39,11 @@
 #'
 #' ## `Period` objects
 #'
-#' `Period` objects are a special time of object developed by the
-#' [lubridate::lubridate-package] team that track changes in clock times
-#' ignoring time irregularities. That is to say that 1 day as `Period` will
-#' always represent 1 day in the timeline. `sum_time()` ignores that property of
-#' `Period` objects, treating them as objects of class `Duration`.
+#' `Period` objects are a special time object developed by the
+#' [lubridate][lubridate::lubridate-package] team that track changes in clock
+#' times ignoring time irregularities. That is to say that 1 day as `Period`
+#' will always represent 1 day in the timeline. `sum_time()` ignores that
+#' property of `Period` objects, treating them as objects of class `Duration`.
 #'
 #' ## Time line irregularities
 #'

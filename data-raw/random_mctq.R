@@ -354,8 +354,8 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
 #' @description
 #'
 #' `random_mctq_raw_code()` prints a [mctq::random_mctq] raw case code to be
-#' used with `build_<model>_mctq`. It's purpose is to help programming special
-#' mctq cases for [mctq::std_mctq], [mctq::micro_mctq], and [mctq::shift_mctq]
+#' used with `build_<model>_mctq`. Its purpose is to help programming special
+#' MCTQ cases for [mctq::std_mctq], [mctq::micro_mctq], and [mctq::shift_mctq]
 #' datasets.
 #'
 #' @details

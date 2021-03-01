@@ -126,19 +126,19 @@ Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
-\item{msf_sc}{
-Chronotype or corrected local time of mid-sleep on \strong{work-free days}.
-\cr \cr
-Type: Computed.
-\cr \cr
-R class: \code{hms}.}
-
 \item{sloss_week}{
 Weekly sleep loss.
 \cr \cr
 Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
+
+\item{msf_sc}{
+Chronotype or corrected local time of mid-sleep on \strong{work-free days}.
+\cr \cr
+Type: Computed.
+\cr \cr
+R class: \code{hms}.}
 
 \item{sjl_rel}{
 Relative social jetlag.

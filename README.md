@@ -109,9 +109,9 @@ articles, that make it easy to find and apply any computation necessary.
 -   `so()` compute MCTQ sleep onset
 -   `gu()` compute MCTQ local time of getting out of bed
 -   `sd()` compute MCTQ sleep duration
--   `napd()` compute MCTQ nap duration (only for MCTQ Shift)
 -   `tbt()` compute MCTQ total time in bed
 -   `ms()` compute MCTQ mid-sleep
+-   `napd()` compute MCTQ nap duration (only for MCTQ Shift)
 -   `sd24()` compute MCTQ 24h sleep duration (only for MCTQ Shift)
 
 Example:
@@ -134,13 +134,13 @@ For computations combining workdays and work-free days, use:
 -   `sd_week()` compute MCTQ average weekly sleep duration
 -   `sd_overall()` compute MCTQ overall sleep duration (only for MCTQ
     Shift)
+-   `sloss_week()` compute MCTQ weekly sleep loss
+-   `le_week()` compute MCTQ average weekly light exposure
+-   `msf_sc()` compute MCTQ chronotype or corrected mid-sleep on
+    work-free days
 -   `sjl()` and `sjl_rel()` compute MCTQ social jet lag
 -   `sjl_weighted()` compute MCTQ absolute social jetlag across all
     shifts (only for MCTQ Shift)
--   `sloss_week()` compute MCTQ weekly sleep loss
--   `msf_sc()` compute MCTQ chronotype or corrected mid-sleep on
-    work-free days
--   `le_week()` compute MCTQ average weekly light exposure
 
 Example:
 
@@ -157,11 +157,11 @@ sjl_rel(msw, msf)
 ### Utilities
 
 In addition to `convert()`, `mctq` is also equipped with many other
-utilities functions.
+utility functions.
 
 All functions are well documented, showing all the guidelines behind the
 computations. Click
-[here](https://gipsousp.github.io/mctq/reference/index.html) to view a
+[here](https://gipsousp.github.io/mctq/reference/index.html) to see a
 list of them.
 
 ## Citation

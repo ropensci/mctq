@@ -23,17 +23,17 @@ reference:
   - so
   - gu
   - sd
-  - napd
   - tbt
   - ms
+  - napd
   - sd24
   - sd_week
   - sd_overall
+  - sloss_week
+  - le_week
+  - msf_sc
   - sjl
   - sjl_weighted
-  - sloss_week
-  - msf_sc
-  - le_week
 
 - title: Data
   contents:

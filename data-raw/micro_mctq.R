@@ -145,7 +145,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "06:00 AM" # hms | IMp [0-12h]
         ) %>%
 
-    ## Null MCTQ (invalid case)
+    ## Null MCTQ
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
@@ -176,7 +176,6 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
         ) %>%
 
     ## All, or almost all, basic variables have the same values
-    ## (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
@@ -206,7 +205,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "" # hms | IMp [0-12h]
         ) %>%
 
-    ## Suspicious values (removed case)
+    ## Suspicious values
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
@@ -267,7 +266,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F SLEEP END` = "07:00 AM" # hms | IMp [0-12h]
         ) %>%
 
-    ## Sleep onset is equal or greater than sleep end (invalid case)
+    ## Sleep onset is equal or greater than sleep end
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[12]), # integer | [auto-increment]
@@ -380,10 +379,10 @@ tidy_micro_mctq <- function(write = FALSE) {
         wd = as.integer(.data$`WORK DAYS`),
 
         so_w = convert_pt(.data$`W SLEEP ONSET`, "hms", orders, quiet = TRUE),
-        se_w = convert_pt(.data$`W SLEEP END`, "hms", orders),
+        se_w = convert_pt(.data$`W SLEEP END`, "hms", orders, quiet = TRUE),
 
         so_f = convert_pt(.data$`F SLEEP ONSET`, "hms",orders, quiet = TRUE),
-        se_f = convert_pt(.data$`F SLEEP END`, "hms", orders)
+        se_f = convert_pt(.data$`F SLEEP END`, "hms", orders, quiet = TRUE)
         )
 
     # Write and output dataset -----
@@ -433,21 +432,18 @@ validate_micro_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
-    # R CMD Check variable bindings fix (see <http://bit.ly/3bliuam>) -----
-
-    dummy <- sd_i <- id <- shift_work <- NULL
-
     # Set values -----
 
     set.seed(1)
     reserved_id <- sample(50, 12)
+    micro_mctq <- tidy_micro_mctq()
 
     # Do univariate validation -----
 
     hms_0 <- hms::parse_hm("00:00")
     hms_24 <- hms::parse_hm("24:00")
 
-    foo <- function(x) {
+    validate_hms <- function(x) {
         dplyr::case_when(
             x == hms_24 ~ hms_0,
             x >= hms_0 & x < hms_24 ~ x)
@@ -455,24 +451,24 @@ validate_micro_mctq <- function(write = FALSE) {
 
     cols_1 <- c("so_w", "se_w", "so_f", "se_f")
 
-    micro_mctq <- tidy_micro_mctq() %>%
+    micro_mctq <- micro_mctq %>%
         dplyr::mutate(
             wd = dplyr::case_when(
                 validate::in_range(wd, min = 0, max = 7) ~ wd)) %>%
-        dplyr::mutate(dplyr::across(dplyr::all_of(cols_1), foo))
+        dplyr::mutate(dplyr::across(dplyr::all_of(cols_1), validate_hms))
 
     # Do multivariate validation -----
 
-    for (i in c("w", "f")) {
-        so_i <- paste0("so_", i)
-        se_i <- paste0("se_", i)
+    for (i in c("_w", "_f")) {
+        so_i <- paste0("so", i)
+        se_i <- paste0("se", i)
 
         micro_mctq <- micro_mctq %>%
             dplyr::mutate(
-                sd_i = sd(!!as.symbol(so_i), !!as.symbol(se_i)),
+                sd_i = mctq::sd(!!as.symbol(so_i), !!as.symbol(se_i)),
                 dummy = dplyr::case_when(
-                    sd_i <= lubridate::dhours(2) |
-                        sd_i >= lubridate::dhours(18) ~ TRUE,
+                    sd_i < lubridate::dhours(2) |
+                        sd_i > lubridate::dhours(18) ~ TRUE,
                     TRUE ~ FALSE
                     ),
                 !!as.symbol(so_i) :=
@@ -486,10 +482,9 @@ validate_micro_mctq <- function(write = FALSE) {
 
     # Clean invalid cases -----
 
-    ## Cases: "Suspicious values (removed case)" and "Sleep onset is equal or
-    ##        greater than sleep end [(s_prep + s_lat) >= se] (invalid case)"
+    ## Cases: "Suspicious values"
 
-    invalid <- c(reserved_id[8], reserved_id[12])
+    invalid <- c(reserved_id[8])
 
     micro_mctq <- micro_mctq %>%
         dplyr::rowwise() %>%
@@ -546,23 +541,6 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
-    # R CMD Check variable bindings fix -----
-
-    ## See: <http://bit.ly/3bliuam>
-
-    id <- NULL
-
-    shift_work <- wd <- fd <- NULL
-
-    so_w <- se_w <- sd_w <- msw <- NULL
-
-    so_f <- se_f <- sd_f <- msf <- NULL
-
-    sd_week <- msf_sc <- sloss_week <- sjl_rel <- sjl <- NULL
-
-    dummy_0_a <- dummy_0_b <- dummy_7_a <- dummy_7_b <- NULL
-    dummy_0 <- dummy_7 <- NULL
-
     # Create computed variables -----
 
     micro_mctq <- validate_micro_mctq() %>%
@@ -587,7 +565,7 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
             so_f, se_f, sd_f, msf,
 
-            sd_week, msf_sc, sloss_week, sjl_rel, sjl)
+            sd_week, sloss_week, msf_sc, sjl_rel, sjl)
 
     # Fix missing sections -----
 

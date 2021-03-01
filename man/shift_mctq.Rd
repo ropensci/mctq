@@ -5,7 +5,7 @@
 \alias{shift_mctq}
 \title{A fictional MCTQ\eqn{^{Shift}}{ Shift} dataset}
 \format{
-A tibble with 1 columns and 1
+A tibble with 128 columns and 50
 rows:
 
 \describe{

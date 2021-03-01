@@ -55,8 +55,8 @@ sum in a 24 hours clock basis, helping with time arithmetic issues.
 what class of object you prefer as output.
 
 Valid \code{class} values are: \code{"character"}, \code{"integer"}, \code{"double"},
-\code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, and \code{"hms"}
-(case insensitive).
+\code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, and \code{"hms"} (case
+insensitive).
 }
 
 \subsection{\code{vectorize} argument}{
@@ -79,11 +79,11 @@ considered.
 
 \subsection{\code{Period} objects}{
 
-\code{Period} objects are a special time of object developed by the
-\link[lubridate:lubridate-package]{lubridate::lubridate-package} team that track changes in clock times
-ignoring time irregularities. That is to say that 1 day as \code{Period} will
-always represent 1 day in the timeline. \code{sum_time()} ignores that property of
-\code{Period} objects, treating them as objects of class \code{Duration}.
+\code{Period} objects are a special time object developed by the
+\link[lubridate:lubridate-package]{lubridate} team that track changes in clock
+times ignoring time irregularities. That is to say that 1 day as \code{Period}
+will always represent 1 day in the timeline. \code{sum_time()} ignores that
+property of \code{Period} objects, treating them as objects of class \code{Duration}.
 }
 
 \subsection{Time line irregularities}{

@@ -43,8 +43,8 @@ install it with \code{install.packages("stats")}.
 \subsection{Cases}{
 
 Random \emph{standard} and \emph{micro} MCTQ cases were created with the general
-population in mind. The data was set to resemble the distributions shown in
-Roenneberg, Wirz-Justice, & Merrow (2003).
+population in mind. The data was set to resemble the distributions parameters
+shown in Roenneberg, Wirz-Justice, & Merrow (2003).
 
 \emph{MCTQ\eqn{^{Shift}}{ Shift}} random cases were created based on the shift
 configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012).

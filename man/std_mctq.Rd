@@ -140,13 +140,6 @@ Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
-\item{msw}{
-Local time of mid-sleep on \strong{workdays}.
-\cr \cr
-Type: Computed.
-\cr \cr
-R class: \code{hms}.}
-
 \item{le_w}{
 Light exposure on \strong{workdays}.
 \cr \cr
@@ -156,6 +149,13 @@ outdoors in daylight (without a roof above my head)".
 Type: Extra.
 \cr \cr
 R class: \code{Duration}.}
+
+\item{msw}{
+Local time of mid-sleep on \strong{workdays}.
+\cr \cr
+Type: Computed.
+\cr \cr
+R class: \code{hms}.}
 
 \item{bt_f}{
 Local time of going to bed on \strong{work-free days}.
@@ -266,13 +266,6 @@ Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
-\item{msf}{
-Local time of mid-sleep on \strong{work-free days}.
-\cr \cr
-Type: Computed.
-\cr \cr
-R class: \code{hms}.}
-
 \item{le_f}{
 Light exposure on \strong{work-free days}.
 \cr \cr
@@ -283,8 +276,29 @@ Type: Extra.
 \cr \cr
 R class: \code{Duration}.}
 
+\item{msf}{
+Local time of mid-sleep on \strong{work-free days}.
+\cr \cr
+Type: Computed.
+\cr \cr
+R class: \code{hms}.}
+
 \item{sd_week}{
 Average weekly sleep duration.
+\cr \cr
+Type: Computed.
+\cr \cr
+R class: \code{Duration}.}
+
+\item{sloss_week}{
+Weekly sleep loss.
+\cr \cr
+Type: Computed.
+\cr \cr
+R class: \code{Duration}.}
+
+\item{le_week}{
+Average weekly light exposure.
 \cr \cr
 Type: Computed.
 \cr \cr
@@ -297,13 +311,6 @@ Type: Computed.
 \cr \cr
 R class: \code{hms}.}
 
-\item{sloss_week}{
-Weekly sleep loss.
-\cr \cr
-Type: Computed.
-\cr \cr
-R class: \code{Duration}.}
-
 \item{sjl_rel}{
 Relative social jetlag.
 \cr \cr
@@ -313,13 +320,6 @@ R class: \code{Duration}.}
 
 \item{sjl}{
 Absolute social jetlag.
-\cr \cr
-Type: Computed.
-\cr \cr
-R class: \code{Duration}.}
-
-\item{le_week}{
-Average weekly light exposure.
 \cr \cr
 Type: Computed.
 \cr \cr

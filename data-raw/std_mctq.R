@@ -208,7 +208,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
             `F BED TIME` = "34:00", # hms | HMS, HM, H [0-24h] # INVALID
             `F SLEEP PREP` = "04:30", # hms | HMS, HM, H [0-24h]
-            `F SLEEP LAT` = "No", # Duration | M
+            `F SLEEP LAT` = "15", # Duration | M
             `F SLEEP END` = "14:12", # hms | HMS, HM, H [0-24h]
             `F SLEEP INERTIA` = "30", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
@@ -273,7 +273,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F LIGHT EXPOSURE` = "04:45" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-    ## Null MCTQ (invalid case)
+    ## Null MCTQ
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
@@ -330,7 +330,6 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         ) %>%
 
     ## All, or almost all, basic variables have the same values
-    ## (invalid case)
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
@@ -386,7 +385,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F LIGHT EXPOSURE` = "" # Duration | [H]MS, [H]M, [H]
         ) %>%
 
-    ## Suspicious values (removed case)
+    ## Suspicious values
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
@@ -433,7 +432,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
             `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "0130 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
-            `F SLEEP LAT` = "00:60", # Duration | M  # AMBIGUOUS
+            `F SLEEP LAT` = "60", # Duration | M
             `F SLEEP END` = "10:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP INERTIA` = "15", # Duration | M
             `F ALARM` = "No", # logical | Yes/No
@@ -500,7 +499,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         ) %>%
 
     ## Sleep onset is equal or greater than sleep end
-    ## [(s_prep + s_lat) >= se] (invalid case)
+    ## [(s_prep + s_lat) >= se]
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[15]), # integer | [auto-increment]
@@ -629,20 +628,15 @@ tidy_std_mctq <- function(write = FALSE) {
         wd = as.integer(.data$`WORK DAYS`),
 
         bt_w = dplyr::case_when(
-            grepl(pattern_1, .data$`W BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`W BED TIME`, "hms",
-                           c("HM", "IMp"), quiet = TRUE),
             grepl(pattern_4, .data$`W BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`W BED TIME`, "hms", "HM",
-                           quiet = TRUE)),
-        sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms",
-                             c("HMS", "HM", "H")),
+                convert_pt(.data$`W BED TIME`, "hms", "HM", quiet = TRUE),
+            TRUE ~ convert_pt(.data$`W BED TIME`, "hms",
+                           c("HM", "IMp"), quiet = TRUE)),
+        sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms", c("HMS", "HM", "H")),
         slat_w = dplyr::case_when(
             grepl(pattern_2, .data$`W SLEEP LAT`, perl = TRUE) ~
-                convert_pt(.data$`W SLEEP LAT`, "Duration", "M",
-                           quiet = TRUE),
-            grepl(pattern_1, .data$`W SLEEP LAT`) ~
-                convert_pt(.data$`W SLEEP LAT`, "Duration",
+                convert_pt(.data$`W SLEEP LAT`, "Duration", "M", quiet = TRUE),
+            TRUE ~ convert_pt(.data$`W SLEEP LAT`, "Duration",
                            c("HMS", "HM", "H"), quiet = TRUE)),
         se_w = convert_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
         si_w = convert_pt(.data$`W SLEEP INERTIA`, "Duration", "M"),
@@ -656,23 +650,19 @@ tidy_std_mctq <- function(write = FALSE) {
                           c("HMS", "HM", "H")),
 
         bt_f = dplyr::case_when(
-            grepl(pattern_1, .data$`F BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
-                           quiet = TRUE),
             grepl(pattern_4, .data$`F BED TIME`, perl = TRUE) ~
                 convert_pt(.data$`F BED TIME`, "hms", "HM",
+                           quiet = TRUE),
+            TRUE ~ convert_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
                            quiet = TRUE)),
-        sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms",
-                             c("HMS", "HM", "H")),
-        slat_f = convert_pt(.data$`F SLEEP LAT`, "Duration", "M",
-                            quiet = TRUE),
+        sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms", c("HMS", "HM", "H")),
+        slat_f = convert_pt(.data$`F SLEEP LAT`, "Duration", "M"),
         se_f = convert_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
         si_f = dplyr::case_when(
             grepl(pattern_2, .data$`F SLEEP INERTIA`) ~
                 convert_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
                            quiet = TRUE),
-            grepl(pattern_1, .data$`F SLEEP INERTIA`) ~
-                convert_pt(.data$`F SLEEP INERTIA`, "Duration",
+            TRUE ~ convert_pt(.data$`F SLEEP INERTIA`, "Duration",
                            c("HMS", "HM", "H"), quiet = TRUE)),
         alarm_f = dplyr::case_when(
             tolower(.data$`F ALARM`) == "yes" ~ TRUE,
@@ -731,14 +721,11 @@ validate_std_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
-    # R CMD Check variable bindings fix (see <http://bit.ly/3bliuam>) -----
-
-    dummy <- bkp <- so_i <- sd_i <-  NULL
-
     # Set values -----
 
     set.seed(1)
     reserved_id <- sample(50, 15)
+    std_mctq <- tidy_std_mctq()
 
     # Do univariate validation -----
 
@@ -748,19 +735,19 @@ validate_std_mctq <- function(write = FALSE) {
     duration_6 <- lubridate::dhours(6)
     duration_24 <- lubridate::dhours(24)
 
-    foo <- function(x) {
+    validate_hms <- function(x) {
         dplyr::case_when(
             x == hms_24 ~ hms_0,
             x >= hms_0 & x < hms_24 ~ x)
     }
 
-    bar <- function(x) {
+    validate_duration_1 <- function(x) {
         dplyr::case_when(
             validate::in_range(x, min = duration_0, max = duration_6) ~ x
         )
     }
 
-    baz <- function(x) {
+    validate_duration_2 <- function(x) {
         dplyr::case_when(
             validate::in_range(x, min = duration_0, max = duration_24) ~ x)
     }
@@ -769,19 +756,19 @@ validate_std_mctq <- function(write = FALSE) {
     cols_2 <- c("slat_w", "si_w", "slat_f", "si_f")
     cols_3 <- c("le_w", "le_f")
 
-    std_mctq <- tidy_std_mctq() %>% dplyr::mutate(
+    std_mctq <- std_mctq %>% dplyr::mutate(
         wd = dplyr::case_when(
             validate::in_range(wd, min = 0, max = 7) ~ wd)) %>%
         dplyr::mutate(
-            dplyr::across(dplyr::all_of(cols_1), foo),
-            dplyr::across(dplyr::all_of(cols_2), bar),
-            dplyr::across(dplyr::all_of(cols_3), baz))
+            dplyr::across(dplyr::all_of(cols_1), validate_hms),
+            dplyr::across(dplyr::all_of(cols_2), validate_duration_1),
+            dplyr::across(dplyr::all_of(cols_3), validate_duration_2))
 
     # Do multivariate validation -----
 
-    for (i in c("w", "f")) {
-        bt_i <- paste0("bt_", i)
-        sprep_i <- paste0("sprep_", i)
+    for (i in c("_w", "_f")) {
+        bt_i <- paste0("bt", i)
+        sprep_i <- paste0("sprep", i)
 
         std_mctq <- std_mctq %>%
             dplyr::mutate(
@@ -798,34 +785,33 @@ validate_std_mctq <- function(write = FALSE) {
             dplyr::select(-dummy, -bkp)
     }
 
-    for (i in c("w", "f")) {
-        sprep_i <- paste0("sprep_", i)
-        slat_i <- paste0("slat_", i)
-        se_i <- paste0("se_", i)
+    for (i in c("_w", "_f")) {
+        sprep_i <- paste0("sprep", i)
+        slat_i <- paste0("slat", i)
+        se_i <- paste0("se", i)
 
         test <- std_mctq %>%
             dplyr::mutate(
-                so_i = so(!!as.symbol(sprep_i), !!as.symbol(slat_i)),
-                sd_i = sd(so_i, !!as.symbol(se_i)),
+                so_i = mctq::so(!!as.symbol(sprep_i), !!as.symbol(slat_i)),
+                sd_i = mctq::sd(so_i, !!as.symbol(se_i)),
                 dummy = dplyr::case_when(
-                    sd_i <= lubridate::dhours(1) |
-                        sd_i >= lubridate::dhours(18) ~ TRUE,
+                    sd_i < lubridate::dhours(2) |
+                        sd_i > lubridate::dhours(18) ~ TRUE,
                     TRUE ~ FALSE)) %>%
             dplyr::select(dummy)
 
         std_mctq <- dplyr::bind_cols(std_mctq, test) %>%
             dplyr::mutate(
-                dplyr::across(dplyr::ends_with("_w"),
+                dplyr::across(dplyr::ends_with(i),
                               ~ dplyr::if_else(dummy, na_as(.x), .x))) %>%
             dplyr::select(-dummy)
     }
 
     # Clean invalid cases -----
 
-    ## Cases: "Suspicious values (removed case)" and "Sleep onset is equal or
-    ##        greater than sleep end [(s_prep + s_lat) >= se] (invalid case)"
+    ## Cases: "Suspicious values"
 
-    invalid <- c(reserved_id[11], reserved_id[15])
+    invalid <- c(reserved_id[11])
 
     std_mctq <- std_mctq %>%
         dplyr::rowwise() %>%
@@ -900,25 +886,6 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
-    # R CMD Check variable bindings fix -----
-
-    ## See: <http://bit.ly/3bliuam>
-
-    id <- NULL
-
-    work <- wd <- fd <- NULL
-
-    bt_w <- sprep_w <- slat_w <- so_w <- se_w <- si_w <- gu_w <- alarm_w <- NULL
-    wake_before_w <- sd_w <- tbt_w <- msw <- le_w <- NULL
-
-    bt_f <- sprep_f <- slat_f <- so_f <- se_f <- si_f <- gu_f <- alarm_f <- NULL
-    reasons_f <- reasons_why_f <- sd_f <- tbt_f <- msf <- le_f <- NULL
-
-    sd_week <- msf_sc <- sloss_week <- sjl_rel <- sjl <- le_week <- NULL
-
-    dummy_0_a <- dummy_0_b <- dummy_0_c <- dummy_7_a <- dummy_7_b <- NULL
-    dummy_0 <- dummy_7 <- NULL
-
     # Create computed variables -----
 
     std_mctq <- validate_std_mctq() %>%
@@ -946,12 +913,12 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             id, work, wd, fd,
 
             bt_w, sprep_w, slat_w, so_w, se_w, si_w, gu_w, alarm_w,
-            wake_before_w, sd_w, tbt_w, msw, le_w,
+            wake_before_w, sd_w, tbt_w, le_w, msw,
 
             bt_f, sprep_f, slat_f, so_f, se_f, si_f, gu_f, alarm_f,
-            reasons_f, reasons_why_f, sd_f, tbt_f, msf, le_f,
+            reasons_f, reasons_why_f, sd_f, tbt_f, le_f, msf,
 
-            sd_week, msf_sc, sloss_week, sjl_rel, sjl, le_week)
+            sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl)
 
     # Fix missing sections -----
 

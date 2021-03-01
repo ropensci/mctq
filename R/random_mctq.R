@@ -28,8 +28,8 @@
 #' ## Cases
 #'
 #' Random _standard_ and _micro_ MCTQ cases were created with the general
-#' population in mind. The data was set to resemble the distributions shown in
-#' Roenneberg, Wirz-Justice, & Merrow (2003).
+#' population in mind. The data was set to resemble the distributions parameters
+#' shown in Roenneberg, Wirz-Justice, & Merrow (2003).
 #'
 #' _MCTQ\eqn{^{Shift}}{ Shift}_ random cases were created based on the shift
 #' configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012).

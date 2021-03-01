@@ -195,13 +195,6 @@
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
-#'   \item{msw}{
-#'   Local time of mid-sleep on __workdays__.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
-#'
 #'   \item{le_w}{
 #'   Light exposure on __workdays__.
 #'   \cr \cr
@@ -211,6 +204,13 @@
 #'   Type: Extra.
 #'   \cr \cr
 #'   R class: `Duration`.}
+#'
+#'   \item{msw}{
+#'   Local time of mid-sleep on __workdays__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `hms`.}
 #'
 #'
 #'   \item{bt_f}{
@@ -322,13 +322,6 @@
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
-#'   \item{msf}{
-#'   Local time of mid-sleep on __work-free days__.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `hms`.}
-#'
 #'   \item{le_f}{
 #'   Light exposure on __work-free days__.
 #'   \cr \cr
@@ -339,9 +332,30 @@
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
+#'   \item{msf}{
+#'   Local time of mid-sleep on __work-free days__.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `hms`.}
+#'
 #'
 #'   \item{sd_week}{
 #'   Average weekly sleep duration.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `Duration`.}
+#'
+#'   \item{sloss_week}{
+#'   Weekly sleep loss.
+#'   \cr \cr
+#'   Type: Computed.
+#'   \cr \cr
+#'   R class: `Duration`.}
+#'
+#'   \item{le_week}{
+#'   Average weekly light exposure.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
@@ -354,13 +368,6 @@
 #'   \cr \cr
 #'   R class: `hms`.}
 #'
-#'   \item{sloss_week}{
-#'   Weekly sleep loss.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `Duration`.}
-#'
 #'   \item{sjl_rel}{
 #'   Relative social jetlag.
 #'   \cr \cr
@@ -370,13 +377,6 @@
 #'
 #'   \item{sjl}{
 #'   Absolute social jetlag.
-#'   \cr \cr
-#'   Type: Computed.
-#'   \cr \cr
-#'   R class: `Duration`.}
-#'
-#'   \item{le_week}{
-#'   Average weekly light exposure.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
