@@ -28,6 +28,7 @@ micro, and shift).
 Please note that this package have not been [peer
 reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
 We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021.
+We also plan to add it to [CRAN](https://cran.r-project.org/) soon.
 
 <!-- ### About MCTQ -->
 <!-- __UNDER DEVELOPMENT__ -->
