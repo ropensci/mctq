@@ -346,7 +346,7 @@ values to \code{month_length} and \code{year_length} arguments.
 
 \code{month_length} and \code{year_length} values must be assigned with the number of
 seconds equivalent to the unit duration. You can also assign a lubridate
-duration object if you like (see \code{\link[lubridate:duration]{lubridate::duration()}}).
+\code{Duration} object if you like (see \code{\link[lubridate:duration]{lubridate::duration()}}).
 }
 }
 \examples{
@@ -401,7 +401,7 @@ convert(0.2617994, "numeric", input_unit = "rad", output_unit = "H")
 convert(40, "numeric", input_unit = "d", output_unit = "deg")
 #> [1] 14400 # Expected
 
-## __ Converting from character or numeric objects to date/time objects __
+## __ Converting from 'character' or 'numeric' to date/time objects __
 convert("19:55:17", "Duration", orders = "HMS")
 #> [1] "71717s (~19.92 hours)" # Expected
 convert("21:00", "Period", orders = "HM")
@@ -419,7 +419,7 @@ convert("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS", tz = "EST")
 convert("03/07/1982 13:00", "POSIXlt", orders = "dmy HM")
 #> [1] "1982-07-03 13:00:00 UTC" # Expected
 
-## __ Converting from character or numeric objects to units __
+## __ Converting from 'character' or 'numeric' objects to units __
 convert("0145", "numeric", orders = "HM", output_unit = "M")
 #> [1] 105 # Expected
 convert(45, "numeric", orders = "M", output_unit = "H")

@@ -211,7 +211,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         }
     }
 
-    ## Inverted values for bed time and sleep preparing
+    ## Inverted values for bed time and sleep preparation
 
     shift_mctq <- shift_mctq %>% dplyr::add_row(
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]

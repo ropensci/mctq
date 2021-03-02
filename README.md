@@ -25,11 +25,9 @@ Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff6
 Questionnaire (MCTQ) data in R for all of its three versions (standard,
 micro, and shift).
 
-Please note that this package is currently on the development stage and
-have not been [peer
+Please note that this package have not been [peer
 reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
-That means that people can try it out and provide feedback, but it comes
-with no promises for long term stability.
+We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021.
 
 <!-- ### About MCTQ -->
 <!-- __UNDER DEVELOPMENT__ -->
@@ -57,10 +55,9 @@ fictional datasets for testing and learning purposes.
 
 ## Installation
 
-The first stable `mctq` version is in its final development stage, we
-hope that it will be available on [CRAN](https://cran.r-project.org/)
-soon. Until that moment comes, you can install the development version
-from GitHub with:
+The first stable `mctq` version is already out, we hope that it will be
+available on [CRAN](https://cran.r-project.org/) soon. Until that moment
+comes, you can install the development version from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -119,9 +116,9 @@ Example:
 ``` r
 # Local time of preparing to sleep on workdays
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
-# Sleep latency on workdays
+# Sleep latency or time to fall asleep after preparing to sleep on workdays
 slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
-# Sleep onset
+# Local time of sleep onset on workdays
 so(sprep_w, slat_w)
 #> 00:15:00
 #> 03:45:00
@@ -145,9 +142,9 @@ For computations combining workdays and work-free days, use:
 Example:
 
 ``` r
-# Mid-sleep on workdays
+# Local time of mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
-# Mid-sleep on work-free days
+# Local time of mid-sleep on work-free days
 msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
 # Relative social jetlag
 sjl_rel(msw, msf)

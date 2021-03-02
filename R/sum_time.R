@@ -144,7 +144,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
 
     if (isTRUE(vectorize) &&
         !(length(unique(vapply(out, length, integer(1)))) == 1)) {
-        stop("When 'vetorize' is 'TRUE', all values in '...' must have ",
+        stop("When 'vectorize' is 'TRUE', all values in '...' must have ",
              "the same length.", call. = FALSE)
     }
 

@@ -32,7 +32,7 @@ library(hms)
 
 `mctq` provides a consistent and fast way to process Munich Chronotype Questionnaire (MCTQ) data in R for all of its three versions (standard, micro, and shift).
 
-Please note that this package is currently on the development stage and have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. That means that people can try it out and provide feedback, but it comes with no promises for long term stability.
+Please note that this package have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021.
 
 <!-- ### About MCTQ -->
 
@@ -54,7 +54,7 @@ This package is also equipped with several utility functions that allows you to 
 
 ## Installation
 
-The first stable `mctq` version is in its final development stage, we hope that it will be available on [CRAN](https://cran.r-project.org/) soon. Until that moment comes, you can install the development version from GitHub with:
+The first stable `mctq` version is already out, we hope that it will be available on [CRAN](https://cran.r-project.org/) soon. Until that moment comes, you can install the development version from GitHub with:
 
 ``` {r, eval = FALSE}
 # install.packages("devtools")
@@ -100,9 +100,9 @@ Example:
 ```{r, message = FALSE}
 # Local time of preparing to sleep on workdays
 sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
-# Sleep latency on workdays
+# Sleep latency or time to fall asleep after preparing to sleep on workdays
 slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
-# Sleep onset
+# Local time of sleep onset on workdays
 so(sprep_w, slat_w)
 ```
 
@@ -121,9 +121,9 @@ For computations combining workdays and work-free days, use:
 Example:
 
 ```{r, message = FALSE}
-# Mid-sleep on workdays
+# Local time of mid-sleep on workdays
 msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
-# Mid-sleep on work-free days
+# Local time of mid-sleep on work-free days
 msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
 # Relative social jetlag
 sjl_rel(msw, msf)
