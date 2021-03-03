@@ -30,23 +30,20 @@ library(hms)
 
 ## Overview
 
-`mctq` provides a consistent and fast way to process Munich Chronotype Questionnaire (MCTQ) data in R for all of its three versions (standard, micro, and shift).
+`mctq` provides a complete and consistent toolkit to process and analyze Munich Chronotype Questionnaire (MCTQ) data in R for all of its three versions (standard, micro, and shift).
 
-Please note that this package have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021. We also plan to add it to [CRAN](https://cran.r-project.org/) soon.
+> Please note that this package have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021. 
+> We also plan to write a article about it and to add it to [CRAN](https://cran.r-project.org/).
 
-<!-- ### About MCTQ -->
+Today MCTQ is one of the best quantitative and validated methods available to assess peoples' sleep behavior and to correlate circadian features of human biology with other factors (like geographic factors). It has become a indispensable tool for sleep and chronobiology scientists when more objective measures (like actigraphy) are not viable.
 
-<!-- __UNDER DEVELOPMENT__ -->
+The questionnaire was presented by Till Roenneberg (LMU Munich), Anna Wirz-Justice (UPK Basel), and Martha Merrow (LMU Munich) in [2003](https://doi.org/10.1177/0748730402239679). Since them, it has been progressively optimized and translated to 13 languages.
 
-<!-- To learn more about the standard Munich Chronotype Questionnaire (MCTQ), _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz, Zerbini, & Winnebeck (2019). -->
-
-<!-- To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg (2013) and Ghotbi _et.al_ (2020). -->
-
-<!-- If you curious about the variable computations and want to have access to the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.). -->
+You can learn more about MCTQ at <https://www.thewep.org/documentations/mctq>.
 
 ### Wait, a R package for a questionnaire?
 
-If you're familiar with MCTQ, you know that it's not a simple questionnaire, as it requires a lot of date/time manipulation. That can be real challenging, especially if you're dealing with a large set of data.
+MCTQ may look like a simple questionnaire, but it analysis requires a lot of date/time manipulation. That can be real challenging, especially if you're dealing with a large set of data.
 
 The main advantage to use the `mctq` package in your research is that you will have reliable tools, thoroughly tested, at your disposition, made and supported by a sleep science research group (GIPSO) from a well know university ([USP](https://www5.usp.br/)). `mctq` also helps with research reproducibility, since it's a free and open source package that anyone can find and use.
 
@@ -84,14 +81,14 @@ convert("10:00 PM", "hms", orders = "IMp")
 
 After your data is all set, just use the `mctq` functions below to process it. 
 
-Note that `mctq` uses a similar naming scheme as those used in the MCTQ articles, that make it easy to find and apply any computation necessary.
+Note that `mctq` uses a similar naming scheme as those used in the MCTQ articles. That make it easy to find and apply any computation necessary.
 
 * `fd()` compute MCTQ work-free days
 * `so()` compute MCTQ sleep onset
 * `gu()` compute MCTQ local time of getting out of bed
 * `sd()` compute MCTQ sleep duration
 * `tbt()` compute MCTQ total time in bed
-* `ms()` compute MCTQ mid-sleep
+* `ms()` compute MCTQ local time of mid-sleep
 * `napd()` compute MCTQ nap duration (only for MCTQ Shift)
 * `sd24()` compute MCTQ 24h sleep duration (only for MCTQ Shift)
 
@@ -114,7 +111,7 @@ For computations combining workdays and work-free days, use:
 * `sd_overall()` compute MCTQ overall sleep duration (only for MCTQ Shift)
 * `sloss_week()` compute MCTQ weekly sleep loss
 * `le_week()` compute MCTQ average weekly light exposure
-* `msf_sc()` compute MCTQ chronotype or corrected mid-sleep on work-free days
+* `msf_sc()` compute MCTQ chronotype or corrected local time of mid-sleep on work-free days
 * `sjl()` and `sjl_rel()` compute MCTQ social jet lag
 * `sjl_weighted()` compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)
 
@@ -134,6 +131,10 @@ sjl_rel(msw, msf)
 In addition to `convert()`, `mctq` is also equipped with many other utility functions. 
 
 All functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipsousp.github.io/mctq/reference/index.html) to see a list of them.
+
+## New features
+
+As of today, `mctq` offers solutions for all variables proposed by the original authors. Because MCTQ is actively used by a sleep research group, we have developed different tools and analysis that can help you with you research. We plan to add new features to the package in the future.
 
 ## Citation
 
