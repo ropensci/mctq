@@ -32,8 +32,7 @@ library(hms)
 
 `mctq` provides a complete and consistent toolkit to process and analyze Munich Chronotype Questionnaire (MCTQ) data in R for all of its three versions (standard, micro, and shift).
 
-> Please note that this package have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021. 
-> We also plan to write a article about it and to add it to [CRAN](https://cran.r-project.org/).
+> Please note that this package have not been [peer reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet. We plan to submit it to [rOpenSci](https://ropensci.org/) in March 2021. We also plan to write a article about it and to add it to [CRAN](https://cran.r-project.org/).
 
 Today MCTQ is one of the best quantitative and validated methods available to assess peoples' sleep behavior and to correlate circadian features of human biology with other factors (like geographic factors). It has become a indispensable tool for sleep and chronobiology scientists when more objective measures (like actigraphy) are not viable.
 
