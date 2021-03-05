@@ -2,6 +2,7 @@ test_that("convert.Duration() | convert test", {
     x <- lubridate::dhours()
     quiet <- TRUE
 
+    expect_equal(convert(x, "logical", quiet = quiet), NA)
     expect_equal(convert(x, "character", quiet = quiet), "01:00:00")
     expect_equal(convert(x, "integer", quiet = quiet), 3600L)
     expect_equal(convert(x, "double", quiet = quiet), 3600)
@@ -34,6 +35,8 @@ test_that("convert.Duration() | transform test", {
 test_that("convert.Duration() | warning test", {
     x <- lubridate::dhours()
 
+    "'x' cannot be converted to 'logical'"
+    expect_warning(convert(x, "logical", quiet = FALSE))
     # "'x' was formatted as HMS."
     expect_warning(convert(x, "character", quiet = FALSE))
     # "'x' was converted to total of full seconds."

@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "mctq",
-  "description": "A set of tools to process and analyze Munich ChronoType \n    Questionnaire (MCTQ) data.",
+  "description": "A complete and consistent toolkit to process Munich ChronoType \n    Questionnaire (MCTQ) data in R for all of its three versions (standard, \n    micro, and shift).",
   "name": "mctq: The R Package for Munich ChronoType Questionnaire (MCTQ) Data",
   "codeRepository": "https://github.com/gipsousp/mctq/",
   "relatedLink": [
@@ -138,6 +138,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "magrittr",
+      "name": "magrittr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=magrittr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "mockr",
       "name": "mockr",
       "provider": {
@@ -147,6 +159,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=mockr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "readr",
+      "name": "readr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=readr"
     },
     {
       "@type": "SoftwareApplication",
@@ -266,7 +290,7 @@
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
   "readme": "https://github.com/gipsousp/mctq/blob/master/README.md",
-  "fileSize": "1806.407KB",
+  "fileSize": "2176.911KB",
   "contIntegration": ["https://travis-ci.com/gipsousp/mctq", "https://codecov.io/gh/gipsousp/mctq?branch=master"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
@@ -296,7 +320,7 @@
           "familyName": "Pedrazzoli"
         }
       ],
-      "name": "mctq: a R package for the Munich ChronoType Questionnaire (MCTQ)",
+      "name": "mctq: the R package for the Munich ChronoType Questionnaire (MCTQ)",
       "url": "https://gipsousp.github.io/mctq/",
       "description": "Lifecycle: maturing"
     }

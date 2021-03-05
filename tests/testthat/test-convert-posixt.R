@@ -2,6 +2,7 @@ test_that("convert.POSIXt() | convert test", {
     x <- lubridate::as_datetime("2000-01-01 01:00:00")
     quiet <- TRUE
 
+    expect_equal(convert(x, "logical", quiet = quiet), NA)
     expect_equal(convert(x, "character", quiet = quiet), "2000-01-01 01:00:00")
     expect_equal(convert(x, "integer", quiet = quiet), 946688400L)
     expect_equal(convert(x, "double", quiet = quiet), 946688400)
@@ -34,6 +35,8 @@ test_that("convert.POSIXt() | transform test", {
 test_that("convert.POSIXt() | warning test", {
     x <- lubridate::as_datetime("2000-01-01 01:00:00")
 
+    "'x' cannot be converted to 'logical'"
+    expect_warning(convert(x, "logical", quiet = FALSE))
     # "'x' was converted to total of full seconds since [...]"
     expect_warning(convert(x, "integer", quiet = FALSE))
     # "'x' was converted to total of seconds since [...]"

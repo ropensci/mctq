@@ -8,8 +8,9 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-A set of tools to process and analyze Munich ChronoType 
-    Questionnaire (MCTQ) data.
+A complete and consistent toolkit to process Munich ChronoType 
+    Questionnaire (MCTQ) data in R for all of its three versions (standard, 
+    micro, and shift).
 }
 \seealso{
 Useful links:

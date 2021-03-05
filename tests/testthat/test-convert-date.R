@@ -2,6 +2,7 @@ test_that("convert.Date() | convert test", {
     x <- as.Date("2000-01-01")
     quiet <- TRUE
 
+    expect_equal(convert(x, "logical", quiet = quiet), NA)
     expect_equal(convert(x, "character", quiet = quiet), "2000-01-01")
     expect_equal(convert(x, "integer", quiet = quiet), 10957L)
     expect_equal(convert(x, "double", quiet = quiet), 10957)
@@ -28,6 +29,8 @@ test_that("convert.Date() | convert test", {
 test_that("convert.Date() | warning test", {
     x <- as.Date("2000-01-01")
 
+    "'x' cannot be converted to 'logical'"
+    expect_warning(convert(x, "logical", quiet = FALSE))
     # "'x' was converted to total of days since  [...]"
     classes <- c("integer", "double", "numeric")
     for (i in classes) expect_warning(convert(x, i, quiet = FALSE))

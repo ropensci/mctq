@@ -2,10 +2,6 @@ test_that("convert() | general test", {
     expect_equal(convert(NA, "character", quiet = TRUE), NA)
 })
 
-test_that("convert.numeric() | general test", {
-    expect_equal(convert(1, "character", quiet = TRUE), "1")
-})
-
 test_that("convert.Period() | general test", {
     x <- lubridate::hours()
     expect_equal(convert(x, "character", quiet = TRUE), "01:00:00")

@@ -2,6 +2,7 @@ test_that("convert.Interval() | convert test", {
     x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
     quiet <- TRUE
 
+    expect_equal(convert(x, "logical", quiet = quiet), NA)
     expect_equal(convert(x, "character", quiet = quiet),
                  "2020-01-01 UTC--2020-01-01 01:00:00 UTC")
     expect_equal(convert(x, "integer", quiet = quiet), 3600L)
@@ -35,6 +36,8 @@ test_that("convert.Interval() | transform test", {
 test_that("convert.Interval() | warning test", {
     x <- lubridate::as.interval(lubridate::dhours(), as.Date("2020-01-01"))
 
+    "'x' cannot be converted to 'logical'"
+    expect_warning(convert(x, "logical", quiet = FALSE))
     # "'x' was converted to total of full seconds of the [...]"
     expect_warning(convert(x, "integer", quiet = FALSE))
     # "'x' was converted to total of seconds of the interval  [...]"

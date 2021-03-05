@@ -13,3 +13,5 @@
 ^LICENSE\.md$
 ^mctq\.Rproj$
 ^README\.Rmd$
+^doc$
+^Meta$

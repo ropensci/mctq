@@ -136,7 +136,7 @@ convert(x, class, ...)
   month_length = lubridate::dmonths(),
   year_length = lubridate::dyears(),
   close_round = TRUE,
-  quiet = FALSE
+  quiet = TRUE
 )
 
 convert_tu(x, output_unit, ...)

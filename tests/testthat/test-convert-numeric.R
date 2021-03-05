@@ -2,6 +2,7 @@ test_that("convert.numeric() | convert test", {
     x <- 1
     quiet <- TRUE
 
+    expect_equal(convert(x, "logical", quiet = quiet), TRUE)
     expect_equal(convert(x, "character", quiet = quiet), "1")
     expect_equal(convert(x, "integer", quiet = quiet), 1L)
     expect_equal(convert(x, "double", quiet = quiet), 1)
@@ -36,9 +37,11 @@ test_that("convert.numeric() | transform test", {
     expect_identical(object, hms::parse_hm("01:00"))
 })
 
-test_that("convert.Duration() | warning test", {
+test_that("convert.numeric() | warning test", {
     x <- 1
 
+    # "'x' was converted 'as is'."
+    expect_warning(convert(x, "logical", quiet = FALSE))
     # "'x' was converted 'as is'. This can produce [...]"
     expect_warning(convert(x, "duration", quiet = FALSE))
     # "'difftime' units was set to seconds."

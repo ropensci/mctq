@@ -21,9 +21,9 @@ Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff6
 
 ## Overview
 
-`mctq` provides a complete and consistent toolkit to process and analyze
-Munich Chronotype Questionnaire (MCTQ) data in R for all of its three
-versions (standard, micro, and shift).
+`mctq` provides a complete and consistent toolkit to process Munich
+Chronotype Questionnaire (MCTQ) data in R for all of its three versions
+(standard, micro, and shift).
 
 > Please note that this package have not been [peer
 > reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
@@ -48,9 +48,9 @@ You can learn more about MCTQ at
 
 ### Wait, a R package for a questionnaire?
 
-MCTQ may look like a simple questionnaire, but it analysis requires a
-lot of date/time manipulation. That can be real challenging, especially
-if you’re dealing with a large set of data.
+MCTQ may look like a simple questionnaire, but it requires a lot of
+date/time manipulation. That can be real challenging, especially if
+you’re dealing with a large set of data.
 
 The main advantage to use the `mctq` package in your research is that
 you will have reliable tools, thoroughly tested, at your disposition,
@@ -63,9 +63,22 @@ This package is also equipped with several utility functions that allows
 you to easily convert and visualize your MCTQ data. It also provides
 fictional datasets for testing and learning purposes.
 
+## Prerequisites
+
+`mctq` was created with the user experience in mind. You only need to
+have some familiarity with the [R programming
+language](https://www.r-project.org/) to use the main functions.
+
+In case you do not fell too comfortable with R, we strongly recommend
+checking Hadley Wickham and Garrett Grolemund free and online book [R
+for data Science](https://r4ds.had.co.nz/) and the Coursera course from
+John Hopkins University [Data Science: Foundations using
+R](https://www.coursera.org/specializations/data-science-foundations-r)
+(free for listeners).
+
 ## Installation
 
-The first stable `mctq` version is already out, we hope that it will be
+The first stable `mctq` version is already out. We hope that it will be
 available on [CRAN](https://cran.r-project.org/) soon. Until that moment
 comes, you can install the development version from GitHub with:
 
@@ -81,7 +94,7 @@ values. This classes can be found in the
 [hms](https://hms.tidyverse.org/) and
 [lubridate](https://lubridate.tidyverse.org/) package from
 [tidyverse](https://www.tidyverse.org/packages/). If your data do not
-conform to the object classes required, don’t worry, just use
+conform to the object classes required, don’t worry, just use `mctq`
 `convert()` to convert it. You can always convert it back if you want.
 
 Here are some examples of how to convert your data using `convert()`:
@@ -104,22 +117,22 @@ convert("10:00 PM", "hms", orders = "IMp")
 #> 22:00:00
 ```
 
-### Basic MCTQ computation
+### Workdays and work-free days variables
 
-After your data is all set, just use the `mctq` functions below to
-process it.
+After your data is all set to start, just use the `mctq` functions below
+to process it.
 
 Note that `mctq` uses a similar naming scheme as those used in the MCTQ
 articles. That make it easy to find and apply any computation necessary.
 
--   `fd()` compute MCTQ work-free days
--   `so()` compute MCTQ sleep onset
--   `gu()` compute MCTQ local time of getting out of bed
--   `sd()` compute MCTQ sleep duration
--   `tbt()` compute MCTQ total time in bed
--   `ms()` compute MCTQ local time of mid-sleep
--   `napd()` compute MCTQ nap duration (only for MCTQ Shift)
--   `sd24()` compute MCTQ 24h sleep duration (only for MCTQ Shift)
+-   `fd()`: compute MCTQ work-free days
+-   `so()`: compute MCTQ sleep onset
+-   `gu()`: compute MCTQ local time of getting out of bed
+-   `sd()`: compute MCTQ sleep duration
+-   `tbt()`: compute MCTQ total time in bed
+-   `ms()`: compute MCTQ local time of mid-sleep
+-   `napd()`: compute MCTQ nap duration (only for MCTQ Shift)
+-   `sd24()`: compute MCTQ 24h sleep duration (only for MCTQ Shift)
 
 Example:
 
@@ -134,19 +147,19 @@ so(sprep_w, slat_w)
 #> 03:45:00
 ```
 
-### MCTQ analysis
+### Combining workdays and work-free days variables
 
 For computations combining workdays and work-free days, use:
 
--   `sd_week()` compute MCTQ average weekly sleep duration
--   `sd_overall()` compute MCTQ overall sleep duration (only for MCTQ
+-   `sd_week()`: compute MCTQ average weekly sleep duration
+-   `sd_overall()`: compute MCTQ overall sleep duration (only for MCTQ
     Shift)
--   `sloss_week()` compute MCTQ weekly sleep loss
--   `le_week()` compute MCTQ average weekly light exposure
--   `msf_sc()` compute MCTQ chronotype or corrected local time of
+-   `sloss_week()`: compute MCTQ weekly sleep loss
+-   `le_week()`: compute MCTQ average weekly light exposure
+-   `msf_sc()`: compute MCTQ chronotype or corrected local time of
     mid-sleep on work-free days
--   `sjl()` and `sjl_rel()` compute MCTQ social jet lag
--   `sjl_weighted()` compute MCTQ absolute social jetlag across all
+-   `sjl()` and `sjl_rel()`: compute MCTQ social jet lag
+-   `sjl_weighted()`: compute MCTQ absolute social jetlag across all
     shifts (only for MCTQ Shift)
 
 Example:
@@ -164,7 +177,8 @@ sjl_rel(msw, msf)
 ### Utilities
 
 In addition to `convert()`, `mctq` is also equipped with many other
-utility functions.
+utility functions. The package also provides fictional datasets of the
+standard, micro and shift versions for testing and learning purposes.
 
 All functions are well documented, showing all the guidelines behind the
 computations. Click
@@ -175,9 +189,9 @@ list of them.
 
 As of today, `mctq` offers solutions for all variables proposed by the
 original authors. Because MCTQ is actively used by a sleep research
-group, we have developed different tools and analysis that can help you
-with you research. We plan to add new features to the package in the
-future.
+group, we have also developed different tools and analysis that can help
+you with you research. You can expect new features and also new
+articles/vignettes to be added to the package in the future.
 
 ## Citation
 

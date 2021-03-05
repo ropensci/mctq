@@ -298,7 +298,7 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
                               year_length = lubridate::dyears(),
                               close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -318,14 +318,17 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
     class <- tolower(class)
     x <- fix_character(x)
 
-    if (!(class == "character")) {
+    if (!(class %in% c("logical", "character"))) {
         shush(warning("'x' was converted 'as is'. This can produce ",
                       "'NA' values. Did you forgot to assign values to ",
                       "'orders' or 'input_unit'/'output_unit'?",
                       call. = FALSE), quiet)
     }
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' was converted 'as is'.", call. = FALSE), quiet)
+        as.logical(x)
+    } else if (class == "character") {
         x
     } else if (class == "integer") {
         shush(as.integer(x))
@@ -360,7 +363,7 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
                             year_length = lubridate::dyears(),
                             close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -379,14 +382,18 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
 
     class <- tolower(class)
 
-    if (!(class %in% c("character", "integer", "double", "numeric"))) {
+    if (!(class %in% c("logical", "character", "integer", "double",
+                       "numeric"))) {
         shush(warning("'x' was converted 'as is'. This can produce ",
                       "'NA' values. Did you forgot to assign values to ",
                       "'orders' or 'input_unit'/'output_unit'?",
                       call. = FALSE), quiet)
     }
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' was converted 'as is'.", call. = FALSE), quiet)
+        as.logical(x)
+    } else if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
         as.integer(x)
@@ -422,7 +429,7 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -434,7 +441,11 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 
     class <- tolower(class)
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' cannot be converted to 'logical'",
+                      call. = FALSE), quiet)
+        as.logical(rep(NA, length(x)))
+    } else if (class == "character") {
         shush(warning("'x' was formatted as HMS.", call. = FALSE), quiet)
         as.character(hms::as_hms(as.numeric(x)))
     } else if (class == "integer") {
@@ -496,7 +507,7 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                         year_length = lubridate::dyears(),
                         close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -508,7 +519,11 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 
     class <- tolower(class)
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' cannot be converted to 'logical'",
+                      call. = FALSE), quiet)
+        as.logical(rep(NA, length(x)))
+    } else if (class == "character") {
         shush(warning("'x' was formatted as HMS.", call. = FALSE), quiet)
         as.character(hms::as_hms(x))
     } else if (class == "integer") {
@@ -545,7 +560,7 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
 #' @export
 convert.Date <- function(x, class, ..., tz = "UTC", quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -565,7 +580,11 @@ convert.Date <- function(x, class, ..., tz = "UTC", quiet = FALSE) {
         shush(warning("There's no time to convert.", call. = FALSE), quiet)
     }
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' cannot be converted to 'logical'",
+                      call. = FALSE), quiet)
+        as.logical(rep(NA, length(x)))
+    } else if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
         shush(as.integer(x), quiet)
@@ -597,7 +616,7 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                            year_length = lubridate::dyears(),
                            close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -614,7 +633,11 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                       "was considered.", call. = FALSE), quiet)
     }
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' cannot be converted to 'logical'",
+                      call. = FALSE), quiet)
+        as.logical(rep(NA, length(x)))
+    } else if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
         shush(warning("'x' was converted to total of full seconds since ",
@@ -652,7 +675,7 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                              year_length = lubridate::dyears(),
                              close_round = TRUE, quiet = FALSE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
@@ -675,7 +698,11 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
                       call. = FALSE), quiet)
     }
 
-    if (class == "character") {
+    if (class == "logical") {
+        shush(warning("'x' cannot be converted to 'logical'",
+                      call. = FALSE), quiet)
+        as.logical(rep(NA, length(x)))
+    } else if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
         shush(warning("'x' was converted to total of full seconds of the ",
@@ -715,9 +742,9 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
                                input_unit = NULL, output_unit = NULL,
                                month_length = lubridate::dmonths(),
                                year_length = lubridate::dyears(),
-                               close_round = TRUE, quiet = FALSE) {
+                               close_round = TRUE, quiet = TRUE) {
     choices <- tolower(
-        c("character", "integer", "double", "numeric", "Duration",
+        c("logical", "character", "integer", "double", "numeric", "Duration",
           "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt"))
 
     checkmate::assert_choice(tolower(class), choices)
