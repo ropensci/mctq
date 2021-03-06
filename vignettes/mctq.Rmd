@@ -219,7 +219,7 @@ data %>% dplyr::select(so_w, sd_w, msw, so_f, sd_f, msf)
 
 ## Combining workdays and work-free days variables
 
-We now have computed all MCTQ variables for each section of the questionnaire. Let's move to some variables that summarize our findings considering the workdays and work-free days.
+We now have computed all MCTQ variables for each section of the questionnaire. Let's move to some variables that summarize our findings considering workdays and work-free days.
 
 ### `sd_week()`: Average weekly sleep duration
 
@@ -270,7 +270,7 @@ data %>% dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
 
 `msf_sc()` allows you to compute the chronotype, or corrected local time of mid-sleep. It takes five arguments: `msf` (local time of mid-sleep on work-free days), `sd_w` (sleep duration on workdays), `sd_f` (sleep duration on work-free days), `sd_week`(average weekly sleep duration), and `alarm_f` (a `logical` value indicating if the subject uses an alarm clock to wake up on work-free days).
 
-If `sd_f` is less or equal than `sd_w`, the output must be `msf`. Else, it must return `msf` minus the difference between `sd_f` and `sd_week` divided by 2. `msf_sc` can only be computed if `alarm_f` is equal to `FALSE` (the function will return `NA` for those cases).
+If `sd_f` is less or equal than `sd_w`, the output must be `msf`. Else, it must return `msf` minus the difference between `sd_f` and `sd_week` divided by 2. `msf_sc` can only be computed if `alarm_f` is equal to `FALSE` (the function will return `NA` when `alarm_f == TRUE`).
 
 `msf_sc` applies a correction to `msf`, removing a estimation of the effect from accumulate sleep debt on workdays that usually is compensated on work-free days. See `?msf_sc` to learn more.
 
@@ -290,9 +290,9 @@ data %>% dplyr::select(msf, msf_sc_rounded)
 
 The output must be the difference between `msf` and `msw` in a clock hour manner.
 
-In case you don't know, social jet lag is a concept developed by Till Roenneberg _et. al_ ([2006](http://doi.org/10.1080/07420520500545979)) that represents the discrepancy between between social and biological time.
+In case you don't know, social jet lag is a concept developed by Till Roenneberg _et. al_ ([2006](http://doi.org/10.1080/07420520500545979)) that represents the discrepancy between social and biological time.
 
-The difference described above may seems trivial, but it's not. See the `vignette("sjl", package = "mctq")` to learn more.
+The difference described above may seems trivial or easy to compute, but it's not. See the `vignette("sjl", package = "mctq")` to learn more.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$sjl_rel <- sjl_rel(data$msw, data$msf)
@@ -307,7 +307,7 @@ data %>% dplyr::select(msw, msf, sjl_rel)
 
 In fact, `sjl_rel` is just a wrapper function to `sjl`, but with the `abs` argument set as `FALSE`.
 
-If you already have `sjl_rel` computed, you don't really need to compute it twice, you can just use `abs(sjl_rel)`. That's what we going to do with our data.
+If you already have `sjl_rel` computed, you don't really need to compute it twice, you can just use `abs(sjl_rel)`. That's what we're going to do with our data.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$sjl <- abs(data$sjl_rel)
@@ -319,7 +319,7 @@ data %>% dplyr::select(sjl_rel, sjl)
 
 ## Success!
 
-We have now processed all the MCTQ standard variables proposed by the original authors.
+We have now processed all the MCTQ standard variables proposed by the original MCTQ authors.
 
 Before we look at the final data, let's first reorder the columns to a nice logical order and remove some `*_rounded` variables that we created just for show.
 
@@ -344,7 +344,7 @@ And our final dataset is ...
 data
 ```
 
-If you're using [RStudio](https://rstudio.com/), you can run the all the code showed above and them type `View(data)` in the console to explore the end result.
+If you're using [RStudio](https://rstudio.com/), you can run all the code showed above and them type `View(data)` in the console to explore the end result.
 
 If you don't feel comfortable with the way `Duration` objects are printed, `mctq` provides a utility function to help you. Just use `pretty_mctq(data, round = FALSE)` to get a better view.
 
