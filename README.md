@@ -49,7 +49,7 @@ You can learn more about MCTQ at
 ### Wait, a R package for a questionnaire?
 
 MCTQ may look like a simple questionnaire, but it requires a lot of
-date/time manipulation. That can be real challenging, especially if
+date/time manipulation. This can be real challenging, especially if
 you’re dealing with a large set of data.
 
 The main advantage to use the `mctq` package in your research is that
@@ -80,7 +80,7 @@ R](https://www.coursera.org/specializations/data-science-foundations-r)
 
 The first stable `mctq` version is already out. We hope that it will be
 available on [CRAN](https://cran.r-project.org/) soon. Until that moment
-comes, you can install the development version from GitHub with:
+comes, you can install it from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -95,7 +95,8 @@ values. This classes can be found in the
 [lubridate](https://lubridate.tidyverse.org/) package from
 [tidyverse](https://www.tidyverse.org/packages/). If your data do not
 conform to the object classes required, don’t worry, just use `mctq`
-`convert()` to convert it. You can always convert it back if you want.
+`convert()` function to convert it. You can always convert it back if
+you want.
 
 Here are some examples of how to convert your data using `convert()`:
 
@@ -174,6 +175,9 @@ sjl_rel(msw, msf)
 #> [1] "-10800s (~-3 hours)"  "15900s (~4.42 hours)"
 ```
 
+See a quick tour to all MCTQ main functions
+[here](https://gipsousp.github.io/mctq/articles/mctq.html).
+
 ### Utilities
 
 In addition to `convert()`, `mctq` is also equipped with many other
@@ -188,7 +192,7 @@ list of them.
 ## New features
 
 As of today, `mctq` offers solutions for all variables proposed by the
-original authors. Because MCTQ is actively used by a sleep research
+original MCTQ authors. Because MCTQ is actively used by a sleep research
 group, we have also developed different tools and analysis that can help
 you with you research. You can expect new features and also new
 articles/vignettes to be added to the package in the future.
@@ -204,14 +208,14 @@ citation("mctq")
 #> 
 #> To cite mctq in publications use:
 #> 
-#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: a R
-#>   package for the Munich ChronoType Questionnaire (MCTQ). Retrieved
+#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: the
+#>   R package for the Munich ChronoType Questionnaire (MCTQ). Retrieved
 #>   from https://gipsousp.github.io/mctq/ .
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
-#>     title = {mctq: a R package for the Munich ChronoType Questionnaire (MCTQ)},
+#>     title = {mctq: the R package for the Munich ChronoType Questionnaire (MCTQ)},
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2021},
 #>     url = {https://gipsousp.github.io/mctq/},

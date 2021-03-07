@@ -44,14 +44,14 @@
 #'    06:00              22:00     06:00              22:00
 #' -----|------------------|---------|------------------|----->
 #'               16h           8h             16h
-#'           longer int.   shorter int.    longer int.
+#'           longer int.  shortest int.   longer int.
 #'
 #'               day 1                      day 2
 #'      y                   x       y                   x
 #'    13:00               08:00   13:00               08:00
 #' -----|-------------------|-------|-------------------|----->
 #'               19h           5h            19h
-#'           longer int.   shorter int.   longer int.
+#'           longer int.  shortest int.  longer int.
 #'
 #'     x,y             x,y             x,y             x,y
 #'      x               y               x               y

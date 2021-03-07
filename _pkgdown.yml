@@ -12,7 +12,6 @@ navbar:
     right: [github]
   components:
     home: ~
-    articles: ~
     news: ~
 
 reference:
@@ -51,6 +50,18 @@ reference:
   - round_time
   - shortest_interval
   - sum_time
+
+articles:
+- title: Get started
+  navbar: ~
+  contents:
+  - mctq
+
+- title: Notes
+  navbar: ~
+  contents:
+  - missing-sections
+  - sjl
 
 authors:
   Daniel Vartanian:

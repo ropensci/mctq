@@ -22,7 +22,7 @@
 #'
 #' * Due to time arithmetic issues, `sjl()` does a slight different computation
 #' by default than those propose by the authors mentioned above. See
-#' `vignette("social_jet_lag", package = "mctq")` for more details.
+#' `vignette("sjl", package = "mctq")` for more details.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble to understand the equations. If you want a better viewer,
@@ -74,7 +74,7 @@
 #'
 #' The topics below provide a simple explanation of each method supported by
 #' `sjl()`. To get a detail understating of this methods, see
-#' `vignette("social-jet-lag", package = "mctq")`.
+#' `vignette("sjl", package = "mctq")`.
 #'
 #' Please note that none of the approaches below are related to Jankowski's
 #' (2017) social jet lag sleep-corrected proposal. Since the Jankowski's
@@ -103,7 +103,7 @@
 #' uses the longer interval between the two, considering a two day window.
 #'
 #' This method may help with special contexts, like when dealing with
-#' shift-workers that usually have a greater than 12h distance between he/she
+#' shift-workers, that usually have a greater than 12h distance between his/her
 #' mid-sleep hours.
 #'
 #' @param msw A `hms` object corresponding to the __mid-sleep on work days__

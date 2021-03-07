@@ -922,7 +922,7 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
     # Fix missing sections -----
 
-    ## See `vignette("missing_sections", "mctq")` to learn more.
+    ## See `vignette("missing-sections", pakckage = "mctq")` to learn more.
 
     count_w <- length(names(std_mctq)[grepl("_w$", names(std_mctq))])
     count_f <- length(names(std_mctq)[grepl("_f$", names(std_mctq))])
