@@ -16,7 +16,7 @@
 #' ## Notes
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'

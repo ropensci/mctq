@@ -2,7 +2,7 @@
 #'
 #' __Standard MCTQ__ functions were created following the guidelines in
 #' Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
-#' Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
+#' Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 #'
 #' __\eqn{\mu}MCTQ__ functions were created following the guidelines in Ghotbi
 #' _et.al_ (2020), in addition to the guidelines used for the standard MCTQ.
@@ -11,12 +11,12 @@
 #' guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
 #' guidelines used for the standard MCTQ.
 #'
-#' See References section to learn more.
+#' See the References section to learn more.
 #'
 #' ## Class requirements
 #'
 #' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found in the [hms][hms::hms-package]
+#' hold time values. These classes can be found in the [hms][hms::hms-package]
 #' and [lubridate][lubridate::lubridate-package] packages. If your data do not
 #' conform to the object classes required, you can use [mctq::convert()] to
 #' convert it.

@@ -9,9 +9,9 @@
 ms(so, sd)
 }
 \arguments{
-\item{so}{A \code{hms} object corresponding to the \strong{sleep onset} value from a
-standard, micro, or shift version of the MCTQ questionnaire. You can use
-\code{\link[=so]{so()}} to compute it for the standard or shift version.}
+\item{so}{A \code{hms} object corresponding to the \strong{local time of sleep onset}
+value from a standard, micro, or shift version of the MCTQ questionnaire.
+You can use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
 
 \item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} value
 from a standard, micro, or shift version of the MCTQ questionnaire. You can
@@ -19,18 +19,18 @@ use \code{\link[=sd]{sd()}} to compute it for any MCTQ version.}
 }
 \value{
 A \code{hms} object corresponding to the sum of \code{so} and \code{(sd / 2)}
-rolled in a 24-hour clock basis.
+considering the circularity of time.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{ms()} computes the \strong{mid-sleep} for standard, micro, and shift versions of
-the Munich Chronotype Questionnaire (MCTQ).
+\code{ms()} computes the \strong{local time of mid-sleep} for standard, micro, and
+shift versions of the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
 Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
-Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
+Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
 \emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
@@ -39,11 +39,11 @@ Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
 guidelines used for the standard MCTQ.
 
-See References section to learn more.
+See the References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in the \link[hms:hms-package]{hms}
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
 conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
 convert it.
@@ -71,7 +71,7 @@ Vetter, & Roenneberg (2013), and theWeP (n.d.) guidelines for \code{ms()}
 \item The computation below must be applied to each section of the
 questionnaire.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble to understand the equations. If you want a better viewer,
+have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
 }

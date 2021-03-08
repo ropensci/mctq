@@ -4,8 +4,8 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `ms()` computes the __mid-sleep__ for standard, micro, and shift versions of
-#' the Munich Chronotype Questionnaire (MCTQ).
+#' `ms()` computes the __local time of mid-sleep__ for standard, micro, and
+#' shift versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
@@ -19,7 +19,7 @@
 #' questionnaire.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -49,15 +49,15 @@
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param so A `hms` object corresponding to the __sleep onset__ value from a
-#'   standard, micro, or shift version of the MCTQ questionnaire. You can use
-#'   [mctq::so()] to compute it for the standard or shift version.
+#' @param so A `hms` object corresponding to the __local time of sleep onset__
+#'   value from a standard, micro, or shift version of the MCTQ questionnaire.
+#'   You can use [mctq::so()] to compute it for the standard or shift version.
 #' @param sd A `Duration` object corresponding to the __sleep duration__ value
 #'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
 #'   use [mctq::sd()] to compute it for any MCTQ version.
 #'
 #' @return A `hms` object corresponding to the sum of `so` and `(sd / 2)`
-#'   rolled in a 24-hour clock basis.
+#'   considering the circularity of time.
 #'
 #' @aliases msw msf
 #' @template details_b
@@ -102,9 +102,9 @@ ms <- function(so, sd) {
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `msf_sc()` computes the __chronotype or corrected mid-sleep on work-free
-#' days__ for standard, micro, and shift versions of the Munich Chronotype
-#' Questionnaire (MCTQ).
+#' `msf_sc()` computes the __chronotype or corrected local time of mid-sleep on
+#' work-free days__ for standard, micro, and shift versions of the Munich
+#' Chronotype Questionnaire (MCTQ).
 #'
 #' `chronotype()` is just a wrapper for `msf_sc()`.
 #'
@@ -144,7 +144,7 @@ ms <- function(so, sd) {
 #' Allebrandt, Merrow, & Vetter, 2012).
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -185,8 +185,8 @@ ms <- function(so, sd) {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param msf A `hms` object corresponding to the __mid-sleep on work-free
-#'   days__ value from a standard, micro, or shift version of the MCTQ
+#' @param msf A `hms` object corresponding to the __local time of mid-sleep on
+#'   work-free days__ value from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. You can use [mctq::ms()] to compute it.
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
 #'   days__ value from a standard, micro, or shift version of the MCTQ
@@ -208,7 +208,7 @@ ms <- function(so, sd) {
 #'   an alarm.
 #'
 #' @return A `hms` object corresponding to the MCTQ chronotype or corrected
-#'   mid-sleep on work-free days.
+#'   local time of mid-sleep on work-free days.
 #'
 #' @template details_b
 #' @template section_a

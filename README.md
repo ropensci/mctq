@@ -25,41 +25,41 @@ Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff6
 Chronotype Questionnaire (MCTQ) data in R for all of its three versions
 (standard, micro, and shift).
 
-> Please note that this package have not been [peer
+> Please note that this package has not been [peer
 > reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
 > We plan to submit it to [rOpenSci](https://ropensci.org/) in March
-> 2021 . We also plan to write a article about it and to add it to
+> 2021 . We also plan to write an article about it and to add it to
 > [CRAN](https://cran.r-project.org/).
 
 Today MCTQ is one of the best quantitative and validated methods
 available to assess peoples’ sleep behavior and to correlate circadian
 features of human biology with other factors (like geographic factors).
-It has become a indispensable tool for sleep and chronobiology
+It has become an indispensable tool for sleep and chronobiology
 scientists when more objective measures (like actigraphy) are not
 viable.
 
 The questionnaire was presented by Till Roenneberg (LMU Munich), Anna
 Wirz-Justice (UPK Basel), and Martha Merrow (LMU Munich) in
-[2003](https://doi.org/10.1177/0748730402239679). Since them, it has
-been progressively optimized and translated to 13 languages.
+[2003](https://doi.org/10.1177/0748730402239679). Since then, it has
+been progressively optimized and translated into 13 languages.
 
 You can learn more about MCTQ at
 <https://www.thewep.org/documentations/mctq>.
 
-### Wait, a R package for a questionnaire?
+### Wait, an R package for a questionnaire?
 
 MCTQ may look like a simple questionnaire, but it requires a lot of
-date/time manipulation. This can be real challenging, especially if
+date/time manipulation. This can be really challenging, especially if
 you’re dealing with a large set of data.
 
-The main advantage to use the `mctq` package in your research is that
-you will have reliable tools, thoroughly tested, at your disposition,
-made and supported by a sleep science research group (GIPSO) from a well
-know university ([USP](https://www5.usp.br/)). `mctq` also helps with
-research reproducibility, since it’s a free and open source package that
+The main advantage to using `mctq` in your research is that you will
+have reliable tools, thoroughly tested, at your disposition, made and
+supported by a sleep science research group (GIPSO) from a well know
+university ([USP](https://www5.usp.br/)). `mctq` also helps with
+research reproducibility, since it’s a free and open-source package that
 anyone can find and use.
 
-This package is also equipped with several utility functions that allows
+This package is also equipped with several utility functions that allow
 you to easily convert and visualize your MCTQ data. It also provides
 fictional datasets for testing and learning purposes.
 
@@ -69,7 +69,7 @@ fictional datasets for testing and learning purposes.
 have some familiarity with the [R programming
 language](https://www.r-project.org/) to use the main functions.
 
-In case you do not fell too comfortable with R, we strongly recommend
+In case you don’t feel too comfortable with R, we strongly recommend
 checking Hadley Wickham and Garrett Grolemund free and online book [R
 for data Science](https://r4ds.had.co.nz/) and the Coursera course from
 John Hopkins University [Data Science: Foundations using
@@ -90,7 +90,7 @@ devtools::install_github("gipsousp/mctq", dependencies = TRUE)
 ## Usage
 
 `mctq` works with a set of object classes specially created to hold time
-values. This classes can be found in the
+values. These classes can be found in the
 [hms](https://hms.tidyverse.org/) and
 [lubridate](https://lubridate.tidyverse.org/) package from
 [tidyverse](https://www.tidyverse.org/packages/). If your data do not
@@ -123,8 +123,9 @@ convert("10:00 PM", "hms", orders = "IMp")
 After your data is all set to start, just use the `mctq` functions below
 to process it.
 
-Note that `mctq` uses a similar naming scheme as those used in the MCTQ
-articles. That make it easy to find and apply any computation necessary.
+Note that `mctq` uses a similar naming scheme to those used in the MCTQ
+articles. That makes it easy to find and apply any computation
+necessary.
 
 -   `fd()`: compute MCTQ work-free days
 -   `so()`: compute MCTQ sleep onset
@@ -175,14 +176,14 @@ sjl_rel(msw, msf)
 #> [1] "-10800s (~-3 hours)"  "15900s (~4.42 hours)"
 ```
 
-See a quick tour to all MCTQ main functions
+See a quick tour of all MCTQ main functions
 [here](https://gipsousp.github.io/mctq/articles/mctq.html).
 
 ### Utilities
 
 In addition to `convert()`, `mctq` is also equipped with many other
 utility functions. The package also provides fictional datasets of the
-standard, micro and shift versions for testing and learning purposes.
+standard, micro, and shift versions for testing and learning purposes.
 
 All functions are well documented, showing all the guidelines behind the
 computations. Click
@@ -193,15 +194,15 @@ list of them.
 
 As of today, `mctq` offers solutions for all variables proposed by the
 original MCTQ authors. Because MCTQ is actively used by a sleep research
-group, we have also developed different tools and analysis that can help
-you with you research. You can expect new features and also new
+group, we have also developed different tools and analyses that can help
+you with your research. You can expect new features and also new
 articles/vignettes to be added to the package in the future.
 
 ## Citation
 
 If you use `mctq` in your research, please consider citing it. We put a
-lot of work to build and maintain a free and open source R package. You
-can find `mctq` citation below.
+lot of work to build and maintain a free and open-source R package. You
+can find the `mctq` citation below.
 
 ``` r
 citation("mctq")

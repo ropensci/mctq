@@ -23,7 +23,7 @@
 #' represent the same thing.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -33,7 +33,7 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
+#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
 #' * \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
 #' ___ min, I get up").
 #'
@@ -45,8 +45,9 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
-#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = local time of sleep end between two
+#' days in a particular shift __or__ between two free days after a particular
+#' shift.
 #' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
 #' between two days in a particular shift __or__ between two free days after a
 #' particular shift ("after ... min, I get up").
@@ -54,14 +55,14 @@
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param se A `hms` object corresponding to the __sleep end__ value from a
-#'   standard or shift version of the MCTQ questionnaire.
+#' @param se A `hms` object corresponding to the __local time of sleep end__
+#'   value from a standard or shift version of the MCTQ questionnaire.
 #' @param si A `Duration` object corresponding to the __sleep inertia__ or
 #'   __time to get up__ value from a standard or shift version of the MCTQ
 #'   questionnaire.
 #'
-#' @return A `hms` object corresponding to the sum of `se` and `si` rolled in a
-#'   24-hour clock basis.
+#' @return A `hms` object corresponding to the sum of `se` and `si` considering
+#'   the circularity of time.
 #'
 #' @template details_b
 #' @template references_a

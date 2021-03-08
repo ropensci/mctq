@@ -10,8 +10,8 @@ msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 }
 \arguments{
-\item{msf}{A \code{hms} object corresponding to the \strong{mid-sleep on work-free
-days} value from a standard, micro, or shift version of the MCTQ
+\item{msf}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
+work-free days} value from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
@@ -38,14 +38,14 @@ an alarm.}
 }
 \value{
 A \code{hms} object corresponding to the MCTQ chronotype or corrected
-mid-sleep on work-free days.
+local time of mid-sleep on work-free days.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{msf_sc()} computes the \strong{chronotype or corrected mid-sleep on work-free
-days} for standard, micro, and shift versions of the Munich Chronotype
-Questionnaire (MCTQ).
+\code{msf_sc()} computes the \strong{chronotype or corrected local time of mid-sleep on
+work-free days} for standard, micro, and shift versions of the Munich
+Chronotype Questionnaire (MCTQ).
 
 \code{chronotype()} is just a wrapper for \code{msf_sc()}.
 
@@ -55,7 +55,7 @@ When using the shift version of the MCTQ, replace the value of \code{sd_week} to
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
 Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
-Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
+Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
 \emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
@@ -64,11 +64,11 @@ Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
 guidelines used for the standard MCTQ.
 
-See References section to learn more.
+See the References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in the \link[hms:hms-package]{hms}
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
 conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
 convert it.
@@ -112,7 +112,7 @@ studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 populations of different age and sex compositions comparable (Roenneberg,
 Allebrandt, Merrow, & Vetter, 2012).
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble to understand the equations. If you want a better viewer,
+have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
 }

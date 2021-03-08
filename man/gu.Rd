@@ -7,16 +7,16 @@
 gu(se, si)
 }
 \arguments{
-\item{se}{A \code{hms} object corresponding to the \strong{sleep end} value from a
-standard or shift version of the MCTQ questionnaire.}
+\item{se}{A \code{hms} object corresponding to the \strong{local time of sleep end}
+value from a standard or shift version of the MCTQ questionnaire.}
 
 \item{si}{A \code{Duration} object corresponding to the \strong{sleep inertia} or
 \strong{time to get up} value from a standard or shift version of the MCTQ
 questionnaire.}
 }
 \value{
-A \code{hms} object corresponding to the sum of \code{se} and \code{si} rolled in a
-24-hour clock basis.
+A \code{hms} object corresponding to the sum of \code{se} and \code{si} considering
+the circularity of time.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -27,7 +27,7 @@ shift versions of the Munich Chronotype Questionnaire (MCTQ).
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
 Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
-Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
+Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
 \emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
@@ -36,11 +36,11 @@ Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
 guidelines used for the standard MCTQ.
 
-See References section to learn more.
+See the References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in the \link[hms:hms-package]{hms}
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
 conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
 convert it.
@@ -71,7 +71,7 @@ questionnaire.
 \eqn{SI} (sleep inertia), but, for the purpose of this computation, both
 represent the same thing.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble to understand the equations. If you want a better viewer,
+have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
 }
@@ -83,7 +83,7 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
+\item \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
 \item \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
 ___ min, I get up").
 }
@@ -97,8 +97,9 @@ ___ min, I get up").
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
-particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = local time of sleep end between two
+days in a particular shift \strong{or} between two free days after a particular
+shift.
 \item \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
 between two days in a particular shift \strong{or} between two free days after a
 particular shift ("after ... min, I get up").

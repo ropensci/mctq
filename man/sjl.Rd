@@ -10,12 +10,12 @@ sjl(msw, msf, abs = TRUE, method = "shortest")
 sjl_rel(msw, msf, method = "shortest")
 }
 \arguments{
-\item{msw}{A \code{hms} object corresponding to the \strong{mid-sleep on work days}
-from a standard, micro, or shift version of the MCTQ questionnaire. You can
-use \code{\link[=ms]{ms()}} to compute it.}
+\item{msw}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
+workdays} from a standard, micro, or shift version of the MCTQ
+questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
-\item{msf}{A \code{hms} object corresponding to the \strong{mid-sleep on work-free
-days} value from a standard, micro, or shift version of the MCTQ
+\item{msf}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
+work-free days} value from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{abs}{(optional) a \code{logical} value indicating if the function must
@@ -33,7 +33,7 @@ jetlag.
 jetlag.
 }
 
-The output may vary depending on the \code{method} used.
+The output may also vary depending on the \code{method} used.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -46,7 +46,7 @@ micro, and shift versions of the Munich Chronotype Questionnaire (MCTQ).
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
 Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
-Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
+Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
 \emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
@@ -55,11 +55,11 @@ Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
 guidelines used for the standard MCTQ.
 
-See References section to learn more.
+See the References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in the \link[hms:hms-package]{hms}
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
 and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
 conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
 convert it.
@@ -88,9 +88,9 @@ and \eqn{SJL}) computation are as follow.
 each shift section of the questionnaire.
 \item Due to time arithmetic issues, \code{sjl()} does a slight different computation
 by default than those propose by the authors mentioned above. See
-\code{vignette("social_jet_lag", package = "mctq")} for more details.
+\code{vignette("sjl", package = "mctq")} for more details.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble to understand the equations. If you want a better viewer,
+have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
 \href{https://gipsousp.github.io/mctq/reference/}{website}.
 }
@@ -147,7 +147,7 @@ approach" (\code{"shortest"}).
 
 The topics below provide a simple explanation of each method supported by
 \code{sjl()}. To get a detail understating of this methods, see
-\code{vignette("social-jet-lag", package = "mctq")}.
+\code{vignette("sjl", package = "mctq")}.
 
 Please note that none of the approaches below are related to Jankowski's
 (2017) social jet lag sleep-corrected proposal. Since the Jankowski's
@@ -179,7 +179,7 @@ instead of using the shortest interval between \eqn{MSF} and \eqn{MSW}, it
 uses the longer interval between the two, considering a two day window.
 
 This method may help with special contexts, like when dealing with
-shift-workers that usually have a greater than 12h distance between he/she
+shift-workers, that usually have a greater than 12h distance between his/her
 mid-sleep hours.
 }
 

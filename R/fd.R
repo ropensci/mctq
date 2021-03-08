@@ -20,11 +20,11 @@
 #' days per week").
 #'
 #' @param wd An [integerish][checkmate::test_integerish()] `numeric` object or
-#'   an `integer` object corresponding to the __number of work days per week__
+#'   an `integer` object corresponding to the __number of workdays per week__
 #'   value from a standard or micro version of the MCTQ questionnaire.
 #'
-#' @return An `integer` value equivalent to `7 - wd`, _i.e._ the difference
-#'   between the number of days in a week and the number of work days.
+#' @return An `integer` object equivalent to the difference between the number
+#'   of days in a week and the number of workdays (`wd`).
 #'
 #' @template details_a
 #' @template references_a

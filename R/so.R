@@ -4,8 +4,8 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `so()` computes the __sleep onset__ for standard and shift versions of the
-#' Munich Chronotype Questionnaire (MCTQ).
+#' `so()` computes the __local time of sleep onset__ for standard and shift
+#' versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
 #' Note that this value is collected directly from the questionnaire if you're
 #' using the \eqn{\mu}MCTQ.
@@ -22,7 +22,7 @@
 #' questionnaire.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -60,11 +60,12 @@
 #'
 #' @param sprep A `hms` object corresponding to the __local time of preparing to
 #'   sleep__ value from a standard or shift version of the MCTQ questionnaire.
-#' @param slat A `Duration` object corresponding to the __sleep latency__ value
-#'   from a standard or shift version of the MCTQ questionnaire.
+#' @param slat A `Duration` object corresponding to the __sleep latency or time
+#'   to fall asleep after preparing to sleep__ value from a standard or shift
+#'   version of the MCTQ questionnaire.
 #'
-#' @return A `hms` object corresponding to the sum of `sprep` and `slat` rolled
-#'   in a 24-hour clock basis.
+#' @return A `hms` object corresponding to the sum of `sprep` and `slat`
+#'   considering the circularity of time.
 #'
 #' @template details_b
 #' @template references_a

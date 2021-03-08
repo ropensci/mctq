@@ -25,7 +25,7 @@
 #' `vignette("sjl", package = "mctq")` for more details.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -106,9 +106,9 @@
 #' shift-workers, that usually have a greater than 12h distance between his/her
 #' mid-sleep hours.
 #'
-#' @param msw A `hms` object corresponding to the __mid-sleep on work days__
-#'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
-#'   use [mctq::ms()] to compute it.
+#' @param msw A `hms` object corresponding to the __local time of mid-sleep on
+#'   workdays__ from a standard, micro, or shift version of the MCTQ
+#'   questionnaire. You can use [mctq::ms()] to compute it.
 #' @param abs (optional) a `logical` value indicating if the function must
 #'   return an absolute social jetlag (default: `TRUE`).
 #' @param method (optional) a string indicating which method the function must
@@ -122,7 +122,7 @@
 #' * If `abs = FALSE`, a `Duration` object corresponding to the relative social
 #' jetlag.
 #'
-#' The output may vary depending on the `method` used.
+#' The output may also vary depending on the `method` used.
 #'
 #' @inheritParams msf_sc
 #' @template details_b
@@ -284,7 +284,7 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' combination.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'

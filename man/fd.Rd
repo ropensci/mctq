@@ -8,12 +8,12 @@ fd(wd)
 }
 \arguments{
 \item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
-an \code{integer} object corresponding to the \strong{number of work days per week}
+an \code{integer} object corresponding to the \strong{number of workdays per week}
 value from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-An \code{integer} value equivalent to \code{7 - wd}, \emph{i.e.} the difference
-between the number of days in a week and the number of work days.
+An \code{integer} object equivalent to the difference between the number
+of days in a week and the number of workdays (\code{wd}).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -24,7 +24,7 @@ and micro versions of the Munich Chronotype Questionnaire (MCTQ).
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
 Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
-Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
+Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
 \emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
@@ -33,7 +33,7 @@ Vetter (2012), and The World Wide Experimental Platform (theWeP, n.d.).
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
 guidelines used for the standard MCTQ.
 
-See References section to learn more.
+See the References section to learn more.
 }
 \section{Guidelines}{
 

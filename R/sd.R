@@ -19,7 +19,7 @@
 #' questionnaire.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -48,14 +48,14 @@
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param so A `hms` object corresponding to the __sleep onset__ value
-#'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
-#'   use [mctq::so()] to compute it for the standard or shift version.
-#' @param se A `hms` object corresponding to the __sleep end__ value
-#'   from a standard, micro, or shift version of the MCTQ questionnaire.
+#' @param so A `hms` object corresponding to the __local time of sleep onset__
+#'   value from a standard, micro, or shift version of the MCTQ questionnaire.
+#'   You can use [mctq::so()] to compute it for the standard or shift version.
+#' @param se A `hms` object corresponding to the __local time of sleep end__
+#'   value from a standard, micro, or shift version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the difference between
-#'   `se` and `so` rolled in a 24-hour clock basis.
+#'   `se` and `so` considering the circularity of time.
 #'
 #' @template details_b
 #' @template references_a
@@ -112,7 +112,7 @@ sd <- function(so, se) {
 #' questionnaire.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -133,13 +133,13 @@ sd <- function(so, se) {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param napo A `hms` object corresponding to the __nap onset__ value
-#'   from the shift version of the MCTQ questionnaire.
-#' @param nape A `hms` object corresponding to the __nap end__ value
-#'   from the shift version of the MCTQ questionnaire.
+#' @param napo A `hms` object corresponding to the __local time of nap onset__
+#'   value from the shift version of the MCTQ questionnaire.
+#' @param nape A `hms` object corresponding to the __local time of nap end__
+#'   value from the shift version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the difference between
-#'   `nape` and `napo` rolled in a 24-hour clock basis.
+#'   `nape` and `napo` considering the circularity of time.
 #'
 #' @template details_b
 #' @template references_a
@@ -200,7 +200,7 @@ napd <- function(napo, nape) {
 #' \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N}.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -231,7 +231,7 @@ napd <- function(napo, nape) {
 #' @return
 #'
 #' * If `nap == TRUE`, a `Duration` object corresponding to the sum of `sd` and
-#' `napd`.
+#' `napd` considering the circularity of time.
 #' * If `nap == FALSE`, a `Duration` object equal to `sd`.
 #'
 #' @template details_b
@@ -311,7 +311,7 @@ sd24 <- function(sd, napd, nap) {
 #' durations on work and work-free days in a week.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
@@ -444,7 +444,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' mean sleep durations.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble to understand the equations. If you want a better viewer,
+#' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
 #' [website](https://gipsousp.github.io/mctq/reference/).
 #'
