@@ -4,13 +4,13 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' A fictional dataset, __for testing and learning purposes__, composed by
+#' A fictional dataset, __for testing and learning purposes__, composed of
 #' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
 #' standard version.
 #'
 #' This data was created following the guidelines in Roenneberg, Wirz-Justice, &
-#' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
-#' World Wide Experimental Platform (theWeP, n.d.). See References and Details
+#' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World
+#' Wide Experimental Platform (theWeP, n.d.). See the References and Details
 #' sections to learn more.
 #'
 #' @details
@@ -34,7 +34,7 @@
 #' ## Data building and data wrangling
 #'
 #' This dataset was created by randomized sampling (see [mctq::random_mctq()])
-#' and by manual insertions of especial cases. Its purpose is to demonstrate
+#' and by manual insertions of special cases. Its purpose is to demonstrate
 #' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
@@ -50,8 +50,8 @@
 #' ## Variable classes
 #'
 #' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] packages.
+#' hold time values. These classes can be found in the [hms][hms::hms-package]
+#' and [lubridate][lubridate::lubridate-package] package.
 #'
 #' ## `Duration` objects
 #'
@@ -62,7 +62,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value for the purpose of identifying each subject in the
+#'   A unique `integer` value with purpose of identify each subject in the
 #'   dataset.
 #'   \cr \cr
 #'   Type: Control.
@@ -71,7 +71,7 @@
 #'
 #'
 #'   \item{work}{
-#'   A `logical` value indicating if the subject have a regular work schedule.
+#'   A `logical` value indicating if the subject has a regular work schedule.
 #'   \cr \cr
 #'   Statement (`EN`): "I have a regular work schedule (this includes being, for
 #'   example, a housewife or househusband): Yes ( ___ ) No ( ___ )".
@@ -171,7 +171,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{wake_before_w}{
-#'   A `logical` value indicating if the subject regularly wake up __before__
+#'   A `logical` value indicating if the subject regularly wakes up __before__
 #'   the alarm rings on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": I regularly wake up BEFORE the alarm rings:
@@ -286,7 +286,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_f}{
-#'   A `logical` value indicating if the subject have any particular reasons for
+#'   A `logical` value indicating if the subject has any particular reasons for
 #'   why he/she __cannot__ freely choose his/her sleep times on __work-free
 #'   days__.
 #'   \cr \cr

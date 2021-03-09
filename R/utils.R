@@ -55,7 +55,7 @@ clock_roll <- function(x) {
 }
 
 interval_mean <- function(start, end, class = "hms", ambiguity = 24,
-                          clock = FALSE) {
+                          circular = FALSE) {
     classes <- c("Duration", "Period", "difftime", "hms", "POSIXct", "POSIXlt")
 
     checkmate::assert_multi_class(start, classes)
@@ -66,14 +66,14 @@ interval_mean <- function(start, end, class = "hms", ambiguity = 24,
 
     checkmate::assert_choice(tolower(class), tolower(classes))
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
-    checkmate::assert_flag(clock)
+    checkmate::assert_flag(circular)
 
     start <- clock_roll(convert(start, "hms", quiet = TRUE))
     end <- clock_roll(convert(end, "hms", quiet = TRUE))
     interval <- shush(assign_date(start, end, ambiguity = ambiguity))
     mean <- as.numeric(start) + (as.numeric(interval) / 2)
 
-    if (isTRUE(clock)) {
+    if (isTRUE(circular)) {
         convert(hms::as_hms(lubridate::as_datetime(mean)), class, quiet = TRUE)
     } else {
         convert(mean, class, quiet = TRUE)

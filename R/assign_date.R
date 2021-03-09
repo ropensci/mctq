@@ -13,10 +13,10 @@
 #' ## Class requirements
 #'
 #' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found in [hms::hms-package] and
-#' [lubridate::lubridate-package]. If your data do not conform to the object
-#' classes required, you can use [mctq::convert()] to convert it
-#' (see `vignette("converting-data", package = "mctq")`).
+#' hold time values. These classes can be found in the [hms][hms::hms-package]
+#' and [lubridate][lubridate::lubridate-package] packages. If your data do not
+#' conform to the object classes required, you can use [mctq::convert()] to
+#' convert it.
 #'
 #' ## `ambiguity` argument
 #'
@@ -57,27 +57,28 @@
 #' ## `start_name` and `end_name` arguments
 #'
 #' These arguments serve to instruct `assign_date()` on how to name the
-#' list elements when `return == "list"`. As default, the function will name
+#' list elements when `return = "list"`. As default, the function will name
 #' this elements with the names of the variables assigned to `start` and `end`
 #' arguments.
 #'
-#' If the number of characters (`nchar`) of `start_name` or `end_name` are equal
-#' or greater than 30, `assign_date()` will name the list elements as `"start"`
-#' and `"end"`.
+#' If the number of characters (`nchar()`) of `start_name` or `end_name` are
+#' equal or greater than 30, `assign_date()` will name the list elements as
+#' `"start"` and `"end"`.
 #'
 #' ## `POSIXt` objects
 #'
 #' `POSIXt` values passed as argument to `start` or `end` will be strip of their
-#' dates. Only the hours will be considered.
+#' dates. Only the time will be considered.
 #'
 #' ## `NA` values
 #'
 #' `assign_date()` will return `NA` if `start` or `end` are `NA`.
 #'
-#' @param start,end A `hms` or `POSIXt` vector indicating the start or end
+#' @param start,end A `hms` or `POSIXt` object indicating the start or end
 #'   hour.
-#' @param ambiguity (optional) a `numeric` value to instruct `assign_date()` on
-#'   how to deal with ambiguities (see Details) (default: `0`).
+#' @param ambiguity (optional) a `numeric` or `NA` value to instruct
+#'   `assign_date()` on how to deal with ambiguities (see Details) (default:
+#'   `0`).
 #' @param return (optional) a string indicating the type of the output (see
 #'   Details) (default: `"Interval"`).
 #' @param start_name,end_name (optional) a string indicating a name associated
@@ -141,7 +142,7 @@
 #' assign_date(start, end, return = "end")
 #' #> [1] "1970-01-01 11:45:00 UTC" # Expected
 #'
-#' ## __ To assign a 24h interval to ambiguities __
+#' ## __ To assign a 24 hours interval to ambiguities __
 #' start <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)

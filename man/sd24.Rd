@@ -7,21 +7,21 @@
 sd24(sd, napd, nap)
 }
 \arguments{
-\item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} value
-from the shift version of the MCTQ questionnaire. You can use \code{\link[=sd]{sd()}}
-to compute it.}
+\item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} from
+the shift version of the MCTQ questionnaire. You can use \code{\link[=sd]{sd()}} to
+compute it.}
 
-\item{napd}{A \code{Duration} object corresponding to the \strong{nap duration} value
-from the shift version of the MCTQ questionnaire. You can use
-\code{\link[=napd]{napd()}} to compute it.}
+\item{napd}{A \code{Duration} object corresponding to the \strong{nap duration} from
+the shift version of the MCTQ questionnaire. You can use \code{\link[=napd]{napd()}} to
+compute it.}
 
 \item{nap}{A \code{logical} value corresponding to the \strong{"I usually take a nap"}
-value from the shift version of the MCTQ questionnaire.}
+from the shift version of the MCTQ questionnaire.}
 }
 \value{
 \itemize{
-\item If \code{nap == TRUE}, a \code{Duration} object corresponding to the sum of \code{sd} and
-\code{napd} considering the circularity of time.
+\item If \code{nap == TRUE}, a \code{Duration} object corresponding to the vectorized sum
+of \code{sd} and \code{napd} in a circular time frame of 24 hours.
 \item If \code{nap == FALSE}, a \code{Duration} object equal to \code{sd}.
 }
 }
@@ -67,8 +67,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for \code{sd24()}
-(\eqn{SD24}) computation are as follow.
+Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
+(n.d.) guidelines for \code{sd24()} (\eqn{SD24}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each shift section of the

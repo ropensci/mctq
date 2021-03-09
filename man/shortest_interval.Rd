@@ -22,7 +22,7 @@ return a inverse output, \emph{i.e} the longer interval between \code{x} and \co
 must be suppressed (default: \code{FALSE}).}
 }
 \value{
-A R object, of class indicated on \code{class}, with the shortest or
+An object, of class indicated on \code{class}, with the shortest or
 longer interval (if \code{inverse = TRUE} or \code{longer_interval()} is used)
 between \code{x} and \code{y}.
 }
@@ -30,9 +30,7 @@ between \code{x} and \code{y}.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{shortest_interval()} finds and return the shortest interval between two
-\code{hms} or \code{POSIXt} objects hours. This is useful for time arithmetic, because
-there's always two possible intervals between two hour values with no date
-reference.
+\code{hms} or \code{POSIXt} objects hours.
 
 \code{longer_interval()} do the inverse of \code{shortest_interval()}, \emph{i.e}
 finds the longer interval between two hours. It's just a wrapper for
@@ -41,7 +39,7 @@ finds the longer interval between two hours. It's just a wrapper for
 \details{
 \subsection{The two intervals problem}{
 
-Given two hours, \code{x} and \code{y}, in a two day timeline, without date references,
+Given two hours, \code{x} and \code{y}, in a two-day timeline, without date references,
 there will be always two possible intervals between them, as illustrated
 below.
 
@@ -92,10 +90,10 @@ shortest or longer interval (they are equal). In this cases,
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert]{convert()}} to convert it
-(see \code{vignette("converting-data", package = "mctq")}).
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
+conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
+convert it.
 }
 
 \subsection{\code{class} argument}{
@@ -109,7 +107,7 @@ and \code{"Interval"} (case insensitive).
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} values passed as argument to \code{x} or \code{y} will be strip of their
+\code{POSIXt} objects passed as argument to \code{x} or \code{y} will be strip of their
 dates. Only the hours will be considered.
 }
 }

@@ -41,7 +41,7 @@ build_vignette_std_mctq <- function(write = FALSE) {
         readr::read_csv(mctq::raw_data("std_mctq.csv"))) %>%
         dplyr::slice(2, 3, 8, 11, 38)
 
-    vignette_mctq$id <- seq(nrow(vignette_mctq))
+    vignette_mctq$ID <- seq(nrow(vignette_mctq))
 
     names(vignette_mctq) <- c("id", "work", "wd", "bt_w", "sprep_w", "slat_w",
                               "se_w", "si_w", "alarm_w", "wake_before_w",
@@ -49,12 +49,12 @@ build_vignette_std_mctq <- function(write = FALSE) {
                               "si_f", "alarm_f", "reasons_f", "reasons_why_f",
                               "le_f")
 
-    for (j in c("work", "alarm_w", "wake_before_w", "reasons_f", "alarm_f")) {
+    for (i in c("work", "alarm_w", "wake_before_w", "reasons_f", "alarm_f")) {
         vignette_mctq <- vignette_mctq %>%
             dplyr::mutate(
-                !!as.symbol(j) := dplyr::case_when(
-                    tolower(!!as.symbol(j)) == "yes" ~ TRUE,
-                    tolower(!!as.symbol(j)) == "no" ~ FALSE)
+                !!as.symbol(i) := dplyr::case_when(
+                    tolower(!!as.symbol(i)) == "yes" ~ TRUE,
+                    tolower(!!as.symbol(i)) == "no" ~ FALSE)
             )
     }
 

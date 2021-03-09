@@ -4,14 +4,14 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' A fictional dataset, for __testing and learning purposes__, composed by
+#' A fictional dataset, for __testing and learning purposes__, composed of
 #' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
 #' shift version.
 #'
 #' This data was created following the guidelines in Juda, Vetter, & Roenneberg
 #' (2013), in addition to the guidelines found in Roenneberg, Wirz-Justice, &
 #' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World
-#' Wide Experimental Platform (theWeP, n.d.). See References and Details
+#' Wide Experimental Platform (theWeP, n.d.). See the References and Details
 #' sections to learn more.
 #'
 #' @details
@@ -35,7 +35,7 @@
 #' ## Data building and data wrangling
 #'
 #' This dataset was created by randomized sampling (see [mctq::random_mctq()])
-#' and by manual insertions of especial cases. Its purpose is to demonstrate
+#' and by manual insertions of special cases. Its purpose is to demonstrate
 #' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
@@ -51,8 +51,8 @@
 #' ## Variable classes
 #'
 #' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] packages.
+#' hold time values. These classes can be found in the [hms][hms::hms-package]
+#' and [lubridate][lubridate::lubridate-package] package.
 #'
 #' ## `Duration` objects
 #'
@@ -64,7 +64,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value for the purpose of identifying each subject in the
+#'   A unique `integer` value with purpose of identify each subject in the
 #'   dataset.
 #'   \cr \cr
 #'   Type: Control.
@@ -153,7 +153,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_w_m}{
-#'   A `logical` value indicating if the subject have any particular reasons for
+#'   A `logical` value indicating if the subject has any particular reasons for
 #'   why he/she __cannot__ freely choose his/her sleep times on workdays
 #'   __between two morning shifts__.
 #'   \cr \cr
@@ -197,7 +197,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{nap_w_m}{
-#'   A `logical` value indicating if the subject usually take a nap on workdays
+#'   A `logical` value indicating if the subject usually takes a nap on workdays
 #'   __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "I usually take a nap: Yes ( ___ ) No ( ___ )".
@@ -232,7 +232,7 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{sd24_w_m}{
-#'   24h sleep duration (sleep duration + nap duration) on workdays
+#'   24 hours sleep duration (sleep duration + nap duration) on workdays
 #'   __between two morning shifts__.
 #'   \cr \cr
 #'   Type: Computed.
@@ -326,7 +326,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_f_m}{
-#'   A `logical` value indicating if the subject have any particular reasons for
+#'   A `logical` value indicating if the subject has any particular reasons for
 #'   why he/she __cannot__ freely choose his/her sleep times on work-free days
 #'   __between two free days after morning shifts__.
 #'   \cr \cr
@@ -373,7 +373,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{nap_f_m}{
-#'   A `logical` value indicating if the subject usually take a nap on
+#'   A `logical` value indicating if the subject usually takes a nap on
 #'   work-free days __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "I usually take a nap: Yes ( ___ ) No ( ___ )".
@@ -411,7 +411,7 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{sd24_f_m}{
-#'   24h sleep duration (sleep duration + nap duration) on work-free days
+#'   24 hours sleep duration (sleep duration + nap duration) on work-free days
 #'   __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Type: Computed.

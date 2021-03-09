@@ -8,15 +8,15 @@ tbt(bt, gu)
 }
 \arguments{
 \item{bt}{A \code{hms} object corresponding to the \strong{local time of going to bed}
-value from a standard or shift version of the MCTQ questionnaire.}
+from a standard or shift version of the MCTQ questionnaire.}
 
 \item{gu}{A \code{hms} object corresponding to the \strong{local time of getting out of
-bed} value from a standard or shift version of the MCTQ questionnaire. You
-can use \code{\link[=gu]{gu()}} to compute it.}
+bed} from a standard or shift version of the MCTQ questionnaire. You can
+use \code{\link[=gu]{gu()}} to compute it.}
 }
 \value{
-A \code{Duration} object corresponding to the difference between \code{gu} and
-\code{bt} considering the circularity of time.
+A \code{Duration} object corresponding to the vectorized difference
+between \code{gu} and \code{bt} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -61,8 +61,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-(2013), and theWeP (n.d.) guidelines for \code{tbt()} (\eqn{TBT}) computation are
-as follow.
+(2013), and The Worldwide Experimental Platform (n.d.) guidelines for \code{tbt()}
+(\eqn{TBT}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each section of the
@@ -80,7 +80,7 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work or work-free
+\item \eqn{BT_{W/F}}{BT_W/F} = local time of going to bed on work or work-free
 days ("I go to bed at ___ o'clock").
 \item \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
 work-free days.
@@ -95,7 +95,7 @@ work-free days.
 
 Where:
 \itemize{
-\item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
+\item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = local time of going to bed between
 two days in a particular shift \strong{or} between two free days after a
 particular shift  ("I go to bed at ___ o'clock").
 \item \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed

@@ -9,8 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
-#' for `fd()` (\eqn{FD}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
+#' Experimental Platform (n.d.) guidelines for `fd()` (\eqn{FD}) computation are
+#' as follow.
 #'
 #' __\deqn{7 - WD}__
 #'
@@ -21,10 +22,10 @@
 #'
 #' @param wd An [integerish][checkmate::test_integerish()] `numeric` object or
 #'   an `integer` object corresponding to the __number of workdays per week__
-#'   value from a standard or micro version of the MCTQ questionnaire.
+#'   from a standard or micro version of the MCTQ questionnaire.
 #'
-#' @return An `integer` object equivalent to the difference between the number
-#'   of days in a week and the number of workdays (`wd`).
+#' @return An `integer` object corresponding to the difference between the
+#'   number of days in a week and the number of workdays (`wd`).
 #'
 #' @template details_a
 #' @template references_a

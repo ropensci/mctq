@@ -8,18 +8,18 @@ le_week(le_w, le_f, wd)
 }
 \arguments{
 \item{le_w}{A \code{Duration} object corresponding to the \strong{light exposure on work
-days} value from a standard version of the MCTQ questionnaire.}
+days} from a standard version of the MCTQ questionnaire.}
 
 \item{le_f}{A \code{Duration} object corresponding to the \strong{light exposure on
-work-free days} value from a standard version of the MCTQ questionnaire.}
+work-free days} from a standard version of the MCTQ questionnaire.}
 
 \item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of workdays per week}
-value from a standard or micro version of the MCTQ questionnaire.}
+from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{le_w} and
-\code{le_f} with \code{wd} and \code{fd(wd)} as weights.
+A \code{Duration} object corresponding to the vectorized weighted mean of
+\code{le_w} and \code{le_f} with \code{wd} and \code{fd(wd)} as weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}

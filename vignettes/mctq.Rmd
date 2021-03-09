@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 
-This article takes a quick tour of all standard Munich Chronotype Questionnaire (MCTQ) main functions from the `mctq` package. Please see the function documentation and other articles/vignettes for more details.
+This article takes a quick tour of the Munich Chronotype Questionnaire (MCTQ) main functions from the `mctq` package. Please see the function documentation and other articles/vignettes for more details.
 
 The same features presented here can also be used with $\mu$MCTQ. To make it easy for newcomers, some MCTQ$^{Shift}$ functions are not shown.
 
@@ -28,7 +28,7 @@ It's a good idea to have the standard MCTQ questionnaire open while reading this
 
 ## First things first
 
-Let's start with the basics. The first thing you have to do to use `mctq` is to have some MCTQ data and `mctq` installed and loaded.
+Let's start with the basics. The first thing you must do to use `mctq` is to have some MCTQ data and `mctq` installed and loaded.
 
 To install a GitHub package you're going to need the [devtools](https://devtools.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
 
@@ -50,11 +50,11 @@ library(mctq)
 
 Now we just need to get some MCTQ data. For demonstration purposes, we are going to use here a small and fictional raw standard MCTQ data provided by the `mctq` package.
 
-This dataset already has valid values. As for any data analysis, you must have clean and valid data before using any analysis tool. If you don't know how to that, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for listeners).
+This dataset already has valid values. As for any data analysis, you must have clean and valid data before using any analysis tool. If you don't know how to do that, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for listeners).
 
 Teaching you how to load your data in R is outside the scope of this article. For that, we recommend checking the [readr](https://readr.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/) (all packages from tidyverse are great!).
 
-Our fictional MCTQ data will be generated with the code below. The naming of the variables follows the same naming scheme used in MCTQ articles. You can see the meaning of each variable by running `?std_mctq`.
+Our fictional MCTQ data will be generated with the code below. The naming of the variables follows the same naming scheme used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq`.
 
 ```{r, warning = FALSE, message = FALSE}
 library(readr)
@@ -69,9 +69,9 @@ data <- readr::read_csv(mctq::raw_data("vignette_mctq.csv"),
 
 Due to the circular nature of time, we strongly recommend that you use appropriate temporal objects while dealing with date/time in R. That can help you get rid of several computation mistakes while trying to adapt your data from a base 10 to a system rooted in a base 12 numerical system.
 
-Seems too complicated? Don't worry! You don't have to know how to handle [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) to do this. We developed a special function called `convert()` to help you.
+Seems too complicated? You don't have to know how to handle [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) to do this. We developed a special function called `convert()` to help you.
 
-`convert()` allows you to convert and parse data to different kinds of R objects. Here we are interested in two of them: `Duration` objects, to store durations (like sleep latency), and `hms` objects, to store local time values (like bedtime).
+`convert()` allows you to convert and parse data to different kinds of R objects. Here we are interested in two of them: `Duration` objects, to store time length, such as sleep latency, and `hms` objects, to store local time values, such as bedtime.
 
 But first, let's take a look at the data, shall we? If you're using [RStudio](https://rstudio.com/), you can run the code above and then type `View(data)` in the console to explore it.
 
@@ -79,7 +79,7 @@ But first, let's take a look at the data, shall we? If you're using [RStudio](ht
 data
 ```
 
-As you can see, our data came in different formats. For example, the column `bt_w` (local time of going to bed on workdays) is in hours:minutes format, while `slat_w` (sleep latency on workdays) is a duration in minutes.
+As you can see, our data came in different formats. For example, the column `bt_w` (local time of going to bed on workdays) is in hours:minutes format, while `slat_w` (sleep latency on workdays) is a duration expressed in minutes.
 
 `convert()` let you easily handle this. It takes a R object plus some instructions on how to handle the conversion. Here are some examples:
 
@@ -135,7 +135,7 @@ We're going to use direct assigning while computing the MCTQ variables, just bec
 
 `fd()` is a simple function that allows you to compute the difference between the total of days in a week and the number of workdays per week (`wd`). It takes only `wd` as argument.
 
-The output must be the total of free days a subject have in a week.
+The output must be the total of free days a subject has in a week.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$fd <- fd(data$wd)
@@ -149,7 +149,7 @@ data %>% dplyr::select(wd, fd)
 
 `so()` allows you to compute the local time of sleep onset for workdays (`so_w`) and work-free days (`so_f`). It takes two arguments: `sprep` (local time of preparing to sleep) and `slat` (sleep latency or time to fall asleep after preparing to sleep).
 
-The output must be the sum of `sprep` and `slat` considering the circularity of time.
+The output must be the sum of `sprep` and `slat` in a circular time frame of 24 hours.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$so_w <- so(data$sprep_w, data$slat_w)
@@ -163,7 +163,7 @@ data %>% dplyr::select(sprep_w, slat_w, so_w, sprep_f, slat_f, so_f)
 
 `gu()` allows you to compute the local time of getting out of bed for workdays (`gu_w`) and work-free days (`gu_f`). It takes two arguments: `se` (local time of sleep end) and `si` (sleep inertia).
 
-The output must be the sum of `se` and `si` considering the circularity of time.
+The output must be the sum of `se` and `si` in a circular time frame of 24 hours.
 
 Please note that, despite the name, `si` represents the time that the subject takes to get up after sleep end. We decided to maintain the original names and abbreviations proposed by the MCTQ authors.
 
@@ -179,7 +179,7 @@ data %>% dplyr::select(se_w, si_w, gu_w, se_f, si_f, gu_f)
 
 `sd()` allows you to compute the sleep duration for workdays (`sd_w`) and work-free days (`sd_f`). It takes two arguments: `so` (local time of sleep onset) and `se` (local time of sleep end).
 
-The output must be the difference between `se` and `so` considering the circularity of time.
+The output must be the difference between `se` and `so` in a circular time frame of 24 hours.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$sd_w <- sd(data$so_w, data$se_w)
@@ -193,7 +193,7 @@ data %>% dplyr::select(so_w, se_w, sd_w, so_f, se_f, sd_f)
 
 `tbt()` allows you to compute total time in bed for workdays (`tbt_w`) and work-free days (`tbt_f`). It takes two arguments: `bt` (local time of going to bed) and `gu` (local time of getting out of bed).
 
-The output must be the difference between `gu` and `bt` considering the circularity of time.
+The output must be the difference between `gu` and `bt` in a circular time frame of 24 hours.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$tbt_w <- tbt(data$bt_w, data$gu_w)
@@ -207,7 +207,7 @@ data %>% dplyr::select(bt_w, gu_w, tbt_w, bt_f, gu_f, tbt_f)
 
 `ms()` allows you to compute the local time of mid-sleep for workdays (`msw`) and work-free days (`msf`). It takes two arguments: `so` (local time of sleep onset) and `sd` (sleep duration).
 
-The output must be the sum of `so` with the half of `sd` duration considering the circularity of time.
+The output must be the sum of `so` with the half of `sd` duration in a circular time frame of 24 hours.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$msw <- ms(data$so_w, data$sd_w)
@@ -225,7 +225,7 @@ We now have computed all MCTQ variables for each section of the questionnaire. L
 
 `sd_week()` allows you to compute the average weekly sleep duration. It takes three arguments: `sd_w` (sleep duration on workdays), `sd_f` (sleep duration on work-free days), and `wd` (number of workdays per week).
 
-The output must be the weighted mean of `sd_w` and `sd_f`, with `wd` and `fd(wd)` as weights, considering the circularity of time.
+The output must be the weighted mean of `sd_w` and `sd_f`, with `wd` and `fd(wd)` as weights, in a circular time frame of 24 hours.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$sd_week <- sd_week(data$sd_w, data$sd_f, data$wd)
@@ -254,7 +254,7 @@ data %>% dplyr::select(wd, sd_w, fd, sd_f, sloss_week_rounded)
 
 `le_week()` allows you to compute the average weekly light exposure. It takes three arguments: `le_w` (light exposure on workdays), `le_f` (light exposure on work-free days), and `wd` (number of workdays per week).
 
-The output must be the weighted mean of `le_w` and `le_f`, with `wd` and `fd(wd)` as weights, considering the circularity of time.
+The output must be the weighted mean of `le_w` and `le_f`, with `wd` and `fd(wd)` as weights, in a circular time frame of 24 hours.
 
 Please note that light exposure is measured only with the full version of the standard MCTQ.
 
@@ -266,7 +266,7 @@ data <- data %>% dplyr::mutate(le_week_rounded = mctq::round_time(le_week))
 data %>% dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
 ```
 
-### `msf_sc()`: Chronotype or corrected local time of mid-sleep
+### `msf_sc()`: Chronotype or corrected local time of mid-sleep on work-free days
 
 `msf_sc()` allows you to compute the chronotype, or corrected local time of mid-sleep on work-free days. It takes five arguments: `msf` (local time of mid-sleep on work-free days), `sd_w` (sleep duration on workdays), `sd_f` (sleep duration on work-free days), `sd_week`(average weekly sleep duration), and `alarm_f` (a `logical` value indicating if the subject uses an alarm clock to wake up on work-free days).
 
@@ -288,7 +288,7 @@ data %>% dplyr::select(msf, msf_sc_rounded)
 
 `sjl_rel()` allows you to compute the relative social jetlag. It takes at least two arguments: `msw` (local time of mid-sleep on workdays) and `msw` (local time of mid-sleep on work-free days).
 
-The output must be the difference between `msf` and `msw` considering the circularity of time.
+The output must be the difference between `msf` and `msw` in a circular time frame of 24 hours.
 
 In case you don't know, social jet lag is a concept developed by Till Roenneberg _et. al_ ([2006](http://doi.org/10.1080/07420520500545979)) that represents the discrepancy between social and biological time.
 
@@ -317,7 +317,7 @@ data %>% dplyr::select(sjl_rel, sjl)
 
 ## Success!
 
-We have now processed all the MCTQ standard variables proposed by the original MCTQ authors.
+We have now processed all the MCTQ standard variables proposed by the MCTQ authors.
 
 Before we look at the final data, let's first reorder the columns to a nice logical order and remove some `*_rounded` variables that we created just for show.
 
@@ -342,7 +342,7 @@ And our final dataset is ...
 data
 ```
 
-If you're using [RStudio](https://rstudio.com/), you can run all the code showed above and then type `View(data)` in the console to explore the end result.
+If you're using [RStudio](https://rstudio.com/), you can run all the code showed above and then type `View(data)` in the console to explore the final result.
 
 If you don't feel comfortable with the way `Duration` objects are printed, `mctq` provides a utility function to help you. Just use `pretty_mctq(data, round = FALSE)` to get a better view.
 
@@ -361,7 +361,7 @@ Before we end, it's important to note that, in addition to `convert()` and to fu
 * `raw_data()`: Get paths to `mctq` raw datasets
 * `round_time()`: Round time values
 * `shortest_interval()`: Find the shortest interval between two hours
-* `sum_time()`: Sum time values
+* `sum_time()`: Sum time objects
 
 `mctq` also provides fictional datasets of the standard, micro, and shift versions for testing and learning purposes.
 

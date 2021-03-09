@@ -10,8 +10,8 @@
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-#' (2013), and theWeP (n.d.) guidelines for `tbt()` (\eqn{TBT}) computation are
-#' as follow.
+#' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `tbt()`
+#' (\eqn{TBT}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -29,7 +29,7 @@
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work or work-free
+#' * \eqn{BT_{W/F}}{BT_W/F} = local time of going to bed on work or work-free
 #' days ("I go to bed at ___ o'clock").
 #' * \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
 #' work-free days.
@@ -42,7 +42,7 @@
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
+#' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = local time of going to bed between
 #' two days in a particular shift __or__ between two free days after a
 #' particular shift  ("I go to bed at ___ o'clock").
 #' * \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
@@ -54,13 +54,13 @@
 #'
 #'
 #' @param bt A `hms` object corresponding to the __local time of going to bed__
-#'   value from a standard or shift version of the MCTQ questionnaire.
+#'   from a standard or shift version of the MCTQ questionnaire.
 #' @param gu A `hms` object corresponding to the __local time of getting out of
-#'   bed__ value from a standard or shift version of the MCTQ questionnaire. You
-#'   can use [mctq::gu()] to compute it.
+#'   bed__ from a standard or shift version of the MCTQ questionnaire. You can
+#'   use [mctq::gu()] to compute it.
 #'
-#' @return A `Duration` object corresponding to the difference between `gu` and
-#'   `bt` considering the circularity of time.
+#' @return A `Duration` object corresponding to the vectorized difference
+#'   between `gu` and `bt` in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a
@@ -94,5 +94,5 @@ tbt <- function(bt, gu) {
     checkmate::assert_class(gu, "hms")
     assert_identical(bt, gu, type = "length")
 
-    sum_time(gu, - bt, class = "Duration", clock = TRUE, vectorize = TRUE)
+    sum_time(gu, - bt, class = "Duration", circular = TRUE, vectorize = TRUE)
 }

@@ -38,12 +38,12 @@
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
 #' @param le_w A `Duration` object corresponding to the __light exposure on work
-#'   days__ value from a standard version of the MCTQ questionnaire.
+#'   days__ from a standard version of the MCTQ questionnaire.
 #' @param le_f A `Duration` object corresponding to the __light exposure on
-#'   work-free days__ value from a standard version of the MCTQ questionnaire.
+#'   work-free days__ from a standard version of the MCTQ questionnaire.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `le_w` and
-#'   `le_f` with `wd` and `fd(wd)` as weights.
+#' @return A `Duration` object corresponding to the vectorized weighted mean of
+#'   `le_w` and `le_f` with `wd` and `fd(wd)` as weights.
 #'
 #' @inheritParams fd
 #' @template details_b

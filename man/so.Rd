@@ -2,21 +2,21 @@
 % Please edit documentation in R/so.R
 \name{so}
 \alias{so}
-\title{Compute MCTQ sleep onset}
+\title{Compute MCTQ local time of sleep onset}
 \usage{
 so(sprep, slat)
 }
 \arguments{
 \item{sprep}{A \code{hms} object corresponding to the \strong{local time of preparing to
-sleep} value from a standard or shift version of the MCTQ questionnaire.}
+sleep} from a standard or shift version of the MCTQ questionnaire.}
 
 \item{slat}{A \code{Duration} object corresponding to the \strong{sleep latency or time
-to fall asleep after preparing to sleep} value from a standard or shift
-version of the MCTQ questionnaire.}
+to fall asleep after preparing to sleep} from a standard or shift version
+of the MCTQ questionnaire.}
 }
 \value{
-A \code{hms} object corresponding to the sum of \code{sprep} and \code{slat}
-considering the circularity of time.
+A \code{hms} object corresponding to the vectorized sum of \code{sprep} and
+\code{slat} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -64,8 +64,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-(2013), and theWeP (n.d.) guidelines for \code{so()} (\eqn{SO}) computation are as
-follow.
+(2013), and The Worldwide Experimental Platform (n.d.) guidelines for \code{so()}
+(\eqn{SO}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each section of the

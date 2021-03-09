@@ -9,8 +9,8 @@
 #'
 #' @section Guidelines:
 #'
-#' For reference, Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi
-#' _et.al_ (2020), Juda, Vetter, & Roenneberg (2013), and theWeP (n.d.)
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
+#' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 #' guidelines for `sd()` (\eqn{SD}) computation are as follow.
 #'
 #' ## Notes
@@ -29,8 +29,9 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
-#' * \eqn{SO_{W/F}}{SO_W/F}  = sleep onset on work or work-free days.
+#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
+#' * \eqn{SO_{W/F}}{SO_W/F}  = local time of sleep onset on work or work-free
+#' days.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -40,22 +41,24 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
-#' particular shift __or__ between two free days after a particular shift.
-#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = sleep onset between two days in a
-#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = local time of sleep end between two
+#' days in a particular shift __or__ between two free days after a particular
+#' shift.
+#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = local time of sleep onset between
+#' two days in a particular shift __or__ between two free days after a
+#' particular shift.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param so A `hms` object corresponding to the __local time of sleep onset__
-#'   value from a standard, micro, or shift version of the MCTQ questionnaire.
-#'   You can use [mctq::so()] to compute it for the standard or shift version.
+#'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
+#'   use [mctq::so()] to compute it for the standard or shift version.
 #' @param se A `hms` object corresponding to the __local time of sleep end__
-#'   value from a standard, micro, or shift version of the MCTQ questionnaire.
+#'   from a standard, micro, or shift version of the MCTQ questionnaire.
 #'
-#' @return A `Duration` object corresponding to the difference between
-#'   `se` and `so` considering the circularity of time.
+#' @return A `Duration` object corresponding to the vectorized difference
+#'   between `se` and `so` in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a
@@ -89,7 +92,7 @@ sd <- function(so, se) {
     checkmate::assert_class(se, "hms")
     assert_identical(so, se, type = "length")
 
-    sum_time(se, - so, class = "Duration", clock = TRUE, vectorize = TRUE)
+    sum_time(se, - so, class = "Duration", circular = TRUE, vectorize = TRUE)
 }
 
 #' Compute MCTQ nap duration (only for MCTQ Shift)
@@ -103,8 +106,8 @@ sd <- function(so, se) {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for `napd()`
-#' (\eqn{NapD}) computation are as follow.
+#' Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
+#' (n.d.) guidelines for `napd()` (\eqn{NapD}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -134,12 +137,12 @@ sd <- function(so, se) {
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param napo A `hms` object corresponding to the __local time of nap onset__
-#'   value from the shift version of the MCTQ questionnaire.
+#'   from the shift version of the MCTQ questionnaire.
 #' @param nape A `hms` object corresponding to the __local time of nap end__
-#'   value from the shift version of the MCTQ questionnaire.
+#'   from the shift version of the MCTQ questionnaire.
 #'
-#' @return A `Duration` object corresponding to the difference between
-#'   `nape` and `napo` considering the circularity of time.
+#' @return A `Duration` object corresponding to the vectorized difference
+#'   between `nape` and `napo` in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a
@@ -173,7 +176,8 @@ napd <- function(napo, nape) {
     checkmate::assert_class(nape, "hms")
     assert_identical(napo, nape, type = "length")
 
-    sum_time(nape, - napo, class = "Duration", clock = TRUE, vectorize = TRUE)
+    sum_time(nape, - napo, class = "Duration", circular = TRUE,
+             vectorize = TRUE)
 }
 
 #' Compute MCTQ 24h sleep duration (only for MCTQ Shift)
@@ -187,8 +191,8 @@ napd <- function(napo, nape) {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for `sd24()`
-#' (\eqn{SD24}) computation are as follow.
+#' Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
+#' (n.d.) guidelines for `sd24()` (\eqn{SD24}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -219,19 +223,19 @@ napd <- function(napo, nape) {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param sd A `Duration` object corresponding to the __sleep duration__ value
-#'   from the shift version of the MCTQ questionnaire. You can use [mctq::sd()]
-#'   to compute it.
-#' @param napd A `Duration` object corresponding to the __nap duration__ value
-#'   from the shift version of the MCTQ questionnaire. You can use
-#'   [mctq::napd()] to compute it.
+#' @param sd A `Duration` object corresponding to the __sleep duration__ from
+#'   the shift version of the MCTQ questionnaire. You can use [mctq::sd()] to
+#'   compute it.
+#' @param napd A `Duration` object corresponding to the __nap duration__ from
+#'   the shift version of the MCTQ questionnaire. You can use [mctq::napd()] to
+#'   compute it.
 #' @param nap A `logical` value corresponding to the __"I usually take a nap"__
-#'   value from the shift version of the MCTQ questionnaire.
+#'   from the shift version of the MCTQ questionnaire.
 #'
 #' @return
 #'
-#' * If `nap == TRUE`, a `Duration` object corresponding to the sum of `sd` and
-#' `napd` considering the circularity of time.
+#' * If `nap == TRUE`, a `Duration` object corresponding to the vectorized sum
+#' of `sd` and `napd` in a circular time frame of 24 hours.
 #' * If `nap == FALSE`, a `Duration` object equal to `sd`.
 #'
 #' @template details_b
@@ -282,7 +286,7 @@ sd24 <- function(sd, napd, nap) {
 
     dplyr::case_when(
         nap == FALSE ~ sd,
-        TRUE ~ sum_time(sd, napd, class = "Duration", clock = FALSE,
+        TRUE ~ sum_time(sd, napd, class = "Duration", circular = FALSE,
                         vectorize = TRUE)
     )
 }
@@ -302,8 +306,8 @@ sd24 <- function(sd, napd, nap) {
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), and
-#' theWeP (n.d.) guidelines for `sd_week()` (\eqn{SD_{week}}{SD_week})
-#' computation are as follow.
+#' The Worldwide Experimental Platform (n.d.) guidelines for `sd_week()`
+#' (\eqn{SD_{week}}{SD_week}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -331,14 +335,14 @@ sd24 <- function(sd, napd, nap) {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
-#'   days__ value from a standard or micro version of the MCTQ questionnaire.
-#'   You can use [mctq::sd()] to compute it.
+#'   days__ from a standard or micro version of the MCTQ questionnaire. You can
+#'   use [mctq::sd()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
-#'   work-free days__ value from a standard or micro version of the MCTQ
+#'   work-free days__ from a standard or micro version of the MCTQ
 #'   questionnaire. You can use [mctq::sd()] to compute it.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `sd_w` and
-#'   `sd_f` with `wd` and `fd(wd)` as weights.
+#' @return A `Duration` object corresponding to the vectorized weighted mean of
+#'   `sd_w` and `sd_f` with `wd` and `fd(wd)` as weights.
 #'
 #' @inheritParams fd
 #' @template details_b
@@ -428,9 +432,9 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
-#' `sd_overall()` (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N}) computation are as
-#' follow.
+#' Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
+#' (n.d.) guidelines for `sd_overall()` (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N})
+#' computation are as follow.
 #'
 #' ## Notes
 #'
@@ -469,22 +473,22 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration between
-#'   two days in a particular shift__ value from a shift version of the MCTQ
+#'   two days in a particular shift__ from a shift version of the MCTQ
 #'   questionnaire. You can use [mctq::sd()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration between
-#'   two free days after a particular shift__ value from a shift version of the
-#'   MCTQ questionnaire. You can use [mctq::sd()] to compute it.
+#'   two free days after a particular shift__ from a shift version of the MCTQ
+#'   questionnaire. You can use [mctq::sd()] to compute it.
 #' @param n_w An [integerish][checkmate::test_integerish()] `numeric` object or
 #'   an `integer` object corresponding to the __number of days worked in a
-#'   particular shift within a shift cycle__ value from a shift version of the
-#'   MCTQ questionnaire.
+#'   particular shift within a shift cycle__ from a shift version of the MCTQ
+#'   questionnaire.
 #' @param n_f An [integerish][checkmate::test_integerish()] `numeric` object or
 #'   an `integer` object corresponding to the __number of free days after a
-#'   particular shift within a shift cycle__ value from a shift version of the
-#'   MCTQ questionnaire.
+#'   particular shift within a shift cycle__ from a shift version of the MCTQ
+#'   questionnaire.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `sd_w` and
-#'   `sd_f` with `n_w` and `n_f` as weights.
+#' @return A `Duration` object corresponding to the vectorized weighted mean of
+#'   `sd_w` and `sd_f` with `n_w` and `n_f` as weights.
 #'
 #' @template details_b
 #' @template references_a

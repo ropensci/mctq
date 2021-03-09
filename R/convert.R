@@ -1,18 +1,15 @@
-#' Convert a R object to another
+#' Convert an object to another
 #'
 #' @description
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `convert()` converts a R object to another object of a predefined class. Its
+#' `convert()` converts an R object to another object of a predefined class. Its
 #' mission is to facilitate conversions between any kind of R object in a
 #' simple and fast way.
 #'
 #' This function also supports date/time parsing and value transformations.
-#' Check Details section to learn more.
-#'
-#' For a complete picture about how to convert your MCTQ data, see
-#' `vignette("converting-data", package = "mctq")`.
+#' Check the Details section to learn more.
 #'
 #' @details
 #'
@@ -94,7 +91,7 @@
 #'
 #' ## Converting columns of a data frame
 #'
-#' `convert()` also allow direct conversions of data frame variables. This is
+#' `convert()` also allow direct conversions of data frame columns. This is
 #' made with the help of [dplyr::mutate()].
 #'
 #' Operations with data frames are only column-wise and can be made by
@@ -113,17 +110,17 @@
 #' `hms` time.
 #'
 #' You can also parse a `character` object and transform it direct to an unit.
-#' See Examples section to know how.
+#' See the Examples section to know how.
 #'
 #' * When `class = "numeric"` or `class = "double"`
 #'
 #' `convert()` will return a [base::as.numeric()] output if `class` is set to
-#' `"numeric"` or `"double"`. For `Date` objects, the output will be the total
+#' `"numeric"` or `"double"`. For `Date` objects the output will be the total
 #' of days since '1970-01-01' (UNIX epoch date). For date-time objects (_e.g._
-#' `POSIXt`), the output will be the total of seconds from the UNIX epoch
+#' `POSIXt`) the output will be the total of seconds from the UNIX epoch
 #' (`1970-01-01 00:00:00 UTC`) (See
 #' [Unix time](https://en.wikipedia.org/wiki/Unix_time) to know more). For time
-#' objects (_e.g._ `hms`), the output will be the total of seconds.
+#' objects (_e.g._ `hms`) the output will be the total of seconds.
 #'
 #' The output `class = "numeric"` can also be different if `input_unit` and
 #' `output_unit` are assigned.
@@ -139,17 +136,17 @@
 #' while April have have 30. Due to leap years, the same can be said to year
 #' lengths.
 #'
-#' To address this problem, `convert()` use as default the mean of
-#' possible values for months and years, used to calculate month and year
-#' durations in the lubridate package (see: [lubridate::dmonths()] and
-#' [lubridate::dyears()]). If you like, you can reset this by assigning other
-#' values to `month_length` and `year_length` arguments.
+#' To address this problem, `convert()` use as default the mean of possible
+#' values for months and years, used to calculate month and year durations in
+#' the lubridate package (see: [lubridate::dmonths()] and
+#' [lubridate::dyears()]). You can reset this by assigning other values to
+#' `month_length` and `year_length` arguments.
 #'
 #' `month_length` and `year_length` values must be assigned with the number of
 #' seconds equivalent to the unit duration. You can also assign a lubridate
-#' `Duration` object if you like (see [lubridate::duration()]).
+#' `Duration` object (see [lubridate::duration()]).
 #'
-#' @param x Any R object, provided that it has a method.
+#' @param x Any R object, provided that convert() has a method to it.
 #' @param class A string indicating the class of the output.
 #' @param ... (optional) additional arguments to be passed to or from methods.
 #' @param orders (optional) a `character` object of date/time formats to parse a
@@ -177,19 +174,11 @@
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
-#' @return A R object of the indicated class in `class`.
+#' @return An object of the indicated class in `class`.
 #'
+#' @template references_d
 #' @family utility functions
 #' @export
-#'
-#' @references
-#'
-#' Van der Loo, M., & De Jonge, E. (2018).
-#' _Statistical data cleaning with applications in R_. Hooboken, NJ: John
-#' Wiley & Sons. \doi{10.1002/9781118897126}.
-#'
-#' Wickham, H, & Grolemund. (n.d.). _R for data science_. Sebastopol, CA:
-#' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
 #'
 #' @examples
 #' ## __ Converting from date/time objects to units __

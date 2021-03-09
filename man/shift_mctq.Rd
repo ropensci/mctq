@@ -10,7 +10,7 @@ rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value for the purpose of identifying each subject in the
+A unique \code{integer} value with purpose of identify each subject in the
 dataset.
 \cr \cr
 Type: Control.
@@ -98,7 +98,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_w_m}{
-A \code{logical} value indicating if the subject have any particular reasons for
+A \code{logical} value indicating if the subject has any particular reasons for
 why he/she \strong{cannot} freely choose his/her sleep times on workdays
 \strong{between two morning shifts}.
 \cr \cr
@@ -142,7 +142,7 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{nap_w_m}{
-A \code{logical} value indicating if the subject usually take a nap on workdays
+A \code{logical} value indicating if the subject usually takes a nap on workdays
 \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "I usually take a nap: Yes ( ___ ) No ( ___ )".
@@ -177,7 +177,7 @@ Type: Computed.
 R class: \code{Duration}.}
 
 \item{sd24_w_m}{
-24h sleep duration (sleep duration + nap duration) on workdays
+24 hours sleep duration (sleep duration + nap duration) on workdays
 \strong{between two morning shifts}.
 \cr \cr
 Type: Computed.
@@ -270,7 +270,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_f_m}{
-A \code{logical} value indicating if the subject have any particular reasons for
+A \code{logical} value indicating if the subject has any particular reasons for
 why he/she \strong{cannot} freely choose his/her sleep times on work-free days
 \strong{between two free days after morning shifts}.
 \cr \cr
@@ -317,7 +317,7 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{nap_f_m}{
-A \code{logical} value indicating if the subject usually take a nap on
+A \code{logical} value indicating if the subject usually takes a nap on
 work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "I usually take a nap: Yes ( ___ ) No ( ___ )".
@@ -355,7 +355,7 @@ Type: Computed.
 R class: \code{Duration}.}
 
 \item{sd24_f_m}{
-24h sleep duration (sleep duration + nap duration) on work-free days
+24 hours sleep duration (sleep duration + nap duration) on work-free days
 \strong{between two free days after morning shifts}.
 \cr \cr
 Type: Computed.
@@ -417,14 +417,14 @@ shift_mctq
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-A fictional dataset, for \strong{testing and learning purposes}, composed by
+A fictional dataset, for \strong{testing and learning purposes}, composed of
 basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
 shift version.
 
 This data was created following the guidelines in Juda, Vetter, & Roenneberg
 (2013), in addition to the guidelines found in Roenneberg, Wirz-Justice, &
 Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World
-Wide Experimental Platform (theWeP, n.d.). See References and Details
+Wide Experimental Platform (theWeP, n.d.). See the References and Details
 sections to learn more.
 }
 \details{
@@ -447,7 +447,7 @@ the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 \subsection{Data building and data wrangling}{
 
 This dataset was created by randomized sampling (see \code{\link[=random_mctq]{random_mctq()}})
-and by manual insertions of especial cases. Its purpose is to demonstrate
+and by manual insertions of special cases. Its purpose is to demonstrate
 common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
@@ -464,8 +464,8 @@ articles, in addition to the guidelines of the \href{https://style.tidyverse.org
 \subsection{Variable classes}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages.
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} package.
 }
 
 \subsection{\code{Duration} objects}{

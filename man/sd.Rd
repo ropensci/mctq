@@ -8,15 +8,15 @@ sd(so, se)
 }
 \arguments{
 \item{so}{A \code{hms} object corresponding to the \strong{local time of sleep onset}
-value from a standard, micro, or shift version of the MCTQ questionnaire.
-You can use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
+from a standard, micro, or shift version of the MCTQ questionnaire. You can
+use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
 
 \item{se}{A \code{hms} object corresponding to the \strong{local time of sleep end}
-value from a standard, micro, or shift version of the MCTQ questionnaire.}
+from a standard, micro, or shift version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the difference between
-\code{se} and \code{so} considering the circularity of time.
+A \code{Duration} object corresponding to the vectorized difference
+between \code{se} and \code{so} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -60,8 +60,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-For reference, Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi
-\emph{et.al} (2020), Juda, Vetter, & Roenneberg (2013), and theWeP (n.d.)
+Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi \emph{et.al} (2020), Juda,
+Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 guidelines for \code{sd()} (\eqn{SD}) computation are as follow.
 \subsection{Notes}{
 \itemize{
@@ -80,8 +80,9 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}}{SE_W/F} = sleep end on work or work-free days.
-\item \eqn{SO_{W/F}}{SO_W/F}  = sleep onset on work or work-free days.
+\item \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
+\item \eqn{SO_{W/F}}{SO_W/F}  = local time of sleep onset on work or work-free
+days.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -93,10 +94,12 @@ Where:
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = sleep end between two days in a
-particular shift \strong{or} between two free days after a particular shift.
-\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = sleep onset between two days in a
-particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = local time of sleep end between two
+days in a particular shift \strong{or} between two free days after a particular
+shift.
+\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = local time of sleep onset between
+two days in a particular shift \strong{or} between two free days after a
+particular shift.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =

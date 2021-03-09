@@ -68,35 +68,35 @@ std_mctq_par <- function() {
 
         ms_mean <- i$ms_mean
         ms_sd <- i$ms_sd
-        ms_min <- sum_time(ms_mean, - (3 * ms_sd), clock = TRUE)
-        ms_max <- sum_time(ms_mean, + (3 * ms_sd), clock = TRUE)
+        ms_min <- sum_time(ms_mean, - (3 * ms_sd), circular = TRUE)
+        ms_max <- sum_time(ms_mean, + (3 * ms_sd), circular = TRUE)
 
         sd_mean <- i$sd_mean
         sd_sd <- i$sd_sd
-        sd_min <- sum_time(sd_mean, - (3 * sd_sd), clock = TRUE)
-        sd_max <- sum_time(sd_mean, + (3 * sd_sd), clock = TRUE)
+        sd_min <- sum_time(sd_mean, - (3 * sd_sd), circular = TRUE)
+        sd_max <- sum_time(sd_mean, + (3 * sd_sd), circular = TRUE)
 
-        message <- paste0("Sleep onset (SO_", i$suffix, ")\n\n")
+        message <- paste0("Local time of sleep onset (SO_", i$suffix, ")\n\n")
         cat(message)
-        mean <- sum_time(ms_mean, - (sd_mean / 2), clock = TRUE)
-        sd <- sum_time((ms_sd + sd_sd) / 2, clock = TRUE)
-        min <- sum_time(ms_min, - (sd_mean / 2), clock = TRUE)
-        max <- sum_time(ms_max, - (sd_mean / 2), clock = TRUE)
+        mean <- sum_time(ms_mean, - (sd_mean / 2), circular = TRUE)
+        sd <- sum_time((ms_sd + sd_sd) / 2, circular = TRUE)
+        min <- sum_time(ms_min, - (sd_mean / 2), circular = TRUE)
+        max <- sum_time(ms_max, - (sd_mean / 2), circular = TRUE)
         cat_(min, max, mean, sd)
 
-        message <- paste0("\nSleep end (SE_", i$suffix, ")\n\n")
+        message <- paste0("\nLocal time of sleep end (SE_", i$suffix, ")\n\n")
         cat(message)
-        mean <- sum_time(ms_mean, + (sd_mean / 2), clock = TRUE)
-        sd <- sum_time((ms_sd + sd_sd) / 2, clock = TRUE)
-        min <- sum_time(ms_min, + (sd_mean / 2), clock = TRUE)
-        max <- sum_time(ms_max, + (sd_mean / 2), clock = TRUE)
+        mean <- sum_time(ms_mean, + (sd_mean / 2), circular = TRUE)
+        sd <- sum_time((ms_sd + sd_sd) / 2, circular = TRUE)
+        min <- sum_time(ms_min, + (sd_mean / 2), circular = TRUE)
+        max <- sum_time(ms_max, + (sd_mean / 2), circular = TRUE)
         cat_(min, max, mean, sd)
 
         message <- paste0("\nSleep duration (SD_", i$suffix, ")\n\n")
         cat(message)
         cat_(sd_min, sd_max, sd_mean, sd_sd)
 
-        message <- paste0("\nMid-sleep (MS", i$suffix, ")\n\n")
+        message <- paste0("\nLocal time of mid-sleep (MS", i$suffix, ")\n\n")
         cat(message)
         cat_(ms_min, ms_max, ms_mean, ms_sd)
     }
@@ -248,8 +248,8 @@ shift_mctq_par <- function() {
         cat(message)
         sprep_mean <- i$sprep_mean
         sprep_sd <- i$sprep_sd
-        sprep_min <- sum_time(sprep_mean, - (3 * sprep_sd), clock = TRUE)
-        sprep_max <- sum_time(sprep_mean, + (3 * sprep_sd), clock = TRUE)
+        sprep_min <- sum_time(sprep_mean, - (3 * sprep_sd), circular = TRUE)
+        sprep_max <- sum_time(sprep_mean, + (3 * sprep_sd), circular = TRUE)
         cat_(sprep_min, sprep_max, sprep_mean, sprep_sd)
 
         message <- paste0("\nSleep latency (SLat_", i$suffix, ")\n\n")
@@ -261,15 +261,15 @@ shift_mctq_par <- function() {
         slat_max <- sum_time(slat_mean, + (3 * slat_sd))
         cat_(slat_min, slat_max, slat_mean, slat_sd)
 
-        message <- paste0("\nSleep onset (SO_", i$suffix, ")\n\n")
+        message <- paste0("\nLocal time of sleep onset (SO_", i$suffix, ")\n\n")
         cat(message)
-        mean <- sum_time(sprep_mean, slat_mean, clock = TRUE)
+        mean <- sum_time(sprep_mean, slat_mean, circular = TRUE)
         sd <- sum_time(sprep_sd + slat_sd)
-        min <- sum_time(sprep_min, slat_min, clock = TRUE)
-        max <- sum_time(sprep_max, slat_max, clock = TRUE)
+        min <- sum_time(sprep_min, slat_min, circular = TRUE)
+        max <- sum_time(sprep_max, slat_max, circular = TRUE)
         cat_(min, max, mean, sd)
 
-        message <- paste0("\nSleep end (SE_", i$suffix, ")\n\n")
+        message <- paste0("\nLocal time of sleep end (SE_", i$suffix, ")\n\n")
         cat(message)
         mean <- i$se_mean
         sd <- i$se_sd
@@ -290,7 +290,7 @@ shift_mctq_par <- function() {
         sd <- i$sd_sd
         min_max(mean, sd)
 
-        message <- paste0("\nMid-sleep (MS", i$suffix, ")\n\n")
+        message <- paste0("\nLocal time of mid-sleep (MS", i$suffix, ")\n\n")
         cat(message)
         mean <- i$ms_mean
         sd <- i$ms_sd
@@ -390,7 +390,7 @@ random_mctq_raw_code <- function(model) {
             ", # integer | [0-7]", "\n\n",
 
 
-            bt("W BED TIME"), " = ",
+            bt("W BEDTIME"), " = ",
             dq(format_hms(data$bt_w)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
@@ -423,7 +423,7 @@ random_mctq_raw_code <- function(model) {
             ", # Duration | [H]MS, [H]M, [H]", "\n\n",
 
 
-            bt("F BED TIME"), " = ",
+            bt("F BEDTIME"), " = ",
             dq(format_hms(data$bt_f)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
@@ -504,7 +504,7 @@ random_mctq_raw_code <- function(model) {
                 dq(format_na(data[[paste0("n", i[2])]])),
                 ", # integer | [0-7]", "\n",
 
-                bt(paste(i[1], "BED TIME")), " = ",
+                bt(paste(i[1], "BEDTIME")), " = ",
                 dq(format_hms(data[[paste0("bt", i[2])]])),
                 ", # hms | HMS, HM, H [0-24h]", "\n",
 
@@ -567,8 +567,8 @@ cat_ <- function(min, max, mean, sd) {
 }
 
 min_max <- function(mean, sd) {
-    min <- sum_time(mean, - (3 * sd), clock = TRUE)
-    max <- sum_time(mean, + (3 * sd), clock = TRUE)
+    min <- sum_time(mean, - (3 * sd), circular = TRUE)
+    max <- sum_time(mean, + (3 * sd), circular = TRUE)
 
     cat_(min, max, mean, sd)
 }

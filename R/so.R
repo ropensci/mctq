@@ -1,4 +1,4 @@
-#' Compute MCTQ sleep onset
+#' Compute MCTQ local time of sleep onset
 #'
 #' @description
 #'
@@ -13,8 +13,8 @@
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-#' (2013), and theWeP (n.d.) guidelines for `so()` (\eqn{SO}) computation are as
-#' follow.
+#' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `so()`
+#' (\eqn{SO}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -59,13 +59,13 @@
 #'
 #'
 #' @param sprep A `hms` object corresponding to the __local time of preparing to
-#'   sleep__ value from a standard or shift version of the MCTQ questionnaire.
+#'   sleep__ from a standard or shift version of the MCTQ questionnaire.
 #' @param slat A `Duration` object corresponding to the __sleep latency or time
-#'   to fall asleep after preparing to sleep__ value from a standard or shift
-#'   version of the MCTQ questionnaire.
+#'   to fall asleep after preparing to sleep__ from a standard or shift version
+#'   of the MCTQ questionnaire.
 #'
-#' @return A `hms` object corresponding to the sum of `sprep` and `slat`
-#'   considering the circularity of time.
+#' @return A `hms` object corresponding to the vectorized sum of `sprep` and
+#'   `slat` in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a
@@ -100,5 +100,5 @@ so <- function(sprep, slat) {
     assert_duration(slat)
     assert_identical(sprep, slat, type = "length")
 
-    sum_time(sprep, slat, class = "hms", clock = TRUE, vectorize = TRUE)
+    sum_time(sprep, slat, class = "hms", circular = TRUE, vectorize = TRUE)
 }

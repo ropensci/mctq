@@ -443,7 +443,7 @@ test_that("interval_mean() | general test", {
     object <- interval_mean(start, end, class = "Duration")
     expect_equal(object, lubridate::dhours(26))
 
-    object <- interval_mean(start, end, clock = TRUE)
+    object <- interval_mean(start, end, circular = TRUE)
     expect_equal(object, hms::parse_hm("02:00"))
 
     start <- hms::parse_hm("00:00")
@@ -456,5 +456,5 @@ test_that("interval_mean() | general test", {
     expect_error(interval_mean(hms::hms(1), 1))
     expect_error(interval_mean(hms::hms(1), hms::hms(1), class = 1))
     expect_error(interval_mean(hms::hms(1), hms::hms(1), ambiguity = 1))
-    expect_error(interval_mean(hms::hms(1), hms::hms(1), clock = ""))
+    expect_error(interval_mean(hms::hms(1), hms::hms(1), circular = ""))
 })

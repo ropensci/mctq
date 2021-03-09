@@ -3,7 +3,7 @@
 \name{sjl}
 \alias{sjl}
 \alias{sjl_rel}
-\title{Compute MCTQ social jet lag}
+\title{Compute MCTQ social jetlag}
 \usage{
 sjl(msw, msf, abs = TRUE, method = "shortest")
 
@@ -15,14 +15,14 @@ workdays} from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{msf}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
-work-free days} value from a standard, micro, or shift version of the MCTQ
+work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{abs}{(optional) a \code{logical} value indicating if the function must
 return an absolute social jetlag (default: \code{TRUE}).}
 
 \item{method}{(optional) a string indicating which method the function must
-use to compute the social jetlag. See Methods section to learn
+use to compute the social jetlag. See the Methods section to learn
 more (default: \code{"shortest"}).}
 }
 \value{
@@ -80,8 +80,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-(2013), and theWeP (n.d.) guidelines for \code{sjl()} (\eqn{SJL_{rel}}{SJL_rel}
-and \eqn{SJL}) computation are as follow.
+(2013), and The Worldwide Experimental Platform (n.d.) guidelines for \code{sjl()}
+(\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
@@ -108,8 +108,8 @@ Absolute social jetlag (\eqn{SJL}):
 
 Where:
 \itemize{
-\item \eqn{MSW} = mid-sleep on work days.
-\item \eqn{MSF} = mid-sleep on work-free days.
+\item \eqn{MSW} = local time of mid-sleep on work days.
+\item \eqn{MSF} = local time of mid-sleep on work-free days.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -127,10 +127,10 @@ Absolute social jetlag (\eqn{SJL}):
 
 Where:
 \itemize{
-\item \eqn{MSW^{M/E/N}}{MSW_M/E/N} = mid-sleep between two days in a particular
-shift.
-\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = mid-sleep between two free days after a
-particular shift.
+\item \eqn{MSW^{M/E/N}}{MSW_M/E/N} = local time of mid-sleep between two days in
+a particular shift.
+\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = local time of mid-sleep between two free
+days after a particular shift.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
@@ -138,7 +138,7 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 }
 
-\section{Methods for computing the social jet lag}{
+\section{Methods for computing the social jetlag}{
 
 
 There are different approaches to compute the social jetlag (\eqn{SJL}). By
@@ -150,7 +150,7 @@ The topics below provide a simple explanation of each method supported by
 \code{vignette("sjl", package = "mctq")}.
 
 Please note that none of the approaches below are related to Jankowski's
-(2017) social jet lag sleep-corrected proposal. Since the Jankowski's
+(2017) social jetlag sleep-corrected proposal. Since the Jankowski's
 alternative is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019),
 the \code{mctq} package currently don't provide a function for it. Future versions
 of the package may include it.
@@ -176,10 +176,10 @@ relating to \eqn{SJL} computation.
 
 The \code{"longer"} method uses the sames logic of the \code{"shortest"} method, but,
 instead of using the shortest interval between \eqn{MSF} and \eqn{MSW}, it
-uses the longer interval between the two, considering a two day window.
+uses the longer interval between the two, considering a two-day window.
 
 This method may help with special contexts, like when dealing with
-shift-workers, that usually have a greater than 12h distance between his/her
+shift-workers that have a greater than 12 hours distance between his/her
 mid-sleep hours.
 }
 

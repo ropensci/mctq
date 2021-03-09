@@ -8,15 +8,15 @@ gu(se, si)
 }
 \arguments{
 \item{se}{A \code{hms} object corresponding to the \strong{local time of sleep end}
-value from a standard or shift version of the MCTQ questionnaire.}
+from a standard or shift version of the MCTQ questionnaire.}
 
 \item{si}{A \code{Duration} object corresponding to the \strong{sleep inertia} or
-\strong{time to get up} value from a standard or shift version of the MCTQ
+\strong{time to get up} from a standard or shift version of the MCTQ
 questionnaire.}
 }
 \value{
-A \code{hms} object corresponding to the sum of \code{se} and \code{si} considering
-the circularity of time.
+A \code{hms} object corresponding to the vectorized sum of \code{se} and \code{si}
+in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -61,15 +61,15 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-(2013), and theWeP (n.d.) guidelines for \code{gu()} (\eqn{GU}) computation are as
-follow.
+(2013), and The Worldwide Experimental Platform (n.d.) guidelines for \code{gu()}
+(\eqn{GU}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each section of the
 questionnaire.
 \item MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
-\eqn{SI} (sleep inertia), but, for the purpose of this computation, both
-represent the same thing.
+\eqn{SI} (sleep inertia). For the purpose of this computation, both represent
+the same thing.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package

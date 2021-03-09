@@ -8,50 +8,53 @@ test_that("sum_time() | non-vectorized test", {
     z <- lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01"))
 
     class <- "duration"
-    clock <- FALSE
+    circular <- FALSE
     vectorize <- FALSE
     na.rm <- FALSE
-    object <- sum_time(t, u, v, w, x, y, z, class = class, clock = clock,
+    object <- sum_time(t, u, v, w, x, y, z, class = class, circular = circular,
                        vectorize = vectorize, na.rm = na.rm)
     expected <- lubridate::dhours(30)
     expect_equal(object, expected) # 30:00:00
 
     class <- "hms"
-    clock <- TRUE
+    circular <- TRUE
     vectorize <- FALSE
     na.rm <- FALSE
-    object <- sum_time(t, u, v, w, x, y, z, class = class, clock = clock,
+    object <- sum_time(t, u, v, w, x, y, z, class = class, circular = circular,
                        vectorize = vectorize, na.rm = na.rm)
     expected <- hms::parse_hm("06:00")
     expect_equal(object, expected) # 06:00 | 30 - 24
 
     i <- hms::as_hms(NA)
     class <- "period"
-    clock <- FALSE
+    circular <- FALSE
     vectorize <- FALSE
     na.rm <- FALSE
-    object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(i, t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- lubridate::as.period(NA)
     expect_equal(object, expected)
 
     i <- hms::as_hms(NA)
     class <- "period"
-    clock <- FALSE
+    circular <- FALSE
     vectorize <- FALSE
     na.rm <- TRUE
-    object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(i, t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- lubridate::as.period(hms::hms(108000))
     expect_equal(object, expected) # 30:00:00
 
     i <- hms::as_hms(NA)
     class <- "difftime"
-    clock <- TRUE
+    circular <- TRUE
     vectorize <- FALSE
     na.rm <- TRUE
-    object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(i, t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- lubridate::as.difftime(21600, units = "secs")
     expect_equal(object, expected)
 })
@@ -70,67 +73,71 @@ test_that("sum_time()| vectorized test", {
            lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01")))
 
     class <- "duration"
-    clock <- FALSE
+    circular <- FALSE
     vectorize <- TRUE
     na.rm <- FALSE
-    object <- sum_time(t, u, v, w, x, y, z, class = class, clock = clock,
+    object <- sum_time(t, u, v, w, x, y, z, class = class, circular = circular,
                        vectorize = vectorize, na.rm = na.rm)
     expected <- c(lubridate::dhours(30), lubridate::dhours(17))
     expect_equal(object, expected) # 30:00:00 | 17:00:00
 
     class <- "hms"
-    clock <- TRUE
+    circular <- TRUE
     vectorize <- TRUE
     na.rm <- FALSE
-    object <- sum_time(t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- c(hms::parse_hm("06:00"), hms::parse_hm("17:00"))
     expect_equal(object, expected) # 06:00:00 | 17:00:00
 
     i <- c(hms::as_hms(NA), hms::as_hms(NA))
     class <- "period"
-    clock <- FALSE
+    circular <- FALSE
     vectorize <- TRUE
     na.rm <- FALSE
-    object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(i, t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- c(lubridate::as.period(NA), lubridate::as.period(NA))
     expect_equal(object, expected)
 
     i <- c(hms::as_hms(NA), hms::as_hms(NA))
     class <- "period"
-    clock <- FALSE
+    circular <- FALSE
     vectorize <- TRUE
     na.rm <- TRUE
-    object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(i, t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- c(lubridate::as.period(hms::hms(108000)),
                   lubridate::as.period(hms::hms(61200)))
     expect_equal(object, expected) # 30:00:00 | 17:00:00
 
     i <- c(hms::as_hms(NA), hms::as_hms(NA))
     class <- "difftime"
-    clock <- TRUE
+    circular <- TRUE
     vectorize <- TRUE
     na.rm <- TRUE
-    object <- sum_time(i, t, u, v, w, x, y, z, class = class, clock = clock,
-                       vectorize = vectorize, na.rm = na.rm)
+    object <- sum_time(i, t, u, v, w, x, y, z, class = class,
+                       circular = circular, vectorize = vectorize,
+                       na.rm = na.rm)
     expected <- c(lubridate::as.difftime(21600, units = "secs"),
                   lubridate::as.difftime(61200, units = "secs"))
     expect_equal(object, expected)
 })
 
 test_that("sum_time() | error test", {
-    # Invalid values for `...`, `class`, `clock`, `vectorize` and `na.rm`
-    expect_error(sum_time(1, class = "", clock = TRUE,
+    # Invalid values for `...`, `class`, `circular`, `vectorize` and `na.rm`
+    expect_error(sum_time(1, class = "", circular = TRUE,
                           vectorize = TRUE, na.rm = TRUE))
-    expect_error(sum_time(hms::hms(1), class = 1, clock = TRUE,
+    expect_error(sum_time(hms::hms(1), class = 1, circular = TRUE,
                           vectorize = TRUE, na.rm = TRUE))
-    expect_error(sum_time(hms::hms(1), class = "", clock = "",
+    expect_error(sum_time(hms::hms(1), class = "", circular = "",
                           vectorize = TRUE, na.rm = TRUE))
-    expect_error(sum_time(hms::hms(1), class = "", clock = TRUE,
+    expect_error(sum_time(hms::hms(1), class = "", circular = TRUE,
                           vectorize = "", na.rm = TRUE))
-    expect_error(sum_time(hms::hms(1), class = "", clock = TRUE,
+    expect_error(sum_time(hms::hms(1), class = "", circular = TRUE,
                           vectorize = TRUE, na.rm = ""))
 
     # "When `vectorize` is `TRUE`, all values in `...` must have [...]"

@@ -19,8 +19,8 @@ the MCTQ questionnaire. \code{n} elements and values must be paired with \code{s
 elements and values.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{sjl}
-with \code{n_w} as weights.
+A \code{Duration} object corresponding to the vectorized weighted mean of
+\code{sjl} with \code{n_w} as weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -65,10 +65,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 The shift version of the MCTQ was developed for shift-workers rotating
-through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
-2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
-schedules (Juda, Vetter, & Roenneberg, 2013). For
-that reason, \code{sjl_weighted()} must operate with any shift combination.
+through morning-, evening-, and night-shifts, but it also allows adaptations
+to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For that reason,
+\code{sjl_weighted()} must operate with any shift combination.
 
 Considering the requirement above, \code{sjl_weighted()} was developed to only
 accept lists values as arguments. For this approach to work, both \code{sjl} and
@@ -81,18 +80,18 @@ and output a weighted mean.
 \section{Guidelines}{
 
 
-Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
-\code{sjl_weighted()} (\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation
-are as follow.
+Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
+(n.d.) guidelines for \code{sjl_weighted()} (\eqn{\emptyset
+SJL_{weighted}}{OSJL_weighted}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The absolute social jetlag across all shifts (\eqn{\emptyset
 SJL_{weighted}}{OSJL_weighted}) is the weighted average of all absolute
 social jetlags.
-\item The authors describe a equation for a three shift schedule, but that may
+\item The authors describe a equation for a three shift schedule, but this may
 not be your case. That's why this function works a little bit different (see
-Operation section), allowing you to compute a weighted average with any shift
-combination.
+the Operation section), allowing you to compute a weighted average with any
+shift combination.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package

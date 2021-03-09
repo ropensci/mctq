@@ -4,22 +4,21 @@
 \alias{ms}
 \alias{msw}
 \alias{msf}
-\title{Compute MCTQ mid-sleep}
+\title{Compute MCTQ local time of mid-sleep}
 \usage{
 ms(so, sd)
 }
 \arguments{
 \item{so}{A \code{hms} object corresponding to the \strong{local time of sleep onset}
-value from a standard, micro, or shift version of the MCTQ questionnaire.
-You can use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
-
-\item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} value
 from a standard, micro, or shift version of the MCTQ questionnaire. You can
-use \code{\link[=sd]{sd()}} to compute it for any MCTQ version.}
+use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
+
+\item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} from a
+standard, micro, or shift version of the MCTQ questionnaire. You can use
+\code{\link[=sd]{sd()}} to compute it for any MCTQ version.}
 }
 \value{
-A \code{hms} object corresponding to the sum of \code{so} and \code{(sd / 2)}
-considering the circularity of time.
+A \code{hms} object corresponding to the vectorized sum of \code{so} and \code{(sd / 2)} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -64,8 +63,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi \emph{et.al} (2020), Juda,
-Vetter, & Roenneberg (2013), and theWeP (n.d.) guidelines for \code{ms()}
-(\eqn{MSW} or \eqn{MSF}) computation are as follow.
+Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
+guidelines for \code{ms()} (\eqn{MSW} or \eqn{MSF}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each section of the
@@ -83,7 +82,8 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SO_{W/F}}{SO_W/F} = sleep onset on work or work-free days.
+\item \eqn{SO_{W/F}}{SO_W/F} = local time of sleep onset on work or work-free
+days.
 \item \eqn{SD_{W/F}}{SD_W/F} = sleep duration on work or work-free days.
 }
 
@@ -97,8 +97,9 @@ SO_W/F_M/E/N + (SD_W/F_M/E/N / 2)}}
 
 Where:
 \itemize{
-\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = sleep onset between two days in a
-particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = local time of sleep onset between
+two days in a particular shift \strong{or} between two free days after a
+particular shift.
 \item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
 particular shift \strong{or} between two free days after a particular shift.
 }

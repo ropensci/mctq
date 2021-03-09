@@ -8,14 +8,14 @@ napd(napo, nape)
 }
 \arguments{
 \item{napo}{A \code{hms} object corresponding to the \strong{local time of nap onset}
-value from the shift version of the MCTQ questionnaire.}
+from the shift version of the MCTQ questionnaire.}
 
 \item{nape}{A \code{hms} object corresponding to the \strong{local time of nap end}
-value from the shift version of the MCTQ questionnaire.}
+from the shift version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the difference between
-\code{nape} and \code{napo} considering the circularity of time.
+A \code{Duration} object corresponding to the vectorized difference
+between \code{nape} and \code{napo} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -59,8 +59,8 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Juda, Vetter & Roenneberg (2013), and theWeP (n.d.) guidelines for \code{napd()}
-(\eqn{NapD}) computation are as follow.
+Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
+(n.d.) guidelines for \code{napd()} (\eqn{NapD}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each shift section of the

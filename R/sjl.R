@@ -1,4 +1,4 @@
-#' Compute MCTQ social jet lag
+#' Compute MCTQ social jetlag
 #'
 #' @description
 #'
@@ -12,8 +12,8 @@
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-#' (2013), and theWeP (n.d.) guidelines for `sjl()` (\eqn{SJL_{rel}}{SJL_rel}
-#' and \eqn{SJL}) computation are as follow.
+#' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `sjl()`
+#' (\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -41,8 +41,8 @@
 #'
 #' Where:
 #'
-#' * \eqn{MSW} = mid-sleep on work days.
-#' * \eqn{MSF} = mid-sleep on work-free days.
+#' * \eqn{MSW} = local time of mid-sleep on work days.
+#' * \eqn{MSF} = local time of mid-sleep on work-free days.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -58,15 +58,15 @@
 #'
 #' Where:
 #'
-#' * \eqn{MSW^{M/E/N}}{MSW_M/E/N} = mid-sleep between two days in a particular
-#' shift.
-#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = mid-sleep between two free days after a
-#' particular shift.
+#' * \eqn{MSW^{M/E/N}}{MSW_M/E/N} = local time of mid-sleep between two days in
+#' a particular shift.
+#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = local time of mid-sleep between two free
+#' days after a particular shift.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @section Methods for computing the social jet lag:
+#' @section Methods for computing the social jetlag:
 #'
 #' There are different approaches to compute the social jetlag (\eqn{SJL}). By
 #' default, `sjl()` uses an approach that we call by "the shortest interval
@@ -77,7 +77,7 @@
 #' `vignette("sjl", package = "mctq")`.
 #'
 #' Please note that none of the approaches below are related to Jankowski's
-#' (2017) social jet lag sleep-corrected proposal. Since the Jankowski's
+#' (2017) social jetlag sleep-corrected proposal. Since the Jankowski's
 #' alternative is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019),
 #' the `mctq` package currently don't provide a function for it. Future versions
 #' of the package may include it.
@@ -100,10 +100,10 @@
 #'
 #' The `"longer"` method uses the sames logic of the `"shortest"` method, but,
 #' instead of using the shortest interval between \eqn{MSF} and \eqn{MSW}, it
-#' uses the longer interval between the two, considering a two day window.
+#' uses the longer interval between the two, considering a two-day window.
 #'
 #' This method may help with special contexts, like when dealing with
-#' shift-workers, that usually have a greater than 12h distance between his/her
+#' shift-workers that have a greater than 12 hours distance between his/her
 #' mid-sleep hours.
 #'
 #' @param msw A `hms` object corresponding to the __local time of mid-sleep on
@@ -112,7 +112,7 @@
 #' @param abs (optional) a `logical` value indicating if the function must
 #'   return an absolute social jetlag (default: `TRUE`).
 #' @param method (optional) a string indicating which method the function must
-#'   use to compute the social jetlag. See Methods section to learn
+#'   use to compute the social jetlag. See the Methods section to learn
 #'   more (default: `"shortest"`).
 #'
 #' @return
@@ -212,7 +212,7 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
     assert_identical(msw, msf, type = "length")
 
     if (method == "difference") {
-        out <- sum_time(msf, - msw, class = "Duration", clock = FALSE,
+        out <- sum_time(msf, - msw, class = "Duration", circular = FALSE,
                  vectorize = TRUE)
     } else {
         if (method == "shortest") {
@@ -254,10 +254,9 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' @section Operation:
 #'
 #' The shift version of the MCTQ was developed for shift-workers rotating
-#' through morning-, evening-, and night-shifts (transition times at 6:00 a.m.,
-#' 2:00 p.m., and 10:00 p.m.), but it also allows adaptations to other shift
-#' schedules (Juda, Vetter, & Roenneberg, 2013). For
-#' that reason, `sjl_weighted()` must operate with any shift combination.
+#' through morning-, evening-, and night-shifts, but it also allows adaptations
+#' to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For that reason,
+#' `sjl_weighted()` must operate with any shift combination.
 #'
 #' Considering the requirement above, `sjl_weighted()` was developed to only
 #' accept lists values as arguments. For this approach to work, both `sjl` and
@@ -268,9 +267,9 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'
 #' @section Guidelines:
 #'
-#' Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
-#' `sjl_weighted()` (\eqn{\emptyset SJL_{weighted}}{OSJL_weighted}) computation
-#' are as follow.
+#' Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
+#' (n.d.) guidelines for `sjl_weighted()` (\eqn{\emptyset
+#' SJL_{weighted}}{OSJL_weighted}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -278,10 +277,10 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' SJL_{weighted}}{OSJL_weighted}) is the weighted average of all absolute
 #' social jetlags.
 #'
-#' * The authors describe a equation for a three shift schedule, but that may
+#' * The authors describe a equation for a three shift schedule, but this may
 #' not be your case. That's why this function works a little bit different (see
-#' Operation section), allowing you to compute a weighted average with any shift
-#' combination.
+#' the Operation section), allowing you to compute a weighted average with any
+#' shift combination.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
@@ -313,8 +312,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'   the MCTQ questionnaire. `n` elements and values must be paired with `sjl`
 #'   elements and values.
 #'
-#' @return A `Duration` object corresponding to the weighted mean of `sjl`
-#'   with `n_w` as weights.
+#' @return A `Duration` object corresponding to the vectorized weighted mean of
+#'   `sjl` with `n_w` as weights.
 #'
 #' @template details_b
 #' @template references_a

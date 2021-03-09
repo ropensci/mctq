@@ -2,20 +2,25 @@
 % Please edit documentation in R/sum_time.R
 \name{sum_time}
 \alias{sum_time}
-\title{Sum time values}
+\title{Sum time objects}
 \usage{
-sum_time(..., class = "hms", clock = FALSE, vectorize = FALSE, na.rm = FALSE)
+sum_time(
+  ...,
+  class = "hms",
+  circular = FALSE,
+  vectorize = FALSE,
+  na.rm = FALSE
+)
 }
 \arguments{
-\item{...}{Vectors belonging to one or more of the following classes:
-\code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or
-\code{Interval}.}
+\item{...}{Objects belonging to one of the following classes: \code{Duration},
+\code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
 
 \item{class}{(optional) a string indicating the output class (default:
 \code{"hms"}).}
 
-\item{clock}{(optional) a logical value indicating whether the sum should
-roll in a 24 hour clock basis (default: \code{FALSE}).}
+\item{circular}{(optional) a logical value indicating whether the sum should
+be in a circular time frame of 24 hours (clock hours) (default: \code{FALSE}).}
 
 \item{vectorize}{(optional) a logical value indicating if the function must
 operate in a vectorized fashion (default: \code{FALSE}).}
@@ -25,16 +30,16 @@ remove \code{NA} values while performing the sum (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{clock = TRUE} and \code{vectorize = FALSE} (default), an object of
+\item If \code{circular = TRUE} and \code{vectorize = FALSE} (default), an object of
 the indicated class in \code{class} (default: \code{"hms"}) with the sum of the time
-from objects in \code{...} rolled in a 24 hour clock basis.
-\item If \code{clock = FALSE} (default) and \code{vectorize = FALSE} (default), an object
-of the indicated class in \code{class} (default: \code{"hms"}) with the cumulative sum
-of the time from objects in \code{...}.
-\item If \code{clock = TRUE} and \code{vectorize = TRUE}, an object of the indicated class
-in \code{class} (default: \code{"hms"}) with a vectorized sum of the time from objects
-in \code{...} rolled in a 24 hour clock basis.
-\item If \code{clock = FALSE} (default) and \code{vectorize = TRUE}, an object of the
+from objects in \code{...} in a circular time frame of 24 hours.
+\item If \code{circular = FALSE} (default) and \code{vectorize = FALSE} (default), an
+object of the indicated class in \code{class} (default: \code{"hms"}) with the
+cumulative sum of the time from objects in \code{...}.
+\item If \code{circular = TRUE} and \code{vectorize = TRUE}, an object of the indicated
+class in \code{class} (default: \code{"hms"}) with a vectorized sum of the time from
+objects in \code{...} in a circular time frame of 24 hours.
+\item If \code{circular = FALSE} (default) and \code{vectorize = TRUE}, an object of the
 indicated class in \code{class} (default: \code{"hms"}) with a vectorized and
 cumulative sum of the time from objects in \code{...}.
 }
@@ -45,8 +50,8 @@ cumulative sum of the time from objects in \code{...}.
 \code{sum_time()} returns the sum of the time from different kinds of date/time
 objects.
 
-This function supports vectorized operations and can also be set to roll the
-sum in a 24 hours clock basis, helping with time arithmetic issues.
+This function supports vectorized operations and can also be set to work with
+a circular time frame of 24 hours.
 }
 \details{
 \subsection{\code{class} argument}{
@@ -61,29 +66,29 @@ insensitive).
 
 \subsection{\code{vectorize} argument}{
 
-If \code{vectorize = FALSE} (default), \code{sum_time} will combine and sum all values
-in \code{...}. In other words, in this setting, \code{sum_time(c(x, y), z)} will have
-the same output as \code{sum_time(x, y, z)}.
+If \code{vectorize = FALSE} (default), \code{sum_time} will combine and sum all time
+values in \code{...}. That is, \code{sum_time(c(x, y), z)} will have the same
+output as \code{sum_time(x, y, z)}.
 
 However, if \code{vectorize = TRUE}, \code{sum_time()} will require that all objects in
 \code{...} have the same length, and will perform a paired sum between elements.
-In other words, in this setting, \code{sum_time(c(x, y), c(w, z))} will return a
-vector like \code{c(sum_time(x, w,), sum_time(y, z))}.
+That is, \code{sum_time(c(x, y), c(w, z))} will return a vector like
+\code{c(sum_time(x, w), sum_time(y, z))}.
 }
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} values in \code{...} will be strip of their dates. Only the hours will be
+\code{POSIXt} values in \code{...} will be strip of their dates. Only the time will be
 considered.
 }
 
 \subsection{\code{Period} objects}{
 
 \code{Period} objects are a special time object developed by the
-\link[lubridate:lubridate-package]{lubridate} team that track changes in clock
-times ignoring time irregularities. That is to say that 1 day as \code{Period}
+\link[lubridate:lubridate-package]{lubridate} team that represent "human units",
+ignoring possible time irregularities. That is to say that 1 day as \code{Period}
 will always represent 1 day in the timeline. \code{sum_time()} ignores that
-property of \code{Period} objects, treating them as objects of class \code{Duration}.
+property of \code{Period} objects, treating them like objects of class \code{Duration}.
 }
 
 \subsection{Time line irregularities}{
@@ -100,15 +105,15 @@ y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 sum_time(x, y, class = "duration")
 #> [1] "142200s (~1.65 days)" # Expected
 
-## __ Non-vectorized sum rolled over in a 24 hour clock basis __
+## __ Non-vectorized sum in a circular time frame of 24 hours __
 x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
-sum_time(x, clock = TRUE)
+sum_time(x, circular = TRUE)
 #> 06:50:00 # Expected
 
 x <- c(hms::parse_hm("00:15"), hms::parse_hm("02:30"), hms::as_hms(NA))
-sum_time(x, clock = TRUE)
+sum_time(x, circular = TRUE)
 #> NA # Expected
-sum_time(x, clock = TRUE, na.rm = TRUE)
+sum_time(x, circular = TRUE, na.rm = TRUE)
 #> 02:45:00 # Expected
 
 ## __ Cumulative vectorized sum __
@@ -121,13 +126,13 @@ sum_time(x, y, vectorize = TRUE, na.rm = TRUE)
 #> 29:00:00 # Expected
 #> 10:00:00 # Expected
 
-## __ Vectorized sum rolled over in a 24 hour clock basis __
+## __ Vectorized sum in a circular time frame of 24 hours __
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-sum_time(x, y, clock = TRUE, vectorize = TRUE)
+sum_time(x, y, circular = TRUE, vectorize = TRUE)
 #> 05:00:00 # Expected
 #>       NA # Expected
-sum_time(x, y, clock = TRUE, vectorize = TRUE, na.rm = TRUE)
+sum_time(x, y, circular = TRUE, vectorize = TRUE, na.rm = TRUE)
 #> 05:00:00 # Expected
 #> 10:00:00 # Expected
 }

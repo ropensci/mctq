@@ -14,14 +14,15 @@ assign_date(
 )
 }
 \arguments{
-\item{start, end}{A \code{hms} or \code{POSIXt} vector indicating the start or end
+\item{start, end}{A \code{hms} or \code{POSIXt} object indicating the start or end
 hour.}
 
 \item{return}{(optional) a string indicating the type of the output (see
 Details) (default: \code{"Interval"}).}
 
-\item{ambiguity}{(optional) a \code{numeric} value to instruct \code{assign_date()} on
-how to deal with ambiguities (see Details) (default: \code{0}).}
+\item{ambiguity}{(optional) a \code{numeric} or \code{NA} value to instruct
+\code{assign_date()} on how to deal with ambiguities (see Details) (default:
+\code{0}).}
 
 \item{start_name, end_name}{(optional) a string indicating a name associated
 with the \code{start} and \code{end} argument.}
@@ -45,10 +46,10 @@ timeline.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. This classes can be found in \link[hms:hms-package]{hms::hms-package} and
-\link[lubridate:lubridate-package]{lubridate::lubridate-package}. If your data do not conform to the object
-classes required, you can use \code{\link[=convert]{convert()}} to convert it
-(see \code{vignette("converting-data", package = "mctq")}).
+hold time values. These classes can be found in the \link[hms:hms-package]{hms}
+and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
+conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
+convert it.
 }
 
 \subsection{\code{ambiguity} argument}{
@@ -91,19 +92,19 @@ corresponding to \code{start} and \code{end} output.
 \subsection{\code{start_name} and \code{end_name} arguments}{
 
 These arguments serve to instruct \code{assign_date()} on how to name the
-list elements when \code{return == "list"}. As default, the function will name
+list elements when \code{return = "list"}. As default, the function will name
 this elements with the names of the variables assigned to \code{start} and \code{end}
 arguments.
 
-If the number of characters (\code{nchar}) of \code{start_name} or \code{end_name} are equal
-or greater than 30, \code{assign_date()} will name the list elements as \code{"start"}
-and \code{"end"}.
+If the number of characters (\code{nchar()}) of \code{start_name} or \code{end_name} are
+equal or greater than 30, \code{assign_date()} will name the list elements as
+\code{"start"} and \code{"end"}.
 }
 
 \subsection{\code{POSIXt} objects}{
 
 \code{POSIXt} values passed as argument to \code{start} or \code{end} will be strip of their
-dates. Only the hours will be considered.
+dates. Only the time will be considered.
 }
 
 \subsection{\code{NA} values}{
@@ -159,7 +160,7 @@ assign_date(start, end, return = "start")
 assign_date(start, end, return = "end")
 #> [1] "1970-01-01 11:45:00 UTC" # Expected
 
-## __ To assign a 24h interval to ambiguities __
+## __ To assign a 24 hours interval to ambiguities __
 start <- lubridate::as_datetime("1985-01-15 12:00:00")
 end <- lubridate::as_datetime("2020-09-10 12:00:00")
 assign_date(start, end, ambiguity = 24)

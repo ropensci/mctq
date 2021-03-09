@@ -5,9 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `shortest_interval()` finds and return the shortest interval between two
-#' `hms` or `POSIXt` objects hours. This is useful for time arithmetic, because
-#' there's always two possible intervals between two hour values with no date
-#' reference.
+#' `hms` or `POSIXt` objects hours.
 #'
 #' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_
 #' finds the longer interval between two hours. It's just a wrapper for
@@ -17,7 +15,7 @@
 #'
 #' ## The two intervals problem
 #'
-#' Given two hours, `x` and `y`, in a two day timeline, without date references,
+#' Given two hours, `x` and `y`, in a two-day timeline, without date references,
 #' there will be always two possible intervals between them, as illustrated
 #' below.
 #'
@@ -70,10 +68,10 @@
 #' ## Class requirements
 #'
 #' The `mctq` package works with a set of object classes specially created to
-#' hold time values. This classes can be found in [hms::hms-package] and
-#' [lubridate::lubridate-package]. If your data do not conform to the object
-#' classes required, you can use [mctq::convert()] to convert it
-#' (see `vignette("converting-data", package = "mctq")`).
+#' hold time values. These classes can be found in the [hms][hms::hms-package]
+#' and [lubridate][lubridate::lubridate-package] packages. If your data do not
+#' conform to the object classes required, you can use [mctq::convert()] to
+#' convert it.
 #'
 #' ## `class` argument
 #'
@@ -85,7 +83,7 @@
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` values passed as argument to `x` or `y` will be strip of their
+#' `POSIXt` objects passed as argument to `x` or `y` will be strip of their
 #' dates. Only the hours will be considered.
 #'
 #' @param x,y A `hms` or `POSIXt` object.
@@ -96,7 +94,7 @@
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
-#' @return A R object, of class indicated on `class`, with the shortest or
+#' @return An object, of class indicated on `class`, with the shortest or
 #'   longer interval (if `inverse = TRUE` or `longer_interval()` is used)
 #'   between `x` and `y`.
 #'

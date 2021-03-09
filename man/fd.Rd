@@ -9,11 +9,11 @@ fd(wd)
 \arguments{
 \item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of workdays per week}
-value from a standard or micro version of the MCTQ questionnaire.}
+from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
-An \code{integer} object equivalent to the difference between the number
-of days in a week and the number of workdays (\code{wd}).
+An \code{integer} object corresponding to the difference between the
+number of days in a week and the number of workdays (\code{wd}).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -38,8 +38,9 @@ See the References section to learn more.
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
-for \code{fd()} (\eqn{FD}) computation are as follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
+Experimental Platform (n.d.) guidelines for \code{fd()} (\eqn{FD}) computation are
+as follow.
 
 \strong{\deqn{7 - WD}}
 

@@ -9,9 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
-#' for `sloss_week()` (\eqn{SLoss_{week}}{SLoss_week}) computation are as
-#' follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
+#' Experimental Platform (n.d.) guidelines for `sloss_week()`
+#' (\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
 #'
 #' ## Notes
 #'

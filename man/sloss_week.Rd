@@ -8,16 +8,16 @@ sloss_week(sd_w, sd_f, wd)
 }
 \arguments{
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} value from a standard or micro version of the MCTQ questionnaire.
-You can use \code{\link[=sd]{sd()}} to compute it.}
+days} from a standard or micro version of the MCTQ questionnaire. You can
+use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
-work-free days} value from a standard or micro version of the MCTQ
+work-free days} from a standard or micro version of the MCTQ
 questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of workdays per week}
-value from a standard or micro version of the MCTQ questionnaire.}
+from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
 A \code{Duration} object corresponding to the weekly sleep loss.
@@ -64,9 +64,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
-for \code{sloss_week()} (\eqn{SLoss_{week}}{SLoss_week}) computation are as
-follow.
+Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
+Experimental Platform (n.d.) guidelines for \code{sloss_week()}
+(\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may

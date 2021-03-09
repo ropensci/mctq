@@ -8,26 +8,26 @@ sd_overall(sd_w, sd_f, n_w, n_f)
 }
 \arguments{
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration between
-two days in a particular shift} value from a shift version of the MCTQ
+two days in a particular shift} from a shift version of the MCTQ
 questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration between
-two free days after a particular shift} value from a shift version of the
-MCTQ questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
+two free days after a particular shift} from a shift version of the MCTQ
+questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{n_w}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of days worked in a
-particular shift within a shift cycle} value from a shift version of the
-MCTQ questionnaire.}
+particular shift within a shift cycle} from a shift version of the MCTQ
+questionnaire.}
 
 \item{n_f}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of free days after a
-particular shift within a shift cycle} value from a shift version of the
-MCTQ questionnaire.}
+particular shift within a shift cycle} from a shift version of the MCTQ
+questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the weighted mean of \code{sd_w} and
-\code{sd_f} with \code{n_w} and \code{n_f} as weights.
+A \code{Duration} object corresponding to the vectorized weighted mean of
+\code{sd_w} and \code{sd_f} with \code{n_w} and \code{n_f} as weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -74,9 +74,9 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 \section{Guidelines}{
 
 
-Juda, Vetter, & Roenneberg (2013) and theWeP (n.d.) guidelines for
-\code{sd_overall()} (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N}) computation are as
-follow.
+Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
+(n.d.) guidelines for \code{sd_overall()} (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N})
+computation are as follow.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each shift section of the

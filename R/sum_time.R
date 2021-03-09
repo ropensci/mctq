@@ -1,4 +1,4 @@
-#' Sum time values
+#' Sum time objects
 #'
 #' @description
 #'
@@ -7,8 +7,8 @@
 #' `sum_time()` returns the sum of the time from different kinds of date/time
 #' objects.
 #'
-#' This function supports vectorized operations and can also be set to roll the
-#' sum in a 24 hours clock basis, helping with time arithmetic issues.
+#' This function supports vectorized operations and can also be set to work with
+#' a circular time frame of 24 hours.
 #'
 #' @details
 #'
@@ -23,27 +23,27 @@
 #'
 #' ## `vectorize` argument
 #'
-#' If `vectorize = FALSE` (default), `sum_time` will combine and sum all values
-#' in `...`. In other words, in this setting, `sum_time(c(x, y), z)` will have
-#' the same output as `sum_time(x, y, z)`.
+#' If `vectorize = FALSE` (default), `sum_time` will combine and sum all time
+#' values in `...`. That is, `sum_time(c(x, y), z)` will have the same
+#' output as `sum_time(x, y, z)`.
 #'
 #' However, if `vectorize = TRUE`, `sum_time()` will require that all objects in
 #' `...` have the same length, and will perform a paired sum between elements.
-#' In other words, in this setting, `sum_time(c(x, y), c(w, z))` will return a
-#' vector like `c(sum_time(x, w,), sum_time(y, z))`.
+#' That is, `sum_time(c(x, y), c(w, z))` will return a vector like
+#' `c(sum_time(x, w), sum_time(y, z))`.
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` values in `...` will be strip of their dates. Only the hours will be
+#' `POSIXt` values in `...` will be strip of their dates. Only the time will be
 #' considered.
 #'
 #' ## `Period` objects
 #'
 #' `Period` objects are a special time object developed by the
-#' [lubridate][lubridate::lubridate-package] team that track changes in clock
-#' times ignoring time irregularities. That is to say that 1 day as `Period`
+#' [lubridate][lubridate::lubridate-package] team that represent "human units",
+#' ignoring possible time irregularities. That is to say that 1 day as `Period`
 #' will always represent 1 day in the timeline. `sum_time()` ignores that
-#' property of `Period` objects, treating them as objects of class `Duration`.
+#' property of `Period` objects, treating them like objects of class `Duration`.
 #'
 #' ## Time line irregularities
 #'
@@ -51,13 +51,12 @@
 #' leap years, DST, leap seconds). This may not be a issue for most people, but
 #' it must be considered when doing time arithmetic.
 #'
-#' @param ... Vectors belonging to one or more of the following classes:
-#'   `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or
-#'   `Interval`.
+#' @param ... Objects belonging to one of the following classes: `Duration`,
+#'   `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
 #' @param class (optional) a string indicating the output class (default:
 #'   `"hms"`).
-#' @param clock (optional) a logical value indicating whether the sum should
-#'   roll in a 24 hour clock basis (default: `FALSE`).
+#' @param circular (optional) a logical value indicating whether the sum should
+#'   be in a circular time frame of 24 hours (clock hours) (default: `FALSE`).
 #' @param vectorize (optional) a logical value indicating if the function must
 #'   operate in a vectorized fashion (default: `FALSE`).
 #' @param na.rm (optional) a logical value indicating if the function must
@@ -65,19 +64,19 @@
 #'
 #' @return
 #'
-#' * If `clock = TRUE` and `vectorize = FALSE` (default), an object of
+#' * If `circular = TRUE` and `vectorize = FALSE` (default), an object of
 #' the indicated class in `class` (default: `"hms"`) with the sum of the time
-#' from objects in `...` rolled in a 24 hour clock basis.
+#' from objects in `...` in a circular time frame of 24 hours.
 #'
-#' * If `clock = FALSE` (default) and `vectorize = FALSE` (default), an object
-#' of the indicated class in `class` (default: `"hms"`) with the cumulative sum
-#' of the time from objects in `...`.
+#' * If `circular = FALSE` (default) and `vectorize = FALSE` (default), an
+#' object of the indicated class in `class` (default: `"hms"`) with the
+#' cumulative sum of the time from objects in `...`.
 #'
-#' * If `clock = TRUE` and `vectorize = TRUE`, an object of the indicated class
-#' in `class` (default: `"hms"`) with a vectorized sum of the time from objects
-#' in `...` rolled in a 24 hour clock basis.
+#' * If `circular = TRUE` and `vectorize = TRUE`, an object of the indicated
+#' class in `class` (default: `"hms"`) with a vectorized sum of the time from
+#' objects in `...` in a circular time frame of 24 hours.
 #'
-#' * If `clock = FALSE` (default) and `vectorize = TRUE`, an object of the
+#' * If `circular = FALSE` (default) and `vectorize = TRUE`, an object of the
 #' indicated class in `class` (default: `"hms"`) with a vectorized and
 #' cumulative sum of the time from objects in `...`.
 #'
@@ -91,15 +90,15 @@
 #' sum_time(x, y, class = "duration")
 #' #> [1] "142200s (~1.65 days)" # Expected
 #'
-#' ## __ Non-vectorized sum rolled over in a 24 hour clock basis __
+#' ## __ Non-vectorized sum in a circular time frame of 24 hours __
 #' x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
-#' sum_time(x, clock = TRUE)
+#' sum_time(x, circular = TRUE)
 #' #> 06:50:00 # Expected
 #'
 #' x <- c(hms::parse_hm("00:15"), hms::parse_hm("02:30"), hms::as_hms(NA))
-#' sum_time(x, clock = TRUE)
+#' sum_time(x, circular = TRUE)
 #' #> NA # Expected
-#' sum_time(x, clock = TRUE, na.rm = TRUE)
+#' sum_time(x, circular = TRUE, na.rm = TRUE)
 #' #> 02:45:00 # Expected
 #'
 #' ## __ Cumulative vectorized sum __
@@ -112,16 +111,16 @@
 #' #> 29:00:00 # Expected
 #' #> 10:00:00 # Expected
 #'
-#' ## __ Vectorized sum rolled over in a 24 hour clock basis __
+#' ## __ Vectorized sum in a circular time frame of 24 hours __
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-#' sum_time(x, y, clock = TRUE, vectorize = TRUE)
+#' sum_time(x, y, circular = TRUE, vectorize = TRUE)
 #' #> 05:00:00 # Expected
 #' #>       NA # Expected
-#' sum_time(x, y, clock = TRUE, vectorize = TRUE, na.rm = TRUE)
+#' sum_time(x, y, circular = TRUE, vectorize = TRUE, na.rm = TRUE)
 #' #> 05:00:00 # Expected
 #' #> 10:00:00 # Expected
-sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
+sum_time <- function(..., class = "hms", circular = FALSE, vectorize = FALSE,
                      na.rm = FALSE) {
     out <- list(...)
 
@@ -137,7 +136,7 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
           "Period", "difftime", "hms"))
 
     checkmate::assert_choice(tolower(class), choices)
-    checkmate::assert_flag(clock)
+    checkmate::assert_flag(circular)
     checkmate::assert_flag(vectorize)
     checkmate::assert_flag(na.rm)
     lapply(out, assert_custom)
@@ -168,6 +167,6 @@ sum_time <- function(..., class = "hms", clock = FALSE, vectorize = FALSE,
         out <- sum(out, na.rm = na.rm)
     }
 
-    if (isTRUE(clock)) out <- flat_posixt(lubridate::as_datetime(out))
+    if (isTRUE(circular)) out <- flat_posixt(lubridate::as_datetime(out))
     convert(out, class, quiet = TRUE)
 }

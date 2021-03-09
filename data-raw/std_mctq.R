@@ -60,7 +60,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `WORK REGULAR` = "Yes", # logical | Yes/No
         `WORK DAYS` = "5", # integer | [0-7]
 
-        `W BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
+        `W BEDTIME` = "00:30", # hms | HMS, HM, H [0-24h]
         `W SLEEP PREP` = "01:30", # hms | HMS, HM, H [0-24h]
         `W SLEEP LAT` = "15", # Duration | M
         `W SLEEP END` = "06:30", # hms | HMS, HM, H [0-24h]
@@ -69,7 +69,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
         `W LIGHT EXPOSURE` = "02:00", # Duration | [H]MS, [H]M, [H]
 
-        `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+        `F BEDTIME` = "01:00", # hms | HMS, HM, H [0-24h]
         `F SLEEP PREP` = "02:30", # hms | HMS, HM, H [0-24h]
         `F SLEEP LAT` = "15", # Duration | M
         `F SLEEP END` = "12:00", # hms | HMS, HM, H [0-24h]
@@ -109,7 +109,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
                     `WORK REGULAR` =  format_logical(.data$work),
                     `WORK DAYS` = as.character(.data$wd),
 
-                    `W BED TIME` = format_hms(.data$bt_w),
+                    `W BEDTIME` = format_hms(.data$bt_w),
                     `W SLEEP PREP` = format_hms(.data$sprep_w),
                     `W SLEEP LAT` = format_duration(.data$slat_w),
                     `W SLEEP END` = format_hms(.data$se_w),
@@ -118,7 +118,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
                     `W WAKE BEFORE ALARM` = format_logical(.data$wake_before_w),
                     `W LIGHT EXPOSURE` = format_hms(.data$le_w),
 
-                    `F BED TIME` = format_hms(.data$bt_f),
+                    `F BEDTIME` = format_hms(.data$bt_f),
                     `F SLEEP PREP` = format_hms(.data$sprep_f),
                     `F SLEEP LAT` = format_duration(.data$slat_f),
                     `F SLEEP END` = format_hms(.data$se_f),
@@ -133,7 +133,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         }
     }
 
-    ## Inverted values for bed time and sleep preparing on workdays
+    ## Inverted values for bedtime and sleep preparing on workdays
 
     std_mctq <- std_mctq %>% dplyr::add_row(
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]
@@ -141,7 +141,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `WORK REGULAR` = "Yes", # logical | Yes/No
         `WORK DAYS` = "4", # integer | [0-7]
 
-        `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h] # INVERSION
+        `W BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h] # INVERSION
         `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
         `W SLEEP LAT` = "10", # Duration | M
         `W SLEEP END` = "05:00", # hms | HMS, HM, H [0-24h]
@@ -150,7 +150,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
         `W LIGHT EXPOSURE` = "04:00", # Duration | [H]MS, [H]M, [H]
 
-        `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
+        `F BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h]
         `F SLEEP PREP` = "01:30", # hms | HMS, HM, H [0-24h]
         `F SLEEP LAT` = "15", # Duration | M
         `F SLEEP END` = "11:00", # hms | HMS, HM, H [0-24h]
@@ -161,7 +161,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F LIGHT EXPOSURE` = "06:00" # Duration | [H]MS, [H]M, [H]
     ) %>%
 
-    ## Inverted values for bed time and sleep preparing on work-free days
+    ## Inverted values for bedtime and sleep preparing on work-free days
 
         dplyr::add_row(
             `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
@@ -169,7 +169,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "5", # integer | [0-7]
 
-            `W BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "22:30", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "30", # Duration | M
             `W SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
@@ -178,7 +178,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No
             `W LIGHT EXPOSURE` = "01:00", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
+            `F BEDTIME` = "23:00", # hms | HMS, HM, H [0-24h] # INVERSION
             `F SLEEP PREP` = "22:30", # hms | HMS, HM, H [0-24h] # INVERSION
             `F SLEEP LAT` = "45", # Duration | M
             `F SLEEP END` = "08:30", # hms | HMS, HM, H [0-24h]
@@ -197,7 +197,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "No", # logical | Yes/No
             `WORK DAYS` = "10", # integer | [0-7] # INVALID
 
-            `W BED TIME` = "27:00", # hms | HMS, HM, H [0-24h] # INVALID
+            `W BEDTIME` = "27:00", # hms | HMS, HM, H [0-24h] # INVALID
             `W SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "30", # Duration | M
             `W SLEEP END` = "12:15", # hms | HMS, HM, H [0-24h]
@@ -206,7 +206,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "Sim", # logical | Yes/No # INVALID
             `W LIGHT EXPOSURE` = "02:15", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "34:00", # hms | HMS, HM, H [0-24h] # INVALID
+            `F BEDTIME` = "34:00", # hms | HMS, HM, H [0-24h] # INVALID
             `F SLEEP PREP` = "04:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "15", # Duration | M
             `F SLEEP END` = "14:12", # hms | HMS, HM, H [0-24h]
@@ -225,7 +225,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "2", # integer | [0-7]
 
-            `W BED TIME` = "21:00", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "21:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "2130", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "15", # Duration | M
             `W SLEEP END` = "09:15", # hms | HMS, HM, H [0-24h]
@@ -234,7 +234,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "0500", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "5", # Duration | M
             `F SLEEP END` = "06:00", # hms | HMS, HM, H [0-24h]
@@ -253,7 +253,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "5", # integer | [0-7]
 
-            `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "15", # Duration | M
             `W SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
@@ -262,7 +262,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
             `W LIGHT EXPOSURE` = "01:55", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "01:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "30", # Duration | M
             `F SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
@@ -281,7 +281,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "", # logical | Yes/No
             `WORK DAYS` = "", # integer | [0-7]
 
-            `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "", # Duration | M
             `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -290,7 +290,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "", # Duration | M
             `F SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -309,7 +309,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "No", # logical | Yes/No
             `WORK DAYS` = "", # integer | [0-7]
 
-            `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "", # Duration | M
             `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -318,7 +318,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "03:30", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "03:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "04:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "90", # Duration | M
             `F SLEEP END` = "15:00", # hms | HMS, HM, H [0-24h]
@@ -337,7 +337,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "0", # logical | Yes/No
             `WORK DAYS` = "0", # integer | [0-7]
 
-            `W BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "0", # Duration | M
             `W SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -346,7 +346,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "0", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "0", # Duration | M
             `F SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -365,7 +365,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "7", # integer | [0-7]
 
-            `W BED TIME` = "23:00", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "23:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "23:30", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "10", # Duration | M
             `W SLEEP END` = "06:30", # hms | HMS, HM, H [0-24h]
@@ -374,7 +374,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
             `W LIGHT EXPOSURE` = "02:00", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "", # Duration | M
             `F SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -393,7 +393,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "No", # logical | Yes/No
             `WORK DAYS` = "6", # integer | [0-7]
 
-            `W BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
             `W SLEEP LAT` = "120", # Duration | M # SUSPICIOUS
             `W SLEEP END` = "04:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
@@ -402,7 +402,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "Yes", # logical | Yes/No
             `W LIGHT EXPOSURE` = "18:00", # Duration | [H]MS, [H]M, [H] # SUSP.
 
-            `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "00:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "30", # Duration | M
             `F SLEEP END` = "09:00", # hms | HMS, HM, H [0-24h]
@@ -421,7 +421,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "true", # logical | Yes/No # AMBIGUOUS
             `WORK DAYS` = "5", # integer | [0-7]
 
-            `W BED TIME` = "11:00 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W BEDTIME` = "11:00 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `W SLEEP PREP` = "0000", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `W SLEEP LAT` = "00:15", # Duration | M #AMBIGUOUS
             `W SLEEP END` = "07:15 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
@@ -430,7 +430,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "3", # Duration | [H]MS, [H]M, [H] # AMBIGUOUS
 
-            `F BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "0130 AM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `F SLEEP LAT` = "60", # Duration | M
             `F SLEEP END` = "10:00", # hms | HMS, HM, H [0-24h]
@@ -449,7 +449,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "6", # integer | [0-7]
 
-            `W BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "", # Duration | M
             `W SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -458,7 +458,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "22:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "22:30", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "15", # Duration | M
             `F SLEEP END` = "06:00", # hms | HMS, HM, H [0-24h]
@@ -478,7 +478,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "5", # integer | [0-7]
 
-            `W BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "22:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "10", # Duration | M
             `W SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
@@ -487,7 +487,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "No", # logical | Yes/No
             `W LIGHT EXPOSURE` = "01:00", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "22:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "23:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP LAT` = "10", # Duration | M
             `F SLEEP END` = "07:00", # hms | HMS, HM, H [0-24h]
@@ -507,7 +507,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `WORK REGULAR` = "Yes", # logical | Yes/No
             `WORK DAYS` = "2", # integer | [0-7]
 
-            `W BED TIME` = "22:30", # hms | HMS, HM, H [0-24h]
+            `W BEDTIME` = "22:30", # hms | HMS, HM, H [0-24h]
             `W SLEEP PREP` = "00:00", # hms | HMS, HM, H [0-24h]
             `W SLEEP LAT` = "60", # Duration | M
             `W SLEEP END` = "08:00", # hms | HMS, HM, H [0-24h]
@@ -516,7 +516,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W WAKE BEFORE ALARM` = "", # logical | Yes/No
             `W LIGHT EXPOSURE` = "01:20", # Duration | [H]MS, [H]M, [H]
 
-            `F BED TIME` = "00:00", # hms | HMS, HM, H [0-24h]
+            `F BEDTIME` = "00:00", # hms | HMS, HM, H [0-24h]
             `F SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h] # ERROR
             `F SLEEP LAT` = "120", # Duration | M # ERROR
             `F SLEEP END` = "04:00", # hms | HMS, HM, H [0-24h] # ERROR
@@ -628,9 +628,9 @@ tidy_std_mctq <- function(write = FALSE) {
         wd = as.integer(.data$`WORK DAYS`),
 
         bt_w = dplyr::case_when(
-            grepl(pattern_4, .data$`W BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`W BED TIME`, "hms", "HM", quiet = TRUE),
-            TRUE ~ convert_pt(.data$`W BED TIME`, "hms",
+            grepl(pattern_4, .data$`W BEDTIME`, perl = TRUE) ~
+                convert_pt(.data$`W BEDTIME`, "hms", "HM", quiet = TRUE),
+            TRUE ~ convert_pt(.data$`W BEDTIME`, "hms",
                            c("HM", "IMp"), quiet = TRUE)),
         sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms", c("HMS", "HM", "H")),
         slat_w = dplyr::case_when(
@@ -650,10 +650,10 @@ tidy_std_mctq <- function(write = FALSE) {
                           c("HMS", "HM", "H")),
 
         bt_f = dplyr::case_when(
-            grepl(pattern_4, .data$`F BED TIME`, perl = TRUE) ~
-                convert_pt(.data$`F BED TIME`, "hms", "HM",
+            grepl(pattern_4, .data$`F BEDTIME`, perl = TRUE) ~
+                convert_pt(.data$`F BEDTIME`, "hms", "HM",
                            quiet = TRUE),
-            TRUE ~ convert_pt(.data$`F BED TIME`, "hms", c("HMS", "HM", "H"),
+            TRUE ~ convert_pt(.data$`F BEDTIME`, "hms", c("HMS", "HM", "H"),
                            quiet = TRUE)),
         sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms", c("HMS", "HM", "H")),
         slat_f = convert_pt(.data$`F SLEEP LAT`, "Duration", "M"),

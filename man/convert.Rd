@@ -17,7 +17,7 @@
 \alias{convert_uu}
 \alias{convert_pt}
 \alias{convert_pu}
-\title{Convert a R object to another}
+\title{Convert an object to another}
 \usage{
 convert(x, class, ...)
 
@@ -150,7 +150,7 @@ convert_pt(x, class, orders, ...)
 convert_pu(x, orders, output_unit, ...)
 }
 \arguments{
-\item{x}{Any R object, provided that it has a method.}
+\item{x}{Any R object, provided that convert() has a method to it.}
 
 \item{class}{A string indicating the class of the output.}
 
@@ -191,20 +191,17 @@ that flags the column names in \code{x} for the purpose of transforming them
 (default: \code{NULL}).}
 }
 \value{
-A R object of the indicated class in \code{class}.
+An object of the indicated class in \code{class}.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{convert()} converts a R object to another object of a predefined class. Its
+\code{convert()} converts an R object to another object of a predefined class. Its
 mission is to facilitate conversions between any kind of R object in a
 simple and fast way.
 
 This function also supports date/time parsing and value transformations.
-Check Details section to learn more.
-
-For a complete picture about how to convert your MCTQ data, see
-\code{vignette("converting-data", package = "mctq")}.
+Check the Details section to learn more.
 }
 \details{
 \code{convert()} was designed to be a simple to use function with powerful
@@ -288,7 +285,7 @@ be allocated between hours and minutes.
 
 \subsection{Converting columns of a data frame}{
 
-\code{convert()} also allow direct conversions of data frame variables. This is
+\code{convert()} also allow direct conversions of data frame columns. This is
 made with the help of \code{\link[dplyr:mutate]{dplyr::mutate()}}.
 
 Operations with data frames are only column-wise and can be made by
@@ -309,18 +306,18 @@ indication of year, \code{convert()} will return a \code{character} vector with 
 \code{hms} time.
 
 You can also parse a \code{character} object and transform it direct to an unit.
-See Examples section to know how.
+See the Examples section to know how.
 \itemize{
 \item When \code{class = "numeric"} or \code{class = "double"}
 }
 
 \code{convert()} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class} is set to
-\code{"numeric"} or \code{"double"}. For \code{Date} objects, the output will be the total
+\code{"numeric"} or \code{"double"}. For \code{Date} objects the output will be the total
 of days since '1970-01-01' (UNIX epoch date). For date-time objects (\emph{e.g.}
-\code{POSIXt}), the output will be the total of seconds from the UNIX epoch
+\code{POSIXt}) the output will be the total of seconds from the UNIX epoch
 (\verb{1970-01-01 00:00:00 UTC}) (See
 \href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to know more). For time
-objects (\emph{e.g.} \code{hms}), the output will be the total of seconds.
+objects (\emph{e.g.} \code{hms}) the output will be the total of seconds.
 
 The output \code{class = "numeric"} can also be different if \code{input_unit} and
 \code{output_unit} are assigned.
@@ -338,15 +335,15 @@ The length of months and years can vary. For example, March have 31 days,
 while April have have 30. Due to leap years, the same can be said to year
 lengths.
 
-To address this problem, \code{convert()} use as default the mean of
-possible values for months and years, used to calculate month and year
-durations in the lubridate package (see: \code{\link[lubridate:duration]{lubridate::dmonths()}} and
-\code{\link[lubridate:duration]{lubridate::dyears()}}). If you like, you can reset this by assigning other
-values to \code{month_length} and \code{year_length} arguments.
+To address this problem, \code{convert()} use as default the mean of possible
+values for months and years, used to calculate month and year durations in
+the lubridate package (see: \code{\link[lubridate:duration]{lubridate::dmonths()}} and
+\code{\link[lubridate:duration]{lubridate::dyears()}}). You can reset this by assigning other values to
+\code{month_length} and \code{year_length} arguments.
 
 \code{month_length} and \code{year_length} values must be assigned with the number of
 seconds equivalent to the unit duration. You can also assign a lubridate
-\code{Duration} object if you like (see \code{\link[lubridate:duration]{lubridate::duration()}}).
+\code{Duration} object (see \code{\link[lubridate:duration]{lubridate::duration()}}).
 }
 }
 \examples{

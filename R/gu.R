@@ -10,8 +10,8 @@
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
-#' (2013), and theWeP (n.d.) guidelines for `gu()` (\eqn{GU}) computation are as
-#' follow.
+#' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `gu()`
+#' (\eqn{GU}) computation are as follow.
 #'
 #' ## Notes
 #'
@@ -19,8 +19,8 @@
 #' questionnaire.
 #'
 #' * MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
-#' \eqn{SI} (sleep inertia), but, for the purpose of this computation, both
-#' represent the same thing.
+#' \eqn{SI} (sleep inertia). For the purpose of this computation, both represent
+#' the same thing.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
@@ -56,13 +56,13 @@
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param se A `hms` object corresponding to the __local time of sleep end__
-#'   value from a standard or shift version of the MCTQ questionnaire.
+#'   from a standard or shift version of the MCTQ questionnaire.
 #' @param si A `Duration` object corresponding to the __sleep inertia__ or
-#'   __time to get up__ value from a standard or shift version of the MCTQ
+#'   __time to get up__ from a standard or shift version of the MCTQ
 #'   questionnaire.
 #'
-#' @return A `hms` object corresponding to the sum of `se` and `si` considering
-#'   the circularity of time.
+#' @return A `hms` object corresponding to the vectorized sum of `se` and `si`
+#'   in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a
@@ -89,5 +89,5 @@ gu <- function(se, si) {
     assert_duration(si)
     assert_identical(se, si, type = "length")
 
-    sum_time(se, si, class = "hms", clock = TRUE, vectorize = TRUE)
+    sum_time(se, si, class = "hms", circular = TRUE, vectorize = TRUE)
 }

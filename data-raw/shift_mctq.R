@@ -60,7 +60,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `ID` = as.character(reserved_id[1]), # integer | [auto-increment]
 
         `W M N DAYS` = "6", # integer | [0-7]
-        `W M BED TIME` = "23:20", # hms | HMS, HM, H [0-24h]
+        `W M BEDTIME` = "23:20", # hms | HMS, HM, H [0-24h]
         `W M SLEEP PREP` = "00:05", # hms | HMS, HM, H [0-24h]
         `W M SLEEP LAT` = "5", # Duration | M
         `W M SLEEP END` = "03:40", # hms | HMS, HM, H [0-24h]
@@ -73,7 +73,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W M NAP END` = "14:40", # hms | HMS, HM, H [0-24h]
 
         `F M N DAYS` = "2", # integer | [0-7]
-        `F M BED TIME` = "23:05", # hms | HMS, HM, H [0-24h]
+        `F M BEDTIME` = "23:05", # hms | HMS, HM, H [0-24h]
         `F M SLEEP PREP` = "00:20", # hms | HMS, HM, H [0-24h]
         `F M SLEEP LAT` = "10", # Duration | M
         `F M SLEEP END` = "10:00", # hms | HMS, HM, H [0-24h]
@@ -86,7 +86,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
         `W E N DAYS` = "4", # integer | [0-7]
-        `W E BED TIME` = "01:45", # hms | HMS, HM, H [0-24h]
+        `W E BEDTIME` = "01:45", # hms | HMS, HM, H [0-24h]
         `W E SLEEP PREP` = "02:50", # hms | HMS, HM, H [0-24h]
         `W E SLEEP LAT` = "30", # Duration | M
         `W E SLEEP END` = "08:15", # hms | HMS, HM, H [0-24h]
@@ -99,7 +99,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
         `F E N DAYS` = "2", # integer | [0-7]
-        `F E BED TIME` = "00:55", # hms | HMS, HM, H [0-24h]
+        `F E BEDTIME` = "00:55", # hms | HMS, HM, H [0-24h]
         `F E SLEEP PREP` = "02:00", # hms | HMS, HM, H [0-24h]
         `F E SLEEP LAT` = "35", # Duration | M
         `F E SLEEP END` = "11:20", # hms | HMS, HM, H [0-24h]
@@ -112,7 +112,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F E NAP END` = "19:20", # hms | HMS, HM, H [0-24h]
 
         `W N N DAYS` = "6", # integer | [0-7]
-        `W N BED TIME` = "07:30", # hms | HMS, HM, H [0-24h]
+        `W N BEDTIME` = "07:30", # hms | HMS, HM, H [0-24h]
         `W N SLEEP PREP` = "07:55", # hms | HMS, HM, H [0-24h]
         `W N SLEEP LAT` = "55", # Duration | M
         `W N SLEEP END` = "12:35", # hms | HMS, HM, H [0-24h]
@@ -125,7 +125,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W N NAP END` = "", # hms | HMS, HM, H [0-24h]
 
         `F N N DAYS` = "8", # integer | [0-7]
-        `F N BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+        `F N BEDTIME` = "21:30", # hms | HMS, HM, H [0-24h]
         `F N SLEEP PREP` = "22:55", # hms | HMS, HM, H [0-24h]
         `F N SLEEP LAT` = "75", # Duration | M
         `F N SLEEP END` = "06:20", # hms | HMS, HM, H [0-24h]
@@ -180,7 +180,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
                     dplyr::mutate(
                         !!as.symbol(paste(i[1], "N DAYS")) :=
                             as.character(.data[[paste0("n", i[2])]]),
-                        !!as.symbol(paste(i[1], "BED TIME")) :=
+                        !!as.symbol(paste(i[1], "BEDTIME")) :=
                             format_hms(.data[[paste0("bt", i[2])]]),
                         !!as.symbol(paste(i[1], "SLEEP PREP")) :=
                             format_hms(.data[[paste0("sprep", i[2])]]),
@@ -211,13 +211,13 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         }
     }
 
-    ## Inverted values for bed time and sleep preparation
+    ## Inverted values for bedtime and sleep preparation
 
     shift_mctq <- shift_mctq %>% dplyr::add_row(
         `ID` = as.character(reserved_id[2]), # integer | [auto-increment]
 
         `W M N DAYS` = "6", # integer | [0-7]
-        `W M BED TIME` = "20:20", # hms | HMS, HM, H [0-24h]  # INVERSION
+        `W M BEDTIME` = "20:20", # hms | HMS, HM, H [0-24h]  # INVERSION
         `W M SLEEP PREP` = "19:40", # hms | HMS, HM, H [0-24h]  # INVERSION
         `W M SLEEP LAT` = "5", # Duration | M
         `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -230,7 +230,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W M NAP END` = "14:10", # hms | HMS, HM, H [0-24h]
 
         `F M N DAYS` = "2", # integer | [0-7]
-        `F M BED TIME` = "23:25", # hms | HMS, HM, H [0-24h]
+        `F M BEDTIME` = "23:25", # hms | HMS, HM, H [0-24h]
         `F M SLEEP PREP` = "23:50", # hms | HMS, HM, H [0-24h]
         `F M SLEEP LAT` = "20", # Duration | M
         `F M SLEEP END` = "09:05", # hms | HMS, HM, H [0-24h]
@@ -243,7 +243,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
         `W E N DAYS` = "4", # integer | [0-7]
-        `W E BED TIME` = "00:25", # hms | HMS, HM, H [0-24h]
+        `W E BEDTIME` = "00:25", # hms | HMS, HM, H [0-24h]
         `W E SLEEP PREP` = "01:05", # hms | HMS, HM, H [0-24h]
         `W E SLEEP LAT` = "15", # Duration | M
         `W E SLEEP END` = "08:15", # hms | HMS, HM, H [0-24h]
@@ -256,7 +256,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W E NAP END` = "19:55", # hms | HMS, HM, H [0-24h]
 
         `F E N DAYS` = "2", # integer | [0-7]
-        `F E BED TIME` = "02:25", # hms | HMS, HM, H [0-24h] # INVERSION
+        `F E BEDTIME` = "02:25", # hms | HMS, HM, H [0-24h] # INVERSION
         `F E SLEEP PREP` = "01:55", # hms | HMS, HM, H [0-24h] # INVERSION
         `F E SLEEP LAT` = "25", # Duration | M
         `F E SLEEP END` = "08:55", # hms | HMS, HM, H [0-24h]
@@ -269,7 +269,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F E NAP END` = "16:10", # hms | HMS, HM, H [0-24h]
 
         `W N N DAYS` = "6", # integer | [0-7]
-        `W N BED TIME` = "08:00", # hms | HMS, HM, H [0-24h]
+        `W N BEDTIME` = "08:00", # hms | HMS, HM, H [0-24h]
         `W N SLEEP PREP` = "08:15", # hms | HMS, HM, H [0-24h]
         `W N SLEEP LAT` = "35", # Duration | M
         `W N SLEEP END` = "15:10", # hms | HMS, HM, H [0-24h]
@@ -282,7 +282,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         `W N NAP END` = "02:40", # hms | HMS, HM, H [0-24h]
 
         `F N N DAYS` = "8", # integer | [0-7]
-        `F N BED TIME` = "18:05", # hms | HMS, HM, H [0-24h]
+        `F N BEDTIME` = "18:05", # hms | HMS, HM, H [0-24h]
         `F N SLEEP PREP` = "18:45", # hms | HMS, HM, H [0-24h]
         `F N SLEEP LAT` = "75", # Duration | M
         `F N SLEEP END` = "02:00", # hms | HMS, HM, H [0-24h]
@@ -301,7 +301,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[3]), # integer | [auto-increment]
 
             `W M N DAYS` = "6", # integer | [0-7]
-            `W M BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "21:30", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "22:25", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "20", # Duration | M
             `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -314,7 +314,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "11:45", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "2", # integer | [0-7]
-            `F M BED TIME` = "00:45", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "00:45", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "35:00", # hms | HMS, HM, H [0-24h] # INVALID
             `F M SLEEP LAT` = "30", # Duration | M
             `F M SLEEP END` = "08:40", # hms | HMS, HM, H [0-24h]
@@ -327,7 +327,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "18:05", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "4", # integer | [0-7]
-            `W E BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "00:30", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "00:55", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "10", # Duration | M
             `W E SLEEP END` = "08:20", # hms | HMS, HM, H [0-24h]
@@ -340,7 +340,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "2", # integer | [0-7]
-            `F E BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "01:05", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "30", # Duration | M
             `F E SLEEP END` = "09:20", # hms | HMS, HM, H [0-24h]
@@ -353,7 +353,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "14:55", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "06:05", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "06:05", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "06:50", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "30", # Duration | M
             `W N SLEEP END` = "42:05", # hms | HMS, HM, H [0-24h] # INVALID
@@ -366,7 +366,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "04:20", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "8", # integer | [0-7]
-            `F N BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "21:30", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "21:55", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "50", # Duration | M
             `F N SLEEP END` = "01:55", # hms | HMS, HM, H [0-24h]
@@ -385,7 +385,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[4]), # integer | [auto-increment]
 
             `W M N DAYS` = "6", # integer | [0-7]
-            `W M BED TIME` = "23:25", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "23:25", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "23:35", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "30", # Duration | M
             `W M SLEEP END` = "04:15", # hms | HMS, HM, H [0-24h]
@@ -398,7 +398,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "16:30", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "2", # integer | [0-7]
-            `F M BED TIME` = "01:25", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "01:25", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "01:50", # hms | HMS, HM, H [0-24h]
             `F M SLEEP LAT` = "30", # Duration | M
             `F M SLEEP END` = "08:05", # hms | HMS, HM, H [0-24h]
@@ -411,7 +411,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "4", # integer | [0-7]
-            `W E BED TIME` = "23:10", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "23:10", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "23:40", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "30", # Duration | M
             `W E SLEEP END` = "05:45", # hms | HMS, HM, H [0-24h]
@@ -424,7 +424,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "2", # integer | [0-7]
-            `F E BED TIME` = "23:10", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "23:10", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "00:15", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "35", # Duration | M
             `F E SLEEP END` = "08:45", # hms | HMS, HM, H [0-24h]
@@ -437,7 +437,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "18:00", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "07:10", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "07:10", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "07:20", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "15", # Duration | M
             `W N SLEEP END` = "12:40", # hms | HMS, HM, H [0-24h]
@@ -450,7 +450,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "00:00", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "8", # integer | [0-7]
-            `F N BED TIME` = "22:25", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "22:25", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "22:50", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "80", # Duration | M
             `F N SLEEP END` = "10:55", # hms | HMS, HM, H [0-24h]
@@ -469,7 +469,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[5]), # integer | [auto-increment]
 
             `W M N DAYS` = "", # integer | [0-7]
-            `W M BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "", # Duration | M
             `W M SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -482,7 +482,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "", # integer | [0-7]
-            `F M BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F M SLEEP LAT` = "", # Duration | M
             `F M SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -495,7 +495,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "", # integer | [0-7]
-            `W E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "", # Duration | M
             `W E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -508,7 +508,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "", # integer | [0-7]
-            `F E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "", # Duration | M
             `F E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -521,7 +521,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "", # integer | [0-7]
-            `W N BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "", # Duration | M
             `W N SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -534,7 +534,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "", # integer | [0-7]
-            `F N BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "", # Duration | M
             `F N SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -553,7 +553,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[6]), # integer | [auto-increment]
 
             `W M N DAYS` = "0", # integer | [0-7]
-            `W M BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "0", # Duration | M
             `W M SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -566,7 +566,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "0", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "0", # integer | [0-7]
-            `F M BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `F M SLEEP LAT` = "0", # Duration | M
             `F M SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -579,7 +579,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "0", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "0", # integer | [0-7]
-            `W E BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "0", # Duration | M
             `W E SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -592,7 +592,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "0", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "0", # integer | [0-7]
-            `F E BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "0", # Duration | M
             `F E SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -605,7 +605,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "0", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "0", # integer | [0-7]
-            `W N BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "0", # Duration | M
             `W N SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -618,7 +618,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "0", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "0", # integer | [0-7]
-            `F N BED TIME` = "0", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "0", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "0", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "0", # Duration | M
             `F N SLEEP END` = "0", # hms | HMS, HM, H [0-24h]
@@ -637,7 +637,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[7]), # integer | [auto-increment]
 
             `W M N DAYS` = "6", # integer | [0-7]
-            `W M BED TIME` = "02:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `W M BEDTIME` = "02:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
             `W M SLEEP PREP` = "04:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
             `W M SLEEP LAT` = "20", # Duration | M
             `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
@@ -650,7 +650,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "11:45", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "2", # integer | [0-7]
-            `F M BED TIME` = "11:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
+            `F M BEDTIME` = "11:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
             `F M SLEEP PREP` = "12:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
             `F M SLEEP LAT` = "30", # Duration | M
             `F M SLEEP END` = "16:30", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
@@ -663,7 +663,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "18:05", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "4", # integer | [0-7]
-            `W E BED TIME` = "00:30", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "00:30", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "00:55", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "10", # Duration | M
             `W E SLEEP END` = "08:20", # hms | HMS, HM, H [0-24h]
@@ -676,7 +676,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "2", # integer | [0-7]
-            `F E BED TIME` = "01:00", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "01:00", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "01:05", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "30", # Duration | M
             `F E SLEEP END` = "09:20", # hms | HMS, HM, H [0-24h]
@@ -689,7 +689,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "19:00", # hms | HMS, HM, H [0-24h] # SUSPICIOUS
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "06:05", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "06:05", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "06:50", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "30", # Duration | M
             `W N SLEEP END` = "16:05", # hms | HMS, HM, H [0-24h]
@@ -702,7 +702,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "04:20", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "8", # integer | [0-7]
-            `F N BED TIME` = "21:30", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "21:30", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "21:55", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "50", # Duration | M
             `F N SLEEP END` = "01:55", # hms | HMS, HM, H [0-24h]
@@ -721,7 +721,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[8]), # integer | [auto-increment]
 
             `W M N DAYS` = "6", # integer | [0-7]
-            `W M BED TIME` = "11:25 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W M BEDTIME` = "11:25 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `W M SLEEP PREP` = "2335", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `W M SLEEP LAT` = "30", # Duration | M
             `W M SLEEP END` = "0415", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
@@ -734,7 +734,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "16:30", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "2", # integer | [0-7]
-            `F M BED TIME` = "01:25", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "01:25", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "01:50", # hms | HMS, HM, H [0-24h]
             `F M SLEEP LAT` = "30", # Duration | M
             `F M SLEEP END` = "08:05", # hms | HMS, HM, H [0-24h]
@@ -747,7 +747,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "4", # integer | [0-7]
-            `W E BED TIME` = "11:10 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
+            `W E BEDTIME` = "11:10 PM", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
             `W E SLEEP PREP` = "23:40 PM", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "30", # Duration | M
             `W E SLEEP END` = "0545", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
@@ -760,7 +760,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "2", # integer | [0-7]
-            `F E BED TIME` = "23:10", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "23:10", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "00:15", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "35", # Duration | M
             `F E SLEEP END` = "08:45", # hms | HMS, HM, H [0-24h]
@@ -773,7 +773,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "18:00", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "07:10", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "07:10", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "07:20", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "15", # Duration | M
             `W N SLEEP END` = "1240", # hms | HMS, HM, H [0-24h] # AMBIGUOUS
@@ -786,7 +786,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "00:00", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "8", # integer | [0-7]
-            `F N BED TIME` = "22:25", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "22:25", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "22:50", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "80", # Duration | M
             `F N SLEEP END` = "10:55", # hms | HMS, HM, H [0-24h]
@@ -805,7 +805,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[9]), # integer | [auto-increment]
 
             `W M N DAYS` = "", # integer | [0-7]
-            `W M BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "", # Duration | M
             `W M SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -818,7 +818,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "2", # integer | [0-7]
-            `F M BED TIME` = "23:40", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "23:40", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "00:45", # hms | HMS, HM, H [0-24h]
             `F M SLEEP LAT` = "45", # Duration | M
             `F M SLEEP END` = "10:35", # hms | HMS, HM, H [0-24h]
@@ -831,7 +831,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "", # integer | [0-7]
-            `W E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "", # Duration | M
             `W E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -844,7 +844,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "", # integer | [0-7]
-            `F E BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "", # Duration | M
             `F E SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -857,7 +857,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "07:40", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "07:40", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "08:15", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "35", # Duration | M
             `W N SLEEP END` = "13:20", # hms | HMS, HM, H [0-24h]
@@ -870,7 +870,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "", # integer | [0-7]
-            `F N BED TIME` = "", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "", # Duration | M
             `F N SLEEP END` = "", # hms | HMS, HM, H [0-24h]
@@ -890,7 +890,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[10]), # integer | [auto-increment]
 
             `W M N DAYS` = "6", # integer | [0-7]
-            `W M BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "21:10", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "25", # Duration | M
             `W M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -903,7 +903,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "6", # integer | [0-7]
-            `F M BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "21:10", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
             `F M SLEEP LAT` = "25", # Duration | M
             `F M SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -916,7 +916,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "6", # integer | [0-7]
-            `W E BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "21:10", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "25", # Duration | M
             `W E SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -929,7 +929,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "6", # integer | [0-7]
-            `F E BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "21:10", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
             `F E SLEEP LAT` = "25", # Duration | M
             `F E SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -942,7 +942,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "21:10", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "25", # Duration | M
             `W N SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -955,7 +955,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "11:50", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "6", # integer | [0-7]
-            `F N BED TIME` = "21:10", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "21:10", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "21:40", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "25", # Duration | M
             `F N SLEEP END` = "04:45", # hms | HMS, HM, H [0-24h]
@@ -975,7 +975,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `ID` = as.character(reserved_id[11]), # integer | [auto-increment]
 
             `W M N DAYS` = "6", # integer | [0-7]
-            `W M BED TIME` = "22:00", # hms | HMS, HM, H [0-24h]
+            `W M BEDTIME` = "22:00", # hms | HMS, HM, H [0-24h]
             `W M SLEEP PREP` = "22:50", # hms | HMS, HM, H [0-24h]
             `W M SLEEP LAT` = "15", # Duration | M
             `W M SLEEP END` = "04:15", # hms | HMS, HM, H [0-24h]
@@ -988,7 +988,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W M NAP END` = "14:00", # hms | HMS, HM, H [0-24h]
 
             `F M N DAYS` = "2", # integer | [0-7]
-            `F M BED TIME` = "05:30", # hms | HMS, HM, H [0-24h]
+            `F M BEDTIME` = "05:30", # hms | HMS, HM, H [0-24h]
             `F M SLEEP PREP` = "07:00", # hms | HMS, HM, H [0-24h] # ERROR
             `F M SLEEP LAT` = "45", # Duration | M # ERROR
             `F M SLEEP END` = "07:45", # hms | HMS, HM, H [0-24h] # ERROR
@@ -1001,7 +1001,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F M NAP END` = "", # hms | HMS, HM, H [0-24h]
 
             `W E N DAYS` = "4", # integer | [0-7]
-            `W E BED TIME` = "23:35", # hms | HMS, HM, H [0-24h]
+            `W E BEDTIME` = "23:35", # hms | HMS, HM, H [0-24h]
             `W E SLEEP PREP` = "23:35", # hms | HMS, HM, H [0-24h]
             `W E SLEEP LAT` = "40", # Duration | M
             `W E SLEEP END` = "06:55", # hms | HMS, HM, H [0-24h]
@@ -1014,7 +1014,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W E NAP END` = "17:40", # hms | HMS, HM, H [0-24h]
 
             `F E N DAYS` = "2", # integer | [0-7]
-            `F E BED TIME` = "10:05", # hms | HMS, HM, H [0-24h]
+            `F E BEDTIME` = "10:05", # hms | HMS, HM, H [0-24h]
             `F E SLEEP PREP` = "12:10", # hms | HMS, HM, H [0-24h] # ERROR
             `F E SLEEP LAT` = "5", # Duration | M # ERROR
             `F E SLEEP END` = "11:00", # hms | HMS, HM, H [0-24h] # ERROR
@@ -1027,7 +1027,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `F E NAP END` = "17:55", # hms | HMS, HM, H [0-24h]
 
             `W N N DAYS` = "6", # integer | [0-7]
-            `W N BED TIME` = "07:20", # hms | HMS, HM, H [0-24h]
+            `W N BEDTIME` = "07:20", # hms | HMS, HM, H [0-24h]
             `W N SLEEP PREP` = "07:45", # hms | HMS, HM, H [0-24h]
             `W N SLEEP LAT` = "20", # Duration | M
             `W N SLEEP END` = "12:45", # hms | HMS, HM, H [0-24h]
@@ -1040,7 +1040,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
             `W N NAP END` = "04:30", # hms | HMS, HM, H [0-24h]
 
             `F N N DAYS` = "8", # integer | [0-7]
-            `F N BED TIME` = "19:40", # hms | HMS, HM, H [0-24h]
+            `F N BEDTIME` = "19:40", # hms | HMS, HM, H [0-24h]
             `F N SLEEP PREP` = "20:25", # hms | HMS, HM, H [0-24h]
             `F N SLEEP LAT` = "55", # Duration | M
             `F N SLEEP END` = "04:40", # hms | HMS, HM, H [0-24h]
@@ -1163,7 +1163,7 @@ tidy_shift_mctq <- function(write = FALSE) {
             !!as.symbol(paste0("n", i[2])) :=
                 as.integer(.data[[paste(i[1], "N DAYS")]]),
             !!as.symbol(paste0("bt", i[2])) :=
-                convert_pt(.data[[paste(i[1], "BED TIME")]], "hms",
+                convert_pt(.data[[paste(i[1], "BEDTIME")]], "hms",
                                    c("HM", "IMp")),
             !!as.symbol(paste0("sprep", i[2])) :=
                 dplyr::case_when(
