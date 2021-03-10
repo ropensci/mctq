@@ -29,8 +29,8 @@ with the \code{start} and \code{end} argument.}
 }
 \value{
 \itemize{
-\item If \code{return = "Interval"}, a \code{start}---\code{end} \code{Interval} object.
-\item If \code{return = "list"}, a named list with \code{start} and \code{end} outputs.
+\item If \code{return = "Interval"}, a \code{start}--\code{end} \code{Interval} object.
+\item If \code{return = "list"}, a named list with \code{start} and \code{end} as elements.
 \item If \verb{return = "start}, only the \code{start} output.
 \item If \code{return = "end"}, only the \code{end} output.
 }
@@ -47,9 +47,9 @@ timeline.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{\code{ambiguity} argument}{
@@ -57,7 +57,7 @@ convert it.
 In cases when \code{start} is equal to \code{end}, there are two possibilities of
 intervals between the two hours (ambiguity). That's because \code{start} and \code{end}
 can be at the same point in time or they can distance themselves by one day,
-as illustrated below.\preformatted{ start,end       start,end       start,end       start,end
+considering a two-day timeline.\preformatted{ start,end       start,end       start,end       start,end
    start            end            start            end
    10:00           10:00           10:00           10:00
 -----|---------------|---------------|---------------|----->
@@ -73,7 +73,7 @@ hours, \emph{i.e} \code{start} and \code{end} are located at the same point in t
 (default).
 \item \code{ambiguity = 24}: to consider the interval between \code{start} and \code{end} as 24
 hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day.
-\item \code{ambiguity = NA}: to disregard this cases, assigning \code{NA} as value.
+\item \code{ambiguity = NA}: to disregard these cases, assigning \code{NA} as value.
 }
 }
 
@@ -81,7 +81,7 @@ hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day.
 
 \code{assign_date()} can return different outputs:
 \itemize{
-\item \code{return = "Interval"}: returns a \code{start}---\code{end} \code{Interval} object.
+\item \code{return = "Interval"}: returns a \code{start}--\code{end} \code{Interval} object.
 \item \code{return = "list"}: returns a \code{list} object with two named elements
 corresponding to \code{start} and \code{end} output.
 \item \code{return = "start"}: returns only the \code{start} output.
@@ -92,8 +92,8 @@ corresponding to \code{start} and \code{end} output.
 \subsection{\code{start_name} and \code{end_name} arguments}{
 
 These arguments serve to instruct \code{assign_date()} on how to name the
-list elements when \code{return = "list"}. As default, the function will name
-this elements with the names of the variables assigned to \code{start} and \code{end}
+list elements when \code{return = "list"}. By default, the function will name
+these elements with the names of the variables assigned to \code{start} and \code{end}
 arguments.
 
 If the number of characters (\code{nchar()}) of \code{start_name} or \code{end_name} are
@@ -103,8 +103,8 @@ equal or greater than 30, \code{assign_date()} will name the list elements as
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} values passed as argument to \code{start} or \code{end} will be strip of their
-dates. Only the time will be considered.
+\code{POSIXt} values passed as argument to \code{start} or \code{end} will be stripped of
+their dates. Only the time will be considered.
 }
 
 \subsection{\code{NA} values}{

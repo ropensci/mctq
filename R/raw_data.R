@@ -5,13 +5,13 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `mctq` comes bundled with raw fictional datasets for testing and learning
-#' purposes. `raw_data()` make it easy to access their paths.
+#' purposes. `raw_data()` makes it easy to access their paths.
 #'
 #' @param file A string indicating the file name of the raw dataset. If `NULL`,
-#'   all raw dataset file names will be listed (default: `NULL`).
+#'   all raw dataset file names will be printed (default: `NULL`).
 #'
-#' @return If `path = NULL`, returns a character vector with all raw dataset
-#'   file names available. Else, returns the `file` path.
+#' @return If `path = NULL`, returns a character object with all raw dataset
+#'   file names available. Else, it returns the `file` path.
 #'
 #' @family utility functions
 #' @export

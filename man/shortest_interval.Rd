@@ -16,21 +16,24 @@ longer_interval(x, y, class = "hms", quiet = FALSE)
 (default: \code{"hms"}).}
 
 \item{inverse}{(optional) a \code{logical} value indicating if the function must
-return a inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
+return an inverse output, \emph{i.e} the longer interval between \code{x} and \code{y}.}
 
 \item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
 must be suppressed (default: \code{FALSE}).}
 }
 \value{
-An object, of class indicated on \code{class}, with the shortest or
-longer interval (if \code{inverse = TRUE} or \code{longer_interval()} is used)
-between \code{x} and \code{y}.
+\itemize{
+\item If \code{inverse = FALSE} (default), an object of the indicated class in
+\code{class} (default: \code{"hms"}) with the shortest interval between \code{x} and \code{y}.
+\item If \code{inverse = TRUE}, an object of the indicated class in \code{class} (default:
+\code{"hms"}) with the longer interval between \code{x} and \code{y}.
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{shortest_interval()} finds and return the shortest interval between two
-\code{hms} or \code{POSIXt} objects hours.
+\code{shortest_interval()} finds and returns the shortest interval between two
+\code{hms} or \code{POSIXt} object hours.
 
 \code{longer_interval()} do the inverse of \code{shortest_interval()}, \emph{i.e}
 finds the longer interval between two hours. It's just a wrapper for
@@ -44,21 +47,21 @@ there will be always two possible intervals between them, as illustrated
 below.
 
 To figure out what interval is the  shortest or the longer,
-\code{shortest_interval()} checks two scenarios: 1. When \code{x} comes before \code{y}; and
+\code{shortest_interval()} verify two scenarios: 1. When \code{x} comes before \code{y}; and
 2. when \code{x} comes after \code{y}. This only works if \code{x} value is smaller than
 \code{y}, therefore, the function will make sure to swap \code{x} and \code{y} values if the
 latter assumption is not true.
 
 Because \code{shortest_interval()} objective is to find the shortest interval, if
 \code{x} and \code{y} are equal, the shortest interval will have a length of 0 hours,
-resulting in a interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
+resulting in an interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
 \code{longer_interval()} is used instead, the latter condition will return a
 interval with 24 hours of length (from \code{x} to \code{x} + 1 day).
 
 In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no
-shortest or longer interval (they are equal). In this cases,
+shortest or longer interval (they will have equal length). In those cases,
 \code{shortest_interval()} and \code{longer_interval()} will return the same value
-(a interval of 12 hours).\preformatted{             day 1                        day 2
+(an interval of 12 hours).\preformatted{             day 1                        day 2
      x                  y         x                  y
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->
@@ -91,15 +94,15 @@ shortest or longer interval (they are equal). In this cases,
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{\code{class} argument}{
 
 \code{shortest_interval()} is integrated with \code{\link[=convert]{convert()}}. That way you
-can choose what class of object your prefer as output.
+can choose what class of object you prefer as output.
 
 Valid \code{class} values are: \code{"Duration"}, \code{"Period"}, \code{"difftime"}, \code{"hms"},
 and \code{"Interval"} (case insensitive).
@@ -107,8 +110,8 @@ and \code{"Interval"} (case insensitive).
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} objects passed as argument to \code{x} or \code{y} will be strip of their
-dates. Only the hours will be considered.
+\code{POSIXt} objects passed as argument to \code{x} or \code{y} will be stripped of their
+dates. Only the time will be considered.
 }
 }
 \examples{

@@ -13,7 +13,7 @@ from a standard or micro version of the MCTQ questionnaire.}
 }
 \value{
 An \code{integer} object corresponding to the difference between the
-number of days in a week and the number of workdays (\code{wd}).
+number of days in a week (7) and the number of workdays (\code{wd}).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -40,7 +40,7 @@ See the References section to learn more.
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
 Experimental Platform (n.d.) guidelines for \code{fd()} (\eqn{FD}) computation are
-as follow.
+as follows.
 
 \strong{\deqn{7 - WD}}
 

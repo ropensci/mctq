@@ -11,20 +11,20 @@ round_time(x)
 \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or \code{POSIXlt}.}
 }
 \value{
-An object of the same class of 'x' with it \code{numeric} value rounded at
-the ones place.
+An object of the same class of \code{x} with its \code{numeric} value rounded
+at the ones place.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or
-\code{POSIXlt} object and round it \code{numeric} value at the ones place.
+\code{POSIXlt} object and round its \code{numeric} value at the ones place.
 }
 \details{
 \code{round_time()} uses \code{\link[base:Round]{base::round()}} for rounding. That is to say that
 \code{round_time()} uses the same IEC 60559 standard (\emph{"go to the even digit"})
-for rounding off a 5. Therefore, \code{round(0.5)} is 0 and \code{round(-1.5)} is -2.
-See \code{?round} to learn more.
+for rounding off a 5. Therefore, \code{round(0.5)} is equal to 0 and \code{round(-1.5)}
+is equal to -2. See \code{?round} to learn more.
 }
 \examples{
 ## __ Scalar example __

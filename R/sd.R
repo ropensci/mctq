@@ -11,7 +11,7 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
 #' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
-#' guidelines for `sd()` (\eqn{SD}) computation are as follow.
+#' guidelines for `sd()` (\eqn{SD}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -29,9 +29,10 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
-#' * \eqn{SO_{W/F}}{SO_W/F}  = local time of sleep onset on work or work-free
+#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work __or__ work-free
 #' days.
+#' * \eqn{SO_{W/F}}{SO_W/F}  = local time of sleep onset on work __or__
+#' work-free days.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -80,7 +81,7 @@
 #' so <- hms::parse_hm("03:15")
 #' se <- hms::as_hms(NA)
 #' sd(so, se)
-#' #> NA # Expected
+#' #> [1] NA # Expected
 #'
 #' ## __ Vector example __
 #' so <- c(hms::parse_hm("04:12"), hms::parse_hm("21:20"))
@@ -95,7 +96,7 @@ sd <- function(so, se) {
     sum_time(se, - so, class = "Duration", circular = TRUE, vectorize = TRUE)
 }
 
-#' Compute MCTQ nap duration (only for MCTQ Shift)
+#' Compute MCTQ nap duration (only for MCTQ\eqn{^{Shift}}{ Shift})
 #'
 #' @description
 #'
@@ -107,7 +108,7 @@ sd <- function(so, se) {
 #' @section Guidelines:
 #'
 #' Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
-#' (n.d.) guidelines for `napd()` (\eqn{NapD}) computation are as follow.
+#' (n.d.) guidelines for `napd()` (\eqn{NapD}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -164,7 +165,7 @@ sd <- function(so, se) {
 #' napo <- hms::parse_hm("10:20")
 #' nape <- hms::as_hms(NA)
 #' napd(napo, nape)
-#' #> NA # Expected
+#' #> [1] NA # Expected
 #'
 #' ## __ Vector example __
 #' napo <- c(hms::parse_hm("01:25"), hms::parse_hm("23:50"))
@@ -180,19 +181,19 @@ napd <- function(napo, nape) {
              vectorize = TRUE)
 }
 
-#' Compute MCTQ 24h sleep duration (only for MCTQ Shift)
+#' Compute MCTQ 24 hours sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})
 #'
 #' @description
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `sd24()` computes the __24h sleep duration__ for the shift version of the
-#' Munich Chronotype Questionnaire (MCTQ).
+#' `sd24()` computes the __24 hours sleep duration__ for the shift version of
+#' the Munich Chronotype Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
 #' Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
-#' (n.d.) guidelines for `sd24()` (\eqn{SD24}) computation are as follow.
+#' (n.d.) guidelines for `sd24()` (\eqn{SD24}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -307,7 +308,7 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), and
 #' The Worldwide Experimental Platform (n.d.) guidelines for `sd_week()`
-#' (\eqn{SD_{week}}{SD_week}) computation are as follow.
+#' (\eqn{SD_{week}}{SD_week}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -321,22 +322,22 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' ## Computation
 #'
-#' __\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}{
+#' __\deqn{\frac{SD_W \times WD + SD_F \times FD}{7}}{
 #' (SD_W * WD + SD_F * FD) / 7}__
 #'
 #' Where:
 #'
-#' * \eqn{SD_w} = sleep duration on workdays.
-#' * \eqn{SD_f} = sleep duration on work-free days.
+#' * \eqn{SD_W} = sleep duration on workdays.
+#' * \eqn{SD_F} = sleep duration on work-free days.
 #' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
 #' work ___ days per week").
 #' * \eqn{FD} = number of work-free days per week.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
-#' @param sd_w A `Duration` object corresponding to the __sleep duration on work
-#'   days__ from a standard or micro version of the MCTQ questionnaire. You can
-#'   use [mctq::sd()] to compute it.
+#' @param sd_w A `Duration` object corresponding to the __sleep duration on
+#'   workdays__ from a standard or micro version of the MCTQ questionnaire. You
+#'   can use [mctq::sd()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
 #'   work-free days__ from a standard or micro version of the MCTQ
 #'   questionnaire. You can use [mctq::sd()] to compute it.
@@ -384,8 +385,8 @@ sd24 <- function(sd, napd, nap) {
 #'     x <- c(sd_w[i], sd_f[i])
 #'     w <- c(wd[i], fd(wd[i]))
 #'     lubridate::as.duration(stats::weighted.mean(x, w))
-#' #> [1] "19620s (~5.45 hours)" # Expected
 #' }
+#' #> [1] "19620s (~5.45 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
 #' sd_w <- lubridate::dhours(5.45)
@@ -418,7 +419,7 @@ sd_week <- function(sd_w, sd_f, wd) {
     ((sd_w * wd) + (sd_f * fd(wd))) / 7
 }
 
-#' Compute MCTQ overall sleep duration (only for MCTQ Shift)
+#' Compute MCTQ overall sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})
 #'
 #' @description
 #'
@@ -434,15 +435,15 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
 #' (n.d.) guidelines for `sd_overall()` (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N})
-#' computation are as follow.
+#' computation are as follows.
 #'
 #' ## Notes
 #'
 #' * The computation below must be applied to each shift section of the
-#' questionnaire. If you are using the three shift design propose by the authors,
-#' you need to compute three overall sleep duration (_e.g._
-#' \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E};
-#' \eqn{\emptyset SD^N}{OSD_N}).
+#' questionnaire. If you're using the three-shift design proposed by the
+#' authors, you need to compute three overall sleep duration (_e.g._
+#' \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
+#' SD^N}{OSD_N}).
 #'
 #' * The overall sleep duration is the weighted average of the shift-specific
 #' mean sleep durations.
@@ -532,8 +533,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'     x <- c(sd_w[i], sd_f[i])
 #'     w <- c(n_w[i], n_f[i])
 #'     lubridate::as.duration(stats::weighted.mean(x, w))
-#' #> [1] "28800s (~8 hours)" # Expected
 #' }
+#' #> [1] "28800s (~8 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
 #' sd_w <- lubridate::dhours(4.75)

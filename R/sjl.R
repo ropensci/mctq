@@ -13,16 +13,16 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 #' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `sjl()`
-#' (\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
+#' (\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follows.
 #'
 #' ## Notes
 #'
 #' * For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
 #' each shift section of the questionnaire.
 #'
-#' * Due to time arithmetic issues, `sjl()` does a slight different computation
-#' by default than those propose by the authors mentioned above. See
-#' `vignette("sjl", package = "mctq")` for more details.
+#' * Due to time arithmetic issues, `sjl()` does a slightly different
+#' computation by default than those proposed by the authors mentioned above.
+#' See `vignette("sjl", package = "mctq")` for more details.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
@@ -41,7 +41,7 @@
 #'
 #' Where:
 #'
-#' * \eqn{MSW} = local time of mid-sleep on work days.
+#' * \eqn{MSW} = local time of mid-sleep on workdays.
 #' * \eqn{MSF} = local time of mid-sleep on work-free days.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -69,7 +69,7 @@
 #' @section Methods for computing the social jetlag:
 #'
 #' There are different approaches to compute the social jetlag (\eqn{SJL}). By
-#' default, `sjl()` uses an approach that we call by "the shortest interval
+#' default, `sjl()` uses an approach that we call "the shortest interval
 #' approach" (`"shortest"`).
 #'
 #' The topics below provide a simple explanation of each method supported by
@@ -77,29 +77,29 @@
 #' `vignette("sjl", package = "mctq")`.
 #'
 #' Please note that none of the approaches below are related to Jankowski's
-#' (2017) social jetlag sleep-corrected proposal. Since the Jankowski's
-#' alternative is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019),
-#' the `mctq` package currently don't provide a function for it. Future versions
-#' of the package may include it.
+#' (2017) social jetlag sleep-corrected proposal. Since Jankowski's alternative
+#' is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019), the `mctq`
+#' package currently doesn't provide a function for it. Future versions of the
+#' package may include it.
 #'
 #' * `"difference"`
 #'
 #' By using `method = "difference"`, `sjl()` will do the exact computation
-#' proposed by the original authors, _i.e._ \eqn{SJL} will be computed as the
-#' linear difference between \eqn{MSF} and \eqn{MSW} (see Guidelines section).
+#' proposed by the MCTQ authors, _i.e._ \eqn{SJL} will be computed as the linear
+#' difference between \eqn{MSF} and \eqn{MSW} (see the Guidelines section).
 #'
-#' __We do not recommend using this method__, as it have many limitations.
+#' __We do not recommend using this method__, as it has many limitations.
 #'
 #' * `"shortest"`
 #'
 #' This is the default method for `sjl()`. It's based on the shortest
-#' interval between \eqn{MSF} and \eqn{MSW}, solving most of the issues
+#' interval between \eqn{MSW} and \eqn{MSF}, solving most of the issues
 #' relating to \eqn{SJL} computation.
 #'
 #' * `"longer"`
 #'
-#' The `"longer"` method uses the sames logic of the `"shortest"` method, but,
-#' instead of using the shortest interval between \eqn{MSF} and \eqn{MSW}, it
+#' The `"longer"` method uses the same logic of the `"shortest"` method, but,
+#' instead of using the shortest interval between \eqn{MSW} and \eqn{MSF}, it
 #' uses the longer interval between the two, considering a two-day window.
 #'
 #' This method may help with special contexts, like when dealing with
@@ -109,7 +109,7 @@
 #' @param msw A `hms` object corresponding to the __local time of mid-sleep on
 #'   workdays__ from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. You can use [mctq::ms()] to compute it.
-#' @param abs (optional) a `logical` value indicating if the function must
+#' @param abs (optional) a `logical` object indicating if the function must
 #'   return an absolute social jetlag (default: `TRUE`).
 #' @param method (optional) a string indicating which method the function must
 #'   use to compute the social jetlag. See the Methods section to learn
@@ -154,13 +154,13 @@
 #' msw <- hms::as_hms(NA)
 #' msf <- hms::parse_hm("05:15")
 #' sjl(msw, msf)
-#' #> NA # Expected
+#' #> [1] NA # Expected
 #'
 #' ## __ Vector example __
 #' msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
 #' msf <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
 #' sjl(msw, msf)
-#' #> [1] "-10800s (~3 hours)" "0s" # Expected
+#' #> [1] "10800s (~3 hours)" "0s" # Expected
 #' sjl(msw, msf, abs = FALSE)
 #' #> [1] "-10800s (~-3 hours)" "0s" # Expected
 #' sjl_rel(msw, msf) # Wrapper function
@@ -242,7 +242,7 @@ sjl_rel <- function(msw, msf, method = "shortest") {
     sjl(msw, msf, abs = FALSE, method = method)
 }
 
-#' Compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)
+#' Compute MCTQ absolute social jetlag across all shifts
 #'
 #' @description
 #'
@@ -255,11 +255,11 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'
 #' The shift version of the MCTQ was developed for shift-workers rotating
 #' through morning-, evening-, and night-shifts, but it also allows adaptations
-#' to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For that reason,
+#' to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For this reason,
 #' `sjl_weighted()` must operate with any shift combination.
 #'
 #' Considering the requirement above, `sjl_weighted()` was developed to only
-#' accept lists values as arguments. For this approach to work, both `sjl` and
+#' accept list objects as arguments. For this approach to work, both `sjl` and
 #' `n_w` arguments must be lists with paired elements and values, _i.e._ the
 #' first element of `sjl` (_e.g._ `sjl_m`) must be paired with the first element
 #' of `n_w` (_e.g._ `n_w_m`). The function will do the work of combining them
@@ -269,7 +269,7 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'
 #' Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
 #' (n.d.) guidelines for `sjl_weighted()` (\eqn{\emptyset
-#' SJL_{weighted}}{OSJL_weighted}) computation are as follow.
+#' SJL_{weighted}}{OSJL_weighted}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -277,10 +277,10 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' SJL_{weighted}}{OSJL_weighted}) is the weighted average of all absolute
 #' social jetlags.
 #'
-#' * The authors describe a equation for a three shift schedule, but this may
-#' not be your case. That's why this function works a little bit different (see
-#' the Operation section), allowing you to compute a weighted average with any
-#' shift combination.
+#' * The authors describe an equation for a three-shift schedule, but this may
+#' not be your case. That's why this function works a little bit differently
+#' (see the Operation section), allowing you to compute a weighted average with
+#' any shift combination.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
@@ -350,8 +350,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #'     x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
 #'     w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
 #'     lubridate::as.duration(stats::weighted.mean(x, w))
-#' #> [1] "8298s (~2.31 hours)" # Expected
 #' }
+#' #> [1] "8298s (~2.31 hours)" # Expected
 #'
 #' ## __ Converting the output to hms __
 #' sjl <- list(sjl_m = lubridate::dhours(0.25),

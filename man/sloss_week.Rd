@@ -7,9 +7,9 @@
 sloss_week(sd_w, sd_f, wd)
 }
 \arguments{
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} from a standard or micro version of the MCTQ questionnaire. You can
-use \code{\link[=sd]{sd()}} to compute it.}
+\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on
+workdays} from a standard or micro version of the MCTQ questionnaire. You
+can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} from a standard or micro version of the MCTQ
@@ -45,16 +45,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -66,7 +66,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
 Experimental Platform (n.d.) guidelines for \code{sloss_week()}
-(\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
+(\eqn{SLoss_{week}}{SLoss_week}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
@@ -100,17 +100,21 @@ work ___ days per week").
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
-Although the standard and micro versions of the MCTQ ask for subjects to
+Although the standard and micro versions of the MCTQ asks for subjects to
 complete the workdays and work-free days sections, even when he/she do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of those parts of the
-questionnaire. In those cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
-\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
-(Not Available) as output. That's because their computation combines workdays
-and work-free days variables.
+(\code{wd = 7}), some of them may still end skipping one of this parts of the
+questionnaire. In those cases, \code{sd_week()}, \code{sloss_week()}, \code{le_week()},
+\code{msf_sc()}, \code{sjl_rel()}, and \code{sjl()} will produce \code{NA} (Not Available) as
+output. That's because those computations combine workdays and work-free days
+variables.
 
-A \code{NA} value is the correct output for the functions above when \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are different
-approaches to deal with those cases. See \code{vignette("missing-sections", package = "mctq")} to learn more.
+For those special standard and micro MCTQ cases, where one section is
+missing, a \code{NA} value is the correct output for the functions mentioned above
+when \code{wd} (number of workdays per week) are \code{wd > 0 & wd < 7}, but it may not
+be when \code{wd == 0} or \code{wd == 7}. There are different approaches to deal with
+those cases. See \code{vignette("missing-sections", package = "mctq")} to learn
+more.
 }
 
 \examples{
@@ -138,8 +142,7 @@ sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
 wd <- c(2, 0)
 sloss_week(sd_w, sd_f, wd)
-#> [1] "2571.42857142857s (~42.86 minutes)" # Expected
-#> [2] "0s"
+#> [1] "2571.42857142857s (~42.86 minutes)" "0s" # Expected
 
 ## __ Converting the output to `hms` __
 sd_w <- lubridate::dhours(4)

@@ -18,7 +18,7 @@ questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
-\item{abs}{(optional) a \code{logical} value indicating if the function must
+\item{abs}{(optional) a \code{logical} object indicating if the function must
 return an absolute social jetlag (default: \code{TRUE}).}
 
 \item{method}{(optional) a string indicating which method the function must
@@ -60,16 +60,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -81,14 +81,14 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 (2013), and The Worldwide Experimental Platform (n.d.) guidelines for \code{sjl()}
-(\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follow.
+(\eqn{SJL_{rel}}{SJL_rel} and \eqn{SJL}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
 each shift section of the questionnaire.
-\item Due to time arithmetic issues, \code{sjl()} does a slight different computation
-by default than those propose by the authors mentioned above. See
-\code{vignette("sjl", package = "mctq")} for more details.
+\item Due to time arithmetic issues, \code{sjl()} does a slightly different
+computation by default than those proposed by the authors mentioned above.
+See \code{vignette("sjl", package = "mctq")} for more details.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
@@ -108,7 +108,7 @@ Absolute social jetlag (\eqn{SJL}):
 
 Where:
 \itemize{
-\item \eqn{MSW} = local time of mid-sleep on work days.
+\item \eqn{MSW} = local time of mid-sleep on workdays.
 \item \eqn{MSF} = local time of mid-sleep on work-free days.
 }
 
@@ -142,7 +142,7 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 
 There are different approaches to compute the social jetlag (\eqn{SJL}). By
-default, \code{sjl()} uses an approach that we call by "the shortest interval
+default, \code{sjl()} uses an approach that we call "the shortest interval
 approach" (\code{"shortest"}).
 
 The topics below provide a simple explanation of each method supported by
@@ -150,32 +150,32 @@ The topics below provide a simple explanation of each method supported by
 \code{vignette("sjl", package = "mctq")}.
 
 Please note that none of the approaches below are related to Jankowski's
-(2017) social jetlag sleep-corrected proposal. Since the Jankowski's
-alternative is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019),
-the \code{mctq} package currently don't provide a function for it. Future versions
-of the package may include it.
+(2017) social jetlag sleep-corrected proposal. Since Jankowski's alternative
+is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019), the \code{mctq}
+package currently doesn't provide a function for it. Future versions of the
+package may include it.
 \itemize{
 \item \code{"difference"}
 }
 
 By using \code{method = "difference"}, \code{sjl()} will do the exact computation
-proposed by the original authors, \emph{i.e.} \eqn{SJL} will be computed as the
-linear difference between \eqn{MSF} and \eqn{MSW} (see Guidelines section).
+proposed by the MCTQ authors, \emph{i.e.} \eqn{SJL} will be computed as the linear
+difference between \eqn{MSF} and \eqn{MSW} (see the Guidelines section).
 
-\strong{We do not recommend using this method}, as it have many limitations.
+\strong{We do not recommend using this method}, as it has many limitations.
 \itemize{
 \item \code{"shortest"}
 }
 
 This is the default method for \code{sjl()}. It's based on the shortest
-interval between \eqn{MSF} and \eqn{MSW}, solving most of the issues
+interval between \eqn{MSW} and \eqn{MSF}, solving most of the issues
 relating to \eqn{SJL} computation.
 \itemize{
 \item \code{"longer"}
 }
 
-The \code{"longer"} method uses the sames logic of the \code{"shortest"} method, but,
-instead of using the shortest interval between \eqn{MSF} and \eqn{MSW}, it
+The \code{"longer"} method uses the same logic of the \code{"shortest"} method, but,
+instead of using the shortest interval between \eqn{MSW} and \eqn{MSF}, it
 uses the longer interval between the two, considering a two-day window.
 
 This method may help with special contexts, like when dealing with
@@ -186,17 +186,21 @@ mid-sleep hours.
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
-Although the standard and micro versions of the MCTQ ask for subjects to
+Although the standard and micro versions of the MCTQ asks for subjects to
 complete the workdays and work-free days sections, even when he/she do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of those parts of the
-questionnaire. In those cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
-\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
-(Not Available) as output. That's because their computation combines workdays
-and work-free days variables.
+(\code{wd = 7}), some of them may still end skipping one of this parts of the
+questionnaire. In those cases, \code{sd_week()}, \code{sloss_week()}, \code{le_week()},
+\code{msf_sc()}, \code{sjl_rel()}, and \code{sjl()} will produce \code{NA} (Not Available) as
+output. That's because those computations combine workdays and work-free days
+variables.
 
-A \code{NA} value is the correct output for the functions above when \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are different
-approaches to deal with those cases. See \code{vignette("missing-sections", package = "mctq")} to learn more.
+For those special standard and micro MCTQ cases, where one section is
+missing, a \code{NA} value is the correct output for the functions mentioned above
+when \code{wd} (number of workdays per week) are \code{wd > 0 & wd < 7}, but it may not
+be when \code{wd == 0} or \code{wd == 7}. There are different approaches to deal with
+those cases. See \code{vignette("missing-sections", package = "mctq")} to learn
+more.
 }
 
 \examples{
@@ -222,13 +226,13 @@ sjl_rel(msw, msf) # Wrapper function
 msw <- hms::as_hms(NA)
 msf <- hms::parse_hm("05:15")
 sjl(msw, msf)
-#> NA # Expected
+#> [1] NA # Expected
 
 ## __ Vector example __
 msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
 msf <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
 sjl(msw, msf)
-#> [1] "-10800s (~3 hours)" "0s" # Expected
+#> [1] "10800s (~3 hours)" "0s" # Expected
 sjl(msw, msf, abs = FALSE)
 #> [1] "-10800s (~-3 hours)" "0s" # Expected
 sjl_rel(msw, msf) # Wrapper function

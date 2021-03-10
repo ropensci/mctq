@@ -11,7 +11,7 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 #' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `gu()`
-#' (\eqn{GU}) computation are as follow.
+#' (\eqn{GU}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -33,9 +33,10 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
-#' * \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work or work-free days ("after
-#' ___ min, I get up").
+#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work __or__ work-free
+#' days.
+#' * \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work __or__ work-free days
+#' ("after ___ min, I get up").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -50,7 +51,7 @@
 #' shift.
 #' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
 #' between two days in a particular shift __or__ between two free days after a
-#' particular shift ("after ... min, I get up").
+#' particular shift ("after ___ min, I get up").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.

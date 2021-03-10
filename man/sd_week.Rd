@@ -7,9 +7,9 @@
 sd_week(sd_w, sd_f, wd)
 }
 \arguments{
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} from a standard or micro version of the MCTQ questionnaire. You can
-use \code{\link[=sd]{sd()}} to compute it.}
+\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on
+workdays} from a standard or micro version of the MCTQ questionnaire. You
+can use \code{\link[=sd]{sd()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} from a standard or micro version of the MCTQ
@@ -49,16 +49,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -70,7 +70,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi \emph{et.al} (2020), and
 The Worldwide Experimental Platform (n.d.) guidelines for \code{sd_week()}
-(\eqn{SD_{week}}{SD_week}) computation are as follow.
+(\eqn{SD_{week}}{SD_week}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The average weekly sleep duration is the weighted average of the sleep
@@ -84,13 +84,13 @@ you can see this documentation on the package
 
 \subsection{Computation}{
 
-\strong{\deqn{\frac{SD_w \times WD + SD_f \times FD}{7}}{
+\strong{\deqn{\frac{SD_W \times WD + SD_F \times FD}{7}}{
 (SD_W * WD + SD_F * FD) / 7}}
 
 Where:
 \itemize{
-\item \eqn{SD_w} = sleep duration on workdays.
-\item \eqn{SD_f} = sleep duration on work-free days.
+\item \eqn{SD_W} = sleep duration on workdays.
+\item \eqn{SD_F} = sleep duration on work-free days.
 \item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
 work ___ days per week").
 \item \eqn{FD} = number of work-free days per week.
@@ -103,17 +103,21 @@ work ___ days per week").
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
-Although the standard and micro versions of the MCTQ ask for subjects to
+Although the standard and micro versions of the MCTQ asks for subjects to
 complete the workdays and work-free days sections, even when he/she do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of those parts of the
-questionnaire. In those cases, \code{\link[=sd_week]{sd_week()}}, \code{\link[=msf_sc]{msf_sc()}},
-\code{\link[=sloss_week]{sloss_week()}}, \code{\link[=sjl]{sjl()}}, and \code{\link[=le_week]{le_week()}} will produce \code{NA}
-(Not Available) as output. That's because their computation combines workdays
-and work-free days variables.
+(\code{wd = 7}), some of them may still end skipping one of this parts of the
+questionnaire. In those cases, \code{sd_week()}, \code{sloss_week()}, \code{le_week()},
+\code{msf_sc()}, \code{sjl_rel()}, and \code{sjl()} will produce \code{NA} (Not Available) as
+output. That's because those computations combine workdays and work-free days
+variables.
 
-A \code{NA} value is the correct output for the functions above when \code{wd > 0 & wd < 7}, but it may not be when \code{wd == 0} or \code{wd == 7}. There are different
-approaches to deal with those cases. See \code{vignette("missing-sections", package = "mctq")} to learn more.
+For those special standard and micro MCTQ cases, where one section is
+missing, a \code{NA} value is the correct output for the functions mentioned above
+when \code{wd} (number of workdays per week) are \code{wd > 0 & wd < 7}, but it may not
+be when \code{wd == 0} or \code{wd == 7}. There are different approaches to deal with
+those cases. See \code{vignette("missing-sections", package = "mctq")} to learn
+more.
 }
 
 \examples{
@@ -149,8 +153,8 @@ if (requireNamespace("stats", quietly = TRUE)) {
     x <- c(sd_w[i], sd_f[i])
     w <- c(wd[i], fd(wd[i]))
     lubridate::as.duration(stats::weighted.mean(x, w))
-#> [1] "19620s (~5.45 hours)" # Expected
 }
+#> [1] "19620s (~5.45 hours)" # Expected
 
 ## __ Converting the output to hms __
 sd_w <- lubridate::dhours(5.45)

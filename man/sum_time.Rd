@@ -19,29 +19,30 @@ sum_time(
 \item{class}{(optional) a string indicating the output class (default:
 \code{"hms"}).}
 
-\item{circular}{(optional) a logical value indicating whether the sum should
-be in a circular time frame of 24 hours (clock hours) (default: \code{FALSE}).}
+\item{circular}{(optional) a \code{logical} value indicating whether the sum
+should be made in a circular time frame of 24 hours (clock hours) (default:
+\code{FALSE}).}
 
-\item{vectorize}{(optional) a logical value indicating if the function must
+\item{vectorize}{(optional) a \code{logical} value indicating if the function must
 operate in a vectorized fashion (default: \code{FALSE}).}
 
-\item{na.rm}{(optional) a logical value indicating if the function must
+\item{na.rm}{(optional) a \code{logical} value indicating if the function must
 remove \code{NA} values while performing the sum (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{circular = TRUE} and \code{vectorize = FALSE} (default), an object of
+\item If \code{circular = TRUE} and \code{vectorize = FALSE}, an object of
 the indicated class in \code{class} (default: \code{"hms"}) with the sum of the time
 from objects in \code{...} in a circular time frame of 24 hours.
-\item If \code{circular = FALSE} (default) and \code{vectorize = FALSE} (default), an
-object of the indicated class in \code{class} (default: \code{"hms"}) with the
-cumulative sum of the time from objects in \code{...}.
+\item If \code{circular = FALSE} and \code{vectorize = FALSE}, an
+object of the indicated class in \code{class} (default: \code{"hms"}) with a
+linear sum of the time from objects in \code{...}.
 \item If \code{circular = TRUE} and \code{vectorize = TRUE}, an object of the indicated
 class in \code{class} (default: \code{"hms"}) with a vectorized sum of the time from
 objects in \code{...} in a circular time frame of 24 hours.
-\item If \code{circular = FALSE} (default) and \code{vectorize = TRUE}, an object of the
+\item If \code{circular = FALSE} and \code{vectorize = TRUE}, an object of the
 indicated class in \code{class} (default: \code{"hms"}) with a vectorized and
-cumulative sum of the time from objects in \code{...}.
+linear sum of the time from objects in \code{...}.
 }
 }
 \description{
@@ -78,28 +79,28 @@ That is, \code{sum_time(c(x, y), c(w, z))} will return a vector like
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} values in \code{...} will be strip of their dates. Only the time will be
-considered.
+\code{POSIXt} values in \code{...} will be stripped of their dates. Only the time will
+be considered.
 }
 
 \subsection{\code{Period} objects}{
 
-\code{Period} objects are a special time object developed by the
-\link[lubridate:lubridate-package]{lubridate} team that represent "human units",
+\code{Period} objects are a special time of object developed by the
+\link[lubridate:lubridate-package]{lubridate} team that represents "human units",
 ignoring possible time irregularities. That is to say that 1 day as \code{Period}
 will always represent 1 day in the timeline. \code{sum_time()} ignores that
 property of \code{Period} objects, treating them like objects of class \code{Duration}.
 }
 
-\subsection{Time line irregularities}{
+\subsection{Timeline irregularities}{
 
-This function does not take into account time line irregularities (\emph{e.g.}
-leap years, DST, leap seconds). This may not be a issue for most people, but
+This function does not take into account timeline irregularities (\emph{e.g.}
+leap years, DST, leap seconds). This may not be an issue for most people, but
 it must be considered when doing time arithmetic.
 }
 }
 \examples{
-## __ Cumulative non-vectorized sum __
+## __ Linear non-vectorized sum __
 x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 sum_time(x, y, class = "duration")
@@ -116,7 +117,7 @@ sum_time(x, circular = TRUE)
 sum_time(x, circular = TRUE, na.rm = TRUE)
 #> 02:45:00 # Expected
 
-## __ Cumulative vectorized sum __
+## __ Linear vectorized sum __
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 sum_time(x, y, vectorize = TRUE)

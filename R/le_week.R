@@ -9,8 +9,9 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and theWeP (n.d.) guidelines
-#' for `le_week()` (\eqn{LE_{week}}{LE_week}) computation are as follow.
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
+#' Experimental Platform (n.d.) guidelines for `le_week()`
+#' (\eqn{LE_{week}}{LE_week}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -37,15 +38,17 @@
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
-#' @param le_w A `Duration` object corresponding to the __light exposure on work
-#'   days__ from a standard version of the MCTQ questionnaire.
+#' @param le_w A `Duration` object corresponding to the __light exposure on
+#'   workdays__ from a standard version of the MCTQ questionnaire.
 #' @param le_f A `Duration` object corresponding to the __light exposure on
 #'   work-free days__ from a standard version of the MCTQ questionnaire.
+#' @param wd An [integerish][checkmate::test_integerish()] `numeric` object or
+#'   an `integer` object corresponding to the __number of workdays per week__
+#'   from a standard version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the vectorized weighted mean of
 #'   `le_w` and `le_f` with `wd` and `fd(wd)` as weights.
 #'
-#' @inheritParams fd
 #' @template details_b
 #' @template section_a
 #' @template references_a
@@ -86,8 +89,8 @@
 #'     x <- c(le_w[i], le_f[i])
 #'     w <- c(wd[i], fd(wd[i]))
 #'     lubridate::as.duration(stats::weighted.mean(x, w))
-#' #> [1] "10157.1428571429s (~2.82 hours)" # Expected
 #' }
+#' #> [1] "10157.1428571429s (~2.82 hours)" # Expected
 #'
 #' ## __ Converting the output to `hms` __
 #' le_w <- lubridate::dhours(1.25)

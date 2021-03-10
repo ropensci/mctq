@@ -24,7 +24,7 @@ It's a good idea to have the standard MCTQ questionnaire and the guidelines for 
 
 ## The two intervals problem
 
-According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), _i.e._ the discrepancy between social and biological time, must be computed as the difference between the $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
+According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), _i.e._ the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
 
 $$SJL_{rel} = MSF - MSW$$
 
@@ -49,9 +49,9 @@ Most people have some trouble understanding this. To illustrate what we mean, le
 
 ```
 
-Note that, while doing the representation above, we're dealing with the assumption that $MSF$ and $MSW$ can be represented in a two-day timeline, since subjects don't usually sleep more than 24 hours (basic assumption).
+Note that, while doing the representation above, we're dealing with the assumption that $MSW$ and $MSF$ can be represented in a two-day timeline, since subjects don't usually sleep more than 24 hours (basic assumption).
 
-As you can see, by overlapping two hour values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shortest interval between the two hour values. But, in some extreme cases, usually when dealing with shift workers, $MSF$ and $MSW$ distance can surpass 12 hours, making the longer interval the correct answer.
+As you can see, by overlapping two hour values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shortest interval between the two. But, in some extreme cases, usually when dealing with shift workers, $MSW$ and $MSF$ distance can surpass 12 hours, making the longer interval the correct answer.
 
 To obtain the signal of $SJL_{rel}$ we must check the start value of the interval. If the interval between $MSW$ and $MSF$ starts with $MSW$, that means that $MSW$ comes before $MSF$, hence, the signal must be positive. Else, if the interval between $MSW$ and $MSF$ starts with $MSF$, that means that $MSW$ comes after $MSF$, hence, the signal must be negative.
 
@@ -85,7 +85,7 @@ The `sjl()` function provides an argument called `method` that allows you to cho
 
 ### `method = "difference"`
 
-By using `method = "difference"`, `sjl()` will do the exact computation proposed by the original authors, _i.e._ $SJL$ will be computed as the linear difference between  $MSF$ and $MSW$.
+By using `method = "difference"`, `sjl()` will do the exact computation proposed by the MCTQ authors, _i.e._ $SJL$ will be computed as the linear difference between  $MSF$ and $MSW$.
 
 Let's see some examples using this method.
 
@@ -109,7 +109,7 @@ $\text{Real difference: + 04:00}$
 
 $MSF - MSW = \text{03:00} - \text{23:00} = \text{- 20:00}$ (__wrong__)
 
-As you can see with the second example, the `"difference"` method uses a linear approach, creating problems regarding the circularity of time.
+As you can see with the second example, the `"difference"` method uses a linear time frame approach, creating problems regarding the circularity of time.
 
 ### `method = "shortest"` (default method)
 

@@ -17,15 +17,15 @@
 #'
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. These classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] packages. If your data do not
-#' conform to the object classes required, you can use [mctq::convert()] to
-#' convert it.
+#' and [lubridate][lubridate::lubridate-package] package. If your data do not
+#' conform to the object classes required, you can use the `mctq`
+#' [mctq::convert()] function to convert it.
 #'
 #' ## Rounding and fractional time
 #'
 #' Some operations may produce an output with fractional time (_e.g._
 #' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
-#' can round it with [mctq::round_time()].
+#' can round it with the `mctq` function [mctq::round_time()].
 #'
 #' Our recommendation is to avoid rounding, but, if you do, make sure that you
 #' only round your values after all computations are done, that way you can

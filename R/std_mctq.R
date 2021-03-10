@@ -9,8 +9,8 @@
 #' standard version.
 #'
 #' This data was created following the guidelines in Roenneberg, Wirz-Justice, &
-#' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World
-#' Wide Experimental Platform (theWeP, n.d.). See the References and Details
+#' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
+#' Worldwide Experimental Platform (n.d.). See the References and Details
 #' sections to learn more.
 #'
 #' @details
@@ -28,7 +28,7 @@
 #' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' (2013) and Ghotbi _et.al_ (2020).
 #'
-#' If you are curious about variable computations and want to have access to
+#' If you're curious about variable computations and want to have access to
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
@@ -38,13 +38,13 @@
 #' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
-#' You can see the `std_mctq` build and data wrangling processes at
-#' <https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R>.
+#' You can see the `std_mctq` build and data wrangling processes
+#' [here](https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R).
 #'
 #' ## Variable naming
 #'
-#' The naming of the variables took into account the naming schemes used in MCTQ
-#' articles, in addition to the guidelines of the [tidyverse style
+#' The naming of the variables took into account the naming scheme used in MCTQ
+#' publications, in addition to the guidelines of the [tidyverse style
 #' guide](https://style.tidyverse.org/).
 #'
 #' ## Variable classes
@@ -62,8 +62,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value with purpose of identify each subject in the
-#'   dataset.
+#'   A unique `integer` value to identify each subject in the dataset.
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr
@@ -143,8 +142,10 @@
 #'   R class: `hms`.}
 #'
 #'   \item{si_w}{
-#'   "Sleep inertia" on __workday__s. Despite the name, this variable represents
-#'   the time the subject takes to get up after sleep end.
+#'   "Sleep inertia" on __workdays__.
+#'   \cr \cr
+#'   Despite the name, this variable represents the time the subject takes to
+#'   get up after sleep end.
 #'   \cr \cr
 #'   Statement (`EN`): "After ___ minutes, I get up".
 #'   \cr \cr
@@ -258,8 +259,10 @@
 #'   R class: `hms`.}
 #'
 #'   \item{si_f}{
-#'   Sleep inertia on __work-free days__. Despite the name, this variable
-#'   represents the time the subject takes to get up after sleep end.
+#'   "Sleep inertia" on __work-free days__.
+#'   \cr \cr
+#'   Despite the name, this variable represents the time the subject takes to
+#'   get up after sleep end.
 #'   \cr \cr
 #'   Statement (`EN`): "After ___ minutes, I get up".
 #'   \cr \cr

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sd.R
 \name{napd}
 \alias{napd}
-\title{Compute MCTQ nap duration (only for MCTQ Shift)}
+\title{Compute MCTQ nap duration (only for MCTQ\eqn{^{Shift}}{ Shift})}
 \usage{
 napd(napo, nape)
 }
@@ -40,16 +40,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -60,7 +60,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
-(n.d.) guidelines for \code{napd()} (\eqn{NapD}) computation are as follow.
+(n.d.) guidelines for \code{napd()} (\eqn{NapD}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each shift section of the
@@ -107,7 +107,7 @@ napd(napo, nape)
 napo <- hms::parse_hm("10:20")
 nape <- hms::as_hms(NA)
 napd(napo, nape)
-#> NA # Expected
+#> [1] NA # Expected
 
 ## __ Vector example __
 napo <- c(hms::parse_hm("01:25"), hms::parse_hm("23:50"))

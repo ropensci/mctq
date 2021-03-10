@@ -2,7 +2,7 @@
 % Please edit documentation in R/sd.R
 \name{sd_overall}
 \alias{sd_overall}
-\title{Compute MCTQ overall sleep duration (only for MCTQ Shift)}
+\title{Compute MCTQ overall sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})}
 \usage{
 sd_overall(sd_w, sd_f, n_w, n_f)
 }
@@ -55,16 +55,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -76,14 +76,14 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
 (n.d.) guidelines for \code{sd_overall()} (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N})
-computation are as follow.
+computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each shift section of the
-questionnaire. If you are using the three shift design propose by the authors,
-you need to compute three overall sleep duration (\emph{e.g.}
-\eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E};
-\eqn{\emptyset SD^N}{OSD_N}).
+questionnaire. If you're using the three-shift design proposed by the
+authors, you need to compute three overall sleep duration (\emph{e.g.}
+\eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
+SD^N}{OSD_N}).
 \item The overall sleep duration is the weighted average of the shift-specific
 mean sleep durations.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
@@ -153,8 +153,8 @@ if (requireNamespace("stats", quietly = TRUE)) {
     x <- c(sd_w[i], sd_f[i])
     w <- c(n_w[i], n_f[i])
     lubridate::as.duration(stats::weighted.mean(x, w))
-#> [1] "28800s (~8 hours)" # Expected
 }
+#> [1] "28800s (~8 hours)" # Expected
 
 ## __ Converting the output to hms __
 sd_w <- lubridate::dhours(4.75)

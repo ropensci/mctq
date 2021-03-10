@@ -10,8 +10,8 @@
 #'
 #' This data was created following the guidelines in Juda, Vetter, & Roenneberg
 #' (2013), in addition to the guidelines found in Roenneberg, Wirz-Justice, &
-#' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World
-#' Wide Experimental Platform (theWeP, n.d.). See the References and Details
+#' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
+#' Worldwide Experimental Platform (n.d.). See the References and Details
 #' sections to learn more.
 #'
 #' @details
@@ -29,7 +29,7 @@
 #' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' (2013) and Ghotbi _et.al_ (2020).
 #'
-#' If you are curious about variable computations and want to have access to
+#' If you're curious about variable computations and want to have access to
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
@@ -39,13 +39,13 @@
 #' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
-#' You can see the `shift_mctq` build and data wrangling processes at
-#' <https://github.com/gipsousp/mctq/blob/master/data-raw/shift_mctq.R>.
+#' You can see the `shift_mctq` build and data wrangling processes
+#' [here](https://github.com/gipsousp/mctq/blob/master/data-raw/shift_mctq.R).
 #'
 #' ## Variable naming
 #'
-#' The naming of the variables took into account the naming schemes used in MCTQ
-#' articles, in addition to the guidelines of the [tidyverse style
+#' The naming of the variables took into account the naming scheme used in MCTQ
+#' publications, in addition to the guidelines of the [tidyverse style
 #' guide](https://style.tidyverse.org/).
 #'
 #' ## Variable classes
@@ -64,8 +64,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value with purpose of identify each subject in the
-#'   dataset.
+#'   A unique `integer` value to identify each subject in the dataset.
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr

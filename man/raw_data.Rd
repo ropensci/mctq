@@ -8,17 +8,17 @@ raw_data(file = NULL)
 }
 \arguments{
 \item{file}{A string indicating the file name of the raw dataset. If \code{NULL},
-all raw dataset file names will be listed (default: \code{NULL}).}
+all raw dataset file names will be printed (default: \code{NULL}).}
 }
 \value{
-If \code{path = NULL}, returns a character vector with all raw dataset
-file names available. Else, returns the \code{file} path.
+If \code{path = NULL}, returns a character object with all raw dataset
+file names available. Else, it returns the \code{file} path.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{mctq} comes bundled with raw fictional datasets for testing and learning
-purposes. \code{raw_data()} make it easy to access their paths.
+purposes. \code{raw_data()} makes it easy to access their paths.
 }
 \examples{
 \dontrun{

@@ -15,16 +15,16 @@ must be suppressed (default: \code{FALSE}).}
 }
 \value{
 A named \code{list} with elements representing each MCTQ basic/measurable
-variable of the model indicated in \code{model}.
+variable of the model indicated in the \code{model} argument.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
-composed by MCTQ basic/measurable variables.
+composed of MCTQ basic/measurable variables.
 
-This function is \strong{for testing and learning purposes}, please don't misuse
-it.
+This function is \strong{for testing and learning purposes only}. Please don't
+misuse it.
 }
 \details{
 The case structure (variable names and classes) are the same as the datasets
@@ -32,8 +32,8 @@ provided by the \code{mctq} package. See \link{std_mctq}, \link{micro_mctq} and
 \link{shift_mctq} to learn more.
 \subsection{Requirements}{
 
-This function requires the \code{\link[stats:stats-package]{stats}} package. This wont
-be a issue for most people, since the package comes with a standard R
+This function requires the \code{\link[stats:stats-package]{stats}} package. This
+won't be an issue for most people since the package comes with a standard R
 installation.
 
 If you don't have the \code{\link[stats:stats-package]{stats}} package, you can
@@ -42,17 +42,17 @@ install it with \code{install.packages("stats")}.
 
 \subsection{Cases}{
 
-Random \emph{standard} and \emph{micro} MCTQ cases were created with the general
-population in mind. The data was set to resemble the distributions parameters
+Random standard and micro MCTQ cases were created with the general
+population in mind. The data was set to resemble the distribution parameters
 shown in Roenneberg, Wirz-Justice, & Merrow (2003).
 
-\emph{MCTQ\eqn{^{Shift}}{ Shift}} random cases were created based on the shift
+MCTQ\eqn{^{Shift}}{ Shift} random cases were created based on the shift
 configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012).
 The data was set to resemble the distribution parameters shown in Juda,
 Vetter, & Roenneberg (2013).
 
-You can see more about the distribution parameters used at
-\url{https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R}.
+You can see more about the distribution parameters used
+\href{https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R}{here}.
 }
 }
 \examples{

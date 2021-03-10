@@ -1,5 +1,5 @@
 Package: mctq
-Title: The R Package for Munich ChronoType Questionnaire (MCTQ) Data
+Title: The R Package for the Munich ChronoType Questionnaire (MCTQ)
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Daniel",

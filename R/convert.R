@@ -4,8 +4,8 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `convert()` converts an R object to another object of a predefined class. Its
-#' mission is to facilitate conversions between any kind of R object in a
+#' `convert()` converts an object to another object of a predefined class. Its
+#' mission is to facilitate conversions between any kind of object in a
 #' simple and fast way.
 #'
 #' This function also supports date/time parsing and value transformations.
@@ -23,18 +23,18 @@
 #'
 #' ## Wrappers
 #'
-#' `convert()` have some wrappers functions for convenience.
+#' `convert()` have some wrapper functions for convenience.
 #'
-#' * `convert_tu()` help make conversions from date/time objects to units.
+#' * `convert_tu()` helps make conversions from date/time objects to units.
 #'
-#' * `convert_ut()` help make conversions from units to date/time objects.
+#' * `convert_ut()` helps make conversions from units to date/time objects.
 #'
-#' * `convert_uu()` help make conversions from unit to other units.
+#' * `convert_uu()` helps make conversions from unit to other units.
 #'
-#' * `convert_pt()` help make conversions from `character` or `numeric` objects
+#' * `convert_pt()` helps make conversions from `character` or `numeric` objects
 #' to date/time objects.
 #'
-#' * `convert_pu()` help make conversions from `character` or `numeric` objects
+#' * `convert_pu()` helps make conversions from `character` or `numeric` objects
 #' to units.
 #'
 #' ## `class` argument
@@ -82,21 +82,21 @@
 #' object, `character` and `numeric` inputs cannot have time values equal or
 #' greater than 24 hours.
 #'
-#' That limits the set of `convert()` applications (_e.g_ when you want to
-#' parse a `character` to a `Duration` object of 35 hours). To
-#' get around this, some exceptions were made to `orders` __equal__ to `"H"`,
-#' `"M"`, `"S"`, `HM`, or `HMS`. For `HM` and `HMS` exceptions, minutes and
-#' seconds are limited to `[0-59]`, and, when hours exceeds 2 digits, a `:` must
-#' be allocated between hours and minutes.
+#' That limits the set of `convert()` applications (_e.g_ when you want to parse
+#' a `character` to a `Duration` object of 35 hours). To get around this, some
+#' exceptions were made to `orders` __equal__ to `"H"`, `"M"`, `"S"`, `"HM"`, or
+#' `"HMS"`. For `"HM"` and `"HMS"` exceptions, minutes and seconds are limited
+#' to `[0-59]`, and, when hours exceed 2 digits, a `:` must be allocated
+#' between hours and minutes.
 #'
 #' ## Converting columns of a data frame
 #'
 #' `convert()` also allow direct conversions of data frame columns. This is
 #' made with the help of [dplyr::mutate()].
 #'
-#' Operations with data frames are only column-wise and can be made by
-#' selecting individual columns (using the `col` argument) or group of columns
-#' (by applying a flag function (_e.g_ `is.numeric`) in the `where` argument).
+#' Operations with data frames are only column-wise and can be made by selecting
+#' specific columns (using the `col` argument) or a group of columns (by
+#' applying a flag function (_e.g_ `is.numeric`) in the `where` argument).
 #'
 #' ## Different outputs
 #'
@@ -109,18 +109,18 @@
 #' indication of year, `convert()` will return a `character` vector with a
 #' `hms` time.
 #'
-#' You can also parse a `character` object and transform it direct to an unit.
-#' See the Examples section to know how.
+#' You can also parse a `character` object and transform it directly into a
+#' unit. See the Examples section to know how.
 #'
 #' * When `class = "numeric"` or `class = "double"`
 #'
 #' `convert()` will return a [base::as.numeric()] output if `class` is set to
-#' `"numeric"` or `"double"`. For `Date` objects the output will be the total
+#' `"numeric"` or `"double"`. For `Date` objects, the output will be the total
 #' of days since '1970-01-01' (UNIX epoch date). For date-time objects (_e.g._
-#' `POSIXt`) the output will be the total of seconds from the UNIX epoch
+#' `POSIXt`), the output will be the total of seconds from the UNIX epoch
 #' (`1970-01-01 00:00:00 UTC`) (See
-#' [Unix time](https://en.wikipedia.org/wiki/Unix_time) to know more). For time
-#' objects (_e.g._ `hms`) the output will be the total of seconds.
+#' [Unix time](https://en.wikipedia.org/wiki/Unix_time) to learn more). For time
+#' objects, (_e.g._ `hms`) the output will be the total of seconds.
 #'
 #' The output `class = "numeric"` can also be different if `input_unit` and
 #' `output_unit` are assigned.
@@ -132,11 +132,10 @@
 #'
 #' ## Year and month lengths
 #'
-#' The length of months and years can vary. For example, March have 31 days,
-#' while April have have 30. Due to leap years, the same can be said to year
-#' lengths.
+#' The length of months and years can vary. For example, March has 31 days,
+#' while April has 30. Due to leap years, the same can be said to year lengths.
 #'
-#' To address this problem, `convert()` use as default the mean of possible
+#' To address this problem, `convert()` use by default the mean of possible
 #' values for months and years, used to calculate month and year durations in
 #' the lubridate package (see: [lubridate::dmonths()] and
 #' [lubridate::dyears()]). You can reset this by assigning other values to
@@ -155,11 +154,11 @@
 #'   convert/parse `x` (default: `"UTC"`).
 #' @param input_unit (optional) a string indicating the unit of `x`.
 #' @param output_unit (optional) a string indicating the desire output unit.
-#' @param month_length (optional) a `Duration` value __or__ a non negative
+#' @param month_length (optional) a `Duration` value __or__ a non-negative
 #'   `numeric` value corresponding to the number of seconds equivalent to the
 #'   month length (default: `lubridate::dmonths()`, which is equivalent to
 #'   30.4375 days or 2629800 seconds).
-#' @param year_length (optional) a `Duration` value __or__ a non negative
+#' @param year_length (optional) a `Duration` value __or__ a non-negative
 #'   `numeric` value corresponding to the number of seconds equivalent to the
 #'   year length (default: `lubridate::dyears()`, which is equivalent to 365.25
 #'   days or 31557600 seconds).
@@ -169,8 +168,7 @@
 #' @param cols (optional) a `character` object indicating the column names in
 #'   `x` to transform (default: `NULL`).
 #' @param where (optional) a function to apply in a [tidyselect::where()] call
-#'   that flags the column names in `x` for the purpose of transforming them
-#'   (default: `NULL`).
+#'   that flags the column names in `x` to transform them (default: `NULL`).
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
@@ -191,14 +189,14 @@
 #' #> [1] 0.5 # Expected
 #' x <- lubridate::as_datetime("1985-10-20 12:00:00")
 #' convert(x, "numeric", output_unit = "d", ignore_date = FALSE)
-#' #> [1] 5771.5 # Expected (days since UNIX origin)
+#' #> [1] 5771.5 # Expected (days since the UNIX epoch)
 #' convert(hms::parse_hm("15:45:00"), "numeric", output_unit = "H")
 #' #> [1] 15.75 # Expected
 #'
 #' ## __ Converting from units to date/time objects __
 #' convert(360, "Period", input_unit = "deg")
 #' #> [1] "1d 0H 0M 0S" # Expected
-#' convert(6.5, "Posixct", input_unit = "H")
+#' convert(6.5, "POSIXct", input_unit = "H")
 #' #> [1] "1970-01-01 06:30:00 UTC" # Expected
 #' convert(365.25, "hms", input_unit = "d")
 #' #> 8766:00:00 # Expected

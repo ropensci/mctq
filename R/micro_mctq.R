@@ -10,8 +10,8 @@
 #'
 #' This data was created following the guidelines in Ghotbi _et.al_ (2020), in
 #' addition to the guidelines in Roenneberg, Wirz-Justice, & Merrow (2003),
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World Wide
-#' Experimental Platform (theWeP, n.d.). See the References and Details sections
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The Worldwide
+#' Experimental Platform (n.d.). See the References and Details sections
 #' to learn more.
 #'
 #' @details
@@ -29,7 +29,7 @@
 #' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
 #' (2013) and Ghotbi _et.al_ (2020).
 #'
-#' If you are curious about variable computations and want to have access to
+#' If you're curious about variable computations and want to have access to
 #' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
@@ -39,13 +39,13 @@
 #' common cases and data issues that researchers may find in their MCTQ data, in
 #' addition to be a suggested data structure for MCTQ data.
 #'
-#' You can see the `micro_mctq` build and data wrangling processes at
-#' <https://github.com/gipsousp/mctq/blob/master/data-raw/micro_mctq.R>.
+#' You can see the `micro_mctq` build and data wrangling processes
+#' [here](https://github.com/gipsousp/mctq/blob/master/data-raw/micro_mctq.R).
 #'
 #' ## Variable naming
 #'
-#' The naming of the variables took into account the naming schemes used in MCTQ
-#' articles, in addition to the guidelines of the [tidyverse style
+#' The naming of the variables took into account the naming scheme used in MCTQ
+#' publications, in addition to the guidelines of the [tidyverse style
 #' guide](https://style.tidyverse.org/).
 #'
 #' ## Variable classes
@@ -64,8 +64,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value with purpose of identify each subject in the
-#'   dataset.
+#'   A unique `integer` value to identify each subject in the dataset.
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr
@@ -137,8 +136,8 @@
 #'
 #'
 #'   \item{so_f}{
-#'   Local time of sleep onset on __work-free days__ when the subject DON'T use
-#'   an alarm clock to wake up.
+#'   Local time of sleep onset on __work-free days__ when the subject
+#'   __doesn't__ use an alarm clock to wake up.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 #'   normally fall asleep at ___ : ___ AM/PM (this is NOT when you get into bed,
@@ -149,8 +148,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{se_f}{
-#'   Local time of sleep end on __work-free days__ when the subject DON'T use an
-#'   alarm clock to wake up.
+#'   Local time of sleep end on __work-free days__ when the subject __doesn't__
+#'   use an alarm clock to wake up.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 #'   normally wake up at ___ : ___ AM/PM (this is NOT when you get out of bed,
@@ -161,16 +160,16 @@
 #'   R class: `hms`.}
 #'
 #'   \item{sd_f}{
-#'   Sleep duration on __work-free days__ when the subject DON'T use an alarm
-#'   clock to wake up.
+#'   Sleep duration on __work-free days__ when the subject __doesn't__ use an
+#'   alarm clock to wake up.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
 #'   R class: `Duration`.}
 #'
 #'   \item{msf}{
-#'   Local time of mid-sleep on __work-free days__ when the subject DON'T use an
-#'   alarm clock to wake up.
+#'   Local time of mid-sleep on __work-free days__ when the subject __doesn't__
+#'   use an alarm clock to wake up.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr

@@ -166,12 +166,12 @@ convert/parse \code{x} (default: \code{"UTC"}).}
 
 \item{output_unit}{(optional) a string indicating the desire output unit.}
 
-\item{month_length}{(optional) a \code{Duration} value \strong{or} a non negative
+\item{month_length}{(optional) a \code{Duration} value \strong{or} a non-negative
 \code{numeric} value corresponding to the number of seconds equivalent to the
 month length (default: \code{lubridate::dmonths()}, which is equivalent to
 30.4375 days or 2629800 seconds).}
 
-\item{year_length}{(optional) a \code{Duration} value \strong{or} a non negative
+\item{year_length}{(optional) a \code{Duration} value \strong{or} a non-negative
 \code{numeric} value corresponding to the number of seconds equivalent to the
 year length (default: \code{lubridate::dyears()}, which is equivalent to 365.25
 days or 31557600 seconds).}
@@ -187,8 +187,7 @@ must be suppressed (default: \code{FALSE}).}
 \code{x} to transform (default: \code{NULL}).}
 
 \item{where}{(optional) a function to apply in a \code{\link[tidyselect:where]{tidyselect::where()}} call
-that flags the column names in \code{x} for the purpose of transforming them
-(default: \code{NULL}).}
+that flags the column names in \code{x} to transform them (default: \code{NULL}).}
 }
 \value{
 An object of the indicated class in \code{class}.
@@ -196,8 +195,8 @@ An object of the indicated class in \code{class}.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{convert()} converts an R object to another object of a predefined class. Its
-mission is to facilitate conversions between any kind of R object in a
+\code{convert()} converts an object to another object of a predefined class. Its
+mission is to facilitate conversions between any kind of object in a
 simple and fast way.
 
 This function also supports date/time parsing and value transformations.
@@ -213,14 +212,14 @@ and Times" from Wickham and Grolemund (n.d.) and chapter "Technical
 Representation of Data" from Loo and Jonge (2018).
 \subsection{Wrappers}{
 
-\code{convert()} have some wrappers functions for convenience.
+\code{convert()} have some wrapper functions for convenience.
 \itemize{
-\item \code{convert_tu()} help make conversions from date/time objects to units.
-\item \code{convert_ut()} help make conversions from units to date/time objects.
-\item \code{convert_uu()} help make conversions from unit to other units.
-\item \code{convert_pt()} help make conversions from \code{character} or \code{numeric} objects
+\item \code{convert_tu()} helps make conversions from date/time objects to units.
+\item \code{convert_ut()} helps make conversions from units to date/time objects.
+\item \code{convert_uu()} helps make conversions from unit to other units.
+\item \code{convert_pt()} helps make conversions from \code{character} or \code{numeric} objects
 to date/time objects.
-\item \code{convert_pu()} help make conversions from \code{character} or \code{numeric} objects
+\item \code{convert_pu()} helps make conversions from \code{character} or \code{numeric} objects
 to units.
 }
 }
@@ -275,12 +274,12 @@ Time zones (tz) are used only if \code{class} is set to \code{"Date"}, \code{"PO
 object, \code{character} and \code{numeric} inputs cannot have time values equal or
 greater than 24 hours.
 
-That limits the set of \code{convert()} applications (\emph{e.g} when you want to
-parse a \code{character} to a \code{Duration} object of 35 hours). To
-get around this, some exceptions were made to \code{orders} \strong{equal} to \code{"H"},
-\code{"M"}, \code{"S"}, \code{HM}, or \code{HMS}. For \code{HM} and \code{HMS} exceptions, minutes and
-seconds are limited to \verb{[0-59]}, and, when hours exceeds 2 digits, a \code{:} must
-be allocated between hours and minutes.
+That limits the set of \code{convert()} applications (\emph{e.g} when you want to parse
+a \code{character} to a \code{Duration} object of 35 hours). To get around this, some
+exceptions were made to \code{orders} \strong{equal} to \code{"H"}, \code{"M"}, \code{"S"}, \code{"HM"}, or
+\code{"HMS"}. For \code{"HM"} and \code{"HMS"} exceptions, minutes and seconds are limited
+to \verb{[0-59]}, and, when hours exceed 2 digits, a \code{:} must be allocated
+between hours and minutes.
 }
 
 \subsection{Converting columns of a data frame}{
@@ -288,9 +287,9 @@ be allocated between hours and minutes.
 \code{convert()} also allow direct conversions of data frame columns. This is
 made with the help of \code{\link[dplyr:mutate]{dplyr::mutate()}}.
 
-Operations with data frames are only column-wise and can be made by
-selecting individual columns (using the \code{col} argument) or group of columns
-(by applying a flag function (\emph{e.g} \code{is.numeric}) in the \code{where} argument).
+Operations with data frames are only column-wise and can be made by selecting
+specific columns (using the \code{col} argument) or a group of columns (by
+applying a flag function (\emph{e.g} \code{is.numeric}) in the \code{where} argument).
 }
 
 \subsection{Different outputs}{
@@ -305,19 +304,19 @@ Your output can change according to your settings. Here are some examples.
 indication of year, \code{convert()} will return a \code{character} vector with a
 \code{hms} time.
 
-You can also parse a \code{character} object and transform it direct to an unit.
-See the Examples section to know how.
+You can also parse a \code{character} object and transform it directly into a
+unit. See the Examples section to know how.
 \itemize{
 \item When \code{class = "numeric"} or \code{class = "double"}
 }
 
 \code{convert()} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class} is set to
-\code{"numeric"} or \code{"double"}. For \code{Date} objects the output will be the total
+\code{"numeric"} or \code{"double"}. For \code{Date} objects, the output will be the total
 of days since '1970-01-01' (UNIX epoch date). For date-time objects (\emph{e.g.}
-\code{POSIXt}) the output will be the total of seconds from the UNIX epoch
+\code{POSIXt}), the output will be the total of seconds from the UNIX epoch
 (\verb{1970-01-01 00:00:00 UTC}) (See
-\href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to know more). For time
-objects (\emph{e.g.} \code{hms}) the output will be the total of seconds.
+\href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to learn more). For time
+objects, (\emph{e.g.} \code{hms}) the output will be the total of seconds.
 
 The output \code{class = "numeric"} can also be different if \code{input_unit} and
 \code{output_unit} are assigned.
@@ -331,11 +330,10 @@ The output \code{class = "numeric"} can also be different if \code{input_unit} a
 
 \subsection{Year and month lengths}{
 
-The length of months and years can vary. For example, March have 31 days,
-while April have have 30. Due to leap years, the same can be said to year
-lengths.
+The length of months and years can vary. For example, March has 31 days,
+while April has 30. Due to leap years, the same can be said to year lengths.
 
-To address this problem, \code{convert()} use as default the mean of possible
+To address this problem, \code{convert()} use by default the mean of possible
 values for months and years, used to calculate month and year durations in
 the lubridate package (see: \code{\link[lubridate:duration]{lubridate::dmonths()}} and
 \code{\link[lubridate:duration]{lubridate::dyears()}}). You can reset this by assigning other values to
@@ -357,14 +355,14 @@ convert(x, "numeric", output_unit = "d")
 #> [1] 0.5 # Expected
 x <- lubridate::as_datetime("1985-10-20 12:00:00")
 convert(x, "numeric", output_unit = "d", ignore_date = FALSE)
-#> [1] 5771.5 # Expected (days since UNIX origin)
+#> [1] 5771.5 # Expected (days since the UNIX epoch)
 convert(hms::parse_hm("15:45:00"), "numeric", output_unit = "H")
 #> [1] 15.75 # Expected
 
 ## __ Converting from units to date/time objects __
 convert(360, "Period", input_unit = "deg")
 #> [1] "1d 0H 0M 0S" # Expected
-convert(6.5, "Posixct", input_unit = "H")
+convert(6.5, "POSIXct", input_unit = "H")
 #> [1] "1970-01-01 06:30:00 UTC" # Expected
 convert(365.25, "hms", input_unit = "d")
 #> 8766:00:00 # Expected
@@ -443,7 +441,7 @@ Van der Loo, M., & De Jonge, E. (2018).
 \emph{Statistical data cleaning with applications in R}. Hooboken, NJ: John
 Wiley & Sons. \doi{10.1002/9781118897126}.
 
-Wickham, H, & Grolemund. (n.d.). \emph{R for data science}. Sebastopol, CA:
+Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
 O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
 \seealso{

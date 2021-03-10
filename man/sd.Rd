@@ -41,16 +41,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -62,7 +62,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi \emph{et.al} (2020), Juda,
 Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
-guidelines for \code{sd()} (\eqn{SD}) computation are as follow.
+guidelines for \code{sd()} (\eqn{SD}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each section of the
@@ -80,9 +80,10 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work or work-free days.
-\item \eqn{SO_{W/F}}{SO_W/F}  = local time of sleep onset on work or work-free
+\item \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work \strong{or} work-free
 days.
+\item \eqn{SO_{W/F}}{SO_W/F}  = local time of sleep onset on work \strong{or}
+work-free days.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -122,7 +123,7 @@ sd(so, se)
 so <- hms::parse_hm("03:15")
 se <- hms::as_hms(NA)
 sd(so, se)
-#> NA # Expected
+#> [1] NA # Expected
 
 ## __ Vector example __
 so <- c(hms::parse_hm("04:12"), hms::parse_hm("21:20"))

@@ -14,16 +14,16 @@
 #'
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. These classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] packages. If your data do not
-#' conform to the object classes required, you can use [mctq::convert()] to
-#' convert it.
+#' and [lubridate][lubridate::lubridate-package] package. If your data do not
+#' conform to the object classes required, you can use the `mctq`
+#' [mctq::convert()] function to convert it.
 #'
 #' ## `ambiguity` argument
 #'
 #' In cases when `start` is equal to `end`, there are two possibilities of
 #' intervals between the two hours (ambiguity). That's because `start` and `end`
 #' can be at the same point in time or they can distance themselves by one day,
-#' as illustrated below.
+#' considering a two-day timeline.
 #'
 #' ```
 #'  start,end       start,end       start,end       start,end
@@ -42,13 +42,13 @@
 #' (default).
 #' * `ambiguity = 24`: to consider the interval between `start` and `end` as 24
 #' hours, _i.e._ `start` and `end` distance themselves by one day.
-#' * `ambiguity = NA`: to disregard this cases, assigning `NA` as value.
+#' * `ambiguity = NA`: to disregard these cases, assigning `NA` as value.
 #'
 #' ## `return` argument
 #'
 #' `assign_date()` can return different outputs:
 #'
-#' * `return = "Interval"`: returns a `start`---`end` `Interval` object.
+#' * `return = "Interval"`: returns a `start`--`end` `Interval` object.
 #' * `return = "list"`: returns a `list` object with two named elements
 #' corresponding to `start` and `end` output.
 #' * `return = "start"`: returns only the `start` output.
@@ -57,8 +57,8 @@
 #' ## `start_name` and `end_name` arguments
 #'
 #' These arguments serve to instruct `assign_date()` on how to name the
-#' list elements when `return = "list"`. As default, the function will name
-#' this elements with the names of the variables assigned to `start` and `end`
+#' list elements when `return = "list"`. By default, the function will name
+#' these elements with the names of the variables assigned to `start` and `end`
 #' arguments.
 #'
 #' If the number of characters (`nchar()`) of `start_name` or `end_name` are
@@ -67,8 +67,8 @@
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` values passed as argument to `start` or `end` will be strip of their
-#' dates. Only the time will be considered.
+#' `POSIXt` values passed as argument to `start` or `end` will be stripped of
+#' their dates. Only the time will be considered.
 #'
 #' ## `NA` values
 #'
@@ -86,8 +86,8 @@
 #'
 #' @return
 #'
-#' * If `return = "Interval"`, a `start`---`end` `Interval` object.
-#' * If `return = "list"`, a named list with `start` and `end` outputs.
+#' * If `return = "Interval"`, a `start`--`end` `Interval` object.
+#' * If `return = "list"`, a named list with `start` and `end` as elements.
 #' * If `return = "start`, only the `start` output.
 #' * If `return = "end"`, only the `end` output.
 #'

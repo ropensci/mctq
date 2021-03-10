@@ -5,20 +5,20 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `round_time()` takes a `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, or
-#' `POSIXlt` object and round it `numeric` value at the ones place.
+#' `POSIXlt` object and round its `numeric` value at the ones place.
 #'
 #' @details
 #'
 #' `round_time()` uses [base::round()] for rounding. That is to say that
 #' `round_time()` uses the same IEC 60559 standard (_"go to the even digit"_)
-#' for rounding off a 5. Therefore, `round(0.5)` is 0 and `round(-1.5)` is -2.
-#' See `?round` to learn more.
+#' for rounding off a 5. Therefore, `round(0.5)` is equal to 0 and `round(-1.5)`
+#' is equal to -2. See `?round` to learn more.
 #'
 #' @param x An object belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`, `POSIXct`, or `POSIXlt`.
 #'
-#' @return An object of the same class of 'x' with it `numeric` value rounded at
-#'   the ones place.
+#' @return An object of the same class of `x` with its `numeric` value rounded
+#'   at the ones place.
 #'
 #' @seealso Other date-time rounding functions: [hms::round_hms()]
 #'   [hms::trunc_hms()] [lubridate::round_date()].

@@ -17,7 +17,7 @@
 #' @description
 #'
 #' `build_std_mctq()` builds a fictional raw dataset, __for testing and learning
-#' purposes__, composed by basic/measurable variables of the Munich Chronotype
+#' purposes__, composed of basic/measurable variables of the Munich Chronotype
 #' Questionnaire (MCTQ) standard version. See [mctq::std_mctq] to learn more.
 #'
 #' @param write (optional) a `logical` value indicating if the function must
@@ -552,7 +552,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'
 #' @details
 #'
-#' Here the process of _tiding_ a dataset is understood as transforming it in
+#' Here, the process of _tiding_ a dataset is understood as transforming it in
 #' input data, like described in Loo and Jonge (2018). It's a very similar
 #' process of tiding data described in the workflow proposed by Wickham and
 #' Grolemund (n.d.).
@@ -692,8 +692,8 @@ tidy_std_mctq <- function(write = FALSE) {
 #'
 #' Here, the process of _validating_ a dataset is understood as detecting
 #' invalid data, by checking whether data satisfies certain assumptions from
-#' domain knowledge, to them removing or, if possible, fixing them. You can find
-#' more about data validation and error location in Loo and Jonge (2018).
+#' domain knowledge, to them, removing or, if possible, fixing them. You can
+#' find more about data validation and error location in Loo and Jonge (2018).
 #'
 #' This process can be considered as part of the process of transforming data,
 #' described in the workflow proposed by Wickham and Grolemund (n.d.).

@@ -2,7 +2,7 @@
 
 > Nothing to report for now.
 
-# mctq 0.0.0
+# mctq 1.0.0
 
 First stable `mctq` version (go go `mctq`!).
 

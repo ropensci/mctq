@@ -11,7 +11,7 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
 #' Experimental Platform (n.d.) guidelines for `sloss_week()`
-#' (\eqn{SLoss_{week}}{SLoss_week}) computation are as follow.
+#' (\eqn{SLoss_{week}}{SLoss_week}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -71,8 +71,7 @@
 #' sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
 #' wd <- c(2, 0)
 #' sloss_week(sd_w, sd_f, wd)
-#' #> [1] "2571.42857142857s (~42.86 minutes)" # Expected
-#' #> [2] "0s"
+#' #> [1] "2571.42857142857s (~42.86 minutes)" "0s" # Expected
 #'
 #' ## __ Converting the output to `hms` __
 #' sd_w <- lubridate::dhours(4)

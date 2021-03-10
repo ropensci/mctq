@@ -17,7 +17,7 @@
 #' ## Requirements
 #'
 #' This function requires the [`grDevices`][grDevices::grDevices-package] and
-#' [`ggplot2`][ggplot2::ggplot2-package] packages and can only run in
+#' [`ggplot2`][ggplot2::ggplot2-package] package and can only run in
 #' interactive mode. The `grDevices` comes with a standard R installation and
 #' is typically loaded by default. Most people also run R interactively.
 #'
@@ -29,7 +29,7 @@
 #' `qplot_walk()` erases all plots after it runs. For that reason, the function
 #' first emits a dialog message warning the user of this behavior before it
 #' runs. If you want to recover a single distribution plot, assign the variable
-#' vector on the `data` argument.
+#' vector to the `data` argument.
 #'
 #' ## Additional arguments to [ggplot2::qplot()]
 #'
@@ -37,19 +37,19 @@
 #' familiar with [ggplot2::qplot()], you can pass additional arguments to the
 #' function using the ellipsis argument (`...`).
 #'
-#' Note that `x`, `y` and `data` arguments are reserved for `qplot_walk()`.
+#' Note that `x`, `y`, and `data` arguments are reserved for `qplot_walk()`.
 #'
 #' ## `Duration`, `Period`, and `difftime` objects
 #'
-#' In order to help with the visualization, `qplot_walk()` automatically
+#' To help with the visualization, `qplot_walk()` automatically
 #' converts `Duration`, `Period`, and `difftime` objects to `hms`.
 #'
 #' ## Midday change
 #'
-#' `hms` variables with values greater than `22:00:00` will automatically be
-#' converted to POSIXct with a midday change, _i.e._ all values with more
+#' Time variables with values greater than `22:00:00` will automatically be
+#' converted to `POSIXct` with a midday change, _i.e._ all values with more
 #' than 12 hours will represent day one, and all the rest will represent day 2.
-#' This is made in order to better represent values that cross the midnight
+#' This is made to better represent values that cross the midnight
 #' hour.
 #'
 #' You can disable this behavior using `midday_change = FALSE`.
@@ -62,17 +62,17 @@
 #'
 #' You can disable this behavior using `remove_id = FALSE`.
 #'
-#' @param data An `atomic` or `data frame` object.
+#' @param data An `atomic` or `data.frame` object.
 #' @param ... (optional) additional arguments to be passed to
 #'   [ggplot2::qplot()].
-#' @param cols (optional) (only for data frames) a `character` vector indicating
-#'   columns names in `data` for plotting. If `NULL`, `qplot_walk()` will use
+#' @param cols (optional) (only for data frames) a `character` object indicating
+#'   column names in `data` for plotting. If `NULL`, `qplot_walk()` will use
 #'   all columns in `data`. This setting only works if `pattern = NULL`
 #'   (default: `NULL`).
 #' @param pattern (optional) (only for data frames) a string with a regular
-#'   expression to select columns names in `data` for plotting. This setting
+#'   expression to select column names in `data` for plotting. This setting
 #'   only works if `cols = NULL` (default: `NULL`).
-#' @param ignore (optional) (only for data frames) a `character` vector
+#' @param ignore (optional) (only for data frames) a `character` object
 #'   indicating which object classes the function must ignore. This setting can
 #'   be used with `cols` and `pattern`. Assign `NULL` to disable this behavior
 #'   (default: `"character"`).

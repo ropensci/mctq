@@ -5,10 +5,10 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `random_mctq` builds a fictional Munich Chronotype Questionnaire (MCTQ) case
-#' composed by MCTQ basic/measurable variables.
+#' composed of MCTQ basic/measurable variables.
 #'
-#' This function is __for testing and learning purposes__, please don't misuse
-#' it.
+#' This function is __for testing and learning purposes only__. Please don't
+#' misuse it.
 #'
 #' @details
 #'
@@ -18,8 +18,8 @@
 #'
 #' ## Requirements
 #'
-#' This function requires the [`stats`][stats::stats-package] package. This wont
-#' be a issue for most people, since the package comes with a standard R
+#' This function requires the [`stats`][stats::stats-package] package. This
+#' won't be an issue for most people since the package comes with a standard R
 #' installation.
 #'
 #' If you don't have the [`stats`][stats::stats-package] package, you can
@@ -27,17 +27,17 @@
 #'
 #' ## Cases
 #'
-#' Random _standard_ and _micro_ MCTQ cases were created with the general
-#' population in mind. The data was set to resemble the distributions parameters
+#' Random standard and micro MCTQ cases were created with the general
+#' population in mind. The data was set to resemble the distribution parameters
 #' shown in Roenneberg, Wirz-Justice, & Merrow (2003).
 #'
-#' _MCTQ\eqn{^{Shift}}{ Shift}_ random cases were created based on the shift
+#' MCTQ\eqn{^{Shift}}{ Shift} random cases were created based on the shift
 #' configuration from "Study Site 1" shown in Vetter, Juda, & Roenneberg (2012).
 #' The data was set to resemble the distribution parameters shown in Juda,
 #' Vetter, & Roenneberg (2013).
 #'
-#' You can see more about the distribution parameters used at
-#' <https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R>.
+#' You can see more about the distribution parameters used
+#' [here](https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R).
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
@@ -45,7 +45,7 @@
 #'   must be suppressed (default: `FALSE`).
 #'
 #' @return A named `list` with elements representing each MCTQ basic/measurable
-#'   variable of the model indicated in `model`.
+#'   variable of the model indicated in the `model` argument.
 #'
 #' @template references_f
 #' @family utility functions

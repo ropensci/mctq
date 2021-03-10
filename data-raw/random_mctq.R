@@ -34,8 +34,8 @@
 #' latency) were created based on the experience of the package authors with
 #' MCTQ data.
 #'
-#' * This values are just for reference while building the random cases. If you
-#' group several random MCTQ cases, this numbers can have some variation.
+#' * These values are just for reference while building the random cases. If you
+#' group several random MCTQ cases, these numbers can have some variation.
 #'
 #' @family random_mctq functions
 #' @noRd
@@ -131,12 +131,12 @@ std_mctq_par <- function() {
 #' involuntarily (by an alarm clock or other disturbances) on free days
 #' following any shift. This can shift these values down.
 #'
-#' * The distribution parameters from other variables not shown here (like bed
-#' time) were created based on the experience of the package authors with
+#' * The distribution parameters from other variables not shown here (like
+#' bedtime) were created based on the experience of the package authors with
 #' MCTQ data.
 #'
-#' * This values are just for reference while building the random cases. If you
-#' group several random MCTQ cases, this numbers can have some variation.
+#' * These values are just for reference while building the random cases. If you
+#' group several random MCTQ cases, these numbers can have some variation.
 #'
 #' @family random_mctq functions
 #' @noRd
@@ -361,7 +361,7 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
 #' @details
 #'
 #' The seed used for random generation is the result of `sample(100:200, 1)`
-#' (see [base::set.seed]).
+#' (see [base::set.seed] to learn more).
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"`.

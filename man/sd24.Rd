@@ -2,7 +2,7 @@
 % Please edit documentation in R/sd.R
 \name{sd24}
 \alias{sd24}
-\title{Compute MCTQ 24h sleep duration (only for MCTQ Shift)}
+\title{Compute MCTQ 24 hours sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})}
 \usage{
 sd24(sd, napd, nap)
 }
@@ -28,8 +28,8 @@ of \code{sd} and \code{napd} in a circular time frame of 24 hours.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{sd24()} computes the \strong{24h sleep duration} for the shift version of the
-Munich Chronotype Questionnaire (MCTQ).
+\code{sd24()} computes the \strong{24 hours sleep duration} for the shift version of
+the Munich Chronotype Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -48,16 +48,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -68,7 +68,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 
 Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
-(n.d.) guidelines for \code{sd24()} (\eqn{SD24}) computation are as follow.
+(n.d.) guidelines for \code{sd24()} (\eqn{SD24}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each shift section of the

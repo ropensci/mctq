@@ -2,7 +2,7 @@
 % Please edit documentation in R/sjl.R
 \name{sjl_weighted}
 \alias{sjl_weighted}
-\title{Compute MCTQ absolute social jetlag across all shifts (only for MCTQ Shift)}
+\title{Compute MCTQ absolute social jetlag across all shifts}
 \usage{
 sjl_weighted(sjl, n_w)
 }
@@ -45,16 +45,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -66,11 +66,11 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 The shift version of the MCTQ was developed for shift-workers rotating
 through morning-, evening-, and night-shifts, but it also allows adaptations
-to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For that reason,
+to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For this reason,
 \code{sjl_weighted()} must operate with any shift combination.
 
 Considering the requirement above, \code{sjl_weighted()} was developed to only
-accept lists values as arguments. For this approach to work, both \code{sjl} and
+accept list objects as arguments. For this approach to work, both \code{sjl} and
 \code{n_w} arguments must be lists with paired elements and values, \emph{i.e.} the
 first element of \code{sjl} (\emph{e.g.} \code{sjl_m}) must be paired with the first element
 of \code{n_w} (\emph{e.g.} \code{n_w_m}). The function will do the work of combining them
@@ -82,16 +82,16 @@ and output a weighted mean.
 
 Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
 (n.d.) guidelines for \code{sjl_weighted()} (\eqn{\emptyset
-SJL_{weighted}}{OSJL_weighted}) computation are as follow.
+SJL_{weighted}}{OSJL_weighted}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The absolute social jetlag across all shifts (\eqn{\emptyset
 SJL_{weighted}}{OSJL_weighted}) is the weighted average of all absolute
 social jetlags.
-\item The authors describe a equation for a three shift schedule, but this may
-not be your case. That's why this function works a little bit different (see
-the Operation section), allowing you to compute a weighted average with any
-shift combination.
+\item The authors describe an equation for a three-shift schedule, but this may
+not be your case. That's why this function works a little bit differently
+(see the Operation section), allowing you to compute a weighted average with
+any shift combination.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
@@ -147,8 +147,8 @@ if (requireNamespace("stats", quietly = TRUE)) {
     x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
     w <- c(n_w[["n_w_m"]][i], n_w[["n_w_e"]][i], n_w[["n_w_n"]][i])
     lubridate::as.duration(stats::weighted.mean(x, w))
-#> [1] "8298s (~2.31 hours)" # Expected
 }
+#> [1] "8298s (~2.31 hours)" # Expected
 
 ## __ Converting the output to hms __
 sjl <- list(sjl_m = lubridate::dhours(0.25),

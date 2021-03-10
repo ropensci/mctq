@@ -4,8 +4,8 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `shortest_interval()` finds and return the shortest interval between two
-#' `hms` or `POSIXt` objects hours.
+#' `shortest_interval()` finds and returns the shortest interval between two
+#' `hms` or `POSIXt` object hours.
 #'
 #' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_
 #' finds the longer interval between two hours. It's just a wrapper for
@@ -20,21 +20,21 @@
 #' below.
 #'
 #' To figure out what interval is the  shortest or the longer,
-#' `shortest_interval()` checks two scenarios: 1. When `x` comes before `y`; and
+#' `shortest_interval()` verify two scenarios: 1. When `x` comes before `y`; and
 #' 2. when `x` comes after `y`. This only works if `x` value is smaller than
 #' `y`, therefore, the function will make sure to swap `x` and `y` values if the
 #' latter assumption is not true.
 #'
 #' Because `shortest_interval()` objective is to find the shortest interval, if
 #' `x` and `y` are equal, the shortest interval will have a length of 0 hours,
-#' resulting in a interval from `x` to `x`. But, if `inverse = TRUE` or
+#' resulting in an interval from `x` to `x`. But, if `inverse = TRUE` or
 #' `longer_interval()` is used instead, the latter condition will return a
 #' interval with 24 hours of length (from `x` to `x` + 1 day).
 #'
 #' In cases when `x` and `y` distance themselves by 12 hours, there will be no
-#' shortest or longer interval (they are equal). In this cases,
+#' shortest or longer interval (they will have equal length). In those cases,
 #' `shortest_interval()` and `longer_interval()` will return the same value
-#' (a interval of 12 hours).
+#' (an interval of 12 hours).
 #'
 #' ```
 #'              day 1                        day 2
@@ -69,34 +69,37 @@
 #'
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. These classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] packages. If your data do not
-#' conform to the object classes required, you can use [mctq::convert()] to
-#' convert it.
+#' and [lubridate][lubridate::lubridate-package] package. If your data do not
+#' conform to the object classes required, you can use the `mctq`
+#' [mctq::convert()] function to convert it.
 #'
 #' ## `class` argument
 #'
 #' `shortest_interval()` is integrated with [mctq::convert()]. That way you
-#' can choose what class of object your prefer as output.
+#' can choose what class of object you prefer as output.
 #'
 #' Valid `class` values are: `"Duration"`, `"Period"`, `"difftime"`, `"hms"`,
 #' and `"Interval"` (case insensitive).
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` objects passed as argument to `x` or `y` will be strip of their
-#' dates. Only the hours will be considered.
+#' `POSIXt` objects passed as argument to `x` or `y` will be stripped of their
+#' dates. Only the time will be considered.
 #'
 #' @param x,y A `hms` or `POSIXt` object.
 #' @param class (optional) a string indicating the object class of the output
 #'   (default: `"hms"`).
 #' @param inverse (optional) a `logical` value indicating if the function must
-#'   return a inverse output, _i.e_ the longer interval between `x` and `y`.
+#'   return an inverse output, _i.e_ the longer interval between `x` and `y`.
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
-#' @return An object, of class indicated on `class`, with the shortest or
-#'   longer interval (if `inverse = TRUE` or `longer_interval()` is used)
-#'   between `x` and `y`.
+#' @return
+#'
+#' * If `inverse = FALSE` (default), an object of the indicated class in
+#' `class` (default: `"hms"`) with the shortest interval between `x` and `y`.
+#' * If `inverse = TRUE`, an object of the indicated class in `class` (default:
+#' `"hms"`) with the longer interval between `x` and `y`.
 #'
 #' @family utility functions
 #' @export

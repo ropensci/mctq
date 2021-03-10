@@ -10,8 +10,7 @@ rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value with purpose of identify each subject in the
-dataset.
+A unique \code{integer} value to identify each subject in the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
@@ -423,8 +422,8 @@ shift version.
 
 This data was created following the guidelines in Juda, Vetter, & Roenneberg
 (2013), in addition to the guidelines found in Roenneberg, Wirz-Justice, &
-Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World
-Wide Experimental Platform (theWeP, n.d.). See the References and Details
+Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
+Worldwide Experimental Platform (n.d.). See the References and Details
 sections to learn more.
 }
 \details{
@@ -440,7 +439,7 @@ Zerbini, & Winnebeck (2019).
 To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
 (2013) and Ghotbi \emph{et.al} (2020).
 
-If you are curious about variable computations and want to have access to
+If you're curious about variable computations and want to have access to
 the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 }
 
@@ -451,14 +450,14 @@ and by manual insertions of special cases. Its purpose is to demonstrate
 common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
-You can see the \code{shift_mctq} build and data wrangling processes at
-\url{https://github.com/gipsousp/mctq/blob/master/data-raw/shift_mctq.R}.
+You can see the \code{shift_mctq} build and data wrangling processes
+\href{https://github.com/gipsousp/mctq/blob/master/data-raw/shift_mctq.R}{here}.
 }
 
 \subsection{Variable naming}{
 
-The naming of the variables took into account the naming schemes used in MCTQ
-articles, in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
+The naming of the variables took into account the naming scheme used in MCTQ
+publications, in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
 }
 
 \subsection{Variable classes}{

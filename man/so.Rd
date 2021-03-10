@@ -44,16 +44,16 @@ See the References section to learn more.
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} packages. If your data do not
-conform to the object classes required, you can use \code{\link[=convert]{convert()}} to
-convert it.
+and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
+conform to the object classes required, you can use the \code{mctq}
+\code{\link[=convert]{convert()}} function to convert it.
 }
 
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (\emph{e.g.}
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done, that way you can
@@ -65,7 +65,7 @@ avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 
 Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 (2013), and The Worldwide Experimental Platform (n.d.) guidelines for \code{so()}
-(\eqn{SO}) computation are as follow.
+(\eqn{SO}) computation are as follows.
 \subsection{Notes}{
 \itemize{
 \item The computation below must be applied to each section of the
@@ -83,10 +83,11 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work or
-work-free days ("I actually get ready to fall asleep at ___ o'clock").
-\item \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency on work or work-free days ("I
-need ___ min to fall asleep").
+\item \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work
+\strong{or} work-free days ("I actually get ready to fall asleep at ___ o'clock").
+\item \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency or time to fall asleep after
+preparing to sleep on work \strong{or} work-free days ("I need ___ min to fall
+asleep").
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -103,9 +104,10 @@ Where:
 sleep between two days in a particular shift \strong{or} between two free days
 after a particular shift ("I actually get ready to fall asleep at ___
 o'clock").
-\item \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency between two days
-in a particular shift \strong{or} between two free days after a particular shift
-("I need ___ min to fall asleep").
+\item \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency or time to fall
+asleep after preparing to sleep between two days in a particular shift \strong{or}
+between two free days after a particular shift ("I need ___ min to fall
+asleep").
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =

@@ -14,7 +14,7 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 #' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `so()`
-#' (\eqn{SO}) computation are as follow.
+#' (\eqn{SO}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -32,10 +32,11 @@
 #'
 #' Where:
 #'
-#' * \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work or
-#' work-free days ("I actually get ready to fall asleep at ___ o'clock").
-#' * \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency on work or work-free days ("I
-#' need ___ min to fall asleep").
+#' * \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work
+#' __or__ work-free days ("I actually get ready to fall asleep at ___ o'clock").
+#' * \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency or time to fall asleep after
+#' preparing to sleep on work __or__ work-free days ("I need ___ min to fall
+#' asleep").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -50,9 +51,10 @@
 #' sleep between two days in a particular shift __or__ between two free days
 #' after a particular shift ("I actually get ready to fall asleep at ___
 #' o'clock").
-#' * \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency between two days
-#' in a particular shift __or__ between two free days after a particular shift
-#' ("I need ___ min to fall asleep").
+#' * \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency or time to fall
+#' asleep after preparing to sleep between two days in a particular shift __or__
+#' between two free days after a particular shift ("I need ___ min to fall
+#' asleep").
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.

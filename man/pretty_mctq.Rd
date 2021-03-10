@@ -2,12 +2,12 @@
 % Please edit documentation in R/pretty_mctq.R
 \name{pretty_mctq}
 \alias{pretty_mctq}
-\title{Make a MCTQ dataset more presentable}
+\title{Make an MCTQ dataset more presentable}
 \usage{
 pretty_mctq(data, round = TRUE, hms = TRUE)
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A \code{data.frame} object.}
 
 \item{round}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
 and \code{hms} objects must be rounded at the seconds level (default: \code{TRUE}).}
@@ -16,13 +16,14 @@ and \code{hms} objects must be rounded at the seconds level (default: \code{TRUE
 and \code{difftime} objects must be converted to \code{hms} (default: \code{TRUE}).}
 }
 \value{
-A transformed data frame, as indicated in arguments.
+A transformed \code{data.frame} object, as indicated in the arguments.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{pretty_mctq()} helps you to transform your MCTQ data in many ways. See
-parameters and Details section to learn more.
+\code{pretty_mctq()} helps you to transform your Munich Chronotype Questionnaire
+(MCTQ) data in many ways. See the Arguments and Details section to learn
+more.
 }
 \details{
 \subsection{Rounding}{
@@ -32,10 +33,10 @@ that if you need to redo a computation, or do new ones, your values can be
 off by a couple of seconds (see
 \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off error}).
 
-Round your values only if and when you want to present it in a more clear
-way, like in graphical representations. You can also round values to
-facilitate data exporting to text formats (like \code{.csv}), but note that this
-will come with a precision cost.
+Round your values only if and when you want to present them more clearly,
+like in graphical representations. You can also round values to facilitate
+data exporting to text formats (like \code{.csv}), but note that this will come
+with a precision cost.
 
 Note also that \code{pretty_mctq()} uses \code{\link[=round_time]{round_time()}} for rounding.
 \code{round_time()} is based on \code{\link[base:Round]{base::round()}}, which uses the IEC 60559

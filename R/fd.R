@@ -11,7 +11,7 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
 #' Experimental Platform (n.d.) guidelines for `fd()` (\eqn{FD}) computation are
-#' as follow.
+#' as follows.
 #'
 #' __\deqn{7 - WD}__
 #'
@@ -25,7 +25,7 @@
 #'   from a standard or micro version of the MCTQ questionnaire.
 #'
 #' @return An `integer` object corresponding to the difference between the
-#'   number of days in a week and the number of workdays (`wd`).
+#'   number of days in a week (7) and the number of workdays (`wd`).
 #'
 #' @template details_a
 #' @template references_a

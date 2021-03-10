@@ -33,18 +33,18 @@ If a subject __do not have a regular work schedule__ (`wd == 0`), __only answere
 
 Following this same line of thought, we can also say that:
 
-* `sd_week` (average weekly sleep duration) value must be equal to `sd_f` (sleep duration on work-free days) since the subject does not have workdays.
-* `sloss_week` (weekly sleep loss) value must be equal to `0s` since there's no sleep debt.
-* `le_week` (average weekly light exposure) value must be equal to `le_f` (light exposure on work-free days) since there are no workdays.
+* `sd_week` (average weekly sleep duration) must be equal to `sd_f` (sleep duration on work-free days) since the subject does not have workdays.
+* `sloss_week` (weekly sleep loss) must be equal to `0s` since there's no sleep debt.
+* `le_week` (average weekly light exposure) must be equal to `le_f` (light exposure on work-free days) since there are no workdays.
 * `sjl_rel` (relative social jet lag) and `sjl` (absolute social jet lag) must be equal to `0s` since there's no discrepancy between social and biological time.
 
 Note that the [chronotype computation](https://www.thewep.org/documentations/mctq/item/mctq-variables) follows a similar line of thought.
 
-The opposite scenario, _i.e._ when the subject __works 7 days per week__ (`wd == 7`) and __only answered the workdays section__, can also have different outputs. `sloss_week()`, `msf_sc()`, `sjl_rel()`, and `sjl()` should still produce a `NA` as output since there's no way to know the real behavior of the subject sleep-wake cycle. But, according to this reasoning, `sd_week` and `le_week` can have different values.
+The opposite scenario, _i.e._ when the subject __works 7 days per week__ (`wd == 7`) and __only answered the workdays section__, can also have different outputs. `sloss_week()`, `msf_sc()`, `sjl_rel()`, and `sjl()` should still produce a `NA` as output since there's no way to know the real behavior of the subject sleep-wake cycle. But, according to this reasoning, `sd_week` and `le_week` can have different outputs.
 
-* `sd_week` (average weekly sleep duration) value must be equal to `sd_w` (sleep duration on workdays) since the subject does not have work-free days.
-* `le_week` (average weekly light exposure) value must be equal to `le_w` (light exposure on work-free days) since the subject does not have work-free days.
+* `sd_week` (average weekly sleep duration) must be equal to `sd_w` (sleep duration on workdays) since the subject does not have work-free days.
+* `le_week` (average weekly light exposure) must be equal to `le_w` (light exposure on work-free days) since the subject does not have work-free days.
 
 If you agree with this line of thought, we recommend creating dummy variables to identify those two situations and then change the case values as mentioned. You can see this procedure in action with the [data wrangling algorithms](https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R#L923) made to produce the fictional `std_mctq` dataset, provided by the `mctq` package.
 
-Please note that this workaround is not mentioned or endorsed by the original MCTQ authors. If you use it, you must mention this reasoning in your methods section.
+Please note that this workaround is not mentioned or endorsed by the MCTQ authors. If you use it, you must mention this reasoning in your methods section.

@@ -10,8 +10,7 @@ rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value with purpose of identify each subject in the
-dataset.
+A unique \code{integer} value to identify each subject in the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
@@ -80,8 +79,8 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{so_f}{
-Local time of sleep onset on \strong{work-free days} when the subject DON'T use
-an alarm clock to wake up.
+Local time of sleep onset on \strong{work-free days} when the subject
+\strong{doesn't} use an alarm clock to wake up.
 \cr \cr
 Statement (\code{EN}): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 normally fall asleep at ___ : ___ AM/PM (this is NOT when you get into bed,
@@ -92,8 +91,8 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{se_f}{
-Local time of sleep end on \strong{work-free days} when the subject DON'T use an
-alarm clock to wake up.
+Local time of sleep end on \strong{work-free days} when the subject \strong{doesn't}
+use an alarm clock to wake up.
 \cr \cr
 Statement (\code{EN}): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 normally wake up at ___ : ___ AM/PM (this is NOT when you get out of bed,
@@ -104,16 +103,16 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{sd_f}{
-Sleep duration on \strong{work-free days} when the subject DON'T use an alarm
-clock to wake up.
+Sleep duration on \strong{work-free days} when the subject \strong{doesn't} use an
+alarm clock to wake up.
 \cr \cr
 Type: Computed.
 \cr \cr
 R class: \code{Duration}.}
 
 \item{msf}{
-Local time of mid-sleep on \strong{work-free days} when the subject DON'T use an
-alarm clock to wake up.
+Local time of mid-sleep on \strong{work-free days} when the subject \strong{doesn't}
+use an alarm clock to wake up.
 \cr \cr
 Type: Computed.
 \cr \cr
@@ -170,8 +169,8 @@ micro version.
 
 This data was created following the guidelines in Ghotbi \emph{et.al} (2020), in
 addition to the guidelines in Roenneberg, Wirz-Justice, & Merrow (2003),
-Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The World Wide
-Experimental Platform (theWeP, n.d.). See the References and Details sections
+Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The Worldwide
+Experimental Platform (n.d.). See the References and Details sections
 to learn more.
 }
 \details{
@@ -187,7 +186,7 @@ Zerbini, & Winnebeck (2019).
 To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
 (2013) and Ghotbi \emph{et.al} (2020).
 
-If you are curious about variable computations and want to have access to
+If you're curious about variable computations and want to have access to
 the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
 }
 
@@ -198,14 +197,14 @@ and by manual insertions of special cases. Its purpose is to demonstrate
 common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
-You can see the \code{micro_mctq} build and data wrangling processes at
-\url{https://github.com/gipsousp/mctq/blob/master/data-raw/micro_mctq.R}.
+You can see the \code{micro_mctq} build and data wrangling processes
+\href{https://github.com/gipsousp/mctq/blob/master/data-raw/micro_mctq.R}{here}.
 }
 
 \subsection{Variable naming}{
 
-The naming of the variables took into account the naming schemes used in MCTQ
-articles, in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
+The naming of the variables took into account the naming scheme used in MCTQ
+publications, in addition to the guidelines of the \href{https://style.tidyverse.org/}{tidyverse style guide}.
 }
 
 \subsection{Variable classes}{

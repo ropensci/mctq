@@ -15,21 +15,21 @@ qplot_walk(
 )
 }
 \arguments{
-\item{data}{An \code{atomic} or \verb{data frame} object.}
+\item{data}{An \code{atomic} or \code{data.frame} object.}
 
 \item{...}{(optional) additional arguments to be passed to
 \code{\link[ggplot2:qplot]{ggplot2::qplot()}}.}
 
-\item{cols}{(optional) (only for data frames) a \code{character} vector indicating
-columns names in \code{data} for plotting. If \code{NULL}, \code{qplot_walk()} will use
+\item{cols}{(optional) (only for data frames) a \code{character} object indicating
+column names in \code{data} for plotting. If \code{NULL}, \code{qplot_walk()} will use
 all columns in \code{data}. This setting only works if \code{pattern = NULL}
 (default: \code{NULL}).}
 
 \item{pattern}{(optional) (only for data frames) a string with a regular
-expression to select columns names in \code{data} for plotting. This setting
+expression to select column names in \code{data} for plotting. This setting
 only works if \code{cols = NULL} (default: \code{NULL}).}
 
-\item{ignore}{(optional) (only for data frames) a \code{character} vector
+\item{ignore}{(optional) (only for data frames) a \code{character} object
 indicating which object classes the function must ignore. This setting can
 be used with \code{cols} and \code{pattern}. Assign \code{NULL} to disable this behavior
 (default: \code{"character"}).}
@@ -57,7 +57,7 @@ interactive mode.
 \subsection{Requirements}{
 
 This function requires the \code{\link[grDevices:grDevices-package]{grDevices}} and
-\code{\link[ggplot2:ggplot2-package]{ggplot2}} packages and can only run in
+\code{\link[ggplot2:ggplot2-package]{ggplot2}} package and can only run in
 interactive mode. The \code{grDevices} comes with a standard R installation and
 is typically loaded by default. Most people also run R interactively.
 
@@ -70,7 +70,7 @@ them with \code{install.packages("grDevices")} and \code{install.packages("ggplo
 \code{qplot_walk()} erases all plots after it runs. For that reason, the function
 first emits a dialog message warning the user of this behavior before it
 runs. If you want to recover a single distribution plot, assign the variable
-vector on the \code{data} argument.
+vector to the \code{data} argument.
 }
 
 \subsection{Additional arguments to \code{\link[ggplot2:qplot]{ggplot2::qplot()}}}{
@@ -79,21 +79,21 @@ vector on the \code{data} argument.
 familiar with \code{\link[ggplot2:qplot]{ggplot2::qplot()}}, you can pass additional arguments to the
 function using the ellipsis argument (\code{...}).
 
-Note that \code{x}, \code{y} and \code{data} arguments are reserved for \code{qplot_walk()}.
+Note that \code{x}, \code{y}, and \code{data} arguments are reserved for \code{qplot_walk()}.
 }
 
 \subsection{\code{Duration}, \code{Period}, and \code{difftime} objects}{
 
-In order to help with the visualization, \code{qplot_walk()} automatically
+To help with the visualization, \code{qplot_walk()} automatically
 converts \code{Duration}, \code{Period}, and \code{difftime} objects to \code{hms}.
 }
 
 \subsection{Midday change}{
 
-\code{hms} variables with values greater than \code{22:00:00} will automatically be
-converted to POSIXct with a midday change, \emph{i.e.} all values with more
+Time variables with values greater than \code{22:00:00} will automatically be
+converted to \code{POSIXct} with a midday change, \emph{i.e.} all values with more
 than 12 hours will represent day one, and all the rest will represent day 2.
-This is made in order to better represent values that cross the midnight
+This is made to better represent values that cross the midnight
 hour.
 
 You can disable this behavior using \code{midday_change = FALSE}.

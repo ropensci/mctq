@@ -11,7 +11,7 @@
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 #' (2013), and The Worldwide Experimental Platform (n.d.) guidelines for `tbt()`
-#' (\eqn{TBT}) computation are as follow.
+#' (\eqn{TBT}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -29,9 +29,9 @@
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}}{BT_W/F} = local time of going to bed on work or work-free
-#' days ("I go to bed at ___ o'clock").
-#' * \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work or
+#' * \eqn{BT_{W/F}}{BT_W/F} = local time of going to bed on work __or__
+#' work-free days ("I go to bed at ___ o'clock").
+#' * \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work __or__
 #' work-free days.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.

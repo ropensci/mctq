@@ -84,7 +84,7 @@ convert("10:00 PM", "hms", orders = "IMp")
 
 After your data is set to start, just use the `mctq` functions below to process it. 
 
-Note that `mctq` uses a similar naming scheme to that used in the MCTQ publications. That makes it easy to find and apply any computation necessary.
+Note that the `mctq` functions uses a similar naming scheme to that used in the MCTQ publications. That makes it easy to find and apply any computation necessary.
 
 * `fd()`: compute MCTQ work-free days
 * `so()`: compute MCTQ local time of sleep onset
@@ -93,7 +93,7 @@ Note that `mctq` uses a similar naming scheme to that used in the MCTQ publicati
 * `tbt()`: compute MCTQ total time in bed
 * `ms()`: compute MCTQ local time of mid-sleep
 * `napd()`: compute MCTQ nap duration (only for MCTQ Shift)
-* `sd24()`: compute MCTQ 24h sleep duration (only for MCTQ Shift)
+* `sd24()`: compute MCTQ 24 hours sleep duration (only for MCTQ Shift)
 
 Example:
 

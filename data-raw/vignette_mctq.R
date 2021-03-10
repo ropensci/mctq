@@ -13,7 +13,7 @@
 #'
 #' @description
 #'
-#' `build_vignette_std_mctq()` builds a fictional raw dataset composed by
+#' `build_vignette_std_mctq()` builds a fictional raw dataset composed of
 #' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
 #' standard version to be used on vignette examples.
 #'

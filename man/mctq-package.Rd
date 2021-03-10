@@ -4,7 +4,7 @@
 \name{mctq-package}
 \alias{mctq}
 \alias{mctq-package}
-\title{mctq: The R Package for Munich ChronoType Questionnaire (MCTQ) Data}
+\title{mctq: The R Package for the Munich ChronoType Questionnaire (MCTQ)}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 

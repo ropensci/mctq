@@ -34,57 +34,58 @@
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` values in `...` will be strip of their dates. Only the time will be
-#' considered.
+#' `POSIXt` values in `...` will be stripped of their dates. Only the time will
+#' be considered.
 #'
 #' ## `Period` objects
 #'
-#' `Period` objects are a special time object developed by the
-#' [lubridate][lubridate::lubridate-package] team that represent "human units",
+#' `Period` objects are a special time of object developed by the
+#' [lubridate][lubridate::lubridate-package] team that represents "human units",
 #' ignoring possible time irregularities. That is to say that 1 day as `Period`
 #' will always represent 1 day in the timeline. `sum_time()` ignores that
 #' property of `Period` objects, treating them like objects of class `Duration`.
 #'
-#' ## Time line irregularities
+#' ## Timeline irregularities
 #'
-#' This function does not take into account time line irregularities (_e.g._
-#' leap years, DST, leap seconds). This may not be a issue for most people, but
+#' This function does not take into account timeline irregularities (_e.g._
+#' leap years, DST, leap seconds). This may not be an issue for most people, but
 #' it must be considered when doing time arithmetic.
 #'
 #' @param ... Objects belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
 #' @param class (optional) a string indicating the output class (default:
 #'   `"hms"`).
-#' @param circular (optional) a logical value indicating whether the sum should
-#'   be in a circular time frame of 24 hours (clock hours) (default: `FALSE`).
-#' @param vectorize (optional) a logical value indicating if the function must
+#' @param circular (optional) a `logical` value indicating whether the sum
+#'   should be made in a circular time frame of 24 hours (clock hours) (default:
+#'   `FALSE`).
+#' @param vectorize (optional) a `logical` value indicating if the function must
 #'   operate in a vectorized fashion (default: `FALSE`).
-#' @param na.rm (optional) a logical value indicating if the function must
+#' @param na.rm (optional) a `logical` value indicating if the function must
 #'   remove `NA` values while performing the sum (default: `FALSE`).
 #'
 #' @return
 #'
-#' * If `circular = TRUE` and `vectorize = FALSE` (default), an object of
+#' * If `circular = TRUE` and `vectorize = FALSE`, an object of
 #' the indicated class in `class` (default: `"hms"`) with the sum of the time
 #' from objects in `...` in a circular time frame of 24 hours.
 #'
-#' * If `circular = FALSE` (default) and `vectorize = FALSE` (default), an
-#' object of the indicated class in `class` (default: `"hms"`) with the
-#' cumulative sum of the time from objects in `...`.
+#' * If `circular = FALSE` and `vectorize = FALSE`, an
+#' object of the indicated class in `class` (default: `"hms"`) with a
+#' linear sum of the time from objects in `...`.
 #'
 #' * If `circular = TRUE` and `vectorize = TRUE`, an object of the indicated
 #' class in `class` (default: `"hms"`) with a vectorized sum of the time from
 #' objects in `...` in a circular time frame of 24 hours.
 #'
-#' * If `circular = FALSE` (default) and `vectorize = TRUE`, an object of the
+#' * If `circular = FALSE` and `vectorize = TRUE`, an object of the
 #' indicated class in `class` (default: `"hms"`) with a vectorized and
-#' cumulative sum of the time from objects in `...`.
+#' linear sum of the time from objects in `...`.
 #'
 #' @family utility functions
 #' @export
 #'
 #' @examples
-#' ## __ Cumulative non-vectorized sum __
+#' ## __ Linear non-vectorized sum __
 #' x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 #' y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 #' sum_time(x, y, class = "duration")
@@ -101,7 +102,7 @@
 #' sum_time(x, circular = TRUE, na.rm = TRUE)
 #' #> 02:45:00 # Expected
 #'
-#' ## __ Cumulative vectorized sum __
+#' ## __ Linear vectorized sum __
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, vectorize = TRUE)
