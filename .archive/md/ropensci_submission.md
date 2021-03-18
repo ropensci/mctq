@@ -1,5 +1,5 @@
 Submitting Author: Daniel Vartanian (@danielvartan)
-Other Authors: Ana Amelia Benedito-Silva (@AnaAmeliaBeneditoSIlva), Mario Pedrazzoli (@pedrazzo)
+Other Authors: Ana Amelia Benedito-Silva (@AnaAmeliaBeneditoSIlva) and Mario Pedrazzoli (@pedrazzo)
 Repository: https://github.com/gipsousp/mctq
 Version submitted: 0.0.0.9000
 Editor: <!--editor--> TBD <!--end-editor-->
@@ -97,7 +97,7 @@ Language: en-US
 
 - Explain how and why the package falls under these categories (briefly, 1-2 sentences):
 
-The Munich Chronotype Questionnaire (MCTQ) may look like a simple questionnaire, but it requires a lot of date/time manipulation. This can be really challenging, especially if you’re dealing with a large set of data. `mctq` provides reliable tools, thoroughly tested, to help scientists with this task.
+The Munich Chronotype Questionnaire (MCTQ) may look like a simple questionnaire, but it requires a lot of date/time manipulation. This can be really challenging, especially if you’re dealing with a large set of data. `mctq` provides reliable tools, thoroughly tested, to help scientists with that task.
 
 -   Who is the target audience and what are scientific applications of this package?
 

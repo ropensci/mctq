@@ -4,13 +4,13 @@
 \name{mctq-package}
 \alias{mctq}
 \alias{mctq-package}
-\title{mctq: The R Package for the Munich ChronoType Questionnaire (MCTQ)}
+\title{mctq: An R Package for the Munich ChronoType Questionnaire}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-A complete and consistent toolkit to process Munich ChronoType 
-    Questionnaire (MCTQ) data in R for all of its three versions (standard, 
-    micro, and shift).
+A complete and consistent toolkit to process the Munich ChronoType 
+    Questionnaire (MCTQ) for all of its three versions (standard, micro, 
+    and shift).
 }
 \seealso{
 Useful links:

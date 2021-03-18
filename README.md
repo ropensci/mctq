@@ -21,48 +21,48 @@ Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff6
 
 ## Overview
 
-`mctq` provides a complete and consistent toolkit to process Munich
-Chronotype Questionnaire (MCTQ) data in R for its three versions
-(standard, micro, and shift).
+`mctq` is an R package that provides a complete and consistent toolkit
+to process the Munich ChronoType Questionnaire (MCTQ), a quantitative
+and validated method to assess peoples’ sleep behavior presented by Till
+Roenneberg, Anna Wirz-Justice, and Martha Merrow in
+[2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
+to facilitate the work of sleep and chronobiology scientists with MCTQ
+data while also helping with research reproducibility.
 
-> Please note that this package has not been [peer
-> reviewed](https://devguide.ropensci.org/softwarereviewintro.html) yet.
-> We plan to submit it to [rOpenSci](https://ropensci.org/) in March
-> 2021 . We also plan to write an article about it and to add it to
-> [CRAN](https://cran.r-project.org/).
+> This package is currently under a [software
+> peer-review](https://github.com/ropensci/software-review/issues/434)
+> by the [rOpenSci](https://ropensci.org/) initiative. We plan to submit
+> it to [CRAN](https://cran.r-project.org/) soon after the review
+> process ends.
 
-MCTQ is one of the best quantitative and validated methods available to
-assess peoples’ sleep behavior. The questionnaire was presented by Till
-Roenneberg (LMU Munich), Anna Wirz-Justice (UPK Basel), and Martha
-Merrow (LMU Munich) in [2003](https://doi.org/10.1177/0748730402239679).
-Since then, it has been progressively optimized and translated into 13
-languages. It has become an indispensable tool for sleep and
-chronobiology scientists.
-
-Learn more about MCTQ at <https://www.thewep.org/documentations/mctq>.
+Learn more about the MCTQ questionnaire at
+<https://www.thewep.org/documentations/mctq>.
 
 ### Wait, an R package for a questionnaire?
 
-MCTQ may look like a simple questionnaire, but it requires a lot of
-date/time manipulation. This can be really challenging, especially if
-you’re dealing with a large set of data.
+Although it may look like a simple questionnaire, MCTQ requires a lot of
+date/time manipulation. This poses a challenge for many scientists,
+being that most people have difficulties with date/time data, especially
+when dealing with an extensive set of data. The `mctq` package comes to
+address this issue.
 
-The main advantage of using the `mctq` package in your research is that
-you will have reliable tools, thoroughly tested, at your disposition,
-made and supported by a sleep science research group (GIPSO) from a well
-know university ([USP](https://www5.usp.br/)). `mctq` also helps with
-research reproducibility, since it’s a free and open-source package that
-anyone can find and use.
-
-This package is also equipped with several utility functions that allow
-you to easily convert and visualize your MCTQ data. It also provides
-fictional datasets for testing and learning purposes.
+`mctq` can handle the processing tasks for the three MCTQ versions
+(standard, micro, and shift) with few dependencies, relying much of its
+applications on the [lubridate](https://lubridate.tidyverse.org/) and
+[hms](https://hms.tidyverse.org/) packages from
+[tidyverse](https://www.tidyverse.org/). We also designed `mctq` with
+the user experience in mind, by creating an interface that resembles the
+way the questionnaire data is shown in MCTQ publications, and by
+providing extensive and detailed documentation about each computation
+proposed by the MCTQ authors. The package also includes several utility
+tools to deal with different time representations (e.g., decimal hours,
+radians) and time arithmetic issues, along with fictional datasets for
+testing and learning purposes.
 
 ## Prerequisites
 
-`mctq` was created with the user experience in mind. You only need to
-have some familiarity with the [R programming
-language](https://www.r-project.org/) to use the main functions.
+You only need to have some familiarity with the [R programming
+language](https://www.r-project.org/) to use the `mctq` main functions.
 
 In case you don’t feel comfortable with R, we strongly recommend
 checking Hadley Wickham and Garrett Grolemund free and online book [R
