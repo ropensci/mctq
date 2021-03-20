@@ -23,7 +23,7 @@
 #'
 #' ## Wrappers
 #'
-#' `convert()` have some wrapper functions for convenience.
+#' `convert()` has some wrapper functions for convenience.
 #'
 #' * `convert_tu()` helps make conversions from date/time objects to units.
 #'

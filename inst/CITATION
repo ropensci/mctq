@@ -2,16 +2,16 @@ citHeader("To cite mctq in publications use:")
 
 citEntry(
   entry       = "Unpublished",
-  title       = paste0("mctq: the R package for the Munich ChronoType ",
-                       "Questionnaire (MCTQ)"),
+  title       = paste0("mctq: An R package for the Munich ChronoType ",
+                       "Questionnaire"),
   author      = personList(as.person("Daniel Vartanian"),
                            as.person("Ana Amelia Benedito-Silva"),
                            as.person("Mario Pedrazzoli")),
   year        = "2021",
   url         = "https://gipsousp.github.io/mctq/",
   textVersion = paste0("Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. ",
-                        "(2021). mctq: the R package for the Munich ChronoType ",
-                        "Questionnaire (MCTQ). Retrieved from ",
-                        "https://gipsousp.github.io/mctq/ ."),
+                       "(2021). mctq: An R package for the Munich ChronoType ",
+                       "Questionnaire. Retrieved from ",
+                       "https://gipsousp.github.io/mctq/ ."),
   note        = "Lifecycle: maturing"
 )

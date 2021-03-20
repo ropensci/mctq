@@ -212,7 +212,7 @@ and Times" from Wickham and Grolemund (n.d.) and chapter "Technical
 Representation of Data" from Loo and Jonge (2018).
 \subsection{Wrappers}{
 
-\code{convert()} have some wrapper functions for convenience.
+\code{convert()} has some wrapper functions for convenience.
 \itemize{
 \item \code{convert_tu()} helps make conversions from date/time objects to units.
 \item \code{convert_ut()} helps make conversions from units to date/time objects.

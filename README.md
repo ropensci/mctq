@@ -5,8 +5,11 @@
 
 <!-- badges: start -->
 
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci/software-review/issues/434)
+![CRAN status](https://www.r-pkg.org/badges/version/mctq) [![Project
+Status: Active – The project has reached a stable, usable state and is
+being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -15,6 +18,8 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 status](https://travis-ci.com/gipsousp/mctq.svg?branch=master)](https://travis-ci.com/gipsousp/mctq)
 [![Codecov test
 coverage](https://codecov.io/gh/gipsousp/mctq/branch/master/graph/badge.svg)](https://codecov.io/gh/gipsousp/mctq?branch=master)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor
 Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
 <!-- badges: end -->
@@ -86,8 +91,8 @@ devtools::install_github("gipsousp/mctq", dependencies = TRUE)
 
 `mctq` works with a set of object classes specially created to hold time
 values. These classes can be found in the
-[hms](https://hms.tidyverse.org/) and
-[lubridate](https://lubridate.tidyverse.org/) package from
+[lubridate](https://lubridate.tidyverse.org/) and
+[hms](https://hms.tidyverse.org/) packages from
 [tidyverse](https://www.tidyverse.org/packages/). If your data do not
 conform to the object classes required, you can use `mctq` `convert()`
 function to convert it.
@@ -213,8 +218,8 @@ citation("mctq")
 
 ## Contributing
 
-`mctq` is a community project, anyone and everyone is welcome to
-contribute. Take a moment to review our [Guidelines for
+`mctq` is a community project, everyone is welcome to contribute. Take a
+moment to review our [Guidelines for
 Contributing](https://gipsousp.github.io/mctq/CONTRIBUTING.html).
 
 Please note that `mctq` is released with a [Contributor Code of

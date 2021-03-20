@@ -10,7 +10,7 @@
 #' @param file A string indicating the file name of the raw dataset. If `NULL`,
 #'   all raw dataset file names will be printed (default: `NULL`).
 #'
-#' @return If `path = NULL`, returns a character object with all raw dataset
+#' @return If `path = NULL`, returns a `character` object with all raw dataset
 #'   file names available. Else, it returns the `file` path.
 #'
 #' @family utility functions

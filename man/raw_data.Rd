@@ -11,7 +11,7 @@ raw_data(file = NULL)
 all raw dataset file names will be printed (default: \code{NULL}).}
 }
 \value{
-If \code{path = NULL}, returns a character object with all raw dataset
+If \code{path = NULL}, returns a \code{character} object with all raw dataset
 file names available. Else, it returns the \code{file} path.
 }
 \description{

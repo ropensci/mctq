@@ -23,8 +23,7 @@ Authors@R:
              role = c("fnd")))
 Maintainer: Daniel Vartanian <danvartan@gmail.com>
 Description: A complete and consistent toolkit to process the Munich ChronoType 
-    Questionnaire (MCTQ) for all of its three versions (standard, micro, 
-    and shift).
+    Questionnaire (MCTQ) for its three versions (standard, micro, and shift).
 License: MIT + file LICENSE
 URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
 BugReports: https://github.com/gipsousp/mctq/issues/
@@ -54,6 +53,7 @@ Suggests:
     spelling,
     stats,
     testthat (>= 2.0.0),
+    usethis,
     utils
 Config/testthat/edition: 2
 VignetteBuilder: knitr
