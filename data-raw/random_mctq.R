@@ -1,10 +1,10 @@
 # Source the file before running the functions
 # Don't forget to uncomment the `library` functions below
 
-# library(lubridate)
-# library(hms)
 # library(crayon)
 # library(glue)
+# library(hms)
+# library(lubridate)
 # library(mctq)
 
 #' Compute and print standard and micro MCTQ distribution parameters

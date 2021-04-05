@@ -5,7 +5,7 @@ test_that("qplot_walk() | general test", {
     data <- utils::head(datasets::iris, 5)
 
     # is_interactive <- mctq:::is_interactive
-    # is_namespace_loaded <- mctq:::is_namespace_loaded
+    # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
@@ -13,7 +13,7 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             suppressWarnings(qplot_walk(data[[1]])))
     }
 
@@ -24,7 +24,7 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             suppressWarnings(qplot_walk(data[[1]], xlab = "test")))
     }
 
@@ -35,7 +35,7 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
             qplot_walk(data))
     }
@@ -51,7 +51,7 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
             qplot_walk(data, pattern = ".+", xlab = "test"))
     }
@@ -64,7 +64,7 @@ test_that("qplot_walk() | error test", {
     data <- utils::head(datasets::iris, 5)
 
     # is_interactive <- mctq:::is_interactive
-    # is_namespace_loaded <- mctq:::is_namespace_loaded
+    # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
@@ -82,7 +82,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) FALSE,
+            require_namespace = function(...) FALSE,
             qplot_walk(data))
     }
 
@@ -93,7 +93,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             qplot_walk(data, x = 1))
     }
 
@@ -104,7 +104,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             qplot_walk(data, cols = "Sepal.Length", pattern = "\\."))
     }
 
@@ -115,7 +115,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             qplot_walk(list(1)))
     }
 
@@ -126,7 +126,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             qplot_walk(data, pattern = "^999$"))
     }
 
@@ -139,7 +139,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             qplot_walk(data, ignore = ignore))
     }
 
@@ -151,7 +151,7 @@ test_that("qplot_walk() | warning test", {
     data <- utils::head(datasets::iris, 5)
 
     # is_interactive <- mctq:::is_interactive
-    # is_namespace_loaded <- mctq:::is_namespace_loaded
+    # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
@@ -159,7 +159,7 @@ test_that("qplot_walk() | warning test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             qplot_walk(data[[1]]))
     }
 
@@ -170,7 +170,7 @@ test_that("qplot_walk() | warning test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
             qplot_walk(data, ignore = "factor"))
     }

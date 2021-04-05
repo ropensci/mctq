@@ -60,9 +60,9 @@ the user experience in mind, by creating an interface that resembles the
 way the questionnaire data is shown in MCTQ publications, and by
 providing extensive and detailed documentation about each computation
 proposed by the MCTQ authors. The package also includes several utility
-tools to deal with different time representations (e.g., decimal hours,
-radians) and time arithmetic issues, along with fictional datasets for
-testing and learning purposes.
+tools to deal with different time representations (*e.g.*, decimal
+hours, radians) and time arithmetic issues, along with fictional
+datasets for testing and learning purposes.
 
 ## Prerequisites
 
@@ -201,14 +201,14 @@ citation("mctq")
 #> 
 #> To cite mctq in publications use:
 #> 
-#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: the
-#>   R package for the Munich ChronoType Questionnaire (MCTQ). Retrieved
-#>   from https://gipsousp.github.io/mctq/ .
+#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: An
+#>   R package for the Munich ChronoType Questionnaire. Retrieved from
+#>   https://gipsousp.github.io/mctq/ .
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
-#>     title = {mctq: the R package for the Munich ChronoType Questionnaire (MCTQ)},
+#>     title = {mctq: An R package for the Munich ChronoType Questionnaire},
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2021},
 #>     url = {https://gipsousp.github.io/mctq/},

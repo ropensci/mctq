@@ -1,8 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
-inst/doc
-docs
-pkgdown
 doc
+docs
+inst/doc
 Meta
+pkgdown

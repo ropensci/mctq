@@ -3,7 +3,7 @@
 
 test_that("dialog_line() | general test", {
     # is_interactive <- mctq:::is_interactive
-    # is_namespace_loaded <- mctq:::is_namespace_loaded
+    # require_namespace <- mctq:::require_namespace
     # read_line <- mctq:::read_line
     # dialog_line <- mctq:::dialog_line
 
@@ -28,7 +28,7 @@ test_that("dialog_line() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             read_line = function(...) TRUE,
             dialog_line(1, space_above = TRUE, space_below = TRUE))
     }
@@ -48,7 +48,7 @@ test_that("dialog_line() | error test", {
 })
 
 test_that("alert() | general test", {
-    # is_namespace_loaded <- mctq:::is_namespace_loaded
+    # require_namespace <- mctq:::require_namespace
 
     expect_equal(alert(1, abort = TRUE), NULL)
     expect_message(alert(1))
@@ -57,7 +57,7 @@ test_that("alert() | general test", {
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
-            is_namespace_loaded = function(...) TRUE,
+            require_namespace = function(...) TRUE,
             alert("test"))
     }
 

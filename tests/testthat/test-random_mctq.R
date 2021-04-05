@@ -16,13 +16,13 @@ test_that("random_mctq() | general test", {
 })
 
 test_that("random_mctq() | error test", {
-    # is_namespace_loaded <- mctq:::is_namespace_loaded
+    # require_namespace <- mctq:::require_namespace
     # random_mctq <- mctq::random_mctq
 
     # "This function requires the `stats` package to run [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
-            is_namespace_loaded = function(...) FALSE,
+            require_namespace = function(...) FALSE,
             random_mctq())
     }
 

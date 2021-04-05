@@ -113,9 +113,10 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
              call. = FALSE)
     }
 
-    if(!is_namespace_loaded("grDevices") || !is_namespace_loaded("ggplot2")) {
+    if (!require_namespace("grDevices", quietly = TRUE) ||
+        !require_namespace("ggplot2", quietly = TRUE)) {
         stop("This function requires the 'grDevices' and 'ggplot2' packages ",
-            'to run. You can install them by running: \n \n',
+            'to run. You can install them by running: \n\n',
             'install.packages("grDevices") \n',
             'install.packages("ggplot2")' , call. = FALSE)
     }
@@ -217,7 +218,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         )
 
     dialog <- dialog_line(
-        line = "Press 'esc' to exit or 'enter' to continue >",
+        "Press 'esc' to exit or 'enter' to continue >",
         space_above = FALSE, space_below = FALSE)
 
     for (i in cols) {

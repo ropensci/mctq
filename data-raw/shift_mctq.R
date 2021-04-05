@@ -8,8 +8,8 @@
 # library(magrittr)
 # library(mctq)
 # library(rlang)
-# library(usethis)
 # library(stringr)
+# library(usethis)
 # library(utils)
 # library(validate)
 
@@ -29,7 +29,7 @@
 #'
 #' @return An invisible `tibble` with a raw MCTQ\eqn{^{Shift}}{ Shift} dataset.
 #'
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data !! :=
 #' @noRd
@@ -1096,7 +1096,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'   MCTQ\eqn{^{Shift}}{ Shift} dataset.
 #'
 #' @template references_e
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data !! :=
 #' @noRd
@@ -1237,7 +1237,7 @@ tidy_shift_mctq <- function(write = FALSE) {
 #'
 #' @inheritParams tidy_shift_mctq
 #' @template references_d
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !!
 #' @noRd
@@ -1390,7 +1390,7 @@ validate_shift_mctq <- function(write = FALSE) {
 #' @inheritParams tidy_shift_mctq
 #' @inheritParams pretty_mctq
 #' @template references_d
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data !! :=
 #' @noRd

@@ -28,7 +28,7 @@
 #'
 #' @return An invisible `tibble` with a raw micro MCTQ dataset.
 #'
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @noRd
@@ -324,7 +324,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'   dataset.
 #'
 #' @template references_e
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @noRd
@@ -413,7 +413,7 @@ tidy_micro_mctq <- function(write = FALSE) {
 #'
 #' @inheritParams tidy_micro_mctq
 #' @template references_d
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !!
 #' @noRd
@@ -524,7 +524,7 @@ validate_micro_mctq <- function(write = FALSE) {
 #' @inheritParams tidy_micro_mctq
 #' @inheritParams pretty_mctq
 #' @template references_d
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !!
 #' @noRd

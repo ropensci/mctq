@@ -1,11 +1,13 @@
-^\.archive$
-^\.github$
 ^data-raw$
+^doc$
 ^docs$
 ^man-roxygen$
+^Meta$
 ^pkgdown$
-^\.travis\.yml$
+^\.archive$
+^\.github$
 ^\.Rproj\.user$
+^\.travis\.yml$
 ^_pkgdown\.yml$
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$
@@ -13,5 +15,3 @@
 ^LICENSE\.md$
 ^mctq\.Rproj$
 ^README\.Rmd$
-^doc$
-^Meta$

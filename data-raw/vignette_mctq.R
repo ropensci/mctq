@@ -24,7 +24,7 @@
 #'
 #' @return An invisible `tibble` with a raw standard MCTQ dataset.
 #'
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data !! :=
 #' @noRd

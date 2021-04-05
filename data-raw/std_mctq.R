@@ -27,7 +27,7 @@
 #'
 #' @return An invisible `tibble` with a raw standard MCTQ dataset.
 #'
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @noRd
@@ -570,7 +570,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'   dataset.
 #'
 #' @template references_e
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @noRd
@@ -702,7 +702,7 @@ tidy_std_mctq <- function(write = FALSE) {
 #'
 #' @inheritParams tidy_std_mctq
 #' @template references_d
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !!
 #' @noRd
@@ -869,7 +869,7 @@ validate_std_mctq <- function(write = FALSE) {
 #' @inheritParams tidy_std_mctq
 #' @inheritParams pretty_mctq
 #' @template references_d
-#' @family data wrangling functions
+#' @family data functions
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data := !!
 #' @noRd

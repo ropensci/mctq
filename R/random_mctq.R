@@ -58,10 +58,10 @@
 #' random_mctq("micro")
 #' random_mctq("shift")}
 random_mctq <- function(model = "standard", quiet = FALSE) {
-    if (!is_namespace_loaded("stats")) {
+    if (!require_namespace("stats", quietly = TRUE)) {
         stop("This function requires the 'stats' package to run. ",
-             'You can install it by running: \n \n',
-             'install.packages("stats") \n', call. = FALSE)
+             'You can install it by running: \n\n',
+             'install.packages("stats")', call. = FALSE)
     }
 
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))

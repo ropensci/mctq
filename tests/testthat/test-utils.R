@@ -183,7 +183,6 @@ test_that("paste_collapse() | general test", {
     # Error test
     expect_error(paste_collapse("", 1, ""))
     expect_error(paste_collapse("", "", 1))
-
 })
 
 test_that("inline_collapse() | general test", {
@@ -225,7 +224,6 @@ test_that("inline_collapse() | general test", {
     # Error test
     expect_error(inline_collapse("", "", TRUE))
     expect_error(inline_collapse("", TRUE, ""))
-
 })
 
 test_that("shush() | general test", {
@@ -303,11 +301,6 @@ test_that("swap_if() | general test", {
 test_that("count_na() | general test", {
     x <- c(1, NA, 1, NA)
     expect_equal(count_na(x), 2)
-})
-
-test_that("escape_regex() | general test", {
-    x <- "test.test"
-    expect_equal(escape_regex(x), "test\\.test")
 })
 
 test_that("escape_regex() | general test", {

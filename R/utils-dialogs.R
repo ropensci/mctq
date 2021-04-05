@@ -22,7 +22,7 @@ dialog_line <- function(..., combined_styles = NULL,
     line <- paste0(line, collapse = "")
     line <- paste0(paste(strwrap(line), collapse = "\n"), " ")
 
-    if (is_namespace_loaded("crayon")) {
+    if (require_namespace("crayon", quietly = TRUE)) {
         crayonize <- shush(crayon::combine_styles(combined_styles))
         line <- (crayonize(line))
     }
@@ -51,7 +51,7 @@ alert <- function(..., combined_styles = c("bold", "red"), abort = FALSE) {
     message <- vapply(list(...), paste0, character(1), collapse = "")
     message <- paste0(message, collapse = "")
 
-    if (is_namespace_loaded("crayon")) {
+    if (require_namespace("crayon", quietly = TRUE)) {
         crayonize <- shush(crayon::combine_styles(combined_styles))
         message <- (crayonize(message))
     }
