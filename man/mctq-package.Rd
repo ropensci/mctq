@@ -10,7 +10,6 @@
 
 A complete and consistent toolkit to process the Munich ChronoType 
     Questionnaire (MCTQ) for its three versions (standard, micro, and shift).
-    (CODEMETA WORKFLOW TEST).
 }
 \seealso{
 Useful links:
