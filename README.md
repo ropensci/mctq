@@ -78,9 +78,12 @@ R](https://www.coursera.org/specializations/data-science-foundations-r)
 
 ## Installation
 
-The first stable `mctq` version is already out. We hope that it will be
-available on [CRAN](https://cran.r-project.org/) soon. Until that moment
-comes, you can install it from GitHub with:
+The first stable `mctq` version is already out, we’re just waiting for
+the [software
+peer-review](https://github.com/ropensci/software-review/issues/434) to
+promote it to the public. We hope that it will be available on
+[CRAN](https://cran.r-project.org/) soon. Until that moment comes, you
+can install it from GitHub with:
 
 ``` r
 # install.packages("devtools")

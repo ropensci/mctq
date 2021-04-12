@@ -4,10 +4,6 @@ is_interactive <- function(...) {
     interactive()
 }
 
-is_namespace_loaded <- function(name, ...) {
-    isNamespaceLoaded(name)
-}
-
 require_namespace <- function(x, ..., quietly = TRUE) {
     requireNamespace(x, ..., quietly = quietly)
 }
