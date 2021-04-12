@@ -216,6 +216,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "usethis",
+      "name": "usethis",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=usethis"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     }
@@ -290,7 +302,7 @@
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
   "readme": "https://github.com/gipsousp/mctq/blob/master/README.md",
-  "fileSize": "2218.512KB",
+  "fileSize": "2218.537KB",
   "contIntegration": ["https://travis-ci.com/gipsousp/mctq", "https://codecov.io/gh/gipsousp/mctq?branch=master"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
@@ -320,9 +332,14 @@
           "familyName": "Pedrazzoli"
         }
       ],
-      "name": "mctq: the R package for the Munich ChronoType Questionnaire (MCTQ)",
+      "name": "mctq: An R package for the Munich ChronoType Questionnaire",
       "url": "https://gipsousp.github.io/mctq/",
       "description": "Lifecycle: maturing"
     }
-  ]
+  ],
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/434",
+    "provider": "https://ropensci.org"
+  }
 }

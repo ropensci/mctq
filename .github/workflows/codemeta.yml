@@ -2,9 +2,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - DESCRIPTION
-      - .github/workflows/codemeta.yml
 
 name: codemeta
 jobs:
