@@ -20,7 +20,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.0.5 (2021-03-31)",
   "author": [
     {
       "@type": "Person",
@@ -301,8 +301,7 @@
     }
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
-  "readme": "https://github.com/gipsousp/mctq/blob/master/README.md",
-  "fileSize": "2218.537KB",
+  "fileSize": "894.199KB",
   "contIntegration": ["https://travis-ci.com/gipsousp/mctq", "https://codecov.io/gh/gipsousp/mctq?branch=master"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
