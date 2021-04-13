@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "mctq",
-  "description": "A complete and consistent toolkit to process the Munich ChronoType \n    Questionnaire (MCTQ) for its three versions (standard, micro, and shift).",
+  "description": "A complete and consistent toolkit to process the Munich\n    ChronoType Questionnaire (MCTQ) for its three versions (standard,\n    micro, and shift).",
   "name": "mctq: An R Package for the Munich ChronoType Questionnaire",
   "codeRepository": "https://github.com/gipsousp/mctq/",
   "relatedLink": [
@@ -237,7 +237,7 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 3.3"
+      "version": ">= 3.6"
     },
     {
       "@type": "SoftwareApplication",
@@ -301,8 +301,8 @@
     }
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
-  "fileSize": "2218.837KB",
-  "contIntegration": ["https://travis-ci.com/gipsousp/mctq", "https://codecov.io/gh/gipsousp/mctq?branch=master"],
+  "fileSize": "2219.029KB",
+  "contIntegration": "https://codecov.io/gh/gipsousp/mctq?branch=master",
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
     "chronobiology",

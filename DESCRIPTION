@@ -29,7 +29,7 @@ License: MIT + file LICENSE
 URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
 BugReports: https://github.com/gipsousp/mctq/issues/
 Depends:
-    R (>= 3.3)
+    R (>= 3.6)
 Imports: 
     checkmate,
     dplyr,
