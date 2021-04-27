@@ -204,7 +204,7 @@ citation("mctq")
 #> 
 #>   Vartanian, D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: An
 #>   R package for the Munich ChronoType Questionnaire. Retrieved from
-#>   https://gipsousp.github.io/mctq/ .
+#>   https://gipsousp.github.io/mctq/.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
