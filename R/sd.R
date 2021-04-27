@@ -441,7 +441,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' * The computation below must be applied to each shift section of the
 #' questionnaire. If you're using the three-shift design proposed by the
-#' authors, you need to compute three overall sleep duration (_e.g._
+#' authors, you need to compute three overall sleep duration (_e.g._,
 #' \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
 #' SD^N}{OSD_N}).
 #'

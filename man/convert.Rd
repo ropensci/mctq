@@ -178,7 +178,7 @@ days or 31557600 seconds).}
 
 \item{close_round}{(optional) a \code{logical} value indicating if numbers with
 decimals starting with three leading 0s or 9s must be rounded
-(\emph{e.g.} 1.999) (default: \code{TRUE}).}
+(\emph{e.g.}, 1.999) (default: \code{TRUE}).}
 
 \item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
 must be suppressed (default: \code{FALSE}).}
@@ -312,11 +312,11 @@ unit. See the Examples section to know how.
 
 \code{convert()} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class} is set to
 \code{"numeric"} or \code{"double"}. For \code{Date} objects, the output will be the total
-of days since '1970-01-01' (UNIX epoch date). For date-time objects (\emph{e.g.}
+of days since '1970-01-01' (UNIX epoch date). For date-time objects (\emph{e.g.},
 \code{POSIXt}), the output will be the total of seconds from the UNIX epoch
 (\verb{1970-01-01 00:00:00 UTC}) (See
 \href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to learn more). For time
-objects, (\emph{e.g.} \code{hms}) the output will be the total of seconds.
+objects, (\emph{e.g.}, \code{hms}) the output will be the total of seconds.
 
 The output \code{class = "numeric"} can also be different if \code{input_unit} and
 \code{output_unit} are assigned.

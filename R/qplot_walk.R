@@ -47,7 +47,7 @@
 #' ## Midday change
 #'
 #' Time variables with values greater than `22:00:00` will automatically be
-#' converted to `POSIXct` with a midday change, _i.e._ all values with more
+#' converted to `POSIXct` with a midday change, _i.e._, all values with more
 #' than 12 hours will represent day one, and all the rest will represent day 2.
 #' This is made to better represent values that cross the midnight
 #' hour.

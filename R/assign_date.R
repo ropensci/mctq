@@ -38,10 +38,10 @@
 #' occurs. There are three options to choose.
 #'
 #' * `ambiguity = 0`: to consider the interval between `start` and `end` as 0
-#' hours, _i.e_ `start` and `end` are located at the same point in time
+#' hours, _i.e._, `start` and `end` are located at the same point in time
 #' (default).
 #' * `ambiguity = 24`: to consider the interval between `start` and `end` as 24
-#' hours, _i.e._ `start` and `end` distance themselves by one day.
+#' hours, _i.e._, `start` and `end` distance themselves by one day.
 #' * `ambiguity = NA`: to disregard these cases, assigning `NA` as value.
 #'
 #' ## `return` argument

@@ -7,7 +7,6 @@
 ^\.archive$
 ^\.github$
 ^\.Rproj\.user$
-^\.travis\.yml$
 ^_pkgdown\.yml$
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$

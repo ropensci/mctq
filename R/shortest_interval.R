@@ -7,7 +7,7 @@
 #' `shortest_interval()` finds and returns the shortest interval between two
 #' `hms` or `POSIXt` object hours.
 #'
-#' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_
+#' `longer_interval()` do the inverse of `shortest_interval()`, _i.e_,
 #' finds the longer interval between two hours. It's just a wrapper for
 #' `shortest_interval(x, y, class, inverse = TRUE)`.
 #'
@@ -90,7 +90,7 @@
 #' @param class (optional) a string indicating the object class of the output
 #'   (default: `"hms"`).
 #' @param inverse (optional) a `logical` value indicating if the function must
-#'   return an inverse output, _i.e_ the longer interval between `x` and `y`.
+#'   return an inverse output, _i.e_, the longer interval between `x` and `y`.
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'
@@ -190,7 +190,7 @@ shortest_interval <- function(x, y, class = "hms", inverse = FALSE,
             flags <- which(x1_y1_interval == y1_x2_interval)
             shush(warning(
                 "Element(s) ", inline_collapse(flags), " of 'x' ",
-                "and 'y' have intervals equal to 12 hours, i.e. ",
+                "and 'y' have intervals equal to 12 hours, i.e., ",
                 "there's no shortest or longer interval ",
                 "between the two hours (they are equal). Only one ",
                 "possible interval was returned.",

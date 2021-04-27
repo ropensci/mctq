@@ -94,7 +94,7 @@ property of \code{Period} objects, treating them like objects of class \code{Dur
 
 \subsection{Timeline irregularities}{
 
-This function does not take into account timeline irregularities (\emph{e.g.}
+This function does not take into account timeline irregularities (\emph{e.g.},
 leap years, DST, leap seconds). This may not be an issue for most people, but
 it must be considered when doing time arithmetic.
 }

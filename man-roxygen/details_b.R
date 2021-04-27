@@ -23,7 +23,7 @@
 #'
 #' ## Rounding and fractional time
 #'
-#' Some operations may produce an output with fractional time (_e.g._
+#' Some operations may produce an output with fractional time (_e.g._,
 #' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
 #' can round it with the `mctq` function [mctq::round_time()].
 #'

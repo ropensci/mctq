@@ -24,7 +24,7 @@ It's a good idea to have the standard MCTQ questionnaire and the guidelines for 
 
 ## The two intervals problem
 
-According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), _i.e._ the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
+According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), _i.e._, the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
 
 $$SJL_{rel} = MSF - MSW$$
 
@@ -32,7 +32,7 @@ This simple equation may seem trivial until you take into account that you're ar
 
 If you dive into the MCTQ articles, you can see that this computation have two objectives:
 
-1. To represent the distance between $MSW$ and $MSF$ (_i.e._ the discrepancy).
+1. To represent the distance between $MSW$ and $MSF$ (_i.e._, the discrepancy).
 2. To establish what value comes before or after the other, representing that with a $+/-$ signal. That is, when $MSW$ comes before $MSF$, $SJL_{rel}$ must be positive, and when $MSW$ comes after $MSF$, $SJL_{rel}$ must be negative.
 
 You can find the rationale about the $SJL_{rel}$ signal in Roenneberg, Pilz, Zerbini, & Winnebeck ([2019](http://doi.org/10.3390/biology8030054)) (see item "3.2 Social Jetlag Computation").
@@ -85,7 +85,7 @@ The `sjl()` function provides an argument called `method` that allows you to cho
 
 ### `method = "difference"`
 
-By using `method = "difference"`, `sjl()` will do the exact computation proposed by the MCTQ authors, _i.e._ $SJL$ will be computed as the linear difference between  $MSF$ and $MSW$.
+By using `method = "difference"`, `sjl()` will do the exact computation proposed by the MCTQ authors, _i.e._, $SJL$ will be computed as the linear difference between  $MSF$ and $MSW$.
 
 Let's see some examples using this method.
 

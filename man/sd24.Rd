@@ -55,7 +55,7 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.}
+Some operations may produce an output with fractional time (\emph{e.g.},
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 

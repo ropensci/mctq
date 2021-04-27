@@ -91,7 +91,7 @@ converts \code{Duration}, \code{Period}, and \code{difftime} objects to \code{hm
 \subsection{Midday change}{
 
 Time variables with values greater than \code{22:00:00} will automatically be
-converted to \code{POSIXct} with a midday change, \emph{i.e.} all values with more
+converted to \code{POSIXct} with a midday change, \emph{i.e.}, all values with more
 than 12 hours will represent day one, and all the rest will represent day 2.
 This is made to better represent values that cross the midnight
 hour.

@@ -9,7 +9,7 @@ citEntry(
                            as.person("Mario Pedrazzoli")),
   year        = "2021",
   url         = "https://gipsousp.github.io/mctq/",
-  textVersion = paste0("Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. ",
+  textVersion = paste0("Vartanian, D., Benedito-Silva, A. A., Pedrazzoli, M. ",
                        "(2021). mctq: An R package for the Munich ChronoType ",
                        "Questionnaire. Retrieved from ",
                        "https://gipsousp.github.io/mctq/ ."),

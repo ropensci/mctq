@@ -134,12 +134,12 @@ ms <- function(so, sd) {
 #' * The basis for estimating chronotype in shift-workers is the mid-sleep on
 #' work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
 #' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg (2013)
-#' propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (_e.g._
+#' propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (_e.g._,
 #' by using a linear model). Unfortunately, the `mctq` package can't help you
 #' with that, as it requires a closer look at your data.
 #'
 #' * \eqn{MSF_{sc}}{MSF_sc} depends on developmental and environmental
-#' conditions (_e.g._ age; light exposure). For epidemiological and genetic
+#' conditions (_e.g._, age, light exposure). For epidemiological and genetic
 #' studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 #' populations of different age and sex compositions comparable (Roenneberg,
 #' Allebrandt, Merrow, & Vetter, 2012).

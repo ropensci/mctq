@@ -69,10 +69,10 @@ You must instruct \code{assign_date()} on how to deal with this problem if it
 occurs. There are three options to choose.
 \itemize{
 \item \code{ambiguity = 0}: to consider the interval between \code{start} and \code{end} as 0
-hours, \emph{i.e} \code{start} and \code{end} are located at the same point in time
+hours, \emph{i.e.}, \code{start} and \code{end} are located at the same point in time
 (default).
 \item \code{ambiguity = 24}: to consider the interval between \code{start} and \code{end} as 24
-hours, \emph{i.e.} \code{start} and \code{end} distance themselves by one day.
+hours, \emph{i.e.}, \code{start} and \code{end} distance themselves by one day.
 \item \code{ambiguity = NA}: to disregard these cases, assigning \code{NA} as value.
 }
 }

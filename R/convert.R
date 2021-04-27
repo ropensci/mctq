@@ -116,11 +116,11 @@
 #'
 #' `convert()` will return a [base::as.numeric()] output if `class` is set to
 #' `"numeric"` or `"double"`. For `Date` objects, the output will be the total
-#' of days since '1970-01-01' (UNIX epoch date). For date-time objects (_e.g._
+#' of days since '1970-01-01' (UNIX epoch date). For date-time objects (_e.g._,
 #' `POSIXt`), the output will be the total of seconds from the UNIX epoch
 #' (`1970-01-01 00:00:00 UTC`) (See
 #' [Unix time](https://en.wikipedia.org/wiki/Unix_time) to learn more). For time
-#' objects, (_e.g._ `hms`) the output will be the total of seconds.
+#' objects, (_e.g._, `hms`) the output will be the total of seconds.
 #'
 #' The output `class = "numeric"` can also be different if `input_unit` and
 #' `output_unit` are assigned.
@@ -164,7 +164,7 @@
 #'   days or 31557600 seconds).
 #' @param close_round (optional) a `logical` value indicating if numbers with
 #' decimals starting with three leading 0s or 9s must be rounded
-#' (_e.g._ 1.999) (default: `TRUE`).
+#' (_e.g._, 1.999) (default: `TRUE`).
 #' @param cols (optional) a `character` object indicating the column names in
 #'   `x` to transform (default: `NULL`).
 #' @param where (optional) a function to apply in a [tidyselect::where()] call

@@ -52,7 +52,7 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.}
+Some operations may produce an output with fractional time (\emph{e.g.},
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
@@ -71,9 +71,9 @@ to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For this reason,
 
 Considering the requirement above, \code{sjl_weighted()} was developed to only
 accept list objects as arguments. For this approach to work, both \code{sjl} and
-\code{n_w} arguments must be lists with paired elements and values, \emph{i.e.} the
-first element of \code{sjl} (\emph{e.g.} \code{sjl_m}) must be paired with the first element
-of \code{n_w} (\emph{e.g.} \code{n_w_m}). The function will do the work of combining them
+\code{n_w} arguments must be lists with paired elements and values, \emph{i.e.}, the
+first element of \code{sjl} (\emph{e.g.}, \code{sjl_m}) must be paired with the first element
+of \code{n_w} (\emph{e.g.}, \code{n_w_m}). The function will do the work of combining them
 and output a weighted mean.
 }
 

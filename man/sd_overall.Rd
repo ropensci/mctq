@@ -62,7 +62,7 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.}
+Some operations may produce an output with fractional time (\emph{e.g.},
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
@@ -81,7 +81,7 @@ computation are as follows.
 \itemize{
 \item The computation below must be applied to each shift section of the
 questionnaire. If you're using the three-shift design proposed by the
-authors, you need to compute three overall sleep duration (\emph{e.g.}
+authors, you need to compute three overall sleep duration (\emph{e.g.},
 \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
 SD^N}{OSD_N}).
 \item The overall sleep duration is the weighted average of the shift-specific

@@ -69,7 +69,7 @@ language](https://www.r-project.org/) to use the `mctq` main functions.
 
 In case you don’t feel comfortable with R, we strongly recommend
 checking Hadley Wickham and Garrett Grolemund free and online book [R
-for data Science](https://r4ds.had.co.nz/) and the Coursera course from
+for Data Science](https://r4ds.had.co.nz/) and the Coursera course from
 John Hopkins University [Data Science: Foundations using
 R](https://www.coursera.org/specializations/data-science-foundations-r)
 (free for listeners).
@@ -202,7 +202,7 @@ citation("mctq")
 #> 
 #> To cite mctq in publications use:
 #> 
-#>   Vartanian D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: An
+#>   Vartanian, D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: An
 #>   R package for the Munich ChronoType Questionnaire. Retrieved from
 #>   https://gipsousp.github.io/mctq/ .
 #> 

@@ -40,7 +40,7 @@ Following this same line of thought, we can also say that:
 
 Note that the [chronotype computation](https://www.thewep.org/documentations/mctq/item/mctq-variables) follows a similar line of thought.
 
-The opposite scenario, _i.e._ when the subject __works 7 days per week__ (`wd == 7`) and __only answered the workdays section__, can also have different outputs. `sloss_week()`, `msf_sc()`, `sjl_rel()`, and `sjl()` should still produce a `NA` as output since there's no way to know the real behavior of the subject sleep-wake cycle. But, according to this reasoning, `sd_week` and `le_week` can have different outputs.
+The opposite scenario, _i.e._, when the subject __works 7 days per week__ (`wd == 7`) and __only answered the workdays section__, can also have different outputs. `sloss_week()`, `msf_sc()`, `sjl_rel()`, and `sjl()` should still produce a `NA` as output since there's no way to know the real behavior of the subject sleep-wake cycle. But, according to this reasoning, `sd_week` and `le_week` can have different outputs.
 
 * `sd_week` (average weekly sleep duration) must be equal to `sd_w` (sleep duration on workdays) since the subject does not have work-free days.
 * `le_week` (average weekly light exposure) must be equal to `le_w` (light exposure on work-free days) since the subject does not have work-free days.
