@@ -48,7 +48,7 @@ Although it may look like a simple questionnaire, MCTQ requires a lot of date/ti
 
 You only need to have some familiarity with the [R programming language](https://www.r-project.org/) to use the `mctq` main functions.
 
-In case you don't feel comfortable with R, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for Data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for listeners).
+In case you don't feel comfortable with R, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for Data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for audit students).
 
 ## Installation
 

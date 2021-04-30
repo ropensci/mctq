@@ -72,7 +72,7 @@ checking Hadley Wickham and Garrett Grolemund free and online book [R
 for Data Science](https://r4ds.had.co.nz/) and the Coursera course from
 John Hopkins University [Data Science: Foundations using
 R](https://www.coursera.org/specializations/data-science-foundations-r)
-(free for listeners).
+(free for audit students).
 
 ## Installation
 
