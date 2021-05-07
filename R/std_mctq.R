@@ -386,7 +386,7 @@
 #'   R class: `Duration`.}
 #' }
 #'
-#' @source Created by Daniel Vartanian (package's author).
+#' @source Created by Daniel Vartanian (package author).
 #' @family datasets
 #' @template references_b
 "std_mctq"

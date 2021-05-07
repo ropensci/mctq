@@ -29,7 +29,7 @@ For those special standard and micro MCTQ cases, where one section is missing, a
 
 To illustrate this approach, consider the following.
 
-If a subject __do not have a regular work schedule__ (`wd == 0`), __only answered the work-free days section__, and __do not use an alarm clock on his/her free days__ (_i.e_ `alarm_f == FALSE`), it would be fair to assume that there's no sleep correction (`sc`) to be made, therefore, his/her chronotype (`msf_sc`) must be equal to his/her midsleep on work-free days (`msf`).
+If a subject __do not have a regular work schedule__ (`wd == 0`), __only answered the work-free days section__, and __do not use an alarm clock on his/her free days__ (_i.e_, `alarm_f == FALSE`), it would be fair to assume that there's no sleep correction (`sc`) to be made, therefore, his/her chronotype (`msf_sc`) must be equal to his/her midsleep on work-free days (`msf`).
 
 Following this same line of thought, we can also say that:
 

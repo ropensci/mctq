@@ -274,12 +274,12 @@ Time zones (tz) are used only if \code{class} is set to \code{"Date"}, \code{"PO
 object, \code{character} and \code{numeric} inputs cannot have time values equal or
 greater than 24 hours.
 
-That limits the set of \code{convert()} applications (\emph{e.g} when you want to parse
-a \code{character} to a \code{Duration} object of 35 hours). To get around this, some
-exceptions were made to \code{orders} \strong{equal} to \code{"H"}, \code{"M"}, \code{"S"}, \code{"HM"}, or
-\code{"HMS"}. For \code{"HM"} and \code{"HMS"} exceptions, minutes and seconds are limited
-to \verb{[0-59]}, and, when hours exceed 2 digits, a \code{:} must be allocated
-between hours and minutes.
+That limits the set of \code{convert()} applications (\emph{e.g}, when you want to
+parse a \code{character} to a \code{Duration} object of 35 hours). To get around this,
+some exceptions were made to \code{orders} \strong{equal} to \code{"H"}, \code{"M"}, \code{"S"},
+\code{"HM"}, or \code{"HMS"}. For \code{"HM"} and \code{"HMS"} exceptions, minutes and seconds
+are limited to \verb{[0-59]}, and, when hours exceed 2 digits, a \code{:} must be
+allocated between hours and minutes.
 }
 
 \subsection{Converting columns of a data frame}{

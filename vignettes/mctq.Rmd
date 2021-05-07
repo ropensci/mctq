@@ -50,7 +50,7 @@ library(mctq)
 
 Now we just need to get some MCTQ data. For demonstration purposes, we're going to use a small and fictional raw standard MCTQ data provided by the `mctq` package.
 
-This dataset already has valid values. As for any data analysis, you must have clean and valid data before using any analysis tool. If you don't know how to do that, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for listeners).
+This dataset already has valid values. As for any data analysis, you must have clean and valid data before using any analysis tool. If you don't know how to do that, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for audit students).
 
 Teaching you how to load your data in R is outside the scope of this article. For that, we recommend checking the [readr](https://readr.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/).
 

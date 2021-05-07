@@ -28,7 +28,7 @@ According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10
 
 $$SJL_{rel} = MSF - MSW$$
 
-This simple equation may seem trivial until you take into account that you're are dealing with two hour values detached from a timeline. In other words, $MSW$ and $MSF$ represent two moments in two different contexts (one on workdays and the other on work-free days).
+This simple equation may seem trivial until you take into account that you're are dealing with two time values detached from a timeline. In other words, $MSW$ and $MSF$ represent two moments in two different contexts (one on workdays and the other on work-free days).
 
 If you dive into the MCTQ articles, you can see that this computation have two objectives:
 
@@ -51,9 +51,9 @@ Most people have some trouble understanding this. To illustrate what we mean, le
 
 Note that, while doing the representation above, we're dealing with the assumption that $MSW$ and $MSF$ can be represented in a two-day timeline, since subjects don't usually sleep more than 24 hours (basic assumption).
 
-As you can see, by overlapping two hour values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shortest interval between the two. But, in some extreme cases, usually when dealing with shift workers, $MSW$ and $MSF$ distance can surpass 12 hours, making the longer interval the correct answer.
+As you can see, by overlapping two time values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shortest interval between the two. But, in some extreme cases, usually when dealing with shift workers, $MSW$ and $MSF$ distance can surpass 12 hours, making the longer interval the correct answer.
 
-To obtain the signal of $SJL_{rel}$ we must check the start value of the interval. If the interval between $MSW$ and $MSF$ starts with $MSW$, that means that $MSW$ comes before $MSF$, hence, the signal must be positive. Else, if the interval between $MSW$ and $MSF$ starts with $MSF$, that means that $MSW$ comes after $MSF$, hence, the signal must be negative.
+To obtain the $SJL_{rel}$ signal we must check the start value of the interval. If the interval between $MSW$ and $MSF$ starts with $MSW$, that means that $MSW$ comes before $MSF$, hence, the signal must be positive. Else, if the interval between $MSW$ and $MSF$ starts with $MSF$, that means that $MSW$ comes after $MSF$, hence, the signal must be negative.
 
 * Example 1: when $MSF - MSW$ makes a __positive__ $SJL_{rel}$
 
@@ -115,7 +115,7 @@ As you can see with the second example, the `"difference"` method uses a linear 
 
 By using `method = "shortest"`, `sjl()` uses the shortest interval between $MSW$ and $MSF$.
 
-This is the most reliable method we found to compute $SJL$, considering the context of MCTQ data. However, it comes with a limitation: when $MSW$ and $MSF$ values distance themselves by more than 12 hours, `sjl()` can return a wrong output. From our experience with MCTQ data, a $SJL$ greater than 12 hours is highly improbable.
+This is the most reliable method we found to compute $SJL$, considering the context of the MCTQ data. However, it comes with a limitation: when $MSW$ and $MSF$ values distance themselves by more than 12 hours, `sjl()` can return a wrong output. From our experience with MCTQ data, a $SJL$ greater than 12 hours is highly improbable.
 
 Let's see some examples using this method.
 

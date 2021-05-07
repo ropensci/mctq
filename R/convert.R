@@ -26,14 +26,10 @@
 #' `convert()` has some wrapper functions for convenience.
 #'
 #' * `convert_tu()` helps make conversions from date/time objects to units.
-#'
 #' * `convert_ut()` helps make conversions from units to date/time objects.
-#'
 #' * `convert_uu()` helps make conversions from unit to other units.
-#'
 #' * `convert_pt()` helps make conversions from `character` or `numeric` objects
 #' to date/time objects.
-#'
 #' * `convert_pu()` helps make conversions from `character` or `numeric` objects
 #' to units.
 #'
@@ -82,12 +78,12 @@
 #' object, `character` and `numeric` inputs cannot have time values equal or
 #' greater than 24 hours.
 #'
-#' That limits the set of `convert()` applications (_e.g_ when you want to parse
-#' a `character` to a `Duration` object of 35 hours). To get around this, some
-#' exceptions were made to `orders` __equal__ to `"H"`, `"M"`, `"S"`, `"HM"`, or
-#' `"HMS"`. For `"HM"` and `"HMS"` exceptions, minutes and seconds are limited
-#' to `[0-59]`, and, when hours exceed 2 digits, a `:` must be allocated
-#' between hours and minutes.
+#' That limits the set of `convert()` applications (_e.g_, when you want to
+#' parse a `character` to a `Duration` object of 35 hours). To get around this,
+#' some exceptions were made to `orders` __equal__ to `"H"`, `"M"`, `"S"`,
+#' `"HM"`, or `"HMS"`. For `"HM"` and `"HMS"` exceptions, minutes and seconds
+#' are limited to `[0-59]`, and, when hours exceed 2 digits, a `:` must be
+#' allocated between hours and minutes.
 #'
 #' ## Converting columns of a data frame
 #'

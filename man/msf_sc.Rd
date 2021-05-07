@@ -32,7 +32,7 @@ questionnaire (you can use \code{\link[=sd_overall]{sd_overall()}} to compute it
 work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. Note that, if \code{alarm_f == TRUE}, \code{msf_sc} cannot be
 computed, \code{msf_sc()} will return \code{NA} for those cases. For the
-\eqn{\mu}MCTQ, this value must be set as \code{FALSE} all times since the
+\eqn{\mu}MCTQ, this value must be set as \code{FALSE} all times, since the
 questionnaire considers only the work-free days when the subject does not
 use an alarm.}
 }

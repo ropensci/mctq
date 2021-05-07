@@ -204,7 +204,7 @@ ms <- function(so, sd) {
 #'   work-free days__ from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
 #'   computed, `msf_sc()` will return `NA` for those cases. For the
-#'   \eqn{\mu}MCTQ, this value must be set as `FALSE` all times since the
+#'   \eqn{\mu}MCTQ, this value must be set as `FALSE` all times, since the
 #'   questionnaire considers only the work-free days when the subject does not
 #'   use an alarm.
 #'

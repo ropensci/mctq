@@ -155,7 +155,7 @@ R class: \code{Duration}.}
 }
 }
 \source{
-Created by Daniel Vartanian (package's author).
+Created by Daniel Vartanian (package author).
 }
 \usage{
 micro_mctq
