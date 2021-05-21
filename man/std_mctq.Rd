@@ -234,7 +234,7 @@ R class: \code{logical}.}
 
 \item{reasons_f}{
 A \code{logical} value indicating if the subject has any particular reasons for
-why he/she \strong{cannot} freely choose his/her sleep times on \strong{work-free
+why they \strong{cannot} freely choose their sleep times on \strong{work-free
 days}.
 \cr \cr
 Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
@@ -245,7 +245,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_why_f}{
-Particular reasons for why the subject cannot freely choose his/her sleep
+Particular reasons for why the subject cannot freely choose their sleep
 times on \strong{work-free days}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )

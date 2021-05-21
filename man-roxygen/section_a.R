@@ -1,7 +1,7 @@
 #' @section Missing sections in standard and micro MCTQ versions:
 #'
 #' Although the standard and micro versions of the MCTQ asks for subjects to
-#' complete the workdays and work-free days sections, even when he/she do not
+#' complete the workdays and work-free days sections, even when they do not
 #' have a regular work schedule (`wd = 0`) or have a 7 day/week work schedule
 #' (`wd = 7`), some of them may still end skipping one of this parts of the
 #' questionnaire. In those cases, `sd_week()`, `sloss_week()`, `le_week()`,

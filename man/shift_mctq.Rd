@@ -98,7 +98,7 @@ R class: \code{logical}.}
 
 \item{reasons_w_m}{
 A \code{logical} value indicating if the subject has any particular reasons for
-why he/she \strong{cannot} freely choose his/her sleep times on workdays
+why they \strong{cannot} freely choose their sleep times on workdays
 \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
@@ -109,7 +109,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_why_w_m}{
-Particular reasons for why the subject cannot freely choose his/her sleep
+Particular reasons for why the subject cannot freely choose their sleep
 times on workdays \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -270,7 +270,7 @@ R class: \code{logical}.}
 
 \item{reasons_f_m}{
 A \code{logical} value indicating if the subject has any particular reasons for
-why he/she \strong{cannot} freely choose his/her sleep times on work-free days
+why they \strong{cannot} freely choose their sleep times on work-free days
 \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
@@ -281,7 +281,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_why_f_m}{
-Particular reasons for why the subject cannot freely choose his/her sleep
+Particular reasons for why the subject cannot freely choose their sleep
 times on work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )

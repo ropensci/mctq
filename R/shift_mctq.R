@@ -153,7 +153,7 @@
 #'
 #'   \item{reasons_w_m}{
 #'   A `logical` value indicating if the subject has any particular reasons for
-#'   why he/she __cannot__ freely choose his/her sleep times on workdays
+#'   why they __cannot__ freely choose their sleep times on workdays
 #'   __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
@@ -164,7 +164,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_w_m}{
-#'   Particular reasons for why the subject cannot freely choose his/her sleep
+#'   Particular reasons for why the subject cannot freely choose their sleep
 #'   times on workdays __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -326,7 +326,7 @@
 #'
 #'   \item{reasons_f_m}{
 #'   A `logical` value indicating if the subject has any particular reasons for
-#'   why he/she __cannot__ freely choose his/her sleep times on work-free days
+#'   why they __cannot__ freely choose their sleep times on work-free days
 #'   __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
@@ -337,7 +337,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_f_m}{
-#'   Particular reasons for why the subject cannot freely choose his/her sleep
+#'   Particular reasons for why the subject cannot freely choose their sleep
 #'   times on work-free days __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )

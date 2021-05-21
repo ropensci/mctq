@@ -99,7 +99,7 @@ work ___ days per week").
 
 
 Although the standard and micro versions of the MCTQ asks for subjects to
-complete the workdays and work-free days sections, even when he/she do not
+complete the workdays and work-free days sections, even when they do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
 (\code{wd = 7}), some of them may still end skipping one of this parts of the
 questionnaire. In those cases, \code{sd_week()}, \code{sloss_week()}, \code{le_week()},
