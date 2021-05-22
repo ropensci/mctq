@@ -290,7 +290,7 @@
 #'
 #'   \item{reasons_f}{
 #'   A `logical` value indicating if the subject has any particular reasons for
-#'   why he/she __cannot__ freely choose his/her sleep times on __work-free
+#'   why they __cannot__ freely choose their sleep times on __work-free
 #'   days__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
@@ -301,7 +301,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_f}{
-#'   Particular reasons for why the subject cannot freely choose his/her sleep
+#'   Particular reasons for why the subject cannot freely choose their sleep
 #'   times on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )

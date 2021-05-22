@@ -179,7 +179,7 @@ instead of using the shortest interval between \eqn{MSW} and \eqn{MSF}, it
 uses the longer interval between the two, considering a two-day window.
 
 This method may help with special contexts, like when dealing with
-shift-workers that have a greater than 12 hours distance between his/her
+shift-workers that have a greater than 12 hours distance between their
 mid-sleep hours.
 }
 
@@ -187,7 +187,7 @@ mid-sleep hours.
 
 
 Although the standard and micro versions of the MCTQ asks for subjects to
-complete the workdays and work-free days sections, even when he/she do not
+complete the workdays and work-free days sections, even when they do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
 (\code{wd = 7}), some of them may still end skipping one of this parts of the
 questionnaire. In those cases, \code{sd_week()}, \code{sloss_week()}, \code{le_week()},

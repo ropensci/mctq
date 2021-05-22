@@ -103,7 +103,7 @@
 #' uses the longer interval between the two, considering a two-day window.
 #'
 #' This method may help with special contexts, like when dealing with
-#' shift-workers that have a greater than 12 hours distance between his/her
+#' shift-workers that have a greater than 12 hours distance between their
 #' mid-sleep hours.
 #'
 #' @param msw A `hms` object corresponding to the __local time of mid-sleep on
