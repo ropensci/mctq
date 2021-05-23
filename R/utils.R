@@ -334,3 +334,11 @@ str_subset_ <- function(string, pattern, negate = FALSE, ignore.case = FALSE,
 
     if (length(out) == 0) as.character(NA) else out
 }
+
+package_startup_message <- function(..., domain = NULL, appendLF = TRUE) {
+    if (is_interactive()) {
+        packageStartupMessage(..., domain = domain, appendLF = appendLF)
+    }
+
+    invisible(NULL)
+}

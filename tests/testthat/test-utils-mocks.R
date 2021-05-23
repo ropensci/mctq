@@ -3,8 +3,8 @@ test_that("is_interactive() | general test", {
 })
 
 test_that("require_namespace() | general test", {
-    x <- "base"
-    expect_equal(require_namespace(x), requireNamespace(x, quietly = TRUE))
+    expect_equal(require_namespace("base"),
+                 requireNamespace("base", quietly = TRUE))
 })
 
 test_that("read_line() | general test", {

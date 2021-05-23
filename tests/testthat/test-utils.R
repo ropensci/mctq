@@ -329,7 +329,7 @@ test_that("na_as() | general test", {
                  as.POSIXlt(lubridate::as_datetime(NA)))
 
     # "`na_as()` don't support objects of class [...]"
-    expect_error(na_as(list(NA)))
+    expect_error(na_as(list(NA)), "don't support objects of class")
 })
 
 test_that("get_class() | general test", {
@@ -365,7 +365,7 @@ test_that("str_extract_() | general test", {
     expected <- as.character(NA)
     expect_equal(object, expected)
 
-    # Error test
+    # Error test (argument check)
     expect_error(str_extract_(1, 1, TRUE, TRUE, TRUE, TRUE, TRUE))
     expect_error(str_extract_(1, TRUE, "", TRUE, TRUE, TRUE, TRUE))
     expect_error(str_extract_(1, TRUE, TRUE, "", TRUE, TRUE, TRUE))
@@ -432,4 +432,26 @@ test_that("interval_mean() | general test", {
     expect_error(interval_mean(hms::hms(1), hms::hms(1), class = 1))
     expect_error(interval_mean(hms::hms(1), hms::hms(1), ambiguity = 1))
     expect_error(interval_mean(hms::hms(1), hms::hms(1), circular = ""))
+})
+
+test_that("package_startup_message() | general test", {
+    # is_interactive <- mctq:::is_interactive
+
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            is_interactive = function(...) TRUE,
+            package_startup_message())
+    }
+
+    # mock()
+    expect_null(mock(), NULL)
+
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            is_interactive = function(...) FALSE,
+            package_startup_message())
+    }
+
+    # mock()
+    expect_null(mock(), NULL)
 })
