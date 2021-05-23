@@ -30,16 +30,16 @@ It's a good idea to have the standard MCTQ questionnaire open while reading this
 
 Let's start with the basics. The first thing you must do to use `mctq` is to have some MCTQ data and `mctq` installed and loaded.
 
-To install a GitHub package you're going to need the [devtools](https://devtools.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
+To install a GitHub package you're going to need the [remotes](https://remotes.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
 
 ```{r, eval = FALSE}
-install.packages("devtools")
+install.packages("remotes")
 ```
 
 After `devtools` is installed, install `mctq` with:
 
 ```{r, eval = FALSE}
-devtools::install_github("gipsousp/mctq", dependencies = TRUE)
+remotes::install_github("gipsousp/mctq", dependencies = TRUE)
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:
@@ -101,7 +101,7 @@ Note that you can always convert your data back to the original format if you wa
 You can also use `convert()` to convert data frame columns directly. That's what we're going to do with our data.
 
 ```{r, warnings = FALSE, message = FALSE}
-library(magrittr)
+library(dplyr)
 
 data <- data %>%
   convert("integer", cols = c("id", "wd"), quiet = TRUE) %>%
@@ -141,7 +141,6 @@ The output must be the total of free days a subject has in a week.
 data$fd <- fd(data$wd)
 
 # Comparing the result
-library(dplyr)
 data %>% dplyr::select(wd, fd)
 ```
 

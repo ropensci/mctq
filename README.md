@@ -84,8 +84,8 @@ promote it to the public. We hope that it will be available on
 can install it from GitHub with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("gipsousp/mctq", dependencies = TRUE)
+# install.packages("remotes")
+remotes::install_github("gipsousp/mctq", dependencies = TRUE)
 ```
 
 ## Usage
