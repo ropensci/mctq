@@ -359,7 +359,7 @@ Before we end, it's important to note that, in addition to `convert()` and to fu
 * `random_mctq()`: Build a random MCTQ case
 * `raw_data()`: Get paths to `mctq` raw datasets
 * `round_time()`: Round time values
-* `shortest_interval()`: Find the shortest interval between two hours
+* `shorter_interval()`: Find the shorter interval between two hours
 * `sum_time()`: Sum time objects
 
 `mctq` also provides fictional datasets of the standard, micro, and shift versions for testing and learning purposes.

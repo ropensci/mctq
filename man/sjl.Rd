@@ -5,9 +5,9 @@
 \alias{sjl_rel}
 \title{Compute MCTQ social jetlag}
 \usage{
-sjl(msw, msf, abs = TRUE, method = "shortest")
+sjl(msw, msf, abs = TRUE, method = "shorter")
 
-sjl_rel(msw, msf, method = "shortest")
+sjl_rel(msw, msf, method = "shorter")
 }
 \arguments{
 \item{msw}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
@@ -23,7 +23,7 @@ return an absolute social jetlag (default: \code{TRUE}).}
 
 \item{method}{(optional) a string indicating which method the function must
 use to compute the social jetlag. See the Methods section to learn
-more (default: \code{"shortest"}).}
+more (default: \code{"shorter"}).}
 }
 \value{
 \itemize{
@@ -142,8 +142,8 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 
 
 There are different approaches to compute the social jetlag (\eqn{SJL}). By
-default, \code{sjl()} uses an approach that we call "the shortest interval
-approach" (\code{"shortest"}).
+default, \code{sjl()} uses an approach that we call "the shorter interval
+approach" (\code{"shorter"}).
 
 The topics below provide a simple explanation of each method supported by
 \code{sjl()}. To get a detail understating of this methods, see
@@ -164,18 +164,18 @@ difference between \eqn{MSF} and \eqn{MSW} (see the Guidelines section).
 
 \strong{We do not recommend using this method}, as it has many limitations.
 \itemize{
-\item \code{"shortest"}
+\item \code{"shorter"}
 }
 
-This is the default method for \code{sjl()}. It's based on the shortest
+This is the default method for \code{sjl()}. It's based on the shorter
 interval between \eqn{MSW} and \eqn{MSF}, solving most of the issues
 relating to \eqn{SJL} computation.
 \itemize{
 \item \code{"longer"}
 }
 
-The \code{"longer"} method uses the same logic of the \code{"shortest"} method, but,
-instead of using the shortest interval between \eqn{MSW} and \eqn{MSF}, it
+The \code{"longer"} method uses the same logic of the \code{"shorter"} method, but,
+instead of using the shorter interval between \eqn{MSW} and \eqn{MSF}, it
 uses the longer interval between the two, considering a two-day window.
 
 This method may help with special contexts, like when dealing with
@@ -246,7 +246,7 @@ msw <- hms::parse_hm("19:15")
 msf <- hms::parse_hm("02:30")
 sjl(msw, msf, abs = FALSE, method = "difference")
 #> [1] "-60300s (~-16.75 hours)" # Expected
-sjl(msw, msf, abs = FALSE, method = "shortest") # default method
+sjl(msw, msf, abs = FALSE, method = "shorter") # default method
 #> [1] "26100s (~7.25 hours)" # Expected
 sjl(msw, msf, abs = FALSE, method = "longer")
 #> [1] "-60300s (~-16.75 hours)" # Expected
@@ -255,7 +255,7 @@ msw <- hms::parse_hm("02:45")
 msf <- hms::parse_hm("04:15")
 sjl(msw, msf, abs = FALSE, method = "difference")
 #> [1] "5400s (~1.5 hours)" # Expected
-sjl(msw, msf, abs = FALSE, method = "shortest") # default method
+sjl(msw, msf, abs = FALSE, method = "shorter") # default method
 #> [1] "5400s (~1.5 hours)" # Expected
 sjl(msw, msf, abs = FALSE, method = "longer")
 #> [1] "-81000s (~-22.5 hours)" # Expected

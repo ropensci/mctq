@@ -45,13 +45,13 @@ Most people have some trouble understanding this. To illustrate what we mean, le
    05:00              21:00     05:00              21:00
 -----|------------------|---------|------------------|----->
               16h           8h             16h
-          longer int.  shortest int.   longer int.
+          longer int.  shorter int.    longer int.
 
 ```
 
 Note that, while doing the representation above, we're dealing with the assumption that $MSW$ and $MSF$ can be represented in a two-day timeline, since subjects don't usually sleep more than 24 hours (basic assumption).
 
-As you can see, by overlapping two time values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shortest interval between the two. But, in some extreme cases, usually when dealing with shift workers, $MSW$ and $MSF$ distance can surpass 12 hours, making the longer interval the correct answer.
+As you can see, by overlapping two time values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shorter interval between the two. But, in some extreme cases, usually when dealing with shift workers, $MSW$ and $MSF$ distance can surpass 12 hours, making the longer interval the correct answer.
 
 To obtain the $SJL_{rel}$ signal we must check the start value of the interval. If the interval between $MSW$ and $MSF$ starts with $MSW$, that means that $MSW$ comes before $MSF$, hence, the signal must be positive. Else, if the interval between $MSW$ and $MSF$ starts with $MSF$, that means that $MSW$ comes after $MSF$, hence, the signal must be negative.
 
@@ -111,15 +111,15 @@ $MSF - MSW = \text{03:00} - \text{23:00} = \text{- 20:00}$ (__wrong__)
 
 As you can see with the second example, the `"difference"` method uses a linear time frame approach, creating problems regarding the circularity of time.
 
-### `method = "shortest"` (default method)
+### `method = "shorter"` (default method)
 
-By using `method = "shortest"`, `sjl()` uses the shortest interval between $MSW$ and $MSF$.
+By using `method = "shorter"`, `sjl()` uses the shorter interval between $MSW$ and $MSF$.
 
 This is the most reliable method we found to compute $SJL$, considering the context of the MCTQ data. However, it comes with a limitation: when $MSW$ and $MSF$ values distance themselves by more than 12 hours, `sjl()` can return a wrong output. From our experience with MCTQ data, a $SJL$ greater than 12 hours is highly improbable.
 
 Let's see some examples using this method.
 
-* Example 5: using the `"shortest"` method
+* Example 5: using the `"shorter"` method
 
 $MSW = \text{04:00}$
 
@@ -133,13 +133,13 @@ $\text{Real difference: + 02:00}$
    06:00              04:00     06:00              04:00
 -----|------------------|---------|------------------|----->
              22h            2h             22h
-         longer int.  shortest int.    longer int.
+         longer int.   shorter int.    longer int.
 
 ```
 
-By using the shortest interval, $MSW$ comes before $MSF$, so $SJL_{rel}$ must be equal to $\text{+ 02:00}$ (__right__).
+By using the shorter interval, $MSW$ comes before $MSF$, so $SJL_{rel}$ must be equal to $\text{+ 02:00}$ (__right__).
 
-* Example 6: using the `"shortest"` method
+* Example 6: using the `"shorter"` method
 
 $MSW = \text{23:00}$
 
@@ -153,13 +153,13 @@ $\text{Real difference: + 04:00}$
    03:00              23:00     03:00              23:00
 -----|------------------|---------|------------------|----->
              20h            4h             20h
-         longer int.   shortest int.   longer int.
+         longer int.   shorter int.    longer int.
 
 ```
 
-By using the shortest interval, $MSW$ comes before $MSF$, so $SJL_{rel}$ must be equal to $\text{+ 04:00}$  (__right__).
+By using the shorter interval, $MSW$ comes before $MSF$, so $SJL_{rel}$ must be equal to $\text{+ 04:00}$  (__right__).
 
-* Example 7: when the `"shortest"` method fails
+* Example 7: when the `"shorter"` method fails
 
 $MSW = \text{12:00}$
 
@@ -173,22 +173,22 @@ $\text{Real difference: - 13:00}$
    12:00                   23:00                    12:00
 -----|-----------------------|------------------------|----->
                11h                       13h
-           shortest int.             longer int.
+           shorter int.              longer int.
 
 ```
 
-By using the shortest interval, $MSW$ comes before $MSF$, so $SJL_{rel}$ must be equal to $\text{+ 11:00}$ (__wrong__).
+By using the shorter interval, $MSW$ comes before $MSF$, so $SJL_{rel}$ must be equal to $\text{+ 11:00}$ (__wrong__).
 
-You can see example 7 in the `shift_mctq` dataset provided by the `mctq` package (ID 39, on and after night shifts). That's the only MCTQ$^{Shift}$ case in `shift_mctq` where we think that the `"shortest"` method would fail.
+You can see example 7 in the `shift_mctq` dataset provided by the `mctq` package (ID 39, on and after night shifts). That's the only MCTQ$^{Shift}$ case in `shift_mctq` where we think that the `"shorter"` method would fail.
 
 ### `method = "longer"`
 
-By using `method = "longer"`, `sjl()` uses the longer interval between $MSW$ and $MSF$. It's just the opposite of the `"shortest"` method showed above.
+By using `method = "longer"`, `sjl()` uses the longer interval between $MSW$ and $MSF$. It's just the opposite of the `"shorter"` method showed above.
 
 ## So, what method should I use?
 
-We recommend that you always use the `"shortest"` method when computing $SJL_{rel}$ or $SJL$ (the default `sjl()` method).
+We recommend that you always use the `"shorter"` method when computing $SJL_{rel}$ or $SJL$ (the default `sjl()` method).
 
-In our tests, the `"shortest"` method demonstrated to be almost fail-safe. You really need to worry about the $SJL$ computation if you are dealing with shift workers.
+In our tests, the `"shorter"` method demonstrated to be almost fail-safe. You really need to worry about the $SJL$ computation if you are dealing with shift workers.
 
 When dealing with a large MCTQ$^{Shift}$ dataset, it will be very difficult to identify $SJL$ errors, unless you look case by case and check the results with your volunteers. That's usually not a viable option. We recommend that you mention which method you use to compute $SJL$ and add it as a possible limitation of your results.

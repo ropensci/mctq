@@ -48,7 +48,7 @@ reference:
   - random_mctq
   - raw_data
   - round_time
-  - shortest_interval
+  - shorter_interval
   - sum_time
 
 articles:

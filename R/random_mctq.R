@@ -938,7 +938,7 @@ sampler_2 <- function(x, by, envir) {
         for (i in seq(3)) { # Bias
             free <- get(x$name, envir = envir)
 
-            check <- shush(shortest_interval(free, work, class = "Interval"))
+            check <- shush(shorter_interval(free, work, class = "Interval"))
             check <- lubridate::int_end(check)
             if (hms::as_hms(check) == free) break
 
@@ -980,8 +980,8 @@ sampler_3 <- function(x, y, by, envir) {
         for (i in seq(3)) { # Bias
             x_free <- get(x$name, envir = envir)
 
-            check_w <- shush(shortest_interval(x_work, y_work))
-            check_f <- shush(shortest_interval(x_free, y_free))
+            check_w <- shush(shorter_interval(x_work, y_work))
+            check_f <- shush(shorter_interval(x_free, y_free))
             if (check_f >= check_w) break
 
             sample <- clock_roll(sample_time(min = min, max = max, by = by,

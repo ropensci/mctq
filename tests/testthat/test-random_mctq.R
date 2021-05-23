@@ -64,7 +64,7 @@ test_that("random_std_mctq() | general test", {
     # "if (isFALSE(reasons_f))"
     set.seed(2)
     x <- random_std_mctq()
-    check <- shortest_interval(x$bt_w, x$bt_f, "Interval")
+    check <- shorter_interval(x$bt_w, x$bt_f, "Interval")
     check <- lubridate::int_end(check)
     expect_true(hms::as_hms(check) == x$bt_f)
 

@@ -69,8 +69,8 @@
 #' @section Methods for computing the social jetlag:
 #'
 #' There are different approaches to compute the social jetlag (\eqn{SJL}). By
-#' default, `sjl()` uses an approach that we call "the shortest interval
-#' approach" (`"shortest"`).
+#' default, `sjl()` uses an approach that we call "the shorter interval
+#' approach" (`"shorter"`).
 #'
 #' The topics below provide a simple explanation of each method supported by
 #' `sjl()`. To get a detail understating of this methods, see
@@ -90,16 +90,16 @@
 #'
 #' __We do not recommend using this method__, as it has many limitations.
 #'
-#' * `"shortest"`
+#' * `"shorter"`
 #'
-#' This is the default method for `sjl()`. It's based on the shortest
+#' This is the default method for `sjl()`. It's based on the shorter
 #' interval between \eqn{MSW} and \eqn{MSF}, solving most of the issues
 #' relating to \eqn{SJL} computation.
 #'
 #' * `"longer"`
 #'
-#' The `"longer"` method uses the same logic of the `"shortest"` method, but,
-#' instead of using the shortest interval between \eqn{MSW} and \eqn{MSF}, it
+#' The `"longer"` method uses the same logic of the `"shorter"` method, but,
+#' instead of using the shorter interval between \eqn{MSW} and \eqn{MSF}, it
 #' uses the longer interval between the two, considering a two-day window.
 #'
 #' This method may help with special contexts, like when dealing with
@@ -113,7 +113,7 @@
 #'   return an absolute social jetlag (default: `TRUE`).
 #' @param method (optional) a string indicating which method the function must
 #'   use to compute the social jetlag. See the Methods section to learn
-#'   more (default: `"shortest"`).
+#'   more (default: `"shorter"`).
 #'
 #' @return
 #'
@@ -174,7 +174,7 @@
 #' msf <- hms::parse_hm("02:30")
 #' sjl(msw, msf, abs = FALSE, method = "difference")
 #' #> [1] "-60300s (~-16.75 hours)" # Expected
-#' sjl(msw, msf, abs = FALSE, method = "shortest") # default method
+#' sjl(msw, msf, abs = FALSE, method = "shorter") # default method
 #' #> [1] "26100s (~7.25 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE, method = "longer")
 #' #> [1] "-60300s (~-16.75 hours)" # Expected
@@ -183,7 +183,7 @@
 #' msf <- hms::parse_hm("04:15")
 #' sjl(msw, msf, abs = FALSE, method = "difference")
 #' #> [1] "5400s (~1.5 hours)" # Expected
-#' sjl(msw, msf, abs = FALSE, method = "shortest") # default method
+#' sjl(msw, msf, abs = FALSE, method = "shorter") # default method
 #' #> [1] "5400s (~1.5 hours)" # Expected
 #' sjl(msw, msf, abs = FALSE, method = "longer")
 #' #> [1] "-81000s (~-22.5 hours)" # Expected
@@ -205,8 +205,8 @@
 #' #> [1] "5068.12339997292s (~1.41 hours)" # Expected
 #' round_time(x)
 #' #> [1] "5068s (~1.41 hours)" # Expected
-sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
-    choices <- c("difference", "shortest", "longer")
+sjl <- function(msw, msf, abs = TRUE, method = "shorter") {
+    choices <- c("difference", "shorter", "longer")
 
     checkmate::assert_class(msw, "hms")
     checkmate::assert_class(msf, "hms")
@@ -218,8 +218,8 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
         out <- sum_time(msf, - msw, class = "Duration", circular = FALSE,
                  vectorize = TRUE)
     } else {
-        if (method == "shortest") {
-            interval <- shortest_interval(msw, msf, class = "Interval",
+        if (method == "shorter") {
+            interval <- shorter_interval(msw, msf, class = "Interval",
                                           quiet = TRUE)
         } else if (method == "longer") {
             interval <- longer_interval(msw, msf, class = "Interval",
@@ -241,7 +241,7 @@ sjl <- function(msw, msf, abs = TRUE, method = "shortest") {
 
 #' @rdname sjl
 #' @export
-sjl_rel <- function(msw, msf, method = "shortest") {
+sjl_rel <- function(msw, msf, method = "shorter") {
     sjl(msw, msf, abs = FALSE, method = method)
 }
 

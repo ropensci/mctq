@@ -141,7 +141,7 @@ Other utility functions:
 \code{\link{random_mctq}()},
 \code{\link{raw_data}()},
 \code{\link{round_time}()},
-\code{\link{shortest_interval}()},
+\code{\link{shorter_interval}()},
 \code{\link{sum_time}()}
 }
 \concept{utility functions}
