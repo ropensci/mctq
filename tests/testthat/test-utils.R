@@ -39,11 +39,6 @@ test_that("midday_change() | general test", {
                   lubridate::ymd_hms("1970-01-02 06:00:00"))
     expect_equal(object, expected)
 
-    # Wrapper function
-    x <- lubridate::ymd_hms("2000-05-04 18:00:00")
-    object <- mdc(x)
-    expect_equal(object, lubridate::ymd_hms("1970-01-01 18:00:00"))
-
     # Error test
     expect_error(midday_change(1))
 })

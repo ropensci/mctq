@@ -25,8 +25,6 @@ midday_change <- function(x) {
     x
 }
 
-mdc <- function(x) midday_change(x)
-
 clock_roll <- function(x) {
     classes <- c("Duration", "Period", "difftime", "hms")
     checkmate::assert_multi_class(x, classes)
