@@ -33,4 +33,3 @@ test_check("mctq")
 # usethis::use_github_action_check_standard()
 # usethis::use_logo("./.archive/ai/hex-logo.png")
 # normalizePath(readClipboard(), "/", mustWork = FALSE)
-

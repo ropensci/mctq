@@ -20,7 +20,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
   "author": [
     {
       "@type": "Person",
@@ -135,18 +135,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "magrittr",
-      "name": "magrittr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=magrittr"
     },
     {
       "@type": "SoftwareApplication",
@@ -301,7 +289,7 @@
     }
   ],
   "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
-  "fileSize": "2219.108KB",
+  "fileSize": "0KB",
   "contIntegration": "https://codecov.io/gh/gipsousp/mctq?branch=master",
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
@@ -341,5 +329,5 @@
     "url": "https://github.com/ropensci/software-review/issues/434",
     "provider": "https://ropensci.org"
   },
-  "readme": "https://github.com/gipsousp/mctq/blob/master/README.md"
+  "readme": "https://github.com/gipsousp/mctq/blob/main/README.md"
 }
