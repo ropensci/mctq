@@ -227,24 +227,15 @@ test_that("inline_collapse() | general test", {
 })
 
 test_that("shush() | general test", {
-    x <- "test"
-    quiet <- FALSE
-    expect_equal(shush(x, quiet = quiet), x)
+    expect_equal(shush("test", quiet = FALSE), "test")
 
     test <- function() {
         warning("test", call. = FALSE)
         "test"
     }
 
-    quiet <- TRUE
-    expect_equal(shush(test(), quiet = quiet), "test")
-
-    quiet <- FALSE
-    expect_warning(shush(test(), quiet = quiet))
-
-    # Error test
-    expect_error(inline_collapse("", "", TRUE))
-    expect_error(inline_collapse("", TRUE, ""))
+    expect_equal(shush(test(), quiet = TRUE), "test")
+    expect_warning(shush(test(), quiet = FALSE))
 })
 
 test_that("close_round() | general test", {
