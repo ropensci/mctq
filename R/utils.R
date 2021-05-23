@@ -284,12 +284,8 @@ na_as <- function(x) {
 }
 
 get_class <- function(x) {
-    foo <- function(x) {
-        class(x)[1]
-    }
-
-    if (is.list(x) || is.data.frame(x)) {
-        vapply(x, foo, character(1))
+    if (is.list(x)) {
+        vapply(x, function(x) class(x)[1], character(1))
     } else {
         class(x)[1]
     }

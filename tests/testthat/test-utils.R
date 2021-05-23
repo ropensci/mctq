@@ -338,17 +338,13 @@ test_that("na_as() | general test", {
 })
 
 test_that("get_class() | general test", {
-    foo <- function(x) {
-        class(x)[1]
-    }
+    test <- function(x) class(x)[1]
 
     expect_equal(get_class(1), "numeric")
-
-    x <- datasets::iris
-    expect_equal(get_class(x), vapply(x, foo, character(1)))
-
-    x <- list(a = 1, b = 1)
-    expect_equal(get_class(x), vapply(x, foo, character(1)))
+    expect_equal(get_class(datasets::iris),
+                 vapply(datasets::iris, test, character(1)))
+    expect_equal(get_class(list(a = 1, b = 1)),
+                 vapply(list(a = 1, b = 1), test, character(1)))
 })
 
 test_that("fix_character() | general test", {
