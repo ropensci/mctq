@@ -48,7 +48,6 @@ Suggests:
     ggplot2,
     grDevices,
     knitr,
-    magrittr,
     mockr,
     readr,
     rmarkdown,
