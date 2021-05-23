@@ -17,6 +17,11 @@ Authors@R:
              role = c("aut", "sad"),
              email = "pedrazzo@usp.br",
              comment = c(ORCID = "0000-0002-5257-591X")),
+    person(given = "Jonathan",
+           family = "Keane",
+           role = "rev",
+           email = "jkeane@gmail.com",
+           comment = c(ORCID = "0000-0001-7087-9776")),
       person(given = "Interdisciplinary Sleep Research Group (GIPSO)",
              role = c("fnd", "cph")),
       person(given = "University of Sao Paulo (USP)",
@@ -30,7 +35,7 @@ URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
 BugReports: https://github.com/gipsousp/mctq/issues/
 Depends:
     R (>= 3.6)
-Imports: 
+Imports:
     checkmate,
     dplyr,
     hms,
