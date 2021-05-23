@@ -132,7 +132,8 @@
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' msw <- hms::parse_hm("03:30")
 #' msf <- hms::parse_hm("05:00")
 #' sjl(msw, msf)
@@ -156,7 +157,8 @@
 #' sjl(msw, msf)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
 #' msf <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
 #' sjl(msw, msf)
@@ -166,7 +168,8 @@
 #' sjl_rel(msw, msf) # Wrapper function
 #' #> [1] "-10800s (~-3 hours)" "0s" # Expected
 #'
-#' ## __ Using different methods __
+#' ## Using different methods
+#'
 #' msw <- hms::parse_hm("19:15")
 #' msf <- hms::parse_hm("02:30")
 #' sjl(msw, msf, abs = FALSE, method = "difference")
@@ -185,7 +188,7 @@
 #' sjl(msw, msf, abs = FALSE, method = "longer")
 #' #> [1] "-81000s (~-22.5 hours)" # Expected
 #'
-#' ## __ Converting the output to `hms` __
+#' ## Converting the output to `hms`
 #' msw <- hms::parse_hm("01:15")
 #' msf <- hms::parse_hm("03:25")
 #' x <- sjl(msw, msf)
@@ -194,7 +197,7 @@
 #' convert(x, "hms")
 #' #> 02:10:00 # Expected
 #'
-#' ## __ Rounding the output at the seconds level __
+#' ## Rounding the output at the seconds level
 #' msw <- hms::parse_hms("04:19:33.1234")
 #' msf <- hms::parse_hms("02:55:05")
 #' x <- sjl(msw, msf)
@@ -321,7 +324,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' sjl <- list(sjl_m = lubridate::dhours(1.25),
 #'             sjl_e = lubridate::dhours(0.5),
 #'             sjl_n = lubridate::dhours(3))
@@ -336,7 +340,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' sjl_weighted(sjl, n_w)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
 #'             sjl_e = c(lubridate::dhours(3.21), lubridate::as.duration(NA)),
 #'             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
@@ -344,7 +349,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' sjl_weighted(sjl, n_w)
 #' #> [1] "8298s (~2.31 hours)" NA # Expected
 #'
-#' ## __ Checking the first output from vector example __
+#' ## Checking the first output from vector example
+#'
 #' if (requireNamespace("stats", quietly = TRUE)) {
 #'     i <- 1
 #'     x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
@@ -353,7 +359,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' }
 #' #> [1] "8298s (~2.31 hours)" # Expected
 #'
-#' ## __ Converting the output to hms __
+#' ## Converting the output to hms
+#'
 #' sjl <- list(sjl_m = lubridate::dhours(0.25),
 #'             sjl_e = lubridate::dhours(1.2),
 #'             sjl_n = lubridate::dhours(4.32))
@@ -363,7 +370,8 @@ sjl_rel <- function(msw, msf, method = "shortest") {
 #' convert(sjl_weighted(sjl, n_w), "hms")
 #' #> 01:06:10.285714 # Expected
 #'
-#' ## __ Rounding the output at the seconds level __
+#' ## Rounding the output at the seconds level
+#'
 #' round_time(sjl_weighted(sjl, n_w))
 #' #> [1] "3970s (~1.1 hours)" # Expected
 #' round_time(convert(sjl_weighted(sjl, n_w), "hms"))

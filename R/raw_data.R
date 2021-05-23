@@ -18,11 +18,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## __ To list all raw dataset file names available __
+#' ## To list all raw dataset file names available
+#'
 #' raw_data()
 #'
-#' ## __ To get the file path from a specific raw dataset __
+#' ## To get the file path from a specific raw dataset
+#'
 #' raw_data(raw_data()[1])
+#'
 #' raw_data("std_mctq.csv")}
 raw_data <- function(file = NULL) {
     checkmate::assert_string(file, null.ok = TRUE)

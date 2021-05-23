@@ -102,7 +102,8 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 sd <- lubridate::dhours(6)
 napd <- lubridate::dhours(0.5)
 nap <- TRUE
@@ -127,7 +128,8 @@ nap <- TRUE
 sd24(sd, napd, nap)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 sd <- c(lubridate::dhours(7.5), lubridate::dhours(8))
 napd <- c(lubridate::dhours(0.75), lubridate::dhours(1))
 nap <- c(TRUE, TRUE)

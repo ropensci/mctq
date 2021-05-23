@@ -110,19 +110,24 @@ You can disable this behavior using \code{remove_id = FALSE}.
 }
 \examples{
 \dontrun{
-## __ Ploting a single column from `data` __
+## Ploting a single column from `data`
+
 qplot_walk(mctq::std_mctq$bt_w)
 
-## __ Ploting all columns from `data` __
+## Ploting all columns from `data`
+
 qplot_walk(mctq::std_mctq, ignore = NULL, remove_id = FALSE)
 
-## __ Ploting selected columns from `data` __
+## Ploting selected columns from `data`
+
 qplot_walk(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
 
-## __ Ploting selected columns from `data` using a name pattern__
+## Ploting selected columns from `data` using a name pattern
+
 qplot_walk(mctq::std_mctq, pattern = "_w$")
 
-## __ Examples using other datasets __
+## Examples using other datasets
+
 if (requireNamespace("datasets", quietly = TRUE)) {
     qplot_walk(datasets::iris)
     qplot_walk(datasets::mtcars)

@@ -118,7 +118,8 @@ more.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 sd_w <- lubridate::dhours(6.5)
 sd_f <- lubridate::dhours(7)
 wd <- 4
@@ -137,14 +138,16 @@ wd <- 7
 sloss_week(sd_w, sd_f, wd)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 sd_w <- c(lubridate::dhours(7), lubridate::dhours(8))
 sd_f <- c(lubridate::dhours(6.5), lubridate::dhours(8))
 wd <- c(2, 0)
 sloss_week(sd_w, sd_f, wd)
 #> [1] "2571.42857142857s (~42.86 minutes)" "0s" # Expected
 
-## __ Converting the output to `hms` __
+## Converting the output to `hms`
+
 sd_w <- lubridate::dhours(4)
 sd_f <- lubridate::dhours(5)
 wd <- 3
@@ -154,7 +157,8 @@ x
 convert(x, "hms")
 #> 01:42:51.428571 # Expected
 
-## __ Rounding the output at the seconds level __
+## Rounding the output at the seconds level
+
 sd_w <- lubridate::dhours(5.8743)
 sd_f <- lubridate::dhours(7.4324)
 wd <- 6

@@ -181,7 +181,8 @@ more.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 msf <- hms::parse_hms("04:00:00")
 sd_w <- lubridate::dhours(6)
 sd_f <- lubridate::dhours(7)
@@ -206,7 +207,8 @@ alarm_f <- TRUE
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> NA # Expected (`msf_sc` cannot be computed if `alarm_f == TRUE`)
 
-## __ Vector example __
+## Vector example
+
 msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
 sd_w <- c(lubridate::dhours(9), lubridate::dhours(6.45))
 sd_f <- c(lubridate::dhours(5), lubridate::dhours(10))
@@ -216,7 +218,8 @@ msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 03:45:00 # Expected
 #> 04:21:00 # Expected
 
-## __ A wrapper for msf_sc() __
+## A wrapper for msf_sc()
+
 msf <- hms::parse_hms("07:00:00")
 sd_w <- lubridate::dhours(6)
 sd_f <- lubridate::dhours(12)
@@ -225,7 +228,8 @@ alarm_f <- FALSE
 chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 05:43:30 # Expected
 
-## __ Rounding the output at the seconds level __
+## Rounding the output at the seconds level
+
 msf <- hms::parse_hms("05:40:00")
 sd_w <- lubridate::dhours(5.43678)
 sd_f <- lubridate::dhours(9.345111)

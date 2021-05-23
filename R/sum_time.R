@@ -85,13 +85,15 @@
 #' @export
 #'
 #' @examples
-#' ## __ Linear non-vectorized sum __
+#' ## Linear non-vectorized sum
+#'
 #' x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 #' y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 #' sum_time(x, y, class = "duration")
 #' #> [1] "142200s (~1.65 days)" # Expected
 #'
-#' ## __ Non-vectorized sum in a circular time frame of 24 hours __
+#' ## Non-vectorized sum in a circular time frame of 24 hours
+#'
 #' x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
 #' sum_time(x, circular = TRUE)
 #' #> 06:50:00 # Expected
@@ -102,7 +104,8 @@
 #' sum_time(x, circular = TRUE, na.rm = TRUE)
 #' #> 02:45:00 # Expected
 #'
-#' ## __ Linear vectorized sum __
+#' ## Linear vectorized sum
+#'
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, vectorize = TRUE)
@@ -112,7 +115,8 @@
 #' #> 29:00:00 # Expected
 #' #> 10:00:00 # Expected
 #'
-#' ## __ Vectorized sum in a circular time frame of 24 hours __
+#' ## Vectorized sum in a circular time frame of 24 hours
+#'
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 #' sum_time(x, y, circular = TRUE, vectorize = TRUE)

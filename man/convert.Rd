@@ -345,7 +345,8 @@ seconds equivalent to the unit duration. You can also assign a lubridate
 }
 }
 \examples{
-## __ Converting from date/time objects to units __
+## Converting from date/time objects to units
+
 convert(lubridate::dhours(), "numeric", output_unit = "M")
 #> [1] 60 # Expected
 convert(lubridate::days(), "numeric", output_unit = "rad")
@@ -359,7 +360,8 @@ convert(x, "numeric", output_unit = "d", ignore_date = FALSE)
 convert(hms::parse_hm("15:45:00"), "numeric", output_unit = "H")
 #> [1] 15.75 # Expected
 
-## __ Converting from units to date/time objects __
+## Converting from units to date/time objects
+
 convert(360, "Period", input_unit = "deg")
 #> [1] "1d 0H 0M 0S" # Expected
 convert(6.5, "POSIXct", input_unit = "H")
@@ -371,7 +373,8 @@ convert(1, "Posixlt", input_unit = "W")
 convert(1.308997, "Duration", input_unit = "rad")
 #> [1] "18000s (~5 hours)" # Expected
 
-## __ Converting between date/time objects __
+## Converting between date/time objects
+
 convert(lubridate::dseconds(120), "hms")
 #> 00:02:00 # Expected
 convert(hms::as_hms("13:45:05"), "POSIXct")
@@ -384,7 +387,8 @@ x <- lubridate::ymd_hms("2020-01-01 12:31:05", tz = "EST")
 convert(x, "POSIXct", tz = "UTC")
 #> [1] "2020-01-01 12:31:05 UTC" # Expected
 
-## __ Converting between units __
+## Converting between units
+
 convert(1.308997, "numeric", input_unit = "rad", output_unit = "H")
 #> [1] 5 # Expected
 convert(60, "numeric", input_unit = "deg", output_unit = "rad")
@@ -396,7 +400,8 @@ convert(0.2617994, "numeric", input_unit = "rad", output_unit = "H")
 convert(40, "numeric", input_unit = "d", output_unit = "deg")
 #> [1] 14400 # Expected
 
-## __ Converting from 'character' or 'numeric' to date/time objects __
+## Converting from 'character' or 'numeric' to date/time objects
+
 convert("19:55:17", "Duration", orders = "HMS")
 #> [1] "71717s (~19.92 hours)" # Expected
 convert("21:00", "Period", orders = "HM")
@@ -414,7 +419,8 @@ convert("2020-01-01 12:31:05", "POSIXct", orders = "ymd HMS", tz = "EST")
 convert("03/07/1982 13:00", "POSIXlt", orders = "dmy HM")
 #> [1] "1982-07-03 13:00:00 UTC" # Expected
 
-## __ Converting from 'character' or 'numeric' objects to units __
+## Converting from 'character' or 'numeric' objects to units
+
 convert("0145", "numeric", orders = "HM", output_unit = "M")
 #> [1] 105 # Expected
 convert(45, "numeric", orders = "M", output_unit = "H")
@@ -426,7 +432,8 @@ convert("2020-03-15 02", "numeric", orders = "ymd H", output_unit = "H")
 convert("01:00", "numeric", orders = "HM", output_unit = "rad")
 #> [1] 0.261799 # Expected
 
-## __ Converting columns of a data frame __
+## Converting columns of a data frame
+
 data <- data.frame(a = 1, b = 2)
 data
 

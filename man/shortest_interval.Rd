@@ -115,7 +115,8 @@ dates. Only the time will be considered.
 }
 }
 \examples{
-## __ Scalar example __
+## Scalar example
+
 x <- hms::parse_hm("23:00")
 y <- hms::parse_hm("01:00")
 shortest_interval(x, y)
@@ -126,14 +127,16 @@ y <- lubridate::as_datetime("2020-09-10 12:00:00")
 shortest_interval(x, y)
 #> 00:00:00 # Expected
 
-## __ Vector example __
+## Vector example
+
 x <- c(hms::parse_hm("15:30"), hms::parse_hm("21:30"))
 y <- c(hms::parse_hm("19:30"), hms::parse_hm("04:00"))
 shortest_interval(x, y)
 #> 04:00:00 # Expected
 #> 06:30:00 # Expected
 
-## __ Finding the longer interval between two hours __
+## Finding the longer interval between two hours
+
 x <- lubridate::parse_date_time("01:10:00", "HMS")
 y <- lubridate::parse_date_time("11:45:00", "HMS")
 shortest_interval(x, y, inverse = TRUE)
@@ -144,7 +147,8 @@ y <- lubridate::as_datetime("1970-07-01 05:00:00")
 longer_interval(x, y)
 #> 24:00:00 # Expected
 
-## __ Changing the output object class __
+## Changing the output object class
+
 x <- as.POSIXct("1988-10-05 02:00:00")
 y <- as.POSIXlt("2100-05-07 13:30:00")
 shortest_interval(x, y, "Interval")

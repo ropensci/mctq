@@ -110,7 +110,8 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 so <- hms::parse_hm("23:30")
 sd <- lubridate::dhours(8)
 ms(so, sd)
@@ -126,7 +127,8 @@ sd <- lubridate::dhours(7.5)
 ms(so, sd)
 #> NA # Expected
 
-## __ Vector example __
+## Vector example
+
 so <- c(hms::parse_hm("00:10"), hms::parse_hm("01:15"))
 sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
 ms(so, sd)

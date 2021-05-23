@@ -95,7 +95,8 @@
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' start <- hms::parse_hms("23:11:00")
 #' end <- hms::parse_hms("05:30:00")
 #' assign_date(start, end)
@@ -111,20 +112,23 @@
 #' assign_date(start, end)
 #' #> [1] NA--NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' start <- c(hms::parse_hm("09:45"), hms::parse_hm("20:30"))
 #' end <- c(hms::parse_hm("21:15"), hms::parse_hm("04:30"))
 #' assign_date(start, end)
 #' #> [1] 1970-01-01 09:45:00 UTC--1970-01-01 21:15:00 UTC # Expected
 #' #> [2] 1970-01-01 20:30:00 UTC--1970-01-02 04:30:00 UTC # Expected
 #'
-#' ## __ To return `start` and `end` as interval (default)__
+#' ## To return `start` and `end` as interval (default)
+#'
 #' start <- hms::parse_hm("12:34")
 #' end <- hms::parse_hm("01:25")
 #' assign_date(start, end)
 #' #> [1] 1970-01-01 12:34:00 UTC--1970-01-02 01:25:00 UTC # Expected
 #'
-#' ## __ To return `start` and `end` as list __
+#' ## To return `start` and `end` as list
+#'
 #' start <- hms::parse_hm("22:15")
 #' end <- hms::parse_hm("00:01")
 #' assign_date(start, end, return = "list")
@@ -134,7 +138,8 @@
 #' #> $end # Expected
 #' #> [1] "1970-01-02 00:01:00 UTC" # Expected
 #'
-#' ## __ To return only `start` or `end` __
+#' ## To return only `start` or `end`
+#'
 #' start <- lubridate::parse_date_time("01:10:00", "HMS")
 #' end <- lubridate::parse_date_time("11:45:00", "HMS")
 #' assign_date(start, end, return = "start")
@@ -142,7 +147,8 @@
 #' assign_date(start, end, return = "end")
 #' #> [1] "1970-01-01 11:45:00 UTC" # Expected
 #'
-#' ## __ To assign a 24 hours interval to ambiguities __
+#' ## To assign a 24 hours interval to ambiguities
+#'
 #' start <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' end <- lubridate::as_datetime("2020-09-10 12:00:00")
 #' assign_date(start, end, ambiguity = 24)

@@ -27,7 +27,8 @@ for rounding off a 5. Therefore, \code{round(0.5)} is equal to 0 and \code{round
 is equal to -2. See \code{?round} to learn more.
 }
 \examples{
-## __ Scalar example __
+## Scalar example
+
 lubridate::dmilliseconds(123456789)
 #> [1] "123456.789s (~1.43 days)" # Expected
 round_time(lubridate::dmilliseconds(123456789))
@@ -57,7 +58,8 @@ round_time(lubridate::as_datetime(12345.6789, tz = "EST"))
 as.numeric(round_time(lubridate::as_datetime(12345.6789, tz = "EST")))
 #> [1] 12346 # Expected
 
-## __ Vector example __
+## Vector example
+
 x <- c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))
 x
 #> [1] "20515.32s (~5.7 hours)"    "9675.05544s (~2.69 hours)" # Expected

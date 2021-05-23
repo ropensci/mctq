@@ -204,7 +204,8 @@ more.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 msw <- hms::parse_hm("03:30")
 msf <- hms::parse_hm("05:00")
 sjl(msw, msf)
@@ -228,7 +229,8 @@ msf <- hms::parse_hm("05:15")
 sjl(msw, msf)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
 msf <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
 sjl(msw, msf)
@@ -238,7 +240,8 @@ sjl(msw, msf, abs = FALSE)
 sjl_rel(msw, msf) # Wrapper function
 #> [1] "-10800s (~-3 hours)" "0s" # Expected
 
-## __ Using different methods __
+## Using different methods
+
 msw <- hms::parse_hm("19:15")
 msf <- hms::parse_hm("02:30")
 sjl(msw, msf, abs = FALSE, method = "difference")
@@ -257,7 +260,7 @@ sjl(msw, msf, abs = FALSE, method = "shortest") # default method
 sjl(msw, msf, abs = FALSE, method = "longer")
 #> [1] "-81000s (~-22.5 hours)" # Expected
 
-## __ Converting the output to `hms` __
+## Converting the output to `hms`
 msw <- hms::parse_hm("01:15")
 msf <- hms::parse_hm("03:25")
 x <- sjl(msw, msf)
@@ -266,7 +269,7 @@ x
 convert(x, "hms")
 #> 02:10:00 # Expected
 
-## __ Rounding the output at the seconds level __
+## Rounding the output at the seconds level
 msw <- hms::parse_hms("04:19:33.1234")
 msf <- hms::parse_hms("02:55:05")
 x <- sjl(msw, msf)

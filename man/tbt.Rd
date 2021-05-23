@@ -109,7 +109,8 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 bt <- hms::parse_hm("22:10")
 gu <- hms::parse_hm("06:15")
 tbt(bt, gu)
@@ -125,7 +126,8 @@ gu <- hms::parse_hm("07:20")
 tbt(bt, gu)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 bt <- c(hms::parse_hm("23:50"), hms::parse_hm("02:30"))
 gu <- c(hms::parse_hm("09:30"), hms::parse_hm("11:25"))
 tbt(bt, gu)

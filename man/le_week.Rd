@@ -116,7 +116,8 @@ more.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 le_w <- lubridate::dhours(1.5)
 le_f <- lubridate::dhours(3.7)
 wd <- 5
@@ -135,7 +136,8 @@ wd <- 3
 le_week(le_w, le_f, wd)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 le_w <- c(lubridate::dhours(3), lubridate::dhours(2.45))
 le_f <- c(lubridate::dhours(3), lubridate::dhours(3.75))
 wd <- c(4, 5)
@@ -143,7 +145,8 @@ le_week(le_w, le_f, wd)
 #> [1] "10800s (~3 hours)" # Expected
 #> [2] "10157.1428571429s (~2.82 hours)" # Expected
 
-## __ Checking second output from vector example __
+## Checking second output from vector example
+
 if (requireNamespace("stats", quietly = TRUE)) {
     i <- 2
     x <- c(le_w[i], le_f[i])
@@ -152,7 +155,8 @@ if (requireNamespace("stats", quietly = TRUE)) {
 }
 #> [1] "10157.1428571429s (~2.82 hours)" # Expected
 
-## __ Converting the output to `hms` __
+## Converting the output to `hms`
+
 le_w <- lubridate::dhours(1.25)
 le_f <- lubridate::dhours(6.23)
 wd <- 3
@@ -162,7 +166,8 @@ x
 convert(x, "hms")
 #> 04:05:44.571429 # Expected
 
-## __ Rounding the output at the seconds level __
+## Rounding the output at the seconds level
+
 le_w <- lubridate::dhours(3.4094)
 le_f <- lubridate::dhours(6.2345)
 wd <- 2

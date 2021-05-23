@@ -67,7 +67,8 @@
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' so <- hms::parse_hm("23:00")
 #' se <- hms::parse_hm("08:00")
 #' sd(so, se)
@@ -83,7 +84,8 @@
 #' sd(so, se)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' so <- c(hms::parse_hm("04:12"), hms::parse_hm("21:20"))
 #' se <- c(hms::parse_hm("14:30"), hms::parse_hm("03:45"))
 #' sd(so, se)
@@ -151,7 +153,8 @@ sd <- function(so, se) {
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' napo <- hms::parse_hm("12:30")
 #' nape <- hms::parse_hm("14:20")
 #' napd(napo, nape)
@@ -167,7 +170,8 @@ sd <- function(so, se) {
 #' napd(napo, nape)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' napo <- c(hms::parse_hm("01:25"), hms::parse_hm("23:50"))
 #' nape <- c(hms::parse_hm("03:10"), hms::parse_hm("01:10"))
 #' napd(napo, nape)
@@ -245,7 +249,8 @@ napd <- function(napo, nape) {
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' sd <- lubridate::dhours(6)
 #' napd <- lubridate::dhours(0.5)
 #' nap <- TRUE
@@ -270,7 +275,8 @@ napd <- function(napo, nape) {
 #' sd24(sd, napd, nap)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' sd <- c(lubridate::dhours(7.5), lubridate::dhours(8))
 #' napd <- c(lubridate::dhours(0.75), lubridate::dhours(1))
 #' nap <- c(TRUE, TRUE)
@@ -353,7 +359,8 @@ sd24 <- function(sd, napd, nap) {
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' sd_w <- lubridate::dhours(4)
 #' sd_f <- lubridate::dhours(8)
 #' wd <- 5
@@ -372,14 +379,16 @@ sd24 <- function(sd, napd, nap) {
 #' sd_week(sd_w, sd_f, wd)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' sd_w <- c(lubridate::dhours(4.5), lubridate::dhours(5.45))
 #' sd_f <- c(lubridate::dhours(8), lubridate::dhours(7.3))
 #' wd <- c(3, 7)
 #' sd_week(sd_w, sd_f, wd)
 #' #> [1] "23400s (~6.5 hours)"  "19620s (~5.45 hours)" # Expected
 #'
-#' ## __ Checking second output from vector example __
+#' ## Checking second output from vector example
+#'
 #' if (requireNamespace("stats", quietly = TRUE)) {
 #'     i <- 2
 #'     x <- c(sd_w[i], sd_f[i])
@@ -388,7 +397,8 @@ sd24 <- function(sd, napd, nap) {
 #' }
 #' #> [1] "19620s (~5.45 hours)" # Expected
 #'
-#' ## __ Converting the output to hms __
+#' ## Converting the output to hms
+#'
 #' sd_w <- lubridate::dhours(5.45)
 #' sd_f <- lubridate::dhours(9.5)
 #' wd <- 5
@@ -398,7 +408,8 @@ sd24 <- function(sd, napd, nap) {
 #' convert(x, "hms")
 #' #> 06:36:25.714286 # Expected
 #'
-#' ## __ Rounding the output at the seconds level __
+#' ## Rounding the output at the seconds level
+#'
 #' sd_w <- lubridate::dhours(4.5)
 #' sd_f <- lubridate::dhours(7.8)
 #' wd <- 3
@@ -497,7 +508,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' sd_w <- lubridate::dhours(5)
 #' sd_f <- lubridate::dhours(9)
 #' n_w <- 2
@@ -519,7 +531,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' sd_w <- c(lubridate::dhours(4), lubridate::dhours(7))
 #' sd_f <- c(lubridate::dhours(12), lubridate::dhours(9))
 #' n_w <- c(3, 4)
@@ -527,7 +540,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] "25920s (~7.2 hours)" "28800s (~8 hours)"  # Expected
 #'
-#' ## __ Checking second output from vector example __
+#' ## Checking second output from vector example
+#'
 #' if (requireNamespace("stats", quietly = TRUE)) {
 #'     i <- 2
 #'     x <- c(sd_w[i], sd_f[i])
@@ -536,7 +550,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' }
 #' #> [1] "28800s (~8 hours)" # Expected
 #'
-#' ## __ Converting the output to hms __
+#' ## Converting the output to hms
+#'
 #' sd_w <- lubridate::dhours(4.75)
 #' sd_f <- lubridate::dhours(10)
 #' n_w <- 5
@@ -547,7 +562,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' convert(x, "hms")
 #' #> 06:15:00 # Expected
 #'
-#' ## __ Rounding the output at the seconds level __
+#' ## Rounding the output at the seconds level
+#'
 #' sd_w <- lubridate::dhours(5.9874)
 #' sd_f <- lubridate::dhours(9.3)
 #' n_w <- 3

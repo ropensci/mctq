@@ -117,7 +117,8 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 sd_w <- lubridate::dhours(5)
 sd_f <- lubridate::dhours(9)
 n_w <- 2
@@ -139,7 +140,8 @@ n_f <- 4
 sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 sd_w <- c(lubridate::dhours(4), lubridate::dhours(7))
 sd_f <- c(lubridate::dhours(12), lubridate::dhours(9))
 n_w <- c(3, 4)
@@ -147,7 +149,8 @@ n_f <- c(2, 4)
 sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] "25920s (~7.2 hours)" "28800s (~8 hours)"  # Expected
 
-## __ Checking second output from vector example __
+## Checking second output from vector example
+
 if (requireNamespace("stats", quietly = TRUE)) {
     i <- 2
     x <- c(sd_w[i], sd_f[i])
@@ -156,7 +159,8 @@ if (requireNamespace("stats", quietly = TRUE)) {
 }
 #> [1] "28800s (~8 hours)" # Expected
 
-## __ Converting the output to hms __
+## Converting the output to hms
+
 sd_w <- lubridate::dhours(4.75)
 sd_f <- lubridate::dhours(10)
 n_w <- 5
@@ -167,7 +171,8 @@ x
 convert(x, "hms")
 #> 06:15:00 # Expected
 
-## __ Rounding the output at the seconds level __
+## Rounding the output at the seconds level
+
 sd_w <- lubridate::dhours(5.9874)
 sd_f <- lubridate::dhours(9.3)
 n_w <- 3

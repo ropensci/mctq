@@ -118,7 +118,8 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 
 \examples{
-## __ Scalar example __
+## Scalar example
+
 sjl <- list(sjl_m = lubridate::dhours(1.25),
             sjl_e = lubridate::dhours(0.5),
             sjl_n = lubridate::dhours(3))
@@ -133,7 +134,8 @@ n_w <- list(n_w_m = 3, n_w_e = 1, n_w_n = 4)
 sjl_weighted(sjl, n_w)
 #> [1] NA # Expected
 
-## __ Vector example __
+## Vector example
+
 sjl <- list(sjl_m = c(lubridate::dhours(2), lubridate::dhours(2.45)),
             sjl_e = c(lubridate::dhours(3.21), lubridate::as.duration(NA)),
             sjl_n = c(lubridate::dhours(1.2), lubridate::dhours(5.32)))
@@ -141,7 +143,8 @@ n_w <- list(n_w_m = c(1, 3), n_w_e = c(4, 1), n_w_n = c(3, 3))
 sjl_weighted(sjl, n_w)
 #> [1] "8298s (~2.31 hours)" NA # Expected
 
-## __ Checking the first output from vector example __
+## Checking the first output from vector example
+
 if (requireNamespace("stats", quietly = TRUE)) {
     i <- 1
     x <- c(sjl[["sjl_m"]][i], sjl[["sjl_e"]][i], sjl[["sjl_n"]][i])
@@ -150,7 +153,8 @@ if (requireNamespace("stats", quietly = TRUE)) {
 }
 #> [1] "8298s (~2.31 hours)" # Expected
 
-## __ Converting the output to hms __
+## Converting the output to hms
+
 sjl <- list(sjl_m = lubridate::dhours(0.25),
             sjl_e = lubridate::dhours(1.2),
             sjl_n = lubridate::dhours(4.32))
@@ -160,7 +164,8 @@ sjl_weighted(sjl, n_w)
 convert(sjl_weighted(sjl, n_w), "hms")
 #> 01:06:10.285714 # Expected
 
-## __ Rounding the output at the seconds level __
+## Rounding the output at the seconds level
+
 round_time(sjl_weighted(sjl, n_w))
 #> [1] "3970s (~1.1 hours)" # Expected
 round_time(convert(sjl_weighted(sjl, n_w), "hms"))

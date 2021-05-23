@@ -71,7 +71,8 @@
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' gu(hms::parse_hm("08:00"), lubridate::dminutes(10))
 #' #> 08:10:00 # Expected
 #' gu(hms::parse_hm("11:45"), lubridate::dminutes(90))
@@ -79,7 +80,8 @@
 #' gu(hms::as_hms(NA), lubridate::dminutes(90))
 #' #> NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' se <- c(hms::parse_hm("12:30"), hms::parse_hm("23:45"))
 #' si <- c(lubridate::dminutes(10), lubridate::dminutes(70))
 #' gu(se, si)

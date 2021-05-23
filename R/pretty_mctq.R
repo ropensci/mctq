@@ -44,10 +44,12 @@
 #'     c = lubridate::period(1.12345),
 #'     d = hms::hms(1.12345))
 #'
-#' ## __ Rounding time objects from `data` __
+#' ## Rounding time objects from `data`
+#'
 #' pretty_mctq(data, round = TRUE, hms = FALSE)
 #'
-#' ## __ Converting non-`hms` time objects from `data` to `hms` __
+#' ## Converting non-`hms` time objects from `data` to `hms`
+#'
 #' pretty_mctq(data, round = FALSE, hms = TRUE)
 pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     checkmate::assert_data_frame(data)

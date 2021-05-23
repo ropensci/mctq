@@ -68,7 +68,8 @@
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' so <- hms::parse_hm("23:30")
 #' sd <- lubridate::dhours(8)
 #' ms(so, sd)
@@ -84,7 +85,8 @@
 #' ms(so, sd)
 #' #> NA # Expected
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' so <- c(hms::parse_hm("00:10"), hms::parse_hm("01:15"))
 #' sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
 #' ms(so, sd)
@@ -218,7 +220,8 @@ ms <- function(so, sd) {
 #' @export
 #'
 #' @examples
-#' ## __ Scalar example __
+#' ## Scalar example
+#'
 #' msf <- hms::parse_hms("04:00:00")
 #' sd_w <- lubridate::dhours(6)
 #' sd_f <- lubridate::dhours(7)
@@ -243,7 +246,8 @@ ms <- function(so, sd) {
 #' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> NA # Expected (`msf_sc` cannot be computed if `alarm_f == TRUE`)
 #'
-#' ## __ Vector example __
+#' ## Vector example
+#'
 #' msf <- c(hms::parse_hms("03:45:00"), hms::parse_hm("04:45:00"))
 #' sd_w <- c(lubridate::dhours(9), lubridate::dhours(6.45))
 #' sd_f <- c(lubridate::dhours(5), lubridate::dhours(10))
@@ -253,7 +257,8 @@ ms <- function(so, sd) {
 #' #> 03:45:00 # Expected
 #' #> 04:21:00 # Expected
 #'
-#' ## __ A wrapper for msf_sc() __
+#' ## A wrapper for msf_sc()
+#'
 #' msf <- hms::parse_hms("07:00:00")
 #' sd_w <- lubridate::dhours(6)
 #' sd_f <- lubridate::dhours(12)
@@ -262,7 +267,8 @@ ms <- function(so, sd) {
 #' chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 05:43:30 # Expected
 #'
-#' ## __ Rounding the output at the seconds level __
+#' ## Rounding the output at the seconds level
+#'
 #' msf <- hms::parse_hms("05:40:00")
 #' sd_w <- lubridate::dhours(5.43678)
 #' sd_f <- lubridate::dhours(9.345111)
@@ -297,6 +303,4 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
 
 #' @rdname msf_sc
 #' @export
-chronotype <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
-    msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
-}
+chronotype <- msf_sc
