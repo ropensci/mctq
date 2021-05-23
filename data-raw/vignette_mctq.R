@@ -3,7 +3,6 @@
 
 # library(checkmate)
 # library(dplyr)
-# library(magrittr)
 # library(mctq)
 # library(readr)
 # library(rlang)
