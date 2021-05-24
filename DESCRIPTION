@@ -1,6 +1,6 @@
 Package: mctq
 Title: An R Package for the Munich ChronoType Questionnaire
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     c(person(given = "Daniel",
              family = "Vartanian",
@@ -40,7 +40,7 @@ Imports:
     dplyr,
     hms,
     lifecycle,
-    lubridate
+    lubridate (>= 1.7.9)
 Suggests:
     covr,
     crayon,
