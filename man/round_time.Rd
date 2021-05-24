@@ -2,9 +2,18 @@
 % Please edit documentation in R/round_time.R
 \name{round_time}
 \alias{round_time}
+\alias{round_time.default}
+\alias{round_time.difftime}
+\alias{round_time.hms}
 \title{Round time values}
 \usage{
 round_time(x)
+
+\method{round_time}{default}(x)
+
+\method{round_time}{difftime}(x)
+
+\method{round_time}{hms}(x)
 }
 \arguments{
 \item{x}{An object belonging to one of the following classes: \code{Duration},
@@ -39,10 +48,10 @@ lubridate::microseconds(123456789)
 round_time(lubridate::microseconds(123456789))
 #> [1] "123S" # Expected
 
-as.difftime(12345.6789, units = "hours")
-#> Time difference of 12345.68 hours # Expected
-round_time(as.difftime(12345.6789, units = "hours"))
-#> Time difference of 12346 hours # Expected
+as.difftime(12345.6789, units = "secs")
+#> Time difference of 12345.68 secs # Expected
+round_time(as.difftime(12345.6789, units = "secs"))
+#> Time difference of 12346 secs # Expected
 
 hms::as_hms(12345.6789)
 #> 03:25:45.6789 # Expected

@@ -4,11 +4,11 @@ test_that("round_time() | scalar test", {
     expect_equal(object, expected)
 
     object <- round_time(lubridate::microseconds(123456789))
-    expected <- lubridate::as.period(hms::hms(123))
+    expected <- round(lubridate::microseconds(123456789))
     expect_equal(object, expected)
 
-    object <- round_time(as.difftime(12345.6789, units = "hours"))
-    expected <- as.difftime(12346, units = "hours")
+    object <- round_time(as.difftime(12345.6789, units = "secs"))
+    expected <- as.difftime(12346, units = "secs")
     expect_equal(object, expected)
 
     object <- round_time(hms::as_hms(12345.6789))

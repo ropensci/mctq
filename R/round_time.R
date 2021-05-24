@@ -39,10 +39,10 @@
 #' round_time(lubridate::microseconds(123456789))
 #' #> [1] "123S" # Expected
 #'
-#' as.difftime(12345.6789, units = "hours")
-#' #> Time difference of 12345.68 hours # Expected
-#' round_time(as.difftime(12345.6789, units = "hours"))
-#' #> Time difference of 12346 hours # Expected
+#' as.difftime(12345.6789, units = "secs")
+#' #> Time difference of 12345.68 secs # Expected
+#' round_time(as.difftime(12345.6789, units = "secs"))
+#' #> Time difference of 12346 secs # Expected
 #'
 #' hms::as_hms(12345.6789)
 #' #> 03:25:45.6789 # Expected
@@ -69,17 +69,34 @@ round_time <- function(x) {
     classes <- c("Duration", "Period", "difftime", "hms", "POSIXct", "POSIXlt")
     checkmate::assert_multi_class(x, classes)
 
-    class <- class(x)[1]
-    if (class == "difftime") units <- units(x)
-    if (class %in% c("POSIXct", "POSIXlt")) tz <- attributes(x)$tzone[1]
+    UseMethod("round_time")
+}
 
-    x <- round(as.numeric(x))
+#' @rdname round_time
+#' @export
+round_time.default <- function(x) {
+    round(x)
+}
 
-    if (class == "difftime") {
-        as.difftime(x, units = units)
-    } else if (class %in% c("POSIXct", "POSIXlt")) {
-        convert(x, class, tz = tz, quiet = TRUE)
-    } else {
-        convert(x, class, quiet = TRUE)
-    }
+#' @rdname round_time
+#' @export
+round_time.difftime <- function(x) {
+    units <- units(x)
+    units(x) <- "secs"
+
+    x <- x %>% as.numeric() %>%
+        round() %>%
+        as.difftime(units = "secs")
+
+    units(x) <- units
+
+    x
+}
+
+#' @rdname round_time
+#' @export
+round_time.hms <- function(x) {
+    x %>% as.numeric() %>%
+        round() %>%
+        hms::as_hms()
 }
