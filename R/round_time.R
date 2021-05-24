@@ -2,12 +2,28 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' `round_time()` takes a `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, or
 #' `POSIXlt` object and round its `numeric` value at the ones place.
 #'
 #' @details
+#'
+#' ## Deprecation notice
+#'
+#' `vctrs` support was added to the [lubridate][lubridate::lubridate-package]
+#' package with its 1.7.9 version (see the pull
+#' [here](https://github.com/tidyverse/lubridate/pull/871)). This resolves
+#' issues when rounding `Duration`, `Period`, `Interval`, and `POSIXt` objects
+#' to the ones place with the [round][base::round] function.
+#'
+#' It looks like the [hms][hms::hms-package] will also add `vctrs` support
+#' following its 1.0.0 version (learn more
+#' [here](https://github.com/tidyverse/hms/issues/18)). When this occurs,
+#' `round_time()` functionality will no longer be needed and the function will
+#' be removed from the `mctq` package.
+#'
+#' ## Round standard
 #'
 #' `round_time()` uses [base::round()] for rounding. That is to say that
 #' `round_time()` uses the same IEC 60559 standard (_"go to the even digit"_)

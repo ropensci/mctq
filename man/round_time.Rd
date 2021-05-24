@@ -24,16 +24,34 @@ An object of the same class of \code{x} with its \code{numeric} value rounded
 at the ones place.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 \code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or
 \code{POSIXlt} object and round its \code{numeric} value at the ones place.
 }
 \details{
+\subsection{Deprecation notice}{
+
+\code{vctrs} support was added to the \link[lubridate:lubridate-package]{lubridate}
+package with its 1.7.9 version (see the pull
+\href{https://github.com/tidyverse/lubridate/pull/871}{here}). This resolves
+issues when rounding \code{Duration}, \code{Period}, \code{Interval}, and \code{POSIXt} objects
+to the ones place with the \link[base:Round]{round} function.
+
+It looks like the \link[hms:hms-package]{hms} will also add \code{vctrs} support
+following its 1.0.0 version (learn more
+\href{https://github.com/tidyverse/hms/issues/18}{here}). When this occurs,
+\code{round_time()} functionality will no longer be needed and the function will
+be removed from the \code{mctq} package.
+}
+
+\subsection{Round standard}{
+
 \code{round_time()} uses \code{\link[base:Round]{base::round()}} for rounding. That is to say that
 \code{round_time()} uses the same IEC 60559 standard (\emph{"go to the even digit"})
 for rounding off a 5. Therefore, \code{round(0.5)} is equal to 0 and \code{round(-1.5)}
 is equal to -2. See \code{?round} to learn more.
+}
 }
 \examples{
 ## Scalar example
