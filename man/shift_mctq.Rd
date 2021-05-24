@@ -10,7 +10,7 @@ rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value to identify each subject in the dataset.
+A unique \code{integer} value to identify each respondent in the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
@@ -86,8 +86,8 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{alarm_w_m}{
-A \code{logical} value indicating if the subject uses an alarm clock to wake up
-on workdays \strong{between two morning shifts}.
+A \code{logical} value indicating if the respondent uses an alarm clock to wake
+up on workdays \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "I wake up at ___ o'clock: ( ___ ) with alarm ( ___ )
 without alarm".
@@ -97,8 +97,8 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_w_m}{
-A \code{logical} value indicating if the subject has any particular reasons for
-why they \strong{cannot} freely choose their sleep times on workdays
+A \code{logical} value indicating if the respondent has any particular reasons
+for why they \strong{cannot} freely choose their sleep times on workdays
 \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
@@ -109,7 +109,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_why_w_m}{
-Particular reasons for why the subject cannot freely choose their sleep
+Particular reasons for why the respondent cannot freely choose their sleep
 times on workdays \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -141,8 +141,8 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{nap_w_m}{
-A \code{logical} value indicating if the subject usually takes a nap on workdays
-\strong{between two morning shifts}.
+A \code{logical} value indicating if the respondent usually takes a nap on
+workdays \strong{between two morning shifts}.
 \cr \cr
 Statement (\code{EN}): "I usually take a nap: Yes ( ___ ) No ( ___ )".
 \cr \cr
@@ -258,8 +258,8 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{alarm_f_m}{
-A \code{logical} value indicating if the subject uses an alarm clock to wake up
-on work-free days \strong{between two free days after morning shifts}.
+A \code{logical} value indicating if the respondent uses an alarm clock to wake
+up on work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "I wake up at ___ o'clock: ( ___ ) with alarm ( ___ )
 without alarm".
@@ -269,8 +269,8 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_f_m}{
-A \code{logical} value indicating if the subject has any particular reasons for
-why they \strong{cannot} freely choose their sleep times on work-free days
+A \code{logical} value indicating if the respondent has any particular reasons
+for why they \strong{cannot} freely choose their sleep times on work-free days
 \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
@@ -281,7 +281,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_why_f_m}{
-Particular reasons for why the subject cannot freely choose their sleep
+Particular reasons for why the respondent cannot freely choose their sleep
 times on work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -316,7 +316,7 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{nap_f_m}{
-A \code{logical} value indicating if the subject usually takes a nap on
+A \code{logical} value indicating if the respondent usually takes a nap on
 work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Statement (\code{EN}): "I usually take a nap: Yes ( ___ ) No ( ___ )".
@@ -432,15 +432,15 @@ sections to learn more.
 \subsection{Guidelines}{
 
 To learn more about the Munich Chronotype Questionnaire (MCTQ),
-\emph{cf.} Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-Merrow, & Vetter (2012), Roenneberg \emph{et al.} (2015), and Roenneberg, Pilz,
+see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 Zerbini, & Winnebeck (2019).
 
-To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
-(2013) and Ghotbi \emph{et.al} (2020).
+To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
+(2013) and Ghotbi et al. (2020).
 
 If you're curious about variable computations and want to have access to
-the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
+the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 }
 
 \subsection{Data building and data wrangling}{

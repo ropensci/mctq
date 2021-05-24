@@ -9,14 +9,14 @@ A tibble with 37 columns and 50 rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value to identify each subject in the dataset.
+A unique \code{integer} value to identify each respondent in the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
 R class: \code{integer}.}
 
 \item{work}{
-A \code{logical} value indicating if the subject has a regular work schedule.
+A \code{logical} value indicating if the respondent has a regular work schedule.
 \cr \cr
 Statement (\code{EN}): "I have a regular work schedule (this includes being, for
 example, a housewife or househusband): Yes ( ___ ) No ( ___ )".
@@ -89,7 +89,7 @@ R class: \code{hms}.}
 \item{si_w}{
 "Sleep inertia" on \strong{workdays}.
 \cr \cr
-Despite the name, this variable represents the time the subject takes to
+Despite the name, this variable represents the time the respondent takes to
 get up after sleep end.
 \cr \cr
 Statement (\code{EN}): "After ___ minutes, I get up".
@@ -106,8 +106,8 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{alarm_w}{
-A \code{logical} value indicating if the subject uses an alarm clock to wake up
-on \strong{workdays}.
+A \code{logical} value indicating if the respondent uses an alarm clock to wake
+up on \strong{workdays}.
 \cr \cr
 Statement (\code{EN}): "I use an alarm clock on workdays: Yes ( ___ ) No ( ___
 )".
@@ -117,8 +117,8 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{wake_before_w}{
-A \code{logical} value indicating if the subject regularly wakes up \strong{before}
-the alarm rings on \strong{workdays}.
+A \code{logical} value indicating if the respondent regularly wakes up
+\strong{before} the alarm rings on \strong{workdays}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": I regularly wake up BEFORE the alarm rings:
 Yes ( ___ ) No ( ___ )".
@@ -205,7 +205,7 @@ R class: \code{hms}.}
 \item{si_f}{
 "Sleep inertia" on \strong{work-free days}.
 \cr \cr
-Despite the name, this variable represents the time the subject takes to
+Despite the name, this variable represents the time the respondent takes to
 get up after sleep end.
 \cr \cr
 Statement (\code{EN}): "After ___ minutes, I get up".
@@ -222,8 +222,8 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{alarm_f}{
-A \code{logical} value indicating if the subject uses an alarm clock to wake up
-on \strong{work-free days}.
+A \code{logical} value indicating if the respondent uses an alarm clock to wake
+up on \strong{work-free days}.
 \cr \cr
 Statement (\code{EN}): "My wake-up time is due to the use of an alarm
 clock: Yes ( ___ ) No ( ___ )".
@@ -233,8 +233,8 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_f}{
-A \code{logical} value indicating if the subject has any particular reasons for
-why they \strong{cannot} freely choose their sleep times on \strong{work-free
+A \code{logical} value indicating if the respondent has any particular reasons
+for why they \strong{cannot} freely choose their sleep times on \strong{work-free
 days}.
 \cr \cr
 Statement (\code{EN}): "There are particular reasons why I \strong{cannot} freely
@@ -245,7 +245,7 @@ Type: Basic.
 R class: \code{logical}.}
 
 \item{reasons_why_f}{
-Particular reasons for why the subject cannot freely choose their sleep
+Particular reasons for why the respondent cannot freely choose their sleep
 times on \strong{work-free days}.
 \cr \cr
 Statement (\code{EN}): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -353,15 +353,15 @@ sections to learn more.
 \subsection{Guidelines}{
 
 To learn more about the Munich Chronotype Questionnaire (MCTQ),
-\emph{cf.} Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-Merrow, & Vetter (2012), Roenneberg \emph{et al.} (2015), and Roenneberg, Pilz,
+see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 Zerbini, & Winnebeck (2019).
 
-To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
-(2013) and Ghotbi \emph{et.al} (2020).
+To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
+(2013) and Ghotbi et al. (2020).
 
 If you're curious about variable computations and want to have access to
-the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
+the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 }
 
 \subsection{Data building and data wrangling}{

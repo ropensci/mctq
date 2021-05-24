@@ -47,7 +47,7 @@
 #' ## Midday change
 #'
 #' Time variables with values greater than `22:00:00` will automatically be
-#' converted to `POSIXct` with a midday change, _i.e._, all values with more
+#' converted to `POSIXct` with a midday change, i.e., all values with more
 #' than 12 hours will represent day one, and all the rest will represent day 2.
 #' This is made to better represent values that cross the midnight
 #' hour.
@@ -57,7 +57,7 @@
 #' ## `id` variables
 #'
 #' `qplot_walk()` will ignore any variable with the follow name pattern
-#' `"^id$|[\\._-]id$"`, _i.e_ any variable named `id` or that ends with
+#' `"^id$|[\\._-]id$"`, i.e. any variable named `id` or that ends with
 #' `.id`, `_id`, or `-id`.
 #'
 #' You can disable this behavior using `remove_id = FALSE`.

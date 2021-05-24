@@ -58,9 +58,9 @@ the user experience in mind, by creating an interface that resembles the
 way the questionnaire data is shown in MCTQ publications, and by
 providing extensive and detailed documentation about each computation
 proposed by the MCTQ authors. The package also includes several utility
-tools to deal with different time representations (*e.g.*, decimal
-hours, radians) and time arithmetic issues, along with fictional
-datasets for testing and learning purposes.
+tools to deal with different time representations (e.g., decimal hours,
+radians) and time arithmetic issues, along with fictional datasets for
+testing and learning purposes.
 
 ## Prerequisites
 

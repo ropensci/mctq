@@ -178,7 +178,7 @@ days or 31557600 seconds).}
 
 \item{close_round}{(optional) a \code{logical} value indicating if numbers with
 decimals starting with three leading 0s or 9s must be rounded
-(\emph{e.g.}, 1.999) (default: \code{TRUE}).}
+(e.g., 1.999) (default: \code{TRUE}).}
 
 \item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
 must be suppressed (default: \code{FALSE}).}
@@ -274,7 +274,7 @@ Time zones (tz) are used only if \code{class} is set to \code{"Date"}, \code{"PO
 object, \code{character} and \code{numeric} inputs cannot have time values equal or
 greater than 24 hours.
 
-That limits the set of \code{convert()} applications (\emph{e.g}, when you want to
+That limits the set of \code{convert()} applications (e.g., when you want to
 parse a \code{character} to a \code{Duration} object of 35 hours). To get around this,
 some exceptions were made to \code{orders} \strong{equal} to \code{"H"}, \code{"M"}, \code{"S"},
 \code{"HM"}, or \code{"HMS"}. For \code{"HM"} and \code{"HMS"} exceptions, minutes and seconds
@@ -289,7 +289,7 @@ made with the help of \code{\link[dplyr:mutate]{dplyr::mutate()}}.
 
 Operations with data frames are only column-wise and can be made by selecting
 specific columns (using the \code{col} argument) or a group of columns (by
-applying a flag function (\emph{e.g} \code{is.numeric}) in the \code{where} argument).
+applying a flag function (e.g., \code{is.numeric}) in the \code{where} argument).
 }
 
 \subsection{Different outputs}{
@@ -312,11 +312,11 @@ unit. See the Examples section to know how.
 
 \code{convert()} will return a \code{\link[base:numeric]{base::as.numeric()}} output if \code{class} is set to
 \code{"numeric"} or \code{"double"}. For \code{Date} objects, the output will be the total
-of days since '1970-01-01' (UNIX epoch date). For date-time objects (\emph{e.g.},
+of days since '1970-01-01' (UNIX epoch date). For date-time objects (e.g.,
 \code{POSIXt}), the output will be the total of seconds from the UNIX epoch
 (\verb{1970-01-01 00:00:00 UTC}) (See
 \href{https://en.wikipedia.org/wiki/Unix_time}{Unix time} to learn more). For time
-objects, (\emph{e.g.}, \code{hms}) the output will be the total of seconds.
+objects, (e.g., \code{hms}) the output will be the total of seconds.
 
 The output \code{class = "numeric"} can also be different if \code{input_unit} and
 \code{output_unit} are assigned.

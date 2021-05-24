@@ -135,7 +135,7 @@ We're going to use direct assigning while computing the MCTQ variables, just bec
 
 `fd()` is a simple function that allows you to compute the difference between the number of days in a week (7) and the number of workdays per week (`wd`). It takes only `wd` as argument.
 
-The output must be the total of free days a subject has in a week.
+The output must be the total of free days a respondent has in a week.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$fd <- fd(data$wd)
@@ -164,7 +164,7 @@ data %>% dplyr::select(sprep_w, slat_w, so_w, sprep_f, slat_f, so_f)
 
 The output must be the sum of `se` and `si` in a circular time frame of 24 hours.
 
-Please note that, despite the name, `si` represents the time that the subject takes to get up after sleep end. We decided to maintain the original names and abbreviations proposed by the MCTQ authors.
+Please note that, despite the name, `si` represents the time that the respondent takes to get up after sleep end. We decided to maintain the original names and abbreviations proposed by the MCTQ authors.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$gu_w <- gu(data$se_w, data$si_w)
@@ -267,7 +267,7 @@ data %>% dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
 
 ### `msf_sc()`: Chronotype or corrected local time of mid-sleep on work-free days
 
-`msf_sc()` allows you to compute the chronotype, or corrected local time of mid-sleep on work-free days. It takes five arguments: `msf` (local time of mid-sleep on work-free days), `sd_w` (sleep duration on workdays), `sd_f` (sleep duration on work-free days), `sd_week`(average weekly sleep duration), and `alarm_f` (a `logical` object indicating if the subject uses an alarm clock to wake up on work-free days).
+`msf_sc()` allows you to compute the chronotype, or corrected local time of mid-sleep on work-free days. It takes five arguments: `msf` (local time of mid-sleep on work-free days), `sd_w` (sleep duration on workdays), `sd_f` (sleep duration on work-free days), `sd_week`(average weekly sleep duration), and `alarm_f` (a `logical` object indicating if the respondent uses an alarm clock to wake up on work-free days).
 
 If `sd_f` is less or equal than `sd_w`, the output must be `msf`. Else, it must return `msf` minus the difference between `sd_f` and `sd_week` divided by 2. `msf_sc` can only be computed if `alarm_f` is equal to `FALSE` (the function will return `NA` when `alarm_f == TRUE`).
 
@@ -289,7 +289,7 @@ data %>% dplyr::select(msf, msf_sc_rounded)
 
 The output must be the difference between `msf` and `msw` in a circular time frame of 24 hours.
 
-In case you don't know, social jet lag is a concept developed by Till Roenneberg _et. al_ ([2006](http://doi.org/10.1080/07420520500545979)) that represents the discrepancy between social and biological time.
+In case you don't know, social jet lag is a concept developed by Till Roenneberg et al. ([2006](http://doi.org/10.1080/07420520500545979)) that represents the discrepancy between social and biological time.
 
 The difference described above may seem trivial or easy to compute, but it's not. See the `vignette("sjl", package = "mctq")` to learn more.
 

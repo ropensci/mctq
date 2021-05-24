@@ -24,7 +24,7 @@ It's a good idea to have the standard MCTQ questionnaire and the guidelines for 
 
 ## The two intervals problem
 
-According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), _i.e._, the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
+According to Roenneberg, Allebrandt, Merrow, & Vetter ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), i.e., the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
 
 $$SJL_{rel} = MSF - MSW$$
 
@@ -32,7 +32,7 @@ This simple equation may seem trivial until you take into account that you're ar
 
 If you dive into the MCTQ articles, you can see that this computation have two objectives:
 
-1. To represent the distance between $MSW$ and $MSF$ (_i.e._, the discrepancy).
+1. To represent the distance between $MSW$ and $MSF$ (i.e., the discrepancy).
 2. To establish what value comes before or after the other, representing that with a $+/-$ signal. That is, when $MSW$ comes before $MSF$, $SJL_{rel}$ must be positive, and when $MSW$ comes after $MSF$, $SJL_{rel}$ must be negative.
 
 You can find the rationale about the $SJL_{rel}$ signal in Roenneberg, Pilz, Zerbini, & Winnebeck ([2019](http://doi.org/10.3390/biology8030054)) (see item "3.2 Social Jetlag Computation").
@@ -49,7 +49,7 @@ Most people have some trouble understanding this. To illustrate what we mean, le
 
 ```
 
-Note that, while doing the representation above, we're dealing with the assumption that $MSW$ and $MSF$ can be represented in a two-day timeline, since subjects don't usually sleep more than 24 hours (basic assumption).
+Note that, while doing the representation above, we're dealing with the assumption that $MSW$ and $MSF$ can be represented in a two-day timeline since people don't usually sleep more than 24 hours (basic assumption).
 
 As you can see, by overlapping two time values in a two-day timeline, we need to make a choice of what interval to use. For most people $MSF$ and $MSW$ are close to each other, so, usually, we are looking for the shorter interval between the two. But, in some extreme cases, usually when dealing with shift workers, $MSW$ and $MSF$ distance can surpass 12 hours, making the longer interval the correct answer.
 
@@ -77,7 +77,7 @@ To obtain the $SJL_{rel}$ signal we must check the start value of the interval. 
 
 ```
 
-We call this the __two intervals problem__. It represents an unsolvable mathematical scenario, if you deprive it of the subject context. That can generate minor errors when computing $SJL$, especially if you're dealing with large datasets.
+We call this the __two intervals problem__. It represents an unsolvable mathematical scenario, if you deprive it of the respondent context. That can generate minor errors when computing $SJL$, especially if you're dealing with large datasets.
 
 ## Methods for computing $SJL$
 
@@ -85,7 +85,7 @@ The `sjl()` function provides an argument called `method` that allows you to cho
 
 ### `method = "difference"`
 
-By using `method = "difference"`, `sjl()` will do the exact computation proposed by the MCTQ authors, _i.e._, $SJL$ will be computed as the linear difference between  $MSF$ and $MSW$.
+By using `method = "difference"`, `sjl()` will do the exact computation proposed by the MCTQ authors, i.e., $SJL$ will be computed as the linear difference between  $MSF$ and $MSW$.
 
 Let's see some examples using this method.
 
@@ -191,4 +191,4 @@ We recommend that you always use the `"shorter"` method when computing $SJL_{rel
 
 In our tests, the `"shorter"` method demonstrated to be almost fail-safe. You really need to worry about the $SJL$ computation if you are dealing with shift workers.
 
-When dealing with a large MCTQ$^{Shift}$ dataset, it will be very difficult to identify $SJL$ errors, unless you look case by case and check the results with your volunteers. That's usually not a viable option. We recommend that you mention which method you use to compute $SJL$ and add it as a possible limitation of your results.
+When dealing with a large MCTQ$^{Shift}$ dataset, it will be very difficult to identify $SJL$ errors, unless you look case by case and check the results with your respondents. That's usually not a viable option. We recommend that you mention which method you use to compute $SJL$ and add it as a possible limitation of your results.

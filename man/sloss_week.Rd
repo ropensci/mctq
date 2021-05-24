@@ -34,7 +34,7 @@ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
 Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
-\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
+et al. (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
@@ -52,12 +52,12 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.},
+Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
-only round your values after all computations are done, that way you can
+only round your values after all computations are done. That way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
@@ -100,7 +100,7 @@ work ___ days per week").
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
-Although the standard and micro versions of the MCTQ asks for subjects to
+Although the standard and micro versions of the MCTQ asks for respondents to
 complete the workdays and work-free days sections, even when they do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
 (\code{wd = 7}), some of them may still end skipping one of this parts of the
@@ -113,7 +113,7 @@ For those special standard and micro MCTQ cases, where one section is
 missing, a \code{NA} value is the correct output for the functions mentioned above
 when \code{wd} (number of workdays per week) are \code{wd > 0 & wd < 7}, but it may not
 be when \code{wd == 0} or \code{wd == 7}. There are different approaches to deal with
-those cases. See \code{vignette("missing-sections", package = "mctq")} to learn
+this issue. See \code{vignette("missing-sections", package = "mctq")} to learn
 more.
 }
 

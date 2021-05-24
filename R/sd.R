@@ -9,7 +9,7 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), Juda,
 #' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 #' guidelines for `sd()` (\eqn{SD}) computation are as follows.
 #'
@@ -204,7 +204,7 @@ napd <- function(napo, nape) {
 #' * The computation below must be applied to each shift section of the
 #' questionnaire.
 #'
-#' * If the subject don't usually take a nap in a particular shift __or__
+#' * If the respondent don't usually take a nap in a particular shift __or__
 #' between two free days after a particular shift, `sd24()` will return only
 #' \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N}.
 #'
@@ -312,7 +312,7 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), and
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), and
 #' The Worldwide Experimental Platform (n.d.) guidelines for `sd_week()`
 #' (\eqn{SD_{week}}{SD_week}) computation are as follows.
 #'
@@ -452,7 +452,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' * The computation below must be applied to each shift section of the
 #' questionnaire. If you're using the three-shift design proposed by the
-#' authors, you need to compute three overall sleep duration (_e.g._,
+#' authors, you need to compute three overall sleep duration (e.g.,
 #' \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
 #' SD^N}{OSD_N}).
 #'

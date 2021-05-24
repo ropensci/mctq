@@ -9,7 +9,7 @@
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), Juda,
 #' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 #' guidelines for `ms()` (\eqn{MSW} or \eqn{MSF}) computation are as follows.
 #'
@@ -117,7 +117,7 @@ ms <- function(so, sd) {
 #'
 #' @section Guidelines:
 #'
-#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi _et.al_ (2020), Juda,
+#' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), Juda,
 #' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 #' guidelines for `msf_sc()` (\eqn{MSF_{sc}}{MSF_sc}) computation are as
 #' follows.
@@ -136,12 +136,12 @@ ms <- function(so, sd) {
 #' * The basis for estimating chronotype in shift-workers is the mid-sleep on
 #' work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
 #' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg (2013)
-#' propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (_e.g._,
+#' propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (e.g.,
 #' by using a linear model). Unfortunately, the `mctq` package can't help you
 #' with that, as it requires a closer look at your data.
 #'
 #' * \eqn{MSF_{sc}}{MSF_sc} depends on developmental and environmental
-#' conditions (_e.g._, age, light exposure). For epidemiological and genetic
+#' conditions (e.g., age, light exposure). For epidemiological and genetic
 #' studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 #' populations of different age and sex compositions comparable (Roenneberg,
 #' Allebrandt, Merrow, & Vetter, 2012).
@@ -207,8 +207,8 @@ ms <- function(so, sd) {
 #'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
 #'   computed, `msf_sc()` will return `NA` for those cases. For the
 #'   \eqn{\mu}MCTQ, this value must be set as `FALSE` all times, since the
-#'   questionnaire considers only the work-free days when the subject does not
-#'   use an alarm.
+#'   questionnaire considers only the work-free days when the respondent does
+#'   not use an alarm.
 #'
 #' @return A `hms` object corresponding to the MCTQ chronotype or corrected
 #'   local time of mid-sleep on work-free days.

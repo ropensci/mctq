@@ -22,15 +22,15 @@
 #' ## Guidelines
 #'
 #' To learn more about the Munich Chronotype Questionnaire (MCTQ),
-#' _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-#' Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz,
+#' see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+#' Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 #' Zerbini, & Winnebeck (2019).
 #'
-#' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
-#' (2013) and Ghotbi _et.al_ (2020).
+#' To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
+#' (2013) and Ghotbi et al. (2020).
 #'
 #' If you're curious about variable computations and want to have access to
-#' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
+#' the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
 #'
@@ -64,7 +64,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value to identify each subject in the dataset.
+#'   A unique `integer` value to identify each respondent in the dataset.
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr
@@ -141,8 +141,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_w_m}{
-#'   A `logical` value indicating if the subject uses an alarm clock to wake up
-#'   on workdays __between two morning shifts__.
+#'   A `logical` value indicating if the respondent uses an alarm clock to wake
+#'   up on workdays __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "I wake up at ___ o'clock: ( ___ ) with alarm ( ___ )
 #'   without alarm".
@@ -152,8 +152,8 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_w_m}{
-#'   A `logical` value indicating if the subject has any particular reasons for
-#'   why they __cannot__ freely choose their sleep times on workdays
+#'   A `logical` value indicating if the respondent has any particular reasons
+#'   for why they __cannot__ freely choose their sleep times on workdays
 #'   __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
@@ -164,7 +164,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_w_m}{
-#'   Particular reasons for why the subject cannot freely choose their sleep
+#'   Particular reasons for why the respondent cannot freely choose their sleep
 #'   times on workdays __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -196,8 +196,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{nap_w_m}{
-#'   A `logical` value indicating if the subject usually takes a nap on workdays
-#'   __between two morning shifts__.
+#'   A `logical` value indicating if the respondent usually takes a nap on
+#'   workdays __between two morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "I usually take a nap: Yes ( ___ ) No ( ___ )".
 #'   \cr \cr
@@ -314,8 +314,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_f_m}{
-#'   A `logical` value indicating if the subject uses an alarm clock to wake up
-#'   on work-free days __between two free days after morning shifts__.
+#'   A `logical` value indicating if the respondent uses an alarm clock to wake
+#'   up on work-free days __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "I wake up at ___ o'clock: ( ___ ) with alarm ( ___ )
 #'   without alarm".
@@ -325,8 +325,8 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_f_m}{
-#'   A `logical` value indicating if the subject has any particular reasons for
-#'   why they __cannot__ freely choose their sleep times on work-free days
+#'   A `logical` value indicating if the respondent has any particular reasons
+#'   for why they __cannot__ freely choose their sleep times on work-free days
 #'   __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
@@ -337,7 +337,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_f_m}{
-#'   Particular reasons for why the subject cannot freely choose their sleep
+#'   Particular reasons for why the respondent cannot freely choose their sleep
 #'   times on work-free days __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )
@@ -372,7 +372,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{nap_f_m}{
-#'   A `logical` value indicating if the subject usually takes a nap on
+#'   A `logical` value indicating if the respondent usually takes a nap on
 #'   work-free days __between two free days after morning shifts__.
 #'   \cr \cr
 #'   Statement (`EN`): "I usually take a nap: Yes ( ___ ) No ( ___ )".

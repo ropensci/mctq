@@ -44,7 +44,7 @@ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
 Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
-\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
+et al. (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
@@ -62,12 +62,12 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.},
+Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
-only round your values after all computations are done, that way you can
+only round your values after all computations are done. That way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
@@ -81,7 +81,7 @@ computation are as follows.
 \itemize{
 \item The computation below must be applied to each shift section of the
 questionnaire. If you're using the three-shift design proposed by the
-authors, you need to compute three overall sleep duration (\emph{e.g.},
+authors, you need to compute three overall sleep duration (e.g.,
 \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
 SD^N}{OSD_N}).
 \item The overall sleep duration is the weighted average of the shift-specific

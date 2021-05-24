@@ -21,15 +21,15 @@
 #' ## Guidelines
 #'
 #' To learn more about the Munich Chronotype Questionnaire (MCTQ),
-#' _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-#' Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz,
+#' see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+#' Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 #' Zerbini, & Winnebeck (2019).
 #'
-#' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
-#' (2013) and Ghotbi _et.al_ (2020).
+#' To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
+#' (2013) and Ghotbi et al. (2020).
 #'
 #' If you're curious about variable computations and want to have access to
-#' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
+#' the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
 #'
@@ -62,7 +62,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value to identify each subject in the dataset.
+#'   A unique `integer` value to identify each respondent in the dataset.
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr
@@ -70,7 +70,7 @@
 #'
 #'
 #'   \item{work}{
-#'   A `logical` value indicating if the subject has a regular work schedule.
+#'   A `logical` value indicating if the respondent has a regular work schedule.
 #'   \cr \cr
 #'   Statement (`EN`): "I have a regular work schedule (this includes being, for
 #'   example, a housewife or househusband): Yes ( ___ ) No ( ___ )".
@@ -144,7 +144,7 @@
 #'   \item{si_w}{
 #'   "Sleep inertia" on __workdays__.
 #'   \cr \cr
-#'   Despite the name, this variable represents the time the subject takes to
+#'   Despite the name, this variable represents the time the respondent takes to
 #'   get up after sleep end.
 #'   \cr \cr
 #'   Statement (`EN`): "After ___ minutes, I get up".
@@ -161,8 +161,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_w}{
-#'   A `logical` value indicating if the subject uses an alarm clock to wake up
-#'   on __workdays__.
+#'   A `logical` value indicating if the respondent uses an alarm clock to wake
+#'   up on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "I use an alarm clock on workdays: Yes ( ___ ) No ( ___
 #'   )".
@@ -172,8 +172,8 @@
 #'   R class: `logical`.}
 #'
 #'   \item{wake_before_w}{
-#'   A `logical` value indicating if the subject regularly wakes up __before__
-#'   the alarm rings on __workdays__.
+#'   A `logical` value indicating if the respondent regularly wakes up
+#'   __before__ the alarm rings on __workdays__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": I regularly wake up BEFORE the alarm rings:
 #'   Yes ( ___ ) No ( ___ )".
@@ -261,7 +261,7 @@
 #'   \item{si_f}{
 #'   "Sleep inertia" on __work-free days__.
 #'   \cr \cr
-#'   Despite the name, this variable represents the time the subject takes to
+#'   Despite the name, this variable represents the time the respondent takes to
 #'   get up after sleep end.
 #'   \cr \cr
 #'   Statement (`EN`): "After ___ minutes, I get up".
@@ -278,8 +278,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{alarm_f}{
-#'   A `logical` value indicating if the subject uses an alarm clock to wake up
-#'   on __work-free days__.
+#'   A `logical` value indicating if the respondent uses an alarm clock to wake
+#'   up on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "My wake-up time is due to the use of an alarm
 #'   clock: Yes ( ___ ) No ( ___ )".
@@ -289,8 +289,8 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_f}{
-#'   A `logical` value indicating if the subject has any particular reasons for
-#'   why they __cannot__ freely choose their sleep times on __work-free
+#'   A `logical` value indicating if the respondent has any particular reasons
+#'   for why they __cannot__ freely choose their sleep times on __work-free
 #'   days__.
 #'   \cr \cr
 #'   Statement (`EN`): "There are particular reasons why I __cannot__ freely
@@ -301,7 +301,7 @@
 #'   R class: `logical`.}
 #'
 #'   \item{reasons_why_f}{
-#'   Particular reasons for why the subject cannot freely choose their sleep
+#'   Particular reasons for why the respondent cannot freely choose their sleep
 #'   times on __work-free days__.
 #'   \cr \cr
 #'   Statement (`EN`): "If "Yes": Child(ren)/pet(s) ( ___ ) Hobbies ( ___ )

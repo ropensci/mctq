@@ -5,7 +5,7 @@
 #' Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 #'
 #' __\eqn{\mu}MCTQ__ functions were created following the guidelines in Ghotbi
-#' _et.al_ (2020), in addition to the guidelines used for the standard MCTQ.
+#' et al. (2020), in addition to the guidelines used for the standard MCTQ.
 #'
 #' __MCTQ\eqn{^{Shift}}{ Shift}__ functions were created following the
 #' guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
@@ -23,10 +23,10 @@
 #'
 #' ## Rounding and fractional time
 #'
-#' Some operations may produce an output with fractional time (_e.g._,
+#' Some operations may produce an output with fractional time (e.g.,
 #' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
 #' can round it with the `mctq` function [mctq::round_time()].
 #'
 #' Our recommendation is to avoid rounding, but, if you do, make sure that you
-#' only round your values after all computations are done, that way you can
+#' only round your values after all computations are done. That way you can
 #' avoid [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).

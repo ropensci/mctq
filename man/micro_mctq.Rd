@@ -10,14 +10,14 @@ rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value to identify each subject in the dataset.
+A unique \code{integer} value to identify each respondent in the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
 R class: \code{integer}.}
 
 \item{shift_work}{
-A \code{logical} value indicating if the subject has been a shift- or
+A \code{logical} value indicating if the respondent has been a shift- or
 night-worker in the past three months.
 \cr \cr
 Statement (\code{EN}): "I have been a shift- or night-worker in the past three
@@ -79,7 +79,7 @@ Type: Computed.
 R class: \code{hms}.}
 
 \item{so_f}{
-Local time of sleep onset on \strong{work-free days} when the subject
+Local time of sleep onset on \strong{work-free days} when the respondent
 \strong{doesn't} use an alarm clock to wake up.
 \cr \cr
 Statement (\code{EN}): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
@@ -91,8 +91,8 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{se_f}{
-Local time of sleep end on \strong{work-free days} when the subject \strong{doesn't}
-use an alarm clock to wake up.
+Local time of sleep end on \strong{work-free days} when the respondent
+\strong{doesn't} use an alarm clock to wake up.
 \cr \cr
 Statement (\code{EN}): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 normally wake up at ___ : ___ AM/PM (this is NOT when you get out of bed,
@@ -103,7 +103,7 @@ Type: Basic.
 R class: \code{hms}.}
 
 \item{sd_f}{
-Sleep duration on \strong{work-free days} when the subject \strong{doesn't} use an
+Sleep duration on \strong{work-free days} when the respondent \strong{doesn't} use an
 alarm clock to wake up.
 \cr \cr
 Type: Computed.
@@ -111,8 +111,8 @@ Type: Computed.
 R class: \code{Duration}.}
 
 \item{msf}{
-Local time of mid-sleep on \strong{work-free days} when the subject \strong{doesn't}
-use an alarm clock to wake up.
+Local time of mid-sleep on \strong{work-free days} when the respondent
+\strong{doesn't} use an alarm clock to wake up.
 \cr \cr
 Type: Computed.
 \cr \cr
@@ -179,15 +179,15 @@ to learn more.
 \subsection{Guidelines}{
 
 To learn more about the Munich Chronotype Questionnaire (MCTQ),
-\emph{cf.} Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-Merrow, & Vetter (2012), Roenneberg \emph{et al.} (2015), and Roenneberg, Pilz,
+see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 Zerbini, & Winnebeck (2019).
 
-To know about different MCTQ versions, \emph{cf.} Juda, Vetter, & Roenneberg
-(2013) and Ghotbi \emph{et.al} (2020).
+To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
+(2013) and Ghotbi et.al (2020).
 
 If you're curious about variable computations and want to have access to
-the full questionnaire, \emph{cf.} The Worldwide Experimental Platform (n.d.).
+the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 }
 
 \subsection{Data building and data wrangling}{

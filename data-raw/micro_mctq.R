@@ -51,8 +51,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     # Create cases -----
 
-    ## Base subject: sleeps less than the recommended for an adult on workdays
-    ##               and stretches during work-free days
+    ## Base respondent: sleeps less than the recommended for an adult on
+    ##                  workdays and stretches during work-free days
 
     micro_mctq <- dplyr::tibble(
         `ID` = as.character(reserved_id[1]), # integer | [auto-increment]
@@ -313,7 +313,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' Please note that input data is not the same as valid data. To get a valid
 #' `micro_mctq` data, run [mctq::validate_micro_mctq()].
 #'
-#' To learn more about the concept of tidy data, _c.f._ Wickham (2014) and
+#' To learn more about the concept of tidy data, see Wickham (2014) and
 #' Wickham and Grolemund (n.d.).
 #'
 #' @param write (optional) a `logical` value indicating if the function must

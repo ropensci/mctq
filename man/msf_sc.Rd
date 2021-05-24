@@ -33,8 +33,8 @@ work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. Note that, if \code{alarm_f == TRUE}, \code{msf_sc} cannot be
 computed, \code{msf_sc()} will return \code{NA} for those cases. For the
 \eqn{\mu}MCTQ, this value must be set as \code{FALSE} all times, since the
-questionnaire considers only the work-free days when the subject does not
-use an alarm.}
+questionnaire considers only the work-free days when the respondent does
+not use an alarm.}
 }
 \value{
 A \code{hms} object corresponding to the MCTQ chronotype or corrected
@@ -58,7 +58,7 @@ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
 Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
-\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
+et al. (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
@@ -76,19 +76,19 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.},
+Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
-only round your values after all computations are done, that way you can
+only round your values after all computations are done. That way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
 \section{Guidelines}{
 
 
-Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi \emph{et.al} (2020), Juda,
+Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), Juda,
 Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 guidelines for \code{msf_sc()} (\eqn{MSF_{sc}}{MSF_sc}) computation are as
 follows.
@@ -103,11 +103,11 @@ standard and micro versions of the MCTQ.
 \item The basis for estimating chronotype in shift-workers is the mid-sleep on
 work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
 schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg (2013)
-propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (\emph{e.g.},
+propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (e.g.,
 by using a linear model). Unfortunately, the \code{mctq} package can't help you
 with that, as it requires a closer look at your data.
 \item \eqn{MSF_{sc}}{MSF_sc} depends on developmental and environmental
-conditions (\emph{e.g.}, age, light exposure). For epidemiological and genetic
+conditions (e.g., age, light exposure). For epidemiological and genetic
 studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 populations of different age and sex compositions comparable (Roenneberg,
 Allebrandt, Merrow, & Vetter, 2012).
@@ -163,7 +163,7 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 \section{Missing sections in standard and micro MCTQ versions}{
 
 
-Although the standard and micro versions of the MCTQ asks for subjects to
+Although the standard and micro versions of the MCTQ asks for respondents to
 complete the workdays and work-free days sections, even when they do not
 have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
 (\code{wd = 7}), some of them may still end skipping one of this parts of the
@@ -176,7 +176,7 @@ For those special standard and micro MCTQ cases, where one section is
 missing, a \code{NA} value is the correct output for the functions mentioned above
 when \code{wd} (number of workdays per week) are \code{wd > 0 & wd < 7}, but it may not
 be when \code{wd == 0} or \code{wd == 7}. There are different approaches to deal with
-those cases. See \code{vignette("missing-sections", package = "mctq")} to learn
+this issue. See \code{vignette("missing-sections", package = "mctq")} to learn
 more.
 }
 

@@ -85,7 +85,7 @@
 #' * `"difference"`
 #'
 #' By using `method = "difference"`, `sjl()` will do the exact computation
-#' proposed by the MCTQ authors, _i.e._, \eqn{SJL} will be computed as the linear
+#' proposed by the MCTQ authors, i.e., \eqn{SJL} will be computed as the linear
 #' difference between \eqn{MSF} and \eqn{MSW} (see the Guidelines section).
 #'
 #' __We do not recommend using this method__, as it has many limitations.
@@ -265,9 +265,9 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' Considering the requirement above, `sjl_weighted()` was developed to only
 #' accept list objects as arguments. For this approach to work, both `sjl` and
-#' `n_w` arguments must be lists with paired elements and values, _i.e._, the
-#' first element of `sjl` (_e.g._, `sjl_m`) must be paired with the first element
-#' of `n_w` (_e.g._, `n_w_m`). The function will do the work of combining them
+#' `n_w` arguments must be lists with paired elements and values, i.e., the
+#' first element of `sjl` (e.g., `sjl_m`) must be paired with the first element
+#' of `n_w` (e.g., `n_w_m`). The function will do the work of combining them
 #' and output a weighted mean.
 #'
 #' @section Guidelines:

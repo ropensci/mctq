@@ -16,7 +16,7 @@ longer_interval(x, y, class = "hms", quiet = FALSE)
 (default: \code{"hms"}).}
 
 \item{inverse}{(optional) a \code{logical} value indicating if the function must
-return an inverse output, \emph{i.e}, the longer interval between \code{x} and \code{y}.}
+return an inverse output, i.e., the longer interval between \code{x} and \code{y}.}
 
 \item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
 must be suppressed (default: \code{FALSE}).}
@@ -35,7 +35,7 @@ must be suppressed (default: \code{FALSE}).}
 \code{shorter_interval()} finds and returns the shorter interval between two
 \code{hms} or \code{POSIXt} object hours.
 
-\code{longer_interval()} do the inverse of \code{shorter_interval()}, \emph{i.e},
+\code{longer_interval()} do the inverse of \code{shorter_interval()}, i.e.,
 finds the longer interval between two hours. It's just a wrapper for
 \code{shorter_interval(x, y, class, inverse = TRUE)}.
 }

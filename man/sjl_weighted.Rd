@@ -34,7 +34,7 @@ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt, Merrow, &
 Vetter (2012), and from The Worldwide Experimental Platform (theWeP, n.d.).
 
 \strong{\eqn{\mu}MCTQ} functions were created following the guidelines in Ghotbi
-\emph{et.al} (2020), in addition to the guidelines used for the standard MCTQ.
+et al. (2020), in addition to the guidelines used for the standard MCTQ.
 
 \strong{MCTQ\eqn{^{Shift}}{ Shift}} functions were created following the
 guidelines in Juda, Vetter, & Roenneberg (2013), in addition to the
@@ -52,12 +52,12 @@ conform to the object classes required, you can use the \code{mctq}
 
 \subsection{Rounding and fractional time}{
 
-Some operations may produce an output with fractional time (\emph{e.g.},
+Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
 can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
-only round your values after all computations are done, that way you can
+only round your values after all computations are done. That way you can
 avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
@@ -71,9 +71,9 @@ to other shift schedules (Juda, Vetter, & Roenneberg, 2013). For this reason,
 
 Considering the requirement above, \code{sjl_weighted()} was developed to only
 accept list objects as arguments. For this approach to work, both \code{sjl} and
-\code{n_w} arguments must be lists with paired elements and values, \emph{i.e.}, the
-first element of \code{sjl} (\emph{e.g.}, \code{sjl_m}) must be paired with the first element
-of \code{n_w} (\emph{e.g.}, \code{n_w_m}). The function will do the work of combining them
+\code{n_w} arguments must be lists with paired elements and values, i.e., the
+first element of \code{sjl} (e.g., \code{sjl_m}) must be paired with the first element
+of \code{n_w} (e.g., \code{n_w_m}). The function will do the work of combining them
 and output a weighted mean.
 }
 

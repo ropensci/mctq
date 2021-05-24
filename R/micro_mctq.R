@@ -22,15 +22,15 @@
 #' ## Guidelines
 #'
 #' To learn more about the Munich Chronotype Questionnaire (MCTQ),
-#' _cf._ Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
-#' Merrow, & Vetter (2012), Roenneberg _et al._ (2015), and Roenneberg, Pilz,
+#' see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
+#' Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 #' Zerbini, & Winnebeck (2019).
 #'
-#' To know about different MCTQ versions, _cf._ Juda, Vetter, & Roenneberg
-#' (2013) and Ghotbi _et.al_ (2020).
+#' To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
+#' (2013) and Ghotbi et.al (2020).
 #'
 #' If you're curious about variable computations and want to have access to
-#' the full questionnaire, _cf._ The Worldwide Experimental Platform (n.d.).
+#' the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 #'
 #' ## Data building and data wrangling
 #'
@@ -64,7 +64,7 @@
 #'
 #' \describe{
 #'   \item{id}{
-#'   A unique `integer` value to identify each subject in the dataset.
+#'   A unique `integer` value to identify each respondent in the dataset.
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr
@@ -72,7 +72,7 @@
 #'
 #'
 #'   \item{shift_work}{
-#'   A `logical` value indicating if the subject has been a shift- or
+#'   A `logical` value indicating if the respondent has been a shift- or
 #'   night-worker in the past three months.
 #'   \cr \cr
 #'   Statement (`EN`): "I have been a shift- or night-worker in the past three
@@ -136,7 +136,7 @@
 #'
 #'
 #'   \item{so_f}{
-#'   Local time of sleep onset on __work-free days__ when the subject
+#'   Local time of sleep onset on __work-free days__ when the respondent
 #'   __doesn't__ use an alarm clock to wake up.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
@@ -148,8 +148,8 @@
 #'   R class: `hms`.}
 #'
 #'   \item{se_f}{
-#'   Local time of sleep end on __work-free days__ when the subject __doesn't__
-#'   use an alarm clock to wake up.
+#'   Local time of sleep end on __work-free days__ when the respondent
+#'   __doesn't__ use an alarm clock to wake up.
 #'   \cr \cr
 #'   Statement (`EN`): "On WORK-FREE DAYS when I DON'T use an alarm clock ... I
 #'   normally wake up at ___ : ___ AM/PM (this is NOT when you get out of bed,
@@ -160,7 +160,7 @@
 #'   R class: `hms`.}
 #'
 #'   \item{sd_f}{
-#'   Sleep duration on __work-free days__ when the subject __doesn't__ use an
+#'   Sleep duration on __work-free days__ when the respondent __doesn't__ use an
 #'   alarm clock to wake up.
 #'   \cr \cr
 #'   Type: Computed.
@@ -168,8 +168,8 @@
 #'   R class: `Duration`.}
 #'
 #'   \item{msf}{
-#'   Local time of mid-sleep on __work-free days__ when the subject __doesn't__
-#'   use an alarm clock to wake up.
+#'   Local time of mid-sleep on __work-free days__ when the respondent
+#'   __doesn't__ use an alarm clock to wake up.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr

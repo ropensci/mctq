@@ -7,7 +7,7 @@
 #' `shorter_interval()` finds and returns the shorter interval between two
 #' `hms` or `POSIXt` object hours.
 #'
-#' `longer_interval()` do the inverse of `shorter_interval()`, _i.e_,
+#' `longer_interval()` do the inverse of `shorter_interval()`, i.e.,
 #' finds the longer interval between two hours. It's just a wrapper for
 #' `shorter_interval(x, y, class, inverse = TRUE)`.
 #'
@@ -90,7 +90,7 @@
 #' @param class (optional) a string indicating the object class of the output
 #'   (default: `"hms"`).
 #' @param inverse (optional) a `logical` value indicating if the function must
-#'   return an inverse output, _i.e_, the longer interval between `x` and `y`.
+#'   return an inverse output, i.e., the longer interval between `x` and `y`.
 #' @param quiet (optional) a `logical` value indicating if warnings or messages
 #'   must be suppressed (default: `FALSE`).
 #'

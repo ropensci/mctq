@@ -7,7 +7,7 @@ library(testthat)
 
 test_check("mctq")
 
-# # For development use only (comment the code after use (Ctrl + Shift + C))
+# # For development use only (comment the code after use (Ctrl + Shift + C)).
 #
 # .rs.restartR()
 # devtools::install()
