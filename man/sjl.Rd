@@ -261,6 +261,7 @@ sjl(msw, msf, abs = FALSE, method = "longer")
 #> [1] "-81000s (~-22.5 hours)" # Expected
 
 ## Converting the output to `hms`
+
 msw <- hms::parse_hm("01:15")
 msf <- hms::parse_hm("03:25")
 x <- sjl(msw, msf)
@@ -270,6 +271,7 @@ convert(x, "hms")
 #> 02:10:00 # Expected
 
 ## Rounding the output at the seconds level
+
 msw <- hms::parse_hms("04:19:33.1234")
 msf <- hms::parse_hms("02:55:05")
 x <- sjl(msw, msf)
