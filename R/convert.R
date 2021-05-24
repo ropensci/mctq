@@ -1074,9 +1074,10 @@ convert_to_seconds <- function(x, input_unit = NULL,
         }
     } else if (is_time(x)) {
         if (lubridate::is.duration(x) || lubridate::is.period(x) ||
-            class(x)[1] == "difftime" || hms::is_hms(x) ||
-            lubridate::is.interval(x)) {
+            hms::is_hms(x) || lubridate::is.interval(x)) {
             as.numeric(x)
+        } else if (class(x)[1] == "difftime") {
+            as.numeric(hms::as_hms(x))
         } else if (lubridate::is.Date(x)) {
             if (isTRUE(ignore_date)) {
                 as.numeric(0)
