@@ -24,23 +24,17 @@ test_that("flat_posixct() | general test", {
 })
 
 test_that("midday_change() | general test", {
-    x <- lubridate::ymd_hms("2000-05-04 18:00:00")
-    object <- midday_change(x)
-    expect_equal(object, lubridate::ymd_hms("1970-01-01 18:00:00"))
+    expect_equal(midday_change(hms::parse_hm("18:00")),
+                 lubridate::ymd_hms("1970-01-01 18:00:00"))
+    expect_equal(midday_change(lubridate::ymd_hms("2000-05-04 06:00:00")),
+                 lubridate::ymd_hms("1970-01-02 06:00:00"))
+    expect_equal(midday_change(c(lubridate::ymd_hms("2020-01-01 18:00:00"),
+                                 lubridate::ymd_hms("2020-01-01 06:00:00"))),
+                 c(lubridate::ymd_hms("1970-01-01 18:00:00"),
+                   lubridate::ymd_hms("1970-01-02 06:00:00")))
 
-    x <- lubridate::ymd_hms("2000-05-04 06:00:00")
-    object <- midday_change(x)
-    expect_equal(object, lubridate::ymd_hms("1970-01-02 06:00:00"))
-
-    x <- c(lubridate::ymd_hms("2020-01-01 18:00:00"),
-           lubridate::ymd_hms("2020-01-01 06:00:00"))
-    object <- midday_change(x)
-    expected <- c(lubridate::ymd_hms("1970-01-01 18:00:00"),
-                  lubridate::ymd_hms("1970-01-02 06:00:00"))
-    expect_equal(object, expected)
-
-    # Error test
-    expect_error(midday_change(1))
+    # Assert error test
+    expect_error(midday_change(1), "but has class 'numeric'")
 })
 
 test_that("change_date() | general test", {
@@ -297,20 +291,6 @@ test_that("escape_regex() | general test", {
 test_that("get_names() | general test", {
     object <- get_names(x, y, z)
     expect_equal(object, noquote(c("x", "y", "z")))
-})
-
-test_that("clock_roll() | general test", {
-    expect_equal(clock_roll(lubridate::dhours(6)), lubridate::dhours(6))
-    expect_equal(clock_roll(lubridate::dhours(24)), lubridate::dhours(0))
-    expect_equal(clock_roll(lubridate::dhours(36)), lubridate::dhours(12))
-
-    x <- as.difftime(32, units = "hours")
-    expect_equal(clock_roll(x), as.difftime(8, units = "hours"))
-
-    x <- c(hms::parse_hm("02:00"), hms::hms(86401)) # 24:00:01
-    object <- clock_roll(x)
-    expected <- c(hms::parse_hm("02:00"), hms::parse_hms("00:00:01"))
-    expect_equal(object, expected)
 })
 
 test_that("get_class() | general test", {

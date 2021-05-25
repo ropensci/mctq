@@ -6,50 +6,22 @@ flat_posixt <- function(x, force_utc = TRUE, base = "1970-01-01") {
     lubridate::date(x) <- base
 
     if (isTRUE(force_utc)) {
-        x <- lubridate::force_tz(x, "UTC")
+        lubridate::force_tz(x, "UTC")
+    } else {
+        x
     }
-
-    x
 }
 
 midday_change <- function(x) {
     checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
 
-    x <- flat_posixt(convert(x, "POSIXct"))
+    if (hms::is_hms(x)) x <- as.POSIXct(x)
+    x <- flat_posixt(x)
 
-    x <- dplyr::case_when(
+    dplyr::case_when(
         lubridate::hour(x) < 12 ~ change_day(x, 2),
         TRUE ~ x
     )
-
-    x
-}
-
-clock_roll <- function(x) {
-    classes <- c("Duration", "Period", "difftime", "hms")
-    checkmate::assert_multi_class(x, classes)
-
-    class <- class(x)[1]
-    out <- x
-
-    if (class == "difftime") {
-        out <- hms::as_hms(x)
-        units <- units(x)
-    }
-
-    if (all(as.numeric(out) > 0 & as.numeric(out) < 86400, na.rm = TRUE)) {
-        x
-    } else {
-        out <- flat_posixt(lubridate::as_datetime(out))
-        out <- convert(out, class, quiet = TRUE)
-
-        if (class == "difftime") {
-            units(out) <- units
-            out
-        } else {
-            out
-        }
-    }
 }
 
 interval_mean <- function(start, end, class = "hms", ambiguity = 24,
@@ -80,10 +52,10 @@ interval_mean <- function(start, end, class = "hms", ambiguity = 24,
 
 change_date <- function(x, date) {
     classes <- c("Date", "POSIXct", "POSIXlt")
-    checkmate::assert_multi_class(x, classes, null.ok = FALSE)
+    checkmate::assert_multi_class(x, classes)
 
     classes <- c("character", "Date")
-    checkmate::assert_multi_class(date, classes, null.ok = FALSE)
+    checkmate::assert_multi_class(date, classes)
     assert_length_one(date)
 
     lubridate::date(x) <- date
