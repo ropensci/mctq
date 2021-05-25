@@ -47,12 +47,30 @@
 #' ## Midday change
 #'
 #' Time variables with values greater than `22:00:00` will automatically be
-#' converted to `POSIXct` with a midday change, i.e., all values with more
-#' than 12 hours will represent day one, and all the rest will represent day 2.
-#' This is made to better represent values that cross the midnight
-#' hour.
+#' converted to `POSIXct` and be attached to a two-day timeline using the midday
+#' hour as a cutting point, i.e., all values with 12 hours or more will be
+#' placed on day 1, and all the rest will be placed on day 2.
 #'
-#' You can disable this behavior using `midday_change = FALSE`.
+#' This is made to better represent time vectors that cross the midnight hour.
+#' You can disable this behavior by using `midday_change = FALSE`.
+#'
+#' Example: Say you have a vector of time values that cross the midnight hour
+#' (e.g., an `hms` vector with `22:00`, `23:00`, `00:00`, `01:00` values). If
+#' you use `midday_change = FALSE`, your data will be represented linearly.
+#'
+#' ```
+#' 00:00 01:00                                22:00 23:00
+#'   |-----|------------------------------------|-----|------->
+#' ```
+#'
+#' By using `midday_change = TRUE` (default), `qplot_walk()` will fit your data
+#' to a circular time frame of 24 hours.
+#'
+#' ```
+#'              day 1                         day 2
+#'                 22:00 23:00 00:00 01:00
+#' ------------------|-----|-----|-----|---------------------->
+#' ```
 #'
 #' ## `id` variables
 #'
@@ -169,7 +187,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         assert_has_length(data)
 
         warning("'data' is 'atomic'. All other arguments, except '...' and ",
-            "'midday_change', are ignored.", call. = FALSE)
+                "'midday_change', are ignored.", call. = FALSE)
 
         x <- transform(data, midday_change)
         xlab <- deparse(substitute(data))
