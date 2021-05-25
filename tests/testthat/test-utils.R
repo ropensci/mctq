@@ -250,32 +250,12 @@ test_that("close_round() | general test", {
 })
 
 test_that("swap() | general test", {
-    x <- 1
-    y <- 2
-    expect_equal(swap(x, y), list(x = y, y = x))
+    expect_equal(swap(5, 1), list(x = 1, y = 5))
+    expect_equal(swap(1, 5, 1 > 5), list(x = 1, y = 5))
+    expect_equal(swap(5, 1, 2 > 1), list(x = 1, y = 5))
 
-    x <- 1
-    y <- TRUE
-    expect_equal(swap(x, y), list(x = TRUE, y = 1))
-
-    x <- c(1, 1)
-    y <- ""
-    expect_equal(swap(x, y), list(x = "", y = c(1, 1)))
-})
-
-test_that("swap_if() | general test", {
-    x <- 2
-    y <- 1
-    condition <- "x > y"
-    expect_equal(swap_if(x, y, condition = condition), list(x = y, y = x))
-
-    x <- 1
-    y <- 1
-    condition <- "x > y"
-    expect_equal(swap_if(x, y, condition = condition), list(x = x, y = y))
-
-    # Error test
-    expect_error(swap_if(1, 1, ""))
+    # Assert condition error
+    expect_error(swap(1, 1, 1), "not 'double'")
 })
 
 test_that("count_na() | general test", {

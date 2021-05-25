@@ -174,28 +174,16 @@ close_round <- function(x, digits = 3) {
         TRUE ~ x)
 }
 
-swap <- function(x, y) {
-    a <- x
-    b <- y
+swap <- function(x, y, condition = TRUE) {
+    assert_identical(x, y, type = "class")
+    assert_identical(x, y, condition, type = "length")
+    checkmate::assert_logical(condition)
 
-    x <- b
-    y <- a
+    first_arg <- x
+    second_arg <- y
 
-    list(x = x, y = y)
-}
-
-swap_if <- function(x, y, condition = "x > y") {
-    choices <- c("x == y", "x < y", "x <= y", "x > y", "x >= y")
-    checkmate::assert_choice(condition, choices)
-
-    condition <- sub("x", "a", condition)
-    condition <- sub("y", "b", condition)
-
-    a <- x
-    b <- y
-
-    x <- dplyr::if_else(eval(parse(text = condition)), b, a)
-    y <- dplyr::if_else(eval(parse(text = condition)), a, b)
+    x <- dplyr::if_else(condition, second_arg, first_arg)
+    y <- dplyr::if_else(condition, first_arg, second_arg)
 
     list(x = x, y = y)
 }

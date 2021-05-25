@@ -168,7 +168,7 @@ shorter_interval <- function(x, y, class = "hms", inverse = FALSE,
     x <- flat_posixt(convert(x, "posixct", quiet = TRUE))
     y <- flat_posixt(convert(y, "posixct", quiet = TRUE))
 
-    list2env(swap_if(x, y, "x > y"), envir = environment())
+    list2env(swap(x, y, x > y), envir = environment())
 
     x1_y1_interval <- lubridate::interval(x, y)
     y1_x2_interval <- lubridate::interval(y, x + lubridate::days())

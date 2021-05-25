@@ -198,7 +198,7 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
     }
 }
 
-# Used in swap_decimal() and parse_to_date_time()
+# Used in parse_to_date_time()
 check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
                            name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -218,5 +218,5 @@ check_custom_1 <- function(x, any.missing = TRUE, null.ok = FALSE,
     }
 }
 
-# Used in swap_decimal() and parse_to_date_time()
+# Used in parse_to_date_time()
 assert_custom_1 <- checkmate::makeAssertionFunction(check_custom_1)
