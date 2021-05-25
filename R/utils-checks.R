@@ -69,6 +69,10 @@ check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
 
 assert_whole_number <- checkmate::makeAssertionFunction(check_whole_number)
 
+## `check_numeric_()` and `assert_numeric_()` were created as a workaround to
+## deal with cases like `is.numeric(lubridate::duration())`. See
+## https://github.com/tidyverse/lubridate/issues/942 to learn more.
+
 check_numeric_ <- function(x, any.missing = TRUE, null.ok = FALSE,
                          name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
