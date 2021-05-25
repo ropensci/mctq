@@ -1,7 +1,7 @@
 flat_posixt <- function(x, force_utc = TRUE, base = "1970-01-01") {
     assert_posixt(x, null.ok = FALSE)
     checkmate::assert_flag(force_utc)
-    checkmate::assert_string(base)
+    checkmate::assert_string(base, pattern = "\\d{4}-\\d{2}-\\d{2}")
 
     lubridate::date(x) <- base
 
@@ -243,42 +243,6 @@ get_names <- function(...) {
     out <- gsub("\\\"","", out)
 
     out
-}
-
-na_as <- function(x) {
-    classes <- c("character", "integer", "double", "numeric", "Duration",
-                 "Period", "difftime", "hms", "Date", "POSIXct", "POSIXlt")
-
-    if (is.logical(x)) {
-        as.logical(NA)
-    } else if (is.character(x)) {
-        as.character(NA)
-    } else if (is.integer(x)) {
-        as.integer(NA)
-    } else if (is_numeric_(x)) {
-        as.numeric(NA)
-    } else if (lubridate::is.duration(x)) {
-        lubridate::as.duration(NA)
-    } else if (lubridate::is.period(x)) {
-        lubridate::as.period(NA)
-    } else if (class(x)[1] == "difftime") {
-        as.difftime(as.numeric(NA), units = attributes(x)$units)
-    } else if (hms::is_hms(x)) {
-        hms::as_hms(NA)
-    } else if (lubridate::is.Date(x)) {
-        as.Date(NA)
-    } else if (lubridate::is.POSIXct(x)) {
-        out <- as.POSIXct(NA)
-        attributes(out)$tzone <- attributes(x)$tzone
-        out
-    } else if (lubridate::is.POSIXlt(x)) {
-        out <- as.POSIXlt(NA)
-        attributes(out)$tzone <- attributes(x)$tzone
-        out
-    } else {
-        stop("`na_as()` don't support objects of class ",
-             class_collapse(x), ".", call. = FALSE)
-    }
 }
 
 get_class <- function(x) {
