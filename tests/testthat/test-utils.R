@@ -101,6 +101,13 @@ test_that("single_quote_() | general test", {
                  paste0("'", lubridate::dhours(), "'"))
 })
 
+test_that("double_quote_() | general test", {
+    expect_equal(double_quote_("test"), paste0("\"", "test", "\""))
+    expect_equal(double_quote_(1), paste0("\"", 1, "\""))
+    expect_equal(double_quote_(lubridate::dhours()),
+                 paste0("\"", lubridate::dhours(), "\""))
+})
+
 test_that("backtick_() | general test", {
     expect_equal(backtick_("test"), paste0("`", "test", "`"))
     expect_equal(backtick_(1), paste0("`", 1, "`"))
@@ -273,7 +280,7 @@ test_that("package_startup_message() | general test", {
     }
 
     # mock()
-    expect_null(mock(), NULL)
+    expect_null(mock())
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
@@ -282,5 +289,37 @@ test_that("package_startup_message() | general test", {
     }
 
     # mock()
-    expect_null(mock(), NULL)
+    expect_null(mock())
+})
+
+test_that("require_pkg() | general test", {
+    expect_null(require_pkg("base"))
+    expect_error(require_pkg("test"),
+                 "This function requires the 'test' package to run. ")
+    expect_error(require_pkg("test1", "test2"),
+                 "This function requires the 'test1' and 'test2' packages ")
+
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
+    # require_namespace <- mctq:::require_namespace
+
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            require_namespace = function(...) TRUE,
+            require_pkg("test"))
+    }
+
+    # mock()
+    expect_null(mock())
+})
+
+test_that("require_pkg() | error test", {
+    expect_error(require_pkg(1), "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(require_pkg(".test"), "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(require_pkg("test."), "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(require_pkg("tes_t"), "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(require_pkg("tést"), "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(require_pkg("test", "test"),
+                 "'...' cannot have duplicated values.")
 })

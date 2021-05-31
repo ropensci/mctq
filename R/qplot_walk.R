@@ -136,13 +136,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
              call. = FALSE)
     }
 
-    if (!require_namespace("grDevices", quietly = TRUE) ||
-        !require_namespace("ggplot2", quietly = TRUE)) {
-        stop("This function requires the 'grDevices' and 'ggplot2' packages ",
-            'to run. You can install them by running: \n\n',
-            'install.packages("grDevices") \n',
-            'install.packages("ggplot2")' , call. = FALSE)
-    }
+    require_pkg("utils", "grDevices", "ggplot2")
 
     if (any(c("x", "y", "data") %in% names(list(...)))) {
         stop("'x', 'y' and `data` are reserved arguments for ",

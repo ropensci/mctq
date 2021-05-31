@@ -13,29 +13,14 @@ test_that("random_mctq() | general test", {
 })
 
 test_that("random_mctq() | error test", {
-    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
-    # ## before trying to run the tests interactively.
-    #
-    # require_namespace <- mctq:::require_namespace
-    # random_mctq <- mctq::random_mctq
-
-    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
-        mockr::with_mock(
-            require_namespace = function(...) FALSE,
-            random_mctq())
-    }
-
-    # mock()
-    expect_error(mock(), "This function requires the 'stats' package to run. ")
-
     expect_error(random_mctq(model = 1), "Assertion on 'model' failed")
     expect_error(random_mctq(quiet = 1), "Assertion on 'quiet' failed")
 })
 
 test_that("random_mctq() | message test", {
-    expect_message(random_mctq(model = "standard"), "\nModel: Standard MCTQ\n")
-    expect_message(random_mctq(model = "micro"), "\nModel: Micro MCTQ\n")
-    expect_message(random_mctq(model = "shift"), "\nModel: MCTQ Shift\n")
+    expect_message(random_mctq(model = "standard"))
+    expect_message(random_mctq(model = "micro"))
+    expect_message(random_mctq(model = "shift"))
 })
 
 test_that("random_std_mctq() | general test", {

@@ -4,7 +4,6 @@ CMD
 ChronoType
 Chronobiology
 Chronotype
-Codecov
 Costa
 Coursera
 De
@@ -17,9 +16,9 @@ Hooboken
 IEC
 Jankowski
 Jankowski's
+Jetlag
 Jonge
 Juda
-LMU
 Lenssen
 Lifecycle
 MSF
@@ -28,7 +27,6 @@ Merrow
 Montagnese
 O'Reilly
 ORCID
-POSIXct
 Paulo
 Pilz
 RStudio
@@ -38,19 +36,17 @@ Salamanca
 Sao
 Sebastopol
 Sehgal
-UPK
 Vetter
 Wickham
 Winnebeck
 Wirz
 Zerbini
-actigraphy
 al
 chronobiology
 chronotype
 chronotypes
+codecov
 der
-devtools
 dplyr
 durations
 enzymology
@@ -59,7 +55,6 @@ funder
 ggplot
 hms
 https
-irresolvable
 jetlag
 jetlags
 lubridate

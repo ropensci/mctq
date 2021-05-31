@@ -3,7 +3,6 @@ test_that("qplot_walk() | general test", {
     # ## before trying to run the tests interactively.
     #
     # is_interactive <- mctq:::is_interactive
-    # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
@@ -11,35 +10,32 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             suppressWarnings(qplot_walk(utils::head(datasets::iris, 5)[[1]])))
     }
 
-    # x <- mock()
+    # mock()
     expect_s3_class(mock(), "ggplot")
 
     # "if ("xlab" %in% names(list(...)))"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             suppressWarnings(qplot_walk(utils::head(datasets::iris, 5)[[1]],
                                         xlab = "test")))
     }
 
-    # x <- mock()
+    # mock()
     expect_s3_class(mock(), "ggplot")
 
     # "if (is.data.frame(data))"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5)))
     }
 
-    # x <- mock()
+    # mock()
     expect_equal(mock(), NULL)
 
     # "if (!is.null(pattern))"
@@ -49,12 +45,11 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
             qplot_walk(data, pattern = ".+", xlab = "test"))
     }
 
-    # x <- mock()
+    # mock()
     expect_equal(mock(), NULL)
 })
 
@@ -63,7 +58,6 @@ test_that("qplot_walk() | error test", {
     # ## before trying to run the tests interactively.
     #
     # is_interactive <- mctq:::is_interactive
-    # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
@@ -76,21 +70,9 @@ test_that("qplot_walk() | error test", {
     # mock()
     expect_error(mock(), "This function can only be used in interactive mode.")
 
-    # "This function requires the `grDevices` and `ggplot2` [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) FALSE,
-            qplot_walk(utils::head(datasets::iris, 5)))
-    }
-
-    # mock()
-    expect_error(mock())
-
-    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
-        mockr::with_mock(
-            is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5), x = 1))
     }
 
@@ -100,7 +82,6 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5), cols = "Sepal.Length",
                        pattern = "\\."))
     }
@@ -111,7 +92,6 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             qplot_walk(list(1)))
     }
 
@@ -121,7 +101,6 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5), pattern = "^999$"))
     }
 
@@ -133,7 +112,6 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5), ignore = ignore))
     }
 
@@ -146,14 +124,12 @@ test_that("qplot_walk() | warning test", {
     # ## before trying to run the tests interactively.
     #
     # is_interactive <- mctq:::is_interactive
-    # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5)[[1]]))
     }
 
@@ -163,7 +139,6 @@ test_that("qplot_walk() | warning test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
             qplot_walk(utils::head(datasets::iris, 5), ignore = "factor"))
     }

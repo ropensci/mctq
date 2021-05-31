@@ -58,14 +58,9 @@
 #' random_mctq("micro")
 #' random_mctq("shift")}
 random_mctq <- function(model = "standard", quiet = FALSE) {
-    if (!require_namespace("stats", quietly = TRUE)) {
-        stop("This function requires the 'stats' package to run. ",
-             'You can install it by running: \n\n',
-             'install.packages("stats")', call. = FALSE)
-    }
-
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
     checkmate::assert_flag(quiet)
+    require_pkg("stats")
 
     if (model %in% c("std", "standard")) {
         shush(alert("\nModel: Standard MCTQ\n",
@@ -83,10 +78,7 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
 }
 
 random_std_mctq <- function() {
-    # R CMD Check variable bindings fix -----
-
-    ## See: <http://bit.ly/3bliuam>
-
+    ## R CMD Check variable bindings fix (see: <http://bit.ly/3bliuam>)
     work <- wd <- NULL
     bt_w <- sprep_w <- slat_w <- se_w <- si_w <- alarm_w <- NULL
     wake_before_w <- le_w <- NULL

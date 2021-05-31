@@ -1,4 +1,4 @@
-# To be used with the `mockr` package.
+## Used with the `mockr` package.
 
 is_interactive <- function(...) {
     interactive()

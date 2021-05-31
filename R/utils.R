@@ -92,6 +92,7 @@ change_day <- function(x, day) {
 }
 
 single_quote_ <- function(x) paste0("'", x, "'")
+double_quote_ <- function(x) paste0("\"", x, "\"")
 backtick_ <- function(x) paste0("`", x, "`")
 class_collapse <- function(x) single_quote_(paste0(class(x), collapse = "/"))
 
@@ -229,4 +230,42 @@ package_startup_message <- function(..., domain = NULL, appendLF = TRUE) {
     }
 
     invisible(NULL)
+}
+
+require_pkg <- function(...) {
+    out <- list(...)
+
+    lapply(out, checkmate::assert_string,
+           pattern = "^[A-Za-z][A-Za-z0-9.]+[A-Za-z0-9]$")
+
+    if (!identical(unique(unlist(out)), unlist(out))) {
+        stop("'...' cannot have duplicated values.", call. = FALSE)
+    }
+
+    pkg <- unlist(out)
+    namespace <- vapply(pkg, require_namespace, logical(1),
+                        quietly = TRUE, USE.NAMES = FALSE)
+    pkg <- pkg[!namespace]
+
+    if (length(pkg) == 0) {
+        invisible(NULL)
+    } else if (length(pkg) == 1) {
+        stop("This function requires the ", single_quote_(pkg), " ",
+             "package to run. You can install it by running: \n\n",
+             "install.packages(", double_quote_(pkg), ")",
+             call. = FALSE)
+    } else {
+        paste_install_function <- function(x) {
+            paste0("install.packages(", double_quote_(x), ")")
+        }
+
+        install_functions <- vapply(pkg, paste_install_function, character(1))
+
+        stop("This function requires the ",
+             inline_collapse(pkg), " ",
+             "packages to run. ",
+             "You can install them by running: \n\n",
+             paste(install_functions, collapse = " \n"),
+             call. = FALSE)
+    }
 }

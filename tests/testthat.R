@@ -1,8 +1,5 @@
 library(checkmate)
-library(lubridate)
-library(hms)
 library(mctq)
-library(mockr)
 library(testthat)
 
 test_check("mctq")
