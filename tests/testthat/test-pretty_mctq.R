@@ -16,10 +16,9 @@ test_that("pretty_mctq() | general test", {
 })
 
 test_that("pretty_mctq() | error test", {
-    data <- datasets::iris
-
-    # Invalid values for `data`, `round`, and `hms`
-    expect_error(pretty_mctq(1, TRUE, TRUE))
-    expect_error(pretty_mctq(data, "a", TRUE))
-    expect_error(pretty_mctq(data, TRUE, ""))
+    expect_error(pretty_mctq(1, TRUE, TRUE), "Assertion on 'data' failed")
+    expect_error(pretty_mctq(datasets::iris, "a", TRUE),
+                 "Assertion on 'round' failed")
+    expect_error(pretty_mctq(datasets::iris, TRUE, ""),
+                 "Assertion on 'hms' failed")
 })

@@ -1,60 +1,44 @@
 test_that("convert.character() | convert test", {
-    x <- "1"
-    quiet <- TRUE
-
-    expect_equal(convert(x, "logical", quiet = quiet), NA)
-    expect_equal(convert(x, "character", quiet = quiet), "1")
-    expect_equal(convert(x, "integer", quiet = quiet), 1L)
-    expect_equal(convert(x, "double", quiet = quiet), 1)
-    expect_equal(convert(x, "numeric", quiet = quiet), 1)
-
-    expect_equal(convert(x, "Duration", quiet = quiet),
+    expect_equal(convert("1", "logical", quiet = TRUE), NA)
+    expect_equal(convert("1", "character", quiet = TRUE), "1")
+    expect_equal(convert("1", "integer", quiet = TRUE), 1L)
+    expect_equal(convert("1", "double", quiet = TRUE), 1)
+    expect_equal(convert("1", "numeric", quiet = TRUE), 1)
+    expect_equal(convert("1", "Duration", quiet = TRUE),
                  lubridate::duration("1"))
-    expect_equal(convert(x, "Period", quiet = quiet), lubridate::period("1"))
-    expect_equal(convert(x, "difftime", quiet = quiet),
+    expect_equal(convert("1", "Period", quiet = TRUE), lubridate::period("1"))
+    expect_equal(convert("1", "difftime", quiet = TRUE),
                  lubridate::as.difftime("NA", units = "secs"))
-    expect_equal(convert(x, "hms", quiet = quiet), hms::hms(NA))
-    expect_equal(convert(x, "Date", quiet = quiet), lubridate::as_date(NA))
-
-    tz <- "EST"
-    object <- convert(x, "POSIXct", tz = tz, quiet = quiet)
-    expected <- lubridate::force_tz(
-        lubridate::as_datetime(NA), tz)
-    expect_equal(object, expected)
-
-    object <- convert(x, "POSIXlt", tz = tz, quiet = quiet)
-    expected <- as.POSIXlt(lubridate::force_tz(
-        lubridate::as_datetime(NA), tz))
-    expect_equal(object, expected)
+    expect_equal(convert("1", "hms", quiet = TRUE), hms::hms(NA))
+    expect_equal(convert("1", "Date", quiet = TRUE), lubridate::as_date(NA))
+    expect_equal(convert("1", "POSIXct", tz = "EST", quiet = TRUE),
+                 lubridate::force_tz(lubridate::as_datetime(NA), "EST"))
+    expect_equal(convert("1", "POSIXlt", tz = "EST", quiet = TRUE),
+                 as.POSIXlt(lubridate::force_tz(
+                     lubridate::as_datetime(NA), "EST")))
 })
 
 test_that("convert.character() | transform test", {
-    x <- "1"
-
-    object <- convert(x, "numeric", input_unit = "H", output_unit = "M",
-                      quiet = TRUE)
-    expect_identical(object, 60)
-
-    object <- convert(x, "hms", orders = "H")
-    expect_identical(object, hms::parse_hm("01:00"))
+    expect_identical(convert("1", "numeric", input_unit = "H",
+                             output_unit = "M", quiet = TRUE),
+                     60)
+    expect_identical(convert("1", "hms", orders = "H"), hms::parse_hm("01:00"))
 })
 
 test_that("convert.character() | warning test", {
-    x <- "1"
-
-    # "'x' was converted 'as is'."
-    expect_warning(convert(x, "logical", quiet = FALSE))
-    # "'x' was converted 'as is'. This can produce [...]"
-    expect_warning(convert(x, "duration", quiet = FALSE))
-    # "'difftime' units was set to seconds."
-    expect_warning(convert(x, "difftime", quiet = FALSE))
+    expect_warning(convert("1", "logical", quiet = FALSE),
+                   "'x' was converted 'as is'.")
+    expect_warning(convert("1", "duration", quiet = FALSE),
+                   "'x' was converted 'as is'.")
+    expect_warning(convert("1", "difftime", quiet = FALSE),
+                   "'difftime' units was set to seconds.")
 })
 
 test_that("convert.character() | error test", {
-    x <- "1"
-
-    # Invalid values for `class, `tz`, and `quiet`
-    expect_error(convert(x, 1, tz = "", quiet = TRUE))
-    expect_error(convert(x, "hms", tz = 1, quiet = TRUE))
-    expect_error(convert(x, "hms", tz = "", quiet = ""))
+    expect_error(convert("1", 1, tz = "", quiet = TRUE),
+                 "Assertion on 'tolower\\(class\\)' failed")
+    expect_error(convert("1", "hms", tz = 1, quiet = TRUE),
+                 "Assertion on 'tz' failed")
+    expect_error(convert("1", "hms", tz = "", quiet = ""),
+                 "Assertion on 'quiet' failed")
 })

@@ -1,26 +1,26 @@
-flat_posixt <- function(x, force_utc = TRUE, base = "1970-01-01") {
-    assert_posixt(x, null.ok = FALSE)
+flat_posixt <- function(posixt, force_utc = TRUE, base = "1970-01-01") {
+    assert_posixt(posixt, null.ok = FALSE)
     checkmate::assert_flag(force_utc)
     checkmate::assert_string(base, pattern = "\\d{4}-\\d{2}-\\d{2}")
 
-    lubridate::date(x) <- base
+    lubridate::date(posixt) <- base
 
     if (isTRUE(force_utc)) {
-        lubridate::force_tz(x, "UTC")
+        lubridate::force_tz(posixt, "UTC")
     } else {
-        x
+        posixt
     }
 }
 
-midday_change <- function(x) {
-    checkmate::assert_multi_class(x, c("hms", "POSIXct", "POSIXlt"))
+midday_change <- function(time) {
+    checkmate::assert_multi_class(time, c("hms", "POSIXct", "POSIXlt"))
 
-    if (hms::is_hms(x)) x <- as.POSIXct(x)
-    x <- flat_posixt(x)
+    if (hms::is_hms(time)) time <- as.POSIXct(time)
+    time <- flat_posixt(time)
 
     dplyr::case_when(
-        lubridate::hour(x) < 12 ~ change_day(x, 2),
-        TRUE ~ x
+        lubridate::hour(time) < 12 ~ change_day(time, 2),
+        TRUE ~ time
     )
 }
 
@@ -91,44 +91,9 @@ change_day <- function(x, day) {
     x
 }
 
-is_time <- function(x, rm = NULL) {
-    checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
-
-    classes <- c("Duration", "Period", "difftime", "hms", "Date", "POSIXct",
-                 "POSIXlt", "Interval")
-
-    if (!is.null(rm)) {
-        rm <- paste0("^", rm, "$", collapse = "|")
-        classes <- str_subset_(classes, rm, negate = TRUE)
-    }
-
-    checkmate::test_subset(class(x)[1], classes)
-}
-
-is_numeric_ <- function(x) {
-    classes <- c("integer", "double", "numeric")
-    checkmate::test_subset(class(x)[1], classes)
-}
-
-is_whole_number <- function(x, tol = .Machine$double.eps^0.5) {
-    if (!is_numeric_(x) || !identical(x, abs(x))) {
-        FALSE
-    } else {
-        abs(x - round(x)) < tol # Example function from `?integer`
-    }
-}
-
-single_quote_ <- function(x) {
-    paste0("'", x, "'")
-}
-
-backtick_ <- function(x) {
-    paste0("`", x, "`")
-}
-
-class_collapse <- function(x) {
-    single_quote_(paste0(class(x), collapse = "/"))
-}
+single_quote_ <- function(x) paste0("'", x, "'")
+backtick_ <- function(x) paste0("`", x, "`")
+class_collapse <- function(x) single_quote_(paste0(class(x), collapse = "/"))
 
 paste_collapse <- function(x, sep = "", last = sep) {
     checkmate::assert_string(sep)
@@ -188,13 +153,8 @@ swap <- function(x, y, condition = TRUE) {
     list(x = x, y = y)
 }
 
-count_na <- function(x) {
-    length(which(is.na(x)))
-}
-
-escape_regex <- function(x) {
-    gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
-}
+count_na <- function(x) length(which(is.na(x)))
+escape_regex <- function(x) gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
 
 get_names <- function(...) {
     out <- lapply(substitute(list(...))[-1], deparse)
@@ -225,30 +185,34 @@ fix_character <- function(x) {
     x
 }
 
-str_extract_ <- function(string, pattern, ignore.case = FALSE, perl = TRUE,
-                         fixed = FALSE, useBytes = FALSE, invert = FALSE) {
+str_extract_ <- function(string, pattern, ignore_case = FALSE, perl = TRUE,
+                         fixed = FALSE, use_bytes = FALSE, invert = FALSE) {
     checkmate::assert_string(pattern)
-    checkmate::assert_flag(ignore.case)
+    checkmate::assert_flag(ignore_case)
     checkmate::assert_flag(perl)
     checkmate::assert_flag(fixed)
-    checkmate::assert_flag(useBytes)
+    checkmate::assert_flag(use_bytes)
     checkmate::assert_flag(invert)
 
-    match <- regexpr(pattern, string, ignore.case = ignore.case, perl = perl,
-                     fixed = fixed, useBytes = useBytes)
+    match <- regexpr(pattern, string, ignore.case = ignore_case, perl = perl,
+                     fixed = fixed, useBytes = use_bytes)
     out <- rep(NA, length(string))
     out[match != -1 & !is.na(match)] <- regmatches(string, match,
                                                    invert = invert)
     out
 }
 
-str_subset_ <- function(string, pattern, negate = FALSE, ignore.case = FALSE,
-                        perl = TRUE, fixed = FALSE, useBytes = FALSE) {
+str_subset_ <- function(string, pattern, negate = FALSE, ignore_case = FALSE,
+                        perl = TRUE, fixed = FALSE, use_bytes = FALSE) {
     checkmate::assert_string(pattern)
     checkmate::assert_flag(negate)
+    checkmate::assert_flag(ignore_case)
+    checkmate::assert_flag(perl)
+    checkmate::assert_flag(fixed)
+    checkmate::assert_flag(use_bytes)
 
-    match <- grepl(pattern, string, ignore.case = ignore.case, perl = perl,
-                   fixed = fixed, useBytes = useBytes)
+    match <- grepl(pattern, string, ignore.case = ignore_case, perl = perl,
+                   fixed = fixed, useBytes = use_bytes)
 
     if (isTRUE(negate)) {
         out <- subset(string, !match)

@@ -1,9 +1,7 @@
-# Don't forget to run devtools::load_all(".") and uncomment the variables
-# before trying to run the tests interactively.
-
 test_that("qplot_walk() | general test", {
-    data <- utils::head(datasets::iris, 5)
-
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
     # is_interactive <- mctq:::is_interactive
     # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
@@ -14,7 +12,7 @@ test_that("qplot_walk() | general test", {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
-            suppressWarnings(qplot_walk(data[[1]])))
+            suppressWarnings(qplot_walk(utils::head(datasets::iris, 5)[[1]])))
     }
 
     # x <- mock()
@@ -25,7 +23,8 @@ test_that("qplot_walk() | general test", {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
-            suppressWarnings(qplot_walk(data[[1]], xlab = "test")))
+            suppressWarnings(qplot_walk(utils::head(datasets::iris, 5)[[1]],
+                                        xlab = "test")))
     }
 
     # x <- mock()
@@ -37,7 +36,7 @@ test_that("qplot_walk() | general test", {
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
-            qplot_walk(data))
+            qplot_walk(utils::head(datasets::iris, 5)))
     }
 
     # x <- mock()
@@ -47,7 +46,6 @@ test_that("qplot_walk() | general test", {
     # "x <- transform(data[[i]], midday_change)"
     # "if ("xlab" %in% names(list(...)))"
     data <- data.frame(a = hms::parse_hm("23:00"), b = lubridate::dhours(1))
-
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
@@ -61,57 +59,55 @@ test_that("qplot_walk() | general test", {
 })
 
 test_that("qplot_walk() | error test", {
-    data <- utils::head(datasets::iris, 5)
-
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
     # is_interactive <- mctq:::is_interactive
     # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
-    # "This function can only be used in interactive mode"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) FALSE,
-            qplot_walk(data))
+            qplot_walk(utils::head(datasets::iris, 5)))
     }
 
     # mock()
-    expect_error(mock())
+    expect_error(mock(), "This function can only be used in interactive mode.")
 
     # "This function requires the `grDevices` and `ggplot2` [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) FALSE,
-            qplot_walk(data))
+            qplot_walk(utils::head(datasets::iris, 5)))
     }
 
     # mock()
     expect_error(mock())
 
-    # "`x`, `y` and `data` are reserved arguments for `qplot_walk()`"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
-            qplot_walk(data, x = 1))
+            qplot_walk(utils::head(datasets::iris, 5), x = 1))
     }
 
     # mock()
-    expect_error(mock())
+    expect_error(mock(), "'x', 'y' and `data` are reserved arguments for .")
 
-    # "`cols` and `pattern` can't both have values [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
-            qplot_walk(data, cols = "Sepal.Length", pattern = "\\."))
+            qplot_walk(utils::head(datasets::iris, 5), cols = "Sepal.Length",
+                       pattern = "\\."))
     }
 
     # mock()
-    expect_error(mock())
+    expect_error(mock(), "'cols' and 'pattern' can't both have values. ")
 
-    # "`cols` and `pattern` can't both have values [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
@@ -120,61 +116,58 @@ test_that("qplot_walk() | error test", {
     }
 
     # mock()
-    expect_error(mock())
-
-    # "None match was found in `names(data)`"
-    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
-        mockr::with_mock(
-            is_interactive = function(...) TRUE,
-            require_namespace = function(...) TRUE,
-            qplot_walk(data, pattern = "^999$"))
-    }
-
-    # mock()
-    expect_error(mock())
-
-    # "You can't ignore all variables in `cols` or in `data` [...]"
-    ignore <- unique(vapply(data, function(x) class(x)[1], character(1)))
+    expect_error(mock(), "'data' must be an 'atomic' object or a data frame.")
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
-            qplot_walk(data, ignore = ignore))
+            qplot_walk(utils::head(datasets::iris, 5), pattern = "^999$"))
     }
 
     # mock()
-    expect_error(mock())
+    expect_error(mock(), "None match was found in 'names\\(data\\)'.")
+
+    ignore <- unique(vapply(utils::head(datasets::iris, 5),
+                            function(x) class(x)[1], character(1)))
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            is_interactive = function(...) TRUE,
+            require_namespace = function(...) TRUE,
+            qplot_walk(utils::head(datasets::iris, 5), ignore = ignore))
+    }
+
+    # mock()
+    expect_error(mock(), "You can't ignore all variables in 'cols' or in ")
 })
 
 test_that("qplot_walk() | warning test", {
-    data <- utils::head(datasets::iris, 5)
-
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
     # is_interactive <- mctq:::is_interactive
     # require_namespace <- mctq:::require_namespace
     # dialog_line <- mctq:::dialog_line
     # qplot_walk <- mctq::qplot_walk
 
-    # "`data` is atomic. All other arguments, except `...` and [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
-            qplot_walk(data[[1]]))
+            qplot_walk(utils::head(datasets::iris, 5)[[1]]))
     }
 
     # mock()
-    expect_warning(mock())
+    expect_warning(mock(), "'data' is 'atomic'. All other arguments, ")
 
-    # "inline_collapse(match), " will be ignored due to the [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
             dialog_line = function(...) TRUE,
-            qplot_walk(data, ignore = "factor"))
+            qplot_walk(utils::head(datasets::iris, 5), ignore = "factor"))
     }
 
     # mock()
-    expect_warning(mock())
+    expect_warning(mock(), "'Species' will be ignored due to the settings ")
 })

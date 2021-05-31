@@ -432,7 +432,7 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     class <- tolower(class)
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'",
+        shush(warning("'x' cannot be converted to 'logical'.",
                       call. = FALSE), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
@@ -510,7 +510,7 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     class <- tolower(class)
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'",
+        shush(warning("'x' cannot be converted to 'logical'.",
                       call. = FALSE), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
@@ -571,7 +571,7 @@ convert.Date <- function(x, class, ..., tz = "UTC", quiet = FALSE) {
     }
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'",
+        shush(warning("'x' cannot be converted to 'logical'.",
                       call. = FALSE), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
@@ -624,7 +624,7 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     }
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'",
+        shush(warning("'x' cannot be converted to 'logical'.",
                       call. = FALSE), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
@@ -683,13 +683,13 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     }
 
     if (class %in% c("posixct", "posixlt")) {
-        shush(warning("'x' was converted to the interval time span with",
+        shush(warning("'x' was converted to the interval time span with ",
                       "'1970-01-01 as origin (UNIX epoch).",
                       call. = FALSE), quiet)
     }
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'",
+        shush(warning("'x' cannot be converted to 'logical'.",
                       call. = FALSE), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
@@ -774,7 +774,7 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
 #' @rdname convert
 #' @export
 convert_tu <- function(x, output_unit, ...) {
-    assert_time(x)
+    assert_temporal(x)
 
     convert(x, class = "numeric", output_unit = output_unit, ... = ...)
 }
@@ -1042,7 +1042,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
     checkmate::assert_flag(ignore_date)
     checkmate::assert_flag(quiet)
 
-    if (!is_time(x) && is.null(input_unit)) {
+    if (!test_temporal(x) && is.null(input_unit)) {
         stop("When 'x' is 'integer' or 'numeric', 'input_unit' cannot be ",
              "'NULL'.", call. = FALSE)
     }
@@ -1072,7 +1072,7 @@ convert_to_seconds <- function(x, input_unit = NULL,
         } else if (input_unit == "deg") {
             x / deg_second
         }
-    } else if (is_time(x)) {
+    } else if (test_temporal(x)) {
         if (lubridate::is.duration(x) || lubridate::is.period(x) ||
             hms::is_hms(x) || lubridate::is.interval(x)) {
             as.numeric(x)

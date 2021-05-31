@@ -1,7 +1,7 @@
-# Don't forget to run devtools::load_all(".") and uncomment the variables
-# before trying to run the tests interactively.
-
 test_that("dialog_line() | general test", {
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
     # is_interactive <- mctq:::is_interactive
     # require_namespace <- mctq:::require_namespace
     # read_line <- mctq:::read_line
@@ -38,22 +38,28 @@ test_that("dialog_line() | general test", {
 })
 
 test_that("dialog_line() | error test", {
-    # Invalid values for `...`, `combined_styles`, `space_above`,
-    # `space_below`, and `abort`
-    expect_error(dialog_line())
-    expect_error(dialog_line(1, combined_styles = ""))
-    expect_error(dialog_line(1, space_above = ""))
-    expect_error(dialog_line(1, space_below = ""))
-    expect_error(dialog_line(1, abort = ""))
+    expect_error(dialog_line(), "Assertion on 'list\\(...\\)' failed")
+    expect_error(dialog_line(1, combined_styles = ""),
+                 "Assertion on 'combined_styles' failed")
+    expect_error(dialog_line(1, space_above = ""),
+                 "Assertion on 'space_above' failed")
+    expect_error(dialog_line(1, space_below = ""),
+                 "Assertion on 'space_below' failed")
+    expect_error(dialog_line(1, abort = ""),
+                 "Assertion on 'abort' failed")
 })
 
 test_that("alert() | general test", {
-    # require_namespace <- mctq:::require_namespace
-
     expect_equal(alert(1, abort = TRUE), NULL)
-    expect_message(alert(1))
-    expect_message(alert(c(1, 2)))
-    expect_message(alert(1, 2))
+
+    expect_message(alert(1), "1")
+    expect_message(alert(c(1, 2)), "12")
+    expect_message(alert(1, 2), "12")
+
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
+    # require_namespace <- mctq:::require_namespace
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
@@ -66,8 +72,9 @@ test_that("alert() | general test", {
 })
 
 test_that("alert() | error test", {
-    # Invalid values for `...`, `combined_styles`, and `abort`
-    expect_error(alert())
-    expect_error(alert(1, combined_styles = ""))
-    expect_error(alert(1, abort = ""))
+    expect_error(alert(), "Assertion on 'list\\(...\\)' failed")
+    expect_error(alert(1, combined_styles = ""),
+                 "Assertion on 'combined_styles' failed")
+    expect_error(alert(1, abort = ""),
+                 "Assertion on 'abort' failed")
 })

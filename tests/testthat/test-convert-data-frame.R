@@ -1,30 +1,29 @@
 test_that("convert.data.frame() | convert test", {
-    x <- dplyr::tibble(a = c(1, 1), b = c("1", "1"))
-    quiet <- TRUE
+    expect_equal(convert(dplyr::tibble(a = c(1, 1), b = c("1", "1")),
+                         "hms", cols = "a", input_unit = "H", quiet = TRUE),
+                 dplyr::tibble(
+                     a = c(hms::parse_hm("01:00"), hms::parse_hm("01:00")),
+                     b = c("1", "1")))
 
-    object <- convert(x, "hms", cols = "a", input_unit = "H", quiet = quiet)
-    expected <- dplyr::tibble(
-        a = c(hms::parse_hm("01:00"), hms::parse_hm("01:00")),
-        b = c("1", "1"))
-    expect_equal(object, expected)
-
-    object <- convert(x, "duration", where = is.character, input_unit = "H",
-                      quiet = quiet)
-    expected <- dplyr::tibble(
-        a = c(1, 1),
-        b = c(lubridate::dhours(), lubridate::dhours()))
-    expect_equal(object, expected)
+    expect_equal(convert(dplyr::tibble(a = c(1, 1), b = c("1", "1")),
+                         "duration", where = is.character, input_unit = "H",
+                         quiet = TRUE),
+                 dplyr::tibble(
+                     a = c(1, 1),
+                     b = c(lubridate::dhours(), lubridate::dhours())))
 })
 
 test_that("convert.data.frame() | error test", {
-    x <- dplyr::tibble(a = c(1, 1), b = c("1", "1"))
-
-    # Invalid values for `class, `where`, `tz`, and `quiet`
-    expect_error(convert(x, 1, tz = "", quiet = TRUE))
-    expect_error(convert(x, "hms", where = 1, tz = "", quiet = TRUE))
-    expect_error(convert(x, "hms", where = is.numeric, tz = 1, quiet = TRUE))
-    expect_error(convert(x, "hms", where = is.numeric, tz = "", quiet = ""))
-
-    # "'cols' and 'where' cannot both be 'NULL'."
-    expect_error(convert(x, "hms"))
+    expect_error(convert(data.frame(), 1, tz = "", quiet = TRUE),
+                 "Assertion on 'tolower\\(class\\)' failed")
+    expect_error(convert(data.frame(), "hms", where = 1, tz = "", quiet = TRUE),
+                 "Assertion on 'where' failed")
+    expect_error(convert(data.frame(), "hms", where = is.numeric, tz = 1,
+                         quiet = TRUE),
+                 "Assertion on 'tz' failed")
+    expect_error(convert(data.frame(), "hms", where = is.numeric, tz = "",
+                         quiet = ""),
+                 "Assertion on 'quiet' failed")
+    expect_error(convert(data.frame(), "hms"),
+                 "'cols' and 'where' cannot both be 'NULL'.")
 })

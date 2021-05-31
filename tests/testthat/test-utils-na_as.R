@@ -1,5 +1,6 @@
 test_that("na_as() | general test", {
-    # Nonexistent method error
+    ## Nonexistent method error
+    ## The error message may change depending on the user's 'locale' settings.
     expect_error(na_as(list(NA)))
 })
 
@@ -41,10 +42,10 @@ test_that("na_as.Date() | general test", {
 })
 
 test_that("na_as.POSIXct() | general test", {
-    expect_equal(na_as(lubridate::as_datetime(0)), lubridate::as_datetime(NA))
+    expect_equal(na_as(lubridate::as_datetime(1)), lubridate::as_datetime(NA))
 })
 
 test_that("na_as.POSIXlt() | general test", {
-    expect_equal(na_as(as.POSIXlt(lubridate::as_datetime(0))),
+    expect_equal(na_as(as.POSIXlt(lubridate::as_datetime(1))),
                  as.POSIXlt(lubridate::as_datetime(NA)))
 })

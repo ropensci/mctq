@@ -146,7 +146,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
     if (any(c("x", "y", "data") %in% names(list(...)))) {
         stop("'x', 'y' and `data` are reserved arguments for ",
-            "`qplot_walk()`.", call. = FALSE)
+            "'qplot_walk()'.", call. = FALSE)
     }
 
     if (is.data.frame(data)) {
@@ -207,7 +207,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- grep(pattern, names(data), value = TRUE)
 
         if (length(cols) == 0) {
-            stop("None match was found in `names(data)`.", call. = FALSE)
+            stop("None match was found in 'names(data)'.", call. = FALSE)
         }
     }
 

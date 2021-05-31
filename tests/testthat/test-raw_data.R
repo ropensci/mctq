@@ -5,6 +5,5 @@ test_that("raw_data() | general test", {
 })
 
 test_that("raw_data() | error test", {
-    # Invalid value for `file`
-    expect_error(raW_data(file = 1))
+    expect_error(raw_data(file = 1), "Assertion on 'file' failed")
 })

@@ -1,50 +1,57 @@
 test_that("convert.Date() | convert test", {
-    x <- as.Date("2000-01-01")
-    quiet <- TRUE
-
-    expect_equal(convert(x, "logical", quiet = quiet), NA)
-    expect_equal(convert(x, "character", quiet = quiet), "2000-01-01")
-    expect_equal(convert(x, "integer", quiet = quiet), 10957L)
-    expect_equal(convert(x, "double", quiet = quiet), 10957)
-    expect_equal(convert(x, "numeric", quiet = quiet), 10957)
-    expect_equal(convert(x, "Duration", quiet = quiet),
+    expect_equal(convert(as.Date("2000-01-01"), "logical", quiet = TRUE), NA)
+    expect_equal(convert(as.Date("2000-01-01"), "character", quiet = TRUE),
+                 "2000-01-01")
+    expect_equal(convert(as.Date("2000-01-01"), "integer", quiet = TRUE),
+                 10957L)
+    expect_equal(convert(as.Date("2000-01-01"), "double", quiet = TRUE), 10957)
+    expect_equal(convert(as.Date("2000-01-01"), "numeric", quiet = TRUE), 10957)
+    expect_equal(convert(as.Date("2000-01-01"), "Duration", quiet = TRUE),
                  lubridate::as.duration(NA))
-    expect_equal(convert(x, "Period", quiet = quiet), lubridate::as.period(NA))
-    expect_equal(convert(x, "difftime", quiet = quiet),
+    expect_equal(convert(as.Date("2000-01-01"), "Period", quiet = TRUE),
+                 lubridate::as.period(NA))
+    expect_equal(convert(as.Date("2000-01-01"), "difftime", quiet = TRUE),
                  lubridate::as.difftime(lubridate::as.duration(NA)))
-    expect_equal(convert(x, "hms", quiet = quiet), hms::as_hms(NA))
-    expect_equal(convert(x, "Date", quiet = quiet), x)
-
-    tz <- "EST"
-    object <- convert(x, "POSIXct", tz = tz, quiet = quiet)
-    expected <- lubridate::force_tz(lubridate::as_datetime("2000-01-01"), tz)
-    expect_equal(object, expected)
-
-    object <- convert(x, "POSIXlt", tz = tz, quiet = quiet)
-    expected <- as.POSIXlt(lubridate::force_tz(
-        lubridate::as_datetime("2000-01-01"), tz))
-    expect_equal(object, expected)
+    expect_equal(convert(as.Date("2000-01-01"), "hms", quiet = TRUE),
+                 hms::as_hms(NA))
+    expect_equal(convert(as.Date("2000-01-01"), "Date", quiet = TRUE),
+                 as.Date("2000-01-01"))
+    expect_equal(convert(as.Date("2000-01-01"), "POSIXct", tz = "EST",
+                         quiet = TRUE),
+                 lubridate::force_tz(lubridate::as_datetime("2000-01-01"),
+                                     "EST"))
+    expect_equal(convert(as.Date("2000-01-01"), "POSIXlt", tz = "EST",
+                         quiet = TRUE),
+                 as.POSIXlt(lubridate::force_tz(
+                     lubridate::as_datetime("2000-01-01"), "EST")))
 })
 
 test_that("convert.Date() | warning test", {
-    x <- as.Date("2000-01-01")
+    expect_warning(convert(as.Date("2000-01-01"), "logical", quiet = FALSE),
+                   "'x' cannot be converted to 'logical'.")
 
-    "'x' cannot be converted to 'logical'"
-    expect_warning(convert(x, "logical", quiet = FALSE))
-    # "'x' was converted to total of days since  [...]"
-    classes <- c("integer", "double", "numeric")
-    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
+    expect_warning(convert(as.Date("2000-01-01"), "integer", quiet = FALSE),
+                   "'x' was converted to total of days since '1970-01-01'")
+    expect_warning(convert(as.Date("2000-01-01"), "double", quiet = FALSE),
+                   "'x' was converted to total of days since '1970-01-01'")
+    expect_warning(convert(as.Date("2000-01-01"), "numeric", quiet = FALSE),
+                   "'x' was converted to total of days since '1970-01-01'")
 
-    # "There's no time to convert."
-    classes <- c("duration", "period", "difftime", "hms")
-    for (i in classes) expect_warning(convert(x, i, quiet = FALSE))
+    expect_warning(convert(as.Date("2000-01-01"), "duration", quiet = FALSE),
+                   "There's no time to convert.")
+    expect_warning(convert(as.Date("2000-01-01"), "period", quiet = FALSE),
+                   "There's no time to convert.")
+    expect_warning(convert(as.Date("2000-01-01"), "difftime", quiet = FALSE),
+                   "There's no time to convert.")
+    expect_warning(convert(as.Date("2000-01-01"), "hms", quiet = FALSE),
+                   "There's no time to convert.")
 })
 
 test_that("convert.Date() | error test", {
-    x <- as.Date("2000-01-01")
-
-    # Invalid values for `class, `tz`, and `quiet`
-    expect_error(convert(x, 1, tz = "", quiet = TRUE))
-    expect_error(convert(x, "hms", tz = 1, quiet = TRUE))
-    expect_error(convert(x, "hms", tz = "", quiet = ""))
+    expect_error(convert(as.Date("2000-01-01"), 1, tz = "", quiet = TRUE),
+                 "Assertion on 'tolower\\(class\\)' failed")
+    expect_error(convert(as.Date("2000-01-01"), "hms", tz = 1, quiet = TRUE),
+                 "Assertion on 'tz' failed")
+    expect_error(convert(as.Date("2000-01-01"), "hms", tz = "", quiet = ""),
+                 "Assertion on 'quiet' failed")
 })

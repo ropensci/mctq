@@ -1,6 +1,3 @@
-# Don't forget to run devtools::load_all(".") and uncomment the variables
-# before trying to run the tests interactively.
-
 test_that("random_mctq() | general test", {
     set.seed(1)
     checkmate::expect_list(shush(random_mctq(model = "standard")))
@@ -16,10 +13,12 @@ test_that("random_mctq() | general test", {
 })
 
 test_that("random_mctq() | error test", {
+    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
+    # ## before trying to run the tests interactively.
+    #
     # require_namespace <- mctq:::require_namespace
     # random_mctq <- mctq::random_mctq
 
-    # "This function requires the `stats` package to run [...]"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             require_namespace = function(...) FALSE,
@@ -27,22 +26,16 @@ test_that("random_mctq() | error test", {
     }
 
     # mock()
-    expect_error(mock())
+    expect_error(mock(), "This function requires the 'stats' package to run. ")
 
-    # Invalid values for `model` and `quiet`
-    expect_error(random_mctq(model = 1))
-    expect_error(random_mctq(quiet = 1))
+    expect_error(random_mctq(model = 1), "Assertion on 'model' failed")
+    expect_error(random_mctq(quiet = 1), "Assertion on 'quiet' failed")
 })
 
 test_that("random_mctq() | message test", {
-    # "\nModel: Standard MCTQ\n"
-    expect_message(random_mctq(model = "standard"))
-
-    # "\nModel: Micro MCTQ\n"
-    expect_message(random_mctq(model = "micro"))
-
-    "\nModel: MCTQ Shift\n"
-    expect_message(random_mctq(model = "shift"))
+    expect_message(random_mctq(model = "standard"), "\nModel: Standard MCTQ\n")
+    expect_message(random_mctq(model = "micro"), "\nModel: Micro MCTQ\n")
+    expect_message(random_mctq(model = "shift"), "\nModel: MCTQ Shift\n")
 })
 
 test_that("random_std_mctq() | general test", {
@@ -96,169 +89,258 @@ test_that("random_shift_mctq() | general test", {
     expect_false(x$nap_f_n)
 
     # Invalid values for `n_w` and `n_f`
-    expect_error(random_shift_mctq(n_w = ""))
-    expect_error(random_shift_mctq(n_w = c(1, 1)))
-    expect_error(random_shift_mctq(n_f = ""))
-    expect_error(random_shift_mctq(n_f = c(1, 1)))
+    expect_error(random_shift_mctq(n_w = ""), "Assertion on 'n_w' failed")
+    expect_error(random_shift_mctq(n_w = c(1, 1)), "Assertion on 'n_w' failed")
+    expect_error(random_shift_mctq(n_f = ""), "Assertion on 'n_f' failed")
+    expect_error(random_shift_mctq(n_f = c(1, 1)), "Assertion on 'n_f' failed")
 })
 
 test_that("normalize() | general test", {
     # else if (check_2)
-    min <- hms::parse_hm("22:00") + lubridate::ddays(1)
-    max <- hms::parse_hm("05:00")
-    mean <- hms::parse_hm("02:00")
-    object <- normalize(min, max, mean)
-    expected <- hms::hms(as.numeric(hms::parse_hm("02:00") +
-                                        lubridate::ddays()))
-    expect_equal(object$mean, expected)
+    object <- normalize(hms::parse_hm("22:00") + lubridate::ddays(1),
+                        hms::parse_hm("05:00"),
+                        hms::parse_hm("02:00"))
+    expect_equal(object$mean,
+                 hms::hms(as.numeric(hms::parse_hm("02:00") +
+                                         lubridate::ddays())))
 
     # if (check_1)
-    min <- hms::parse_hm("01:00")
-    max <- hms::parse_hm("12:00") + lubridate::ddays(1)
-    mean <- hms::parse_hm("06:00")
-    object <- normalize(min, max, mean)
-    expected <- hms::parse_hm("12:00")
-    expect_equal(object$max, expected)
+    object <- normalize(hms::parse_hm("01:00"),
+                        hms::parse_hm("12:00") + lubridate::ddays(1),
+                        hms::parse_hm("06:00"))
+    expect_equal(object$max, hms::parse_hm("12:00"))
 
-    # "'mean' can't be found within the interval between 'min' and 'max'"
-    min <- hms::parse_hm("12:00")
-    max <- hms::parse_hm("03:00")
-    mean <- hms::parse_hm("06:00")
-    expect_error(normalize(min, max, mean))
+    expect_error(normalize(hms::parse_hm("12:00"),
+                           hms::parse_hm("03:00"),
+                           hms::parse_hm("06:00")),
+                 "'mean' can't be found within the interval between 'min' ")
 
-    # Invalid values for `min`, `max`, `mean`, and `ambiguity`
-    test <- c(hms::hms(1), hms::hms(1))
-
-    expect_error(normalize("", hms::hms(1), hms::hms(1)))
-    expect_error(normalize(hms::hms(1), "", hms::hms(1)))
-    expect_error(normalize(hms::hms(1), hms::hms(1), ""))
-    expect_error(normalize(test, hms::hms(1), hms::hms(1)))
-    expect_error(normalize(hms::hms(1), test, hms::hms(1)))
-    expect_error(normalize(hms::hms(1), hms::hms(1), test))
-    expect_error(normalize(hms::hms(1), hms::hms(1), hms::hms(1), 1))
+    expect_error(normalize("", hms::hms(1), hms::hms(1)),
+                 "Assertion on 'min' failed")
+    expect_error(normalize(c(hms::hms(1), hms::hms(1)), hms::hms(1),
+                           hms::hms(1)),
+                 "Assertion on 'min' failed")
+    expect_error(normalize(hms::hms(1), "", hms::hms(1)),
+                 "Assertion on 'max' failed")
+    expect_error(normalize(hms::hms(1), c(hms::hms(1), hms::hms(1)),
+                           hms::hms(1)),
+                 "Assertion on 'max' failed")
+    expect_error(normalize(hms::hms(1), hms::hms(1), ""),
+                 "Assertion on 'mean' failed")
+    expect_error(normalize(hms::hms(1), hms::hms(1),
+                           c(hms::hms(1), hms::hms(1))),
+                 "Assertion on 'mean' failed")
+    expect_error(normalize(hms::hms(1), hms::hms(1), hms::hms(1), 1),
+                 "Assertion on 'ambiguity' failed")
 })
 
 test_that("sample_time() | general test", {
-    lower <- as.numeric(hms::parse_hms("00:00:00"))
-    max <- as.numeric(hms::parse_hms("23:59:59"))
-    object <- as.numeric(sample_time())
-    checkmate::expect_numeric(object, lower = lower, max = max)
+    checkmate::expect_numeric(as.numeric(sample_time()),
+                              lower = as.numeric(hms::parse_hms("00:00:00")),
+                              max = as.numeric(hms::parse_hms("23:59:59")))
 
     set.seed(1)
     expect_equal(sample_time(), hms::parse_hms("13:50:00"))
 
-    # "You cannot take a sample larger than the population [...]"
-    expect_error(sample_time(
-        min = lubridate::dseconds(1),
-        max = lubridate::dseconds(3),
-        by = lubridate::dseconds(1),
-        size = 100,
-        replace = FALSE))
+    expect_error(sample_time(min = lubridate::dseconds(1),
+                             max = lubridate::dseconds(3),
+                             by = lubridate::dseconds(1),
+                             size = 100,
+                             replace = FALSE),
+                 "You cannot take a sample larger than the population ")
 
-    # Invalid values for `class`, `min`, `max`, `by`, `size`, `replace`
-    # and `prob`
-    test <- c(hms::hms(1), hms::hms(1))
-
-    expect_error(sample_time(class = ""))
-    expect_error(sample_time(min = ""))
-    expect_error(sample_time(max = ""))
-    expect_error(sample_time(by = ""))
-    expect_error(sample_time(min = test))
-    expect_error(sample_time(max = test))
-    expect_error(sample_time(by = test))
-    expect_error(sample_time(replace = ""))
-    expect_error(sample_time(size = ""))
-    expect_error(sample_time(size = - 1))
-    expect_error(sample_time(prob = ""))
+    expect_error(sample_time(class = ""),
+                 "Assertion on 'tolower\\(class\\)' failed")
+    expect_error(sample_time(min = ""), "Assertion on 'min' failed")
+    expect_error(sample_time(min = c(hms::hms(1), hms::hms(1))),
+                 "Assertion on 'min' failed")
+    expect_error(sample_time(max = ""), "Assertion on 'max' failed")
+    expect_error(sample_time(max = c(hms::hms(1), hms::hms(1))),
+                 "Assertion on 'max' failed")
+    expect_error(sample_time(by = ""), "Assertion on 'by' failed")
+    expect_error(sample_time(by = c(hms::hms(1), hms::hms(1))),
+                 "Assertion on 'by' failed")
+    expect_error(sample_time(replace = ""), "Assertion on 'replace' failed")
+    expect_error(sample_time(size = ""), "Assertion on 'size' failed")
+    expect_error(sample_time(size = - 1), "Assertion on 'size' failed")
+    expect_error(sample_time(prob = ""), "Assertion on 'prob' failed")
 })
 
 test_that("sampler_1() | general test", {
     set.seed(1)
-    x <- list(name = "a", min = hms::parse_hm("23:00"),
-              max = hms::parse_hm("16:00"), mean = hms::parse_hm("10:00"),
-              sd = hms::parse_hm("01:00"))
-    by <- hms::parse_hm("00:05")
-    envir <- new.env()
-    sampler_1(x, by, envir)
+    envir = new.env()
+    sampler_1(list(name = "a",
+                   min = hms::parse_hm("23:00"),
+                   max = hms::parse_hm("16:00"),
+                   mean = hms::parse_hm("10:00"),
+                   sd = hms::parse_hm("01:00")),
+              hms::parse_hm("00:05"),
+              envir)
     expect_equal(envir$a, hms::parse_hm("09:40"))
 
-    # Invalid values for `x`, `by`, and `envir`
-    test_1 <- list(a = 1, b = 2)
-    test_2 <- list(name = "", min = 1L, max = 1L, mean = 1L, sd = 1L)
-
-    expect_error(sampler_1("", hms::hms(1), envir = environment()))
-    expect_error(sampler_1(test_1, hms::hms(1), envir = environment()))
-    expect_error(sampler_1(test_2, hms::hms(1), envir = environment()))
-    expect_error(sampler_1(x, "", envir = environment()))
-    expect_error(sampler_1(x, hms::hms(1), envir = ""))
+    expect_error(sampler_1("", hms::hms(1), envir = environment()),
+                 "Assertion on 'x' failed")
+    expect_error(sampler_1(list(a = 1, b = 2),
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'names\\(x\\)' failed")
+    expect_error(sampler_1(list(name = "", min = 1L, max = 1L, mean = 1L,
+                                sd = 1L),
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(sampler_1(list(name = "a",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           "",
+                           envir = environment()),
+                 "Assertion on 'by' failed")
+    expect_error(sampler_1(list(name = "a",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           hms::hms(1),
+                           envir = ""),
+                 "Assertion on 'envir' failed")
 })
 
 test_that("sampler_2() | general test", {
     set.seed(1)
-    x <- list(name = "a_f", min = hms::parse_hm("23:00"),
-              max = hms::parse_hm("16:00"), mean = hms::parse_hm("10:00"),
-              sd = hms::parse_hm("01:00"))
-    by <- hms::parse_hm("00:05")
     envir <- new.env()
     envir$a_w <- hms::parse_hm("10:00")
-    sampler_2(x, by, envir)
+    sampler_2(list(name = "a_f",
+                   min = hms::parse_hm("23:00"),
+                   max = hms::parse_hm("16:00"),
+                   mean = hms::parse_hm("10:00"),
+                   sd = hms::parse_hm("01:00")),
+              hms::parse_hm("00:05"),
+              envir)
     expect_equal(envir$a_f, hms::parse_hm("08:20"))
 
-    # Invalid values for `x`, `by`, and `envir`
-    test_1 <- list(a = 1, b = 2)
-    test_2 <- list(name = "", min = 1L, max = 1L, mean = 1L, sd = 1L)
-
-    expect_error(sampler_2("", hms::hms(1), envir = environment()))
-    expect_error(sampler_2(test_1, hms::hms(1), envir = environment()))
-    expect_error(sampler_2(test_2, hms::hms(1), envir = environment()))
-    expect_error(sampler_2(x, "", envir = environment()))
-    expect_error(sampler_2(x, hms::hms(1), envir = ""))
+    expect_error(sampler_2("", hms::hms(1), envir = environment()),
+                 "Assertion on 'x' failed")
+    expect_error(sampler_2(list(a = 1, b = 2), hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'names\\(x\\)' failed")
+    expect_error(sampler_2(list(name = "", min = 1L, max = 1L, mean = 1L,
+                                sd = 1L),
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(sampler_2(list(name = "a_f",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           "",
+                           envir = environment()),
+                 "Assertion on 'by' failed")
+    expect_error(sampler_2(list(name = "a_f",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           hms::hms(1),
+                           envir = ""),
+                 "Assertion on 'envir' failed")
 })
 
 test_that("sampler_3() | general test", {
     set.seed(1)
-    x <- list(name = "a_f", min = hms::parse_hm("23:00"),
-              max = hms::parse_hm("16:00"), mean = hms::parse_hm("10:00"),
-              sd = hms::parse_hm("01:00"))
-    y <- "b"
-    by <- hms::parse_hm("00:05")
     envir <- new.env()
     envir$a_w <- hms::parse_hm("10:00")
     envir$b_w <- hms::parse_hm("00:00")
     envir$b_f <- hms::parse_hm("11:00")
-    sampler_3(x, y, by, envir)
+    sampler_3(list(name = "a_f",
+                   min = hms::parse_hm("23:00"),
+                   max = hms::parse_hm("16:00"),
+                   mean = hms::parse_hm("10:00"),
+                   sd = hms::parse_hm("01:00")),
+              "b",
+              hms::parse_hm("00:05"),
+              envir)
     expect_equal(envir$a_f, hms::parse_hm("08:20"))
 
-    # Invalid values for `x`, `by`, and `envir`
-    test_1 <- list(a = 1, b = 2)
-    test_2 <- list(name = "", min = 1L, max = 1L, mean = 1L, sd = 1L)
-
-    expect_error(sampler_3("", "1", hms::hms(1), envir = environment()))
-    expect_error(sampler_3(test_1, "1", hms::hms(1), envir = environment()))
-    expect_error(sampler_3(test_2, "1", hms::hms(1), envir = environment()))
-    expect_error(sampler_3(x, 1, hms::hms(1), envir = environment()))
-    expect_error(sampler_3(x, "", envir = environment()))
-    expect_error(sampler_3(x, hms::hms(1), envir = ""))
+    expect_error(sampler_3("", "1", hms::hms(1), envir = environment()),
+                 "Assertion on 'x' failed")
+    expect_error(sampler_3(list(a = 1, b = 2),
+                           "1",
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'names\\(x\\)' failed")
+    expect_error(sampler_3(list(name = "", min = 1L, max = 1L, mean = 1L,
+                                sd = 1L), "1",
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(sampler_3(list(name = "a_f",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           1,
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'y' failed")
+    expect_error(sampler_3(list(name = "a_f",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           "",
+                           envir = environment()),
+                 "Assertion on 'y' failed")
+    expect_error(sampler_3(list(name = "a_f",
+                                min = hms::parse_hm("23:00"),
+                                max = hms::parse_hm("16:00"),
+                                mean = hms::parse_hm("10:00"),
+                                sd = hms::parse_hm("01:00")),
+                           hms::hms(1),
+                           envir = ""),
+                 "Assertion on 'y' failed")
 })
 
 test_that("sampler_4() | general test", {
     set.seed(1)
-    x <- list(name = "a_f", min = hms::parse_hm("00:00"),
-              max = hms::parse_hm("01:00"), mean = hms::parse_hm("00:30"),
-              sd = hms::parse_hm("00:15"))
-    by <- hms::parse_hm("00:05")
     envir <- new.env()
     envir$a_w <- lubridate::dhours(24)
-    sampler_4(x, by, envir)
+    sampler_4(list(name = "a_f",
+                   min = hms::parse_hm("00:00"),
+                   max = hms::parse_hm("01:00"),
+                   mean = hms::parse_hm("00:30"),
+                   sd = hms::parse_hm("00:15")),
+              hms::parse_hm("00:05"),
+              envir)
     expect_equal(envir$a_f, lubridate::duration(3300))
 
-    # Invalid values for `x`, `by`, and `envir`
-    test_1 <- list(a = 1, b = 2)
-    test_2 <- list(name = "", min = 1L, max = 1L, mean = 1L, sd = 1L)
-
-    expect_error(sampler_4("", hms::hms(1), envir = environment()))
-    expect_error(sampler_4(test_1, hms::hms(1), envir = environment()))
-    expect_error(sampler_4(test_2, hms::hms(1), envir = environment()))
-    expect_error(sampler_4(x, "", envir = environment()))
-    expect_error(sampler_4(x, hms::hms(1), envir = ""))
+    expect_error(sampler_4("", hms::hms(1), envir = environment()),
+                 "Assertion on 'x' failed")
+    expect_error(sampler_4(list(a = 1, b = 2),
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'names\\(x\\)' failed")
+    expect_error(sampler_4(list(name = "", min = 1L, max = 1L, mean = 1L,
+                                sd = 1L),
+                           hms::hms(1),
+                           envir = environment()),
+                 "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(sampler_4(list(name = "a_f",
+                                min = hms::parse_hm("00:00"),
+                                max = hms::parse_hm("01:00"),
+                                mean = hms::parse_hm("00:30"),
+                                sd = hms::parse_hm("00:15")),
+                           "",
+                           envir = environment()),
+                 "Assertion on 'by' failed")
+    expect_error(sampler_4(list(name = "a_f",
+                                min = hms::parse_hm("00:00"),
+                                max = hms::parse_hm("01:00"),
+                                mean = hms::parse_hm("00:30"),
+                                sd = hms::parse_hm("00:15")),
+                           hms::hms(1),
+                           envir = ""),
+                 "Assertion on 'envir' failed")
 })
