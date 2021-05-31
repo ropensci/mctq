@@ -7,15 +7,15 @@
 
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci/software-review/issues/434)
-![CRAN status](https://www.r-pkg.org/badges/version/mctq) [![Project
-Status: Active – The project has reached a stable, usable state and is
-being actively
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/gipsousp/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/gipsousp/mctq?branch=main)
+[![codecov](https://codecov.io/gh/gipsousp/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipsousp/mctq)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor
