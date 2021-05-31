@@ -249,23 +249,14 @@ require_pkg <- function(...) {
 
     if (length(pkg) == 0) {
         invisible(NULL)
-    } else if (length(pkg) == 1) {
-        stop("This function requires the ", single_quote_(pkg), " ",
-             "package to run. You can install it by running: \n\n",
-             "install.packages(", double_quote_(pkg), ")",
-             call. = FALSE)
     } else {
-        paste_install_function <- function(x) {
-            paste0("install.packages(", double_quote_(x), ")")
-        }
-
-        install_functions <- vapply(pkg, paste_install_function, character(1))
-
-        stop("This function requires the ",
-             inline_collapse(pkg), " ",
-             "packages to run. ",
-             "You can install them by running: \n\n",
-             paste(install_functions, collapse = " \n"),
+        stop("This function requires the ", inline_collapse(pkg), " ",
+             ifelse(length(pkg) == 1, "package", "packages"), " ",
+             "to run. You can install ",
+             ifelse(length(pkg) == 1, "it", "them"), " ",
+             "by running: \n\n",
+             "install.packages(",
+             paste(double_quote_(pkg), collapse = ", "), ")",
              call. = FALSE)
     }
 }
