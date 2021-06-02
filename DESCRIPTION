@@ -37,7 +37,7 @@ Depends:
     R (>= 3.6)
 Imports:
     checkmate,
-    dplyr,
+    dplyr (>= 0.2),
     hms,
     lifecycle,
     lubridate (>= 1.7.9)
@@ -45,6 +45,7 @@ Suggests:
     covr,
     crayon,
     datasets,
+    emojifont,
     ggplot2,
     grDevices,
     knitr,
