@@ -7,12 +7,15 @@
 raw_data(file = NULL)
 }
 \arguments{
-\item{file}{A string indicating the file name of the raw dataset. If \code{NULL},
-all raw dataset file names will be printed (default: \code{NULL}).}
+\item{file}{(optional) a \code{character} object indicating the raw data file
+name(s). If \code{NULL}, all raw data file names will be printed (default:
+\code{NULL}).}
 }
 \value{
-If \code{path = NULL}, returns a \code{character} object with all raw dataset
-file names available. Else, it returns the \code{file} path.
+\itemize{
+\item If \code{file = NULL}, a \code{character} object with all file names available.
+\item If \code{file != NULL}, a string with the file name path.
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -22,11 +25,11 @@ purposes. \code{raw_data()} makes it easy to access their paths.
 }
 \examples{
 \dontrun{
-## To list all raw dataset file names available
+## To list all raw data file names available
 
 raw_data()
 
-## To get the file path from a specific raw dataset
+## To get the file path from a specific raw data
 
 raw_data(raw_data()[1])
 
