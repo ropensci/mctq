@@ -8,7 +8,7 @@ on:
       - main
       - master
 
-name: Codecov
+name: test-coverage
 
 jobs:
   test-coverage:

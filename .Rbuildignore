@@ -1,9 +1,3 @@
-^data-raw$
-^doc$
-^docs$
-^man-roxygen$
-^Meta$
-^pkgdown$
 ^\.archive$
 ^\.github$
 ^\.Rproj\.user$
@@ -11,6 +5,12 @@
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$
 ^codemeta\.json$
+^data-raw$
+^doc$
+^docs$
 ^LICENSE\.md$
+^man-roxygen$
 ^mctq\.Rproj$
+^Meta$
+^pkgdown$
 ^README\.Rmd$
