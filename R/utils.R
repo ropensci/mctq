@@ -154,16 +154,24 @@ swap <- function(x, y, condition = TRUE) {
     list(x = x, y = y)
 }
 
-count_na <- function(x) length(which(is.na(x)))
-escape_regex <- function(x) gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
+count_na <- function(x) {
+    checkmate::assert_atomic(x)
+
+    length(which(is.na(x)))
+}
+
+escape_regex <- function(x) {
+    checkmate::assert_atomic(x)
+
+    gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
+}
 
 get_names <- function(...) {
-    out <- lapply(substitute(list(...))[-1], deparse)
-    out <- vapply(out, unlist, character(1))
-    out <- noquote(out)
-    out <- gsub("\\\"","", out)
+    out <- lapply(substitute(list(...))[-1], deparse) %>%
+        vapply(unlist, character(1)) %>%
+        noquote()
 
-    out
+    gsub("\\\"","", out)
 }
 
 get_class <- function(x) {

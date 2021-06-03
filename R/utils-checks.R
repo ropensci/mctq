@@ -56,8 +56,7 @@ check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
         paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
         paste0(single_quote_(name), " cannot have 'NULL' values")
-    } else  if (!test_whole_number(x, any.missing = any.missing,
-                                   null.ok = null.ok)) {
+    } else  if (!test_whole_number(x)) {
         paste0(single_quote_(name), " must consist of whole numbers")
     } else {
         TRUE
