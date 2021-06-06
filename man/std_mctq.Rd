@@ -339,8 +339,8 @@ std_mctq
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 A fictional dataset, \strong{for testing and learning purposes}, composed of
-basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
-standard version.
+basic/measurable and computed variables of the Munich Chronotype
+Questionnaire (MCTQ) standard version.
 
 This data was created following the guidelines in Roenneberg, Wirz-Justice, &
 Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The

@@ -164,8 +164,8 @@ micro_mctq
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 A fictional dataset, \strong{for testing and learning purposes}, composed of
-basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
-micro version.
+basic/measurable and computed variables of the Munich Chronotype
+Questionnaire (MCTQ) micro version.
 
 This data was created following the guidelines in Ghotbi \emph{et.al} (2020), in
 addition to the guidelines in Roenneberg, Wirz-Justice, & Merrow (2003),

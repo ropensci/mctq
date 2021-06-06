@@ -5,8 +5,8 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' A fictional dataset, __for testing and learning purposes__, composed of
-#' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
-#' standard version.
+#' basic/measurable and computed variables of the Munich Chronotype
+#' Questionnaire (MCTQ) standard version.
 #'
 #' This data was created following the guidelines in Roenneberg, Wirz-Justice, &
 #' Merrow (2003), Roenneberg, Allebrandt, Merrow, & Vetter (2012), and The
