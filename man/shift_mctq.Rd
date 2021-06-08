@@ -439,7 +439,7 @@ Zerbini, & Winnebeck (2019).
 To know about different MCTQ versions, see Juda, Vetter, & Roenneberg
 (2013) and Ghotbi et al. (2020).
 
-If you're curious about variable computations and want to have access to
+If you're curious about the variable computations and want to have access to
 the full questionnaire, see The Worldwide Experimental Platform (n.d.).
 }
 
