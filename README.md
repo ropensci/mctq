@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Buy Me A Coffee donate
-button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://www.buymeacoffee.com/danielvartan)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci/software-review/issues/434)
 [![CRAN
@@ -22,6 +20,8 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor
 Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
+[![Buy Me A Coffee donate
+button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://www.buymeacoffee.com/danielvartan)
 <!-- badges: end -->
 
 ## Overview
