@@ -229,7 +229,7 @@ Please note that `mctq` is released with a [Contributor Code of
 Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
 
-## Donate
+## Support `mctq`
 
 [![“Buy Me A
 Coffee”](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/danielvartan)
@@ -245,4 +245,7 @@ author work, please consider donating or even creating a membership
 subscription (if you can!). Your support will help with the author
 scientific pursuit and with the package maintenance.
 
-To make a donation, click on the buymeacoffee.com badge above.
+To make a donation, click on the buymeacoffee.com button above. Please
+indicate the `mctq` package in your donation message.
+
+Thank you!
