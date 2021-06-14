@@ -33,7 +33,8 @@ Authors:
 Other contributors:
 \itemize{
   \item Jonathan Keane \email{jkeane@gmail.com} (\href{https://orcid.org/0000-0001-7087-9776}{ORCID}) [reviewer]
-  \item Interdisciplinary Sleep Research Group (GIPSO) [funder, copyright holder]
+  \item Mario Andre Leocadio-Miguel \email{miguel.ml.mario@gmail.com} (\href{https://orcid.org/0000-0002-7248-3529}{ORCID}) [reviewer]
+  \item Interdisciplinary Sleep Research Group (GIPSO) [funder]
   \item University of Sao Paulo (USP) [funder]
 }
 

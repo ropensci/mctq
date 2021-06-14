@@ -22,8 +22,13 @@ Authors@R:
              role = "rev",
              email = "jkeane@gmail.com",
              comment = c(ORCID = "0000-0001-7087-9776")),
+      person(given = "Mario Andre",
+             family = "Leocadio-Miguel",
+             role = "rev",
+             email = "miguel.ml.mario@gmail.com",
+             comment = c(ORCID = "0000-0002-7248-3529")),
       person(given = "Interdisciplinary Sleep Research Group (GIPSO)",
-             role = c("fnd", "cph")),
+             role = c("fnd")),
       person(given = "University of Sao Paulo (USP)",
              role = "fnd"))
 Maintainer: Daniel Vartanian <danvartan@gmail.com>
