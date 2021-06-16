@@ -30,16 +30,16 @@ It's a good idea to have the standard MCTQ questionnaire open while reading this
 
 Let's start with the basics. The first thing you must do to use `mctq` is to have some MCTQ data and `mctq` installed and loaded.
 
-To install a GitHub package you're going to need the [remotes](https://remotes.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
+To install a GitHub package you're going to need the [pak](https://pak.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
 
 ```{r, eval = FALSE}
-install.packages("remotes")
+install.packages("pak")
 ```
 
-After `devtools` is installed, install `mctq` with:
+After `pak` is installed, install `mctq` with:
 
 ```{r, eval = FALSE}
-remotes::install_github("gipsousp/mctq", dependencies = TRUE)
+pak::pkg_install("gipsousp/mctq")
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:
@@ -54,7 +54,7 @@ This dataset already has valid values. As for any data analysis, you must have c
 
 Teaching you how to load your data in R is outside the scope of this article. For that, we recommend checking the [readr](https://readr.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/).
 
-Our fictional MCTQ data will be generated with the code below. The naming of the variables follows the same naming scheme used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq`.
+Our fictional MCTQ data will be loaded with the code below. The naming of the variables follows the same naming scheme used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq`.
 
 ```{r, warning = FALSE, message = FALSE}
 library(readr)
