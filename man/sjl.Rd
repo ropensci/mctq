@@ -92,7 +92,7 @@ See \code{vignette("sjl", package = "mctq")} for more details.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
-\href{https://gipsousp.github.io/mctq/reference/}{website}.
+\href{https://gipso.github.io/mctq/reference/}{website}.
 }
 }
 

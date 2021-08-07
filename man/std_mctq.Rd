@@ -372,7 +372,7 @@ common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
 You can see the \code{std_mctq} build and data wrangling processes
-\href{https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R}{here}.
+\href{https://github.com/gipso/mctq/blob/master/data-raw/std_mctq.R}{here}.
 }
 
 \subsection{Variable naming}{

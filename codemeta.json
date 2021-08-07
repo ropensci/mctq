@@ -7,12 +7,11 @@
   "identifier": "mctq",
   "description": "A complete and consistent toolkit to process the Munich\n    ChronoType Questionnaire (MCTQ) for its three versions (standard,\n    micro, and shift).",
   "name": "mctq: An R Package for the Munich ChronoType Questionnaire",
-  "codeRepository": "https://github.com/gipsousp/mctq/",
+  "codeRepository": "https://github.com/gipso/mctq/",
   "relatedLink": [
-    "https://gipsousp.github.io/mctq",
-    "https://gipsousp.github.io/mctq/"
+    "https://gipso.github.io/mctq/"
   ],
-  "issueTracker": "https://github.com/gipsousp/mctq/issues/",
+  "issueTracker": "https://github.com/gipso/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9001",
   "programmingLanguage": {
@@ -249,6 +248,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "cli",
+      "name": "cli",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=cli"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
       "version": ">= 0.2",
@@ -298,9 +309,9 @@
       "sameAs": "https://CRAN.R-project.org/package=lubridate"
     }
   ],
-  "releaseNotes": "https://github.com/gipsousp/mctq/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/gipso/mctq/blob/master/NEWS.md",
   "fileSize": "0KB",
-  "contIntegration": "https://codecov.io/gh/gipsousp/mctq",
+  "contIntegration": "https://codecov.io/gh/gipso/mctq",
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [
     "chronobiology",
@@ -330,7 +341,7 @@
         }
       ],
       "name": "mctq: An R package for the Munich ChronoType Questionnaire",
-      "url": "https://gipsousp.github.io/mctq/",
+      "url": "https://gipso.github.io/mctq/",
       "description": "Lifecycle: maturing"
     }
   ],
@@ -339,5 +350,5 @@
     "url": "https://github.com/ropensci/software-review/issues/434",
     "provider": "https://ropensci.org"
   },
-  "readme": "https://github.com/gipsousp/mctq/blob/main/README.md"
+  "readme": "https://github.com/gipso/mctq/blob/main/README.md"
 }

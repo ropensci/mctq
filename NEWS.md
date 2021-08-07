@@ -1,6 +1,24 @@
 # mctq 0.0.0.9001
 
-* The DESCRIPTION file now requires a lubridate version >= 1.7.9. `vctrs` support was added in this version, fixing some issues related to rounding `Duration`, `Period`, and `Interval` objects. Click [here](https://github.com/tidyverse/lubridate/pull/871) to learn more.
+## Added
+
+* @jonkeane was added as a reviewer ('rev').
+* @leocadio-miguel was added as a reviewer ('rev').
+* The user interface has gotten more stylish, thanks to the [`cli` package](https://cli.r-lib.org) (now on imports).
+
+## Changed
+
+* The DESCRIPTION file now requires a lubridate version `>= 1.7.9`. `vctrs` support was added in this version, fixing some issues related to rounding `Duration`, `Period`, and `Interval` objects. Click [here](https://github.com/tidyverse/lubridate/pull/871) to learn more.
+* The DESCRIPTION file now requires a dplyr version `>= 0.2`. That's when the `dplyr` start to import the pipe operator. Click [here](https://github.com/tidyverse/dplyr/blob/master/NEWS.md#piping) to learn more.
+* `round_time()` is now a S3 generic.
+* `shortest_interval()` was renamed to `shorter_interval()`
+* Several functions were optimized.
+* The test suite was optimized.
+
+## Fixed
+
+* Several typos were fixed in the documentation.
+
 
 # mctq 0.0.0.9000
 

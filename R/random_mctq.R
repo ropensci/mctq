@@ -37,7 +37,7 @@
 #' Vetter, & Roenneberg (2013).
 #'
 #' You can see more about the distribution parameters used
-#' [here](https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R).
+#' [here](https://github.com/gipso/mctq/blob/master/data-raw/random_mctq.R).
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).

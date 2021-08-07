@@ -18,7 +18,7 @@
 #             "Absolutely")
 #     no <- c("No way", "Not now", "Negative", "No", "Nope", "Absolutely not")
 #
-#     if(isTRUE(space_above)) cat("\n")
+#     if (isTRUE(space_above)) cat("\n")
 #
 #     for (i in seq_along(choices)) {
 #         choices[i] <- crayon::black$bold(choices[i])
@@ -72,7 +72,10 @@ alert <- function(..., combined_styles = c("bold", "red"), type = "message",
 
     message <- vapply(list(...), paste0, character(1), collapse = "")
     message <- paste0(message, collapse = "")
-    message <- paste(strwrap(message), collapse = "\n")
+
+    if (!grepl("\\n", message)) {
+        message <- paste(strwrap(message), collapse = "\n")
+    }
 
     if (require_namespace("crayon", quietly = TRUE) &&
         !is.null(combined_styles)) {
@@ -115,3 +118,22 @@ crayonize <- function(..., combined_styles = c("bold", "red"), abort = FALSE) {
 
     out
 }
+
+# emojinize <- function(aliases, alternative = "", left_space = FALSE,
+#                       right_space = FALSE) {
+#     checkmate::assert_string(aliases)
+#     checkmate::assert_string(alternative)
+#     checkmate::assert_flag(left_space)
+#     checkmate::assert_flag(right_space)
+#
+#     if (require_namespace("emojifont", quietly = TRUE)) {
+#         out <- emojifont::emoji(aliases)
+#
+#         if (isTRUE(left_space)) out <- paste0(" ", out)
+#         if (isTRUE(right_space)) out <- paste0(out, " ")
+#
+#         out
+#     } else {
+#         alternative
+#     }
+# }

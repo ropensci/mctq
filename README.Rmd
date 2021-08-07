@@ -17,23 +17,23 @@ library(lubridate)
 library(hms)
 ```
 
-# mctq <a href='https://gipsousp.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# mctq <a href='https://gipso.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci/software-review/issues/434)
 [![CRAN status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
-[![codecov](https://codecov.io/gh/gipsousp/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipsousp/mctq)
+[![R-CMD-check](https://github.com/gipso/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipso/mctq/actions)
+[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipso/mctq)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html)
 [![Buy Me A Coffee donate button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://www.buymeacoffee.com/danielvartan)
 <!-- badges: end -->
 
 ## Overview
 
-`mctq` is an R package that provides a complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated method to assess peoples’ sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data while also helping with research reproducibility.
+`mctq` is an R package that provides a complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ),  a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data while also helping with research reproducibility.
 
 > This package is currently under a [software peer-review](https://github.com/ropensci/software-review/issues/434) by the [rOpenSci](https://ropensci.org/) initiative. We plan to submit it to [CRAN](https://cran.r-project.org/) soon after the review process ends.
 
@@ -41,7 +41,7 @@ Learn more about the MCTQ questionnaire at <https://www.thewep.org/documentation
 
 ### Wait, an R package for a questionnaire?
 
-Although it may look like a simple questionnaire, MCTQ requires a lot of date/time manipulation. This poses a challenge for many scientists, being that most people have difficulties with date/time data, especially when dealing with an extensive set of data. The `mctq` package comes to address this issue. 
+Although it may look like a simple questionnaire, MCTQ requires a lot of date/time manipulation. This poses a challenge for many scientists, being that most people have difficulties with date/time data, especially when dealing with an extensive set of data. The `mctq` package comes to address this issue.
 
 `mctq` can handle the processing tasks for the three MCTQ versions (standard, micro, and shift) with few dependencies, relying much of its applications on the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages from [tidyverse](https://www.tidyverse.org/). We also designed `mctq` with the user experience in mind, by creating an interface that resembles the way the questionnaire data is shown in MCTQ publications, and by providing extensive and detailed documentation about each computation proposed by the MCTQ authors. The package also includes several utility tools to deal with different time representations (e.g., decimal hours, radians) and time arithmetic issues, along with fictional datasets for testing and learning purposes.
 
@@ -57,7 +57,7 @@ The first stable `mctq` version is already out, we're just waiting for the [soft
 
 ``` {r, eval = FALSE}
 # install.packages("pak")
-pak::pkg_install("gipsousp/mctq")
+pak::pkg_install("gipso/mctq")
 ```
 
 ## Usage
@@ -128,13 +128,13 @@ msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
 sjl_rel(msw, msf)
 ```
 
-See a quick tour of all MCTQ main functions [here](https://gipsousp.github.io/mctq/articles/mctq.html).
+See a quick tour of all MCTQ main functions [here](https://gipso.github.io/mctq/articles/mctq.html).
 
 ### Utilities
 
 In addition to `convert()`, `mctq` is also equipped with many other utility functions. The package also provides fictional datasets of the standard, micro, and shift MCTQ versions for testing and learning purposes.
 
-All functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipsousp.github.io/mctq/reference/index.html) to see a list of them.
+All functions are well documented, showing all the guidelines behind the computations. Click [here](https://gipso.github.io/mctq/reference/index.html) to see a list of them.
 
 ## Citation
 
@@ -146,10 +146,10 @@ citation("mctq")
 
 ## Contributing
 
-`mctq` is a community project, everyone is welcome to contribute. Take a moment to review our [Guidelines for Contributing](https://gipsousp.github.io/mctq/CONTRIBUTING.html).
+`mctq` is a community project, everyone is welcome to contribute. Take a moment to review our [Guidelines for Contributing](https://gipso.github.io/mctq/CONTRIBUTING.html).
 
 Please note that `mctq` is released with a [Contributor Code of
-Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By contributing
+Conduct](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html). By contributing
 to this project, you agree to abide by its terms.
 
 ## Support `mctq`

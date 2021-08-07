@@ -39,7 +39,7 @@ install.packages("pak")
 After `pak` is installed, install `mctq` with:
 
 ```{r, eval = FALSE}
-pak::pkg_install("gipsousp/mctq")
+pak::pkg_install("gipso/mctq")
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:

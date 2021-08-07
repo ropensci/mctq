@@ -28,7 +28,7 @@ Authors@R:
              email = "miguel.ml.mario@gmail.com",
              comment = c(ORCID = "0000-0002-7248-3529")),
       person(given = "Interdisciplinary Sleep Research Group (GIPSO)",
-             role = c("fnd")),
+             role = "fnd"),
       person(given = "University of Sao Paulo (USP)",
              role = "fnd"))
 Maintainer: Daniel Vartanian <danvartan@gmail.com>
@@ -36,12 +36,13 @@ Description: A complete and consistent toolkit to process the Munich
     ChronoType Questionnaire (MCTQ) for its three versions (standard,
     micro, and shift).
 License: MIT + file LICENSE
-URL: https://gipsousp.github.io/mctq/, https://github.com/gipsousp/mctq/
-BugReports: https://github.com/gipsousp/mctq/issues/
+URL: https://gipso.github.io/mctq/, https://github.com/gipso/mctq/
+BugReports: https://github.com/gipso/mctq/issues/
 Depends:
     R (>= 3.6)
 Imports:
     checkmate,
+    cli,
     dplyr (>= 0.2),
     hms,
     lifecycle,

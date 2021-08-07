@@ -45,6 +45,6 @@ The opposite scenario, i.e., when the respondent __works 7 days per week__ (`wd 
 * `sd_week` (average weekly sleep duration) must be equal to `sd_w` (sleep duration on workdays) since the respondent does not have work-free days.
 * `le_week` (average weekly light exposure) must be equal to `le_w` (light exposure on work-free days) since the respondent does not have work-free days.
 
-If you agree with this line of thought, we recommend creating dummy variables to identify those two situations and then change the case values as mentioned. You can see this procedure in action with the [data wrangling algorithms](https://github.com/gipsousp/mctq/blob/master/data-raw/std_mctq.R#L923) made to produce the fictional `std_mctq` dataset, provided by the `mctq` package.
+If you agree with this line of thought, we recommend creating dummy variables to identify those two situations and then change the case values as mentioned. You can see this procedure in action with the [data wrangling algorithms](https://github.com/gipso/mctq/blob/master/data-raw/std_mctq.R#L923) made to produce the fictional `std_mctq` dataset, provided by the `mctq` package.
 
 Please note that this workaround is not mentioned or endorsed by the MCTQ authors. If you use it, you must mention this reasoning in your methods section.

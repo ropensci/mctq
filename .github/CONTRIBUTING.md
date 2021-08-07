@@ -6,13 +6,13 @@ First of all, thanks for considering contributing to `mctq`! 👍 It's people li
 
 `mctq` is an open source project, maintained by people who care. We are not directly funded to do so.
 
-[repo]: https://github.com/gipsousp/mctq
-[issues]: https://github.com/gipsousp/mctq/issues
-[discussions]: https://github.com/gipsousp/mctq/discussions
-[new_issue]: https://github.com/gipsousp/mctq/issues/new
-[new_discussion]: https://github.com/gipsousp/mctq/discussions/new
-[website]: https://gipsousp.github.io/mctq
-[citation]: https://gipsousp.github.io/mctq//authors.html
+[repo]: https://github.com/gipso/mctq
+[issues]: https://github.com/gipso/mctq/issues
+[discussions]: https://github.com/gipso/mctq/discussions
+[new_issue]: https://github.com/gipso/mctq/issues/new
+[new_discussion]: https://github.com/gipso/mctq/discussions/new
+[website]: https://gipso.github.io/mctq
+[citation]: https://gipso.github.io/mctq//authors.html
 [email]: mailto:danvartan@gmail.com
 
 ## Code of conduct

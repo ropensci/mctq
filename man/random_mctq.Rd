@@ -52,7 +52,7 @@ The data was set to resemble the distribution parameters shown in Juda,
 Vetter, & Roenneberg (2013).
 
 You can see more about the distribution parameters used
-\href{https://github.com/gipsousp/mctq/blob/master/data-raw/random_mctq.R}{here}.
+\href{https://github.com/gipso/mctq/blob/master/data-raw/random_mctq.R}{here}.
 }
 }
 \examples{

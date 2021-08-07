@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mctq <a href='https://gipsousp.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# mctq <a href='https://gipso.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -14,12 +14,12 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R-CMD-check](https://github.com/gipsousp/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipsousp/mctq/actions)
-[![codecov](https://codecov.io/gh/gipsousp/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipsousp/mctq)
+[![R-CMD-check](https://github.com/gipso/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipso/mctq/actions)
+[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipso/mctq)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor
-Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html)
+Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html)
 [![Buy Me A Coffee donate
 button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://www.buymeacoffee.com/danielvartan)
 <!-- badges: end -->
@@ -28,8 +28,8 @@ button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](h
 
 `mctq` is an R package that provides a complete and consistent toolkit
 to process the Munich ChronoType Questionnaire (MCTQ), a quantitative
-and validated method to assess peoples’ sleep behavior presented by Till
-Roenneberg, Anna Wirz-Justice, and Martha Merrow in
+and validated tool to assess chronotypes using peoples’ sleep behavior
+presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
 to facilitate the work of sleep and chronobiology scientists with MCTQ
 data while also helping with research reproducibility.
@@ -87,7 +87,7 @@ can install it from GitHub with:
 
 ``` r
 # install.packages("pak")
-pak::pkg_install("gipsousp/mctq")
+pak::pkg_install("gipso/mctq")
 ```
 
 ## Usage
@@ -179,7 +179,7 @@ sjl_rel(msw, msf)
 ```
 
 See a quick tour of all MCTQ main functions
-[here](https://gipsousp.github.io/mctq/articles/mctq.html).
+[here](https://gipso.github.io/mctq/articles/mctq.html).
 
 ### Utilities
 
@@ -190,8 +190,8 @@ purposes.
 
 All functions are well documented, showing all the guidelines behind the
 computations. Click
-[here](https://gipsousp.github.io/mctq/reference/index.html) to see a
-list of them.
+[here](https://gipso.github.io/mctq/reference/index.html) to see a list
+of them.
 
 ## Citation
 
@@ -206,7 +206,7 @@ citation("mctq")
 #> 
 #>   Vartanian, D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: An
 #>   R package for the Munich ChronoType Questionnaire. Retrieved from
-#>   https://gipsousp.github.io/mctq/.
+#>   https://gipso.github.io/mctq/.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -214,7 +214,7 @@ citation("mctq")
 #>     title = {mctq: An R package for the Munich ChronoType Questionnaire},
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2021},
-#>     url = {https://gipsousp.github.io/mctq/},
+#>     url = {https://gipso.github.io/mctq/},
 #>     note = {Lifecycle: maturing},
 #>   }
 ```
@@ -223,10 +223,10 @@ citation("mctq")
 
 `mctq` is a community project, everyone is welcome to contribute. Take a
 moment to review our [Guidelines for
-Contributing](https://gipsousp.github.io/mctq/CONTRIBUTING.html).
+Contributing](https://gipso.github.io/mctq/CONTRIBUTING.html).
 
 Please note that `mctq` is released with a [Contributor Code of
-Conduct](https://gipsousp.github.io/mctq/CODE_OF_CONDUCT.html). By
+Conduct](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
 
 ## Support `mctq`

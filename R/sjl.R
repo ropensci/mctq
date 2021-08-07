@@ -27,7 +27,7 @@
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
-#' [website](https://gipsousp.github.io/mctq/reference/).
+#' [website](https://gipso.github.io/mctq/reference/).
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
@@ -290,7 +290,7 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
-#' [website](https://gipsousp.github.io/mctq/reference/).
+#' [website](https://gipso.github.io/mctq/reference/).
 #'
 #' ## Computation
 #'

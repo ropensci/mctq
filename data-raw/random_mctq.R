@@ -44,7 +44,7 @@
 #' \dontrun{
 #' std_mctq_par()}
 std_mctq_par <- function() {
-    alert("\nStandard and micro MCTQ distribution parameters\n")
+    mctq:::alert("\nStandard and micro MCTQ distribution parameters\n")
 
     values <- list( # Extracted from the base article
         w = list(
@@ -64,7 +64,7 @@ std_mctq_par <- function() {
     )
 
     for (i in values) {
-        alert(i$title, combined_styles = c("black", "bold"))
+        mctq:::alert(i$title, combined_styles = c("black", "bold"))
 
         ms_mean <- i$ms_mean
         ms_sd <- i$ms_sd
@@ -145,7 +145,7 @@ std_mctq_par <- function() {
 #' \dontrun{
 #' shift_mctq_par()}
 shift_mctq_par <- function() {
-    alert("\nMCTQ Shift distribution parameters\n")
+    mctq:::alert("\nMCTQ Shift distribution parameters\n")
 
     values <- list( # Extracted from the base article
         w_m = list(
@@ -241,7 +241,7 @@ shift_mctq_par <- function() {
     )
 
     for (i in values) {
-        alert(i$title, combined_styles = c("black", "bold"))
+        mctq:::alert(i$title, combined_styles = c("black", "bold"))
 
         message <- paste0("Local time of preparing to sleep (SPrep_",
                           i$suffix, ")\n\n")
