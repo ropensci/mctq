@@ -15,7 +15,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/gipso/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipso/mctq/actions)
-[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipso/mctq)
+[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/gipso/mctq)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor
@@ -231,8 +231,7 @@ contributing to this project, you agree to abide by its terms.
 
 ## Support `mctq`
 
-[![“Buy Me A
-Coffee”](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/danielvartan)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/danielvartan)
 
 Working with science in Brazil is a daily challenge. There are few
 funding opportunities available and their value is not enough to live
@@ -245,7 +244,8 @@ author work, please consider donating or even creating a membership
 subscription (if you can!). Your support will help with the author
 scientific pursuit and with the package maintenance.
 
-To make a donation, click on the buymeacoffee.com button above. Please
-indicate the `mctq` package in your donation message.
+To make a donation click on the [Ko-fi](https://ko-fi.com/danielvartan)
+button above. Please indicate the `mctq` package in your donation
+message.
 
 Thank you!

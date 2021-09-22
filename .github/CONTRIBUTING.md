@@ -1,6 +1,6 @@
 # Contributing to `mctq`
 
-<!-- This CONTRIBUTING.md is adapted from https://gist.github.com/peterdesmet/e90a1b0dc17af6c12daf6e8b2f044e7c -->
+<!-- This CONTRIBUTING.md was adapted from https://gist.github.com/peterdesmet/e90a1b0dc17af6c12daf6e8b2f044e7c -->
 
 First of all, thanks for considering contributing to `mctq`! 👍 It's people like you that make it rewarding for us - the project maintainers - to work on `mctq`. 😊
 
@@ -12,7 +12,7 @@ First of all, thanks for considering contributing to `mctq`! 👍 It's people li
 [new_issue]: https://github.com/gipso/mctq/issues/new
 [new_discussion]: https://github.com/gipso/mctq/discussions/new
 [website]: https://gipso.github.io/mctq
-[citation]: https://gipso.github.io/mctq//authors.html
+[citation]: https://gipso.github.io/mctq/authors.html
 [email]: mailto:danvartan@gmail.com
 
 ## Code of conduct
@@ -70,14 +70,14 @@ Functions are described as comments near their code and translated to documentat
 
 ### Contribute code 📝
 
-Care to fix bugs or implement new functionality for `mctq`? Awesome! 👏 Have a look at the [discussion list][issues] and leave a comment on the things you want to work on. See also the development guidelines below.
+Care to fix bugs or implement new functionality for `mctq`? Awesome! 👏 Have a look at the [issue list][issues] and leave a comment on the things you want to work on. See also the development guidelines below.
 
 ## Development guidelines
 
 We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/) for development.
 
 1. Fork [this repo][repo] and clone it to your computer. To learn more about this process, see [this guide](https://guides.github.com/activities/forking/).
-2. If you have forked and cloned the project before and it has been a while since you worked on it, [pull changes from the original repo](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/) to your clone by using `git pull upstream master`.
+2. If you have forked and cloned the project before and it has been a while since you worked on it, [pull changes from the original repo](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/) to your clone by using `git pull upstream main`.
 3. Open the RStudio project file (`.Rproj`).
 4. Make your changes:
     * Write your code.

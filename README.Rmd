@@ -25,7 +25,7 @@ library(hms)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/gipso/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipso/mctq/actions)
-[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg?token=i5nG9mtxP8)](https://codecov.io/gh/gipso/mctq)
+[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/gipso/mctq)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html)
 [![Buy Me A Coffee donate button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://www.buymeacoffee.com/danielvartan)
@@ -33,7 +33,7 @@ library(hms)
 
 ## Overview
 
-`mctq` is an R package that provides a complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ),  a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data while also helping with research reproducibility.
+`mctq` is an R package that provides a complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data while also helping with research reproducibility.
 
 > This package is currently under a [software peer-review](https://github.com/ropensci/software-review/issues/434) by the [rOpenSci](https://ropensci.org/) initiative. We plan to submit it to [CRAN](https://cran.r-project.org/) soon after the review process ends.
 
@@ -154,12 +154,12 @@ to this project, you agree to abide by its terms.
 
 ## Support `mctq`
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/danielvartan)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/danielvartan)
 
 Working with science in Brazil is a daily challenge. There are few funding opportunities available and their value is not enough to live on. Added to this, every day Brazilian science suffers from deep cuts in funding, which requires researchers to always look for other sources of income.
 
 If this package helps you in any way or you simply want to support the author work, please consider donating or even creating a membership subscription (if you can!). Your support will help with the author scientific pursuit and with the package maintenance.
 
-To make a donation, click on the buymeacoffee.com button above. Please indicate the `mctq` package in your donation message.
+To make a donation click on the [Ko-fi](https://ko-fi.com/danielvartan) button above. Please indicate the `mctq` package in your donation message.
 
 Thank you!
