@@ -9,11 +9,11 @@ sd_overall(sd_w, sd_f, n_w, n_f)
 \arguments{
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration between
 two days in a particular shift} from a shift version of the MCTQ
-questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
+questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration between
 two free days after a particular shift} from a shift version of the MCTQ
-questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
+questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{n_w}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of days worked in a
@@ -215,7 +215,7 @@ Other MCTQ functions:
 \code{\link{napd}()},
 \code{\link{sd24}()},
 \code{\link{sd_week}()},
-\code{\link{sd}()},
+\code{\link{sdu}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

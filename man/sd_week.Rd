@@ -9,11 +9,11 @@ sd_week(sd_w, sd_f, wd)
 \arguments{
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on
 workdays} from a standard or micro version of the MCTQ questionnaire. You
-can use \code{\link[=sd]{sd()}} to compute it.}
+can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} from a standard or micro version of the MCTQ
-questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
+questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
 an \code{integer} object corresponding to the \strong{number of workdays per week}
@@ -213,7 +213,7 @@ Other MCTQ functions:
 \code{\link{napd}()},
 \code{\link{sd24}()},
 \code{\link{sd_overall}()},
-\code{\link{sd}()},
+\code{\link{sdu}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

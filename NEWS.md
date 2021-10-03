@@ -1,5 +1,9 @@
 # mctq 0.0.0.9001
 
+## Breaking changes
+
+* The `sd()` function is now named as `sdu()`. That was a tough, but necessary, call. Although we tried to preserve the original authors naming pattern for the MCTQ functions, the name `sd` provokes a dangerous name collision with the widely used `stats::sd` (standard deviation) function. That's why we named it as `sdu`. This is the only exception, all the other `mctq` functions maintain a strong naming resemblance with the original authors naming pattern.
+
 ## Added
 
 * @jonkeane was added as a reviewer ('rev').

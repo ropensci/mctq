@@ -388,12 +388,12 @@ sjl_weighted <- function(sjl, n_w) {
     sjl <- lapply(sjl, abs)
     n_w <- lapply(n_w, as.integer)
 
-    foo <- function(x, y) {
+    reduce <- function(x, y) {
         out <- Reduce("*", list(x, y))
         lubridate::as.duration(out)
     }
 
-    sjl <- mapply(foo, n_w, sjl, SIMPLIFY = FALSE)
+    sjl <- mapply(reduce, n_w, sjl, SIMPLIFY = FALSE)
     sjl <- Reduce("+", sjl)
     n_w <- Reduce("+", n_w)
 

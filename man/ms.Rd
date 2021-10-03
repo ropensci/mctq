@@ -15,7 +15,7 @@ use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
 
 \item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} from a
 standard, micro, or shift version of the MCTQ questionnaire. You can use
-\code{\link[=sd]{sd()}} to compute it for any MCTQ version.}
+\code{\link[=sdu]{sdu()}} to compute it for any MCTQ version.}
 }
 \value{
 A \code{hms} object corresponding to the vectorized sum of \code{so} and \code{(sd / 2)} in a circular time frame of 24 hours.
@@ -167,7 +167,7 @@ Other MCTQ functions:
 \code{\link{sd24}()},
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
-\code{\link{sd}()},
+\code{\link{sdu}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

@@ -16,11 +16,11 @@ questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
 \item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
 days} from a standard, micro, or shift version of the MCTQ questionnaire.
-You can use \code{\link[=sd]{sd()}} to compute it.}
+You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
 work-free days} from a standard, micro, or shift version of the MCTQ
-questionnaire. You can use \code{\link[=sd]{sd()}} to compute it.}
+questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{sd_week}{A \code{Duration} object corresponding to the \strong{average weekly
 sleep duration} from a standard or micro version of the MCTQ questionnaire
@@ -273,7 +273,7 @@ Other MCTQ functions:
 \code{\link{sd24}()},
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
-\code{\link{sd}()},
+\code{\link{sdu}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

@@ -56,7 +56,7 @@
 #'   use [mctq::so()] to compute it for the standard or shift version.
 #' @param sd A `Duration` object corresponding to the __sleep duration__ from a
 #'   standard, micro, or shift version of the MCTQ questionnaire. You can use
-#'   [mctq::sd()] to compute it for any MCTQ version.
+#'   [mctq::sdu()] to compute it for any MCTQ version.
 #'
 #' @return A `hms` object corresponding to the vectorized sum of `so` and `(sd /
 #'   2)` in a circular time frame of 24 hours.
@@ -193,10 +193,10 @@ ms <- function(so, sd) {
 #'   questionnaire. You can use [mctq::ms()] to compute it.
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
 #'   days__ from a standard, micro, or shift version of the MCTQ questionnaire.
-#'   You can use [mctq::sd()] to compute it.
+#'   You can use [mctq::sdu()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
 #'   work-free days__ from a standard, micro, or shift version of the MCTQ
-#'   questionnaire. You can use [mctq::sd()] to compute it.
+#'   questionnaire. You can use [mctq::sdu()] to compute it.
 #' @param sd_week A `Duration` object corresponding to the __average weekly
 #'   sleep duration__ from a standard or micro version of the MCTQ questionnaire
 #'   (you can use [mctq::sd_week()] to compute it) __or__ the __overall sleep

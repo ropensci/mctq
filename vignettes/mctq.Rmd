@@ -174,15 +174,17 @@ data$gu_f <- gu(data$se_f, data$si_f)
 data %>% dplyr::select(se_w, si_w, gu_w, se_f, si_f, gu_f)
 ```
 
-### `sd()`: Sleep duration
+### `sdu()`: Sleep duration
 
-`sd()` allows you to compute the sleep duration for workdays (`sd_w`) and work-free days (`sd_f`). It takes two arguments: `so` (local time of sleep onset) and `se` (local time of sleep end).
+`sdu()` allows you to compute the sleep duration for workdays (`sd_w`) and work-free days (`sd_f`). It takes two arguments: `so` (local time of sleep onset) and `se` (local time of sleep end).
 
 The output must be the difference between `se` and `so` in a circular time frame of 24 hours.
 
+Please note that, although we tried to preserve the original authors naming pattern for the MCTQ functions, the name `sd` provokes a dangerous name collision with the widely used [stats::sd] (standard deviation) function. That's why we named it as `sdu`. This is the only exception, all the other `mctq` functions maintain a strong naming resemblance with the original authors naming pattern.
+
 ```{r, warnings = FALSE, message = FALSE}
-data$sd_w <- sd(data$so_w, data$se_w)
-data$sd_f <- sd(data$so_f, data$se_f)
+data$sd_w <- sdu(data$so_w, data$se_w)
+data$sd_f <- sdu(data$so_f, data$se_f)
 
 # Comparing the result
 data %>% dplyr::select(so_w, se_w, sd_w, so_f, se_f, sd_f)

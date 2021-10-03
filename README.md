@@ -132,7 +132,7 @@ computation necessary.
 -   `fd()`: compute MCTQ work-free days
 -   `so()`: compute MCTQ local time of sleep onset
 -   `gu()`: compute MCTQ local time of getting out of bed
--   `sd()`: compute MCTQ sleep duration
+-   `sdu()`: compute MCTQ sleep duration
 -   `tbt()`: compute MCTQ total time in bed
 -   `ms()`: compute MCTQ local time of mid-sleep
 -   `napd()`: compute MCTQ nap duration (only for MCTQ Shift)

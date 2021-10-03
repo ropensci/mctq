@@ -4,14 +4,21 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `sd()` computes the __sleep duration__ for standard, micro, and shift
+#' `sdu()` computes the __sleep duration__ for standard, micro, and shift
 #' versions of the Munich Chronotype Questionnaire (MCTQ).
+#'
+#' Please note that, although we tried to preserve the original authors naming
+#' pattern for the MCTQ functions, the name `sd` provokes a dangerous name
+#' collision with the widely used [stats::sd] (standard deviation) function.
+#' That's why we named it as `sdu`. This is the only exception, all the other
+#' `mctq` functions maintain a strong naming resemblance with the original
+#' authors naming pattern.
 #'
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), Juda,
 #' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
-#' guidelines for `sd()` (\eqn{SD}) computation are as follows.
+#' guidelines for `sdu()` (\eqn{SD}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -71,26 +78,26 @@
 #'
 #' so <- hms::parse_hm("23:00")
 #' se <- hms::parse_hm("08:00")
-#' sd(so, se)
+#' sdu(so, se)
 #' #> [1] "32400s (~9 hours)" # Expected
 #'
 #' so <- hms::parse_hm("02:00")
 #' se <- hms::parse_hm("12:30")
-#' sd(so, se)
+#' sdu(so, se)
 #' #> [1] "37800s (~10.5 hours)" # Expected
 #'
 #' so <- hms::parse_hm("03:15")
 #' se <- hms::as_hms(NA)
-#' sd(so, se)
+#' sdu(so, se)
 #' #> [1] NA # Expected
 #'
 #' ## Vector example
 #'
 #' so <- c(hms::parse_hm("04:12"), hms::parse_hm("21:20"))
 #' se <- c(hms::parse_hm("14:30"), hms::parse_hm("03:45"))
-#' sd(so, se)
+#' sdu(so, se)
 #' #> [1] "37080s (~10.3 hours)" "23100s (~6.42 hours)" # Expected
-sd <- function(so, se) {
+sdu <- function(so, se) {
     checkmate::assert_class(so, "hms")
     checkmate::assert_class(se, "hms")
     assert_identical(so, se, type = "length")
@@ -229,7 +236,7 @@ napd <- function(napo, nape) {
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #' @param sd A `Duration` object corresponding to the __sleep duration__ from
-#'   the shift version of the MCTQ questionnaire. You can use [mctq::sd()] to
+#'   the shift version of the MCTQ questionnaire. You can use [mctq::sdu()] to
 #'   compute it.
 #' @param napd A `Duration` object corresponding to the __nap duration__ from
 #'   the shift version of the MCTQ questionnaire. You can use [mctq::napd()] to
@@ -343,10 +350,10 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on
 #'   workdays__ from a standard or micro version of the MCTQ questionnaire. You
-#'   can use [mctq::sd()] to compute it.
+#'   can use [mctq::sdu()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration on
 #'   work-free days__ from a standard or micro version of the MCTQ
-#'   questionnaire. You can use [mctq::sd()] to compute it.
+#'   questionnaire. You can use [mctq::sdu()] to compute it.
 #'
 #' @return A `Duration` object corresponding to the vectorized weighted mean of
 #'   `sd_w` and `sd_f` with `wd` and `fd(wd)` as weights.
@@ -486,10 +493,10 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' @param sd_w A `Duration` object corresponding to the __sleep duration between
 #'   two days in a particular shift__ from a shift version of the MCTQ
-#'   questionnaire. You can use [mctq::sd()] to compute it.
+#'   questionnaire. You can use [mctq::sdu()] to compute it.
 #' @param sd_f A `Duration` object corresponding to the __sleep duration between
 #'   two free days after a particular shift__ from a shift version of the MCTQ
-#'   questionnaire. You can use [mctq::sd()] to compute it.
+#'   questionnaire. You can use [mctq::sdu()] to compute it.
 #' @param n_w An [integerish][checkmate::test_integerish()] `numeric` object or
 #'   an `integer` object corresponding to the __number of days worked in a
 #'   particular shift within a shift cycle__ from a shift version of the MCTQ

@@ -1,8 +1,6 @@
 # Source the file before running the functions
 # Don't forget to uncomment the `library` functions below
 
-library(magrittr)
-
 # library(checkmate)
 # library(cli)
 # library(glue)

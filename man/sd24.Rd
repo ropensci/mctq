@@ -8,7 +8,7 @@ sd24(sd, napd, nap)
 }
 \arguments{
 \item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} from
-the shift version of the MCTQ questionnaire. You can use \code{\link[=sd]{sd()}} to
+the shift version of the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}} to
 compute it.}
 
 \item{napd}{A \code{Duration} object corresponding to the \strong{nap duration} from
@@ -168,7 +168,7 @@ Other MCTQ functions:
 \code{\link{napd}()},
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
-\code{\link{sd}()},
+\code{\link{sdu}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

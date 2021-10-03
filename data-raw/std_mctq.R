@@ -1,8 +1,6 @@
 # Source the file before running the functions
 # Don't forget to uncomment the `library` functions below
 
-library(magrittr)
-
 # library(checkmate)
 # library(dplyr)
 # library(hms)
@@ -794,7 +792,7 @@ validate_std_mctq <- function(write = FALSE) {
         test <- std_mctq %>%
             dplyr::mutate(
                 so_i = mctq::so(!!as.symbol(sprep_i), !!as.symbol(slat_i)),
-                sd_i = mctq::sd(so_i, !!as.symbol(se_i)),
+                sd_i = mctq::sdu(so_i, !!as.symbol(se_i)),
                 dummy = dplyr::case_when(
                     sd_i < lubridate::dhours(2) |
                         sd_i > lubridate::dhours(18) ~ TRUE,
@@ -894,13 +892,13 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             fd = fd(wd),
             so_w = so(sprep_w, slat_w),
             gu_w = gu(se_w, si_w),
-            sd_w = sd(so_w, se_w),
+            sd_w = sdu(so_w, se_w),
             tbt_w = tbt(bt_w, gu_w),
             msw = ms(so_w, sd_w),
 
             so_f = so(sprep_f, slat_f),
             gu_f = gu(se_f, si_f),
-            sd_f = sd(so_f, se_f),
+            sd_f = sdu(so_f, se_f),
             tbt_f = tbt(bt_f, gu_f),
             msf = ms(so_f, sd_f),
 

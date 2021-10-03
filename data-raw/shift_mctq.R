@@ -1,8 +1,6 @@
 # Source the file before running the functions
 # Don't forget to uncomment the `library` functions below
 
-library(magrittr)
-
 # library(checkmate)
 # library(dplyr)
 # library(hms)
@@ -1320,7 +1318,7 @@ validate_shift_mctq <- function(write = FALSE) {
         test <- shift_mctq %>%
             dplyr::mutate(
                 so_i = mctq::so(!!as.symbol(sprep_i), !!as.symbol(slat_i)),
-                sd_i = mctq::sd(so_i, !!as.symbol(se_i)),
+                sd_i = mctq::sdu(so_i, !!as.symbol(se_i)),
                 dummy = dplyr::case_when(
                     sd_i < lubridate::dhours(2) |
                         sd_i > lubridate::dhours(18) ~ TRUE,
@@ -1426,7 +1424,7 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
                     gu(!!as.symbol(paste0("se", i)),
                        !!as.symbol(paste0("tgu", i))),
                 !!as.symbol(paste0("sd", i)) :=
-                    sd(!!as.symbol(paste0("so", i)),
+                    sdu(!!as.symbol(paste0("so", i)),
                        !!as.symbol(paste0("se", i))),
                 !!as.symbol(paste0("tbt", i)) :=
                     tbt(!!as.symbol(paste0("bt", i)),

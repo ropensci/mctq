@@ -204,7 +204,7 @@ Other MCTQ functions:
 \code{\link{sd24}()},
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
-\code{\link{sd}()},
+\code{\link{sdu}()},
 \code{\link{sjl}()},
 \code{\link{so}()},
 \code{\link{tbt}()}

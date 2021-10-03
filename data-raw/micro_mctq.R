@@ -1,8 +1,6 @@
 # Source the file before running the functions
 # Don't forget to uncomment the `library` functions below
 
-library(magrittr)
-
 # library(checkmate)
 # library(dplyr)
 # library(hms)
@@ -466,7 +464,7 @@ validate_micro_mctq <- function(write = FALSE) {
 
         micro_mctq <- micro_mctq %>%
             dplyr::mutate(
-                sd_i = mctq::sd(!!as.symbol(so_i), !!as.symbol(se_i)),
+                sd_i = mctq::sdu(!!as.symbol(so_i), !!as.symbol(se_i)),
                 dummy = dplyr::case_when(
                     sd_i < lubridate::dhours(2) |
                         sd_i > lubridate::dhours(18) ~ TRUE,
@@ -548,10 +546,10 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
         dplyr::mutate(
             fd = fd(wd),
 
-            sd_w = sd(so_w, se_w),
+            sd_w = sdu(so_w, se_w),
             msw = ms(so_w, sd_w),
 
-            sd_f = sd(so_f, se_f),
+            sd_f = sdu(so_f, se_f),
             msf = ms(so_f, sd_f),
 
             sd_week = sd_week(sd_w, sd_f, wd),
