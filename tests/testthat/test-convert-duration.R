@@ -32,19 +32,19 @@ test_that("convert.Duration() | transform test", {
 })
 
 test_that("convert.Duration() | warning test", {
-    expect_warning(convert(lubridate::dhours(), "logical", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "logical", quiet = FALSE),
                    "'x' cannot be converted to 'logical'.")
-    expect_warning(convert(lubridate::dhours(), "character", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "character", quiet = FALSE),
                    "'x' was formatted as HMS.")
-    expect_warning(convert(lubridate::dhours(), "integer", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "integer", quiet = FALSE),
                    "'x' was converted to total of full seconds.")
-    expect_warning(convert(lubridate::dhours(), "double", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "double", quiet = FALSE),
                    "'x' was converted to total of seconds.")
-    expect_warning(convert(lubridate::dhours(), "numeric", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "numeric", quiet = FALSE),
                    "'x' was converted to total of seconds.")
-    expect_warning(convert(lubridate::dhours(), "difftime", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "difftime", quiet = FALSE),
                    "'difftime' units was set to seconds.")
-    expect_warning(convert(lubridate::dhours(), "date", quiet = FALSE),
+    expect_message(convert(lubridate::dhours(), "date", quiet = FALSE),
                    "There's no date to convert.")
 })
 

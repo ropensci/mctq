@@ -180,8 +180,10 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     if (is.atomic(data)) {
         assert_has_length(data)
 
-        warning("'data' is 'atomic'. All other arguments, except '...' and ",
-                "'midday_change', are ignored.", call. = FALSE)
+        cli::cli_alert_warning(paste0(
+            "'data' is 'atomic'. All other arguments, except '...' and ",
+            "'midday_change', was ignored."
+        ))
 
         x <- transform(data, midday_change)
         xlab <- deparse(substitute(data))
@@ -215,9 +217,11 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
         if (any(ignore %in% get_class(data[cols]))) {
             match <- names(data[cols])[get_class(data[cols]) %in% ignore]
-            warning(inline_collapse(match), " will be ignored due to the ",
-                    "settings in the 'ignore' argument.",
-                    call. = FALSE, immediate. = TRUE)
+
+            cli::cli_alert_warning(paste0(
+                inline_collapse(match), " will be ignored due to the ",
+                "settings in the 'ignore' argument."
+            ))
         }
 
         cols <- names(data[cols])[!(get_class(data[cols]) %in% ignore)]
@@ -228,11 +232,13 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- cols[!grepl("^id$|[\\._-]id$", cols, ignore.case = TRUE)]
     }
 
-    alert(
-        "\nWarning: `qplot_walk()` clears all plots from your system ",
+    cli::cat_line()
+    cli::cli_alert_warning(paste0(
+        "'qplot_walk()' clears all plots from your system ",
         "after it runs. If you don't agree with this, press 'esc' to ",
-        "exit.\n", combined_styles = c("bold", "red")
-        )
+        "exit."
+        ))
+    cli::cat_line()
 
     dialog <- dialog_line(
         "Press 'esc' to exit or 'enter' to continue >",

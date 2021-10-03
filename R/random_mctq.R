@@ -63,16 +63,10 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
     require_pkg("stats")
 
     if (model %in% c("std", "standard")) {
-        shush(alert("\nModel: Standard MCTQ\n",
-                    combined_styles = c("bold", "red")), quiet = quiet)
         random_std_mctq()
     } else if (model == "micro") {
-        shush(alert("\nModel: Micro MCTQ\n",
-                    combined_styles = c("bold", "red")), quiet = quiet)
         random_micro_mctq()
     } else if (model == "shift") {
-        shush(alert("\nModel: MCTQ Shift\n",
-                    combined_styles = c("bold", "red")), quiet = quiet)
         random_shift_mctq()
     }
 }

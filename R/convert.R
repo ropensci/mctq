@@ -309,14 +309,17 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
     x <- fix_character(x)
 
     if (!(class %in% c("logical", "character"))) {
-        shush(warning("'x' was converted 'as is'. This can produce ",
-                      "'NA' values. Did you forgot to assign values to ",
-                      "'orders' or 'input_unit'/'output_unit'?",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted 'as is'. This can produce ",
+            "'NA' values. Did you forgot to assign values to ",
+            "'orders' or 'input_unit'/'output_unit'?"
+        )), quiet)
     }
 
     if (class == "logical") {
-        shush(warning("'x' was converted 'as is'.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted 'as is'."
+        )), quiet)
         as.logical(x)
     } else if (class == "character") {
         x
@@ -329,8 +332,9 @@ convert.character <- function(x, class, ..., orders = NULL, tz = "UTC",
     } else if (class == "period") {
         lubridate::period(x)
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(rep("NA", length(x)), units = "secs")
     } else if (class == "hms") {
         hms::hms(rep(NA, length(x)))
@@ -374,14 +378,17 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
 
     if (!(class %in% c("logical", "character", "integer", "double",
                        "numeric"))) {
-        shush(warning("'x' was converted 'as is'. This can produce ",
-                      "'NA' values. Did you forgot to assign values to ",
-                      "'orders' or 'input_unit'/'output_unit'?",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted 'as is'. This can produce ",
+            "'NA' values. Did you forgot to assign values to ",
+            "'orders' or 'input_unit'/'output_unit'?"
+        )), quiet)
     }
 
     if (class == "logical") {
-        shush(warning("'x' was converted 'as is'.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted 'as is'."
+        )), quiet)
         as.logical(x)
     } else if (class == "character") {
         as.character(x)
@@ -394,20 +401,23 @@ convert.numeric <- function(x, class, ..., orders = NULL, tz = "UTC",
     } else if (class == "period") {
         lubridate::as.period(hms::hms(x))
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(x, units = "secs")
     } else if (class == "hms") {
         hms::hms(x)
     } else if (class == "date") {
         lubridate::as_date(x)
     } else if (class == "posixct") {
-        shush(warning("'POSIXct' origin was set as '1970-01-01 UTC'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'POSIXct' origin was set as '1970-01-01 UTC'."
+        )), quiet)
         lubridate::as_datetime(x, tz = tz)
     } else if (class == "posixlt") {
-        shush(warning("'POSIXlt' origin was set as '1970-01-01 UTC'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'POSIXlt' origin was set as '1970-01-01 UTC'."
+        )), quiet)
         as.POSIXlt(lubridate::as_datetime(x), tz = tz)
     }
 }
@@ -432,32 +442,40 @@ convert.Duration <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     class <- tolower(class)
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' cannot be converted to 'logical'."
+        )), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
-        shush(warning("'x' was formatted as HMS.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was formatted as HMS."
+        )), quiet)
         as.character(hms::as_hms(as.numeric(x)))
     } else if (class == "integer") {
-        shush(warning("'x' was converted to total of full seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of full seconds."
+        )), quiet)
         as.integer(x)
     } else if (class %in% c("double", "numeric")) {
-        shush(warning("'x' was converted to total of seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of seconds."
+        )), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(x)
     } else if (class == "period") {
         lubridate::as.period(x)
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(x)
     } else if (class == "hms") {
         hms::as_hms(as.numeric(x))
     } else if (class == "date") {
-        shush(warning("There's no date to convert.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "There's no date to convert."
+        )), quiet)
         lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
@@ -510,32 +528,40 @@ convert.hms <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     class <- tolower(class)
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' cannot be converted to 'logical'."
+        )), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
-        shush(warning("'x' was formatted as HMS.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was formatted as HMS."
+        )), quiet)
         as.character(hms::as_hms(x))
     } else if (class == "integer") {
-        shush(warning("'x' was converted to total of full seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of full seconds."
+        )), quiet)
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
-        shush(warning("'x' was converted to total of seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of seconds."
+        )), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(x)
     } else if (class == "period") {
         lubridate::as.period(x)
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(lubridate::as.duration(x))
     } else if (class == "hms") {
         hms::as_hms(x)
     } else if (class == "date") {
-        shush(warning("There's no date to convert.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "There's no date to convert."
+        )), quiet)
         lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(x))
@@ -560,19 +586,22 @@ convert.Date <- function(x, class, ..., tz = "UTC", quiet = FALSE) {
     class <- tolower(class)
 
     if (class %in% c("integer", "double", "numeric")) {
-        shush(warning(
+        shush(cli::cli_alert_warning(paste0(
             "'x' was converted to total of days since ",
-            "'1970-01-01' (UNIX epoch).",
-            call. = FALSE), quiet)
+            "'1970-01-01' (UNIX epoch)."
+        )), quiet)
     }
 
     if (class %in% c("duration", "period", "difftime", "hms")) {
-        shush(warning("There's no time to convert.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "There's no time to convert."
+        )), quiet)
     }
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' cannot be converted to 'logical'."
+        )), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
         as.character(x)
@@ -585,8 +614,9 @@ convert.Date <- function(x, class, ..., tz = "UTC", quiet = FALSE) {
     } else if (class == "period") {
         lubridate::as.period(rep(NA, length(x)))
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(lubridate::as.duration(rep(NA, length(x))))
     } else if (class == "hms") {
         hms::as_hms(rep(NA, length(x)))
@@ -619,33 +649,38 @@ convert.POSIXt <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     class <- tolower(class)
 
     if (class %in% c("duration", "period", "difftime", "hms")) {
-        shush(warning("'x' date was discarded. Only 'x' time ",
-                      "was considered.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' date was discarded. Only 'x' time was considered."
+        )), quiet)
     }
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' cannot be converted to 'logical'."
+        )), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
-        shush(warning("'x' was converted to total of full seconds since ",
-                      "'1970-01-01 00:00:00' (UNIX epoch).",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of full seconds since ",
+            "'1970-01-01 00:00:00' (UNIX epoch)."
+        )), quiet)
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
-        shush(warning("'x' was converted to total of seconds since ",
-                      "'1970-01-01 00:00:00' (UNIX epoch).",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of seconds since ",
+            "'1970-01-01 00:00:00' (UNIX epoch)."
+        )), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(hms::as_hms(x))
     } else if (class == "period") {
         lubridate::as.period(hms::as_hms(x))
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(as.numeric(hms::as_hms(x)), units = "secs")
     } else if (class == "hms") {
         hms::as_hms(x)
@@ -678,43 +713,52 @@ convert.Interval <- function(x, class, ..., tz = "UTC", output_unit = NULL,
     class <- tolower(class)
 
     if (class %in% c("duration", "period", "difftime", "hms")) {
-        shush(warning("'x' was converted to the interval time span.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to the interval time span."
+        )), quiet)
     }
 
     if (class %in% c("posixct", "posixlt")) {
-        shush(warning("'x' was converted to the interval time span with ",
-                      "'1970-01-01 as origin (UNIX epoch).",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to the interval time span with ",
+            "'1970-01-01 as origin (UNIX epoch)."
+        )), quiet)
     }
 
     if (class == "logical") {
-        shush(warning("'x' cannot be converted to 'logical'.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' cannot be converted to 'logical'."
+        )), quiet)
         as.logical(rep(NA, length(x)))
     } else if (class == "character") {
         as.character(x)
     } else if (class == "integer") {
-        shush(warning("'x' was converted to total of full seconds of the ",
-                      "interval time span.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of full seconds of the ",
+            "interval time span."
+        )), quiet)
         shush(as.integer(x), quiet)
     } else if (class %in% c("double", "numeric")) {
-        shush(warning("'x' was converted to total of seconds of the interval ",
-                      "time span.", call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'x' was converted to total of seconds of the interval ",
+            "time span."
+        )), quiet)
         shush(as.numeric(x), quiet)
     } else if (class == "duration") {
         lubridate::as.duration(x)
     } else if (class == "period") {
         lubridate::as.period(x)
     } else if (class == "difftime") {
-        shush(warning("'difftime' units was set to seconds.",
-                      call. = FALSE), quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "'difftime' units was set to seconds."
+        )), quiet)
         lubridate::as.difftime(x)
     } else if (class == "hms") {
         hms::hms(x)
     } else if (class == "date") {
-        shush(warning("There's no sigle date to convert.", call. = FALSE),
-              quiet)
+        shush(cli::cli_alert_warning(paste0(
+            "There's no sigle date to convert."
+        )), quiet)
         lubridate::as_date(rep(NA, length(x)))
     } else if (class == "posixct") {
         x <- as.POSIXct(hms::as_hms(as.numeric(x)))
@@ -952,11 +996,13 @@ parse_to_date_time <- function(x, orders = c("HMS", "HM", "H"), tz = "UTC",
             na_diff <- length(which(is.na(out))) - length(which(is.na(x)))
 
             if (all(is.na(out))) {
-                shush(warning("All formats failed to parse. No formats found.",
-                              call. = FALSE), quiet = quiet)
+                shush(cli::cli_alert_warning(paste0(
+                    "All formats failed to parse. No formats found."
+                )), quiet)
             } else if (na_diff > 0) {
-                shush(warning(na_diff, " failed to parse.",
-                              call. = FALSE), quiet = quiet)
+                shush(cli::cli_alert_warning(paste0(
+                    na_diff, " failed to parse."
+                )), quiet)
             }
         }
 

@@ -49,9 +49,7 @@ Imports:
     lubridate (>= 1.7.10)
 Suggests:
     covr,
-    crayon,
     datasets,
-    emojifont,
     ggplot2,
     grDevices,
     knitr,

@@ -32,19 +32,19 @@ test_that("convert.hms() | transform test", {
 })
 
 test_that("convert.hms() | warning test", {
-    expect_warning(convert(hms::parse_hm("01:00"), "logical", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "logical", quiet = FALSE),
                    "'x' cannot be converted to 'logical'.")
-    expect_warning(convert(hms::parse_hm("01:00"), "character", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "character", quiet = FALSE),
                    "'x' was formatted as HMS.")
-    expect_warning(convert(hms::parse_hm("01:00"), "integer", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "integer", quiet = FALSE),
                    "'x' was converted to total of full seconds.")
-    expect_warning(convert(hms::parse_hm("01:00"), "double", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "double", quiet = FALSE),
                    "'x' was converted to total of seconds.")
-    expect_warning(convert(hms::parse_hm("01:00"), "numeric", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "numeric", quiet = FALSE),
                    "'x' was converted to total of seconds.")
-    expect_warning(convert(hms::parse_hm("01:00"), "difftime", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "difftime", quiet = FALSE),
                    "'difftime' units was set to seconds.")
-    expect_warning(convert(hms::parse_hm("01:00"), "date", quiet = FALSE),
+    expect_message(convert(hms::parse_hm("01:00"), "date", quiet = FALSE),
                    "There's no date to convert.")
 })
 

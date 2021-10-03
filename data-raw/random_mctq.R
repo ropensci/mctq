@@ -1,11 +1,15 @@
 # Source the file before running the functions
 # Don't forget to uncomment the `library` functions below
 
-# library(crayon)
+library(magrittr)
+
+# library(checkmate)
+# library(cli)
 # library(glue)
 # library(hms)
 # library(lubridate)
 # library(mctq)
+# library(utils)
 
 #' Compute and print standard and micro MCTQ distribution parameters
 #'
@@ -44,19 +48,19 @@
 #' \dontrun{
 #' std_mctq_par()}
 std_mctq_par <- function() {
-    mctq:::alert("\nStandard and micro MCTQ distribution parameters\n")
+    cli::cli_h1("Standard and micro MCTQ distribution parameters")
 
     values <- list( # Extracted from the base article
         w = list(
             suffix = "W",
-            title = "Workdays (W)\n",
+            title = "Workdays (W)",
             sd_mean = hms::parse_hms("07:22:00"),
             sd_sd = hms::parse_hms("01:09:00"),
             ms_mean = hms::parse_hms("03:10:00"),
             ms_sd = hms::parse_hms("00:50:00")),
         f = list(
             suffix = "F",
-            title = "\nWork-free days (F)\n",
+            title = "Work-free days (F)",
             sd_mean = hms::parse_hms("08:27:00"),
             sd_sd = hms::parse_hms("01:32:00"),
             ms_mean = hms::parse_hms("05:02:00"),
@@ -64,7 +68,7 @@ std_mctq_par <- function() {
     )
 
     for (i in values) {
-        mctq:::alert(i$title, combined_styles = c("black", "bold"))
+        cli::cli_h2(i$title)
 
         ms_mean <- i$ms_mean
         ms_sd <- i$ms_sd
@@ -76,28 +80,40 @@ std_mctq_par <- function() {
         sd_min <- sum_time(sd_mean, - (3 * sd_sd), circular = TRUE)
         sd_max <- sum_time(sd_mean, + (3 * sd_sd), circular = TRUE)
 
-        message <- paste0("Local time of sleep onset (SO_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Local time of sleep onset (SO_", i$suffix, ")"
+            ))
+        cli::cat_line()
+
         mean <- sum_time(ms_mean, - (sd_mean / 2), circular = TRUE)
         sd <- sum_time((ms_sd + sd_sd) / 2, circular = TRUE)
         min <- sum_time(ms_min, - (sd_mean / 2), circular = TRUE)
         max <- sum_time(ms_max, - (sd_mean / 2), circular = TRUE)
         cat_(min, max, mean, sd)
 
-        message <- paste0("\nLocal time of sleep end (SE_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "\nLocal time of sleep end (SE_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         mean <- sum_time(ms_mean, + (sd_mean / 2), circular = TRUE)
         sd <- sum_time((ms_sd + sd_sd) / 2, circular = TRUE)
         min <- sum_time(ms_min, + (sd_mean / 2), circular = TRUE)
         max <- sum_time(ms_max, + (sd_mean / 2), circular = TRUE)
         cat_(min, max, mean, sd)
 
-        message <- paste0("\nSleep duration (SD_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "\nSleep duration (SD_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         cat_(sd_min, sd_max, sd_mean, sd_sd)
 
-        message <- paste0("\nLocal time of mid-sleep (MS", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "\nLocal time of mid-sleep (MS", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         cat_(ms_min, ms_max, ms_mean, ms_sd)
     }
 
@@ -145,12 +161,12 @@ std_mctq_par <- function() {
 #' \dontrun{
 #' shift_mctq_par()}
 shift_mctq_par <- function() {
-    mctq:::alert("\nMCTQ Shift distribution parameters\n")
+    cli::cli_h1("MCTQ Shift distribution parameters")
 
     values <- list( # Extracted from the base article
         w_m = list(
             suffix = "W_M",
-            title = "Between two morning shifts (W_M)\n",
+            title = "Between two morning shifts (W_M)",
             sprep_mean = hms::parse_hms("22:28:00"),
             sprep_sd = hms::parse_hms("01:04:00"),
             slat_mean = hms::as_hms(as.numeric(lubridate::dminutes(20.2))),
@@ -165,7 +181,7 @@ shift_mctq_par <- function() {
             ms_sd = hms::parse_hms("00:40:00")),
         f_m = list(
             suffix = "F_M",
-            title = "\nBetween two free days after morning shifts (F_M)\n",
+            title = "Between two free days after morning shifts (F_M)",
             sprep_mean = hms::parse_hms("23:46:00"),
             sprep_sd = hms::parse_hms("01:19:00"),
             slat_mean = hms::as_hms(as.numeric(lubridate::dminutes(15.4))),
@@ -180,7 +196,7 @@ shift_mctq_par <- function() {
             ms_sd = hms::parse_hms("01:22:00")),
         w_e = list(
             suffix = "W_E",
-            title = "\nBetween two evening shifts (W_E)\n",
+            title = "Between two evening shifts (W_E)",
             sprep_mean = hms::parse_hms("00:38:00"),
             sprep_sd = hms::parse_hms("00:59:00"),
             slat_mean = hms::as_hms(as.numeric(lubridate::dminutes(14.9))),
@@ -195,7 +211,7 @@ shift_mctq_par <- function() {
             ms_sd = hms::parse_hms("01:01:00")),
         f_e = list(
             suffix = "F_E",
-            title = "\nBetween two free days after evening shifts (F_E)\n",
+            title = "Between two free days after evening shifts (F_E)",
             sprep_mean = hms::parse_hms("00:09:00"),
             sprep_sd = hms::parse_hms("01:26:00"),
             slat_mean = hms::as_hms(as.numeric(lubridate::dminutes(14.5))),
@@ -210,7 +226,7 @@ shift_mctq_par <- function() {
             ms_sd = hms::parse_hms("01:20:00")),
         w_n = list(
             suffix = "W_N",
-            title = "\nBetween two night shifts (W_N)\n",
+            title = "Between two night shifts (W_N)",
             sprep_mean = hms::parse_hms("07:19:00"),
             sprep_sd = hms::parse_hms("00:57:00"),
             slat_mean = hms::as_hms(as.numeric(lubridate::dminutes(13.9))),
@@ -225,7 +241,7 @@ shift_mctq_par <- function() {
             ms_sd = hms::parse_hms("01:02:00")),
         f_n = list(
             suffix = "F_N",
-            title = "\nBetween two free days after night shifts (F_N)\n",
+            title = "Between two free days after night shifts (F_N)",
             sprep_mean = hms::parse_hms("00:40:00"),
             sprep_sd = hms::parse_hms("02:19:00"),
             slat_mean = hms::as_hms(as.numeric(lubridate::dminutes(23.1))),
@@ -241,19 +257,24 @@ shift_mctq_par <- function() {
     )
 
     for (i in values) {
-        mctq:::alert(i$title, combined_styles = c("black", "bold"))
+        cli::cli_h2(i$title)
 
-        message <- paste0("Local time of preparing to sleep (SPrep_",
-                          i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Local time of preparing to sleep (SPrep_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         sprep_mean <- i$sprep_mean
         sprep_sd <- i$sprep_sd
         sprep_min <- sum_time(sprep_mean, - (3 * sprep_sd), circular = TRUE)
         sprep_max <- sum_time(sprep_mean, + (3 * sprep_sd), circular = TRUE)
         cat_(sprep_min, sprep_max, sprep_mean, sprep_sd)
 
-        message <- paste0("\nSleep latency (SLat_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Sleep latency (SLat_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         slat_mean <- i$slat_mean
         slat_sd <- i$slat_sd
         slat_min <- sum_time(slat_mean, - (3 * slat_sd))
@@ -261,22 +282,31 @@ shift_mctq_par <- function() {
         slat_max <- sum_time(slat_mean, + (3 * slat_sd))
         cat_(slat_min, slat_max, slat_mean, slat_sd)
 
-        message <- paste0("\nLocal time of sleep onset (SO_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Local time of sleep onset (SO_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         mean <- sum_time(sprep_mean, slat_mean, circular = TRUE)
         sd <- sum_time(sprep_sd + slat_sd)
         min <- sum_time(sprep_min, slat_min, circular = TRUE)
         max <- sum_time(sprep_max, slat_max, circular = TRUE)
         cat_(min, max, mean, sd)
 
-        message <- paste0("\nLocal time of sleep end (SE_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Local time of sleep end (SE_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         mean <- i$se_mean
         sd <- i$se_sd
         min_max(mean, sd)
 
-        message <- paste0("\nTime to get up (TGU_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Time to get up (TGU_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         mean <- i$tgu_mean
         sd <- i$tgu_sd
         min <- sum_time(mean, - (3 * sd))
@@ -284,14 +314,20 @@ shift_mctq_par <- function() {
         max <- sum_time(mean, + (3 * sd))
         cat_(min, max, mean, sd)
 
-        message <- paste0("\nSleep duration (SD_", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Sleep duration (SD_", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         mean <- i$sd_mean
         sd <- i$sd_sd
         min_max(mean, sd)
 
-        message <- paste0("\nLocal time of mid-sleep (MS", i$suffix, ")\n\n")
-        cat(message)
+        cli::cli_h3(paste0(
+            "Local time of mid-sleep (MS", i$suffix, ")"
+        ))
+        cli::cat_line()
+
         mean <- i$ms_mean
         sd <- i$ms_sd
         min_max(mean, sd)
@@ -328,20 +364,13 @@ shift_mctq_par <- function() {
 #' force_random_mctq("shift", iterations = 100)}
 force_random_mctq <- function(model, iterations = 100, seed = 1) {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
-    assert_numeric_(iterations)
-    checkmate::assert_numeric(iterations, lower = 0, upper = 500)
-    checkmate::assert_integerish(iterations)
-    assert_numeric_(seed)
-    checkmate::assert_numeric(seed, lower = 0, upper = 500)
-    checkmate::assert_integerish(seed)
+    checkmate::assert_integerish(iterations, lower = 0, upper = 500)
+    checkmate::assert_integerish(seed, lower = 0, upper = 500)
 
-    iterations <- as.integer(iterations)
-    seed <- as.integer(seed)
-
-    set.seed(seed)
+    set.seed(as.integer(seed))
     out <- dplyr::as_tibble(random_mctq(model = model, quiet = TRUE))
 
-    for (i in seq_len(iterations - 1)) {
+    for (i in seq_len(as.integer(iterations) - 1)) {
         random_case <- random_mctq(model = model, quiet = TRUE)
         out <- dplyr::bind_rows(out, dplyr::as_tibble(random_case))
     }
@@ -365,6 +394,9 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"`.
+#' @param clipboard A `logical` value indicating if the case code must be
+#'   transfered to the Windwos clipboard. See [utils::utils::writeClipboard] to
+#'   learn more (default: `TRUE`).
 #'
 #' @family random_mctq functions
 #' @noRd
@@ -374,121 +406,133 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
 #' random_mctq_raw_code("standard")
 #' random_mctq_raw_code("micro")
 #' random_mctq_raw_code("shift")}
-random_mctq_raw_code <- function(model) {
+random_mctq_raw_code <- function(model, clipboard = TRUE) {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 
     set.seed(sample(100:200, 1))
     data <- random_mctq(model = model, quiet = TRUE)
 
-    if (model == "standard") {
-        cat(bt("WORK REGULAR"), " = ",
-            dq(format_logical(data$work)),
+    if (model %in% c("std", "standard")) {
+        out <- paste0(
+            glue::backtick("WORK REGULAR"), " = ",
+            glue::double_quote(format_logical(data$work)),
             ", # logical | Yes/No", "\n",
 
-            bt("WORK DAYS"), " = ",
-            dq(format_na(data$wd)),
+            glue::backtick("WORK DAYS"), " = ",
+            glue::double_quote(format_na(data$wd)),
             ", # integer | [0-7]", "\n\n",
 
 
-            bt("W BEDTIME"), " = ",
-            dq(format_hms(data$bt_w)),
+            glue::backtick("W BEDTIME"), " = ",
+            glue::double_quote(format_hms(data$bt_w)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
-            bt("W SLEEP PREP"), " = ",
-            dq(format_hms(data$sprep_w)),
+            glue::backtick("W SLEEP PREP"), " = ",
+            glue::double_quote(format_hms(data$sprep_w)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
-            bt("W SLEEP LAT"), " = ",
-            dq(format_duration(data$slat_w)),
+            glue::backtick("W SLEEP LAT"), " = ",
+            glue::double_quote(format_duration(data$slat_w)),
             ", # Duration | M", "\n",
 
-            bt("W SLEEP END"), " = ",
-            dq(format_hms(data$se_w)),
+            glue::backtick("W SLEEP END"), " = ",
+            glue::double_quote(format_hms(data$se_w)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
-            bt("W SLEEP INERTIA"), " = ",
-            dq(format_duration(data$si_w)),
+            glue::backtick("W SLEEP INERTIA"), " = ",
+            glue::double_quote(format_duration(data$si_w)),
             ", # Duration | M", "\n",
 
-            bt("W ALARM"), " = ",
-            dq(format_logical(data$alarm_w)),
+            glue::backtick("W ALARM"), " = ",
+            glue::double_quote(format_logical(data$alarm_w)),
             ", # logical | Yes/No", "\n",
 
-            bt("W WAKE BEFORE ALARM"), " = ",
-            dq(format_logical(data$wake_before_w)),
+            glue::backtick("W WAKE BEFORE ALARM"), " = ",
+            glue::double_quote(format_logical(data$wake_before_w)),
             ", # logical | Yes/No", "\n",
 
-            bt("W LIGHT EXPOSURE"), " = ",
-            dq(format_hms(data$le_w)),
+            glue::backtick("W LIGHT EXPOSURE"), " = ",
+            glue::double_quote(format_hms(data$le_w)),
             ", # Duration | [H]MS, [H]M, [H]", "\n\n",
 
 
-            bt("F BEDTIME"), " = ",
-            dq(format_hms(data$bt_f)),
+            glue::backtick("F BEDTIME"), " = ",
+            glue::double_quote(format_hms(data$bt_f)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
-            bt("F SLEEP PREP"), " = ",
-            dq(format_hms(data$sprep_f)),
+            glue::backtick("F SLEEP PREP"), " = ",
+            glue::double_quote(format_hms(data$sprep_f)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
-            bt("F SLEEP LAT"), " = ",
-            dq(format_duration(data$slat_f)),
+            glue::backtick("F SLEEP LAT"), " = ",
+            glue::double_quote(format_duration(data$slat_f)),
             ", # Duration | M", "\n",
 
-            bt("F SLEEP END"), " = ",
-            dq(format_hms(data$se_f)),
+            glue::backtick("F SLEEP END"), " = ",
+            glue::double_quote(format_hms(data$se_f)),
             ", # hms | HMS, HM, H [0-24h]", "\n",
 
-            bt("F SLEEP INERTIA"), " = ",
-            dq(format_duration(data$si_f)),
+            glue::backtick("F SLEEP INERTIA"), " = ",
+            glue::double_quote(format_duration(data$si_f)),
             ", # Duration | M", "\n",
 
-            bt("F ALARM"), " = ",
-            dq(format_logical(data$alarm_f)),
+            glue::backtick("F ALARM"), " = ",
+            glue::double_quote(format_logical(data$alarm_f)),
             ", # logical | Yes/No", "\n",
 
-            bt("F REASONS"), " = ",
-            dq(format_logical(data$reasons_f)),
+            glue::backtick("F REASONS"), " = ",
+            glue::double_quote(format_logical(data$reasons_f)),
             ", # logical | Yes/No", "\n",
 
-            bt("F REASONS WHY"), " = ",
-            dq(format_na(data$reasons_why_f)),
+            glue::backtick("F REASONS WHY"), " = ",
+            glue::double_quote(format_na(data$reasons_why_f)),
             ", # character", "\n",
 
-            bt("F LIGHT EXPOSURE"), " = ",
-            dq(format_hms(data$le_f)),
-            " # Duration | [H]MS, [H]M, [H]",
-
-            sep = ""
+            glue::backtick("F LIGHT EXPOSURE"), " = ",
+            glue::double_quote(format_hms(data$le_f)),
+            " # Duration | [H]MS, [H]M, [H]"
         )
+
+        cat(out, sep = "")
+
+        if (isTRUE(clipboard)) {
+            cli::cat_line()
+            clipboard(out)
+        }
     } else if (model == "micro") {
-        cat(bt("SHIFT WORK"), " = ",
-            dq(format_logical(data$shift_work)),
+        out <- paste0(
+            glue::backtick("SHIFT WORK"), " = ",
+            glue::double_quote(format_logical(data$shift_work)),
             ", # logical | Yes/No", "\n",
 
-            bt("WORK DAYS"), " = ",
-            dq(format_na(data$wd)),
+            glue::backtick("WORK DAYS"), " = ",
+            glue::double_quote(format_na(data$wd)),
             ", # integer | [0-7]", "\n\n",
 
 
-            bt("W SLEEP ONSET"), " = ",
-            dq(format_hms_imp(data$so_w)),
+            glue::backtick("W SLEEP ONSET"), " = ",
+            glue::double_quote(format_hms_imp(data$so_w)),
             ", # hms | IMp [0-12h]", "\n",
 
-            bt("W SLEEP END"), " = ",
-            dq(format_hms_imp(data$se_w)),
+            glue::backtick("W SLEEP END"), " = ",
+            glue::double_quote(format_hms_imp(data$se_w)),
             ", # hms | IMp [0-12h]", "\n\n",
 
-            bt("F SLEEP ONSET"), " = ",
-            dq(format_hms_imp(data$so_f)),
+            glue::backtick("F SLEEP ONSET"), " = ",
+            glue::double_quote(format_hms_imp(data$so_f)),
             ", # hms | IMp [0-12h]", "\n",
 
-            bt("F SLEEP END"), " = ",
-            dq(format_hms_imp(data$se_f)),
-            " # hms | IMp [0-12h]",
-
-            sep = ""
+            glue::backtick("F SLEEP END"), " = ",
+            glue::double_quote(format_hms_imp(data$se_f)),
+            " # hms | IMp [0-12h]"
         )
+
+        cat(out, sep = "")
+
+        if (isTRUE(clipboard)) {
+            cli::cat_line()
+            clipboard(out)
+        }
     } else if (model == "shift") {
         values <- list(
             w_m = c("W M", "_w_m"),
@@ -499,71 +543,85 @@ random_mctq_raw_code <- function(model) {
             f_n = c("F N", "_f_n")
             )
 
+        out <- character()
+
         for (i in values) {
-            cat(bt(paste(i[1], "N DAYS")), " = ",
-                dq(format_na(data[[paste0("n", i[2])]])),
+            out <- out %>% append(paste0(
+                glue::backtick(paste(i[1], "N DAYS")), " = ",
+                glue::double_quote(format_na(data[[paste0("n", i[2])]])),
                 ", # integer | [0-7]", "\n",
 
-                bt(paste(i[1], "BEDTIME")), " = ",
-                dq(format_hms(data[[paste0("bt", i[2])]])),
+                glue::backtick(paste(i[1], "BEDTIME")), " = ",
+                glue::double_quote(format_hms(data[[paste0("bt", i[2])]])),
                 ", # hms | HMS, HM, H [0-24h]", "\n",
 
-                bt(paste(i[1], "SLEEP PREP")), " = ",
-                dq(format_hms(data[[paste0("sprep", i[2])]])),
+                glue::backtick(paste(i[1], "SLEEP PREP")), " = ",
+                glue::double_quote(format_hms(data[[paste0("sprep", i[2])]])),
                 ", # hms | HMS, HM, H [0-24h]", "\n",
 
-                bt(paste(i[1], "SLEEP LAT")), " = ",
-                dq(format_duration(data[[paste0("slat", i[2])]])),
+                glue::backtick(paste(i[1], "SLEEP LAT")), " = ",
+                glue::double_quote(format_duration(
+                    data[[paste0("slat", i[2])]])),
                 ", # Duration | M", "\n",
 
-                bt(paste(i[1], "SLEEP END")), " = ",
-                dq(format_hms(data[[paste0("se", i[2])]])),
+                glue::backtick(paste(i[1], "SLEEP END")), " = ",
+                glue::double_quote(format_hms(data[[paste0("se", i[2])]])),
                 ", # hms | HMS, HM, H [0-24h]", "\n",
 
-                bt(paste(i[1], "TIME GU")), " = ",
-                dq(format_duration(data[[paste0("tgu", i[2])]])),
+                glue::backtick(paste(i[1], "TIME GU")), " = ",
+                glue::double_quote(format_duration(
+                    data[[paste0("tgu", i[2])]])),
                 ", # Duration | M", "\n",
 
-                bt(paste(i[1], "ALARM")), " = ",
-                dq(format_logical(data[[paste0("alarm", i[2])]])),
+                glue::backtick(paste(i[1], "ALARM")), " = ",
+                glue::double_quote(format_logical(
+                    data[[paste0("alarm", i[2])]])),
                 ", # logical | Yes/No", "\n",
 
-                bt(paste(i[1], "REASONS")), " = ",
-                dq(format_logical(data[[paste0("reasons", i[2])]])),
+                glue::backtick(paste(i[1], "REASONS")), " = ",
+                glue::double_quote(format_logical(
+                    data[[paste0("reasons", i[2])]])),
                 ", # logical | Yes/No", "\n",
 
-                bt(paste(i[1], "REASONS WHY")), " = ",
-                dq(format_na(data[[paste0("reasons_why", i[2])]])),
+                glue::backtick(paste(i[1], "REASONS WHY")), " = ",
+                glue::double_quote(format_na(
+                    data[[paste0("reasons_why", i[2])]])),
                 ", # character", "\n",
 
-                bt(paste(i[1], "NAP")), " = ",
-                dq(format_logical(data[[paste0("nap", i[2])]])),
+                glue::backtick(paste(i[1], "NAP")), " = ",
+                glue::double_quote(format_logical(data[[paste0("nap", i[2])]])),
                 ", # logical | Yes/No", "\n",
 
-                bt(paste(i[1], "NAP ONSET")), " = ",
-                dq(format_hms(data[[paste0("napo", i[2])]])),
+                glue::backtick(paste(i[1], "NAP ONSET")), " = ",
+                glue::double_quote(format_hms(data[[paste0("napo", i[2])]])),
                 ", # hms | HMS, HM, H [0-24h]", "\n",
 
-                bt(paste(i[1], "NAP END")), " = ",
-                dq(format_hms(data[[paste0("nape", i[2])]])),
+                glue::backtick(paste(i[1], "NAP END")), " = ",
+                glue::double_quote(format_hms(data[[paste0("nape", i[2])]])),
                 ifelse(i[1] == "F N", " ", ", "),
-                "# hms | HMS, HM, H [0-24h]", "\n",
+                "# hms | HMS, HM, H [0-24h]",
 
-                ifelse(i[1] == "F N", "", "\n"), sep = ""
-                )
+                ifelse(i[1] == "F N", "", "\n\n")
+                ))
+        }
+
+        out <- paste(out, collapse = "")
+        cat(out, sep = "")
+
+        if (isTRUE(clipboard)) {
+            cli::cat_line()
+            clipboard(out)
         }
     }
 
     invisible(NULL)
 }
 
-alert <- mctq:::alert
-
 cat_ <- function(min, max, mean, sd) {
-    cat("Min:", as.character(min), "\n")
-    cat("Max:", as.character(max), "\n")
-    cat("Mean:", as.character(mean), "\n")
-    cat("SD:", as.character(sd), "\n")
+    cli::cli_text("{.emph Min:} ", as.character(min), "\n")
+    cli::cli_text("{.emph Max:} ", as.character(max), "\n")
+    cli::cli_text("{.emph Mean:} ", as.character(mean), "\n")
+    cli::cli_text("{.emph SD:} ", as.character(sd), "\n")
 }
 
 min_max <- function(mean, sd) {
@@ -631,8 +689,18 @@ format_na <- function(x) {
     }
 }
 
-bt <- function(x) glue::backtick(x)
-dq <- function(x) glue::double_quote(x)
+clipboard <- function(..., space_above = TRUE, n_minus = TRUE, quiet = FALSE) {
+    mctq:::assert_has_length(list(...))
+    checkmate::assert_flag(space_above)
+    checkmate::assert_flag(quiet)
+
+    utils::writeClipboard(as.character(unlist(list(...), use.names = FALSE)))
+
+    if (isFALSE(quiet)) {
+        if(isTRUE(space_above)) cli::cat_line()
+        cli::cli_inform("{cli::col_silver('[Copied to clipboard]')}")
+    }
+}
 
 # std_mctq_par()
 # shift_mctq_par()

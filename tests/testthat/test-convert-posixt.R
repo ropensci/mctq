@@ -46,28 +46,28 @@ test_that("convert.POSIXt() | transform test", {
 })
 
 test_that("convert.POSIXt() | warning test", {
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "logical", quiet = FALSE),
                    "'x' cannot be converted to 'logical'.")
 
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "integer", quiet = FALSE),
                    "'x' was converted to total of full seconds since ")
 
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "double", quiet = FALSE),
                    "'x' was converted to total of seconds since ")
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "numeric", quiet = FALSE),
                    "'x' was converted to total of seconds since ")
 
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "duration", quiet = FALSE),
                    "'x' date was discarded. Only 'x' time ")
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "difftime", quiet = FALSE),
                    "'x' date was discarded. Only 'x' time ")
-    expect_warning(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
+    expect_message(convert(lubridate::as_datetime("2000-01-01 01:00:00"),
                            "hms", quiet = FALSE),
                    "'x' date was discarded. Only 'x' time ")
 })

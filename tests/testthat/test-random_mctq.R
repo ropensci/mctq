@@ -17,12 +17,6 @@ test_that("random_mctq() | error test", {
     expect_error(random_mctq(quiet = 1), "Assertion on 'quiet' failed")
 })
 
-test_that("random_mctq() | message test", {
-    expect_message(random_mctq(model = "standard"))
-    expect_message(random_mctq(model = "micro"))
-    expect_message(random_mctq(model = "shift"))
-})
-
 test_that("random_std_mctq() | general test", {
     # # Finder
     # for (i in seq_len(100)) {

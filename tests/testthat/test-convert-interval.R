@@ -59,52 +59,52 @@ test_that("convert.Interval() | transform test", {
 })
 
 test_that("convert.Interval() | warning test", {
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "logical", quiet = FALSE),
                    "'x' cannot be converted to 'logical'.")
 
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "integer", quiet = FALSE),
                    "'x' was converted to total of full seconds of the ")
 
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "double", quiet = FALSE),
                    "'x' was converted to total of seconds of the ")
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "numeric", quiet = FALSE),
                    "'x' was converted to total of seconds of the ")
 
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "date", quiet = FALSE),
                    "There's no sigle date to convert.")
 
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "duration", quiet = FALSE),
                    "'x' was converted to the interval time span.")
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "period", quiet = FALSE),
                    "'x' was converted to the interval time span.")
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "difftime", quiet = FALSE),
                    "'x' was converted to the interval time span.")
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "hms", quiet = FALSE),
                    "'x' was converted to the interval time span.")
 
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "posixct", quiet = FALSE),
                    "'x' was converted to the interval time span with ")
-    expect_warning(convert(lubridate::as.interval(lubridate::dhours(),
+    expect_message(convert(lubridate::as.interval(lubridate::dhours(),
                                                   as.Date("2020-01-01")),
                            "posixlt", quiet = FALSE),
                    "'x' was converted to the interval time span with ")

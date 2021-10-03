@@ -27,23 +27,23 @@ test_that("convert.Date() | convert test", {
 })
 
 test_that("convert.Date() | warning test", {
-    expect_warning(convert(as.Date("2000-01-01"), "logical", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "logical", quiet = FALSE),
                    "'x' cannot be converted to 'logical'.")
 
-    expect_warning(convert(as.Date("2000-01-01"), "integer", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "integer", quiet = FALSE),
                    "'x' was converted to total of days since '1970-01-01'")
-    expect_warning(convert(as.Date("2000-01-01"), "double", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "double", quiet = FALSE),
                    "'x' was converted to total of days since '1970-01-01'")
-    expect_warning(convert(as.Date("2000-01-01"), "numeric", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "numeric", quiet = FALSE),
                    "'x' was converted to total of days since '1970-01-01'")
 
-    expect_warning(convert(as.Date("2000-01-01"), "duration", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "duration", quiet = FALSE),
                    "There's no time to convert.")
-    expect_warning(convert(as.Date("2000-01-01"), "period", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "period", quiet = FALSE),
                    "There's no time to convert.")
-    expect_warning(convert(as.Date("2000-01-01"), "difftime", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "difftime", quiet = FALSE),
                    "There's no time to convert.")
-    expect_warning(convert(as.Date("2000-01-01"), "hms", quiet = FALSE),
+    expect_message(convert(as.Date("2000-01-01"), "hms", quiet = FALSE),
                    "There's no time to convert.")
 })
 

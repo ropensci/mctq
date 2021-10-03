@@ -96,9 +96,9 @@ test_that("parse_to_date_time() | general test", {
 })
 
 test_that("parse_to_date_time() | warning test", {
-    expect_warning(parse_to_date_time("a", "H", quiet = FALSE),
+    expect_message(parse_to_date_time("a", "H", quiet = FALSE),
                    "All formats failed to parse. No formats found.")
-    expect_warning(parse_to_date_time(c("1", "a"), "H", quiet = FALSE),
+    expect_message(parse_to_date_time(c("1", "a"), "H", quiet = FALSE),
                    "1 failed to parse.")
 })
 

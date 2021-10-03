@@ -54,7 +54,7 @@ test_that("shorter_interval() | 'class' test", {
 })
 
 test_that("shorter_interval() | warning test", {
-    expect_warning(shorter_interval(hms::parse_hm("00:00"),
+    expect_message(shorter_interval(hms::parse_hm("00:00"),
                                     hms::parse_hm("12:00"), "Interval",
                                     quiet = FALSE),
                    "Element\\(s\\) '1' of 'x' and 'y' have intervals equal to ")

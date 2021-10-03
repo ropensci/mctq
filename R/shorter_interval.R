@@ -192,13 +192,14 @@ shorter_interval <- function(x, y, class = "hms", inverse = FALSE,
     if (class == "interval") {
         if (any(x1_y1_interval == y1_x2_interval, na.rm = TRUE)) {
             flags <- which(x1_y1_interval == y1_x2_interval)
-            shush(warning(
+
+            shush(cli::cli_alert_warning(paste0(
                 "Element(s) ", inline_collapse(flags), " of 'x' ",
                 "and 'y' have intervals equal to 12 hours, i.e., ",
                 "there's no shorter or longer interval ",
                 "between the two hours (they are equal). Only one ",
-                "possible interval was returned.",
-                call. = FALSE), quiet = quiet)
+                "possible interval was returned."
+            )), quiet = quiet)
         }
 
         out

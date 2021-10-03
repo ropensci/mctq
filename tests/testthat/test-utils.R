@@ -261,31 +261,6 @@ test_that("str_subset_() | error test", {
                  "Assertion on 'use_bytes' failed")
 })
 
-test_that("package_startup_message() | general test", {
-    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
-    # ## before trying to run the tests interactively.
-    #
-    # is_interactive <- mctq:::is_interactive
-
-    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
-        mockr::with_mock(
-            is_interactive = function(...) TRUE,
-            package_startup_message())
-    }
-
-    # mock()
-    expect_null(mock())
-
-    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
-        mockr::with_mock(
-            is_interactive = function(...) FALSE,
-            package_startup_message())
-    }
-
-    # mock()
-    expect_null(mock())
-})
-
 test_that("require_pkg() | general test", {
     expect_null(require_pkg("base"))
     expect_error(require_pkg("test"),

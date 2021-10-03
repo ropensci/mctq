@@ -25,15 +25,15 @@ test_that("convert.numeric() | transform test", {
 })
 
 test_that("convert.numeric() | warning test", {
-    expect_warning(convert(1, "logical", quiet = FALSE),
+    expect_message(convert(1, "logical", quiet = FALSE),
                    "'x' was converted 'as is'.")
-    expect_warning(convert(1, "duration", quiet = FALSE),
+    expect_message(convert(1, "duration", quiet = FALSE),
                    "'x' was converted 'as is'. This can produce ")
-    expect_warning(convert(1, "difftime", quiet = FALSE),
+    expect_message(convert(1, "difftime", quiet = FALSE),
                    "'difftime' units was set to seconds.")
-    expect_warning(convert(1, "posixct", quiet = FALSE),
+    expect_message(convert(1, "posixct", quiet = FALSE),
                    "'POSIXct' origin was set as '1970-01-01 UTC'.")
-    expect_warning(convert(1, "posixlt", quiet = FALSE),
+    expect_message(convert(1, "posixlt", quiet = FALSE),
                    "'POSIXlt' origin was set as '1970-01-01 UTC'.")
 })
 

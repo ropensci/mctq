@@ -26,11 +26,11 @@ test_that("convert.character() | transform test", {
 })
 
 test_that("convert.character() | warning test", {
-    expect_warning(convert("1", "logical", quiet = FALSE),
+    expect_message(convert("1", "logical", quiet = FALSE),
                    "'x' was converted 'as is'.")
-    expect_warning(convert("1", "duration", quiet = FALSE),
+    expect_message(convert("1", "duration", quiet = FALSE),
                    "'x' was converted 'as is'.")
-    expect_warning(convert("1", "difftime", quiet = FALSE),
+    expect_message(convert("1", "difftime", quiet = FALSE),
                    "'difftime' units was set to seconds.")
 })
 

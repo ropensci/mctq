@@ -10,7 +10,7 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            suppressWarnings(qplot_walk(utils::head(datasets::iris, 5)[[1]])))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5)[[1]])))
     }
 
     # mock()
@@ -20,7 +20,7 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            suppressWarnings(qplot_walk(utils::head(datasets::iris, 5)[[1]],
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5)[[1]],
                                         xlab = "test")))
     }
 
@@ -134,7 +134,7 @@ test_that("qplot_walk() | warning test", {
     }
 
     # mock()
-    expect_warning(mock(), "'data' is 'atomic'. All other arguments, ")
+    expect_message(mock(), "'data' is 'atomic'. All other arguments, ")
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
@@ -144,5 +144,5 @@ test_that("qplot_walk() | warning test", {
     }
 
     # mock()
-    expect_warning(mock(), "'Species' will be ignored due to the settings ")
+    expect_message(mock(), "'Species' will be ignored due to the settings ")
 })
