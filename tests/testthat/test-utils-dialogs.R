@@ -39,8 +39,6 @@ test_that("dialog_line() | general test", {
 
 test_that("dialog_line() | error test", {
     expect_error(dialog_line(), "Assertion on 'list\\(...\\)' failed")
-    expect_error(dialog_line(1, combined_styles = 1),
-                 "Assertion on 'combined_styles' failed")
     expect_error(dialog_line(1, space_above = ""),
                  "Assertion on 'space_above' failed")
     expect_error(dialog_line(1, space_below = ""),
