@@ -5,28 +5,22 @@
 \alias{longer_interval}
 \title{Find the shorter interval between two hours}
 \usage{
-shorter_interval(x, y, class = "hms", inverse = FALSE, quiet = FALSE)
+shorter_interval(x, y, inverse = FALSE)
 
-longer_interval(x, y, class = "hms", quiet = FALSE)
+longer_interval(x, y)
 }
 \arguments{
 \item{x, y}{A \code{hms} or \code{POSIXt} object.}
 
-\item{class}{(optional) a string indicating the object class of the output
-(default: \code{"hms"}).}
-
 \item{inverse}{(optional) a \code{logical} value indicating if the function must
 return an inverse output, i.e., the longer interval between \code{x} and \code{y}.}
-
-\item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
-must be suppressed (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{inverse = FALSE} (default), an object of the indicated class in
-\code{class} (default: \code{"hms"}) with the shorter interval between \code{x} and \code{y}.
-\item If \code{inverse = TRUE}, an object of the indicated class in \code{class} (default:
-\code{"hms"}) with the longer interval between \code{x} and \code{y}.
+\item If \code{inverse = FALSE} (default), an \code{Interval} object with the shorter
+interval between \code{x} and \code{y}.
+\item If \code{inverse = TRUE}, an \code{Interval} object with the longer interval between
+\code{x} and \code{y}.
 }
 }
 \description{
@@ -37,7 +31,7 @@ must be suppressed (default: \code{FALSE}).}
 
 \code{longer_interval()} do the inverse of \code{shorter_interval()}, i.e.,
 finds the longer interval between two hours. It's just a wrapper for
-\code{shorter_interval(x, y, class, inverse = TRUE)}.
+\code{shorter_interval(x, y, inverse = TRUE)}.
 }
 \details{
 \subsection{The two intervals problem}{
@@ -90,6 +84,16 @@ shorter or longer interval (they will have equal length). In those cases,
 }
 }
 
+\subsection{Base date and timezone}{
+
+\code{shorter_interval()} uses the
+\href{https://en.wikipedia.org/wiki/Unix_time}{Unix epoch} (1970-01-01) date as
+the start date for creating intervals.
+
+The output will always have \code{"UTC"} set as timezone. Learn more about
+time zones in \link[base:timezones]{base::timezone}.
+}
+
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
@@ -99,19 +103,13 @@ conform to the object classes required, you can use the \code{mctq}
 \code{\link[=convert]{convert()}} function to convert it.
 }
 
-\subsection{\code{class} argument}{
-
-\code{shorter_interval()} is integrated with \code{\link[=convert]{convert()}}. That way you
-can choose what class of object you prefer as output.
-
-Valid \code{class} values are: \code{"Duration"}, \code{"Period"}, \code{"difftime"}, \code{"hms"},
-and \code{"Interval"} (case insensitive).
-}
-
 \subsection{\code{POSIXt} objects}{
 
 \code{POSIXt} objects passed as argument to \code{x} or \code{y} will be stripped of their
 dates. Only the time will be considered.
+
+Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
+Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 }
 }
 \examples{
@@ -120,45 +118,32 @@ dates. Only the time will be considered.
 x <- hms::parse_hm("23:00")
 y <- hms::parse_hm("01:00")
 shorter_interval(x, y)
-#> 02:00:00 # Expected
+#> [1] 1970-01-01 23:00:00 UTC--1970-01-02 01:00:00 UTC # Expected
 
 x <- lubridate::as_datetime("1985-01-15 12:00:00")
 y <- lubridate::as_datetime("2020-09-10 12:00:00")
 shorter_interval(x, y)
-#> 00:00:00 # Expected
+#> [1] 1970-01-01 12:00:00 UTC--1970-01-01 12:00:00 UTC # Expected
 
 ## Vector example
 
 x <- c(hms::parse_hm("15:30"), hms::parse_hm("21:30"))
 y <- c(hms::parse_hm("19:30"), hms::parse_hm("04:00"))
 shorter_interval(x, y)
-#> 04:00:00 # Expected
-#> 06:30:00 # Expected
+#> [1] 1970-01-01 15:30:00 UTC--1970-01-01 19:30:00 UTC # Expected
+#> [2] 1970-01-01 21:30:00 UTC--1970-01-02 04:00:00 UTC # Expected
 
 ## Finding the longer interval between two hours
 
 x <- lubridate::parse_date_time("01:10:00", "HMS")
 y <- lubridate::parse_date_time("11:45:00", "HMS")
 shorter_interval(x, y, inverse = TRUE)
-#> 13:25:00 # Expected
+#> [1] 1970-01-01 11:45:00 UTC--1970-01-02 01:10:00 UTC # Expected
 
 x <- lubridate::as_datetime("1915-02-14 05:00:00")
 y <- lubridate::as_datetime("1970-07-01 05:00:00")
 longer_interval(x, y)
-#> 24:00:00 # Expected
-
-## Changing the output object class
-
-x <- as.POSIXct("1988-10-05 02:00:00")
-y <- as.POSIXlt("2100-05-07 13:30:00")
-shorter_interval(x, y, "Interval")
-#> [1] 1970-01-01 02:00:00 UTC--1970-01-01 13:30:00 UTC # Expected
-longer_interval(x, y, "Duration")
-#> [1] "45000s (~12.5 hours)" # Expected
-shorter_interval(x, y, "Period")
-#> [1] "11H 30M 0S" # Expected
-longer_interval(x, y, "hms")
-#> 12:30:00" # Expected
+#> [1] 1970-01-01 05:00:00 UTC--1970-01-02 05:00:00 UTC # Expected
 }
 \seealso{
 Other utility functions: 

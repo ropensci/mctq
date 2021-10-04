@@ -1,7 +1,7 @@
 flat_posixt <- function(posixt, base = as.Date("1970-01-01"),
                         force_tz = TRUE, tz = "UTC") {
     assert_posixt(posixt, null.ok = FALSE)
-    checkmate::assert_date(base, min.len = 1, max.len = 1)
+    checkmate::assert_date(base, len = 1, all.missing = FALSE)
     checkmate::assert_flag(force_tz)
     checkmate::assert_choice(tz, OlsonNames())
 
