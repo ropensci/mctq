@@ -2,47 +2,30 @@
 % Please edit documentation in R/sum_time.R
 \name{sum_time}
 \alias{sum_time}
+\alias{sum_times}
 \title{Sum time objects}
 \usage{
-sum_time(
-  ...,
-  class = "hms",
-  circular = FALSE,
-  vectorize = FALSE,
-  na.rm = FALSE
-)
+sum_time(..., cycle = NULL, na_rm = FALSE)
+
+sum_times(..., cycle = NULL, na_rm = FALSE)
 }
 \arguments{
 \item{...}{Objects belonging to one of the following classes: \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
 
-\item{class}{(optional) a string indicating the output class (default:
-\code{"hms"}).}
+\item{cycle}{(optional) a number indicating the cycle length in seconds. If
+\code{NULL} the function will perform a linear sum (see Details to learn
+more) (default: \code{NULL}).}
 
-\item{circular}{(optional) a \code{logical} value indicating whether the sum
-should be made in a circular time frame of 24 hours (clock hours) (default:
-\code{FALSE}).}
-
-\item{vectorize}{(optional) a \code{logical} value indicating if the function must
-operate in a vectorized fashion (default: \code{FALSE}).}
-
-\item{na.rm}{(optional) a \code{logical} value indicating if the function must
+\item{na_rm}{(optional) a \code{logical} value indicating if the function must
 remove \code{NA} values while performing the sum (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{circular = TRUE} and \code{vectorize = FALSE}, an object of
-the indicated class in \code{class} (default: \code{"hms"}) with the sum of the time
-from objects in \code{...} in a circular time frame of 24 hours.
-\item If \code{circular = FALSE} and \code{vectorize = FALSE}, an
-object of the indicated class in \code{class} (default: \code{"hms"}) with a
-linear sum of the time from objects in \code{...}.
-\item If \code{circular = TRUE} and \code{vectorize = TRUE}, an object of the indicated
-class in \code{class} (default: \code{"hms"}) with a vectorized sum of the time from
-objects in \code{...} in a circular time frame of 24 hours.
-\item If \code{circular = FALSE} and \code{vectorize = TRUE}, an object of the
-indicated class in \code{class} (default: \code{"hms"}) with a vectorized and
-linear sum of the time from objects in \code{...}.
+\item If \code{cycle = NULL}, an \code{hms} object with a linear sum of the time from
+objects in \code{...}.
+\item If \code{cycle != NULL}, an \code{hms} object with a circular sum of the time
+from objects in \code{...}.
 }
 }
 \description{
@@ -51,45 +34,110 @@ linear sum of the time from objects in \code{...}.
 \code{sum_time()} returns the sum of the time from different kinds of date/time
 objects.
 
-This function supports vectorized operations and can also be set to work with
-a circular time frame of 24 hours.
+\code{sum_times()} returns the vectorized sum of the time from different kinds of
+date/time objects.
+
+Both functions can be set to work with a circular time frame (see Details to
+learn more).
 }
 \details{
-\subsection{\code{class} argument}{
+\subsection{\code{sum_time()} versus \code{sum_times()}}{
 
-\code{sum_time()} is integrated with \code{\link[=convert]{convert()}}. That way you can choose
-what class of object you prefer as output.
+\code{sum_time()} behaves similar to \code{sum()}, in the sense that it aggregates the
+time lengths of values in \code{...} into a single data point. For example,
+\code{sum_time(c(x, y), z)} will have the same output as \code{sum_time(x, y, z)}.
 
-Valid \code{class} values are: \code{"character"}, \code{"integer"}, \code{"double"},
-\code{"numeric"}, \code{"Duration"}, \code{"Period"}, \code{"difftime"}, and \code{"hms"} (case
-insensitive).
+\code{sum_times()} performs a different type of sum (a vectorized one). Instead of
+aggregate the time lengths, the function perform a paired sum between
+elements. For example, \code{sum_time(c(x, y), c(w, z))} will return a vector like
+\code{c(sum_time(x, w), sum_time(y, z))}. Because of that, \code{sum_times()} requires
+that all objects in \code{...} have the same length.
 }
 
-\subsection{\code{vectorize} argument}{
+\subsection{Linear versus circular sum}{
 
-If \code{vectorize = FALSE} (default), \code{sum_time} will combine and sum all time
-values in \code{...}. That is, \code{sum_time(c(x, y), z)} will have the same
-output as \code{sum_time(x, y, z)}.
+Time can have different "shapes".
 
-However, if \code{vectorize = TRUE}, \code{sum_time()} will require that all objects in
-\code{...} have the same length, and will perform a paired sum between elements.
-That is, \code{sum_time(c(x, y), c(w, z))} will return a vector like
-\code{c(sum_time(x, w), sum_time(y, z))}.
+If the objective is to measure the duration of an event, time is usually
+measured considering a linear frame, with a fixed point of
+\href{https://en.wikipedia.org/wiki/Origin_(mathematics)}{origin}. In this
+context, the time value distance itself to infinity in relation to the
+origin.\preformatted{                                   B
+                             |----------|
+                                        A
+                             |---------------------|
+ - inf                                                inf +
+<----------------------------|----------|----------|------->
+ s                           0          5          10     s
+                           origin
+
+A + B = 10 + 5 = 15s
+}
+
+But that's not the only possible "shape" of time, as it can also be measured
+in other contexts.
+
+In a "time of day" context, time will be linked to the rotation of the
+earth, "resetting" when a new rotation cycle starts. That brings a different
+kind of shape to time: a circular shape. With this shape the time value
+encounters the origin at the end of the cycle (every 24 hours or 86400
+seconds).\preformatted{               - <--- h ---> +
+                    origin
+                . . . 0 . . .
+             .                 .
+            .                   .
+           .                     .
+          .                       .
+         .                         .
+         18                        6
+         .                         .
+          .                       .
+           .                     .
+            .                   .
+             .                 .
+                . . . 12 . . .
+
+18 + 6 = 0h
+}
+
+If we transpose this circular time frame to a linear one, it would look like
+this:\preformatted{-----|---------------|---------------|---------------|----->
+    0h              12h              0h             12h
+  origin                           origin
+}
+
+Note that now the origin is not fixed, but cyclical.
+
+\code{sum_time()} and \code{sum_times()} can both operate in either a linear or a
+circular fashion. If \code{cycle = NULL} (default), the function will use a
+linear approach. Else, the function will use a circular approach relative to
+the cycle length (e.g, \code{cycle = 86400} (1 day)).
 }
 
 \subsection{\code{POSIXt} objects}{
 
 \code{POSIXt} values in \code{...} will be stripped of their dates. Only the time will
 be considered.
+
+Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
+Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 }
 
 \subsection{\code{Period} objects}{
 
-\code{Period} objects are a special time of object developed by the
+\code{Period} objects are a special type of object developed by the
 \link[lubridate:lubridate-package]{lubridate} team that represents "human units",
 ignoring possible time irregularities. That is to say that 1 day as \code{Period}
-will always represent 1 day in the timeline. \code{sum_time()} ignores that
-property of \code{Period} objects, treating them like objects of class \code{Duration}.
+will always represent 1 day in the timeline. \code{sum_time()} and \code{sum_times()}
+ignores that property of \code{Period} objects, treating them like objects of
+class \code{Duration}.
+}
+
+\subsection{\code{Interval} objects}{
+
+By using \code{Interval} objects in \code{...}, \code{sum_time()} and \code{sum_times()} will
+consider only their time lengths. That is, the amount of seconds of the
+intervals.
 }
 
 \subsection{Timeline irregularities}{
@@ -100,33 +148,33 @@ it must be considered when doing time arithmetic.
 }
 }
 \examples{
-## Linear non-vectorized sum
+## Non-vectorized sum in an linear time frame
 
 x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
-sum_time(x, y, class = "duration")
-#> [1] "142200s (~1.65 days)" # Expected
+sum_time(x, y)
+#> 39:30:00 # Expected
 
 ## Non-vectorized sum in a circular time frame of 24 hours
 
 x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
-sum_time(x, circular = TRUE)
+sum_time(x, cycle = lubridate::ddays())
 #> 06:50:00 # Expected
 
 x <- c(hms::parse_hm("00:15"), hms::parse_hm("02:30"), hms::as_hms(NA))
-sum_time(x, circular = TRUE)
+sum_time(x, cycle = lubridate::ddays())
 #> NA # Expected
-sum_time(x, circular = TRUE, na.rm = TRUE)
+sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
 #> 02:45:00 # Expected
 
-## Linear vectorized sum
+## Vectorized sum in an linear time frame
 
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-sum_time(x, y, vectorize = TRUE)
+sum_times(x, y)
 #> 29:00:00 # Expected
 #>       NA # Expected
-sum_time(x, y, vectorize = TRUE, na.rm = TRUE)
+sum_times(x, y, na_rm = TRUE)
 #> 29:00:00 # Expected
 #> 10:00:00 # Expected
 
@@ -134,10 +182,10 @@ sum_time(x, y, vectorize = TRUE, na.rm = TRUE)
 
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-sum_time(x, y, circular = TRUE, vectorize = TRUE)
+sum_times(x, y, cycle = lubridate::ddays())
 #> 05:00:00 # Expected
 #>       NA # Expected
-sum_time(x, y, circular = TRUE, vectorize = TRUE, na.rm = TRUE)
+sum_times(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #> 05:00:00 # Expected
 #> 10:00:00 # Expected
 }

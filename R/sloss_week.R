@@ -108,8 +108,8 @@ sloss_week <- function(sd_w, sd_f, wd) {
 
     wd <- as.integer(wd)
     sd_week <- sd_week(sd_w, sd_f, wd)
-    sum_1 <- sum_time(sd_week, - sd_w, class = "Duration", vectorize = TRUE)
-    sum_2 <- sum_time(sd_week, - sd_f, class = "Duration", vectorize = TRUE)
+    sum_1 <- sum_times(sd_week, - sd_w) %>% lubridate::as.duration()
+    sum_2 <- sum_times(sd_week, - sd_f) %>% lubridate::as.duration()
 
     dplyr::case_when(
         sd_week > sd_w ~ sum_1 * wd,

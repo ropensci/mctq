@@ -17,6 +17,7 @@
 * `round_time()` is now a S3 generic.
 * `shortest_interval()` was renamed to `shorter_interval()`.
 * `shorter_interval()` will now return only `Interval` objects.
+* `sum_time()` now have different arguments and was divided in two functions: `sum_time()` (for non-vectorized sums) and `sum_times()` (for vectorized sums).
 * Several functions were optimized.
 * The test suite was optimized.
 

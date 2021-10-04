@@ -104,5 +104,5 @@ so <- function(sprep, slat) {
     assert_duration(slat)
     assert_identical(sprep, slat, type = "length")
 
-    sum_time(sprep, slat, class = "hms", circular = TRUE, vectorize = TRUE)
+    sum_times(sprep, slat, cycle = lubridate::ddays())
 }

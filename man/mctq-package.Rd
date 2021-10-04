@@ -8,9 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-A complete and consistent toolkit to process the Munich
-    ChronoType Questionnaire (MCTQ) for its three versions (standard,
-    micro, and shift).
+A complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ) for its three versions (standard, micro, and shift).
 }
 \seealso{
 Useful links:

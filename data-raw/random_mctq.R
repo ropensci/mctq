@@ -70,23 +70,23 @@ std_mctq_par <- function() {
 
         ms_mean <- i$ms_mean
         ms_sd <- i$ms_sd
-        ms_min <- sum_time(ms_mean, - (3 * ms_sd), circular = TRUE)
-        ms_max <- sum_time(ms_mean, + (3 * ms_sd), circular = TRUE)
+        ms_min <- sum_time(ms_mean, - (3 * ms_sd), cycle = lubridate::ddays())
+        ms_max <- sum_time(ms_mean, + (3 * ms_sd), cycle = lubridate::ddays())
 
         sd_mean <- i$sd_mean
         sd_sd <- i$sd_sd
-        sd_min <- sum_time(sd_mean, - (3 * sd_sd), circular = TRUE)
-        sd_max <- sum_time(sd_mean, + (3 * sd_sd), circular = TRUE)
+        sd_min <- sum_time(sd_mean, - (3 * sd_sd), cycle = lubridate::ddays())
+        sd_max <- sum_time(sd_mean, + (3 * sd_sd), cycle = lubridate::ddays())
 
         cli::cli_h3(paste0(
             "Local time of sleep onset (SO_", i$suffix, ")"
             ))
         cli::cat_line()
 
-        mean <- sum_time(ms_mean, - (sd_mean / 2), circular = TRUE)
-        sd <- sum_time((ms_sd + sd_sd) / 2, circular = TRUE)
-        min <- sum_time(ms_min, - (sd_mean / 2), circular = TRUE)
-        max <- sum_time(ms_max, - (sd_mean / 2), circular = TRUE)
+        mean <- sum_time(ms_mean, - (sd_mean / 2), cycle = lubridate::ddays())
+        sd <- sum_time((ms_sd + sd_sd) / 2, cycle = lubridate::ddays())
+        min <- sum_time(ms_min, - (sd_mean / 2), cycle = lubridate::ddays())
+        max <- sum_time(ms_max, - (sd_mean / 2), cycle = lubridate::ddays())
         cat_(min, max, mean, sd)
 
         cli::cli_h3(paste0(
@@ -94,10 +94,10 @@ std_mctq_par <- function() {
         ))
         cli::cat_line()
 
-        mean <- sum_time(ms_mean, + (sd_mean / 2), circular = TRUE)
-        sd <- sum_time((ms_sd + sd_sd) / 2, circular = TRUE)
-        min <- sum_time(ms_min, + (sd_mean / 2), circular = TRUE)
-        max <- sum_time(ms_max, + (sd_mean / 2), circular = TRUE)
+        mean <- sum_time(ms_mean, + (sd_mean / 2), cycle = lubridate::ddays())
+        sd <- sum_time((ms_sd + sd_sd) / 2, cycle = lubridate::ddays())
+        min <- sum_time(ms_min, + (sd_mean / 2), cycle = lubridate::ddays())
+        max <- sum_time(ms_max, + (sd_mean / 2), cycle = lubridate::ddays())
         cat_(min, max, mean, sd)
 
         cli::cli_h3(paste0(
@@ -264,8 +264,10 @@ shift_mctq_par <- function() {
 
         sprep_mean <- i$sprep_mean
         sprep_sd <- i$sprep_sd
-        sprep_min <- sum_time(sprep_mean, - (3 * sprep_sd), circular = TRUE)
-        sprep_max <- sum_time(sprep_mean, + (3 * sprep_sd), circular = TRUE)
+        sprep_min <- sum_time(sprep_mean, - (3 * sprep_sd),
+                              cycle = lubridate::ddays())
+        sprep_max <- sum_time(sprep_mean, + (3 * sprep_sd),
+                              cycle = lubridate::ddays())
         cat_(sprep_min, sprep_max, sprep_mean, sprep_sd)
 
         cli::cli_h3(paste0(
@@ -285,10 +287,10 @@ shift_mctq_par <- function() {
         ))
         cli::cat_line()
 
-        mean <- sum_time(sprep_mean, slat_mean, circular = TRUE)
+        mean <- sum_time(sprep_mean, slat_mean, cycle = lubridate::ddays())
         sd <- sum_time(sprep_sd + slat_sd)
-        min <- sum_time(sprep_min, slat_min, circular = TRUE)
-        max <- sum_time(sprep_max, slat_max, circular = TRUE)
+        min <- sum_time(sprep_min, slat_min, cycle = lubridate::ddays())
+        max <- sum_time(sprep_max, slat_max, cycle = lubridate::ddays())
         cat_(min, max, mean, sd)
 
         cli::cli_h3(paste0(
@@ -623,8 +625,8 @@ cat_ <- function(min, max, mean, sd) {
 }
 
 min_max <- function(mean, sd) {
-    min <- sum_time(mean, - (3 * sd), circular = TRUE)
-    max <- sum_time(mean, + (3 * sd), circular = TRUE)
+    min <- sum_time(mean, - (3 * sd), cycle = lubridate::ddays())
+    max <- sum_time(mean, + (3 * sd), cycle = lubridate::ddays())
 
     cat_(min, max, mean, sd)
 }
