@@ -258,7 +258,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         }
 
         dialog <- dialog_line(
-            "Press 'esc' to exit or 'enter' to continue > ",
+            "Press 'esc' to exit or 'enter' to continue >",
             space_above = FALSE, space_below = FALSE)
 
         grDevices::dev.off()
