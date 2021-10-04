@@ -4,42 +4,24 @@
 \alias{assign_date}
 \title{Assign dates to two sequential hours}
 \usage{
-assign_date(
-  start,
-  end,
-  return = "Interval",
-  ambiguity = 0,
-  start_name = deparse(substitute(start)),
-  end_name = deparse(substitute(end))
-)
+assign_date(start, end, ambiguity = 0)
 }
 \arguments{
 \item{start, end}{A \code{hms} or \code{POSIXt} object indicating the start or end
 hour.}
 
-\item{return}{(optional) a string indicating the type of the output (see
-Details) (default: \code{"Interval"}).}
-
 \item{ambiguity}{(optional) a \code{numeric} or \code{NA} value to instruct
 \code{assign_date()} on how to deal with ambiguities (see Details) (default:
 \code{0}).}
-
-\item{start_name, end_name}{(optional) a string indicating a name associated
-with the \code{start} and \code{end} argument.}
 }
 \value{
-\itemize{
-\item If \code{return = "Interval"}, a \code{start}--\code{end} \code{Interval} object.
-\item If \code{return = "list"}, a named list with \code{start} and \code{end} as elements.
-\item If \verb{return = "start}, only the \code{start} output.
-\item If \code{return = "end"}, only the \code{end} output.
-}
+A \code{start}--\code{end} \code{Interval} object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{assign_date()} assign dates to two sequential hours. It can facilitate
-time arithmetic by locating time values without date reference on a
+time arithmetic by locating time values without a date reference on a
 timeline.
 }
 \details{
@@ -77,39 +59,29 @@ hours, i.e., \code{start} and \code{end} distance themselves by one day.
 }
 }
 
-\subsection{\code{return} argument}{
+\subsection{Base date and timezone}{
 
-\code{assign_date()} can return different outputs:
-\itemize{
-\item \code{return = "Interval"}: returns a \code{start}--\code{end} \code{Interval} object.
-\item \code{return = "list"}: returns a \code{list} object with two named elements
-corresponding to \code{start} and \code{end} output.
-\item \code{return = "start"}: returns only the \code{start} output.
-\item \code{return = "end"}: returns only the \code{end} output.
-}
-}
+\code{assign_date()} uses the
+\href{https://en.wikipedia.org/wiki/Unix_time}{Unix epoch} (1970-01-01) date as
+the start date for creating intervals.
 
-\subsection{\code{start_name} and \code{end_name} arguments}{
-
-These arguments serve to instruct \code{assign_date()} on how to name the
-list elements when \code{return = "list"}. By default, the function will name
-these elements with the names of the variables assigned to \code{start} and \code{end}
-arguments.
-
-If the number of characters (\code{nchar()}) of \code{start_name} or \code{end_name} are
-equal or greater than 30, \code{assign_date()} will name the list elements as
-\code{"start"} and \code{"end"}.
+The output will always have \code{"UTC"} set as timezone. Learn more about
+time zones in \link[base:timezones]{base::timezone}.
 }
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} values passed as argument to \code{start} or \code{end} will be stripped of
+\code{POSIXt} objects passed as argument to \code{start} or \code{end} will be stripped of
 their dates. Only the time will be considered.
+
+Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
+Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 }
 
 \subsection{\code{NA} values}{
 
-\code{assign_date()} will return \code{NA} if \code{start} or \code{end} are \code{NA}.
+\code{assign_date()} will return an \code{Interval} \code{NA}-\code{NA} if \code{start} or \code{end} are
+\code{NA}.
 }
 }
 \examples{
@@ -137,33 +109,6 @@ end <- c(hms::parse_hm("21:15"), hms::parse_hm("04:30"))
 assign_date(start, end)
 #> [1] 1970-01-01 09:45:00 UTC--1970-01-01 21:15:00 UTC # Expected
 #> [2] 1970-01-01 20:30:00 UTC--1970-01-02 04:30:00 UTC # Expected
-
-## To return `start` and `end` as interval (default)
-
-start <- hms::parse_hm("12:34")
-end <- hms::parse_hm("01:25")
-assign_date(start, end)
-#> [1] 1970-01-01 12:34:00 UTC--1970-01-02 01:25:00 UTC # Expected
-
-## To return `start` and `end` as list
-
-start <- hms::parse_hm("22:15")
-end <- hms::parse_hm("00:01")
-assign_date(start, end, return = "list")
-#> $start # Expected
-#> [1] "1970-01-01 22:15:00 UTC" # Expected
-#> # Expected
-#> $end # Expected
-#> [1] "1970-01-02 00:01:00 UTC" # Expected
-
-## To return only `start` or `end`
-
-start <- lubridate::parse_date_time("01:10:00", "HMS")
-end <- lubridate::parse_date_time("11:45:00", "HMS")
-assign_date(start, end, return = "start")
-#> [1] "1970-01-01 01:10:00 UTC" # Expected
-assign_date(start, end, return = "end")
-#> [1] "1970-01-01 11:45:00 UTC" # Expected
 
 ## To assign a 24 hours interval to ambiguities
 
