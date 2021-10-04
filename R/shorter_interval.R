@@ -65,6 +65,14 @@
 #'             12h             12h             12h
 #' ```
 #'
+#' ## Class requirements
+#'
+#' The `mctq` package works with a set of object classes specially created to
+#' hold time values. These classes can be found in the [hms][hms::hms-package]
+#' and [lubridate][lubridate::lubridate-package] package. If your data do not
+#' conform to the object classes required, you can use the `mctq`
+#' [mctq::convert()] function to convert it.
+#'
 #' ## Base date and timezone
 #'
 #' `shorter_interval()` uses the
@@ -74,14 +82,6 @@
 #' The output will always have `"UTC"` set as timezone. Learn more about
 #' time zones in [base::timezone].
 #'
-#' ## Class requirements
-#'
-#' The `mctq` package works with a set of object classes specially created to
-#' hold time values. These classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] package. If your data do not
-#' conform to the object classes required, you can use the `mctq`
-#' [mctq::convert()] function to convert it.
-#'
 #' ## `POSIXt` objects
 #'
 #' `POSIXt` objects passed as argument to `x` or `y` will be stripped of their
@@ -89,6 +89,11 @@
 #'
 #' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
 #' Learn more about it in [base::DateTimeClasses].
+#'
+#' ## `NA` values
+#'
+#' `shorter_interval()` will return an `Interval` `NA`-`NA` if `x` or `y` are
+#' `NA`.
 #'
 #' @param x,y A `hms` or `POSIXt` object.
 #' @param inverse (optional) a `logical` value indicating if the function must
