@@ -86,8 +86,7 @@ test_that("assign_date() | `start_name` and `end_name` test", {
 test_that("assign_date() | error test", {
   expect_error(assign_date(1, hms::hms(1)), "Assertion on 'start' failed")
   expect_error(assign_date(hms::hms(1), 1), "Assertion on 'end' failed")
-  expect_error(assign_date(hms::hms(1), c(hms::hms(1), hms::hms(1))),
-               "'start' and 'end' must have identical lengths")
+  expect_error(assign_date(hms::hms(1), c(hms::hms(1), hms::hms(1))))
   expect_error(assign_date(hms::hms(1), hms::hms(1) , return = "x"),
                "Assertion on 'tolower\\(return\\)' failed")
   expect_error(assign_date(hms::hms(1), hms::hms(1) , ambiguity = "x"),

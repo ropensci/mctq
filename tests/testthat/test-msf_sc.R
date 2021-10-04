@@ -107,8 +107,7 @@ test_that("msf_sc() | error test", {
 
     expect_error(msf_sc(hms::hms(1), lubridate::duration(1),
                         lubridate::duration(1), lubridate::duration(1),
-                        c(TRUE, FALSE)),
-                 "'msf', 'sd_w', 'sd_f', 'sd_week', and 'alarm_f' must have ")
+                        c(TRUE, FALSE)))
 })
 
 test_that("msf_sc() | wrappers", {

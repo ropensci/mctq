@@ -105,8 +105,7 @@ test_that("sjl() | error test", {
     expect_error(sjl(hms::hms(1), hms::hms(1), TRUE, 1),
                  "Assertion on 'method' failed")
 
-    expect_error(sjl(hms::hms(1), c(hms::hms(1), hms::hms(1))),
-                 "'msw' and 'msf' must have identical lengths.")
+    expect_error(sjl(hms::hms(1), c(hms::hms(1), hms::hms(1))))
 })
 
 test_that("sjl() | wrappers", {

@@ -835,8 +835,10 @@ normalize <- function(min, max, mean, ambiguity = 24) {
         mean <- hms::hms(as.numeric(mean + lubridate::ddays()))
         list(min = min, max = max, mean = mean)
     } else {
-        stop("'mean' can't be found within the interval between 'min' ",
-             "and 'max'", call. = FALSE)
+        cli::cli_abort(paste0(
+            "'mean' cannot be found within the interval between 'min' ",
+            "and 'max'."
+        ))
     }
 
 }
@@ -863,8 +865,10 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
     by <- as.numeric(by)
 
     if (size > length(seq(min, max, by)) && isFALSE(replace)) {
-        stop("You cannot take a sample larger than the population ",
-             "when 'replace = FALSE'", call. = FALSE)
+        cli::cli_abort(paste0(
+            "You cannot take a sample larger than the population ",
+            "when 'replace = FALSE'."
+        ))
     }
 
     sample <- sample(seq(min, max, by), size = size, replace = replace,
@@ -924,7 +928,7 @@ sampler_2 <- function(x, by, envir) {
         for (i in seq(3)) { # Bias
             free <- get(x$name, envir = envir)
 
-            check <- shush(shorter_interval(free, work, class = "Interval"))
+            check <- shush(shorter_interval(free, work))
             check <- lubridate::int_end(check)
             if (hms::as_hms(check) == free) break
 
@@ -966,8 +970,8 @@ sampler_3 <- function(x, y, by, envir) {
         for (i in seq(3)) { # Bias
             x_free <- get(x$name, envir = envir)
 
-            check_w <- shush(shorter_interval(x_work, y_work))
-            check_f <- shush(shorter_interval(x_free, y_free))
+            check_w <- shush(convert(shorter_interval(x_work, y_work), "hms"))
+            check_f <- shush(convert(shorter_interval(x_free, y_free), "hms"))
             if (check_f >= check_w) break
 
             sample <- clock_roll(sample_time(min = min, max = max, by = by,

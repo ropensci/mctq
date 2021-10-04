@@ -51,6 +51,5 @@ test_that("le_week() | error test", {
                  "Assertion on 'wd' failed")
 
     expect_error(le_week(lubridate::duration(1), lubridate::duration(1),
-                         c(1, 1)),
-                 "'le_w', 'le_f', and 'wd' must have identical lengths.")
+                         c(1, 1)))
 })

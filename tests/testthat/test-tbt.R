@@ -19,6 +19,5 @@ test_that("tbt() | error test", {
     expect_error(tbt(hms::hms(1), 1),
                  "Assertion on 'gu' failed")
 
-    expect_error(tbt(hms::hms(1), c(hms::hms(1), hms::hms(1))),
-                 "'bt' and 'gu' must have identical lengths.")
+    expect_error(tbt(hms::hms(1), c(hms::hms(1), hms::hms(1))))
 })

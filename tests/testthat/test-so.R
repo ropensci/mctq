@@ -20,6 +20,5 @@ test_that("so() | error test", {
                  "Assertion on 'slat' failed")
 
     expect_error(so(hms::hms(1), c(lubridate::duration(1),
-                                   lubridate::duration(1))),
-                 "Assertion failed: 'sprep' and 'slat' must have identical ")
+                                   lubridate::duration(1))))
 })

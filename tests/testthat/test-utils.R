@@ -1,26 +1,26 @@
 test_that("flat_posixct() | general test", {
     expect_equal(flat_posixt(lubridate::dmy_hms("17/04/1995 12:00:00"),
-                             TRUE,
-                             "1970-01-01"),
+                             base = as.Date("1970-01-01"),
+                             force_tz = TRUE),
                  lubridate::ymd_hms("1970-01-01 12:00:00"))
     expect_equal(flat_posixt(lubridate::dmy_hms("17/04/1995 12:00:00",
                                                 tz = "EST"),
-                             FALSE,
-                             "1970-01-01"),
+                             base = as.Date("1970-01-01"),
+                             force_tz = FALSE),
                  lubridate::ymd_hms("1970-01-01 12:00:00", tz = "EST"))
     expect_equal(flat_posixt(lubridate::dmy_hms("17/04/1995 12:00:00",
                                                 tz = "EST"),
-                             TRUE,
-                             "2000-01-01"),
+                             base = as.Date("2000-01-01"),
+                             force_tz = TRUE),
                  lubridate::ymd_hms("2000-01-01 12:00:00"))
 })
 
 test_that("flat_posixct() | error test", {
-    expect_error(flat_posixt(1, TRUE, ""), "Assertion on 'posixt' failed")
-    expect_error(flat_posixt(lubridate::as_datetime(1), "", ""),
-                 "Assertion on 'force_utc' failed")
-    expect_error(flat_posixt(lubridate::as_datetime(1), TRUE, 1),
+    expect_error(flat_posixt(1), "Assertion on 'posixt' failed")
+    expect_error(flat_posixt(lubridate::as_datetime(1), base = ""),
                  "Assertion on 'base' failed")
+    expect_error(flat_posixt(lubridate::as_datetime(1), force_tz = 1),
+                 "Assertion on 'force_tz' failed")
 })
 
 test_that("midday_change() | general test", {
@@ -117,36 +117,6 @@ test_that("class_collapse() | general test", {
     expect_equal(class_collapse(lubridate::dhours()),
                  single_quote_(paste0(class(lubridate::dhours()),
                                       collapse = "/")))
-})
-
-test_that("paste_collapse() | general test", {
-    expect_equal(paste_collapse("test"), "test")
-    expect_equal(paste_collapse(c(1, 2, 3), sep = ", ", last = ", and "),
-                 "1, 2, and 3")
-})
-
-test_that("paste_collapse() | error test", {
-    expect_error(paste_collapse("", 1, ""), "Assertion on 'sep' failed")
-    expect_error(paste_collapse("", "", 1), "Assertion on 'last' failed")
-})
-
-test_that("inline_collapse() | general test", {
-    expect_equal(inline_collapse("test", FALSE, FALSE), "test")
-    expect_equal(inline_collapse("test", TRUE, FALSE),
-                 paste0("'", "test", "'"))
-    expect_equal(inline_collapse(c(1, 2), FALSE, FALSE),
-                 paste0(1, " and ", 2))
-    expect_equal(inline_collapse(c(1, 2), TRUE, FALSE),
-                 paste0("'1'", " and ", "'2'"))
-    expect_equal(inline_collapse(c(1, 2, 3), TRUE, TRUE),
-                 paste0("'1'", ", ", "'2'", ", and ", "'3'"))
-})
-
-test_that("inline_collapse() | error test", {
-    expect_error(inline_collapse("", "", TRUE),
-                 "Assertion on 'single_quote' failed")
-    expect_error(inline_collapse("", TRUE, ""),
-                 "Assertion on 'serial_comma' failed")
 })
 
 test_that("shush() | general test", {
@@ -263,10 +233,8 @@ test_that("str_subset_() | error test", {
 
 test_that("require_pkg() | general test", {
     expect_null(require_pkg("base"))
-    expect_error(require_pkg("test"),
-                 "This function requires the 'test' package to run. ")
-    expect_error(require_pkg("test1", "test2"),
-                 "This function requires the 'test1' and 'test2' packages ")
+    expect_error(require_pkg("test"))
+    expect_error(require_pkg("test1", "test2"))
 
     # ## Don't forget to run devtools::load_all(".") and uncomment the variables
     # ## before trying to run the tests interactively.

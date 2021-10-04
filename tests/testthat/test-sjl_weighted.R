@@ -52,6 +52,5 @@ test_that("sjl_weighted() | error test", {
 
     # `sjl` and `n_w` have different object lengths inside elements
     expect_error(sjl_weighted(list(sjl_m = lubridate::duration(1)),
-                              list(n_w_m = c(1, 1))),
-                  "'dots\\[\\[1L\\]\\]\\[\\[1L\\]\\]' and 'dots\\[\\[2L\\]\\]")
+                              list(n_w_m = c(1, 1))))
 })

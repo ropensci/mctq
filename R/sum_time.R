@@ -148,8 +148,10 @@ sum_time <- function(..., class = "hms", circular = FALSE, vectorize = FALSE,
 
     if (isTRUE(vectorize) &&
         !(length(unique(vapply(out, length, integer(1)))) == 1)) {
-        stop("When 'vectorize' is 'TRUE', all values in '...' must have ",
-             "the same length.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "When 'vectorize' is 'TRUE', all values in '...' must have ",
+            "the same length."
+        ))
     }
 
     normalize <- function(x) {

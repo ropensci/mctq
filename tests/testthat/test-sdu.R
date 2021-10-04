@@ -17,6 +17,5 @@ test_that("sdu() | error test", {
     expect_error(sdu(1, hms::hms(1)), "Assertion on 'so' failed")
     expect_error(sdu(hms::hms(1), 1), "Assertion on 'se' failed")
 
-    expect_error(sdu(hms::hms(1), c(hms::hms(1), hms::hms(1))),
-                 "'so' and 'se' must have identical lengths.")
+    expect_error(sdu(hms::hms(1), c(hms::hms(1), hms::hms(1))))
 })

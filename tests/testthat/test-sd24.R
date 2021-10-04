@@ -28,6 +28,5 @@ test_that("sd24() | error test", {
 
     expect_error(sd24(lubridate::as.duration(1), c(lubridate::as.duration(1),
                                                    lubridate::as.duration(1)),
-                      TRUE),
-                 "'sd', 'napd', and 'nap' must have identical lengths.")
+                      TRUE))
 })

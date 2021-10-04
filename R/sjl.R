@@ -221,11 +221,9 @@ sjl <- function(msw, msf, abs = TRUE, method = "shorter") {
                  vectorize = TRUE)
     } else {
         if (method == "shorter") {
-            interval <- shorter_interval(msw, msf, class = "Interval",
-                                          quiet = TRUE)
+            interval <- shush(shorter_interval(msw, msf))
         } else if (method == "longer") {
-            interval <- longer_interval(msw, msf, class = "Interval",
-                                        quiet = TRUE)
+            interval <- shush(longer_interval(msw, msf))
         }
 
         int_start <- hms::as_hms(lubridate::int_start(interval))

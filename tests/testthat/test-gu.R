@@ -20,6 +20,5 @@ test_that("gu() | error test", {
                  "Assertion on 'si' failed")
 
     expect_error(gu(hms::hms(1), c(lubridate::duration(1),
-                                   lubridate::duration(1))),
-                 "'se' and 'si' must have identical lengths.")
+                                   lubridate::duration(1))))
 })

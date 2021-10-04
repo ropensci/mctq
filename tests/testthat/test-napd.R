@@ -17,6 +17,5 @@ test_that("napd() | error test", {
     expect_error(napd(1, hms::hms(1)), "Assertion on 'napo' failed")
     expect_error(napd(hms::hms(1), 1), "Assertion on 'nape' failed")
 
-    expect_error(napd(hms::hms(1), c(hms::hms(1), hms::hms(1))),
-                 "'napo' and 'nape' must have identical lengths.")
+    expect_error(napd(hms::hms(1), c(hms::hms(1), hms::hms(1))))
 })

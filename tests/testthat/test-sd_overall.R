@@ -65,6 +65,5 @@ test_that("sd_overall() | error test", {
                  "Assertion on 'n_f' failed")
 
     expect_error(sd_overall(lubridate::duration(1), lubridate::duration(1),
-                            c(1, 1), 1),
-                 "'sd_w', 'sd_f', 'n_w', and 'n_f' must have identical ")
+                            c(1, 1), 1))
 })

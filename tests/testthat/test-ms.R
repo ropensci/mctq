@@ -21,6 +21,5 @@ test_that("ms() | error test", {
     expect_error(ms(hms::hms(1), 1),
                  "Assertion on 'sd' failed")
     expect_error(ms(hms::hms(1), c(lubridate::duration(1),
-                                   lubridate::duration(1))),
-                 "'so' and 'sd' must have identical lengths.")
+                                   lubridate::duration(1))))
 })

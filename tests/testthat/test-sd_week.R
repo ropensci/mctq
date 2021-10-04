@@ -50,6 +50,5 @@ test_that("sd_week() | error test", {
                  "Assertion on 'wd' failed")
 
     expect_error(sd_week(lubridate::duration(1), lubridate::duration(1),
-                         c(1, 1)),
-                 "'sd_w', 'sd_f', and 'wd' must have identical lengths.")
+                         c(1, 1)))
 })

@@ -15,7 +15,8 @@
 * The DESCRIPTION file now requires a lubridate version `>= 1.7.9`. `vctrs` support was added in this version, fixing some issues related to rounding `Duration`, `Period`, and `Interval` objects. Click [here](https://github.com/tidyverse/lubridate/pull/871) to learn more.
 * The DESCRIPTION file now requires a dplyr version `>= 0.2`. That's when the `dplyr` start to import the pipe operator. Click [here](https://github.com/tidyverse/dplyr/blob/master/NEWS.md#piping) to learn more.
 * `round_time()` is now a S3 generic.
-* `shortest_interval()` was renamed to `shorter_interval()`
+* `shortest_interval()` was renamed to `shorter_interval()`.
+* `shorter_interval()` will now return only `Interval` objects.
 * Several functions were optimized.
 * The test suite was optimized.
 

@@ -791,7 +791,7 @@ convert.data.frame <- function(x, class, ..., cols = NULL, where = NULL,
     }
 
     if (is.null(cols) & is.null(where)) {
-        stop("'cols' and 'where' cannot both be 'NULL'.", call. = FALSE)
+        cli::cli_abort("'cols' and 'where' cannot both be 'NULL'.")
     }
 
     call <- function(x) {
@@ -869,27 +869,34 @@ parser_1 <- function(x, class, ..., orders = NULL, tz = "UTC",
     if (is.character(x)) x <- fix_character(x)
 
     if (!identical(count_na(x), count_na(shush(as.numeric(x))))) {
-        stop("To convert 'character' objects to units, all values must be ",
-             "able to be coerced to 'numeric'. Try `as.numeric(x)` to check ",
-             "for errors.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "To convert 'character' objects to units, all values must be ",
+            "able to be coerced to 'numeric'. Try `as.numeric(x)` to check ",
+            "for errors."
+        ))
     }
 
     if (!is.null(output_unit) && is.null(input_unit)) {
-        stop("'x' can only be converted to 'output_unit' if 'input_unit' ",
-             "is assigned.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "'x' can only be converted to 'output_unit' if 'input_unit' ",
+             "is assigned."
+        ))
     }
 
     if (!is.null(output_unit) &&
         !(class %in% c("integer", "double", "numeric"))) {
-        stop("'x' can only be converted to 'output_unit' if 'class' ",
-             "is 'integer', 'double', or 'numeric'.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "'x' can only be converted to 'output_unit' if 'class' ",
+            "is 'integer', 'double', or 'numeric'."
+        ))
     }
 
     if (class %in% c("integer", "double", "numeric") &&
         (is.null(input_unit) || is.null(output_unit))) {
-        stop("input_unit' and 'output_unit' must both be assigned, or be ",
-             "'NULL', when 'class' is equal to ", single_quote_(class), ".",
-             call. = FALSE)
+        cli::cli_abort(paste0(
+            "input_unit' and 'output_unit' must both be assigned, or be ",
+            "'NULL', when 'class' is equal to {single_quote_(class)}."
+        ))
     }
 
     if (!is.null(input_unit) && !is.null(output_unit)) {
@@ -947,8 +954,10 @@ parser_3 <- function(x, class, ..., output_unit = NULL,
     class <- tolower(class)
 
     if (!(class %in% c("integer", "double", "numeric"))) {
-        stop("'x' can be only be converted to 'output_unit' if 'class' ",
-             "is 'integer', 'double' or 'numeric'.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "'x' can be only be converted to 'output_unit' if 'class' ",
+            "is 'integer', 'double' or 'numeric'."
+        ))
     }
 
     x <- convert_to_unit(x, input_unit = NULL, output_unit = output_unit,
@@ -1089,8 +1098,10 @@ convert_to_seconds <- function(x, input_unit = NULL,
     checkmate::assert_flag(quiet)
 
     if (!test_temporal(x) && is.null(input_unit)) {
-        stop("When 'x' is 'integer' or 'numeric', 'input_unit' cannot be ",
-             "'NULL'.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "When 'x' is 'integer' or 'numeric', 'input_unit' cannot be ",
+            "'NULL'."
+        ))
     }
 
     ## rad_second <- (2 * pi) / 24 / 60 / 60

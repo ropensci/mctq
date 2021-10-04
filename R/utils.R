@@ -1,12 +1,14 @@
-flat_posixt <- function(posixt, force_utc = TRUE, base = "1970-01-01") {
+flat_posixt <- function(posixt, base = as.Date("1970-01-01"),
+                        force_tz = TRUE, tz = "UTC") {
     assert_posixt(posixt, null.ok = FALSE)
-    checkmate::assert_flag(force_utc)
-    checkmate::assert_string(base, pattern = "\\d{4}-\\d{2}-\\d{2}")
+    checkmate::assert_date(base, min.len = 1, max.len = 1)
+    checkmate::assert_flag(force_tz)
+    checkmate::assert_choice(tz, OlsonNames())
 
     lubridate::date(posixt) <- base
 
-    if (isTRUE(force_utc)) {
-        lubridate::force_tz(posixt, "UTC")
+    if (isTRUE(force_tz)) {
+        lubridate::force_tz(posixt, tz)
     } else {
         posixt
     }
@@ -71,19 +73,24 @@ change_day <- function(x, day) {
 
     if (any(lubridate::month(x) %in% c(4, 6, 9, 11), na.rm = TRUE)
         && day > 30) {
-        stop("You can't assign more than 30 days to April, June, ",
-             "September, or November.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "You can't assign more than 30 days to April, June, ",
+            "September, or November."
+        ))
     }
 
     if (any(lubridate::month(x) == 2 & !lubridate::leap_year(x)) && day > 28) {
-        stop("You can't assign more than 28 days to February in ",
-             "non-leap years.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "You can't assign more than 28 days to February in ",
+            "non-leap years."
+        ))
     }
 
     if (any(lubridate::month(x) == 2 & lubridate::leap_year(x), na.rm = TRUE) &&
         day > 29) {
-        stop("You can't assign more than 29 days to February in a leap year.",
-             call. = FALSE)
+        cli::cli_abort(paste0(
+            "You can't assign more than 29 days to February in a leap year."
+        ))
     }
 
     lubridate::day(x) <- day
@@ -95,30 +102,6 @@ single_quote_ <- function(x) paste0("'", x, "'")
 double_quote_ <- function(x) paste0("\"", x, "\"")
 backtick_ <- function(x) paste0("`", x, "`")
 class_collapse <- function(x) single_quote_(paste0(class(x), collapse = "/"))
-
-paste_collapse <- function(x, sep = "", last = sep) {
-    checkmate::assert_string(sep)
-    checkmate::assert_string(last)
-
-    if (length(x) == 1) {
-        x
-    } else {
-        paste0(paste(x[-length(x)], collapse = sep), last, x[length(x)])
-    }
-}
-
-inline_collapse <- function(x, single_quote = TRUE, serial_comma = TRUE) {
-    checkmate::assert_flag(single_quote)
-    checkmate::assert_flag(serial_comma)
-
-    if (isTRUE(single_quote)) x <- single_quote_(x)
-
-    if (length(x) <= 2 || isFALSE(serial_comma)) {
-        paste_collapse(x, sep = ", ", last = " and ")
-    } else {
-        paste_collapse(x, sep = ", ", last = ", and ")
-    }
-}
 
 shush <- function(x, quiet = TRUE) {
     if (isTRUE(quiet)) {
@@ -239,7 +222,7 @@ require_pkg <- function(...) {
            pattern = "^[A-Za-z][A-Za-z0-9.]+[A-Za-z0-9]$")
 
     if (!identical(unique(unlist(out)), unlist(out))) {
-        stop("'...' cannot have duplicated values.", call. = FALSE)
+        cli::cli_abort("'...' cannot have duplicated values.")
     }
 
     pkg <- unlist(out)
@@ -250,13 +233,11 @@ require_pkg <- function(...) {
     if (length(pkg) == 0) {
         invisible(NULL)
     } else {
-        stop("This function requires the ", inline_collapse(pkg), " ",
-             ifelse(length(pkg) == 1, "package", "packages"), " ",
-             "to run. You can install ",
-             ifelse(length(pkg) == 1, "it", "them"), " ",
-             "by running: \n\n",
+        cli::cli_abort(paste0(
+            "This function requires the {single_quote_(pkg)} package{?s} ",
+             "to run. You can install {?it/them} by running:", "\n\n",
              "install.packages(",
-             paste(double_quote_(pkg), collapse = ", "), ")",
-             call. = FALSE)
+             "{paste(double_quote_(pkg), collapse = ', ')})"
+            ))
     }
 }

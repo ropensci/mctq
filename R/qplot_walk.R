@@ -132,15 +132,16 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
                        midday_change = TRUE) {
     if (!is_interactive()) {
-        stop("This function can only be used in interactive mode.",
-             call. = FALSE)
+        cli::cli_abort("This function can only be used in interactive mode.")
     }
 
     require_pkg("utils", "grDevices", "ggplot2")
 
     if (any(c("x", "y", "data") %in% names(list(...)))) {
-        stop("'x', 'y' and `data` are reserved arguments for ",
-            "'qplot_walk()'.", call. = FALSE)
+        cli::cli_abort(paste0(
+            "'x', 'y' and `data` are reserved arguments for ",
+            "'qplot_walk()'."
+        ))
     }
 
     if (is.data.frame(data)) {
@@ -153,15 +154,17 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         checkmate::assert_flag(remove_id)
 
         if (!is.null(cols) && !is.null(pattern)) {
-            stop("'cols' and 'pattern' can't both have values. ",
-                "You need to choose only one selection method.", call. = FALSE)
+            cli::cli_abort(paste0(
+                "'cols' and 'pattern' can't both have values. ",
+                "You need to choose only one selection method."
+            ))
         }
     }
 
     checkmate::assert_flag(midday_change)
 
     if (!is.atomic(data) && !is.data.frame(data)) {
-        stop("'data' must be an 'atomic' object or a data frame.", call. = FALSE)
+        cli::cli_abort("'data' must be an 'atomic' object or a data frame.")
     }
 
     transform <- function(x, midday_change = TRUE) {
@@ -203,23 +206,24 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         cols <- grep(pattern, names(data), value = TRUE)
 
         if (length(cols) == 0) {
-            stop("None match was found in 'names(data)'.", call. = FALSE)
+            cli::cli_abort("None match was found in 'names(data)'.")
         }
     }
 
     if (!is.null(ignore)) {
         if (all(unique(get_class(data[cols])) %in% ignore)) {
-            stop("You can't ignore all variables in 'cols' or in 'data'. ",
+            cli::cli_abort(paste0(
+                "You can't ignore all variables in 'cols' or in 'data'. ",
                 "Note that `qplot_walk()` is set by default to ignore ",
-                "'character' objects. Please check your settings.",
-                call. = FALSE)
+                "'character' objects. Please check your settings."
+            ))
         }
 
         if (any(ignore %in% get_class(data[cols]))) {
             match <- names(data[cols])[get_class(data[cols]) %in% ignore]
 
             cli::cli_alert_warning(paste0(
-                inline_collapse(match), " will be ignored due to the ",
+                "{single_quote_(match)} will be ignored due to the ",
                 "settings in the 'ignore' argument."
             ))
         }

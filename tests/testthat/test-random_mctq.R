@@ -36,7 +36,7 @@ test_that("random_std_mctq() | general test", {
     # "if (isFALSE(reasons_f))"
     set.seed(2)
     x <- random_std_mctq()
-    check <- shorter_interval(x$bt_w, x$bt_f, "Interval")
+    check <- shorter_interval(x$bt_w, x$bt_f)
     check <- lubridate::int_end(check)
     expect_true(hms::as_hms(check) == x$bt_f)
 
@@ -92,7 +92,7 @@ test_that("normalize() | general test", {
     expect_error(normalize(hms::parse_hm("12:00"),
                            hms::parse_hm("03:00"),
                            hms::parse_hm("06:00")),
-                 "'mean' can't be found within the interval between 'min' ")
+                 "'mean' cannot be found within the interval between 'min' ")
 
     expect_error(normalize("", hms::hms(1), hms::hms(1)),
                  "Assertion on 'min' failed")
