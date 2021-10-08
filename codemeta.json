@@ -290,7 +290,7 @@
     }
   ],
   "releaseNotes": "https://github.com/gipso/mctq/blob/master/NEWS.md",
-  "fileSize": "752.841KB",
+  "fileSize": "743.004KB",
   "contIntegration": ["https://github.com/gipso/mctq/actions", "https://codecov.io/gh/gipso/mctq"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
   "keywords": [

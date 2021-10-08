@@ -86,8 +86,8 @@ promote it to the public. We hope that it will be available on
 can install it from GitHub with:
 
 ``` r
-# install.packages("pak")
-pak::pkg_install("gipso/mctq")
+# install.packages("remotes")
+remotes::install_github("gipso/mctq")
 ```
 
 ## Usage

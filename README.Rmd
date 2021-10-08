@@ -56,8 +56,8 @@ In case you don't feel comfortable with R, we strongly recommend checking Hadley
 The first stable `mctq` version is already out, we're just waiting for the [software peer-review](https://github.com/ropensci/software-review/issues/434) to promote it to the public. We hope that it will be available on [CRAN](https://cran.r-project.org/) soon. Until that moment comes, you can install it from GitHub with:
 
 ``` {r, eval = FALSE}
-# install.packages("pak")
-pak::pkg_install("gipso/mctq")
+# install.packages("remotes")
+remotes::install_github("gipso/mctq")
 ```
 
 ## Usage

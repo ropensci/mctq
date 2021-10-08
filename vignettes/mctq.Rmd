@@ -33,13 +33,13 @@ Let's start with the basics. The first thing you must do to use `mctq` is to hav
 To install a GitHub package you're going to need the [pak](https://pak.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
 
 ```{r, eval = FALSE}
-install.packages("pak")
+install.packages("remotes")
 ```
 
 After `pak` is installed, install `mctq` with:
 
 ```{r, eval = FALSE}
-pak::pkg_install("gipso/mctq")
+remotes::install_github("gipso/mctq")
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:
