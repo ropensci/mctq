@@ -7,25 +7,26 @@
 #' `sum_time()` returns the sum of the time from different kinds of date/time
 #' objects.
 #'
-#' `sum_times()` returns the vectorized sum of the time from different kinds of
-#' date/time objects.
+#' `vct_sum_time()` returns the vectorized sum of the time from different kinds
+#' of date/time objects.
 #'
 #' Both functions can be set to work with a circular time frame (see Details to
 #' learn more).
 #'
 #' @details
 #'
-#' ## `sum_time()` versus `sum_times()`
+#' ## `sum_time()` versus `vct_sum_time()`
 #'
-#' `sum_time()` behaves similar to `sum()`, in the sense that it aggregates the
-#' time lengths of values in `...` into a single data point. For example,
-#' `sum_time(c(x, y), z)` will have the same output as `sum_time(x, y, z)`.
+#' `sum_time()` behaves similar to [base::sum()], in the sense that it
+#' aggregates the time lengths of values in `...` into a single data point. For
+#' example, `sum_time(c(x, y), z)` will have the same output as `sum_time(x, y,
+#' z)`.
 #'
-#' `sum_times()` performs a different type of sum (a vectorized one). Instead of
-#' aggregate the time lengths, the function perform a paired sum between
+#' `vct_sum_time()` performs a different type of sum (a vectorized one). Instead
+#' of aggregating the time lengths, the function perform a paired sum between
 #' elements. For example, `sum_time(c(x, y), c(w, z))` will return a vector like
-#' `c(sum_time(x, w), sum_time(y, z))`. Because of that, `sum_times()` requires
-#' that all objects in `...` have the same length.
+#' `c(sum_time(x, w), sum_time(y, z))`. Because of that, `vct_sum_time()`
+#' requires that all objects in `...` have the same length.
 #'
 #' ## Linear versus circular sum
 #'
@@ -56,8 +57,7 @@
 #' In a "time of day" context, time will be linked to the rotation of the
 #' earth, "resetting" when a new rotation cycle starts. That brings a different
 #' kind of shape to time: a circular shape. With this shape the time value
-#' encounters the origin at the end of the cycle (every 24 hours or 86400
-#' seconds).
+#' encounters the origin at the end of each cycle.
 #'
 #' ```
 #'                - <--- h ---> +
@@ -84,21 +84,21 @@
 #'
 #'
 #' ```
-#' -----|---------------|---------------|---------------|----->
+#' <----|---------------|---------------|---------------|----->
 #'     0h              12h              0h             12h
 #'   origin                           origin
 #' ```
 #'
 #' Note that now the origin is not fixed, but cyclical.
 #'
-#' `sum_time()` and `sum_times()` can both operate in either a linear or a
+#' `sum_time()` and `vct_sum_time()` can both operate in either a linear or a
 #' circular fashion. If `cycle = NULL` (default), the function will use a
 #' linear approach. Else, the function will use a circular approach relative to
 #' the cycle length (e.g, `cycle = 86400` (1 day)).
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` values in `...` will be stripped of their dates. Only the time will
+#' `POSIXt` objects in `...` will be stripped of their dates. Only the time will
 #' be considered.
 #'
 #' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
@@ -109,13 +109,13 @@
 #' `Period` objects are a special type of object developed by the
 #' [lubridate][lubridate::lubridate-package] team that represents "human units",
 #' ignoring possible time irregularities. That is to say that 1 day as `Period`
-#' will always represent 1 day in the timeline. `sum_time()` and `sum_times()`
-#' ignores that property of `Period` objects, treating them like objects of
-#' class `Duration`.
+#' will always represent 1 day in the timeline. `sum_time()` and
+#' `vct_sum_time()` ignores that property of `Period` objects, treating them
+#' like objects of class `Duration`.
 #'
 #' ## `Interval` objects
 #'
-#' By using `Interval` objects in `...`, `sum_time()` and `sum_times()` will
+#' By using `Interval` objects in `...`, `sum_time()` and `vct_sum_time()` will
 #' consider only their time lengths. That is, the amount of seconds of the
 #' intervals.
 #'
@@ -127,17 +127,17 @@
 #'
 #' @param ... Objects belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
-#' @param cycle (optional) a number indicating the cycle length in seconds. If
-#'   `NULL` the function will perform a linear sum (see Details to learn
-#'   more) (default: `NULL`).
+#' @param cycle (optional) a number indicating the cycle length in seconds (for
+#'   circular sums). If `NULL` the function will perform a linear sum (see
+#'   Details to learn more) (default: `NULL`).
 #' @param na_rm (optional) a `logical` value indicating if the function must
 #'   remove `NA` values while performing the sum (default: `FALSE`).
 #'
 #' @return
 #'
-#' * If `cycle = NULL`, an `hms` object with a linear sum of the time from
+#' * If `cycle = NULL`, a `hms` object with a linear sum of the time from
 #' objects in `...`.
-#' * If `cycle != NULL`, an `hms` object with a circular sum of the time
+#' * If `cycle != NULL`, a `hms` object with a circular sum of the time
 #' from objects in `...`.
 #'
 #' @family utility functions
@@ -167,10 +167,10 @@
 #'
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-#' sum_times(x, y)
+#' vct_sum_time(x, y)
 #' #> 29:00:00 # Expected
 #' #>       NA # Expected
-#' sum_times(x, y, na_rm = TRUE)
+#' vct_sum_time(x, y, na_rm = TRUE)
 #' #> 29:00:00 # Expected
 #' #> 10:00:00 # Expected
 #'
@@ -178,10 +178,10 @@
 #'
 #' x <- c(lubridate::dhours(6), NA)
 #' y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-#' sum_times(x, y, cycle = lubridate::ddays())
+#' vct_sum_time(x, y, cycle = lubridate::ddays())
 #' #> 05:00:00 # Expected
 #' #>       NA # Expected
-#' sum_times(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
+#' vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #' #> 05:00:00 # Expected
 #' #> 10:00:00 # Expected
 sum_time <- function(..., cycle = NULL, na_rm = FALSE) {
@@ -190,7 +190,7 @@ sum_time <- function(..., cycle = NULL, na_rm = FALSE) {
 
 #' @rdname sum_time
 #' @export
-sum_times <- function(..., cycle = NULL, na_rm = FALSE) {
+vct_sum_time <- function(..., cycle = NULL, na_rm = FALSE) {
     build_sum(..., vectorize = TRUE, cycle = cycle, na_rm = na_rm)
 }
 

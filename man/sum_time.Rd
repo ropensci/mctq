@@ -2,29 +2,29 @@
 % Please edit documentation in R/sum_time.R
 \name{sum_time}
 \alias{sum_time}
-\alias{sum_times}
+\alias{vct_sum_time}
 \title{Sum time objects}
 \usage{
 sum_time(..., cycle = NULL, na_rm = FALSE)
 
-sum_times(..., cycle = NULL, na_rm = FALSE)
+vct_sum_time(..., cycle = NULL, na_rm = FALSE)
 }
 \arguments{
 \item{...}{Objects belonging to one of the following classes: \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
 
-\item{cycle}{(optional) a number indicating the cycle length in seconds. If
-\code{NULL} the function will perform a linear sum (see Details to learn
-more) (default: \code{NULL}).}
+\item{cycle}{(optional) a number indicating the cycle length in seconds (for
+circular sums). If \code{NULL} the function will perform a linear sum (see
+Details to learn more) (default: \code{NULL}).}
 
 \item{na_rm}{(optional) a \code{logical} value indicating if the function must
 remove \code{NA} values while performing the sum (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{cycle = NULL}, an \code{hms} object with a linear sum of the time from
+\item If \code{cycle = NULL}, a \code{hms} object with a linear sum of the time from
 objects in \code{...}.
-\item If \code{cycle != NULL}, an \code{hms} object with a circular sum of the time
+\item If \code{cycle != NULL}, a \code{hms} object with a circular sum of the time
 from objects in \code{...}.
 }
 }
@@ -34,24 +34,24 @@ from objects in \code{...}.
 \code{sum_time()} returns the sum of the time from different kinds of date/time
 objects.
 
-\code{sum_times()} returns the vectorized sum of the time from different kinds of
-date/time objects.
+\code{vct_sum_time()} returns the vectorized sum of the time from different kinds
+of date/time objects.
 
 Both functions can be set to work with a circular time frame (see Details to
 learn more).
 }
 \details{
-\subsection{\code{sum_time()} versus \code{sum_times()}}{
+\subsection{\code{sum_time()} versus \code{vct_sum_time()}}{
 
-\code{sum_time()} behaves similar to \code{sum()}, in the sense that it aggregates the
-time lengths of values in \code{...} into a single data point. For example,
-\code{sum_time(c(x, y), z)} will have the same output as \code{sum_time(x, y, z)}.
+\code{sum_time()} behaves similar to \code{\link[base:sum]{base::sum()}}, in the sense that it
+aggregates the time lengths of values in \code{...} into a single data point. For
+example, \code{sum_time(c(x, y), z)} will have the same output as \code{sum_time(x, y, z)}.
 
-\code{sum_times()} performs a different type of sum (a vectorized one). Instead of
-aggregate the time lengths, the function perform a paired sum between
+\code{vct_sum_time()} performs a different type of sum (a vectorized one). Instead
+of aggregating the time lengths, the function perform a paired sum between
 elements. For example, \code{sum_time(c(x, y), c(w, z))} will return a vector like
-\code{c(sum_time(x, w), sum_time(y, z))}. Because of that, \code{sum_times()} requires
-that all objects in \code{...} have the same length.
+\code{c(sum_time(x, w), sum_time(y, z))}. Because of that, \code{vct_sum_time()}
+requires that all objects in \code{...} have the same length.
 }
 
 \subsection{Linear versus circular sum}{
@@ -80,8 +80,7 @@ in other contexts.
 In a "time of day" context, time will be linked to the rotation of the
 earth, "resetting" when a new rotation cycle starts. That brings a different
 kind of shape to time: a circular shape. With this shape the time value
-encounters the origin at the end of the cycle (every 24 hours or 86400
-seconds).\preformatted{               - <--- h ---> +
+encounters the origin at the end of each cycle.\preformatted{               - <--- h ---> +
                     origin
                 . . . 0 . . .
              .                 .
@@ -101,14 +100,14 @@ seconds).\preformatted{               - <--- h ---> +
 }
 
 If we transpose this circular time frame to a linear one, it would look like
-this:\preformatted{-----|---------------|---------------|---------------|----->
+this:\preformatted{<----|---------------|---------------|---------------|----->
     0h              12h              0h             12h
   origin                           origin
 }
 
 Note that now the origin is not fixed, but cyclical.
 
-\code{sum_time()} and \code{sum_times()} can both operate in either a linear or a
+\code{sum_time()} and \code{vct_sum_time()} can both operate in either a linear or a
 circular fashion. If \code{cycle = NULL} (default), the function will use a
 linear approach. Else, the function will use a circular approach relative to
 the cycle length (e.g, \code{cycle = 86400} (1 day)).
@@ -116,7 +115,7 @@ the cycle length (e.g, \code{cycle = 86400} (1 day)).
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} values in \code{...} will be stripped of their dates. Only the time will
+\code{POSIXt} objects in \code{...} will be stripped of their dates. Only the time will
 be considered.
 
 Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
@@ -128,14 +127,14 @@ Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 \code{Period} objects are a special type of object developed by the
 \link[lubridate:lubridate-package]{lubridate} team that represents "human units",
 ignoring possible time irregularities. That is to say that 1 day as \code{Period}
-will always represent 1 day in the timeline. \code{sum_time()} and \code{sum_times()}
-ignores that property of \code{Period} objects, treating them like objects of
-class \code{Duration}.
+will always represent 1 day in the timeline. \code{sum_time()} and
+\code{vct_sum_time()} ignores that property of \code{Period} objects, treating them
+like objects of class \code{Duration}.
 }
 
 \subsection{\code{Interval} objects}{
 
-By using \code{Interval} objects in \code{...}, \code{sum_time()} and \code{sum_times()} will
+By using \code{Interval} objects in \code{...}, \code{sum_time()} and \code{vct_sum_time()} will
 consider only their time lengths. That is, the amount of seconds of the
 intervals.
 }
@@ -171,10 +170,10 @@ sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
 
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-sum_times(x, y)
+vct_sum_time(x, y)
 #> 29:00:00 # Expected
 #>       NA # Expected
-sum_times(x, y, na_rm = TRUE)
+vct_sum_time(x, y, na_rm = TRUE)
 #> 29:00:00 # Expected
 #> 10:00:00 # Expected
 
@@ -182,10 +181,10 @@ sum_times(x, y, na_rm = TRUE)
 
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
-sum_times(x, y, cycle = lubridate::ddays())
+vct_sum_time(x, y, cycle = lubridate::ddays())
 #> 05:00:00 # Expected
 #>       NA # Expected
-sum_times(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
+vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #> 05:00:00 # Expected
 #> 10:00:00 # Expected
 }

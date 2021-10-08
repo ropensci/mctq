@@ -96,6 +96,6 @@ tbt <- function(bt, gu) {
     checkmate::assert_class(gu, "hms")
     assert_identical(bt, gu, type = "length")
 
-    sum_times(gu, - bt, cycle = lubridate::ddays()) %>%
+    vct_sum_time(gu, - bt, cycle = lubridate::ddays()) %>%
         lubridate::as.duration()
 }
