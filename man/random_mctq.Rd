@@ -4,14 +4,11 @@
 \alias{random_mctq}
 \title{Build a random MCTQ case}
 \usage{
-random_mctq(model = "standard", quiet = FALSE)
+random_mctq(model = "standard")
 }
 \arguments{
 \item{model}{A string indicating the data model to return. Valid values are:
 \code{"standard"}, "\verb{shift"}, and \code{"micro"} (default: \code{"standard"}).}
-
-\item{quiet}{(optional) a \code{logical} value indicating if warnings or messages
-must be suppressed (default: \code{FALSE}).}
 }
 \value{
 A named \code{list} with elements representing each MCTQ basic/measurable

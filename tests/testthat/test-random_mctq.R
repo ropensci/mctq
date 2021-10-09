@@ -14,7 +14,6 @@ test_that("random_mctq() | general test", {
 
 test_that("random_mctq() | error test", {
     expect_error(random_mctq(model = 1), "Assertion on 'model' failed")
-    expect_error(random_mctq(quiet = 1), "Assertion on 'quiet' failed")
 })
 
 test_that("random_std_mctq() | general test", {
@@ -128,8 +127,6 @@ test_that("sample_time() | general test", {
                              replace = FALSE),
                  "You cannot take a sample larger than the population ")
 
-    expect_error(sample_time(class = ""),
-                 "Assertion on 'tolower\\(class\\)' failed")
     expect_error(sample_time(min = ""), "Assertion on 'min' failed")
     expect_error(sample_time(min = c(hms::hms(1), hms::hms(1))),
                  "Assertion on 'min' failed")

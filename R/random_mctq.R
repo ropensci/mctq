@@ -41,8 +41,6 @@
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
-#' @param quiet (optional) a `logical` value indicating if warnings or messages
-#'   must be suppressed (default: `FALSE`).
 #'
 #' @return A named `list` with elements representing each MCTQ basic/measurable
 #'   variable of the model indicated in the `model` argument.
@@ -57,9 +55,8 @@
 #' random_mctq("standard")
 #' random_mctq("micro")
 #' random_mctq("shift")}
-random_mctq <- function(model = "standard", quiet = FALSE) {
+random_mctq <- function(model = "standard") {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
-    checkmate::assert_flag(quiet)
     require_pkg("stats")
 
     if (model %in% c("std", "standard")) {
@@ -72,7 +69,8 @@ random_mctq <- function(model = "standard", quiet = FALSE) {
 }
 
 random_std_mctq <- function() {
-    ## R CMD Check variable bindings fix (see: <http://bit.ly/3bliuam>)
+    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
+
     work <- wd <- NULL
     bt_w <- sprep_w <- slat_w <- se_w <- si_w <- alarm_w <- NULL
     wake_before_w <- le_w <- NULL
@@ -263,9 +261,7 @@ random_std_mctq <- function() {
 }
 
 random_micro_mctq <- function() {
-    # R CMD Check variable bindings fix -----
-
-    ## See: <http://bit.ly/3bliuam>
+    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
 
     shift_work <- wd <- so_w <- se_w <- so_f <- se_f <- NULL
 
@@ -354,9 +350,7 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     checkmate::assert_integerish(n_w, lower = 0, any.missing = FALSE, len = 3)
     checkmate::assert_integerish(n_f, lower = 0, any.missing = FALSE, len = 3)
 
-    # R CMD Check variable bindings fix -----
-
-    ## See: <http://bit.ly/3bliuam>
+    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
 
     n_w_m <- bt_w_m <- sprep_w_m <- slat_w_m <- se_w_m <- alarm_w_m <- NULL
     tgu_w_m <- nap_w_m <- napo_w_m <- nape_w_m <- reasons_w_m <- NULL
@@ -388,18 +382,18 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
         sprep_w_m = list(
             name = "sprep_w_m",
             min = hms::parse_hm("19:15"),
-            max = hms::parse_hm("00:40"), # Changed
+            max = hms::parse_hm("00:40"), # Adjusted
             mean = hms::parse_hm("22:30"),
             sd = hms::parse_hm("01:05")),
         sprep_w_e = list(
             name = "sprep_w_e",
             min = hms::parse_hm("21:40"),
-            max = hms::parse_hm("02:35"), # Changed
+            max = hms::parse_hm("02:35"), # Adjusted
             mean = hms::parse_hm("00:40"),
             sd = hms::parse_hm("01:00")),
         sprep_w_n = list(
             name = "sprep_w_n",
-            min = hms::parse_hm("06:30"), # Changed
+            min = hms::parse_hm("06:30"), # Adjusted
             max = hms::parse_hm("10:10"),
             mean = hms::parse_hm("07:20"),
             sd = hms::parse_hm("01:00")),
@@ -444,37 +438,37 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     values <- list(
         slat_w_m = list(
             name = "slat_w_m",
-            min = hms::parse_hm("00:05"), # Changed
-            max = hms::parse_hm("00:30"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
+            max = hms::parse_hm("00:30"), # Adjusted
             mean = hms::parse_hm("00:20"),
             sd = hms::parse_hm("00:25")),
         slat_w_e = list(
             name = "slat_w_e",
-            min = hms::parse_hm("00:05"), # Changed
-            max = hms::parse_hm("00:40"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
+            max = hms::parse_hm("00:40"), # Adjusted
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:20")),
         slat_w_n = list(
             name = "slat_w_n",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("01:10"),
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:20")),
         slat_f_m = list(
             name = "slat_f_m",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("01:00"),
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:15")),
         slat_f_e = list(
             name = "slat_f_e",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("01:05"),
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:15")),
         slat_f_n = list(
             name = "slat_f_n",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("02:15"),
             mean = hms::parse_hm("00:25"),
             sd = hms::parse_hm("00:35"))
@@ -511,7 +505,7 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
             name = "se_w_m",
             min = sum_time(sprep_w_m, slat_w_m, hms::parse_hm("02:05"),
                            cycle = lubridate::ddays()),
-            max = hms::parse_hm("05:00"), # Changed
+            max = hms::parse_hm("05:00"), # Adjusted
             mean = hms::parse_hm("04:35"),
             sd = hms::parse_hm("00:35")),
         # se_w_e_min >= sprep_w_e_max + slat_w_e_max + sd_w_e_min
@@ -563,37 +557,37 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     values <- list(
         tgu_w_m = list(
             name = "tgu_w_m",
-            min = hms::parse_hm("00:05"), # Changed
-            max = hms::parse_hm("00:30"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
+            max = hms::parse_hm("00:30"), # Adjusted
             mean = hms::parse_hm("00:05"),
             sd = hms::parse_hm("00:10")),
         tgu_w_e = list(
             name = "tgu_w_e",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("00:50"),
             mean = hms::parse_hm("00:10"),
             sd = hms::parse_hm("00:15")),
         tgu_w_n = list(
             name = "tgu_w_n",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("01:00"),
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:15")),
         tgu_f_m = list(
             name = "tgu_f_m",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("01:25"),
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:25")),
         tgu_f_e = list(
             name = "tgu_f_e",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("00:45"),
             mean = hms::parse_hm("00:10"),
             sd = hms::parse_hm("00:10")),
         tgu_f_n = list(
             name = "tgu_f_n",
-            min = hms::parse_hm("00:05"), # Changed
+            min = hms::parse_hm("00:05"), # Adjusted
             max = hms::parse_hm("00:55"),
             mean = hms::parse_hm("00:15"),
             sd = hms::parse_hm("00:15"))
@@ -843,13 +837,12 @@ normalize <- function(min, max, mean, ambiguity = 24) {
 
 }
 
-sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
+sample_time <- function(min = hms::parse_hms("00:00:00"),
                         max = hms::parse_hms("23:59:59"),
                         by = lubridate::dminutes(5), size = 1,
                         replace = FALSE, prob = NULL) {
     classes <- c("Duration", "Period", "hms", "integer", "numeric")
 
-    checkmate::assert_choice(tolower(class), tolower(classes))
     checkmate::assert_multi_class(min, classes)
     checkmate::assert_multi_class(max, classes)
     checkmate::assert_multi_class(by, classes)
@@ -874,7 +867,7 @@ sample_time <- function(class = "hms", min = hms::parse_hms("00:00:00"),
     sample <- sample(seq(min, max, by), size = size, replace = replace,
                      prob = prob)
 
-    convert(sample, class, quiet = TRUE)
+    hms::hms(sample)
 }
 
 sampler_1 <- function(x, by, envir) {
@@ -970,8 +963,8 @@ sampler_3 <- function(x, y, by, envir) {
         for (i in seq(3)) { # Bias
             x_free <- get(x$name, envir = envir)
 
-            check_w <- shush(convert(shorter_interval(x_work, y_work), "hms"))
-            check_f <- shush(convert(shorter_interval(x_free, y_free), "hms"))
+            check_w <- shush(hms::hms(shorter_interval(x_work, y_work)))
+            check_f <- shush(hms::hms(shorter_interval(x_free, y_free)))
             if (check_f >= check_w) break
 
             sample <- clock_roll(sample_time(min = min, max = max, by = by,
@@ -999,8 +992,8 @@ sampler_4 <- function(x, by, envir) {
     sd <- as.numeric(x$sd)
     by <- as.numeric(by)
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
-    sample <- sample_time("Duration", min = min, max = max, by = by,
-                          prob = prob)
+    sample <- sample_time(min = min, max = max, by = by, prob = prob) %>%
+        lubridate::as.duration()
     assign(x$name, sample, envir = envir)
 
     if (grepl("_f$|_f_", x$name, perl = TRUE)) {
@@ -1010,8 +1003,9 @@ sampler_4 <- function(x, by, envir) {
             free <- get(x$name, envir = envir)
             if (free >= work) break
 
-            sample <- sample_time("Duration", min = min, max = max, by = by,
-                             prob = prob)
+            sample <- sample_time(min = min, max = max, by = by,
+                                  prob = prob) %>%
+                lubridate::as.duration()
             assign(x$name, sample, envir = envir)
         }
     }
