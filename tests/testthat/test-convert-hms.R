@@ -2,7 +2,8 @@ test_that("convert.hms() | convert test", {
     expect_equal(convert(hms::parse_hm("01:00"), "logical", quiet = TRUE), NA)
     expect_equal(convert(hms::parse_hm("01:00"), "character", quiet = TRUE),
                  "01:00:00")
-    expect_equal(convert(hms::parse_hm("01:00"), "integer", quiet = TRUE), 3600L)
+    expect_equal(convert(hms::parse_hm("01:00"), "integer", quiet = TRUE),
+                 3600L)
     expect_equal(convert(hms::parse_hm("01:00"), "double", quiet = TRUE), 3600)
     expect_equal(convert(hms::parse_hm("01:00"), "numeric", quiet = TRUE), 3600)
     expect_equal(convert(hms::parse_hm("01:00"), "Duration", quiet = TRUE),

@@ -28,7 +28,8 @@ test_that("vct_sum_time()| linear test", {
                              lubridate::as_datetime("1970-01-01 10:00:00")),
                            as.POSIXlt(
                                c(lubridate::as_datetime("1970-01-01 01:00:00"),
-                                 lubridate::as_datetime("1970-01-01 02:00:00"))),
+                                 lubridate::as_datetime(
+                                     "1970-01-01 02:00:00"))),
                            c(lubridate::as.interval(lubridate::dhours(4),
                                                     as.Date("1970-01-01")),
                              lubridate::as.interval(lubridate::dhours(1),
@@ -46,7 +47,8 @@ test_that("vct_sum_time()| linear test", {
                              lubridate::as_datetime("1970-01-01 10:00:00")),
                            as.POSIXlt(
                                c(lubridate::as_datetime("1970-01-01 01:00:00"),
-                                 lubridate::as_datetime("1970-01-01 02:00:00"))),
+                                 lubridate::as_datetime(
+                                     "1970-01-01 02:00:00"))),
                            c(lubridate::as.interval(lubridate::dhours(4),
                                                     as.Date("1970-01-01")),
                              lubridate::as.interval(lubridate::dhours(1),
@@ -87,7 +89,8 @@ test_that("vct_sum_time()| circular test", {
                              lubridate::as_datetime("1970-01-01 10:00:00")),
                            as.POSIXlt(
                                c(lubridate::as_datetime("1970-01-01 01:00:00"),
-                                 lubridate::as_datetime("1970-01-01 02:00:00"))),
+                                 lubridate::as_datetime(
+                                     "1970-01-01 02:00:00"))),
                            c(lubridate::as.interval(lubridate::dhours(4),
                                                     as.Date("1970-01-01")),
                              lubridate::as.interval(lubridate::dhours(1),

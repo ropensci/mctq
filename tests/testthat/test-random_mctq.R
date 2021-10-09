@@ -144,7 +144,7 @@ test_that("sample_time() | general test", {
 
 test_that("sampler_1() | general test", {
     set.seed(1)
-    envir = new.env()
+    envir <- new.env()
     sampler_1(list(name = "a",
                    min = hms::parse_hm("23:00"),
                    max = hms::parse_hm("16:00"),
