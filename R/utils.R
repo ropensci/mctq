@@ -26,29 +26,31 @@ midday_change <- function(time) {
     )
 }
 
-interval_mean <- function(start, end, class = "hms", ambiguity = 24,
-                          circular = FALSE) {
+interval_mean <- function(start, end, ambiguity = 24) {
     classes <- c("Duration", "Period", "difftime", "hms", "POSIXct", "POSIXlt")
 
     checkmate::assert_multi_class(start, classes)
     checkmate::assert_multi_class(end, classes)
-
-    classes <- c("character", "integer", "double", "numeric", "Duration",
-                 "Period", "difftime", "hms", "POSIXct", "POSIXlt")
-
-    checkmate::assert_choice(tolower(class), tolower(classes))
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
-    checkmate::assert_flag(circular)
 
-    start <- clock_roll(convert(start, "hms", quiet = TRUE))
-    end <- clock_roll(convert(end, "hms", quiet = TRUE))
+    start <- clock_roll(hms::hms(extract_seconds(start)))
+    end <- clock_roll(hms::hms(extract_seconds(end)))
     interval <- shush(assign_date(start, end, ambiguity = ambiguity))
     mean <- as.numeric(start) + (as.numeric(interval) / 2)
 
-    if (isTRUE(circular)) {
-        convert(hms::as_hms(lubridate::as_datetime(mean)), class, quiet = TRUE)
+    hms::hms(mean)
+}
+
+extract_seconds <- function(x) {
+    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
+                 "POSIXlt", "Interval")
+
+    checkmate::assert_multi_class(x, classes)
+
+    if (lubridate::is.POSIXt(x) || lubridate::is.difftime(x)) {
+        as.numeric(hms::as_hms(x))
     } else {
-        convert(mean, class, quiet = TRUE)
+        as.numeric(x)
     }
 }
 

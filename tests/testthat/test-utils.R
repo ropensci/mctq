@@ -41,12 +41,6 @@ test_that("midday_change() | error test", {
 test_that("interval_mean() | general test", {
     expect_equal(interval_mean(hms::parse_hm("22:00"), hms::parse_hm("06:00")),
                  hms::hms(26 * 3600))
-    expect_equal(interval_mean(hms::parse_hm("22:00"), hms::parse_hm("06:00"),
-                               class = "Duration"),
-                 lubridate::dhours(26))
-    expect_equal(interval_mean(hms::parse_hm("22:00"), hms::parse_hm("06:00"),
-                               circular = TRUE),
-                 hms::parse_hm("02:00"))
     expect_equal(interval_mean(hms::parse_hm("00:00"), hms::parse_hm("10:00")),
                  hms::parse_hm("05:00"))
 })
@@ -54,12 +48,29 @@ test_that("interval_mean() | general test", {
 test_that("interval_mean() | error test", {
     expect_error(interval_mean(1, hms::hms(1)), "Assertion on 'start' failed")
     expect_error(interval_mean(hms::hms(1), 1), "Assertion on 'end' failed")
-    expect_error(interval_mean(hms::hms(1), hms::hms(1), class = 1),
-                 "Assertion on 'tolower\\(class\\)' failed")
     expect_error(interval_mean(hms::hms(1), hms::hms(1), ambiguity = 1),
                  "Assertion on 'ambiguity' failed")
-    expect_error(interval_mean(hms::hms(1), hms::hms(1), circular = ""),
-                 "Assertion on 'circular' failed")
+})
+
+test_that("extract_seconds() | general test", {
+    expect_equal(extract_seconds(lubridate::dhours(1)), 3600)
+    expect_equal(extract_seconds(lubridate::minutes(1)), 60)
+    expect_equal(extract_seconds(lubridate::minutes(1)), 60)
+    expect_equal(extract_seconds(as.difftime(3600, units = "secs")), 3600)
+    expect_equal(extract_seconds(hms::hms(3600)), 3600)
+    expect_equal(extract_seconds(
+        as.POSIXct("2020-01-01 01:00:00", tz = "UTC")),
+        3600)
+    expect_equal(extract_seconds(
+        as.POSIXlt("2020-01-01 01:00:00", tz = "UTC")),
+        3600)
+    expect_equal(extract_seconds(
+        lubridate::as.interval(lubridate::dhours(1), lubridate::origin)),
+        3600)
+})
+
+test_that("extract_seconds() | error test", {
+    expect_error(extract_seconds(1), "Assertion on 'x' failed")
 })
 
 test_that("change_date() | general test", {

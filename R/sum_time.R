@@ -214,15 +214,7 @@ build_sum <- function(..., vectorize = FALSE, cycle = NULL, na_rm = FALSE) {
         cli::cli_abort("All values in '...' must have the same length.")
     }
 
-    normalize <- function(x) {
-        if (lubridate::is.POSIXt(x) || lubridate::is.difftime(x)) {
-            as.numeric(hms::as_hms(x))
-        } else {
-            as.numeric(x)
-        }
-    }
-
-    out <- lapply(out, normalize)
+    out <- lapply(out, extract_seconds)
 
     if (isTRUE(na_rm)) {
         out <- lapply(out, function(x) dplyr::if_else(is.na(x), 0, x))
