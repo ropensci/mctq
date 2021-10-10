@@ -55,7 +55,7 @@ articles:
 - title: Get started
   navbar: ~
   contents:
-  - introduction-to-mctq
+  - mctq
 
 - title: Notes
   navbar: ~
