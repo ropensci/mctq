@@ -78,8 +78,7 @@ test_that("parser_3() | general test", {
 })
 
 test_that("parser_3() | error test", {
-    expect_error(parser_3(lubridate::dhours(), "hms"),
-                 "'x' can be only be converted to 'output_unit' if 'class' ")
+    expect_error(parser_3(lubridate::dhours(), "hms"))
 })
 
 test_that("parse_to_date_time() | general test", {
