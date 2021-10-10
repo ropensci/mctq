@@ -58,8 +58,8 @@ requires that all objects in \code{...} have the same length.
 
 Time can have different "shapes".
 
-If the objective is to measure the duration of an event, time is usually
-measured considering a linear frame, with a fixed point of
+If the objective is to measure the duration (time span) of an event, time is
+usually measured considering a linear frame, with a fixed point of
 \href{https://en.wikipedia.org/wiki/Origin_(mathematics)}{origin}. In this
 context, the time value distance itself to infinity in relation to the
 origin.\preformatted{                                   B
@@ -115,8 +115,8 @@ the cycle length (e.g, \code{cycle = 86400} (1 day)).
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} objects in \code{...} will be stripped of their dates. Only the time will
-be considered.
+\code{\link[base:as.POSIXlt]{POSIXt}} objects in \code{...} will be stripped of their
+dates. Only the time will be considered.
 
 Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
 Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
@@ -124,19 +124,26 @@ Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 
 \subsection{\code{Period} objects}{
 
-\code{Period} objects are a special type of object developed by the
-\link[lubridate:lubridate-package]{lubridate} team that represents "human units",
-ignoring possible time irregularities. That is to say that 1 day as \code{Period}
-will always represent 1 day in the timeline. \code{sum_time()} and
-\code{vct_sum_time()} ignores that property of \code{Period} objects, treating them
-like objects of class \code{Duration}.
+\code{\link[lubridate:period]{Period}} objects are a special type of object
+developed by the \link[lubridate:lubridate-package]{lubridate} team that
+represents "human units", ignoring possible timeline irregularities. That is
+to say that 1 day as \code{Period} can have different time spans, when looking to
+a timeline after a irregularity event. \code{sum_time()} and \code{vct_sum_time()}
+ignores that property of \code{Period} objects, treating them like objects of
+class \code{\link[lubridate:duration]{Duration}}.
+
+Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Wickham & Grolemund (n.d.).
 }
 
 \subsection{\code{Interval} objects}{
 
-By using \code{Interval} objects in \code{...}, \code{sum_time()} and \code{vct_sum_time()} will
-consider only their time lengths. That is, the amount of seconds of the
-intervals.
+By using \code{\link[lubridate:interval]{Interval}} objects in \code{...}, \code{sum_time()}
+and \code{vct_sum_time()} will consider only their time lengths. That is, the
+amount of seconds of the intervals.
+
+Learn more about \code{Interval} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Wickham & Grolemund (n.d.).
 }
 
 \subsection{Timeline irregularities}{
@@ -187,6 +194,10 @@ vct_sum_time(x, y, cycle = lubridate::ddays())
 vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #> 05:00:00 # Expected
 #> 10:00:00 # Expected
+}
+\references{
+Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
+O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
 \seealso{
 Other utility functions: 

@@ -1,0 +1,87 @@
+---
+title: "Why `Duration` and not `Period`?"
+output: rmarkdown::html_vignette
+description: >
+  This article explains why the `mctq` package use `Duration` instead
+  of `Period` (objects from the {lubridate} package) as the default object
+  for time spans.
+vignette: >
+  %\VignetteIndexEntry{Why `Duration` and not `Period`?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This article explains why the `mctq` package uses `Duration` instead of `Period` (objects from the [lubridate](https://lubridate.tidyverse.org/) package) as the default object for time spans.
+
+## `Duration` versus `Period` objects
+
+The [`lubridate`](https://lubridate.tidyverse.org/) package offers three types of objects for storing and manipulating time spans: [`Duration`](https://lubridate.tidyverse.org/reference/duration.html), [`Period`](https://lubridate.tidyverse.org/reference/period.html), and [`Interval`](https://lubridate.tidyverse.org/reference/interval.html).
+
+To understand the difference between `Duration` and `Period` objects you must first remember that the timeline is not always consistent, as it can have irregularities caused by, for example, leap years, DST (Daylight Saving Time), or leap seconds. That's when `Period` objects differ from `Duration` objects.
+
+[`Duration`](https://lubridate.tidyverse.org/reference/duration.html) objects represent time spans by their exact number of seconds. That is, a `Duration` object of 1 hour will always represent a 1-hour time span, even with possible timeline irregularities.
+
+```{r echo = TRUE}
+start <- lubridate::ymd_hms("2020-01-01 10:00:00", tz = "America/New_York")
+
+start + lubridate::duration(1, units = "hour")
+
+```
+
+[`Period`](https://lubridate.tidyverse.org/reference/period.html) objects work a little bit differently. They are a special type of object developed by the `lubridate` team that represents "human units", ignoring possible timeline irregularities. That is to say that 1 day as `Period` can have different time spans when looking to a timeline after an irregular event.
+
+To illustrate this behavior, take the case of a DST event, starting at 2016-03-13 01:00:00 EST.
+
+
+```{r echo = TRUE}
+start <- lubridate::ymd_hms("2016-03-13 01:00:00", tz = "America/New_York")
+
+start + lubridate::duration(1, units = "hour")
+start + lubridate::period(1, units = "hour")
+```
+
+You might ask: why the result is `NA` when adding 1 hour as a `Period` object? That's because `Period` objects ignore time irregularities. When the DST starts at `01:00:00` the timeline "jumps" to `03:00:00`, so the period from `02:00:00` to `02:59:59` doesn't exist.
+
+```
+base: 2016-03-13 01:00:00, tz = "America/New_York" 
+
+                        DST + 1 hour
+-----|---------------|               |---------------|----->
+  01:00             NA           03:00           04:00
+
+From the `Duration` perspective: base + 1 hour = 2016-03-13 03:00:00
+
+     |-------------------------------|---------------|
+                   1 hour                  1 hour
+
+From the `Period` perspective: base + 1 hour = NA
+
+     |---------------|---------------|---------------|
+           1 hour          1 hour          1 hour
+```
+
+`Period` objects are useful when you need to consider the human units of time. For example:
+
+```{r echo = TRUE}
+start <- lubridate::ymd_hms("2016-03-13 01:00:00", tz = "America/New_York")
+
+start + lubridate::duration(1, units = "day")
+start + lubridate::period(1, units = "day")
+```
+
+In this case, `1 day`, by human standards, represents the same `time of day` of the next day. But, considering the DST event, that `1 day` has a time span of 23 hours.
+
+You can learn more about [`lubridate`](https://lubridate.tidyverse.org/) time span objects in the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter of Wickham & Grolemund's book "R for Data Science".
+
+## The MCTQ context
+
+At the first glance you might think that, since MCTQ was made for human respondents, the best representation for time spans would be the one that better represents "human units", right? That would be fine if we were talking about a time span in a timeline irregularity context, but MCTQ doesn’t consider this scenario.
+
+When using MCTQ, the interest is to measure the exact time span between one local time to another. By ignoring irregularities in the timeline (as `Periods` do) the time span can have a fluctuating value. This would not create an issue for most MCTQ applications, but, if the MCTQ data were to be applied with other types of data, this could produce errors. That's why `Duration` objects are the default object for time spans.

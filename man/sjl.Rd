@@ -88,7 +88,7 @@ Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 each shift section of the questionnaire.
 \item Due to time arithmetic issues, \code{sjl()} does a slightly different
 computation by default than those proposed by the authors mentioned above.
-See \code{vignette("sjl", package = "mctq")} for more details.
+See \code{vignette("sjl-computation", package = "mctq")} for more details.
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
@@ -147,7 +147,7 @@ approach" (\code{"shorter"}).
 
 The topics below provide a simple explanation of each method supported by
 \code{sjl()}. To get a detail understating of this methods, see
-\code{vignette("sjl", package = "mctq")}.
+\code{vignette("sjl-computation", package = "mctq")}.
 
 Please note that none of the approaches below are related to Jankowski's
 (2017) social jetlag sleep-corrected proposal. Since Jankowski's alternative

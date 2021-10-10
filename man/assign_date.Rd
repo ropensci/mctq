@@ -71,8 +71,8 @@ time zones in \link[base:timezones]{base::timezone}.
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} objects passed as argument to \code{start} or \code{end} will be stripped of
-their dates. Only the time will be considered.
+\code{\link[base:as.POSIXlt]{POSIXt}} objects passed as argument to \code{start} or \code{end}
+will be stripped of their dates. Only the time will be considered.
 
 Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
 Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.

@@ -55,13 +55,14 @@ articles:
 - title: Get started
   navbar: ~
   contents:
-  - mctq
+  - introduction-to-mctq
 
 - title: Notes
   navbar: ~
   contents:
+  - time-span-objects
   - missing-sections
-  - sjl
+  - sjl-computation
 
 authors:
   Daniel Vartanian:

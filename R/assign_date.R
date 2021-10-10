@@ -55,8 +55,8 @@
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` objects passed as argument to `start` or `end` will be stripped of
-#' their dates. Only the time will be considered.
+#' [`POSIXt`][base::as.POSIXct()] objects passed as argument to `start` or `end`
+#' will be stripped of their dates. Only the time will be considered.
 #'
 #' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
 #' Learn more about it in [base::DateTimeClasses].

@@ -955,7 +955,7 @@ parser_3 <- function(x, class, ..., output_unit = NULL,
 
     if (!(class %in% c("integer", "double", "numeric"))) {
         cli::cli_abort(paste0(
-            "'x' can be only be converted to 'output_unit' if 'class' ",
+            "'x' can only be converted to 'output_unit' if 'class' ",
             "is 'integer', 'double' or 'numeric'."
         ))
     }

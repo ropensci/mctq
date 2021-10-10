@@ -179,7 +179,7 @@ sjl_rel(msw, msf)
 ```
 
 See a quick tour of all MCTQ main functions
-[here](https://gipso.github.io/mctq/articles/mctq.html).
+[here](https://gipso.github.io/mctq/articles/introduction-to-mctq.html).
 
 ### Utilities
 

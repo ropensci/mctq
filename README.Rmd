@@ -128,7 +128,7 @@ msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
 sjl_rel(msw, msf)
 ```
 
-See a quick tour of all MCTQ main functions [here](https://gipso.github.io/mctq/articles/mctq.html).
+See a quick tour of all MCTQ main functions [here](https://gipso.github.io/mctq/articles/introduction-to-mctq.html).
 
 ### Utilities
 

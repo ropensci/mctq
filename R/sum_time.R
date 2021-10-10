@@ -32,8 +32,8 @@
 #'
 #' Time can have different "shapes".
 #'
-#' If the objective is to measure the duration of an event, time is usually
-#' measured considering a linear frame, with a fixed point of
+#' If the objective is to measure the duration (time span) of an event, time is
+#' usually measured considering a linear frame, with a fixed point of
 #' [origin](https://en.wikipedia.org/wiki/Origin_(mathematics)). In this
 #' context, the time value distance itself to infinity in relation to the
 #' origin.
@@ -98,26 +98,35 @@
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` objects in `...` will be stripped of their dates. Only the time will
-#' be considered.
+#' [`POSIXt`][base::as.POSIXct()] objects in `...` will be stripped of their
+#' dates. Only the time will be considered.
 #'
 #' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
 #' Learn more about it in [base::DateTimeClasses].
 #'
 #' ## `Period` objects
 #'
-#' `Period` objects are a special type of object developed by the
-#' [lubridate][lubridate::lubridate-package] team that represents "human units",
-#' ignoring possible time irregularities. That is to say that 1 day as `Period`
-#' will always represent 1 day in the timeline. `sum_time()` and
-#' `vct_sum_time()` ignores that property of `Period` objects, treating them
-#' like objects of class `Duration`.
+#' [`Period`][lubridate::period()] objects are a special type of object
+#' developed by the [lubridate][lubridate::lubridate-package] team that
+#' represents "human units", ignoring possible timeline irregularities. That is
+#' to say that 1 day as `Period` can have different time spans, when looking to
+#' a timeline after a irregularity event. `sum_time()` and `vct_sum_time()`
+#' ignores that property of `Period` objects, treating them like objects of
+#' class [`Duration`][lubridate::duration()].
+#'
+#' Learn more about `Period` objects in the [Dates and
+#' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
+#' Wickham & Grolemund (n.d.).
 #'
 #' ## `Interval` objects
 #'
-#' By using `Interval` objects in `...`, `sum_time()` and `vct_sum_time()` will
-#' consider only their time lengths. That is, the amount of seconds of the
-#' intervals.
+#' By using [`Interval`][lubridate::interval()] objects in `...`, `sum_time()`
+#' and `vct_sum_time()` will consider only their time lengths. That is, the
+#' amount of seconds of the intervals.
+#'
+#' Learn more about `Interval` objects in the [Dates and
+#' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
+#' Wickham & Grolemund (n.d.).
 #'
 #' ## Timeline irregularities
 #'
@@ -141,6 +150,7 @@
 #' from objects in `...`.
 #'
 #' @family utility functions
+#' @template references_g
 #' @export
 #'
 #' @examples

@@ -22,7 +22,7 @@
 #'
 #' * Due to time arithmetic issues, `sjl()` does a slightly different
 #' computation by default than those proposed by the authors mentioned above.
-#' See `vignette("sjl", package = "mctq")` for more details.
+#' See `vignette("sjl-computation", package = "mctq")` for more details.
 #'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
@@ -74,7 +74,7 @@
 #'
 #' The topics below provide a simple explanation of each method supported by
 #' `sjl()`. To get a detail understating of this methods, see
-#' `vignette("sjl", package = "mctq")`.
+#' `vignette("sjl-computation", package = "mctq")`.
 #'
 #' Please note that none of the approaches below are related to Jankowski's
 #' (2017) social jetlag sleep-corrected proposal. Since Jankowski's alternative

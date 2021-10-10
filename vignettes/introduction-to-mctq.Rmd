@@ -293,7 +293,7 @@ The output must be the difference between `msf` and `msw` in a circular time fra
 
 In case you don't know, social jet lag is a concept developed by Till Roenneberg et al. ([2006](http://doi.org/10.1080/07420520500545979)) that represents the discrepancy between social and biological time.
 
-The difference described above may seem trivial or easy to compute, but it's not. See the `vignette("sjl", package = "mctq")` to learn more.
+The difference described above may seem trivial or easy to compute, but it's not. See the `vignette("sjl-computation", package = "mctq")` to learn more.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$sjl_rel <- sjl_rel(data$msw, data$msf)
