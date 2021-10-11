@@ -4,14 +4,21 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `ms()` computes the __local time of mid-sleep__ for standard, micro, and
+#' `msl()` computes the __local time of mid-sleep__ for standard, micro, and
 #' shift versions of the Munich Chronotype Questionnaire (MCTQ).
+#'
+#' Please note that, although we tried to preserve the original authors' naming
+#' pattern for the MCTQ functions, the name `ms` provokes a dangerous name
+#' collision with the [lubridate::ms()] function (a function for parsing minutes
+#' and seconds components). That's why we named it `msl`. `msl()` and [sdu()]
+#' are the only exceptions, all the other `mctq` functions maintain a strong
+#' naming resemblance with the original authors' naming pattern.
 #'
 #' @section Guidelines:
 #'
 #' Roenneberg, Allebrandt, Merrow, & Vetter (2012), Ghotbi et al. (2020), Juda,
 #' Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
-#' guidelines for `ms()` (\eqn{MSW} or \eqn{MSF}) computation are as follows.
+#' guidelines for `msl()` (\eqn{MSW} or \eqn{MSF}) computation are as follows.
 #'
 #' ## Notes
 #'
@@ -72,27 +79,27 @@
 #'
 #' so <- hms::parse_hm("23:30")
 #' sd <- lubridate::dhours(8)
-#' ms(so, sd)
+#' msl(so, sd)
 #' #> 03:30:00 # Expected
 #'
 #' so <- hms::parse_hm("01:00")
 #' sd <- lubridate::dhours(10)
-#' ms(so, sd)
+#' msl(so, sd)
 #' #> 06:00:00 # Expected
 #'
 #' so <- hms::as_hms(NA)
 #' sd <- lubridate::dhours(7.5)
-#' ms(so, sd)
+#' msl(so, sd)
 #' #> NA # Expected
 #'
 #' ## Vector example
 #'
 #' so <- c(hms::parse_hm("00:10"), hms::parse_hm("01:15"))
 #' sd <- c(lubridate::dhours(9.25), lubridate::dhours(5.45))
-#' ms(so, sd)
+#' msl(so, sd)
 #' #> [1] 04:47:30 # Expected
 #' #> [1] 03:58:30 # Expected
-ms <- function(so, sd) {
+msl <- function(so, sd) {
     checkmate::assert_class(so, "hms")
     assert_duration(sd)
     assert_identical(so, sd, type = "length")
@@ -190,7 +197,7 @@ ms <- function(so, sd) {
 #'
 #' @param msf A `hms` object corresponding to the __local time of mid-sleep on
 #'   work-free days__ from a standard, micro, or shift version of the MCTQ
-#'   questionnaire. You can use [mctq::ms()] to compute it.
+#'   questionnaire. You can use [mctq::msl()] to compute it.
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
 #'   days__ from a standard, micro, or shift version of the MCTQ questionnaire.
 #'   You can use [mctq::sdu()] to compute it.

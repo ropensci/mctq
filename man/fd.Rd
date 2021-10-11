@@ -95,7 +95,7 @@ Other MCTQ functions:
 \code{\link{gu}()},
 \code{\link{le_week}()},
 \code{\link{msf_sc}()},
-\code{\link{ms}()},
+\code{\link{msl}()},
 \code{\link{napd}()},
 \code{\link{sd24}()},
 \code{\link{sd_overall}()},

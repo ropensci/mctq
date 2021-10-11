@@ -126,7 +126,7 @@ computation necessary.
 -   `gu()`: compute MCTQ local time of getting out of bed
 -   `sdu()`: compute MCTQ sleep duration
 -   `tbt()`: compute MCTQ total time in bed
--   `ms()`: compute MCTQ local time of mid-sleep
+-   `msl()`: compute MCTQ local time of mid-sleep
 -   `napd()`: compute MCTQ nap duration (only for MCTQ Shift)
 -   `sd24()`: compute MCTQ 24 hours sleep duration (only for MCTQ Shift)
 

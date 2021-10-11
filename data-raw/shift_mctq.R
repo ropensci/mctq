@@ -1446,7 +1446,7 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
                     tbt(!!as.symbol(paste0("bt", i)),
                         !!as.symbol(paste0("gu", i))),
                 !!as.symbol(ms) :=
-                    ms(!!as.symbol(paste0("so", i)),
+                    msl(!!as.symbol(paste0("so", i)),
                        !!as.symbol(paste0("sd", i))),
                 !!as.symbol(paste0("napd", i)) :=
                     napd(!!as.symbol(paste0("napo", i)),

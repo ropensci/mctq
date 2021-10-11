@@ -7,12 +7,12 @@
 #' `sdu()` computes the __sleep duration__ for standard, micro, and shift
 #' versions of the Munich Chronotype Questionnaire (MCTQ).
 #'
-#' Please note that, although we tried to preserve the original authors naming
+#' Please note that, although we tried to preserve the original authors' naming
 #' pattern for the MCTQ functions, the name `sd` provokes a dangerous name
-#' collision with the widely used [stats::sd] (standard deviation) function.
-#' That's why we named it as `sdu`. This is the only exception, all the other
-#' `mctq` functions maintain a strong naming resemblance with the original
-#' authors naming pattern.
+#' collision with the widely used [stats::sd()] function (standard deviation).
+#' That's why we named it `sdu`. `sdu()` and [msl()] are the only exceptions,
+#' all the other `mctq` functions maintain a strong naming resemblance with the
+#' original authors' naming pattern.
 #'
 #' @section Guidelines:
 #'
