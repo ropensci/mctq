@@ -56,7 +56,9 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
-    where <- NULL # R CMD Check variable bindings fix
+    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
+
+    where <- NULL
 
     if (isTRUE(round)) {
         check <- function(x) {
@@ -64,7 +66,8 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
             checkmate::test_multi_class(x, classes)
         }
 
-        data <- dplyr::mutate(data, dplyr::across(where(check), round_time))
+        data <- data %>%
+            dplyr::mutate(dplyr::across(where(check), round_time))
     }
 
     if (isTRUE(hms)) {
@@ -73,7 +76,9 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
             checkmate::test_multi_class(x, classes)
         }
 
-        data <- convert(data, "hms", where = check)
+        data <- data %>%
+            dplyr::mutate(dplyr::across(where(check),
+                                        ~ hms::hms(extract_seconds(.x))))
     }
 
     data

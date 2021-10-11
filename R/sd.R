@@ -404,7 +404,7 @@ sd24 <- function(sd, napd, nap) {
 #' }
 #' #> [1] "19620s (~5.45 hours)" # Expected
 #'
-#' ## Converting the output to hms
+#' ## Converting the output to `hms`
 #'
 #' sd_w <- lubridate::dhours(5.45)
 #' sd_f <- lubridate::dhours(9.5)
@@ -412,7 +412,7 @@ sd24 <- function(sd, napd, nap) {
 #' x <- sd_week(sd_w, sd_f, wd)
 #' x
 #' #> [1] "23785.7142857143s (~6.61 hours)" # Expected
-#' convert(x, "hms")
+#' hms::as_hms(as.numeric(x))
 #' #> 06:36:25.714286 # Expected
 #'
 #' ## Rounding the output at the seconds level
@@ -557,7 +557,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' }
 #' #> [1] "28800s (~8 hours)" # Expected
 #'
-#' ## Converting the output to hms
+#' ## Converting the output to `hms`
 #'
 #' sd_w <- lubridate::dhours(4.75)
 #' sd_f <- lubridate::dhours(10)
@@ -566,7 +566,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' x <- sd_overall(sd_w, sd_f, n_w, n_f)
 #' x
 #' #> [1] "22500s (~6.25 hours)" # Expected
-#' convert(x, "hms")
+#' hms::as_hms(as.numeric(x))
 #' #> 06:15:00 # Expected
 #'
 #' ## Rounding the output at the seconds level

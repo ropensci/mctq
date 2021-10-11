@@ -88,9 +88,7 @@ shorter or longer interval (they will have equal length). In those cases,
 
 The \code{mctq} package works with a set of object classes specially created to
 hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
-conform to the object classes required, you can use the \code{mctq}
-\code{\link[=convert]{convert()}} function to convert it.
+and \link[lubridate:lubridate-package]{lubridate} package.
 }
 
 \subsection{Base date and timezone}{
@@ -154,7 +152,6 @@ longer_interval(x, y)
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

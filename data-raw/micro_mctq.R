@@ -95,8 +95,8 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     if (isTRUE(random_cases)) {
         for (i in id) {
-            random_case <- dplyr::as_tibble(
-                random_mctq(model = "micro", quiet = TRUE)) %>%
+            random_case <- random_mctq(model = "micro") %>%
+                dplyr::as_tibble() %>%
                 dplyr::transmute(
                     `ID` = as.character(i),
 
@@ -339,6 +339,10 @@ tidy_micro_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
+    # Set values -----
+
+    micro_mctq <- build_micro_mctq()
+
     # Clean NULL cases -----
 
     fix_character <- function(x) {
@@ -351,7 +355,7 @@ tidy_micro_mctq <- function(write = FALSE) {
         x
     }
 
-    micro_mctq <- build_micro_mctq() %>%
+    micro_mctq <- micro_mctq %>%
         dplyr::mutate(dplyr::across(.fns = fix_character)) %>%
         dplyr::rowwise() %>%
         dplyr::mutate(length =
@@ -368,20 +372,25 @@ tidy_micro_mctq <- function(write = FALSE) {
     pattern_3 <- "(AM|PM)$"
     orders <- c("IMp", "IMSp", "HM", "HMS")
 
-    micro_mctq <- micro_mctq %>% dplyr::transmute(
-        id = as.integer(.data$`ID`),
+    micro_mctq <- micro_mctq %>%
+        dplyr::transmute(
+            id = as.integer(.data$`ID`),
 
-        shift_work = dplyr::case_when(
-            tolower(.data$`SHIFT WORK`) == "yes" ~ TRUE,
-            tolower(.data$`SHIFT WORK`) == "false" ~ FALSE,
-            tolower(.data$`SHIFT WORK`) == "no" ~ FALSE),
-        wd = as.integer(.data$`WORK DAYS`),
+            shift_work = dplyr::case_when(
+                tolower(.data$`SHIFT WORK`) == "yes" ~ TRUE,
+                tolower(.data$`SHIFT WORK`) == "false" ~ FALSE,
+                tolower(.data$`SHIFT WORK`) == "no" ~ FALSE),
+            wd = as.integer(.data$`WORK DAYS`),
 
-        so_w = convert_pt(.data$`W SLEEP ONSET`, "hms", orders, quiet = TRUE),
-        se_w = convert_pt(.data$`W SLEEP END`, "hms", orders, quiet = TRUE),
+            so_w = mctq:::shush(hms::as_hms(
+                lubridate::parse_date_time(`W SLEEP ONSET`, orders))),
+            se_w = mctq:::shush(hms::as_hms(
+                lubridate::parse_date_time(`W SLEEP END`, orders))),
 
-        so_f = convert_pt(.data$`F SLEEP ONSET`, "hms",orders, quiet = TRUE),
-        se_f = convert_pt(.data$`F SLEEP END`, "hms", orders, quiet = TRUE)
+            so_f = mctq:::shush(hms::as_hms(
+                lubridate::parse_date_time(`F SLEEP ONSET`, orders))),
+            se_f = mctq:::shush(hms::as_hms(
+                lubridate::parse_date_time(`F SLEEP END`, orders)))
         )
 
     # Write and output dataset -----
@@ -439,22 +448,19 @@ validate_micro_mctq <- function(write = FALSE) {
 
     # Do univariate validation -----
 
-    hms_0 <- hms::parse_hm("00:00")
-    hms_24 <- hms::parse_hm("24:00")
-
     validate_hms <- function(x) {
         dplyr::case_when(
-            x == hms_24 ~ hms_0,
-            x >= hms_0 & x < hms_24 ~ x)
+            x == hms::parse_hm("24:00") ~ hms::parse_hm("00:00"),
+            x >= hms::parse_hm("00:00") & x < hms::parse_hm("24:00") ~ x)
     }
-
-    cols_1 <- c("so_w", "se_w", "so_f", "se_f")
 
     micro_mctq <- micro_mctq %>%
         dplyr::mutate(
             wd = dplyr::case_when(
                 validate::in_range(wd, min = 0, max = 7) ~ wd)) %>%
-        dplyr::mutate(dplyr::across(dplyr::all_of(cols_1), validate_hms))
+        dplyr::mutate(dplyr::across(
+            dplyr::all_of(c("so_w", "se_w", "so_f", "se_f")),
+            validate_hms))
 
     # Do multivariate validation -----
 
@@ -489,9 +495,9 @@ validate_micro_mctq <- function(write = FALSE) {
         dplyr::rowwise() %>%
         dplyr::mutate(
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-                .data$id %in% invalid, na_as(.x), .x)),
+                .data$id %in% invalid, mctq:::na_as(.x), .x)),
             dplyr::across(-c(id:shift_work), .fns = ~ dplyr::if_else(
-                shift_work, na_as(.x), .x))) %>%
+                shift_work, mctq:::na_as(.x), .x))) %>%
         dplyr::ungroup()
 
 
@@ -540,9 +546,13 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
+    # Set values -----
+
+    micro_mctq <- validate_micro_mctq()
+
     # Create computed variables -----
 
-    micro_mctq <- validate_micro_mctq() %>%
+    micro_mctq <- micro_mctq %>%
         dplyr::mutate(
             fd = fd(wd),
 
@@ -574,6 +584,12 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     count_f <- length(names(micro_mctq)[grepl("_f$", names(micro_mctq))])
     count_w <- count_w * 2/3
     count_f <- count_f * 2/3
+
+    count_na <- function(x) {
+        checkmate::assert_atomic(x)
+
+        length(which(is.na(x)))
+    }
 
     test <- micro_mctq %>%
         dplyr::mutate(dplyr::across(.fns = as.character)) %>%

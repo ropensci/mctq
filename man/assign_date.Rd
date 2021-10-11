@@ -28,10 +28,10 @@ timeline.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
-conform to the object classes required, you can use the \code{mctq}
-\code{\link[=convert]{convert()}} function to convert it.
+hold time values. These classes can be found in the
+\link[lubridate:lubridate-package]{lubridate} and \link[hms:hms-package]{hms}
+packages. Please refer to those package documentations to learn more about
+them.
 }
 
 \subsection{\code{ambiguity} argument}{
@@ -119,7 +119,6 @@ assign_date(start, end, ambiguity = 24)
 }
 \seealso{
 Other utility functions: 
-\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

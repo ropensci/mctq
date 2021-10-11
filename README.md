@@ -48,7 +48,7 @@ Learn more about the MCTQ questionnaire at
 Although it may look like a simple questionnaire, MCTQ requires a lot of
 date/time manipulation. This poses a challenge for many scientists,
 being that most people have difficulties with date/time data, especially
-when dealing with an extensive set of data. The `mctq` package comes to
+when dealing with an extensive dataset. The `mctq` package comes to
 address this issue.
 
 `mctq` can handle the processing tasks for the three MCTQ versions
@@ -60,14 +60,15 @@ the user experience in mind, by creating an interface that resembles the
 way the questionnaire data is shown in MCTQ publications, and by
 providing extensive and detailed documentation about each computation
 proposed by the MCTQ authors. The package also includes several utility
-tools to deal with different time representations (e.g., decimal hours,
-radians) and time arithmetic issues, along with fictional datasets for
-testing and learning purposes.
+tools, along with fictional datasets for testing and learning purposes.
 
 ## Prerequisites
 
-You only need to have some familiarity with the [R programming
-language](https://www.r-project.org/) to use the `mctq` main functions.
+You need to have some familiarity with the [R programming
+language](https://www.r-project.org/) and with the
+[lubridate](https://lubridate.tidyverse.org/) and
+[hms](https://hms.tidyverse.org/) packages from
+[tidyverse](https://www.tidyverse.org/) to use `mctq` main functions.
 
 In case you don’t feel comfortable with R, we strongly recommend
 checking Hadley Wickham and Garrett Grolemund free and online book [R
@@ -76,9 +77,16 @@ John Hopkins University [Data Science: Foundations using
 R](https://www.coursera.org/specializations/data-science-foundations-r)
 (free for audit students).
 
+Please refer to the [lubridate](https://lubridate.tidyverse.org/) and
+[hms](https://hms.tidyverse.org/) package documentation to learn more
+about them. These two are essential packages to deal with date/time data
+in R. We also recommend that you read the [Dates and
+times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter
+from Wickham & Grolemund’s book “R for Data Science”.
+
 ## Installation
 
-The first stable `mctq` version is already out, we’re just waiting for
+The first stable `mctq` version is already out. We’re just waiting for
 the [software
 peer-review](https://github.com/ropensci/software-review/issues/434) to
 promote it to the public. We hope that it will be available on
@@ -92,41 +100,25 @@ remotes::install_github("gipso/mctq")
 
 ## Usage
 
-`mctq` works with a set of object classes specially created to hold time
-values. These classes can be found in the
-[lubridate](https://lubridate.tidyverse.org/) and
-[hms](https://hms.tidyverse.org/) packages from
-[tidyverse](https://www.tidyverse.org/packages/). If your data do not
-conform to the object classes required, you can use `mctq` `convert()`
-function to convert it.
+`mctq` makes use of the [lubridate](https://lubridate.tidyverse.org/)
+and [hms](https://hms.tidyverse.org/) packages from
+[tidyverse](https://www.tidyverse.org/), which provide special objects
+to deal with date/time values in R. If your dataset does not conform to
+this structure, you first need to convert your data to it.
 
-Here are some examples of how to convert your data using `convert()`:
-
-``` r
-# From decimal hours to `hms`
-convert(6.5, "hms", input_unit = "H")
-#> 06:30:00
-# From radians to `Duration`
-convert(1.308997, "Duration", input_unit = "rad")
-#> [1] "18000s (~5 hours)"
-# From radians to decimal minutes
-convert(0.2617994, "numeric", input_unit = "rad", output_unit = "M")
-#> [1] 60
-# From `character` `HMS` to `Duration`
-convert("19:55:17", "Duration", orders = "HMS")
-#> [1] "71717s (~19.92 hours)"
-# From `character` `HM AM/PM ` to `hms`
-convert("10:00 PM", "hms", orders = "IMp")
-#> 22:00:00
-```
+Due to the circular nature of time, we strongly recommend that you use
+appropriate temporal objects while dealing with date/time in R. That can
+help you get rid of several computation mistakes while trying to adapt
+your data from a base 10 to a system rooted in a base 12 numerical
+system.
 
 ### Workdays and work-free days variables
 
 After your data is set to start, just use the `mctq` functions below to
 process it.
 
-Note that the `mctq` functions uses a similar naming scheme to that used
-in the MCTQ publications. That makes it easy to find and apply any
+Note that the `mctq` functions uses a similar naming pattern to that
+used in the MCTQ publications. That makes it easy to find and apply any
 computation necessary.
 
 -   `fd()`: compute MCTQ work-free days
@@ -142,7 +134,7 @@ Example:
 
 ``` r
 # Local time of preparing to sleep on workdays
-sprep_w <- c(hms::parse_hms("23:45:00"), hms::parse_hms("02:15:00"))
+sprep_w <- c(hms::parse_hm("23:45"), hms::parse_hm("02:15"))
 # Sleep latency or time to fall asleep after preparing to sleep on workdays
 slat_w <- c(lubridate::dminutes(30), lubridate::dminutes(90))
 # Local time of sleep onset on workdays
@@ -170,9 +162,9 @@ Example:
 
 ``` r
 # Local time of mid-sleep on workdays
-msw <- c(hms::parse_hms("02:05:00"), hms::parse_hms("04:05:00"))
+msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
 # Local time of mid-sleep on work-free days
-msf <- c(hms::parse_hms("23:05:00"), hms::parse_hms("08:30:00"))
+msf <- c(hms::parse_hm("23:05"), hms::parse_hm("08:30"))
 # Relative social jetlag
 sjl_rel(msw, msf)
 #> [1] "-10800s (~-3 hours)"  "15900s (~4.42 hours)"
@@ -183,10 +175,9 @@ See a quick tour of all MCTQ main functions
 
 ### Utilities
 
-In addition to `convert()`, `mctq` is also equipped with many other
-utility functions. The package also provides fictional datasets of the
-standard, micro, and shift MCTQ versions for testing and learning
-purposes.
+`mctq` is also equipped with many utility functions. The package also
+provides fictional datasets of the standard, micro, and shift MCTQ
+versions for testing and learning purposes.
 
 All functions are well documented, showing all the guidelines behind the
 computations. Click
@@ -240,8 +231,8 @@ funding, which requires researchers to always look for other sources of
 income.
 
 If this package helps you in any way or you simply want to support the
-author work, please consider donating or even creating a membership
-subscription (if you can!). Your support will help with the author
+author’s work, please consider donating or even creating a membership
+subscription (if you can!). Your support will help with the author’s
 scientific pursuit and with the package maintenance.
 
 To make a donation click on the [Ko-fi](https://ko-fi.com/danielvartan)

@@ -368,10 +368,10 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
     checkmate::assert_integerish(seed, lower = 0, upper = 500)
 
     set.seed(as.integer(seed))
-    out <- dplyr::as_tibble(random_mctq(model = model, quiet = TRUE))
+    out <- dplyr::as_tibble(random_mctq(model = model))
 
     for (i in seq_len(as.integer(iterations) - 1)) {
-        random_case <- random_mctq(model = model, quiet = TRUE)
+        random_case <- random_mctq(model = model)
         out <- dplyr::bind_rows(out, dplyr::as_tibble(random_case))
     }
 
@@ -410,7 +410,7 @@ random_mctq_raw_code <- function(model, clipboard = TRUE) {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 
     set.seed(sample(100:200, 1))
-    data <- random_mctq(model = model, quiet = TRUE)
+    data <- random_mctq(model = model)
 
     if (model %in% c("std", "standard")) {
         out <- paste0(
@@ -647,7 +647,7 @@ format_hms <- function(x) {
         as.character("")
     } else {
         format <- c(1, 5)
-        x <- convert(x, "hms")
+        x <- hms::hms(mctq:::extract_seconds(x))
         substr(as.character(x), format[1], format[2])
     }
 }
@@ -677,7 +677,7 @@ format_duration <- function(x) {
     if(is.na(x)) {
         as.character("")
     } else {
-        as.character(convert_tu(x, "M"))
+        as.character(as.numeric(x) / 60)
     }
 }
 

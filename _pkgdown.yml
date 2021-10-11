@@ -42,7 +42,6 @@ reference:
 - title: Utilities
   contents:
   - assign_date
-  - convert
   - pretty_mctq
   - qplot_walk
   - random_mctq

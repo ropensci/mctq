@@ -174,7 +174,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             any(x > hms::parse_hm("22:00"), na.rm = TRUE)) {
             midday_change(x)
         } else if (checkmate::test_multi_class(x, classes)) {
-            convert(x, "hms")
+            hms::hms(extract_seconds(x))
         } else {
             x
         }

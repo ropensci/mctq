@@ -69,9 +69,7 @@
 #'
 #' The `mctq` package works with a set of object classes specially created to
 #' hold time values. These classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] package. If your data do not
-#' conform to the object classes required, you can use the `mctq`
-#' [mctq::convert()] function to convert it.
+#' and [lubridate][lubridate::lubridate-package] package.
 #'
 #' ## Base date and timezone
 #'
@@ -151,8 +149,15 @@ shorter_interval <- function(x, y, inverse = FALSE) {
                               lower = 0, upper = 86400)
     checkmate::assert_flag(inverse)
 
-    x <- flat_posixt(convert(x, "posixct", quiet = TRUE))
-    y <- flat_posixt(convert(y, "posixct", quiet = TRUE))
+    x <- x %>%
+        hms::as_hms() %>%
+        as.POSIXct() %>%
+        flat_posixt()
+
+    y <- y %>%
+        hms::as_hms() %>%
+        as.POSIXct() %>%
+        flat_posixt()
 
     list2env(swap(x, y, x > y), envir = environment())
 

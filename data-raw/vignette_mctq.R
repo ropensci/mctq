@@ -69,4 +69,4 @@ build_vignette_std_mctq <- function(write = FALSE) {
     invisible(vignette_mctq)
 }
 
-# raw <- build_vignette_mctq()
+# raw <- build_vignette_std_mctq()

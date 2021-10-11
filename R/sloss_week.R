@@ -83,7 +83,7 @@
 #' x <- sloss_week(sd_w, sd_f, wd)
 #' x
 #' #> [1] "6171.42857142858s (~1.71 hours)" # Expected
-#' convert(x, "hms")
+#' hms::as_hms(as.numeric(x))
 #' #> 01:42:51.428571 # Expected
 #'
 #' ## Rounding the output at the seconds level

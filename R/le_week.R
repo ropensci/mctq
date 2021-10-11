@@ -103,7 +103,7 @@
 #' x <- le_week(le_w, le_f, wd)
 #' x
 #' #> [1] "14744.5714285714s (~4.1 hours)" # Expected
-#' convert(x, "hms")
+#' hms::hms(as.numeric(x))
 #' #> 04:05:44.571429 # Expected
 #'
 #' ## Rounding the output at the seconds level

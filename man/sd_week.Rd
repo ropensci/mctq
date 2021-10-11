@@ -48,10 +48,10 @@ See the References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
-conform to the object classes required, you can use the \code{mctq}
-\code{\link[=convert]{convert()}} function to convert it.
+hold time values. These classes can be found in the
+\link[lubridate:lubridate-package]{lubridate} and \link[hms:hms-package]{hms}
+packages. Please refer to those package documentations to learn more about
+them.
 }
 
 \subsection{Rounding and fractional time}{
@@ -159,7 +159,7 @@ if (requireNamespace("stats", quietly = TRUE)) {
 }
 #> [1] "19620s (~5.45 hours)" # Expected
 
-## Converting the output to hms
+## Converting the output to `hms`
 
 sd_w <- lubridate::dhours(5.45)
 sd_f <- lubridate::dhours(9.5)
@@ -167,7 +167,7 @@ wd <- 5
 x <- sd_week(sd_w, sd_f, wd)
 x
 #> [1] "23785.7142857143s (~6.61 hours)" # Expected
-convert(x, "hms")
+hms::as_hms(as.numeric(x))
 #> 06:36:25.714286 # Expected
 
 ## Rounding the output at the seconds level

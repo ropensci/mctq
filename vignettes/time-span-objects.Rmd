@@ -78,10 +78,10 @@ start + lubridate::period(1, units = "day")
 
 In this case, `1 day`, by human standards, represents the same `time of day` of the next day. But, considering the DST event, that `1 day` has a time span of 23 hours.
 
-You can learn more about [`lubridate`](https://lubridate.tidyverse.org/) time span objects in the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter of Wickham & Grolemund's book "R for Data Science".
+You can learn more about [`lubridate`](https://lubridate.tidyverse.org/) time span objects in the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter from Wickham & Grolemund's book "R for Data Science".
 
 ## The MCTQ context
 
-At the first glance you might think that, since MCTQ was made for human respondents, the best representation for time spans would be the one that better represents "human units", right? That would be fine if we were talking about a time span in a timeline irregularity context, but MCTQ doesn’t consider this scenario.
+At first glance you might think that, since MCTQ was made for human respondents, the best representation for time spans would be the one that better represents "human units", right? That would be fine if we were talking about a time span in a timeline irregularity context, but MCTQ doesn’t consider this scenario.
 
 When using MCTQ, the interest is to measure the exact time span between one local time to another. By ignoring irregularities in the timeline (as `Periods` do) the time span can have a fluctuating value. This would not create an issue for most MCTQ applications, but, if the MCTQ data were to be applied with other types of data, this could produce errors. That's why `Duration` objects are the default object for time spans.

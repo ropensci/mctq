@@ -90,18 +90,18 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     format_hms <- function(x) {
         format <- c(1, 5)
-        x <- convert(x, "hms")
+        x <- hms::hms(mctq:::extract_seconds(x))
         substr(as.character(x), format[1], format[2])
     }
 
     format_duration <- function(x) {
-        as.character(convert_tu(x, "M"))
+        as.character(as.numeric(x) / 60)
     }
 
     if (isTRUE(random_cases)) {
         for (i in id) {
-            random_case <- dplyr::as_tibble(
-                random_mctq(model = "standard", quiet = TRUE)) %>%
+            random_case <- random_mctq(model = "standard") %>%
+                dplyr::as_tibble() %>%
                 dplyr::transmute(
                     `ID` = as.character(i),
 
@@ -585,6 +585,10 @@ tidy_std_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
+    # Set values -----
+
+    std_mctq <- build_std_mctq()
+
     # Clean NULL cases -----
 
     fix_character <- function(x) {
@@ -597,7 +601,7 @@ tidy_std_mctq <- function(write = FALSE) {
         x
     }
 
-    std_mctq <- build_std_mctq() %>%
+    std_mctq <- std_mctq %>%
         dplyr::mutate(dplyr::across(.fns = fix_character)) %>%
         dplyr::rowwise() %>%
         dplyr::mutate(length =
@@ -616,6 +620,7 @@ tidy_std_mctq <- function(write = FALSE) {
     pattern_5 <- "^([-+])?\\d+(:)?[0-5]\\d((:)?[0-5]\\d)?"
     pattern_6 <- "^[0-1][0-2](:)?[0-5]\\d(AM|PM)"
     pattern_7 <- "(AM|PM)$"
+    pattern_8 <- "^\\-"
 
     std_mctq <- std_mctq %>% dplyr::transmute(
         id = as.integer(.data$`ID`),
@@ -628,41 +633,58 @@ tidy_std_mctq <- function(write = FALSE) {
 
         bt_w = dplyr::case_when(
             grepl(pattern_4, .data$`W BEDTIME`, perl = TRUE) ~
-                convert_pt(.data$`W BEDTIME`, "hms", "HM", quiet = TRUE),
-            TRUE ~ convert_pt(.data$`W BEDTIME`, "hms",
-                           c("HM", "IMp"), quiet = TRUE)),
-        sprep_w = convert_pt(.data$`W SLEEP PREP`, "hms", c("HMS", "HM", "H")),
+                mctq:::shush(hms::as_hms(
+                    lubridate::parse_date_time(.data$`W BEDTIME`, "HM"))),
+            TRUE ~ mctq:::shush(hms::as_hms(
+                lubridate::parse_date_time(.data$`W BEDTIME`,
+                                           c("HM", "IMp"))))),
+        sprep_w = mctq:::shush(hms::as_hms(
+            lubridate::parse_date_time(.data$`W SLEEP PREP`,
+                                       c("HMS", "HM", "H")))),
         slat_w = dplyr::case_when(
             grepl(pattern_2, .data$`W SLEEP LAT`, perl = TRUE) ~
-                convert_pt(.data$`W SLEEP LAT`, "Duration", "M", quiet = TRUE),
-            TRUE ~ convert_pt(.data$`W SLEEP LAT`, "Duration",
-                           c("HMS", "HM", "H"), quiet = TRUE)),
-        se_w = convert_pt(.data$`W SLEEP END`, "hms", c("HMS", "HM", "H")),
-        si_w = convert_pt(.data$`W SLEEP INERTIA`, "Duration", "M"),
+                mctq:::shush(lubridate::dminutes(as.numeric(
+                    .data$`W SLEEP LAT`))),
+            TRUE ~ mctq:::shush(lubridate::as.duration(hms::as_hms(
+                lubridate::parse_date_time(.data$`W SLEEP LAT`,
+                                           c("HMS", "HM", "H")))))),
+        se_w = mctq:::shush(hms::as_hms(
+            lubridate::parse_date_time(.data$`W SLEEP END`,
+                                       c("HMS", "HM", "H")))),
+        si_w = mctq:::shush(lubridate::dminutes(as.numeric(
+            .data$`W SLEEP INERTIA`))),
         alarm_w = dplyr::case_when(
             tolower(.data$`W ALARM`) == "yes" ~ TRUE,
             tolower(.data$`W ALARM`) == "no" ~ FALSE),
         wake_before_w = dplyr::case_when(
             tolower(.data$`W WAKE BEFORE ALARM`) == "yes" ~ TRUE,
             tolower(.data$`W WAKE BEFORE ALARM`) == "no" ~ FALSE),
-        le_w = convert_pt(.data$`W LIGHT EXPOSURE`, "Duration",
-                          c("HMS", "HM", "H")),
+        le_w = mctq:::shush(lubridate::as.duration(hms::as_hms(
+            lubridate::parse_date_time(.data$`W LIGHT EXPOSURE`,
+                                       c("HMS", "HM", "H"))))),
 
         bt_f = dplyr::case_when(
             grepl(pattern_4, .data$`F BEDTIME`, perl = TRUE) ~
-                convert_pt(.data$`F BEDTIME`, "hms", "HM",
-                           quiet = TRUE),
-            TRUE ~ convert_pt(.data$`F BEDTIME`, "hms", c("HMS", "HM", "H"),
-                           quiet = TRUE)),
-        sprep_f = convert_pt(.data$`F SLEEP PREP`, "hms", c("HMS", "HM", "H")),
-        slat_f = convert_pt(.data$`F SLEEP LAT`, "Duration", "M"),
-        se_f = convert_pt(.data$`F SLEEP END`, "hms", c("HMS", "HM", "H")),
+                mctq:::shush(hms::as_hms(
+                    lubridate::parse_date_time(.data$`F BEDTIME`, "HM"))),
+            TRUE ~ mctq:::shush(hms::as_hms(
+                lubridate::parse_date_time(.data$`F BEDTIME`,
+                                           c("HMS", "HM", "H"))))),
+        sprep_f = mctq:::shush(hms::as_hms(
+            lubridate::parse_date_time(.data$`F SLEEP PREP`,
+                                       c("HMS", "HM", "H")))),
+        slat_f = mctq:::shush(lubridate::dminutes(as.numeric(
+            .data$`F SLEEP LAT`))),
+        se_f = mctq:::shush(hms::as_hms(
+            lubridate::parse_date_time(.data$`F SLEEP END`,
+                                       c("HMS", "HM", "H")))),
         si_f = dplyr::case_when(
             grepl(pattern_2, .data$`F SLEEP INERTIA`) ~
-                convert_pt(.data$`F SLEEP INERTIA`, "Duration", "M",
-                           quiet = TRUE),
-            TRUE ~ convert_pt(.data$`F SLEEP INERTIA`, "Duration",
-                           c("HMS", "HM", "H"), quiet = TRUE)),
+                mctq:::shush(lubridate::dminutes(as.numeric(
+                    .data$`F SLEEP INERTIA`))),
+            TRUE ~ mctq:::shush(lubridate::as.duration(hms::as_hms(
+                lubridate::parse_date_time(.data$`F SLEEP INERTIA`,
+                                           c("HMS", "HM", "H")))))),
         alarm_f = dplyr::case_when(
             tolower(.data$`F ALARM`) == "yes" ~ TRUE,
             tolower(.data$`F ALARM`) == "no" ~ FALSE),
@@ -670,7 +692,14 @@ tidy_std_mctq <- function(write = FALSE) {
             tolower(.data$`F REASONS`) == "yes" ~ TRUE,
             tolower(.data$`F REASONS`) == "no" ~ FALSE),
         reasons_why_f = .data$`F REASONS WHY`,
-        le_f = convert_pt(.data$`F LIGHT EXPOSURE`, "Duration", "HM")
+        le_f = dplyr::case_when(
+            grepl(pattern_8, .data$`F LIGHT EXPOSURE`) ~
+                mctq:::shush(- lubridate::as.duration(hms::as_hms(
+                    lubridate::parse_date_time(.data$`F LIGHT EXPOSURE`,
+                                               "HM")))),
+            TRUE ~ mctq:::shush(lubridate::as.duration(hms::as_hms(
+                lubridate::parse_date_time(.data$`F LIGHT EXPOSURE`,
+                                           "HM")))))
     )
 
     # Write and output dataset -----
@@ -802,7 +831,7 @@ validate_std_mctq <- function(write = FALSE) {
         std_mctq <- dplyr::bind_cols(std_mctq, test) %>%
             dplyr::mutate(
                 dplyr::across(dplyr::ends_with(i),
-                              ~ dplyr::if_else(dummy, na_as(.x), .x))) %>%
+                              ~ dplyr::if_else(dummy, mctq:::na_as(.x), .x))) %>%
             dplyr::select(-dummy)
     }
 
@@ -816,7 +845,7 @@ validate_std_mctq <- function(write = FALSE) {
         dplyr::rowwise() %>%
         dplyr::mutate(
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-                .data$id %in% invalid, na_as(.x), .x))) %>%
+                .data$id %in% invalid, mctq:::na_as(.x), .x))) %>%
         dplyr::ungroup()
 
     # Fix/impute linked data -----
@@ -885,9 +914,13 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
+    # Set values -----
+
+    std_mctq <- validate_std_mctq()
+
     # Create computed variables -----
 
-    std_mctq <- validate_std_mctq() %>%
+    std_mctq <- std_mctq %>%
         dplyr::mutate(
             fd = fd(wd),
             so_w = so(sprep_w, slat_w),
@@ -927,6 +960,12 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     count_f <- length(names(std_mctq)[grepl("_f$", names(std_mctq))])
     count_w <- count_w * 2/3
     count_f <- count_f * 2/3
+
+    count_na <- function(x) {
+        checkmate::assert_atomic(x)
+
+        length(which(is.na(x)))
+    }
 
     test <- std_mctq %>%
         dplyr::mutate(dplyr::across(.fns = as.character)) %>%

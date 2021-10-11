@@ -30,13 +30,13 @@ It's a good idea to have the standard MCTQ questionnaire open while reading this
 
 Let's start with the basics. The first thing you must do to use `mctq` is to have some MCTQ data and `mctq` installed and loaded.
 
-To install a GitHub package you're going to need the [pak](https://pak.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
+To install a GitHub package you're going to need the [remotes](https://remotes.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
 
 ```{r, eval = FALSE}
 install.packages("remotes")
 ```
 
-After `pak` is installed, install `mctq` with:
+After `remotes` is installed, install `mctq` with:
 
 ```{r, eval = FALSE}
 remotes::install_github("gipso/mctq")
@@ -54,7 +54,7 @@ This dataset already has valid values. As for any data analysis, you must have c
 
 Teaching you how to load your data in R is outside the scope of this article. For that, we recommend checking the [readr](https://readr.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/).
 
-Our fictional MCTQ data will be loaded with the code below. The naming of the variables follows the same naming scheme used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq`.
+Our fictional MCTQ data will be loaded with the code below. The naming of the variables follows the same naming pattern used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq` in your console (you can also see it in this [link](https://gipso.github.io/mctq/reference/std_mctq.html)).
 
 ```{r, warning = FALSE, message = FALSE}
 library(readr)
@@ -65,13 +65,13 @@ data <- readr::read_csv(mctq::raw_data("vignette_mctq.csv"),
 
 ## Converting your data
 
-`mctq` makes use of the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages, which provide special objects to deal with date/time values in R. If your dataset does not conform to this structure, you first need to convert your data to it.
+`mctq` makes use of the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages from [tidyverse](https://www.tidyverse.org/), which provide special objects to deal with date/time values in R. If your dataset does not conform to this structure, you first need to convert your data to it.
 
 Due to the circular nature of time, we strongly recommend that you use appropriate temporal objects while dealing with date/time in R. That can help you get rid of several computation mistakes while trying to adapt your data from a base 10 to a system rooted in a base 12 numerical system.
 
-You don't have to know how to handle [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) to do this. We developed a special function called `convert()` to help you.
+Teaching you how to parse/convert your data is outside the scope of this article. Please refer to the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) package documentation to learn more about them. These two are essential packages to deal with date/time data in R. We also recommend that you read the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter from Wickham & Grolemund's book "R for Data Science".
 
-`convert()` allows you to convert and parse data to different kinds of R objects. Here we are interested in two of them: `Duration` objects, to store time length, such as sleep latency, and `hms` objects, to store local time values, such as bedtime.
+Here we are interested in two types of time objects: `Duration` objects, to store time spans, such as sleep latency, and `hms` objects, to store local time values, such as bedtime.
 
 But first, let's take a look at the data, shall we? If you're using [RStudio](https://rstudio.com/), you can run the code above and then type `View(data)` in the console to explore it.
 
@@ -79,45 +79,26 @@ But first, let's take a look at the data, shall we? If you're using [RStudio](ht
 data
 ```
 
-As you can see, our data came in different formats. For example, the column `bt_w` (local time of going to bed on workdays) is in hours:minutes format, while `slat_w` (sleep latency on workdays) is a duration expressed in minutes.
+As you can see, our data came in different formats. For example, the column `bt_w` (local time of going to bed on workdays) is in `hours:minutes` format, while `slat_w` (sleep latency on workdays) is a duration expressed in minutes.
 
-`convert()` let you easily handle this. It takes an R object plus some instructions on how to handle the conversion. Here are some examples:
-
-```{r, warnings = FALSE, message = FALSE}
-# From decimal hours to `hms`
-convert(6.5, "hms", input_unit = "H")
-# From radians to `Duration`
-convert(1.308997, "Duration", input_unit = "rad")
-# From radians to decimal minutes
-convert(0.2617994, "numeric", input_unit = "rad", output_unit = "M")
-# From `character` `HMS` to `Duration`
-convert("19:55:17", "Duration", orders = "HMS")
-# From `character` `HM AM/PM ` to `hms`
-convert("10:00 PM", "hms", orders = "IMp")
-```
-
-Note that you can always convert your data back to the original format if you want.
-
-You can also use `convert()` to convert data frame columns directly. That's what we're going to do with our data.
+Our fictional data will be parsed/converted with the code below. Please note that the `lubridate` and `hms` packages are equipped with easy tools and great documentation to help you with this task.
 
 ```{r, warnings = FALSE, message = FALSE}
 library(dplyr)
+library(hms)
+library(lubridate)
 
 data <- data %>%
-  convert("integer", cols = c("id", "wd"), quiet = TRUE) %>%
-  convert("logical", 
-          cols = c("work", "alarm_w", "wake_before_w", "alarm_f", 
-                   "reasons_f"),
-          quiet = TRUE) %>%
-  convert("hms", 
-          cols = c("bt_w", "sprep_w", "se_w","bt_f", "sprep_f", "se_f"), 
-          orders = "HM") %>%
-  convert("Duration", cols = c("slat_w", "si_w", "slat_f", "si_f"), 
-          orders = "M") %>%
-  convert("Duration", cols = c("le_w", "le_f"), orders = "HM")
+  dplyr::mutate(dplyr::across(dplyr::matches("^id$|^wd$"), as.integer)) %>%
+  dplyr::mutate(dplyr::across(
+    dplyr::matches("^work$|^alarm_|^wake_|^reasons_f$"), as.logical)) %>%
+  dplyr::mutate(dplyr::across(
+    dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm)) %>%
+  dplyr::mutate(dplyr::across(
+    dplyr::matches("^slat_|^si_"), ~ lubridate::dminutes(as.numeric(.x)))) %>%
+  dplyr::mutate(dplyr::across(
+    dplyr::matches("^le_"), ~ lubridate::as.duration(hms::parse_hm(.x))))
 ```
-
-Another fast and reliable way to convert columns from a data frame is by using `convert()` with the `mutate()` function, included in the  [dplyr](https://dplyr.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/). In fact, that's what `convert()` do in the background when converting data frame columns.
 
 Our data is now all set to start. Let's take a look at it.
 
@@ -180,7 +161,7 @@ data %>% dplyr::select(se_w, si_w, gu_w, se_f, si_f, gu_f)
 
 The output must be the difference between `se` and `so` in a circular time frame of 24 hours.
 
-Please note that, although we tried to preserve the original authors naming pattern for the MCTQ functions, the name `sd` provokes a dangerous name collision with the widely used [stats::sd] (standard deviation) function. That's why we named it as `sdu`. This is the only exception, all the other `mctq` functions maintain a strong naming resemblance with the original authors naming pattern.
+Please note that, although we tried to preserve the original authors naming pattern for the MCTQ functions, the name `sd` provokes a dangerous name collision with the widely used [stats::sd](https://rdrr.io/r/stats/sd.html) (standard deviation) function. That's why we named it as `sdu`. This is the only exception, all the other `mctq` functions maintain a strong naming resemblance with the original authors naming pattern.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$sd_w <- sdu(data$so_w, data$se_w)
@@ -210,9 +191,11 @@ data %>% dplyr::select(bt_w, gu_w, tbt_w, bt_f, gu_f, tbt_f)
 
 The output must be the sum of `so` with the half of `sd` duration in a circular time frame of 24 hours.
 
+Please note that by loading other packages the `ms()` function may be masked. This happens when you load the `lubridate` package (`library(lubridate)`) after loading `mctq` (`library(mctq)`). To assure you're using the `ms()` function from the `mctq` package, use the prefix `mctq::`, as shown below.
+
 ```{r, warnings = FALSE, message = FALSE}
-data$msw <- ms(data$so_w, data$sd_w)
-data$msf <- ms(data$so_f, data$sd_f)
+data$msw <- mctq::ms(data$so_w, data$sd_w)
+data$msf <- mctq::ms(data$so_f, data$sd_f)
 
 # Comparing the result
 data %>% dplyr::select(so_w, sd_w, msw, so_f, sd_f, msf)
@@ -280,8 +263,7 @@ data$msf_sc <- msf_sc(data$msf, data$sd_w, data$sd_f, data$sd_week,
                       data$alarm_f)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(
-  msf_sc_rounded = mctq::round_time(msf_sc))
+data <- data %>% dplyr::mutate(msf_sc_rounded = mctq::round_time(msf_sc))
 data %>% dplyr::select(msf, msf_sc_rounded)
 ```
 
@@ -333,7 +315,8 @@ data <- data %>%
             bt_f, sprep_f, slat_f, so_f, se_f, si_f, gu_f, alarm_f,
             reasons_f, reasons_why_f, sd_f, tbt_f, le_f, msf,
 
-            sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl) %>%
+            sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl
+            ) %>%
   dplyr::select(-dplyr::ends_with("_rounded"))
 ```
 
@@ -353,7 +336,7 @@ pretty_mctq(data, round = FALSE)
 
 ## Utilities
 
-Before we end, it's important to note that, in addition to `convert()` and to functions for MCTQ processing, `mctq` also provides several other utility tools to help with your MCTQ data. Here's a list of them.
+Before we end, it's important to note that `mctq` also provides several utility tools to help with your MCTQ data. Here's a list of them.
 
 * `assign_date()`: Assign dates to two sequential hours
 * `pretty_mctq()`: Make a MCTQ dataset more presentable
@@ -366,8 +349,8 @@ Before we end, it's important to note that, in addition to `convert()` and to fu
 
 `mctq` also provides fictional datasets of the standard, micro, and shift versions for testing and learning purposes.
 
-* `std_mctq`: A fictional standard MCTQ dataset
-* `micro_mctq`: A fictional $\mu$MCTQ dataset
-* `shift_mctq`: A fictional MCTQ$^{Shift}$ dataset
+* `std_mctq`: A fictional standard MCTQ dataset (`?std_mctq`)
+* `micro_mctq`: A fictional $\mu$MCTQ dataset (`?micro_mctq`)
+* `shift_mctq`: A fictional MCTQ$^{Shift}$ dataset (`?shift_mctq`)
 
 We encouraged you to read the documentation of the features above. You may find it worth your time.

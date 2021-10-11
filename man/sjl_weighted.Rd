@@ -44,10 +44,10 @@ See the References section to learn more.
 \subsection{Class requirements}{
 
 The \code{mctq} package works with a set of object classes specially created to
-hold time values. These classes can be found in the \link[hms:hms-package]{hms}
-and \link[lubridate:lubridate-package]{lubridate} package. If your data do not
-conform to the object classes required, you can use the \code{mctq}
-\code{\link[=convert]{convert()}} function to convert it.
+hold time values. These classes can be found in the
+\link[lubridate:lubridate-package]{lubridate} and \link[hms:hms-package]{hms}
+packages. Please refer to those package documentations to learn more about
+them.
 }
 
 \subsection{Rounding and fractional time}{
@@ -159,16 +159,17 @@ sjl <- list(sjl_m = lubridate::dhours(0.25),
             sjl_e = lubridate::dhours(1.2),
             sjl_n = lubridate::dhours(4.32))
 n_w <- list(n_w_m = 4, n_w_e = 2, n_w_n = 1)
-sjl_weighted(sjl, n_w)
+x <- sjl_weighted(sjl, n_w)
+x
 #> [1] "3970.28571428571s (~1.1 hours)" # Expected
-convert(sjl_weighted(sjl, n_w), "hms")
+hms::as_hms(as.numeric(x))
 #> 01:06:10.285714 # Expected
 
 ## Rounding the output at the seconds level
 
-round_time(sjl_weighted(sjl, n_w))
+round_time(x)
 #> [1] "3970s (~1.1 hours)" # Expected
-round_time(convert(sjl_weighted(sjl, n_w), "hms"))
+round_time(hms::as_hms(as.numeric(x)))
 #> 01:06:10 # Expected
 }
 \references{

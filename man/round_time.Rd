@@ -99,7 +99,6 @@ Other date-time rounding functions: \code{\link[hms:round_hms]{hms::round_hms()}
 
 Other utility functions: 
 \code{\link{assign_date}()},
-\code{\link{convert}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

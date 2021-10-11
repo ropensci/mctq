@@ -148,18 +148,17 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     format_hms <- function(x) {
         format <- c(1, 5)
-        x <- convert(x, "hms")
+        x <- hms::hms(mctq:::extract_seconds(x))
         substr(as.character(x), format[1], format[2])
     }
 
     format_duration <- function(x) {
-        as.character(convert_tu(x, "M"))
+        as.character(as.numeric(x) / 60)
     }
 
     if (isTRUE(random_cases)) {
         for (i in id) {
-            random_case <- dplyr::as_tibble(
-                random_mctq(model = "shift", quiet = TRUE))
+            random_case <- random_mctq(model = "shift") %>% dplyr::as_tibble()
 
             values <- list(
                 w_m = c("W M", "_w_m"),
@@ -1111,6 +1110,10 @@ tidy_shift_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
+    # Set values -----
+
+    shift_mctq <- build_shift_mctq()
+
     # Clean NULL cases -----
 
     fix_character <- function(x) {
@@ -1123,7 +1126,7 @@ tidy_shift_mctq <- function(write = FALSE) {
         x
     }
 
-    shift_mctq <- build_shift_mctq() %>%
+    shift_mctq <- shift_mctq %>%
         dplyr::mutate(dplyr::across(.fns = fix_character)) %>%
         dplyr::rowwise() %>%
         dplyr::mutate(length =
@@ -1158,51 +1161,58 @@ tidy_shift_mctq <- function(write = FALSE) {
         dplyr::relocate(.data$id, .before = .data$`W M N DAYS`)
 
     for (i in values) {
-        shift_mctq <- shift_mctq %>% dplyr::mutate(
-            !!as.symbol(paste0("n", i[2])) :=
-                as.integer(.data[[paste(i[1], "N DAYS")]]),
-            !!as.symbol(paste0("bt", i[2])) :=
-                convert_pt(.data[[paste(i[1], "BEDTIME")]], "hms",
-                                   c("HM", "IMp")),
-            !!as.symbol(paste0("sprep", i[2])) :=
-                dplyr::case_when(
-                    grepl(pattern_4, .data[[paste(i[1], "SLEEP PREP")]],
-                          perl = TRUE) ~
-                        convert_pt(.data[[paste(i[1], "SLEEP PREP")]], "hms",
-                                   "HM", quiet = TRUE),
-                    TRUE ~
-                        convert_pt(.data[[paste(i[1], "SLEEP PREP")]], "hms",
-                                   c("HM", "IMp"), quiet = TRUE)),
-            !!as.symbol(paste0("slat", i[2])) :=
-                convert_pt(.data[[paste(i[1], "SLEEP LAT")]], "Duration", "M"),
-            !!as.symbol(paste0("se", i[2])) :=
-                dplyr::case_when(
-                    grepl(pattern_4, .data[[paste(i[1], "SLEEP END")]],
-                          perl = TRUE) ~
-                        convert_pt(.data[[paste(i[1], "SLEEP END")]], "hms",
-                                   "HM", quiet = TRUE),
-                    TRUE ~
-                        convert_pt(.data[[paste(i[1], "SLEEP END")]], "hms",
-                                   c("HM", "IMp"), quiet = TRUE)),
-            !!as.symbol(paste0("tgu", i[2])) :=
-                convert_pt(.data[[paste(i[1], "TIME GU")]], "Duration", "M"),
-            !!as.symbol(paste0("alarm", i[2])) := dplyr::case_when(
-                tolower(.data[[paste(i[1], "ALARM")]]) == "yes" ~ TRUE,
-                tolower(.data[[paste(i[1], "ALARM")]]) == "no" ~ FALSE),
-            !!as.symbol(paste0("reasons", i[2])) := dplyr::case_when(
-                tolower(.data[[paste(i[1], "REASONS")]]) == "yes" ~ TRUE,
-                tolower(.data[[paste(i[1], "REASONS")]]) == "no" ~ FALSE),
-            !!as.symbol(paste0("reasons_why", i[2])) :=
-                .data[[paste(i[1], "REASONS WHY")]],
-            !!as.symbol(paste0("nap", i[2])) := dplyr::case_when(
-                tolower(.data[[paste(i[1], "NAP")]]) == "yes" ~ TRUE,
-                tolower(.data[[paste(i[1], "NAP")]]) == "no" ~ FALSE),
-            !!as.symbol(paste0("napo", i[2])) :=
-                convert_pt(.data[[paste(i[1], "NAP ONSET")]], "hms",
-                           c("HM", "IMp")),
-            !!as.symbol(paste0("nape", i[2])) :=
-                convert_pt(.data[[paste(i[1], "NAP END")]], "hms",
-                           c("HM", "IMp")),
+        shift_mctq <- shift_mctq %>%
+            dplyr::mutate(
+                !!as.symbol(paste0("n", i[2])) :=
+                    as.integer(.data[[paste(i[1], "N DAYS")]]),
+                !!as.symbol(paste0("bt", i[2])) :=
+                    mctq:::shush(hms::as_hms(lubridate::parse_date_time(
+                        .data[[paste(i[1], "BEDTIME")]], c("HM", "IMp")))),
+                !!as.symbol(paste0("sprep", i[2])) :=
+                    dplyr::case_when(
+                        grepl(pattern_4, .data[[paste(i[1], "SLEEP PREP")]],
+                              perl = TRUE) ~ mctq:::shush(hms::as_hms(
+                                  lubridate::parse_date_time(
+                                      .data[[paste(i[1], "SLEEP PREP")]],
+                                      "HM"))),
+                        TRUE ~ mctq:::shush(hms::as_hms(
+                            lubridate::parse_date_time(
+                                .data[[paste(i[1], "SLEEP PREP")]],
+                                c("HM", "IMp"))))),
+                !!as.symbol(paste0("slat", i[2])) :=
+                    mctq:::shush(lubridate::dminutes(as.numeric(
+                        .data[[paste(i[1], "SLEEP LAT")]]))),
+                !!as.symbol(paste0("se", i[2])) :=
+                    dplyr::case_when(
+                        grepl(pattern_4, .data[[paste(i[1], "SLEEP END")]],
+                              perl = TRUE) ~ mctq:::shush(hms::as_hms(
+                                  lubridate::parse_date_time(
+                                      .data[[paste(i[1], "SLEEP END")]],
+                                      "HM"))),
+                        TRUE ~ mctq:::shush(hms::as_hms(
+                            lubridate::parse_date_time(
+                                .data[[paste(i[1], "SLEEP END")]],
+                                c("HM", "IMp"))))),
+                !!as.symbol(paste0("tgu", i[2])) :=
+                    mctq:::shush(lubridate::dminutes(as.numeric(
+                        .data[[paste(i[1], "TIME GU")]]))),
+                !!as.symbol(paste0("alarm", i[2])) := dplyr::case_when(
+                    tolower(.data[[paste(i[1], "ALARM")]]) == "yes" ~ TRUE,
+                    tolower(.data[[paste(i[1], "ALARM")]]) == "no" ~ FALSE),
+                !!as.symbol(paste0("reasons", i[2])) := dplyr::case_when(
+                    tolower(.data[[paste(i[1], "REASONS")]]) == "yes" ~ TRUE,
+                    tolower(.data[[paste(i[1], "REASONS")]]) == "no" ~ FALSE),
+                !!as.symbol(paste0("reasons_why", i[2])) :=
+                    .data[[paste(i[1], "REASONS WHY")]],
+                !!as.symbol(paste0("nap", i[2])) := dplyr::case_when(
+                    tolower(.data[[paste(i[1], "NAP")]]) == "yes" ~ TRUE,
+                    tolower(.data[[paste(i[1], "NAP")]]) == "no" ~ FALSE),
+                !!as.symbol(paste0("napo", i[2])) :=
+                    mctq:::shush(hms::as_hms(lubridate::parse_date_time(
+                        .data[[paste(i[1], "NAP ONSET")]], c("HM", "IMp")))),
+                !!as.symbol(paste0("nape", i[2])) :=
+                    mctq:::shush(hms::as_hms(lubridate::parse_date_time(
+                        .data[[paste(i[1], "NAP END")]], c("HM", "IMp"))))
         ) %>%
             dplyr::select(-dplyr::starts_with(i[1]))
     }
@@ -1287,7 +1297,8 @@ validate_shift_mctq <- function(write = FALSE) {
     shift_mctq <- shift_mctq %>%
         dplyr::mutate(
             dplyr::across(dplyr::all_of(cols_1), validate_hms),
-            dplyr::across(dplyr::all_of(cols_2), validate_duration))
+            dplyr::across(dplyr::all_of(cols_2), validate_duration)
+            )
 
     # Do multivariate validation -----
 
@@ -1306,7 +1317,8 @@ validate_shift_mctq <- function(write = FALSE) {
                     dplyr::if_else(dummy, !!as.symbol(sprep_i),
                                    !!as.symbol(bt_i)),
                 !!as.symbol(sprep_i) :=
-                    dplyr::if_else(dummy, bkp, !!as.symbol(sprep_i))) %>%
+                    dplyr::if_else(dummy, bkp, !!as.symbol(sprep_i))
+                ) %>%
             dplyr::select(-dummy, -bkp)
     }
 
@@ -1322,13 +1334,16 @@ validate_shift_mctq <- function(write = FALSE) {
                 dummy = dplyr::case_when(
                     sd_i < lubridate::dhours(2) |
                         sd_i > lubridate::dhours(18) ~ TRUE,
-                    TRUE ~ FALSE)) %>%
+                    TRUE ~ FALSE)
+                ) %>%
             dplyr::select(dummy)
 
         shift_mctq <- dplyr::bind_cols(shift_mctq, test) %>%
             dplyr::mutate(
                 dplyr::across(dplyr::ends_with(i),
-                              ~ dplyr::if_else(dummy, na_as(.x), .x))) %>%
+                              ~ dplyr::if_else(
+                                  dummy, mctq:::na_as(.x), .x))
+                ) %>%
             dplyr::select(-dummy)
     }
 
@@ -1343,7 +1358,8 @@ validate_shift_mctq <- function(write = FALSE) {
         dplyr::rowwise() %>%
         dplyr::mutate(
             dplyr::across(-.data$id, .fns = ~ dplyr::if_else(
-                .data$id %in% invalid, na_as(.x), .x))) %>%
+                .data$id %in% invalid, mctq:::na_as(.x), .x))
+            ) %>%
         dplyr::ungroup()
 
     # Fix/impute linked data -----
@@ -1468,7 +1484,8 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
         dplyr::mutate(
             sjl_weighted = sjl_weighted(
                 sjl = list(sjl_m = sjl_m, sjl_e = sjl_e, sjl_n = sjl_n),
-                n = list(n_w_m = n_w_m, n_w_e = n_w_e, n_w_n = n_w_n))) %>%
+                n = list(n_w_m = n_w_m, n_w_e = n_w_e, n_w_n = n_w_n))
+            ) %>%
         dplyr::relocate(
             id,
 
@@ -1502,7 +1519,8 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
             sd_overall_n, msf_sc_n, sjl_rel_n, sjl_n,
 
-            sjl_weighted)
+            sjl_weighted
+            )
 
     # Apply corrections to `sjl_rel` and `sjl` -----
 
@@ -1518,12 +1536,10 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             sjl_rel_n = dplyr::if_else(.data$id %in% cases,
                                        sjl_rel(.data$msw_n, .data$msf_n,
                                                method = "longer"),
-                                       .data$sjl_rel_n),
-        ) %>%
+                                       .data$sjl_rel_n)
+            ) %>%
         dplyr::ungroup() %>%
-        dplyr::mutate(
-            sjl_n = abs(.data$sjl_rel_n)
-        )
+        dplyr::mutate(sjl_n = abs(.data$sjl_rel_n))
 
     # Make MCTQ pretty -----
 
