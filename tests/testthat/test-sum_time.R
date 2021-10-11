@@ -81,7 +81,8 @@ test_that("vct_sum_time()| linear test", {
                               c(lubridate::as_datetime("1970-01-01 20:00:00"),
                                 lubridate::as_datetime("1970-01-01 10:00:00")),
                               as.POSIXlt(
-                                  c(lubridate::as_datetime("1970-01-01 01:00:00"),
+                                  c(lubridate::as_datetime(
+                                      "1970-01-01 01:00:00"),
                                     lubridate::as_datetime(
                                         "1970-01-01 02:00:00"))),
                               c(lubridate::as.interval(lubridate::dhours(4),
@@ -101,7 +102,8 @@ test_that("vct_sum_time()| linear test", {
                               c(lubridate::as_datetime("1970-01-01 20:00:00"),
                                 lubridate::as_datetime("1970-01-01 10:00:00")),
                               as.POSIXlt(
-                                  c(lubridate::as_datetime("1970-01-01 01:00:00"),
+                                  c(lubridate::as_datetime(
+                                      "1970-01-01 01:00:00"),
                                     lubridate::as_datetime(
                                         "1970-01-01 02:00:00"))),
                               c(lubridate::as.interval(lubridate::dhours(4),
@@ -120,7 +122,8 @@ test_that("vct_sum_time()| linear test", {
                               c(lubridate::as_datetime("1970-01-01 20:00:00"),
                                 lubridate::as_datetime("1970-01-01 10:00:00")),
                               as.POSIXlt(
-                                  c(lubridate::as_datetime("1970-01-01 01:00:00"),
+                                  c(lubridate::as_datetime(
+                                      "1970-01-01 01:00:00"),
                                     lubridate::as_datetime(
                                         "1970-01-01 02:00:00"))),
                               c(lubridate::as.interval(lubridate::dhours(4),
@@ -142,7 +145,8 @@ test_that("vct_sum_time()| circular test", {
                               c(lubridate::as_datetime("1970-01-01 20:00:00"),
                                 lubridate::as_datetime("1970-01-01 10:00:00")),
                               as.POSIXlt(
-                                  c(lubridate::as_datetime("1970-01-01 01:00:00"),
+                                  c(lubridate::as_datetime(
+                                      "1970-01-01 01:00:00"),
                                     lubridate::as_datetime(
                                         "1970-01-01 02:00:00"))),
                               c(lubridate::as.interval(lubridate::dhours(4),
@@ -162,7 +166,8 @@ test_that("vct_sum_time()| circular test", {
                               c(lubridate::as_datetime("1970-01-01 20:00:00"),
                                 lubridate::as_datetime("1970-01-01 10:00:00")),
                               as.POSIXlt(
-                                  c(lubridate::as_datetime("1970-01-01 01:00:00"),
+                                  c(lubridate::as_datetime(
+                                      "1970-01-01 01:00:00"),
                                     lubridate::as_datetime(
                                         "1970-01-01 02:00:00"))),
                               c(lubridate::as.interval(lubridate::dhours(4),
