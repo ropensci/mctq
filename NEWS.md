@@ -26,7 +26,7 @@
 
 ## Note about removing `convert()`
 
-`convert()` was created considering the user experience (sleep and chronobiology scientists). Since most of them don't have much experience with R and that time can have different types of representations (e.g., decimal hours, radian), `convert()` aim was to help transpose those difficulties, posing as an "universal translator" (🖖).  by trying to pose as an "universal translator" (🖖).
+`convert()` was created considering the user experience (sleep and chronobiology scientists). Since most of them don't have much experience with R and that time can have different types of representations (e.g., decimal hours, radian), `convert()` aim was to help transpose those difficulties, posing as an "universal translator" (🖖).
 
 However, after much thought and consideration, we believe that the `convert()` feature may be out of the `mctq` scope. It can maybe be part of another package (a `lubritime` package perhaps? 😄). Other `mctq` tools, like `shorter_interval()` and `sum_time()`, could also be a part of that package (but are necessary in `mctq` for the time being). Hence, we decided to remove `convert()` and to instruct the user to check the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages for parsing/conversion.
 
