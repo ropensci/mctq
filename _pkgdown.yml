@@ -1,9 +1,9 @@
-url: https://gipsousp.github.io/mctq/
+url: https://gipso.github.io/mctq/
 
 template:
   params:
     bootswatch: cosmo
-    ganalytics: G-CQHJT6E3K1
+    ganalytics: G-MXJXQFEVEE
     mathjax: true
 
 navbar:
