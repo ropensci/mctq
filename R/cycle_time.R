@@ -180,7 +180,7 @@
 #' cycle <- lubridate::dyears(1)
 #' reverse <- FALSE
 #' cycle_time(time, cycle, reverse)
-#' #> [1] "0s"                     "-2629800s (~-4.35 weeks)" # Expected
+#' #> [1] "0s"                       "-2629800s (~-4.35 weeks)" # Expected
 #'
 #' time <- c(lubridate::dmonths(24), lubridate::dmonths(-13))
 #' cycle <- lubridate::dyears(1)
