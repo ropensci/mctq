@@ -50,8 +50,7 @@
 #' #> [1]  6 NA # Expected
 fd <- function(wd) {
     assert_numeric_(wd)
-    checkmate::assert_numeric(wd, lower = 0, upper = 7)
-    checkmate::assert_integerish(wd)
+    checkmate::assert_integerish(wd, lower = 0, upper = 7)
 
     wd <- as.integer(wd)
     as.integer(7 - wd)

@@ -97,14 +97,14 @@
 #' round_time(x)
 #' #> [1] "4808s (~1.34 hours)" # Expected
 sloss_week <- function(sd_w, sd_f, wd) {
-    assert_duration(sd_w)
-    assert_duration(sd_f)
-    checkmate::assert_integerish(wd)
-    checkmate::assert_numeric(wd, lower = 0, upper = 7)
+    assert_duration(sd_w, lower = lubridate::duration(0))
+    assert_duration(sd_f, lower = lubridate::duration(0))
+    assert_numeric_(wd)
+    checkmate::assert_integerish(wd, lower = 0, upper = 7)
     assert_identical(sd_w, sd_f, wd, type = "length")
 
-    ## `sum_1` and `sum_2` exists to remove unnecessary warnings of the
-    ## lubridate package when subtracting objects of class `Duration`.
+    # `sum_1` and `sum_2` exists to remove unnecessary warnings of the
+    # {lubridate} package when subtracting objects of class `Duration`.
 
     wd <- as.integer(wd)
     sd_week <- sd_week(sd_w, sd_f, wd)

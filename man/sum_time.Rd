@@ -59,7 +59,7 @@ elements. For example, \code{sum_time(c(x, y), c(w, z))} will return a vector li
 requires that all objects in \code{...} have the same length.
 }
 
-\subsection{Linear versus circular sum}{
+\subsection{Linear versus circular time}{
 
 Time can have different "shapes".
 
@@ -162,15 +162,6 @@ get -6h (-30 + 24), and -6h relative to the origin will be 18h.\preformatted{   
 }
 }
 
-\subsection{\code{POSIXt} objects}{
-
-\code{\link[base:as.POSIXlt]{POSIXt}} objects in \code{...} will be stripped of their
-dates. Only the time will be considered.
-
-Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
-Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
-}
-
 \subsection{\code{Period} objects}{
 
 \code{\link[lubridate:period]{Period}} objects are a special type of object
@@ -183,6 +174,15 @@ class \code{\link[lubridate:duration]{Duration}}.
 
 Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
 Wickham & Grolemund (n.d.).
+}
+
+\subsection{\code{POSIXt} objects}{
+
+\code{\link[base:as.POSIXlt]{POSIXt}} objects in \code{...} will be stripped of their
+dates. Only the time will be considered.
+
+Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
+Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 }
 
 \subsection{\code{Interval} objects}{

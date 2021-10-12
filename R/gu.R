@@ -88,8 +88,8 @@
 #' #> 12:40:00 # Expected
 #' #> 00:55:00 # Expected
 gu <- function(se, si) {
-    checkmate::assert_class(se, "hms")
-    assert_duration(si)
+    assert_hms(se, lower = hms::hms(0))
+    assert_duration(si, lower = lubridate::duration(0))
     assert_identical(se, si, type = "length")
 
     vct_sum_time(se, si, cycle = lubridate::ddays()) %>%

@@ -100,8 +100,8 @@
 #' #> [1] 04:47:30 # Expected
 #' #> [1] 03:58:30 # Expected
 msl <- function(so, sd) {
-    checkmate::assert_class(so, "hms")
-    assert_duration(sd)
+    assert_hms(so, lower = hms::hms(0))
+    assert_duration(sd, lower = lubridate::duration(0))
     assert_identical(so, sd, type = "length")
 
     vct_sum_time(so, (sd / 2), cycle = lubridate::ddays()) %>%
@@ -289,10 +289,10 @@ msl <- function(so, sd) {
 #' round_time(x)
 #' #> 04:46:00 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
-    checkmate::assert_class(msf, "hms")
-    assert_duration(sd_w)
-    assert_duration(sd_f)
-    assert_duration(sd_week)
+    assert_hms(msf, lower = hms::hms(0))
+    assert_duration(sd_w, lower = lubridate::duration(0))
+    assert_duration(sd_f, lower = lubridate::duration(0))
+    assert_duration(sd_week, lower = lubridate::duration(0))
     checkmate::assert_logical(alarm_f)
     assert_identical(msf, sd_w, sd_f, sd_week, alarm_f, type = "length")
 

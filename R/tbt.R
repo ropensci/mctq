@@ -92,8 +92,8 @@
 #' tbt(bt, gu)
 #' #> [1] "34800s (~9.67 hours)" "32100s (~8.92 hours)" # Expected
 tbt <- function(bt, gu) {
-    checkmate::assert_class(bt, "hms")
-    checkmate::assert_class(gu, "hms")
+    assert_hms(bt, lower = hms::hms(0))
+    assert_hms(gu, lower = hms::hms(0))
     assert_identical(bt, gu, type = "length")
 
     vct_sum_time(gu, - bt, cycle = lubridate::ddays())

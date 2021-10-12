@@ -210,11 +210,11 @@
 sjl <- function(msw, msf, abs = TRUE, method = "shorter") {
     choices <- c("difference", "shorter", "longer")
 
-    checkmate::assert_class(msw, "hms")
-    checkmate::assert_class(msf, "hms")
+    assert_hms(msw, lower = hms::hms(0))
+    assert_hms(msf, lower = hms::hms(0))
+    assert_identical(msw, msf, type = "length")
     checkmate::assert_flag(abs)
     checkmate::assert_choice(method, choices)
-    assert_identical(msw, msf, type = "length")
 
     if (method == "difference") {
         out <- vct_sum_time(msf, - msw)
@@ -379,7 +379,7 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 sjl_weighted <- function(sjl, n_w) {
     checkmate::assert_list(sjl, len = length(n_w))
     checkmate::assert_list(n_w, len = length(sjl))
-    lapply(sjl, assert_duration)
+    lapply(sjl, assert_duration, lower = lubridate::duration(0))
     lapply(n_w, assert_whole_number)
     mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
 

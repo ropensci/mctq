@@ -144,14 +144,6 @@
 #'                     (-12)
 #' ```
 #'
-#' ## `POSIXt` objects
-#'
-#' [`POSIXt`][base::as.POSIXct()] objects in `...` will be stripped of their
-#' dates. Only the time will be considered.
-#'
-#' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
-#' Learn more about it in [base::DateTimeClasses].
-#'
 #' ## `Period` objects
 #'
 #' [`Period`][lubridate::period()] objects are a special type of object
@@ -165,6 +157,14 @@
 #' Learn more about `Period` objects in the [Dates and
 #' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
 #' Wickham & Grolemund (n.d.).
+#'
+#' ## `POSIXt` objects
+#'
+#' [`POSIXt`][base::as.POSIXct()] objects in `...` will be stripped of their
+#' dates. Only the time will be considered.
+#'
+#' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
+#' Learn more about it in [base::DateTimeClasses].
 #'
 #' ## `Interval` objects
 #'
