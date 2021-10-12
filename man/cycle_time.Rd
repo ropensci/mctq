@@ -4,7 +4,7 @@
 \alias{cycle_time}
 \title{Cycle time objects}
 \usage{
-cycle_time(time, cycle, reverse = FALSE)
+cycle_time(time, cycle, reverse = TRUE)
 }
 \arguments{
 \item{time}{An object belonging to one of the following classes: \code{numeric},
@@ -13,8 +13,9 @@ cycle_time(time, cycle, reverse = FALSE)
 \item{cycle}{A \code{numeric} or \code{Duration} object of length 1, equal or greater
 than 0, indicating the cycle length in seconds (see Details to learn more).}
 
-\item{reverse}{A \code{logical} value indicating if the function must use a
-reverse cycle for negative values in \code{time} (see Details to learn more).}
+\item{reverse}{(optional) A \code{logical} value indicating if the function must
+use a reverse cycle for negative values in \code{time} (see Details to learn
+more) (default: \code{TRUE}).}
 }
 \value{
 The same type of object of \code{time} cycled with the \code{cycle} parameter.
@@ -172,7 +173,7 @@ time <- c(lubridate::dmonths(24), lubridate::dmonths(-13))
 cycle <- lubridate::dyears(1)
 reverse <- FALSE
 cycle_time(time, cycle, reverse)
-#> [1] "0s"                     "-2629800s (~4.35 weeks)" # Expected
+#> [1] "0s"                     "-2629800s (~-4.35 weeks)" # Expected
 
 time <- c(lubridate::dmonths(24), lubridate::dmonths(-13))
 cycle <- lubridate::dyears(1)

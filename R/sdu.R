@@ -102,8 +102,7 @@ sdu <- function(so, se) {
     checkmate::assert_class(se, "hms")
     assert_identical(so, se, type = "length")
 
-    vct_sum_time(se, - so, cycle = lubridate::ddays(), reverse = TRUE) %>%
-        lubridate::as.duration()
+    vct_sum_time(se, - so, cycle = lubridate::ddays())
 }
 
 #' Compute MCTQ nap duration (only for MCTQ\eqn{^{Shift}}{ Shift})
@@ -189,8 +188,7 @@ napd <- function(napo, nape) {
     checkmate::assert_class(nape, "hms")
     assert_identical(napo, nape, type = "length")
 
-    vct_sum_time(nape, - napo, cycle = lubridate::ddays(), reverse = TRUE) %>%
-        lubridate::as.duration()
+    vct_sum_time(nape, - napo, cycle = lubridate::ddays())
 }
 
 #' Compute MCTQ 24 hours sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})
@@ -301,7 +299,7 @@ sd24 <- function(sd, napd, nap) {
 
     dplyr::case_when(
         nap == FALSE ~ sd,
-        TRUE ~ lubridate::as.duration(vct_sum_time(sd, napd))
+        TRUE ~ vct_sum_time(sd, napd)
     )
 }
 

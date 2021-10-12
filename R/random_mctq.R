@@ -430,7 +430,8 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     for (i in c("bt_w_m", "bt_w_e", "bt_w_n", "bt_f_m", "bt_f_e", "bt_f_n")) {
         sample <- sample_time(min = min, max = max, by = by, prob = prob)
         name <- paste0("sprep_", str_extract_(i, "._.$"))
-        assign(i, sum_time(get(name), - sample, cycle = lubridate::ddays()))
+        assign(i, hms::hms(as.numeric(
+            sum_time(get(name), - sample, cycle = lubridate::ddays()))))
     }
 
     # Create `slat_w_*` and `slat_f_*` -----
@@ -498,35 +499,47 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
 
     values <- list(
         # se_w_m_min >= sprep_w_m_max + slat_w_m_max + sd_w_m_min
-        # sum_time(hms::parse_hm("00:40"), hms::parse_hm("00:30"), `sd_w_m_min`)
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("00:40"), hms::parse_hm("00:30"),
+        # `sd_w_m_min`)))
         # se_w_m_max + tgu_w_m_max <= 06:00 - 00:30
-        # sum_time(hms::parse_hm("05:00"), hms::parse_hm("00:30"))
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("05:00"), hms::parse_hm("00:30"))))
         se_w_m = list(
             name = "se_w_m",
-            min = sum_time(sprep_w_m, slat_w_m, hms::parse_hm("02:05"),
-                           cycle = lubridate::ddays()),
+            min = hms::hms(as.numeric(
+                sum_time(sprep_w_m, slat_w_m, hms::parse_hm("02:05"),
+                         cycle = lubridate::ddays()))),
             max = hms::parse_hm("05:00"), # Adjusted
             mean = hms::parse_hm("04:35"),
             sd = hms::parse_hm("00:35")),
         # se_w_e_min >= sprep_w_e_max + slat_w_e_max + sd_w_e_min
-        # sum_time(hms::parse_hm("02:35"), hms::parse_hm("00:40"), `sd_w_e_min`)
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("02:35"), hms::parse_hm("00:40"),
+        # `sd_w_e_min`)))
         # se_w_e_max + tgu_w_e_max) <= 14:00 - 00:30
-        # sum_time(hms::parse_hm("12:25"), hms::parse_hm("00:50"))
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("12:25"), hms::parse_hm("00:50"))))
         se_w_e = list(
             name = "se_w_e",
-            min = sum_time(sprep_w_e, slat_w_e, hms::parse_hm("03:40"),
-                           cycle = lubridate::ddays()),
+            min = hms::hms(as.numeric(
+                sum_time(sprep_w_e, slat_w_e, hms::parse_hm("03:40"),
+                         cycle = lubridate::ddays()))),
             max = hms::parse_hm("12:25"),
             mean = hms::parse_hm("08:25"),
             sd = hms::parse_hm("01:20")),
         # se_w_n_min >= sprep_w_n_max + slat_w_n_max + sd_w_n_min
-        # sum_time(hms::parse_hm("10:10"), hms::parse_hm("01:10"), `sd_w_n_min`)
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("10:10"), hms::parse_hm("01:10"),
+        # `sd_w_n_min`)))
         # se_w_n_max + tgu_w_n_max <= 22:00 - 00:30
-        # sum_time(hms::parse_hm("18:05"), hms::parse_hm("01:00"))
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("18:05"), hms::parse_hm("01:00"))))
         se_w_n = list(
             name = "se_w_n",
-            min = sum_time(sprep_w_n, slat_w_n, hms::parse_hm("02:00"), # Chan.
-                           cycle = lubridate::ddays()),
+            min = hms::hms(as.numeric(
+                sum_time(sprep_w_n, slat_w_n, hms::parse_hm("02:00"), # Adj.
+                         cycle = lubridate::ddays()))),
             max = hms::parse_hm("18:05"),
             mean = hms::parse_hm("13:30"),
             sd = hms::parse_hm("01:30")),
@@ -610,7 +623,8 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     values <- list(
         # napo_w_m_min >= 06:00 + 01:30
         # napo_w_m_max <= bt_w_m_min - 01:30
-        # sum_time(hms::parse_hm("19:15"), - hms::parse_hm("01:30"))
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("19:15"), - hms::parse_hm("01:30"))))
         napo_w_m = list(
             name = "napo_w_m",
             min = hms::parse_hm("07:30"),
@@ -618,9 +632,10 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
             mean = interval_mean(hms::parse_hm("09:00"),
                                  hms::parse_hm("17:45")),
             sd = hms::parse_hm("01:30")),
-        ## napo_w_e_min >= 14:00 + 01:30
-        ## napo_w_e_max <= bt_w_e_min - 01:30
-        ## sum_time(hms::parse_hm("21:40"), - hms::parse_hm("01:30"))
+        # napo_w_e_min >= 14:00 + 01:30
+        # napo_w_e_max <= bt_w_e_min - 01:30
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("21:40"), - hms::parse_hm("01:30"))))
         napo_w_e = list(
             name = "napo_w_e",
             min = hms::parse_hm("15:30"),
@@ -630,7 +645,8 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
             sd = hms::parse_hm("01:30")),
         # napo_w_n_min >= 22:00 + 01:30
         # napo_w_n_max <= bt_w_n_min - 01:30
-        # sum_time(hms::parse_hm("06:30"), - hms::parse_hm("01:30"))
+        # hms::hms(as.numeric(
+        # sum_time(hms::parse_hm("06:30"), - hms::parse_hm("01:30"))))
         napo_w_n = list(
             name = "napo_w_n",
             min = hms::parse_hm("23:30"),
@@ -640,20 +656,26 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
             sd = hms::parse_hm("01:30")),
         napo_f_m = list(
             name = "napo_f_m",
-            min = sum_time(se_f_m, tgu_f_m, hms::parse_hm("01:30")),
-            max = sum_time(bt_f_m, - hms::parse_hm("01:30")),
+            min = hms::hms(as.numeric(
+                sum_time(se_f_m, tgu_f_m, hms::parse_hm("01:30")))),
+            max = hms::hms(as.numeric(
+                sum_time(bt_f_m, - hms::parse_hm("01:30")))),
             mean = interval_mean(hms::as_hms(se_f_m + tgu_f_m), bt_f_m),
             sd = hms::parse_hm("01:30")),
         napo_f_e = list(
             name = "napo_f_e",
-            min = sum_time(se_f_e, tgu_f_e, hms::parse_hm("01:30")),
-            max = sum_time(bt_f_e, - hms::parse_hm("01:30")),
+            min = hms::hms(as.numeric(
+                sum_time(se_f_e, tgu_f_e, hms::parse_hm("01:30")))),
+            max = hms::hms(as.numeric(
+                sum_time(bt_f_e, - hms::parse_hm("01:30")))),
             mean = interval_mean(hms::as_hms(se_f_e + tgu_f_e), bt_f_e),
             sd = hms::parse_hm("01:30")),
         napo_f_n = list(
             name = "napo_f_n",
-            min = sum_time(se_f_n, tgu_f_n, hms::parse_hm("01:30")),
-            max = sum_time(bt_f_n, - hms::parse_hm("01:30")),
+            min = hms::hms(as.numeric(
+                sum_time(se_f_n, tgu_f_n, hms::parse_hm("01:30")))),
+            max = hms::hms(as.numeric(
+                sum_time(bt_f_n, - hms::parse_hm("01:30")))),
             mean = interval_mean(hms::as_hms(se_f_n + tgu_f_n), bt_f_n),
             sd = hms::parse_hm("01:30"))
     )
@@ -672,7 +694,8 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
                 "nape_f_n")) {
         name <- get(paste0("napo_", str_extract_(i, "._.$")))
         sample <- sample_time(min = min, max = max, by = by, prob = prob)
-        assign(i, sum_time(name, sample, cycle = lubridate::ddays()))
+        assign(i, hms::hms(as.numeric(
+            sum_time(name, sample, cycle = lubridate::ddays()))))
     }
 
     # Create `nap_w_*` and `nap_f_*` -----
@@ -812,14 +835,11 @@ normalize <- function(min, max, mean, ambiguity = 24) {
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
 
     min <- cycle_time(hms::as_hms(as.numeric(min)),
-                      cycle = lubridate::ddays(),
-                      reverse = TRUE)
+                      cycle = lubridate::ddays())
     max <- cycle_time(hms::as_hms(as.numeric(max)),
-                      cycle = lubridate::ddays(),
-                      reverse = TRUE)
+                      cycle = lubridate::ddays())
     mean <- cycle_time(hms::as_hms(as.numeric(mean)),
-                       cycle = lubridate::ddays(),
-                       reverse = TRUE)
+                       cycle = lubridate::ddays())
 
     interval <- assign_date(min, max, ambiguity = ambiguity)
     min <- hms::as_hms(lubridate::int_start(interval))
@@ -896,8 +916,7 @@ sampler_1 <- function(x, by, envir) {
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
     sample <- cycle_time(sample_time(min = min, max = max, by = by,
                                      prob = prob),
-                         cycle = lubridate::ddays(),
-                         reverse = TRUE)
+                         cycle = lubridate::ddays())
     assign(x$name, sample, envir = envir)
 }
 
@@ -921,8 +940,7 @@ sampler_2 <- function(x, by, envir) {
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
     sample <- cycle_time(sample_time(min = min, max = max, by = by,
                                      prob = prob),
-                         cycle = lubridate::ddays(),
-                         reverse = TRUE)
+                         cycle = lubridate::ddays())
     assign(x$name, sample, envir = envir)
 
     if (grepl("_f$|_f_", x$name, perl = TRUE)) {
@@ -937,8 +955,7 @@ sampler_2 <- function(x, by, envir) {
 
             sample <- cycle_time(sample_time(min = min, max = max, by = by,
                                              prob = prob),
-                                 cycle = lubridate::ddays(),
-                                 reverse = TRUE)
+                                 cycle = lubridate::ddays())
             assign(x$name, sample, envir = envir)
         }
     }
@@ -965,8 +982,7 @@ sampler_3 <- function(x, y, by, envir) {
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
     sample <- cycle_time(sample_time(min = min, max = max, by = by,
                                      prob = prob),
-                         cycle = lubridate::ddays(),
-                         reverse = TRUE)
+                         cycle = lubridate::ddays())
     assign(x$name, sample, envir = envir)
 
     if (grepl("_f$|_f_", x$name, perl = TRUE)) {
@@ -983,8 +999,7 @@ sampler_3 <- function(x, y, by, envir) {
 
             sample <- cycle_time(sample_time(min = min, max = max, by = by,
                                              prob = prob),
-                                 cycle = lubridate::ddays(),
-                                 reverse = TRUE)
+                                 cycle = lubridate::ddays())
             assign(x$name, sample, envir = envir)
         }
     }

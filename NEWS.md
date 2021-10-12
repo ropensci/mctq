@@ -17,7 +17,7 @@
 * `shortest_interval()` was renamed to `shorter_interval()`.
 * `shorter_interval()` and `longer_interval()` now returns only `Interval` objects.
 * `sum_time()` now have different arguments and was divided in two functions: `sum_time()` (for non-vectorized sums) and `vct_sum_time()` (for vectorized sums).
-* `sum_time()` now only returns `Duration` objects.
+* `sum_time()` now only returns only `Duration` objects.
 * The `sd()` function was renamed to `sdu()`. See a dedicated note about this below.
 * The `ms()` function was renamed to `msl()`. See a dedicated note about this below.
 

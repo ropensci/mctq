@@ -141,8 +141,9 @@
 #' `Duration`, `Period`, `difftime`, or `hms`.
 #' @param cycle A `numeric` or `Duration` object of length 1, equal or greater
 #'   than 0, indicating the cycle length in seconds (see Details to learn more).
-#' @param reverse A `logical` value indicating if the function must use a
-#'   reverse cycle for negative values in `time` (see Details to learn more).
+#' @param reverse (optional) A `logical` value indicating if the function must
+#'   use a reverse cycle for negative values in `time` (see Details to learn
+#'   more) (default: `TRUE`).
 #'
 #' @return The same type of object of `time` cycled with the `cycle` parameter.
 #'
@@ -181,38 +182,38 @@
 #' cycle <- lubridate::dyears(1)
 #' reverse <- FALSE
 #' cycle_time(time, cycle, reverse)
-#' #> [1] "0s"                     "-2629800s (~4.35 weeks)" # Expected
+#' #> [1] "0s"                     "-2629800s (~-4.35 weeks)" # Expected
 #'
 #' time <- c(lubridate::dmonths(24), lubridate::dmonths(-13))
 #' cycle <- lubridate::dyears(1)
 #' reverse <- TRUE
 #' cycle_time(time, cycle, reverse)
 #' #> [1] "0s"                       "28927800s (~47.83 weeks)" # Expected
-cycle_time <- function(time, cycle, reverse = FALSE) {
+cycle_time <- function(time, cycle, reverse = TRUE) {
     UseMethod("cycle_time")
 }
 
 #' @export
-cycle_time.numeric <- function(time, cycle, reverse = FALSE) {
+cycle_time.numeric <- function(time, cycle, reverse = TRUE) {
     time %>% cycle_time_build(cycle, reverse)
 }
 
 #' @export
-cycle_time.Duration <- function(time, cycle, reverse = FALSE) {
+cycle_time.Duration <- function(time, cycle, reverse = TRUE) {
     time %>%
         cycle_time_build(cycle, reverse) %>%
         lubridate::dseconds()
 }
 
 #' @export
-cycle_time.Period <- function(time, cycle, reverse = FALSE) {
+cycle_time.Period <- function(time, cycle, reverse = TRUE) {
     time %>%
         cycle_time_build(cycle, reverse) %>%
         lubridate::seconds()
 }
 
 #' @export
-cycle_time.difftime <- function(time, cycle, reverse = FALSE) {
+cycle_time.difftime <- function(time, cycle, reverse = TRUE) {
     out <- time
     units(out) <- "secs"
 
@@ -226,7 +227,7 @@ cycle_time.difftime <- function(time, cycle, reverse = FALSE) {
 }
 
 #' @export
-cycle_time.hms <- function(time, cycle, reverse = FALSE) {
+cycle_time.hms <- function(time, cycle, reverse = TRUE) {
     time %>%
         cycle_time_build(cycle, reverse) %>%
         hms::hms()

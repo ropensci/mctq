@@ -217,8 +217,7 @@ sjl <- function(msw, msf, abs = TRUE, method = "shorter") {
     assert_identical(msw, msf, type = "length")
 
     if (method == "difference") {
-        out <- vct_sum_time(msf, - msw) %>%
-            lubridate::as.duration()
+        out <- vct_sum_time(msf, - msw)
     } else {
         if (method == "shorter") {
             interval <- shush(shorter_interval(msw, msf))

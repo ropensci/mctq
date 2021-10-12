@@ -92,5 +92,7 @@ gu <- function(se, si) {
     assert_duration(si)
     assert_identical(se, si, type = "length")
 
-    vct_sum_time(se, si, cycle = lubridate::ddays())
+    vct_sum_time(se, si, cycle = lubridate::ddays()) %>%
+        as.numeric() %>%
+        hms::hms()
 }

@@ -104,7 +104,9 @@ msl <- function(so, sd) {
     assert_duration(sd)
     assert_identical(so, sd, type = "length")
 
-    vct_sum_time(so, (sd / 2), cycle = lubridate::ddays())
+    vct_sum_time(so, (sd / 2), cycle = lubridate::ddays()) %>%
+        as.numeric() %>%
+        hms::hms()
 }
 
 #' Compute MCTQ corrected local time of mid-sleep on work-free days
@@ -294,17 +296,17 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
     checkmate::assert_logical(alarm_f)
     assert_identical(msf, sd_w, sd_f, sd_week, alarm_f, type = "length")
 
-    ## `sc` exists to remove unnecessary warnings of the lubridate package when
-    ## subtracting objects of class `Duration`.
+    ## `sc` exists to remove unnecessary warnings of the {lubridate} package
+    ## when subtracting objects of class `Duration`.
 
-    sc <- vct_sum_time(sd_f, - sd_week, cycle = lubridate::ddays()) %>%
-        lubridate::as.duration()
+    sc <- vct_sum_time(sd_f, - sd_week, cycle = lubridate::ddays())
     sc <- sc / 2
 
     dplyr::case_when(
         alarm_f == TRUE ~ hms::as_hms(NA),
         sd_f <= sd_w ~ msf,
-        sd_f > sd_w ~ vct_sum_time(msf, - sc, cycle = lubridate::ddays())
+        sd_f > sd_w ~ hms::hms(as.numeric(
+            vct_sum_time(msf, - sc, cycle = lubridate::ddays())))
     )
 }
 

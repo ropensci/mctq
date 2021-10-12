@@ -5,9 +5,9 @@
 \alias{vct_sum_time}
 \title{Sum time objects}
 \usage{
-sum_time(..., cycle = NULL, reverse = FALSE, na_rm = FALSE)
+sum_time(..., cycle = NULL, reverse = TRUE, na_rm = FALSE)
 
-vct_sum_time(..., cycle = NULL, reverse = FALSE, na_rm = FALSE)
+vct_sum_time(..., cycle = NULL, reverse = TRUE, na_rm = FALSE)
 }
 \arguments{
 \item{...}{Objects belonging to one of the following classes: \code{Duration},
@@ -18,18 +18,18 @@ or greater than 0, indicating the cycle length in seconds. If \code{NULL} the
 function will perform a linear sum (see Details to learn more) (default:
 \code{NULL}).}
 
-\item{reverse}{A \code{logical} value indicating if the function must use a
-reverse cycle for negative sums (see Details to learn more) (default:
-\code{FALSE}).}
+\item{reverse}{(optional) A \code{logical} value indicating if the function must
+use a reverse cycle for negative sums (see Details to learn more) (default:
+\code{TRUE}).}
 
 \item{na_rm}{(optional) a \code{logical} value indicating if the function must
 remove \code{NA} values while performing the sum (default: \code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{cycle = NULL}, a \code{hms} object with a linear sum of the time from
+\item If \code{cycle = NULL}, a \code{Duration} object with a linear sum of the time from
 objects in \code{...}.
-\item If \code{cycle != NULL}, a \code{hms} object with a circular sum of the time
+\item If \code{cycle != NULL}, a \code{Duration} object with a circular sum of the time
 from objects in \code{...}.
 }
 }
@@ -210,61 +210,55 @@ it must be considered when doing time arithmetic.
 x <- c(as.POSIXct("2020-01-01 15:00:00"), as.POSIXct("1999-05-04 17:30:00"))
 y <- lubridate::as.interval(lubridate::dhours(7), as.Date("1970-05-08"))
 sum_time(x, y)
-#> 39:30:00 # Expected
+#> [1] "142200s (~1.65 days)" # 39:30:00 # Expected
 
 ## Non-vectorized sum in a circular time frame of 24 hours
 
 x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
 sum_time(x, cycle = lubridate::ddays())
-#> 06:50:00 # Expected
+#> [1] "24600s (~6.83 hours)" # 06:50:00 # Expected
 
 x <- c(hms::parse_hm("00:15"), hms::parse_hm("02:30"), hms::as_hms(NA))
 sum_time(x, cycle = lubridate::ddays())
 #> NA # Expected
 sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
-#> 02:45:00 # Expected
+#> [1] "9900s (~2.75 hours)" # 02:45:00 # Expected
 
 x <- c(lubridate::hours(-12), lubridate::dhours(-13))
 sum_time(x, cycle = lubridate::ddays(), reverse = FALSE)
-#> -01:00:00 # Expected
+#> [1] "-3600s (~-1 hours)" # -01:00:00 # Expected
 
 x <- c(lubridate::hours(-12), lubridate::dhours(-13))
 sum_time(x, cycle = lubridate::ddays(), reverse = TRUE)
-#> 23:00:00 # Expected
+#> [1] "82800s (~23 hours)" # 23:00:00 # Expected
 
 ## Vectorized sum in an linear time frame
 
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 vct_sum_time(x, y)
-#> 29:00:00 # Expected
-#>       NA # Expected
+#> [1] "104400s (~1.21 days)" NA # 29:00:00 NA # Expected
 vct_sum_time(x, y, na_rm = TRUE)
-#> 29:00:00 # Expected
-#> 10:00:00 # Expected
+#> [1] "104400s (~1.21 days)" "36000s (~10 hours)" # Expected
 
 ## Vectorized sum in a circular time frame of 24 hours
 
 x <- c(lubridate::dhours(6), NA)
 y <- c(hms::parse_hm("23:00"), hms::parse_hm("10:00"))
 vct_sum_time(x, y, cycle = lubridate::ddays())
-#> 05:00:00 # Expected
-#>       NA # Expected
+#> [1] "18000s (~5 hours)" NA  # Expected
 vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
-#> 05:00:00 # Expected
-#> 10:00:00 # Expected
+#> [1] "18000s (~5 hours)"  "36000s (~10 hours)" # Expected
 
 x <- c(lubridate::hours(-49), lubridate::hours(-24))
 y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = FALSE)
-#> -01:00:00 # Expected
-#> -06:00:00 # Expected
+#> "-3600s (~-1 hours)"  "-21600s (~-6 hours)" # Expected
 
 x <- c(lubridate::hours(-49), lubridate::hours(-24))
 y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
-#> 23:00:00 # Expected
-#> 18:00:00 # Expected
+#> "82800s (~23 hours)" "64800s (~18 hours)" # Expected
 }
 \references{
 Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:

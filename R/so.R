@@ -104,5 +104,7 @@ so <- function(sprep, slat) {
     assert_duration(slat)
     assert_identical(sprep, slat, type = "length")
 
-    vct_sum_time(sprep, slat, cycle = lubridate::ddays())
+    vct_sum_time(sprep, slat, cycle = lubridate::ddays()) %>%
+        as.numeric() %>%
+        hms::hms()
 }
