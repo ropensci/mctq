@@ -88,16 +88,16 @@ library(dplyr)
 library(hms)
 library(lubridate)
 
-data <- data %>%
-  dplyr::mutate(dplyr::across(dplyr::matches("^id$|^wd$"), as.integer)) %>%
-  dplyr::mutate(dplyr::across(
-    dplyr::matches("^work$|^alarm_|^wake_|^reasons_f$"), as.logical)) %>%
-  dplyr::mutate(dplyr::across(
-    dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm)) %>%
-  dplyr::mutate(dplyr::across(
-    dplyr::matches("^slat_|^si_"), ~ lubridate::dminutes(as.numeric(.x)))) %>%
-  dplyr::mutate(dplyr::across(
-    dplyr::matches("^le_"), ~ lubridate::as.duration(hms::parse_hm(.x))))
+data <- data %>% dplyr::mutate(
+  dplyr::across(dplyr::matches("^id$|^wd$"), as.integer),
+  dplyr::across(dplyr::matches("^work$|^alarm_|^wake_|^reasons_f$"),
+                as.logical),
+  dplyr::across(dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm),
+  dplyr::across(dplyr::matches("^slat_|^si_"),
+                ~ lubridate::dminutes(as.numeric(.x))),
+  dplyr::across(dplyr::matches("^le_"), 
+                ~ lubridate::as.duration(hms::parse_hm(.x)))
+  )
 ```
 
 Our data is now all set to start. Let's take a look at it.

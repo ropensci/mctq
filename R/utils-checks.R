@@ -88,7 +88,7 @@ test_numeric_ <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
     }
 }
 
-check_numeric_ <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+check_numeric_ <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                            null.ok = FALSE,
                          name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -117,7 +117,7 @@ check_numeric_ <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
 
 assert_numeric_ <- checkmate::makeAssertionFunction(check_numeric_)
 
-test_duration <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+test_duration <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                           null.ok = FALSE) {
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
@@ -134,7 +134,7 @@ test_duration <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
     }
 }
 
-check_duration <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+check_duration <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                            null.ok = FALSE,
                            name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -159,7 +159,7 @@ check_duration <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
 
 assert_duration <- checkmate::makeAssertionFunction(check_duration)
 
-test_hms <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+test_hms <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                           null.ok = FALSE) {
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
@@ -176,7 +176,7 @@ test_hms <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
     }
 }
 
-check_hms <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+check_hms <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                            null.ok = FALSE,
                            name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
@@ -201,7 +201,7 @@ check_hms <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
 
 assert_hms <- checkmate::makeAssertionFunction(check_hms)
 
-test_posixt <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+test_posixt <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                      null.ok = FALSE) {
     checkmate::assert_flag(any.missing)
     checkmate::assert_flag(null.ok)
@@ -218,7 +218,7 @@ test_posixt <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
     }
 }
 
-check_posixt <- function(x, lower = -Inf, upper = Inf, any.missing = TRUE,
+check_posixt <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
                       null.ok = FALSE,
                       name = deparse(substitute(x))) {
     checkmate::assert_flag(any.missing)
