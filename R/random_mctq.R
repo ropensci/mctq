@@ -811,9 +811,15 @@ normalize <- function(min, max, mean, ambiguity = 24) {
     assert_length_one(mean)
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
 
-    min <- clock_roll(hms::as_hms(as.numeric(min)))
-    max <- clock_roll(hms::as_hms(as.numeric(max)))
-    mean <- clock_roll(hms::as_hms(as.numeric(mean)))
+    min <- cycle_time(hms::as_hms(as.numeric(min)),
+                      cycle = lubridate::ddays(),
+                      reverse = TRUE)
+    max <- cycle_time(hms::as_hms(as.numeric(max)),
+                      cycle = lubridate::ddays(),
+                      reverse = TRUE)
+    mean <- cycle_time(hms::as_hms(as.numeric(mean)),
+                       cycle = lubridate::ddays(),
+                       reverse = TRUE)
 
     interval <- assign_date(min, max, ambiguity = ambiguity)
     min <- hms::as_hms(lubridate::int_start(interval))
@@ -888,8 +894,10 @@ sampler_1 <- function(x, by, envir) {
     sd <- as.numeric(x$sd)
     by <- as.numeric(by)
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
-    sample <- clock_roll(sample_time(min = min, max = max, by = by,
-                                     prob = prob))
+    sample <- cycle_time(sample_time(min = min, max = max, by = by,
+                                     prob = prob),
+                         cycle = lubridate::ddays(),
+                         reverse = TRUE)
     assign(x$name, sample, envir = envir)
 }
 
@@ -911,8 +919,10 @@ sampler_2 <- function(x, by, envir) {
     sd <- as.numeric(x$sd)
     by <- as.numeric(by)
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
-    sample <- clock_roll(sample_time(min = min, max = max, by = by,
-                                     prob = prob))
+    sample <- cycle_time(sample_time(min = min, max = max, by = by,
+                                     prob = prob),
+                         cycle = lubridate::ddays(),
+                         reverse = TRUE)
     assign(x$name, sample, envir = envir)
 
     if (grepl("_f$|_f_", x$name, perl = TRUE)) {
@@ -925,8 +935,10 @@ sampler_2 <- function(x, by, envir) {
             check <- lubridate::int_end(check)
             if (hms::as_hms(check) == free) break
 
-            sample <- clock_roll(sample_time(min = min, max = max, by = by,
-                                             prob = prob))
+            sample <- cycle_time(sample_time(min = min, max = max, by = by,
+                                             prob = prob),
+                                 cycle = lubridate::ddays(),
+                                 reverse = TRUE)
             assign(x$name, sample, envir = envir)
         }
     }
@@ -951,8 +963,10 @@ sampler_3 <- function(x, y, by, envir) {
     sd <- as.numeric(x$sd)
     by <- as.numeric(by)
     prob <- stats::dnorm(seq(min, max, by), mean = mean, sd = sd)
-    sample <- clock_roll(sample_time(min = min, max = max, by = by,
-                                     prob = prob))
+    sample <- cycle_time(sample_time(min = min, max = max, by = by,
+                                     prob = prob),
+                         cycle = lubridate::ddays(),
+                         reverse = TRUE)
     assign(x$name, sample, envir = envir)
 
     if (grepl("_f$|_f_", x$name, perl = TRUE)) {
@@ -967,8 +981,10 @@ sampler_3 <- function(x, y, by, envir) {
             check_f <- shush(hms::hms(shorter_interval(x_free, y_free)))
             if (check_f >= check_w) break
 
-            sample <- clock_roll(sample_time(min = min, max = max, by = by,
-                                             prob = prob))
+            sample <- cycle_time(sample_time(min = min, max = max, by = by,
+                                             prob = prob),
+                                 cycle = lubridate::ddays(),
+                                 reverse = TRUE)
             assign(x$name, sample, envir = envir)
         }
     }

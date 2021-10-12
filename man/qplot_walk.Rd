@@ -148,6 +148,7 @@ if (requireNamespace("datasets", quietly = TRUE)) {
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{cycle_time}()},
 \code{\link{pretty_mctq}()},
 \code{\link{random_mctq}()},
 \code{\link{raw_data}()},

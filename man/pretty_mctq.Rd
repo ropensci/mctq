@@ -61,6 +61,7 @@ pretty_mctq(data, round = FALSE, hms = TRUE)
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{cycle_time}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
 \code{\link{raw_data}()},

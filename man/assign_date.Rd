@@ -119,6 +119,7 @@ assign_date(start, end, ambiguity = 24)
 }
 \seealso{
 Other utility functions: 
+\code{\link{cycle_time}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

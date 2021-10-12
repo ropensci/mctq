@@ -42,6 +42,7 @@ reference:
 - title: Utilities
   contents:
   - assign_date
+  - cycle_time
   - pretty_mctq
   - qplot_walk
   - random_mctq

@@ -33,8 +33,10 @@ interval_mean <- function(start, end, ambiguity = 24) {
     checkmate::assert_multi_class(end, classes)
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
 
-    start <- clock_roll(hms::hms(extract_seconds(start)))
-    end <- clock_roll(hms::hms(extract_seconds(end)))
+    start <- cycle_time(hms::hms(extract_seconds(start)),
+                        cycle = lubridate::ddays())
+    end <- cycle_time(hms::hms(extract_seconds(end)),
+                      cycle = lubridate::ddays())
     interval <- shush(assign_date(start, end, ambiguity = ambiguity))
     mean <- as.numeric(start) + (as.numeric(interval) / 2)
 

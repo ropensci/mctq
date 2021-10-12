@@ -337,6 +337,7 @@ pretty_mctq(data, round = FALSE)
 Before we end, it's important to note that `mctq` also provides several utility tools to help with your MCTQ data. Here's a list of them.
 
 * `assign_date()`: Assign dates to two sequential hours
+* `cycle_time()`: Cycle time objects
 * `pretty_mctq()`: Make a MCTQ dataset more presentable
 * `qplot_walk()`: Walk through distribution plots
 * `random_mctq()`: Build a random MCTQ case

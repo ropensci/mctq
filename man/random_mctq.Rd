@@ -75,6 +75,7 @@ time awake, and sleep duration on cognitive performance in shiftworkers.
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{cycle_time}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{raw_data}()},

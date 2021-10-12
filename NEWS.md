@@ -6,16 +6,18 @@
 * @leocadio-miguel was added as a reviewer ('rev').
 * The user interface has gotten more stylish, thanks to the [`cli`](https://cli.r-lib.org) package (now on imports).
 * A new vignette was introduced, explaining why the `mctq` package use `Duration` instead of `Period` (objects from the [lubridate](https://lubridate.tidyverse.org/) package) as the default object for time spans.
+* `cycle_time()`, a function to cycle time spans, was introduced.
 
 ## Changed
 
 * To avoid any unknown compatibility issues, all packages on imports now require the latest version of them at the moment of this release.
-* `assign_date()` now return only `Interval` objects.
+* `assign_date()` now returns only `Interval` objects.
 * `convert()` and all `convert_*()` functions were removed. See a dedicated note about this below.
 * `round_time()` is now a S3 generic.
 * `shortest_interval()` was renamed to `shorter_interval()`.
-* `shorter_interval()` and `longer_interval()` now return only `Interval` objects.
+* `shorter_interval()` and `longer_interval()` now returns only `Interval` objects.
 * `sum_time()` now have different arguments and was divided in two functions: `sum_time()` (for non-vectorized sums) and `vct_sum_time()` (for vectorized sums).
+* `sum_time()` now only returns `Duration` objects.
 * The `sd()` function was renamed to `sdu()`. See a dedicated note about this below.
 * The `ms()` function was renamed to `msl()`. See a dedicated note about this below.
 

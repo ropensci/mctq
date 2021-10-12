@@ -102,7 +102,7 @@ sdu <- function(so, se) {
     checkmate::assert_class(se, "hms")
     assert_identical(so, se, type = "length")
 
-    vct_sum_time(se, - so, cycle = lubridate::ddays()) %>%
+    vct_sum_time(se, - so, cycle = lubridate::ddays(), reverse = TRUE) %>%
         lubridate::as.duration()
 }
 
@@ -189,7 +189,7 @@ napd <- function(napo, nape) {
     checkmate::assert_class(nape, "hms")
     assert_identical(napo, nape, type = "length")
 
-    vct_sum_time(nape, - napo, cycle = lubridate::ddays()) %>%
+    vct_sum_time(nape, - napo, cycle = lubridate::ddays(), reverse = TRUE) %>%
         lubridate::as.duration()
 }
 

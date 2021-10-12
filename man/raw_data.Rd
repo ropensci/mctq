@@ -38,6 +38,7 @@ raw_data("std_mctq.csv")}
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{cycle_time}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

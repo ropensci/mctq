@@ -5,17 +5,22 @@
 \alias{vct_sum_time}
 \title{Sum time objects}
 \usage{
-sum_time(..., cycle = NULL, na_rm = FALSE)
+sum_time(..., cycle = NULL, reverse = FALSE, na_rm = FALSE)
 
-vct_sum_time(..., cycle = NULL, na_rm = FALSE)
+vct_sum_time(..., cycle = NULL, reverse = FALSE, na_rm = FALSE)
 }
 \arguments{
 \item{...}{Objects belonging to one of the following classes: \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
 
-\item{cycle}{(optional) a number indicating the cycle length in seconds (for
-circular sums). If \code{NULL} the function will perform a linear sum (see
-Details to learn more) (default: \code{NULL}).}
+\item{cycle}{(optional) A \code{numeric} or \code{Duration} object of length 1, equal
+or greater than 0, indicating the cycle length in seconds. If \code{NULL} the
+function will perform a linear sum (see Details to learn more) (default:
+\code{NULL}).}
+
+\item{reverse}{A \code{logical} value indicating if the function must use a
+reverse cycle for negative sums (see Details to learn more) (default:
+\code{FALSE}).}
 
 \item{na_rm}{(optional) a \code{logical} value indicating if the function must
 remove \code{NA} values while performing the sum (default: \code{FALSE}).}
@@ -105,12 +110,58 @@ this:\preformatted{<----|---------------|---------------|---------------|----->
   origin                           origin
 }
 
-Note that now the origin is not fixed, but cyclical.
+Note that now the origin is not fix, but cyclical.
 
 \code{sum_time()} and \code{vct_sum_time()} can both operate in either a linear or a
 circular fashion. If \code{cycle = NULL} (default), the function will use a
 linear approach. Else, the function will use a circular approach relative to
 the cycle length (e.g, \code{cycle = 86400} (1 day)).
+}
+
+\subsection{Fractional time}{
+
+\code{sum_time()} uses the \code{\%\%} operator to cycle values. Hence, it can be subject
+to catastrophic loss of accuracy if values in \code{...} are fractional and much
+larger than \code{cycle}. A warning is given if this is detected.
+
+\code{\%\%} is a \code{builtin} R function that operates like this:\preformatted{function(a, b) \{
+    a - floor(a / b) * b
+\}
+}
+}
+
+\subsection{Negative time cycling}{
+
+If the sum of the time is negative, with a \code{cycle} assigned and
+\code{reverse = FALSE}, \code{sum_time()} and \code{vtc_sum_time()} will perform the cycle
+considering the absolute value of the sum and return the result with a
+negative signal.
+
+However, If the sum of the time have a negative value, with a \code{cycle}
+assigned and \code{reverse = TRUE}, \code{sum_time()} and \code{vtc_sum_time()} will perform
+the cycle in reverse, relative to its origin.
+
+Example: If the sum of the time have a -30h time span in a reversed cycle of
+24h, the result will be 18h. By removing the full cycles of -30h you will
+get -6h (-30 + 24), and -6h relative to the origin will be 18h.
+
+\strong{\deqn{- (|-30| \mod 24) + 24 = 18}}\preformatted{               - <--- h ---> +
+                    origin
+                . . . 0 . . .
+              .                 .
+            .                   .
+           .                     .
+          .                       .
+         .                         .
+    (-6) 18                        6 (-18)
+         .                         .
+          .                       .
+           .                     .
+            .                   .
+             .                 .
+                . . . 12 . . .
+                    (-12)
+}
 }
 
 \subsection{\code{POSIXt} objects}{
@@ -173,6 +224,14 @@ sum_time(x, cycle = lubridate::ddays())
 sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
 #> 02:45:00 # Expected
 
+x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+sum_time(x, cycle = lubridate::ddays(), reverse = FALSE)
+#> -01:00:00 # Expected
+
+x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+sum_time(x, cycle = lubridate::ddays(), reverse = TRUE)
+#> 23:00:00 # Expected
+
 ## Vectorized sum in an linear time frame
 
 x <- c(lubridate::dhours(6), NA)
@@ -194,6 +253,18 @@ vct_sum_time(x, y, cycle = lubridate::ddays())
 vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #> 05:00:00 # Expected
 #> 10:00:00 # Expected
+
+x <- c(lubridate::hours(-49), lubridate::hours(-24))
+y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
+vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = FALSE)
+#> -01:00:00 # Expected
+#> -06:00:00 # Expected
+
+x <- c(lubridate::hours(-49), lubridate::hours(-24))
+y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
+vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
+#> 23:00:00 # Expected
+#> 18:00:00 # Expected
 }
 \references{
 Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
@@ -202,6 +273,7 @@ O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 \seealso{
 Other utility functions: 
 \code{\link{assign_date}()},
+\code{\link{cycle_time}()},
 \code{\link{pretty_mctq}()},
 \code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},

@@ -89,12 +89,62 @@
 #'   origin                           origin
 #' ```
 #'
-#' Note that now the origin is not fixed, but cyclical.
+#' Note that now the origin is not fix, but cyclical.
 #'
 #' `sum_time()` and `vct_sum_time()` can both operate in either a linear or a
 #' circular fashion. If `cycle = NULL` (default), the function will use a
 #' linear approach. Else, the function will use a circular approach relative to
 #' the cycle length (e.g, `cycle = 86400` (1 day)).
+#'
+#' ## Fractional time
+#'
+#' `sum_time()` uses the `%%` operator to cycle values. Hence, it can be subject
+#' to catastrophic loss of accuracy if values in `...` are fractional and much
+#' larger than `cycle`. A warning is given if this is detected.
+#'
+#' `%%` is a `builtin` R function that operates like this:
+#'
+#' ```
+#' function(a, b) {
+#'     a - floor(a / b) * b
+#' }
+#' ````
+#'
+#' ## Negative time cycling
+#'
+#' If the sum of the time is negative, with a `cycle` assigned and
+#' `reverse = FALSE`, `sum_time()` and `vtc_sum_time()` will perform the cycle
+#' considering the absolute value of the sum and return the result with a
+#' negative signal.
+#'
+#' However, If the sum of the time have a negative value, with a `cycle`
+#' assigned and `reverse = TRUE`, `sum_time()` and `vtc_sum_time()` will perform
+#' the cycle in reverse, relative to its origin.
+#'
+#' Example: If the sum of the time have a -30h time span in a reversed cycle of
+#' 24h, the result will be 18h. By removing the full cycles of -30h you will
+#' get -6h (-30 + 24), and -6h relative to the origin will be 18h.
+#'
+#' __\deqn{- (|-30| \mod 24) + 24 = 18}__
+#'
+#' ```
+#'                - <--- h ---> +
+#'                     origin
+#'                 . . . 0 . . .
+#'               .                 .
+#'             .                   .
+#'            .                     .
+#'           .                       .
+#'          .                         .
+#'     (-6) 18                        6 (-18)
+#'          .                         .
+#'           .                       .
+#'            .                     .
+#'             .                   .
+#'              .                 .
+#'                 . . . 12 . . .
+#'                     (-12)
+#' ```
 #'
 #' ## `POSIXt` objects
 #'
@@ -136,9 +186,13 @@
 #'
 #' @param ... Objects belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
-#' @param cycle (optional) a number indicating the cycle length in seconds (for
-#'   circular sums). If `NULL` the function will perform a linear sum (see
-#'   Details to learn more) (default: `NULL`).
+#' @param cycle (optional) A `numeric` or `Duration` object of length 1, equal
+#'   or greater than 0, indicating the cycle length in seconds. If `NULL` the
+#'   function will perform a linear sum (see Details to learn more) (default:
+#'   `NULL`).
+#' @param reverse A `logical` value indicating if the function must use a
+#'   reverse cycle for negative sums (see Details to learn more) (default:
+#'   `FALSE`).
 #' @param na_rm (optional) a `logical` value indicating if the function must
 #'   remove `NA` values while performing the sum (default: `FALSE`).
 #'
@@ -173,6 +227,14 @@
 #' sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
 #' #> 02:45:00 # Expected
 #'
+#' x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+#' sum_time(x, cycle = lubridate::ddays(), reverse = FALSE)
+#' #> -01:00:00 # Expected
+#'
+#' x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+#' sum_time(x, cycle = lubridate::ddays(), reverse = TRUE)
+#' #> 23:00:00 # Expected
+#'
 #' ## Vectorized sum in an linear time frame
 #'
 #' x <- c(lubridate::dhours(6), NA)
@@ -194,17 +256,32 @@
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #' #> 05:00:00 # Expected
 #' #> 10:00:00 # Expected
-sum_time <- function(..., cycle = NULL, na_rm = FALSE) {
-    build_sum(..., vectorize = FALSE, cycle = cycle, na_rm = na_rm)
+#'
+#' x <- c(lubridate::hours(-49), lubridate::hours(-24))
+#' y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
+#' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = FALSE)
+#' #> -01:00:00 # Expected
+#' #> -06:00:00 # Expected
+#'
+#' x <- c(lubridate::hours(-49), lubridate::hours(-24))
+#' y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
+#' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
+#' #> 23:00:00 # Expected
+#' #> 18:00:00 # Expected
+sum_time <- function(..., cycle = NULL, reverse = FALSE, na_rm = FALSE) {
+    sum_time_build(..., vectorize = FALSE, cycle = cycle, reverse = reverse,
+                   na_rm = na_rm)
 }
 
 #' @rdname sum_time
 #' @export
-vct_sum_time <- function(..., cycle = NULL, na_rm = FALSE) {
-    build_sum(..., vectorize = TRUE, cycle = cycle, na_rm = na_rm)
+vct_sum_time <- function(..., cycle = NULL, reverse = FALSE, na_rm = FALSE) {
+    sum_time_build(..., vectorize = TRUE, cycle = cycle, reverse = reverse,
+                   na_rm = na_rm)
 }
 
-build_sum <- function(..., vectorize = FALSE, cycle = NULL, na_rm = FALSE) {
+sum_time_build <- function(..., vectorize = FALSE, cycle = NULL,
+                           reverse = FALSE, na_rm = FALSE) {
     out <- list(...)
 
     assert_custom <- function(x) {
@@ -215,6 +292,8 @@ build_sum <- function(..., vectorize = FALSE, cycle = NULL, na_rm = FALSE) {
     }
 
     checkmate::assert_flag(vectorize)
+    checkmate::assert_multi_class(cycle, c("numeric", "Duration"),
+                                  null.ok = TRUE)
     checkmate::assert_number(cycle, lower = 0, null.ok = TRUE)
     checkmate::assert_flag(na_rm)
     lapply(out, assert_custom)
@@ -237,7 +316,7 @@ build_sum <- function(..., vectorize = FALSE, cycle = NULL, na_rm = FALSE) {
         out <- sum(out, na.rm = na_rm)
     }
 
-    if (!is.null(cycle))  out <- out %% cycle
+    if (!is.null(cycle)) out <- out %>% cycle_time(cycle, reverse)
 
     hms::hms(out)
 }
