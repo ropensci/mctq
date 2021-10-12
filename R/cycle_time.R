@@ -102,8 +102,6 @@
 #' will be 18h. By removing the full cycles of -30h you will get -6h (-30 + 24),
 #' and -6h relative to the origin will be 18h.
 #'
-#' __\deqn{- (|-30| \mod 24) + 24 = 18}__
-#'
 #' ```
 #'                - <--- h ---> +
 #'                     origin

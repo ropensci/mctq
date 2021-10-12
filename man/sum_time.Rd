@@ -143,9 +143,7 @@ the cycle in reverse, relative to its origin.
 
 Example: If the sum of the time have a -30h time span in a reversed cycle of
 24h, the result will be 18h. By removing the full cycles of -30h you will
-get -6h (-30 + 24), and -6h relative to the origin will be 18h.
-
-\strong{\deqn{- (|-30| \mod 24) + 24 = 18}}\preformatted{               - <--- h ---> +
+get -6h (-30 + 24), and -6h relative to the origin will be 18h.\preformatted{               - <--- h ---> +
                     origin
                 . . . 0 . . .
               .                 .
