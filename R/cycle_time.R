@@ -161,7 +161,7 @@
 #' cycle <- lubridate::ddays(1)
 #' reverse <- FALSE
 #' cycle_time(time, cycle, reverse)
-#' #> [1] "-3600s (~-1 hours)" # Expected
+#' #> [1] "-3600S" # Expected
 #'
 #' time <- lubridate::dhours(-25)
 #' cycle <- lubridate::ddays(1)

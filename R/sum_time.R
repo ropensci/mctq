@@ -28,7 +28,7 @@
 #' `c(sum_time(x, w), sum_time(y, z))`. Because of that, `vct_sum_time()`
 #' requires that all objects in `...` have the same length.
 #'
-#' ## Linear versus circular sum
+#' ## Linear versus circular time
 #'
 #' Time can have different "shapes".
 #'
