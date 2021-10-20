@@ -1,12 +1,12 @@
 ---
-title: "Why `Duration` and not `Period`?"
+title: "Why Duration and not Period?"
 output: rmarkdown::html_vignette
 description: >
-  This article explains why the `mctq` package use `Duration` instead
+  This article explains why the {mctq} package use `Duration` instead
   of `Period` (objects from the {lubridate} package) as the default object
   for time spans.
 vignette: >
-  %\VignetteIndexEntry{Why `Duration` and not `Period`?}
+  %\VignetteIndexEntry{Why Duration and not Period?}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

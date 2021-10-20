@@ -95,7 +95,7 @@
 #' perform the cycle considering the absolute value of `time` and return the
 #' result with a negative signal.
 #'
-#' However, If `time` have a negative value and `reverse = TRUE`,
+#' However, If `time` have a negative value and `reverse = TRUE` (default),
 #' `cycle_time()` will perform the cycle in reverse, relative to its origin.
 #'
 #' Example: If you have a -30h time span in a reversed cycle of 24h, the result

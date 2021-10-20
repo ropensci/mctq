@@ -35,7 +35,7 @@ If you dive into the MCTQ articles, you can see that this computation have two o
 1. To represent the distance between $MSW$ and $MSF$ (i.e., the discrepancy).
 2. To establish what value comes before or after the other, representing that with a $+/-$ signal. That is, when $MSW$ comes before $MSF$, $SJL_{rel}$ must be positive, and when $MSW$ comes after $MSF$, $SJL_{rel}$ must be negative.
 
-You can find the rationale about the $SJL_{rel}$ signal in Roenneberg, Pilz, Zerbini, & Winnebeck ([2019](http://doi.org/10.3390/biology8030054)) (see item "3.2 Social Jetlag Computation").
+You can find the rationale about the $SJL_{rel}$ signal in Roenneberg, Pilz, Zerbini, & Winnebeck ([2019](https://doi.org/10.3390/biology8030054)) (see item "3.2 Social Jetlag Computation").
 
 Most people have some trouble understanding this. To illustrate what we mean, let's visualize a timeline overlapping an $MSW$ and $MSF$ value:
 

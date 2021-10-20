@@ -102,7 +102,7 @@ If \code{time} have a negative value and \code{reverse = FALSE}, \code{cycle_tim
 perform the cycle considering the absolute value of \code{time} and return the
 result with a negative signal.
 
-However, If \code{time} have a negative value and \code{reverse = TRUE},
+However, If \code{time} have a negative value and \code{reverse = TRUE} (default),
 \code{cycle_time()} will perform the cycle in reverse, relative to its origin.
 
 Example: If you have a -30h time span in a reversed cycle of 24h, the result

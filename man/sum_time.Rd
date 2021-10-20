@@ -138,8 +138,8 @@ considering the absolute value of the sum and return the result with a
 negative signal.
 
 However, If the sum of the time have a negative value, with a \code{cycle}
-assigned and \code{reverse = TRUE}, \code{sum_time()} and \code{vtc_sum_time()} will perform
-the cycle in reverse, relative to its origin.
+assigned and \code{reverse = TRUE} (default), \code{sum_time()} and \code{vtc_sum_time()}
+will perform the cycle in reverse, relative to its origin.
 
 Example: If the sum of the time have a -30h time span in a reversed cycle of
 24h, the result will be 18h. By removing the full cycles of -30h you will
