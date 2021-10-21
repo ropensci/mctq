@@ -15,7 +15,8 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R-CMD-check](https://github.com/gipso/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipso/mctq/actions)
-[![codecov](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/gipso/mctq)
+[![Codecov test
+coverage](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/gipso/mctq?branch=main)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![Contributor
