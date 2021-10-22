@@ -73,19 +73,6 @@ test_that("extract_seconds() | error test", {
     expect_error(extract_seconds(1), "Assertion on 'x' failed")
 })
 
-test_that("change_date() | general test", {
-    expect_equal(change_date(as.Date("1970-01-01"), "2000-01-01"),
-                 as.Date("2000-01-01"))
-    expect_equal(change_date(lubridate::as_datetime(0), as.Date("1990-01-01")),
-                 lubridate::ymd_hms("1990-01-01 00:00:00"))
-})
-
-test_that("change_date() | error test", {
-    expect_error(change_date(1, ""), "Assertion on 'x' failed")
-    expect_error(change_date(as.Date("1970-01-01"), 1),
-                 "Assertion on 'date' failed")
-})
-
 test_that("change_day() | general test", {
     expect_equal(change_day(as.Date("1970-01-01"), 10), as.Date("1970-01-10"))
     expect_equal(change_day(lubridate::as_datetime(0), 25),
@@ -105,31 +92,6 @@ test_that("change_day() | general test", {
                  "You can't assign more than 29 days to February in a leap ")
 })
 
-test_that("single_quote_() | general test", {
-    expect_equal(single_quote_("a"), paste0("'", "a", "'"))
-    expect_equal(single_quote_(1), paste0("'", 1, "'"))
-})
-
-test_that("double_quote_() | general test", {
-    expect_equal(double_quote_("a"), paste0("\"", "a", "\""))
-    expect_equal(double_quote_(1), paste0("\"", 1, "\""))
-})
-
-test_that("backtick_() | general test", {
-    expect_equal(backtick_("a"), paste0("`", "a", "`"))
-    expect_equal(backtick_(1), paste0("`", 1, "`"))
-})
-
-test_that("class_collapse() | general test", {
-    expect_equal(class_collapse("test"),
-                 single_quote_(paste0(class("test"), collapse = "/")))
-    expect_equal(class_collapse(1),
-                 single_quote_(paste0(class(1), collapse = "/")))
-    expect_equal(class_collapse(lubridate::dhours()),
-                 single_quote_(paste0(class(lubridate::dhours()),
-                                      collapse = "/")))
-})
-
 test_that("shush() | general test", {
     expect_equal(shush("a", quiet = FALSE), "a")
 
@@ -140,20 +102,6 @@ test_that("shush() | general test", {
 
     expect_equal(shush(test(), quiet = TRUE), "test")
     expect_warning(shush(test(), quiet = FALSE), "test")
-})
-
-test_that("close_round() | general test", {
-    expect_equal(close_round(1.999999, 5), 2)
-    expect_equal(close_round(1.000001, 5), 1)
-    expect_equal(close_round(1.001, 2), 1)
-    expect_equal(close_round(1.0001, 5), 1.0001)
-    expect_equal(close_round(c(1.000001, 1.999999, 1.11), 5),
-                 c(1, 2, 1.11))
-})
-
-test_that("close_round() | error test", {
-    expect_error(close_round("", 1), "Assertion on 'x' failed")
-    expect_error(close_round(1, ""), "Assertion on 'digits' failed")
 })
 
 test_that("swap() | general test", {
@@ -170,10 +118,6 @@ test_that("count_na() | general test", {
     expect_equal(count_na(c(1, NA, 1, NA)), 2)
 })
 
-test_that("escape_regex() | general test", {
-    expect_equal(escape_regex("test.test"), "test\\.test")
-})
-
 test_that("get_names() | general test", {
     expect_equal(get_names(x, y, z), noquote(c("x", "y", "z")))
 })
@@ -187,13 +131,24 @@ test_that("get_class() | general test", {
                         character(1)))
 })
 
-test_that("fix_character() | general test", {
-    expect_equal(fix_character(c("1   ", "   1", "", "NA")),
-                 c("1", "1", NA, NA))
+test_that("single_quote_() | general test", {
+    expect_equal(single_quote_("a"), paste0("'", "a", "'"))
+    expect_equal(single_quote_(1), paste0("'", 1, "'"))
 })
 
-test_that("fix_character() | error test", {
-    expect_error(fix_character(1), "Assertion on 'x' failed")
+test_that("double_quote_() | general test", {
+    expect_equal(double_quote_("a"), paste0("\"", "a", "\""))
+    expect_equal(double_quote_(1), paste0("\"", 1, "\""))
+})
+
+test_that("class_collapse() | general test", {
+    expect_equal(class_collapse("test"),
+                 single_quote_(paste0(class("test"), collapse = "/")))
+    expect_equal(class_collapse(1),
+                 single_quote_(paste0(class(1), collapse = "/")))
+    expect_equal(class_collapse(lubridate::dhours()),
+                 single_quote_(paste0(class(lubridate::dhours()),
+                                      collapse = "/")))
 })
 
 test_that("str_extract_() | general test", {
@@ -216,30 +171,6 @@ test_that("str_extract_() | error test", {
                  "Assertion on 'use_bytes' failed")
     expect_error(str_extract_(1, "a", TRUE, TRUE, TRUE, TRUE, ""),
                  "Assertion on 'invert' failed")
-})
-
-test_that("str_subset_() | general test", {
-    expect_equal(str_subset_(month.name, "^J.+", perl = TRUE, negate = FALSE),
-                 subset(month.name, grepl("^J.+", month.name, perl = TRUE)))
-    expect_equal(str_subset_(month.name, "^J.+", perl = TRUE, negate = TRUE),
-                 subset(month.name, !grepl("^J.+", month.name, perl = TRUE)))
-    expect_equal(str_subset_(month.name, "^z$", perl = TRUE, negate = FALSE),
-                 as.character(NA))
-})
-
-test_that("str_subset_() | error test", {
-    expect_error(str_subset_(1, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
-                 "Assertion on 'pattern' failed")
-    expect_error(str_subset_(1, "a", "", TRUE, TRUE, TRUE, TRUE),
-                 "Assertion on 'negate' failed")
-    expect_error(str_subset_(1, "a", TRUE, "", TRUE, TRUE, TRUE),
-                 "Assertion on 'ignore_case' failed")
-    expect_error(str_subset_(1, "a", TRUE, TRUE, "", TRUE, TRUE),
-                 "Assertion on 'perl' failed")
-    expect_error(str_subset_(1, "a", TRUE, TRUE, TRUE, "", TRUE),
-                 "Assertion on 'fixed' failed")
-    expect_error(str_subset_(1, "a", TRUE, TRUE, TRUE, TRUE, ""),
-                 "Assertion on 'use_bytes' failed")
 })
 
 test_that("require_pkg() | general test", {

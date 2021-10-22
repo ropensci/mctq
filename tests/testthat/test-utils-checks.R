@@ -26,37 +26,6 @@ test_that("*_has_length() | general test", {
                  "Assertion on 'numeric\\(\\)' failed")
 })
 
-test_that("*_whole_number() | general test", {
-    expect_true(test_whole_number(0))
-    expect_true(test_whole_number(as.integer(1)))
-    expect_true(test_whole_number(as.double(11)))
-    expect_true(test_whole_number(as.numeric(475)))
-    expect_true(test_whole_number(c(1, NA), any.missing = TRUE))
-    expect_true(test_whole_number(NULL, null.ok = TRUE))
-    expect_false(test_whole_number(-1L))
-    expect_false(test_whole_number(-55))
-    expect_false(test_whole_number(1.58))
-    expect_false(test_whole_number(lubridate::dhours()))
-    expect_false(test_whole_number(letters))
-    expect_false(test_whole_number(datasets::iris))
-    expect_false(test_whole_number(c(1, NA), any.missing = FALSE))
-    expect_false(test_whole_number(NULL, null.ok = FALSE))
-
-    checkmate::expect_string(check_whole_number(c(1, NA), any.missing = FALSE),
-                             pattern = "'c\\(1, NA\\)' cannot have missing ")
-    checkmate::expect_string(check_whole_number(NULL, null.ok = FALSE),
-                             "'NULL' cannot have 'NULL' values")
-    checkmate::expect_string(check_whole_number(c(1, 1.5)),
-                             pattern = "'c\\(1, 1.5\\)' must consist of whole ")
-    expect_true(check_whole_number(c(1, 1)))
-    expect_true(check_whole_number(c(1, NA), any.missing = TRUE))
-    expect_true(check_whole_number(NULL, null.ok = TRUE))
-
-    expect_equal(assert_whole_number(c(1, 1)), c(1, 1))
-    expect_error(assert_whole_number(c(1, 1.5)),
-                 "Assertion on 'c\\(1, 1.5\\)' failed")
-})
-
 test_that("*_numeric_() | general test", {
     expect_true(test_numeric_(as.integer(1)))
     expect_true(test_numeric_(as.double(1)))
@@ -207,47 +176,6 @@ test_that("*_posixt() | general test", {
                  c(lubridate::as_datetime(1), lubridate::as_datetime(1)))
     expect_error(assert_posixt(c(1, 1)),
                  "Assertion on 'c\\(1, 1\\)' failed")
-})
-
-test_that("*_temporal() | general test", {
-    expect_true(test_temporal(lubridate::dhours()))
-    expect_true(test_temporal(lubridate::hours()))
-    expect_true(test_temporal(as.difftime(1, units = "secs")))
-    expect_true(test_temporal(hms::hms(1)))
-    expect_true(test_temporal(as.Date("2000-01-01")))
-    expect_true(test_temporal(lubridate::as_datetime(1)))
-    expect_true(test_temporal(as.POSIXlt(lubridate::as_datetime(1))))
-    expect_true(test_temporal(lubridate::as.interval(
-        lubridate::dhours(), lubridate::as_datetime(0))))
-    expect_true(test_temporal(NULL, null.ok = TRUE))
-    expect_false(test_temporal(1))
-    expect_false(test_temporal(letters))
-    expect_false(test_temporal(datasets::iris))
-    expect_false(test_temporal(lubridate::dhours(), rm = "Duration"))
-    expect_false(test_temporal(lubridate::hours(), rm = "Period"))
-    expect_false(test_temporal(as.difftime(1, units = "secs"), rm = "difftime"))
-    expect_false(test_temporal(hms::hms(1), rm = "hms"))
-    expect_false(test_temporal(as.Date("2000-01-01"), rm = "Date"))
-    expect_false(test_temporal(lubridate::as_datetime(1), rm = "POSIXct"))
-    expect_false(test_temporal(as.POSIXlt(lubridate::as_datetime(1)),
-                rm = "POSIXlt"))
-    expect_false(test_temporal(lubridate::as.interval(
-        lubridate::dhours(), lubridate::as_datetime(0)), rm = "Interval"))
-    expect_false(test_temporal(c(1, NA), any.missing = FALSE))
-    expect_false(test_temporal(NULL, null.ok = FALSE))
-
-    checkmate::expect_string(check_temporal(c(1, 1)),
-                             pattern = "Must be a temporal object ")
-    checkmate::expect_string(check_temporal(c(1, NA), any.missing = FALSE),
-                             pattern = "'c\\(1, NA\\)' cannot have missing ")
-    checkmate::expect_string(check_temporal(NULL, null.ok = FALSE),
-                             pattern = "'NULL' cannot have 'NULL' values")
-    expect_true(check_temporal(c(lubridate::hours(1), lubridate::hours(1))))
-    expect_true(check_temporal(NULL, null.ok = TRUE))
-
-    expect_equal(assert_temporal(c(lubridate::hours(1), lubridate::hours(1))),
-                 c(lubridate::hours(1), lubridate::hours(1)))
-    expect_error(assert_temporal(c(1, 1)), "Assertion on 'c\\(1, 1\\)' failed")
 })
 
 test_that("assert_identical() | general test", {

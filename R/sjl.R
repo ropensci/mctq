@@ -309,10 +309,10 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'   questionnaire (you can use [mctq::sjl()] to compute it). `sjl` elements and
 #'   values must be paired with `n` elements and values.
 #' @param n_w A `list` object with [integerish][checkmate::test_integerish()]
-#'   `numeric` elements or `integer` elements corresponding to the __number of
-#'   days worked in each shift within a shift cycle__ from a shift version of
-#'   the MCTQ questionnaire. `n` elements and values must be paired with `sjl`
-#'   elements and values.
+#'   `integer` or `double` elements corresponding to the __number of days worked
+#'   in each shift within a shift cycle__ from a shift version of the MCTQ
+#'   questionnaire. `n` elements and values must be paired with `sjl` elements
+#'   and values.
 #'
 #' @return A `Duration` object corresponding to the vectorized weighted mean of
 #'   `sjl` with `n_w` as weights.
@@ -379,8 +379,8 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 sjl_weighted <- function(sjl, n_w) {
     checkmate::assert_list(sjl, len = length(n_w))
     checkmate::assert_list(n_w, len = length(sjl))
-    lapply(sjl, assert_duration, lower = lubridate::duration(0))
-    lapply(n_w, assert_whole_number)
+    lapply(sjl, assert_duration)
+    lapply(n_w, checkmate::assert_integerish, lower = 0)
     mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
 
     sjl <- lapply(sjl, abs)

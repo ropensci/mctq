@@ -28,43 +28,6 @@ check_has_length <- function(x, any.missing = TRUE,
 
 assert_has_length <- checkmate::makeAssertionFunction(check_has_length)
 
-test_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
-                              tol = .Machine$double.eps^0.5) {
-    checkmate::assert_flag(any.missing)
-    checkmate::assert_flag(null.ok)
-    checkmate::assert_number(tol)
-
-    if (is.null(x) && isTRUE(null.ok)) {
-        TRUE
-    } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        FALSE
-    } else if (!test_numeric_(x) || !identical(x, abs(x))) {
-        FALSE
-    } else {
-        all(abs(x - round(x)) < tol, na.rm = any.missing)
-    }
-}
-
-check_whole_number <- function(x, any.missing = TRUE, null.ok = FALSE,
-                             name = deparse(substitute(x))) {
-    checkmate::assert_flag(any.missing)
-    checkmate::assert_flag(null.ok)
-
-    if (is.null(x) && isTRUE(null.ok)) {
-        TRUE
-    } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(single_quote_(name), " cannot have missing values")
-    } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(single_quote_(name), " cannot have 'NULL' values")
-    } else  if (!test_whole_number(x)) {
-        paste0(single_quote_(name), " must consist of whole numbers")
-    } else {
-        TRUE
-    }
-}
-
-assert_whole_number <- checkmate::makeAssertionFunction(check_whole_number)
-
 # `*_numeric_()` was created as a workaround to deal with cases like
 # `is.numeric(lubridate::duration())`. See
 # https://github.com/tidyverse/lubridate/issues/942 to learn more.
@@ -243,49 +206,6 @@ check_posixt <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
 }
 
 assert_posixt <- checkmate::makeAssertionFunction(check_posixt)
-
-test_temporal <- function(x, any.missing = TRUE, null.ok = FALSE, rm = NULL) {
-    checkmate::assert_flag(any.missing)
-    checkmate::assert_flag(null.ok)
-    checkmate::assert_character(rm, any.missing = FALSE, null.ok = TRUE)
-
-    if (is.null(x) && isTRUE(null.ok)) {
-        TRUE
-    } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        FALSE
-    } else {
-        classes <- c("Duration", "Period", "difftime", "hms", "Date", "POSIXct",
-                     "POSIXlt", "Interval")
-
-        if (!is.null(rm)) {
-            rm <- paste0("^", rm, "$", collapse = "|")
-            classes <- str_subset_(classes, rm, negate = TRUE)
-        }
-
-        checkmate::test_subset(class(x)[1], classes)
-    }
-}
-
-check_temporal <- function(x, any.missing = TRUE, null.ok = FALSE,
-                       name = deparse(substitute(x))) {
-    checkmate::assert_flag(any.missing)
-    checkmate::assert_flag(null.ok)
-
-    if (is.null(x) && isTRUE(null.ok)) {
-        TRUE
-    } else if (any(is.na(x)) && isFALSE(any.missing)) {
-        paste0(single_quote_(name), " cannot have missing values")
-    } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(single_quote_(name), " cannot have 'NULL' values")
-    } else if (!test_temporal(x)) {
-        paste0("Must be a temporal object (see 'test_temporal()'), ",
-               "not ", class_collapse(x))
-    } else {
-        TRUE
-    }
-}
-
-assert_temporal <- checkmate::makeAssertionFunction(check_temporal)
 
 assert_identical <- function(..., type = "value", any.missing = TRUE,
                             null.ok = FALSE) {

@@ -30,13 +30,13 @@ na_as.hms <- function(x) hms::as_hms(NA)
 #' @export
 na_as.POSIXct <- function(x) {
     out <- as.POSIXct(NA)
-    attributes(out)$tzone <- attributes(x)$tzone
+    attributes(out) <- attributes(x)
     out
 }
 
 #' @export
 na_as.POSIXlt <- function(x) {
     out <- as.POSIXlt(NA)
-    attributes(out)$tzone <- attributes(x)$tzone
+    attributes(out) <- attributes(x)
     out
 }
