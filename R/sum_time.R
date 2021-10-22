@@ -150,9 +150,12 @@
 #' developed by the [lubridate][lubridate::lubridate-package] team that
 #' represents "human units", ignoring possible timeline irregularities. That is
 #' to say that 1 day as `Period` can have different time spans, when looking to
-#' a timeline after a irregularity event. `sum_time()` and `vct_sum_time()`
-#' ignores that property of `Period` objects, treating them like objects of
-#' class [`Duration`][lubridate::duration()].
+#' a timeline after a irregularity event.
+#'
+#' Since the time span of a `Period` object can fluctuate, `sum_time()`
+#' and `vct_sum_time()` don't accept this kind of object. You can transform
+#' it to a `Duration` object and still use the functions, but beware that
+#' this can produce errors.
 #'
 #' Learn more about `Period` objects in the [Dates and
 #' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
@@ -169,7 +172,7 @@
 #' ## `Interval` objects
 #'
 #' By using [`Interval`][lubridate::interval()] objects in `...`, `sum_time()`
-#' and `vct_sum_time()` will consider only their time lengths. That is, the
+#' and `vct_sum_time()` will consider only their time spans. That is, the
 #' amount of seconds of the intervals.
 #'
 #' Learn more about `Interval` objects in the [Dates and
@@ -183,7 +186,7 @@
 #' it must be considered when doing time arithmetic.
 #'
 #' @param ... Objects belonging to one of the following classes: `Duration`,
-#'   `Period`, `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
+#'   `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
 #' @param cycle (optional) A `numeric` or `Duration` object of length 1, equal
 #'   or greater than 0, indicating the cycle length in seconds. If `NULL` the
 #'   function will perform a linear sum (see Details to learn more) (default:
@@ -215,7 +218,7 @@
 #'
 #' ## Non-vectorized sum in a circular time frame of 24 hours
 #'
-#' x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
+#' x <- c(lubridate::dhours(25), lubridate::dhours(5), lubridate::dminutes(50))
 #' sum_time(x, cycle = lubridate::ddays())
 #' #> [1] "24600s (~6.83 hours)" # 06:50:00 # Expected
 #'
@@ -225,11 +228,11 @@
 #' sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
 #' #> [1] "9900s (~2.75 hours)" # 02:45:00 # Expected
 #'
-#' x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+#' x <- c(lubridate::dhours(-12), lubridate::dhours(-13))
 #' sum_time(x, cycle = lubridate::ddays(), reverse = FALSE)
 #' #> [1] "-3600s (~-1 hours)" # -01:00:00 # Expected
 #'
-#' x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+#' x <- c(lubridate::dhours(-12), lubridate::dhours(-13))
 #' sum_time(x, cycle = lubridate::ddays(), reverse = TRUE)
 #' #> [1] "82800s (~23 hours)" # 23:00:00 # Expected
 #'
@@ -251,12 +254,12 @@
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #' #> [1] "18000s (~5 hours)"  "36000s (~10 hours)" # Expected
 #'
-#' x <- c(lubridate::hours(-49), lubridate::hours(-24))
+#' x <- c(lubridate::dhours(-49), lubridate::dhours(-24))
 #' y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = FALSE)
 #' #> "-3600s (~-1 hours)"  "-21600s (~-6 hours)" # Expected
 #'
-#' x <- c(lubridate::hours(-49), lubridate::hours(-24))
+#' x <- c(lubridate::dhours(-49), lubridate::dhours(-24))
 #' y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
 #' #> "82800s (~23 hours)" "64800s (~18 hours)" # Expected
@@ -275,20 +278,15 @@ vct_sum_time <- function(..., cycle = NULL, reverse = TRUE, na_rm = FALSE) {
 sum_time_build <- function(..., vectorize = FALSE, cycle = NULL,
                            reverse = TRUE, na_rm = FALSE) {
     out <- list(...)
-
-    assert_custom <- function(x) {
-        classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
-                     "POSIXlt", "Interval")
-
-        checkmate::assert_multi_class(x, classes)
-    }
+    classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt",
+                 "Interval")
 
     checkmate::assert_flag(vectorize)
     checkmate::assert_multi_class(cycle, c("numeric", "Duration"),
                                   null.ok = TRUE)
     checkmate::assert_number(cycle, lower = 0, null.ok = TRUE)
     checkmate::assert_flag(na_rm)
-    lapply(out, assert_custom)
+    lapply(out, checkmate::assert_multi_class, classes)
 
     if (isTRUE(vectorize) &&
         !(length(unique(vapply(out, length, integer(1)))) == 1)) {

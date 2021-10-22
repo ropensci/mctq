@@ -1,6 +1,6 @@
 test_that("sum_time() | linear test", {
     expect_equal(sum_time(c(lubridate::dhours(1), lubridate::dminutes(30)),
-                          lubridate::hours(1),
+                          lubridate::dhours(1),
                           c(as.difftime(1, units = "hours"),
                             as.difftime(30, units = "mins")),
                           c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -16,7 +16,7 @@ test_that("sum_time() | linear test", {
 
     expect_equal(sum_time(hms::as_hms(NA), # !
                           c(lubridate::dhours(1), lubridate::dminutes(30)),
-                          lubridate::hours(1),
+                          lubridate::dhours(1),
                           c(as.difftime(1, units = "hours"),
                             as.difftime(30, units = "mins")),
                           c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -32,7 +32,7 @@ test_that("sum_time() | linear test", {
 
     expect_equal(sum_time(hms::as_hms(NA), # !
                           c(lubridate::dhours(1), lubridate::dminutes(30)),
-                          lubridate::hours(1),
+                          lubridate::dhours(1),
                           c(as.difftime(1, units = "hours"),
                             as.difftime(30, units = "mins")),
                           c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -49,7 +49,7 @@ test_that("sum_time() | linear test", {
 
 test_that("sum_time() | circular test", {
     expect_equal(sum_time(c(lubridate::dhours(1), lubridate::dminutes(30)),
-                          lubridate::hours(1),
+                          lubridate::dhours(1),
                           c(as.difftime(1, units = "hours"),
                             as.difftime(30, units = "mins")),
                           c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -65,7 +65,7 @@ test_that("sum_time() | circular test", {
 
     expect_equal(sum_time(hms::as_hms(NA),
                           c(lubridate::dhours(1), lubridate::dminutes(30)),
-                          lubridate::hours(1),
+                          lubridate::dhours(1),
                           c(as.difftime(1, units = "hours"),
                             as.difftime(30, units = "mins")),
                           c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -80,14 +80,14 @@ test_that("sum_time() | circular test", {
                  lubridate::dhours(6))
 
     expect_equal(sum_time(c(lubridate::dhours(-1), lubridate::dhours(-2)),
-                          c(lubridate::hours(-1), lubridate::hours(-21)),
+                          c(lubridate::dhours(-1), lubridate::dhours(-21)),
                           cycle = lubridate::ddays(),
                           reverse = FALSE,
                           na_rm = FALSE),
                  lubridate::dhours(-1))
 
     expect_equal(sum_time(c(lubridate::dhours(-1), lubridate::dhours(-2)),
-                          c(lubridate::hours(-1), lubridate::hours(-21)),
+                          c(lubridate::dhours(-1), lubridate::dhours(-21)),
                           cycle = lubridate::ddays(),
                           reverse = TRUE,
                           na_rm = FALSE),
@@ -96,7 +96,7 @@ test_that("sum_time() | circular test", {
 
 test_that("vct_sum_time()| linear test", {
     expect_equal(vct_sum_time(c(lubridate::dhours(1), lubridate::dminutes(30)),
-                              c(lubridate::hours(1), lubridate::hours(1)),
+                              c(lubridate::dhours(1), lubridate::dhours(1)),
                               c(as.difftime(1, units = "hours"),
                                 as.difftime(30, units = "mins")),
                               c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -118,7 +118,7 @@ test_that("vct_sum_time()| linear test", {
 
     expect_equal(vct_sum_time(c(hms::as_hms(NA), hms::as_hms(NA)), # !
                               c(lubridate::dhours(1), lubridate::dminutes(30)),
-                              c(lubridate::hours(1), lubridate::hours(1)),
+                              c(lubridate::dhours(1), lubridate::dhours(1)),
                               c(as.difftime(1, units = "hours"),
                                 as.difftime(30, units = "mins")),
                               c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -140,7 +140,7 @@ test_that("vct_sum_time()| linear test", {
 
     expect_equal(vct_sum_time(c(hms::as_hms(NA), hms::as_hms(NA)), # !
                               c(lubridate::dhours(1), lubridate::dminutes(30)),
-                              c(lubridate::hours(1), lubridate::hours(1)),
+                              c(lubridate::dhours(1), lubridate::dhours(1)),
                               c(as.difftime(1, units = "hours"),
                                 as.difftime(30, units = "mins")),
                               c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -163,7 +163,7 @@ test_that("vct_sum_time()| linear test", {
 
 test_that("vct_sum_time()| circular test", {
     expect_equal(vct_sum_time(c(lubridate::dhours(1), lubridate::dminutes(30)),
-                              c(lubridate::hours(1), lubridate::hours(1)),
+                              c(lubridate::dhours(1), lubridate::dhours(1)),
                               c(as.difftime(1, units = "hours"),
                                 as.difftime(30, units = "mins")),
                               c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -185,7 +185,7 @@ test_that("vct_sum_time()| circular test", {
 
     expect_equal(vct_sum_time(c(hms::as_hms(NA), hms::as_hms(NA)),
                               c(lubridate::dhours(1), lubridate::dminutes(30)),
-                              c(lubridate::hours(1), lubridate::hours(1)),
+                              c(lubridate::dhours(1), lubridate::dhours(1)),
                               c(as.difftime(1, units = "hours"),
                                 as.difftime(30, units = "mins")),
                               c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
@@ -206,14 +206,14 @@ test_that("vct_sum_time()| circular test", {
                  c(lubridate::dhours(6), lubridate::dhours(17)))
 
     expect_equal(vct_sum_time(c(lubridate::dhours(-24), lubridate::dhours(-1)),
-                              c(lubridate::hours(-6), lubridate::hours(-48)),
+                              c(lubridate::dhours(-6), lubridate::dhours(-48)),
                               cycle = lubridate::ddays(),
                               reverse = FALSE,
                               na_rm = FALSE),
                  c(lubridate::dhours(-6), lubridate::dhours(-1)))
 
     expect_equal(vct_sum_time(c(lubridate::dhours(-24), lubridate::dhours(-1)),
-                              c(lubridate::hours(-6), lubridate::hours(-48)),
+                              c(lubridate::dhours(-6), lubridate::dhours(-48)),
                               cycle = lubridate::ddays(),
                               reverse = TRUE,
                               na_rm = FALSE),
@@ -223,7 +223,10 @@ test_that("vct_sum_time()| circular test", {
 test_that("sum_time_build() | error test", {
     expect_error(sum_time_build(1, vectorize = FALSE, cycle = NULL,
                                 na_rm = FALSE),
-                 "Assertion on 'x' failed")
+                 "Assertion on 'X\\[\\[i\\]\\]' failed")
+    expect_error(sum_time_build(lubridate::hours(), vectorize = FALSE,
+                                cycle = NULL, na_rm = FALSE),
+                 "Assertion on 'X\\[\\[i\\]\\]' failed")
     expect_error(sum_time_build(hms::hms(1), vectorize = "", cycle = NULL,
                            na_rm = TRUE),
                  "Assertion on 'vectorize' failed")

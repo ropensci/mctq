@@ -85,40 +85,6 @@ test_that("cycle_time.Duration() | vector test", {
                  c(lubridate::dhours(23), lubridate::dhours(1)))
 })
 
-test_that("cycle_time.Period() | scalar test", {
-    expect_equal(cycle_time(lubridate::hours(6),
-                            cycle = lubridate::ddays(),
-                            reverse = FALSE),
-                 lubridate::seconds(6 * 60 * 60))
-
-    expect_equal(cycle_time(lubridate::as.period(NA),
-                            cycle = lubridate::ddays(),
-                            reverse = FALSE),
-                 lubridate::as.period(NA))
-
-    expect_equal(cycle_time(lubridate::hours(24),
-                            cycle = lubridate::ddays(),
-                            reverse = FALSE),
-                 lubridate::seconds(0))
-
-    expect_equal(cycle_time(lubridate::hours(-36),
-                            cycle = lubridate::ddays(),
-                            reverse = FALSE),
-                 lubridate::seconds(-12 * 60 * 60))
-
-    expect_equal(cycle_time(lubridate::hours(-36),
-                            cycle = lubridate::ddays(),
-                            reverse = TRUE),
-                 lubridate::seconds(12 * 60 * 60))
-})
-
-test_that("cycle_time.Period() | vector test", {
-    expect_equal(cycle_time(c(lubridate::hours(1), lubridate::hours(48)),
-                            cycle = lubridate::ddays(),
-                            reverse = FALSE),
-                 c(lubridate::seconds(1 * 60* 60), lubridate::seconds(0)))
-})
-
 test_that("cycle_time.difftime() | scalar test", {
     expect_equal(cycle_time(as.difftime(6, units = "mins"),
                             cycle = lubridate::ddays(),

@@ -54,8 +54,6 @@ test_that("interval_mean() | error test", {
 
 test_that("extract_seconds() | general test", {
     expect_equal(extract_seconds(lubridate::dhours(1)), 3600)
-    expect_equal(extract_seconds(lubridate::minutes(1)), 60)
-    expect_equal(extract_seconds(lubridate::minutes(1)), 60)
     expect_equal(extract_seconds(as.difftime(3600, units = "secs")), 3600)
     expect_equal(extract_seconds(hms::hms(3600)), 3600)
     expect_equal(extract_seconds(

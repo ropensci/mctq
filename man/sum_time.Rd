@@ -11,7 +11,7 @@ vct_sum_time(..., cycle = NULL, reverse = TRUE, na_rm = FALSE)
 }
 \arguments{
 \item{...}{Objects belonging to one of the following classes: \code{Duration},
-\code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
+\code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
 
 \item{cycle}{(optional) A \code{numeric} or \code{Duration} object of length 1, equal
 or greater than 0, indicating the cycle length in seconds. If \code{NULL} the
@@ -168,9 +168,12 @@ get -6h (-30 + 24), and -6h relative to the origin will be 18h.\preformatted{   
 developed by the \link[lubridate:lubridate-package]{lubridate} team that
 represents "human units", ignoring possible timeline irregularities. That is
 to say that 1 day as \code{Period} can have different time spans, when looking to
-a timeline after a irregularity event. \code{sum_time()} and \code{vct_sum_time()}
-ignores that property of \code{Period} objects, treating them like objects of
-class \code{\link[lubridate:duration]{Duration}}.
+a timeline after a irregularity event.
+
+Since the time span of a \code{Period} object can fluctuate, \code{sum_time()}
+and \code{vct_sum_time()} don't accept this kind of object. You can transform
+it to a \code{Duration} object and still use the functions, but beware that
+this can produce errors.
 
 Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
 Wickham & Grolemund (n.d.).
@@ -188,7 +191,7 @@ Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 \subsection{\code{Interval} objects}{
 
 By using \code{\link[lubridate:interval]{Interval}} objects in \code{...}, \code{sum_time()}
-and \code{vct_sum_time()} will consider only their time lengths. That is, the
+and \code{vct_sum_time()} will consider only their time spans. That is, the
 amount of seconds of the intervals.
 
 Learn more about \code{Interval} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
@@ -212,7 +215,7 @@ sum_time(x, y)
 
 ## Non-vectorized sum in a circular time frame of 24 hours
 
-x <- c(lubridate::hours(25), lubridate::dhours(5), lubridate::minutes(50))
+x <- c(lubridate::dhours(25), lubridate::dhours(5), lubridate::dminutes(50))
 sum_time(x, cycle = lubridate::ddays())
 #> [1] "24600s (~6.83 hours)" # 06:50:00 # Expected
 
@@ -222,11 +225,11 @@ sum_time(x, cycle = lubridate::ddays())
 sum_time(x, cycle = lubridate::ddays(), na_rm = TRUE)
 #> [1] "9900s (~2.75 hours)" # 02:45:00 # Expected
 
-x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+x <- c(lubridate::dhours(-12), lubridate::dhours(-13))
 sum_time(x, cycle = lubridate::ddays(), reverse = FALSE)
 #> [1] "-3600s (~-1 hours)" # -01:00:00 # Expected
 
-x <- c(lubridate::hours(-12), lubridate::dhours(-13))
+x <- c(lubridate::dhours(-12), lubridate::dhours(-13))
 sum_time(x, cycle = lubridate::ddays(), reverse = TRUE)
 #> [1] "82800s (~23 hours)" # 23:00:00 # Expected
 
@@ -248,12 +251,12 @@ vct_sum_time(x, y, cycle = lubridate::ddays())
 vct_sum_time(x, y, cycle = lubridate::ddays(), na_rm = TRUE)
 #> [1] "18000s (~5 hours)"  "36000s (~10 hours)" # Expected
 
-x <- c(lubridate::hours(-49), lubridate::hours(-24))
+x <- c(lubridate::dhours(-49), lubridate::dhours(-24))
 y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = FALSE)
 #> "-3600s (~-1 hours)"  "-21600s (~-6 hours)" # Expected
 
-x <- c(lubridate::hours(-49), lubridate::hours(-24))
+x <- c(lubridate::dhours(-49), lubridate::dhours(-24))
 y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
 #> "82800s (~23 hours)" "64800s (~18 hours)" # Expected

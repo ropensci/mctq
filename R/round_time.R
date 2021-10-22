@@ -4,24 +4,10 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `round_time()` takes a `Duration`, `Period`, `difftime`, `hms`, `POSIXct`, or
-#' `POSIXlt` object and round its `numeric` value at the ones place.
+#' `round_time()` takes a `Duration`, `difftime`, `hms`, `POSIXct`, or
+#' `POSIXlt` object and round it at the level of seconds.
 #'
 #' @details
-#'
-#' ## Deprecation notice
-#'
-#' `vctrs` support was added to the [lubridate][lubridate::lubridate-package]
-#' package with its 1.7.9 version (see the pull
-#' [here](https://github.com/tidyverse/lubridate/pull/871)). This resolves
-#' issues when rounding `Duration`, `Period`, `Interval`, and `POSIXt` objects
-#' to the ones place with the [round][base::round] function.
-#'
-#' It looks like the [hms][hms::hms-package] will also add `vctrs` support
-#' following its 1.0.0 version (learn more
-#' [here](https://github.com/tidyverse/hms/issues/18)). When this occurs,
-#' `round_time()` functionality will no longer be needed and the function will
-#' be removed from the `mctq` package.
 #'
 #' ## Round standard
 #'
@@ -30,16 +16,32 @@
 #' for rounding off a 5. Therefore, `round(0.5)` is equal to 0 and `round(-1.5)`
 #' is equal to -2. See `?round` to learn more.
 #'
+#' ## `Period` objects
+#'
+#' [`Period`][lubridate::period()] objects are a special type of object
+#' developed by the [lubridate][lubridate::lubridate-package] team that
+#' represents "human units", ignoring possible timeline irregularities. That is
+#' to say that 1 day as `Period` can have different time spans, when looking to
+#' a timeline after a irregularity event.
+#'
+#' Since the time span of a `Period` object can fluctuate, `round_time()` don't
+#' accept this kind of object. You can transform it to a `Duration` object and
+#' still use the function, but beware that this can produce errors.
+#'
+#' Learn more about `Period` objects in the [Dates and
+#' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
+#' Wickham & Grolemund (n.d.).
+#'
 #' @param x An object belonging to one of the following classes: `Duration`,
 #'   `Period`, `difftime`, `hms`, `POSIXct`, or `POSIXlt`.
 #'
-#' @return An object of the same class of `x` with its `numeric` value rounded
-#'   at the ones place.
+#' @return An object of the same class of `x` rounded at the level of seconds.
 #'
 #' @seealso Other date-time rounding functions: [hms::round_hms()]
 #'   [hms::trunc_hms()] [lubridate::round_date()].
 #'
 #' @family utility functions
+#' @template references_g
 #' @export
 #'
 #' @examples
@@ -49,11 +51,6 @@
 #' #> [1] "123456.789s (~1.43 days)" # Expected
 #' round_time(lubridate::dmilliseconds(123456789))
 #' #> [1] "123457s (~1.43 days)" # Expected
-#'
-#' lubridate::microseconds(123456789)
-#' #> [1] "123.456789S" # Expected
-#' round_time(lubridate::microseconds(123456789))
-#' #> [1] "123S" # Expected
 #'
 #' as.difftime(12345.6789, units = "secs")
 #' #> Time difference of 12345.68 secs # Expected
@@ -82,7 +79,7 @@
 #' round_time(x)
 #' #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 round_time <- function(x) {
-    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct", "POSIXlt")
+    classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt")
     checkmate::assert_multi_class(x, classes)
 
     UseMethod("round_time")
@@ -90,23 +87,25 @@ round_time <- function(x) {
 
 #' @rdname round_time
 #' @export
-round_time.default <- function(x) {
-    round(x)
+round_time.Duration <- function(x) {
+    x %>% as.numeric() %>%
+        round() %>%
+        lubridate::dseconds()
 }
 
 #' @rdname round_time
 #' @export
 round_time.difftime <- function(x) {
-    units <- units(x)
-    units(x) <- "secs"
+    out <- x
+    units(out) <- "secs"
 
-    x <- x %>% as.numeric() %>%
+    out <- out %>% as.numeric() %>%
         round() %>%
         as.difftime(units = "secs")
 
-    units(x) <- units
+    units(out) <- units(x)
 
-    x
+    out
 }
 
 #' @rdname round_time
@@ -115,4 +114,32 @@ round_time.hms <- function(x) {
     x %>% as.numeric() %>%
         round() %>%
         hms::as_hms()
+}
+
+#' @rdname round_time
+#' @export
+round_time.POSIXct <- function(x) {
+    out <- x %>% as.numeric() %>%
+        round()
+
+    attributes(out) <- attributes(x)
+
+    out
+}
+
+#' @rdname round_time
+#' @export
+round_time.POSIXlt <- function(x) {
+    out <- unclass(x)
+
+    if (round(out$sec) >= 60) {
+        out$sec <- round(out$sec) - 60
+        out$min <- out$min + 1
+    } else {
+        out$sec <- round(out$sec)
+    }
+
+    class(out) <- class(x)
+
+    out
 }

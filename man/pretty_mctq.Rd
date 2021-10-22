@@ -9,11 +9,11 @@ pretty_mctq(data, round = TRUE, hms = TRUE)
 \arguments{
 \item{data}{A \code{data.frame} object.}
 
-\item{round}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
-and \code{hms} objects must be rounded at the seconds level (default: \code{TRUE}).}
+\item{round}{(optional) a \code{logical} value indicating if \code{Duration} and
+\code{hms} objects must be rounded at the level of seconds (default: \code{TRUE}).}
 
-\item{hms}{(optional) a \code{logical} value indicating if \code{Duration}, \code{Period},
-and \code{difftime} objects must be converted to \code{hms} (default: \code{TRUE}).}
+\item{hms}{(optional) a \code{logical} value indicating if \code{Duration} and
+\code{difftime} objects must be converted to \code{hms} (default: \code{TRUE}).}
 }
 \value{
 A transformed \code{data.frame} object, as indicated in the arguments.
@@ -38,17 +38,16 @@ like in graphical representations. You can also round values to facilitate
 data exporting to text formats (like \code{.csv}), but note that this will come
 with a precision cost.
 
-Note also that \code{pretty_mctq()} uses \code{\link[=round_time]{round_time()}} for rounding.
-\code{round_time()} is based on \code{\link[base:Round]{base::round()}}, which uses the IEC 60559
-standard. For more information see \code{?round_time}.
+Note also that \code{pretty_mctq()} uses \link[=round_time]{round_time()} for
+rounding. \code{round_time()} is based on \link[base:Round]{round()}, which uses the
+IEC 60559 standard. For more information see \code{?round_time}.
 }
 }
 \examples{
 data <- data.frame(
     a = 1,
     b = lubridate::duration(1.12345),
-    c = lubridate::period(1.12345),
-    d = hms::hms(1.12345))
+    c = hms::hms(1.12345))
 
 ## Rounding time objects from `data`
 

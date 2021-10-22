@@ -8,7 +8,7 @@ cycle_time(time, cycle, reverse = TRUE)
 }
 \arguments{
 \item{time}{An object belonging to one of the following classes: \code{numeric},
-\code{Duration}, \code{Period}, \code{difftime}, or \code{hms}.}
+\code{Duration}, \code{difftime}, or \code{hms}.}
 
 \item{cycle}{A \code{numeric} or \code{Duration} object of length 1, equal or greater
 than 0, indicating the cycle length in seconds (see Details to learn more).}
@@ -132,9 +132,11 @@ and -6h relative to the origin will be 18h.\preformatted{               - <--- h
 developed by the \link[lubridate:lubridate-package]{lubridate} team that
 represents "human units", ignoring possible timeline irregularities. That is
 to say that 1 day as \code{Period} can have different time spans, when looking to
-a timeline after a irregularity event. \code{cycle_time()} ignores that property
-of \code{Period} objects, treating them like objects of class
-\code{\link[lubridate:duration]{Duration}}.
+a timeline after a irregularity event.
+
+Since the time span of a \code{Period} object can fluctuate, \code{cycle_time()} don't
+accept this kind of object. You can transform it to a \code{Duration} object and
+still use the function, but beware that this can produce errors.
 
 Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
 Wickham & Grolemund (n.d.).
@@ -148,11 +150,11 @@ cycle <- lubridate::ddays(1)
 cycle_time(time, cycle)
 #> [1] "3600s (~1 hours)" # Expected
 
-time <- lubridate::hours(-25)
+time <- lubridate::dhours(-25)
 cycle <- lubridate::ddays(1)
 reverse <- FALSE
 cycle_time(time, cycle, reverse)
-#> [1] "-3600S" # Expected
+#> [1] "-3600s (~-1 hours)" # Expected
 
 time <- lubridate::dhours(-25)
 cycle <- lubridate::ddays(1)

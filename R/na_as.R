@@ -28,15 +28,7 @@ na_as.Date <- function(x) as.Date(NA)
 na_as.hms <- function(x) hms::as_hms(NA)
 
 #' @export
-na_as.POSIXct <- function(x) {
-    out <- as.POSIXct(NA)
-    attributes(out) <- attributes(x)
-    out
-}
+na_as.POSIXct <- function(x) as.POSIXct(NA, tz = attributes(x)$tzone)
 
 #' @export
-na_as.POSIXlt <- function(x) {
-    out <- as.POSIXlt(NA)
-    attributes(out) <- attributes(x)
-    out
-}
+na_as.POSIXlt <- function(x) as.POSIXlt(NA, tz = attributes(x)$tzone)

@@ -22,15 +22,15 @@
 #' data exporting to text formats (like `.csv`), but note that this will come
 #' with a precision cost.
 #'
-#' Note also that `pretty_mctq()` uses [mctq::round_time()] for rounding.
-#' `round_time()` is based on [base::round()], which uses the IEC 60559
-#' standard. For more information see `?round_time`.
+#' Note also that `pretty_mctq()` uses [round_time()][mctq::round_time()] for
+#' rounding. `round_time()` is based on [round()][base::round()], which uses the
+#' IEC 60559 standard. For more information see `?round_time`.
 #'
 #' @param data A `data.frame` object.
-#' @param round (optional) a `logical` value indicating if `Duration`, `Period`,
-#'   and `hms` objects must be rounded at the seconds level (default: `TRUE`).
-#' @param hms (optional) a `logical` value indicating if `Duration`, `Period`,
-#'   and `difftime` objects must be converted to `hms` (default: `TRUE`).
+#' @param round (optional) a `logical` value indicating if `Duration` and
+#'   `hms` objects must be rounded at the level of seconds (default: `TRUE`).
+#' @param hms (optional) a `logical` value indicating if `Duration` and
+#'   `difftime` objects must be converted to `hms` (default: `TRUE`).
 #'
 #' @return A transformed `data.frame` object, as indicated in the arguments.
 #'
@@ -41,8 +41,7 @@
 #' data <- data.frame(
 #'     a = 1,
 #'     b = lubridate::duration(1.12345),
-#'     c = lubridate::period(1.12345),
-#'     d = hms::hms(1.12345))
+#'     c = hms::hms(1.12345))
 #'
 #' ## Rounding time objects from `data`
 #'
@@ -57,12 +56,11 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     checkmate::assert_flag(hms)
 
     # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
-
     where <- NULL
 
     if (isTRUE(round)) {
         check <- function(x) {
-            classes <- c("Duration", "Period", "hms")
+            classes <- c("Duration", "hms")
             checkmate::test_multi_class(x, classes)
         }
 
@@ -72,7 +70,7 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
 
     if (isTRUE(hms)) {
         check <- function(x) {
-            classes <- c("Duration", "Period", "difftime")
+            classes <- c("Duration", "difftime")
             checkmate::test_multi_class(x, classes)
         }
 

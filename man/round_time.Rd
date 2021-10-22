@@ -2,55 +2,61 @@
 % Please edit documentation in R/round_time.R
 \name{round_time}
 \alias{round_time}
-\alias{round_time.default}
+\alias{round_time.Duration}
 \alias{round_time.difftime}
 \alias{round_time.hms}
+\alias{round_time.POSIXct}
+\alias{round_time.POSIXlt}
 \title{Round time values}
 \usage{
 round_time(x)
 
-\method{round_time}{default}(x)
+\method{round_time}{Duration}(x)
 
 \method{round_time}{difftime}(x)
 
 \method{round_time}{hms}(x)
+
+\method{round_time}{POSIXct}(x)
+
+\method{round_time}{POSIXlt}(x)
 }
 \arguments{
 \item{x}{An object belonging to one of the following classes: \code{Duration},
 \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or \code{POSIXlt}.}
 }
 \value{
-An object of the same class of \code{x} with its \code{numeric} value rounded
-at the ones place.
+An object of the same class of \code{x} rounded at the level of seconds.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{round_time()} takes a \code{Duration}, \code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or
-\code{POSIXlt} object and round its \code{numeric} value at the ones place.
+\code{round_time()} takes a \code{Duration}, \code{difftime}, \code{hms}, \code{POSIXct}, or
+\code{POSIXlt} object and round it at the level of seconds.
 }
 \details{
-\subsection{Deprecation notice}{
-
-\code{vctrs} support was added to the \link[lubridate:lubridate-package]{lubridate}
-package with its 1.7.9 version (see the pull
-\href{https://github.com/tidyverse/lubridate/pull/871}{here}). This resolves
-issues when rounding \code{Duration}, \code{Period}, \code{Interval}, and \code{POSIXt} objects
-to the ones place with the \link[base:Round]{round} function.
-
-It looks like the \link[hms:hms-package]{hms} will also add \code{vctrs} support
-following its 1.0.0 version (learn more
-\href{https://github.com/tidyverse/hms/issues/18}{here}). When this occurs,
-\code{round_time()} functionality will no longer be needed and the function will
-be removed from the \code{mctq} package.
-}
-
 \subsection{Round standard}{
 
 \code{round_time()} uses \code{\link[base:Round]{base::round()}} for rounding. That is to say that
 \code{round_time()} uses the same IEC 60559 standard (\emph{"go to the even digit"})
 for rounding off a 5. Therefore, \code{round(0.5)} is equal to 0 and \code{round(-1.5)}
 is equal to -2. See \code{?round} to learn more.
+}
+
+\subsection{\code{Period} objects}{
+
+\code{\link[lubridate:period]{Period}} objects are a special type of object
+developed by the \link[lubridate:lubridate-package]{lubridate} team that
+represents "human units", ignoring possible timeline irregularities. That is
+to say that 1 day as \code{Period} can have different time spans, when looking to
+a timeline after a irregularity event.
+
+Since the time span of a \code{Period} object can fluctuate, \code{round_time()} don't
+accept this kind of object. You can transform it to a \code{Duration} object and
+still use the function, but beware that this can produce errors.
+
+Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Wickham & Grolemund (n.d.).
 }
 }
 \examples{
@@ -60,11 +66,6 @@ lubridate::dmilliseconds(123456789)
 #> [1] "123456.789s (~1.43 days)" # Expected
 round_time(lubridate::dmilliseconds(123456789))
 #> [1] "123457s (~1.43 days)" # Expected
-
-lubridate::microseconds(123456789)
-#> [1] "123.456789S" # Expected
-round_time(lubridate::microseconds(123456789))
-#> [1] "123S" # Expected
 
 as.difftime(12345.6789, units = "secs")
 #> Time difference of 12345.68 secs # Expected
@@ -92,6 +93,10 @@ x
 #> [1] "20515.32s (~5.7 hours)"    "9675.05544s (~2.69 hours)" # Expected
 round_time(x)
 #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
+}
+\references{
+Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
+O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
 }
 \seealso{
 Other date-time rounding functions: \code{\link[hms:round_hms]{hms::round_hms()}}

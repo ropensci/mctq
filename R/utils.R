@@ -27,7 +27,7 @@ midday_change <- function(time) {
 }
 
 interval_mean <- function(start, end, ambiguity = 24) {
-    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct", "POSIXlt")
+    classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt")
 
     checkmate::assert_multi_class(start, classes)
     checkmate::assert_multi_class(end, classes)
@@ -44,8 +44,8 @@ interval_mean <- function(start, end, ambiguity = 24) {
 }
 
 extract_seconds <- function(x) {
-    classes <- c("Duration", "Period", "difftime", "hms", "POSIXct",
-                 "POSIXlt", "Interval")
+    classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt",
+                 "Interval")
 
     checkmate::assert_multi_class(x, classes)
 

@@ -127,16 +127,18 @@
 #' developed by the [lubridate][lubridate::lubridate-package] team that
 #' represents "human units", ignoring possible timeline irregularities. That is
 #' to say that 1 day as `Period` can have different time spans, when looking to
-#' a timeline after a irregularity event. `cycle_time()` ignores that property
-#' of `Period` objects, treating them like objects of class
-#' [`Duration`][lubridate::duration()].
+#' a timeline after a irregularity event.
+#'
+#' Since the time span of a `Period` object can fluctuate, `cycle_time()` don't
+#' accept this kind of object. You can transform it to a `Duration` object and
+#' still use the function, but beware that this can produce errors.
 #'
 #' Learn more about `Period` objects in the [Dates and
 #' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
 #' Wickham & Grolemund (n.d.).
 #'
 #' @param time An object belonging to one of the following classes: `numeric`,
-#' `Duration`, `Period`, `difftime`, or `hms`.
+#' `Duration`, `difftime`, or `hms`.
 #' @param cycle A `numeric` or `Duration` object of length 1, equal or greater
 #'   than 0, indicating the cycle length in seconds (see Details to learn more).
 #' @param reverse (optional) A `logical` value indicating if the function must
@@ -157,11 +159,11 @@
 #' cycle_time(time, cycle)
 #' #> [1] "3600s (~1 hours)" # Expected
 #'
-#' time <- lubridate::hours(-25)
+#' time <- lubridate::dhours(-25)
 #' cycle <- lubridate::ddays(1)
 #' reverse <- FALSE
 #' cycle_time(time, cycle, reverse)
-#' #> [1] "-3600S" # Expected
+#' #> [1] "-3600s (~-1 hours)" # Expected
 #'
 #' time <- lubridate::dhours(-25)
 #' cycle <- lubridate::ddays(1)
@@ -201,13 +203,6 @@ cycle_time.Duration <- function(time, cycle, reverse = TRUE) {
     time %>%
         cycle_time_build(cycle, reverse) %>%
         lubridate::dseconds()
-}
-
-#' @export
-cycle_time.Period <- function(time, cycle, reverse = TRUE) {
-    time %>%
-        cycle_time_build(cycle, reverse) %>%
-        lubridate::seconds()
 }
 
 #' @export

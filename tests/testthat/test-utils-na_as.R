@@ -47,5 +47,5 @@ test_that("na_as.POSIXct() | general test", {
 
 test_that("na_as.POSIXlt() | general test", {
     expect_equal(na_as(as.POSIXlt(lubridate::as_datetime(1))),
-                 as.POSIXlt(lubridate::as_datetime(NA)))
+                 as.POSIXlt(NA, tz = "UTC"))
 })

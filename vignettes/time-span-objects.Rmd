@@ -82,6 +82,14 @@ You can learn more about [`lubridate`](https://lubridate.tidyverse.org/) time sp
 
 ## The MCTQ context
 
-At first glance you might think that, since MCTQ was made for human respondents, the best representation for time spans would be the one that better represents "human units", right? That would be fine if we were talking about a time span in a timeline irregularity context, but MCTQ doesn’t consider this scenario.
+At first glance you might think that, since MCTQ was made for human respondents, the best representation for time spans would be the one that better represents "human units", right? That would be fine if we were talking about a time span in a timeline irregularity context, but MCTQ doesn’t deal with this scenario.
 
-When using MCTQ, the interest is to measure the exact time span between one local time to another. By ignoring irregularities in the timeline (as `Periods` do) the time span can have a fluctuating value. This would not create an issue for most MCTQ applications, but, if the MCTQ data were to be applied with other types of data, this could produce errors. That's why `Duration` objects are the default object for time spans.
+When using MCTQ, the interest is to measure the exact time span between one local time to another. By ignoring irregularities in the timeline, `Periods` produce a fluctuating time span, hence `Period` objects are not compatible with other time spans objects (like `hms`).
+
+```{r echo = TRUE, eval = FALSE}
+hms::parse_hm("10:00") + lubridate::period(1, units = "hours")
+
+#> Error: Incompatible classes: <hms> + <Period>
+```
+
+In summary, `Period` objects were made considering a very specific context that doesn't apply to MCTQ. That's why `Duration` objects are the default object for time spans.
