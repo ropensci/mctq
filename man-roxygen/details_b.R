@@ -24,9 +24,9 @@
 #' ## Rounding and fractional time
 #'
 #' Some operations may produce an output with fractional time (e.g.,
-#' `"19538.3828571429s (~5.43 hours)"`; `01:15:44.505`). If you want, you
-#' can round it with the `mctq` function [mctq::round_time()].
+#' `"19538.3828571429s (~5.43 hours)"`, `01:15:44.505`). If you want, you
+#' can round it with [round_time()][mctq::round_time()].
 #'
 #' Our recommendation is to avoid rounding, but, if you do, make sure that you
-#' only round your values after all computations are done. That way you can
-#' avoid [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).
+#' only round your values after all computations are done. That way you avoid
+#' [round-off errors](https://en.wikipedia.org/wiki/Round-off_error).

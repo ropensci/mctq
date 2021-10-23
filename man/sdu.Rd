@@ -56,12 +56,12 @@ them.
 \subsection{Rounding and fractional time}{
 
 Some operations may produce an output with fractional time (e.g.,
-\code{"19538.3828571429s (~5.43 hours)"}; \code{01:15:44.505}). If you want, you
-can round it with the \code{mctq} function \code{\link[=round_time]{round_time()}}.
+\code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
+can round it with \link[=round_time]{round_time()}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
-only round your values after all computations are done. That way you can
-avoid \href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
+only round your values after all computations are done. That way you avoid
+\href{https://en.wikipedia.org/wiki/Round-off_error}{round-off errors}.
 }
 }
 \section{Guidelines}{
