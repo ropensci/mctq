@@ -32,3 +32,8 @@ na_as.POSIXct <- function(x) as.POSIXct(NA, tz = attributes(x)$tzone)
 
 #' @export
 na_as.POSIXlt <- function(x) as.POSIXlt(NA, tz = attributes(x)$tzone)
+
+#' @export
+na_as.Interval <- function(x) {
+    lubridate::interval(NA, NA, tz = attributes(x)$tzone)
+}

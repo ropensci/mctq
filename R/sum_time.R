@@ -257,12 +257,12 @@
 #' x <- c(lubridate::dhours(-49), lubridate::dhours(-24))
 #' y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = FALSE)
-#' #> "-3600s (~-1 hours)"  "-21600s (~-6 hours)" # Expected
+#' #> [1] "-3600s (~-1 hours)"  "-21600s (~-6 hours)" # Expected
 #'
 #' x <- c(lubridate::dhours(-49), lubridate::dhours(-24))
 #' y <- c(hms::parse_hm("24:00"), - hms::parse_hm("06:00"))
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
-#' #> "82800s (~23 hours)" "64800s (~18 hours)" # Expected
+#' #> [1] "82800s (~23 hours)" "64800s (~18 hours)" # Expected
 sum_time <- function(..., cycle = NULL, reverse = TRUE, na_rm = FALSE) {
     sum_time_build(..., vectorize = FALSE, cycle = cycle, reverse = reverse,
                    na_rm = na_rm)
