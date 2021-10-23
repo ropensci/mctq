@@ -10,7 +10,8 @@ test_that("qplot_walk() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            suppressMessages(qplot_walk(utils::head(datasets::iris, 5)[[1]])))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5)[[1]]))
+            )
     }
 
     # mock()
@@ -21,7 +22,8 @@ test_that("qplot_walk() | general test", {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             suppressMessages(qplot_walk(utils::head(datasets::iris, 5)[[1]],
-                                        xlab = "test")))
+                                        xlab = "test"))
+            )
     }
 
     # mock()
@@ -32,7 +34,8 @@ test_that("qplot_walk() | general test", {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             dialog_line = function(...) TRUE,
-            qplot_walk(utils::head(datasets::iris, 5)))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5)))
+            )
     }
 
     # mock()
@@ -46,7 +49,8 @@ test_that("qplot_walk() | general test", {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
             dialog_line = function(...) TRUE,
-            qplot_walk(data, pattern = ".+", xlab = "test"))
+            suppressMessages(qplot_walk(data, pattern = ".+", xlab = "test"))
+            )
     }
 
     # mock()
@@ -64,7 +68,8 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) FALSE,
-            qplot_walk(utils::head(datasets::iris, 5)))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5)))
+            )
     }
 
     # mock()
@@ -73,7 +78,8 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            qplot_walk(utils::head(datasets::iris, 5), x = 1))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5), x = 1))
+            )
     }
 
     # mock()
@@ -82,8 +88,10 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            qplot_walk(utils::head(datasets::iris, 5), cols = "Sepal.Length",
-                       pattern = "\\."))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5),
+                                        cols = "Sepal.Length",
+                                        pattern = "\\."))
+            )
     }
 
     # mock()
@@ -92,7 +100,7 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            qplot_walk(list(1)))
+            suppressMessages(qplot_walk(list(1))))
     }
 
     # mock()
@@ -101,7 +109,9 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            qplot_walk(utils::head(datasets::iris, 5), pattern = "^999$"))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5),
+                                        pattern = "^999$"))
+            )
     }
 
     # mock()
@@ -112,7 +122,9 @@ test_that("qplot_walk() | error test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            qplot_walk(utils::head(datasets::iris, 5), ignore = ignore))
+            suppressMessages(qplot_walk(utils::head(datasets::iris, 5),
+                                        ignore = ignore))
+            )
     }
 
     # mock()
@@ -134,7 +146,9 @@ test_that("qplot_walk() | warning test", {
     }
 
     # mock()
-    expect_message(mock(), "'data' is 'atomic'. All other arguments, ")
+    suppressMessages(
+        expect_message(mock(), "'data' is 'atomic'. All other arguments, ")
+        )
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
@@ -144,5 +158,7 @@ test_that("qplot_walk() | warning test", {
     }
 
     # mock()
-    expect_message(mock(), "'Species' will be ignored due to the settings ")
+    suppressMessages(
+        expect_message(mock(), "'Species' will be ignored due to the settings ")
+        )
 })

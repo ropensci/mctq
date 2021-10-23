@@ -8,18 +8,14 @@
 #' It uses [ggplot2::qplot()] to walk through each selected variable from a
 #' data frame.
 #'
-#' This function requires the [`grDevices`][grDevices::grDevices-package] and
-#' [`ggplot2`][ggplot2::ggplot2-package] packages and can only run in
-#' interactive mode.
-#'
 #' @details
 #'
 #' ## Requirements
 #'
 #' This function requires the [`grDevices`][grDevices::grDevices-package] and
-#' [`ggplot2`][ggplot2::ggplot2-package] package and can only run in
-#' interactive mode. The `grDevices` comes with a standard R installation and
-#' is typically loaded by default. Most people also run R interactively.
+#' [`ggplot2`][ggplot2::ggplot2-package] package and can only run in interactive
+#' mode. The `grDevices` package comes with a standard R installation and is
+#' typically loaded by default. Most people also run R interactively.
 #'
 #' If you don't have any of the two packages mentioned above, you can install
 #' them with `install.packages("grDevices")` and `install.packages("ggplot2")`.

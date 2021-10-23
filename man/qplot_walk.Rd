@@ -48,18 +48,14 @@ must apply a midday change for \code{hms} variables with values greater than
 \code{qplot_walk()} helps you to visually assess the distribution of your data.
 It uses \code{\link[ggplot2:qplot]{ggplot2::qplot()}} to walk through each selected variable from a
 data frame.
-
-This function requires the \code{\link[grDevices:grDevices-package]{grDevices}} and
-\code{\link[ggplot2:ggplot2-package]{ggplot2}} packages and can only run in
-interactive mode.
 }
 \details{
 \subsection{Requirements}{
 
 This function requires the \code{\link[grDevices:grDevices-package]{grDevices}} and
-\code{\link[ggplot2:ggplot2-package]{ggplot2}} package and can only run in
-interactive mode. The \code{grDevices} comes with a standard R installation and
-is typically loaded by default. Most people also run R interactively.
+\code{\link[ggplot2:ggplot2-package]{ggplot2}} package and can only run in interactive
+mode. The \code{grDevices} package comes with a standard R installation and is
+typically loaded by default. Most people also run R interactively.
 
 If you don't have any of the two packages mentioned above, you can install
 them with \code{install.packages("grDevices")} and \code{install.packages("ggplot2")}.

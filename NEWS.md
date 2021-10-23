@@ -10,7 +10,7 @@
 
 ## Changed
 
-* To avoid any unknown compatibility issues, all packages on imports now require the latest version of them at the moment of this release.
+* To avoid any unknown compatibility issues, all packages on imports will now require the latest version of them at the moment of release.
 * `assign_date()` now returns only `Interval` objects.
 * `convert()` and all `convert_*()` functions were removed. See a dedicated note about this below.
 * `round_time()` is now a S3 generic.
