@@ -28,19 +28,7 @@ na_as.Date <- function(x) as.Date(NA)
 na_as.hms <- function(x) hms::as_hms(NA)
 
 #' @export
-na_as.POSIXct <- function(x) {
-    if (!is.null(lubridate::tz(x)) && !lubridate::tz(x) == "") {
-        as.POSIXct(NA, tz = lubridate::tz(x))
-    } else {
-        as.POSIXct(NA, tz = attributes(x)$tzone)
-    }
-}
+na_as.POSIXct <- function(x) as.POSIXct(NA, tz = attributes(x)$tzone)
 
 #' @export
-na_as.POSIXlt <- function(x) {
-    if (!is.null(lubridate::tz(x)) && !lubridate::tz(x) == "") {
-        as.POSIXlt(NA, tz = lubridate::tz(x))
-    } else {
-        as.POSIXlt(NA, tz = attributes(x)$tzone)
-    }
-}
+na_as.POSIXlt <- function(x) as.POSIXlt(NA, tz = attributes(x)$tzone)

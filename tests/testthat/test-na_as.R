@@ -42,10 +42,12 @@ test_that("na_as.Date() | general test", {
 })
 
 test_that("na_as.POSIXct() | general test", {
-    expect_equal(na_as(lubridate::as_datetime(1)), lubridate::as_datetime(NA))
+    expect_equal(na_as(as.POSIXct(1, tz = "UTC", origin = lubridate::origin)),
+                 as.POSIXct(NA, tz = "UTC"))
+
 })
 
 test_that("na_as.POSIXlt() | general test", {
-    expect_equal(na_as(as.POSIXlt(lubridate::as_datetime(1))),
+    expect_equal(na_as(as.POSIXlt(1, tz = "UTC", origin = lubridate::origin)),
                  as.POSIXlt(NA, tz = "UTC"))
 })
