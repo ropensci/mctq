@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mctq <a href='https://gipso.github.io/mctq'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# mctq <a href = "https://docs.ropensci.org/mctq/"><img src = "man/figures/logo.png" align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -14,13 +14,11 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R-CMD-check](https://github.com/gipso/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/gipso/mctq/actions)
+[![R-CMD-check](https://github.com/ropensci/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/mctq/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/gipso/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/gipso/mctq?branch=main)
+coverage](https://codecov.io/gh/ropensci/mctq/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/mctq?branch=main)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
-[![Contributor
-Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html)
 [![Buy Me A Coffee donate
 button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://ko-fi.com/danielvartan)
 <!-- badges: end -->
@@ -34,12 +32,6 @@ presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
 to facilitate the work of sleep and chronobiology scientists with MCTQ
 data while also helping with research reproducibility.
-
-> This package is currently under a [software
-> peer-review](https://github.com/ropensci/software-review/issues/434)
-> by the [rOpenSci](https://ropensci.org/) initiative. We plan to submit
-> it to [CRAN](https://cran.r-project.org/) soon after the review
-> process ends.
 
 Learn more about the MCTQ questionnaire at
 <https://www.thewep.org/documentations/mctq>.
@@ -87,16 +79,13 @@ from Wickham & Grolemund’s book “R for Data Science”.
 
 ## Installation
 
-The first stable `mctq` version is already out. We’re just waiting for
-the [software
-peer-review](https://github.com/ropensci/software-review/issues/434) to
-promote it to the public. We hope that it will be available on
-[CRAN](https://cran.r-project.org/) soon. Until that moment comes, you
-can install it from GitHub with:
+The first stable `mctq` version is already out. We hope that it will be
+available on [CRAN](https://cran.r-project.org/) soon. Until that moment
+comes, you can install it from GitHub with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("gipso/mctq")
+remotes::install_github("ropensci/mctq")
 ```
 
 ## Usage
@@ -105,7 +94,8 @@ remotes::install_github("gipso/mctq")
 and [hms](https://hms.tidyverse.org/) packages from
 [tidyverse](https://www.tidyverse.org/), which provide special objects
 to deal with date/time values in R. If your dataset does not conform to
-this structure, you first need to convert your data to it.
+this structure, you first need to convert your data to it. Please refer
+to those package documentations to learn more about them.
 
 Due to the circular nature of time, we strongly recommend that you use
 appropriate temporal objects while dealing with date/time in R. That can
@@ -172,7 +162,7 @@ sjl_rel(msw, msf)
 ```
 
 See a quick tour of all MCTQ main functions
-[here](https://gipso.github.io/mctq/articles/mctq.html).
+[here](https://docs.ropensci.org/mctq/articles/mctq.html).
 
 ### Utilities
 
@@ -182,8 +172,8 @@ versions for testing and learning purposes.
 
 All functions are well documented, showing all the guidelines behind the
 computations. Click
-[here](https://gipso.github.io/mctq/reference/index.html) to see a list
-of them.
+[here](https://docs.ropensci.org/mctq/reference/index.html) to see a
+list of them.
 
 ## Citation
 
@@ -194,19 +184,19 @@ can find the `mctq` citation below.
 ``` r
 citation("mctq")
 #> 
-#> To cite mctq in publications use:
+#> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D., Benedito-Silva, A. A., Pedrazzoli, M. (2021). mctq: An
-#>   R package for the Munich ChronoType Questionnaire. Retrieved from
-#>   https://gipso.github.io/mctq/.
+#>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2021).
+#>   {mctq}: an R package for the Munich ChronoType Questionnaire.
+#>   https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
-#>     title = {mctq: An R package for the Munich ChronoType Questionnaire},
+#>     title = {{mctq}: an R package for the Munich ChronoType Questionnaire},
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2021},
-#>     url = {https://gipso.github.io/mctq/},
+#>     url = {https://docs.ropensci.org/mctq/},
 #>     note = {Lifecycle: maturing},
 #>   }
 ```
@@ -215,11 +205,11 @@ citation("mctq")
 
 `mctq` is a community project, everyone is welcome to contribute. Take a
 moment to review our [Guidelines for
-Contributing](https://gipso.github.io/mctq/CONTRIBUTING.html).
+Contributing](https://docs.ropensci.org/mctq/CONTRIBUTING.html).
 
-Please note that `mctq` is released with a [Contributor Code of
-Conduct](https://gipso.github.io/mctq/CODE_OF_CONDUCT.html). By
-contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.
 
 ## Support `mctq`
 

@@ -29,7 +29,7 @@ round_time(x)
 An object of the same class of \code{x} rounded at the level of seconds.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{round_time()} takes a \code{Duration}, \code{difftime}, \code{hms}, \code{POSIXct}, or
 \code{POSIXlt} object and round it at the level of seconds.

@@ -1,18 +1,20 @@
-url: https://gipso.github.io/mctq/
+url: https://docs.ropensci.org/mctq
 
 template:
+  package: rotemplate
   params:
-    bootswatch: cosmo
-    ganalytics: G-MXJXQFEVEE
+    ganalytics: G-R8X4QBKWTF
     mathjax: true
 
 navbar:
   structure:
-    left:  [intro, reference, articles, news]
-    right: [github]
-  components:
-    home: ~
-    news: ~
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - news
+    right: github
 
 reference:
 - title: MCTQ
@@ -82,5 +84,3 @@ authors:
 
 development:
   mode: auto
-  destination: doc
-  version_label: warning

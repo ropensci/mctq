@@ -117,12 +117,6 @@ count_na <- function(x) {
     length(which(is.na(x)))
 }
 
-escape_regex <- function(x) {
-    checkmate::assert_atomic(x)
-
-    gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", x)
-}
-
 get_names <- function(...) {
     out <- lapply(substitute(list(...))[-1], deparse) %>%
         vapply(unlist, character(1)) %>%

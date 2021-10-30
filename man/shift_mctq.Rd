@@ -451,7 +451,7 @@ common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
 You can see the \code{shift_mctq} build and data wrangling processes
-\href{https://github.com/gipso/mctq/blob/master/data-raw/shift_mctq.R}{here}.
+\href{https://github.com/ropensci/mctq/blob/master/data-raw/shift_mctq.R}{here}.
 }
 
 \subsection{Variable naming}{
@@ -490,7 +490,7 @@ and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
 
 Roenneberg, T., Keller, L. K., Fischer, D., Matera, J. L., Vetter, C., &
 Winnebeck, E. C. (2015). Human activity and rest in situ. In A. Sehgal (Ed.),
-\emph{Methods in enzymology} (Vol. 552, pp. 257-283). London, UK: Academic Press.
+\emph{Methods in Enzymology} (Vol. 552, pp. 257-283). London, UK: Academic Press.
 \doi{10.1016/bs.mie.2014.11.028}.
 
 Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
@@ -501,8 +501,8 @@ Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological
 Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
-The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
-\url{https://www.thewep.org/documentations/mctq/}.
+The Worldwide Experimental Platform (n.d.). MCTQ.
+https://www.thewep.org/documentations/mctq/
 }
 \seealso{
 Other datasets: 

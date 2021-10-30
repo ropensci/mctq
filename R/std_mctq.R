@@ -39,7 +39,7 @@
 #' addition to be a suggested data structure for MCTQ data.
 #'
 #' You can see the `std_mctq` build and data wrangling processes
-#' [here](https://github.com/gipso/mctq/blob/master/data-raw/std_mctq.R).
+#' [here](https://github.com/ropensci/mctq/blob/master/data-raw/std_mctq.R).
 #'
 #' ## Variable naming
 #'

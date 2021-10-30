@@ -13,9 +13,9 @@ A complete and consistent toolkit to process the Munich ChronoType Questionnaire
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://gipso.github.io/mctq/}
-  \item \url{https://github.com/gipso/mctq/}
-  \item Report bugs at \url{https://github.com/gipso/mctq/issues/}
+  \item \url{https://docs.ropensci.org/mctq/}
+  \item \url{https://github.com/ropensci/mctq/}
+  \item Report bugs at \url{https://github.com/ropensci/mctq/issues/}
 }
 
 }

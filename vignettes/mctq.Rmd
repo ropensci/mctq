@@ -39,7 +39,7 @@ install.packages("remotes")
 After `remotes` is installed, install `mctq` with:
 
 ```{r, eval = FALSE}
-remotes::install_github("gipso/mctq")
+remotes::install_github("ropensci/mctq")
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:
@@ -54,7 +54,7 @@ This dataset already has valid values. As for any data analysis, you must have c
 
 Teaching you how to load your data in R is outside the scope of this article. For that, we recommend checking the [readr](https://readr.tidyverse.org/) package from [tidyverse](https://www.tidyverse.org/).
 
-Our fictional MCTQ data will be loaded with the code below. The naming of the variables follows the same naming pattern used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq` in your console (you can also see it in this [link](https://gipso.github.io/mctq/reference/std_mctq.html)).
+Our fictional MCTQ data will be loaded with the code below. The naming of the variables follows the same naming pattern used in MCTQ publications. You can see the meaning of each variable by running `?std_mctq` in your console (you can also see it in this [link](https://docs.ropensci.org/mctq/reference/std_mctq.html)).
 
 ```{r, warning = FALSE, message = FALSE}
 library(readr)

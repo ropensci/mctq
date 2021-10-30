@@ -6,22 +6,24 @@ First of all, thanks for considering contributing to `mctq`! 👍 It's people li
 
 `mctq` is an open source project, maintained by people who care. We are not directly funded to do so.
 
-[repo]: https://github.com/gipso/mctq
-[issues]: https://github.com/gipso/mctq/issues
-[discussions]: https://github.com/gipso/mctq/discussions
-[new_issue]: https://github.com/gipso/mctq/issues/new
-[new_discussion]: https://github.com/gipso/mctq/discussions/new
-[website]: https://gipso.github.io/mctq
-[citation]: https://gipso.github.io/mctq/authors.html
+[repo]: https://github.com/ropensci/mctq
+[issues]: https://github.com/ropensci/mctq/issues
+[discussions]: https://github.com/ropensci/mctq/discussions
+[new_issue]: https://github.com/ropensci/mctq/issues/new
+[new_discussion]: https://github.com/ropensci/mctq/discussions/new
+[website]: https://docs.ropensci.org/mctq
+[citation]: https://docs.ropensci.org/mctq/authors.html
 [email]: mailto:danvartan@gmail.com
 
 ## Code of conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 
 ## How you can contribute
 
 There are several ways you can contribute to this project. If you want to know more about why and how to contribute to open source projects like this one, see this [Open Source Guide](https://opensource.guide/how-to-contribute/).
+
+This package generally uses the rOpenSci packaging guidelines for style and structure.
 
 ### Share the love ❤️
 
@@ -87,4 +89,4 @@ We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/)
 5. Commit and push your changes.
 6. Submit a [pull request](https://guides.github.com/activities/forking/#making-a-pull-request).
 
-Also note that we use the [tidyverse design guide](https://principles.tidyverse.org/) and [tidyverse style guide](https://style.tidyverse.org/). Your code must conform to this principles and rules.
+Also note that we use the [rOpenSci packaging guidelines](https://github.com/ropensci/onboarding/blob/master/packaging_guide.md), [tidyverse design guide](https://principles.tidyverse.org/), and [tidyverse style guide](https://style.tidyverse.org/). Your code must conform to this principles and rules.

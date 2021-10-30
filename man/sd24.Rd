@@ -79,7 +79,7 @@ between two free days after a particular shift, \code{sd24()} will return only
 \item If you are visualizing this documentation in plain text (\code{ASCII}), you may
 have some trouble understanding the equations. If you want a better viewer,
 you can see this documentation on the package
-\href{https://gipso.github.io/mctq/reference/}{website}.
+\href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -155,8 +155,8 @@ Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological
 Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
-The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
-\url{https://www.thewep.org/documentations/mctq/}.
+The Worldwide Experimental Platform (n.d.). MCTQ.
+https://www.thewep.org/documentations/mctq/
 }
 \seealso{
 Other MCTQ functions: 

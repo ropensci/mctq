@@ -49,7 +49,7 @@ The data was set to resemble the distribution parameters shown in Juda,
 Vetter, & Roenneberg (2013).
 
 You can see more about the distribution parameters used
-\href{https://github.com/gipso/mctq/blob/master/data-raw/random_mctq.R}{here}.
+\href{https://github.com/ropensci/mctq/blob/master/data-raw/random_mctq.R}{here}.
 }
 }
 \examples{
@@ -69,7 +69,7 @@ Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 Vetter, C., Juda, M., & Roenneberg, T. (2012). The influence of internal time,
 time awake, and sleep duration on cognitive performance in shiftworkers.
-\emph{Chronobiology international}, \emph{29}(8), 1127-1138.
+\emph{Chronobiology International}, \emph{29}(8), 1127-1138.
 \doi{10.3109/07420528.2012.707999}.
 }
 \seealso{
