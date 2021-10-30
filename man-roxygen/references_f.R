@@ -10,5 +10,5 @@
 #'
 #' Vetter, C., Juda, M., & Roenneberg, T. (2012). The influence of internal time,
 #' time awake, and sleep duration on cognitive performance in shiftworkers.
-#' _Chronobiology international_, _29_(8), 1127-1138.
+#' _Chronobiology International_, _29_(8), 1127-1138.
 #' \doi{10.3109/07420528.2012.707999}.

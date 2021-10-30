@@ -16,7 +16,7 @@
 #'
 #' Roenneberg, T., Keller, L. K., Fischer, D., Matera, J. L., Vetter, C., &
 #' Winnebeck, E. C. (2015). Human activity and rest in situ. In A. Sehgal (Ed.),
-#' _Methods in enzymology_ (Vol. 552, pp. 257-283). London, UK: Academic Press.
+#' _Methods in Enzymology_ (Vol. 552, pp. 257-283). London, UK: Academic Press.
 #' \doi{10.1016/bs.mie.2014.11.028}.
 #'
 #' Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
@@ -27,5 +27,5 @@
 #' daily temporal patterns of human chronotypes. _Journal of Biological
 #' Rhythms_, _18_(1), 80-90. \doi{10.1177/0748730402239679}.
 #'
-#' The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
-#' <https://www.thewep.org/documentations/mctq/>.
+#' The Worldwide Experimental Platform (n.d.). MCTQ. 
+#' https://www.thewep.org/documentations/mctq/
