@@ -102,6 +102,8 @@
 #'
 #' @examples
 #' \dontrun{
+#' if (interactive()) {
+#'
 #' ## Ploting a single column from `data`
 #'
 #' qplot_walk(mctq::std_mctq$bt_w)
@@ -123,6 +125,7 @@
 #' if (requireNamespace("datasets", quietly = TRUE)) {
 #'     qplot_walk(datasets::iris)
 #'     qplot_walk(datasets::mtcars)
+#' }
 #' }}
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,

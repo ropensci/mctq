@@ -118,6 +118,8 @@ You can disable this behavior using \code{remove_id = FALSE}.
 }
 \examples{
 \dontrun{
+if (interactive()) {
+
 ## Ploting a single column from `data`
 
 qplot_walk(mctq::std_mctq$bt_w)
@@ -139,6 +141,7 @@ qplot_walk(mctq::std_mctq, pattern = "_w$")
 if (requireNamespace("datasets", quietly = TRUE)) {
     qplot_walk(datasets::iris)
     qplot_walk(datasets::mtcars)
+}
 }}
 }
 \seealso{

@@ -1,6 +1,12 @@
 <!--- https://devguide.ropensci.org/releasing.html -->
 <!--- https://style.tidyverse.org/news.html -->
 
+# mctq 0.0.0 (2021-10-30)
+
+* First stable `mctq` release. 🎉
+* Now on CRAN! You can install `mctq` with `install.packages("mctq")`.
+
+
 # mctq 0.0.0.9002
 
 ## Changed
@@ -8,9 +14,9 @@
 * `mctq` is now a
 [peer-reviewed](https://github.com/ropensci/software-review/issues/434) package
 by @ropensci! 🎉
-* The package repository was transfer to the @ropensci organization. All links
-related to `mctq` was changed. Old links have an redirect protocol to point to
-new repository and new website.
+* The package repository was transferred to the @ropensci organization. All
+links related to `mctq` have been changed. Old links have a redirect protocol to
+point to the new repository and new website.
 
 
 # mctq 0.0.0.9001
