@@ -198,7 +198,7 @@ common cases and data issues that researchers may find in their MCTQ data, in
 addition to be a suggested data structure for MCTQ data.
 
 You can see the \code{micro_mctq} build and data wrangling processes
-\href{https://github.com/ropensci/mctq/blob/master/data-raw/micro_mctq.R}{here}.
+\href{https://github.com/ropensci/mctq/blob/main/data-raw/micro_mctq.R}{here}.
 }
 
 \subsection{Variable naming}{

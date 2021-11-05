@@ -40,7 +40,7 @@
 #' addition to be a suggested data structure for MCTQ data.
 #'
 #' You can see the `micro_mctq` build and data wrangling processes
-#' [here](https://github.com/ropensci/mctq/blob/master/data-raw/micro_mctq.R).
+#' [here](https://github.com/ropensci/mctq/blob/main/data-raw/micro_mctq.R).
 #'
 #' ## Variable naming
 #'

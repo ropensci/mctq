@@ -30,16 +30,10 @@ It's a good idea to have the standard MCTQ questionnaire open while reading this
 
 Let's start with the basics. The first thing you must do to use `mctq` is to have some MCTQ data and `mctq` installed and loaded.
 
-To install a GitHub package you're going to need the [remotes](https://remotes.r-lib.org/) package. If you don't already have it installed, just type the following command in your console.
+Install `mctq` with:
 
 ```{r, eval = FALSE}
-install.packages("remotes")
-```
-
-After `remotes` is installed, install `mctq` with:
-
-```{r, eval = FALSE}
-remotes::install_github("ropensci/mctq")
+install.packages("mctq")
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:

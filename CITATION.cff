@@ -1,0 +1,51 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.1.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "mctq" in publications use:'
+type: software
+license: MIT
+title: 'mctq: Tools to Process the Munich ChronoType Questionnaire (MCTQ)'
+version: 0.1.0.9000
+abstract: A complete and consistent toolkit to process the Munich ChronoType Questionnaire
+  (MCTQ) for its three versions (standard, micro, and shift). MCTQ is a quantitative
+  and validated tool to assess chronotypes using peoples' sleep behavior, originally
+  presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow (2003, <doi:10.1177/0748730402239679>).
+authors:
+- family-names: Vartanian
+  given-names: Daniel
+  email: danvartan@gmail.com
+  orcid: https://orcid.org/0000-0001-7782-759X
+- family-names: Benedito-Silva
+  given-names: Ana Amelia
+  email: aamelia@usp.br
+  orcid: https://orcid.org/0000-0003-4976-2623
+- family-names: Pedrazzoli
+  given-names: Mario
+  email: pedrazzo@usp.br
+  orcid: https://orcid.org/0000-0002-5257-591X
+preferred-citation:
+  type: unpublished
+  title: 'mctq: an R package for the Munich ChronoType Questionnaire'
+  authors:
+  - family-names: Vartanian
+    given-names: Daniel
+  - family-names: Benedito-Silva
+    given-names: Ana Amelia
+  - family-names: Pedrazzoli
+    given-names: Mario
+  year: '2021'
+  url: https://docs.ropensci.org/mctq/
+repository: https://bioconductor.org/
+repository-code: https://github.com/ropensci/mctq/issues/
+url: https://docs.ropensci.org/mctq/
+contact:
+- family-names: Vartanian
+  given-names: Daniel
+  email: danvartan@gmail.com
+  orcid: https://orcid.org/0000-0001-7782-759X
+identifiers:
+- type: url
+  value: https://github.com/ropensci/mctq/

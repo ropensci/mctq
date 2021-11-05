@@ -7,6 +7,10 @@
 
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci/software-review/issues/434)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/mctq)](https://cran.r-project.org/package=mctq)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -78,9 +82,14 @@ Science](https://r4ds.had.co.nz/).
 
 ## Installation
 
-The first `mctq` version is already out. We hope that it will be
-available on [CRAN](https://cran.r-project.org/) soon. Until that moment
-comes, you can install it from GitHub with:
+You can install the released version of `mctq` from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("mctq")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")

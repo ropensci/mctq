@@ -2,6 +2,7 @@
 ^\.github$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
+^CITATION\.cff$
 ^CODE_OF_CONDUCT\.md$
 ^codecov\.yml$
 ^codemeta\.json$

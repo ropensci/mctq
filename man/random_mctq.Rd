@@ -49,7 +49,7 @@ The data was set to resemble the distribution parameters shown in Juda,
 Vetter, & Roenneberg (2013).
 
 You can see more about the distribution parameters used
-\href{https://github.com/ropensci/mctq/blob/master/data-raw/random_mctq.R}{here}.
+\href{https://github.com/ropensci/mctq/blob/main/data-raw/random_mctq.R}{here}.
 }
 }
 \examples{

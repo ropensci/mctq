@@ -8,7 +8,7 @@ test_check("mctq")
 #
 # .rs.restartR()
 # BiocCheck::BiocCheck()
-# codemetar::give_opinions()
+# cffr::cff_write()
 # codemetar::write_codemeta()
 # covr::package_coverage()
 # devtools::check()

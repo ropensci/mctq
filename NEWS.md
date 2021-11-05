@@ -2,19 +2,21 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
-# mctq 0.1.0 (2021-11-03)
+# mctq (development version)
 
-* First `mctq` release. 🎉 (awaiting for CRAN approval)
-* Now on CRAN! You can install `mctq` with `install.packages("mctq")`.
-(awaiting for CRAN approval)
+* The documentation were updated to add
+[CRAN](https://cran.r-project.org/package=mctq) installation instructions.
+
+
+# mctq 0.1.0 (2021-11-04)
+
+* Initial [CRAN](https://cran.r-project.org/package=mctq) release. 🎉
+* You can now install `mctq` with `install.packages("mctq")`.
 * We decided to wait for a little while before releasing a `1.0.0` (stable) 
 `mctq` version. We don't intend to make any breaking changes, but we think is
 better to wait and see if the user community don't have any issues with the
 features.
 
-## Minor improvements and fixes
-
-* Some parts of the documentation were updated.
 
 # mctq 0.0.0.9002
 
