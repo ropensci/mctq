@@ -336,20 +336,20 @@ pretty_mctq(data, round = FALSE)
 
 Before we end, it's important to note that `mctq` also provides several utility tools to help with your MCTQ data. Here's a list of them.
 
-* `assign_date()`: Assign dates to two sequential hours
-* `cycle_time()`: Cycle time objects
-* `pretty_mctq()`: Make a MCTQ dataset more presentable
-* `qplot_walk()`: Walk through distribution plots
-* `random_mctq()`: Build a random MCTQ case
-* `raw_data()`: Get paths to `mctq` raw datasets
-* `round_time()`: Round time values
-* `shorter_interval()`: Find the shorter interval between two hours
-* `sum_time()`: Sum time objects
+* `assign_date()`: Assign dates to two sequential hours.
+* `cycle_time()`: Cycle time objects.
+* `pretty_mctq()`: Make a MCTQ dataset more presentable.
+* `qplot_walk()`: Walk through distribution plots.
+* `random_mctq()`: Build a random MCTQ case.
+* `raw_data()`: Get paths to `mctq` raw datasets.
+* `round_time()`: Round time values.
+* `shorter_interval()`: Find the shorter interval between two hours.
+* `sum_time()`: Sum time objects.
 
 `mctq` also provides fictional datasets of the standard, micro, and shift versions for testing and learning purposes.
 
-* `std_mctq`: A fictional standard MCTQ dataset (`?std_mctq`)
-* `micro_mctq`: A fictional $\mu$MCTQ dataset (`?micro_mctq`)
-* `shift_mctq`: A fictional MCTQ$^{Shift}$ dataset (`?shift_mctq`)
+* `std_mctq`: A fictional standard MCTQ dataset (`?std_mctq`).
+* `micro_mctq`: A fictional $\mu$MCTQ dataset (`?micro_mctq`).
+* `shift_mctq`: A fictional MCTQ$^{Shift}$ dataset (`?shift_mctq`).
 
 We encouraged you to read the documentation of the features above. You may find it worth your time.

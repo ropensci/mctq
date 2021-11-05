@@ -4,11 +4,11 @@
 \name{mctq-package}
 \alias{mctq}
 \alias{mctq-package}
-\title{mctq: An R Package for the Munich ChronoType Questionnaire}
+\title{mctq: Tools to Process the Munich ChronoType Questionnaire (MCTQ)}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-A complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ) for its three versions (standard, micro, and shift).
+A complete and consistent toolkit to process the Munich ChronoType Questionnaire (MCTQ) for its three versions (standard, micro, and shift). MCTQ is a quantitative and validated tool to assess chronotypes using peoples' sleep behavior, originally presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow (2003, <doi:10.1177/0748730402239679>).
 }
 \seealso{
 Useful links:

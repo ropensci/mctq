@@ -8,4 +8,4 @@
 #' 1-23. \doi{10.18637/jss.v059.i10}.
 #'
 #' Wickham, H., & Grolemund, G. (n.d.). _R for data science_. Sebastopol, CA:
-#' O'Reilly Media. Retrieved from <https://r4ds.had.co.nz>.
+#' O'Reilly Media. \url{https://r4ds.had.co.nz}

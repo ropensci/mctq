@@ -54,7 +54,8 @@
 #' \dontrun{
 #' random_mctq("standard")
 #' random_mctq("micro")
-#' random_mctq("shift")}
+#' random_mctq("shift")
+#' }
 random_mctq <- function(model = "standard") {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
     require_pkg("stats")

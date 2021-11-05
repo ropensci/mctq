@@ -307,8 +307,8 @@ Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological
 Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
-The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
-\url{https://www.thewep.org/documentations/mctq/}.
+The Worldwide Experimental Platform (n.d.). MCTQ.
+\url{https://www.thewep.org/documentations/mctq/}
 }
 \seealso{
 Other MCTQ functions: 

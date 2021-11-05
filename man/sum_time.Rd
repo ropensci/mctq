@@ -263,7 +263,7 @@ vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
 }
 \references{
 Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
-O'Reilly Media. Retrieved from \url{https://r4ds.had.co.nz}.
+O'Reilly Media. \url{https://r4ds.had.co.nz}
 }
 \seealso{
 Other utility functions: 

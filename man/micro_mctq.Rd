@@ -5,8 +5,8 @@
 \alias{micro_mctq}
 \title{A fictional \eqn{\mu}MCTQ dataset}
 \format{
-A tibble with 17 columns and 50
-rows:
+A tibble with 17 columns and
+50` rows:
 
 \describe{
 \item{id}{
@@ -249,7 +249,7 @@ daily temporal patterns of human chronotypes. \emph{Journal of Biological
 Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
 
 The Worldwide Experimental Platform (n.d.). MCTQ.
-https://www.thewep.org/documentations/mctq/
+\url{https://www.thewep.org/documentations/mctq/}
 }
 \seealso{
 Other datasets: 

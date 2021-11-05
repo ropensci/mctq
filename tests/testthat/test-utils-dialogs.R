@@ -1,18 +1,10 @@
 test_that("dialog_line() | general test", {
-    # ## Don't forget to run devtools::load_all(".") and uncomment the variables
-    # ## before trying to run the tests interactively.
-    #
-    # is_interactive <- mctq:::is_interactive
-    # require_namespace <- mctq:::require_namespace
-    # read_line <- mctq:::read_line
-
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) FALSE,
             dialog_line(1))
     }
 
-    # mock()
     expect_null(mock())
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
@@ -21,7 +13,6 @@ test_that("dialog_line() | general test", {
             dialog_line(1, abort = TRUE))
     }
 
-    # mock()
     expect_null(mock())
 
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
@@ -33,7 +24,6 @@ test_that("dialog_line() | general test", {
                         space_below = TRUE))
     }
 
-    # mock()
     expect_equal(utils::capture.output(mock()), c("", "", "[1] TRUE"))
 })
 

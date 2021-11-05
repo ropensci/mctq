@@ -73,11 +73,12 @@ Please refer to the [lubridate](https://lubridate.tidyverse.org/) and
 about them. These two are essential packages to deal with date/time data
 in R. We also recommend that you read the [Dates and
 times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter
-from Wickham & Grolemund’s book “R for Data Science”.
+from Wickham & Grolemund’s book [R for Data
+Science](https://r4ds.had.co.nz/).
 
 ## Installation
 
-The first stable `mctq` version is already out. We hope that it will be
+The first `mctq` version is already out. We hope that it will be
 available on [CRAN](https://cran.r-project.org/) soon. Until that moment
 comes, you can install it from GitHub with:
 
@@ -110,14 +111,15 @@ Note that the `mctq` functions uses a similar naming pattern to that
 used in the MCTQ publications. That makes it easy to find and apply any
 computation necessary.
 
--   `fd()`: compute MCTQ work-free days
--   `so()`: compute MCTQ local time of sleep onset
--   `gu()`: compute MCTQ local time of getting out of bed
--   `sdu()`: compute MCTQ sleep duration
--   `tbt()`: compute MCTQ total time in bed
--   `msl()`: compute MCTQ local time of mid-sleep
--   `napd()`: compute MCTQ nap duration (only for MCTQ Shift)
--   `sd24()`: compute MCTQ 24 hours sleep duration (only for MCTQ Shift)
+-   `fd()`: compute MCTQ work-free days.
+-   `so()`: compute MCTQ local time of sleep onset.
+-   `gu()`: compute MCTQ local time of getting out of bed.
+-   `sdu()`: compute MCTQ sleep duration.
+-   `tbt()`: compute MCTQ total time in bed.
+-   `msl()`: compute MCTQ local time of mid-sleep.
+-   `napd()`: compute MCTQ nap duration (only for MCTQ Shift).
+-   `sd24()`: compute MCTQ 24 hours sleep duration (only for MCTQ
+    Shift).
 
 Example:
 
@@ -136,16 +138,16 @@ so(sprep_w, slat_w)
 
 For computations combining workdays and work-free days, use:
 
--   `sd_week()`: compute MCTQ average weekly sleep duration
+-   `sd_week()`: compute MCTQ average weekly sleep duration.
 -   `sd_overall()`: compute MCTQ overall sleep duration (only for MCTQ
-    Shift)
--   `sloss_week()`: compute MCTQ weekly sleep loss
--   `le_week()`: compute MCTQ average weekly light exposure
+    Shift).
+-   `sloss_week()`: compute MCTQ weekly sleep loss.
+-   `le_week()`: compute MCTQ average weekly light exposure.
 -   `msf_sc()`: compute MCTQ chronotype or corrected local time of
-    mid-sleep on work-free days
--   `sjl_rel()` and `sjl()`: compute MCTQ social jet lag
+    mid-sleep on work-free days.
+-   `sjl_rel()` and `sjl()`: compute MCTQ social jet lag.
 -   `sjl_weighted()`: compute MCTQ absolute social jetlag across all
-    shifts (only for MCTQ Shift)
+    shifts (only for MCTQ Shift).
 
 Example:
 

@@ -26,5 +26,5 @@
 #' daily temporal patterns of human chronotypes. _Journal of Biological
 #' Rhythms_, _18_(1), 80-90. \doi{10.1177/0748730402239679}.
 #'
-#' The Worldwide Experimental Platform (n.d.). MCTQ. Retrieved from
-#' <https://www.thewep.org/documentations/mctq/>.
+#' The Worldwide Experimental Platform (n.d.). MCTQ.
+#' \url{https://www.thewep.org/documentations/mctq/}

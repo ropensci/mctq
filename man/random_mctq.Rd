@@ -56,7 +56,8 @@ You can see more about the distribution parameters used
 \dontrun{
 random_mctq("standard")
 random_mctq("micro")
-random_mctq("shift")}
+random_mctq("shift")
+}
 }
 \references{
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType

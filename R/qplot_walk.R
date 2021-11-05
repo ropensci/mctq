@@ -97,11 +97,12 @@
 #'   must apply a midday change for `hms` variables with values greater than
 #'   `22:00:00` (see Details section to learn more) (default: `TRUE`).
 #'
+#' @return An invisible `NULL`. `qplot_walk()` was made to only display plots.
+#'
 #' @family utility functions
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' if (interactive()) {
 #'
 #' ## Ploting a single column from `data`
@@ -126,7 +127,7 @@
 #'     qplot_walk(datasets::iris)
 #'     qplot_walk(datasets::mtcars)
 #' }
-#' }}
+#' }
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
                        midday_change = TRUE) {

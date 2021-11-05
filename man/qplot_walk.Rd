@@ -42,6 +42,9 @@ regular expression \code{"^id$|[\\\\._-]id$"} (default: \code{TRUE}).}
 must apply a midday change for \code{hms} variables with values greater than
 \code{22:00:00} (see Details section to learn more) (default: \code{TRUE}).}
 }
+\value{
+An invisible \code{NULL}. \code{qplot_walk()} was made to only display plots.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
@@ -117,7 +120,6 @@ You can disable this behavior using \code{remove_id = FALSE}.
 }
 }
 \examples{
-\dontrun{
 if (interactive()) {
 
 ## Ploting a single column from `data`
@@ -142,7 +144,7 @@ if (requireNamespace("datasets", quietly = TRUE)) {
     qplot_walk(datasets::iris)
     qplot_walk(datasets::mtcars)
 }
-}}
+}
 }
 \seealso{
 Other utility functions: 
