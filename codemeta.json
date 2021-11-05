@@ -110,7 +110,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">= 1.36.0",
+      "version": ">= 1.36",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -123,7 +123,7 @@
       "@type": "SoftwareApplication",
       "identifier": "mockr",
       "name": "mockr",
-      "version": ">= 0.1.0",
+      "version": ">= 0.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -149,7 +149,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">= 2.11.0",
+      "version": ">= 2.11",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -162,7 +162,7 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.2.0",
+      "version": ">= 2.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -234,7 +234,7 @@
       "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
-      "version": ">= 3.0.1",
+      "version": ">= 3.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -298,7 +298,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/mctq/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/mctq/blob/main/README.md",
-  "fileSize": "672.309KB",
+  "fileSize": "672.353KB",
   "contIntegration": ["https://github.com/ropensci/mctq/actions", "https://app.codecov.io/gh/ropensci/mctq?branch=main"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://lifecycle.r-lib.org/articles/stages.html#maturing"],
   "review": {
