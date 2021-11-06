@@ -11,6 +11,8 @@ Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci
 status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
 [![CRAN
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/mctq)](https://cran.r-project.org/package=mctq)
+[![mctq status
+badge](https://ropensci.r-universe.dev/badges/mctq)](https://ropensci.r-universe.dev)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
