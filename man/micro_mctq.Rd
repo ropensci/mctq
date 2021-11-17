@@ -5,8 +5,7 @@
 \alias{micro_mctq}
 \title{A fictional \eqn{\mu}MCTQ dataset}
 \format{
-A tibble with 17 columns and
-50` rows:
+A \code{\link[dplyr:reexports]{tibble}} with 17 columns and 50 rows:
 
 \describe{
 \item{id}{

@@ -8,7 +8,7 @@
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/434_status.svg)](https://github.com/ropensci/software-review/issues/434)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
+status](https://www.r-pkg.org/badges/version/mctq)](https://cran.r-project.org/package=mctq)
 [![CRAN
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/mctq)](https://cran.r-project.org/package=mctq)
 [![mctq status
@@ -78,8 +78,8 @@ Please refer to the [lubridate](https://lubridate.tidyverse.org/) and
 [hms](https://hms.tidyverse.org/) package documentation to learn more
 about them. These two are essential packages to deal with date/time data
 in R. We also recommend that you read the [Dates and
-times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter
-from Wickham & Grolemund’s book [R for Data
+times](https://r4ds.had.co.nz/dates-and-times.html#dates-and-times)
+chapter from Wickham & Grolemund’s book [R for Data
 Science](https://r4ds.had.co.nz/).
 
 ## Installation

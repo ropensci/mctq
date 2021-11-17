@@ -97,7 +97,7 @@
 #'   must apply a midday change for `hms` variables with values greater than
 #'   `22:00:00` (see Details section to learn more) (default: `TRUE`).
 #'
-#' @return An invisible `NULL`. `qplot_walk()` was made to only display plots.
+#' @return An invisible `NULL`. This function don't aim to return values.
 #'
 #' @family utility functions
 #' @export

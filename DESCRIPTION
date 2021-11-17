@@ -57,6 +57,7 @@ Suggests:
     knitr (>= 1.36),
     mockr (>= 0.1),
     readr (>= 2.0.2),
+    rlang (>= 0.4.12),
     rmarkdown (>= 2.11),
     spelling (>= 2.2),
     stats (>= 4.0.0),

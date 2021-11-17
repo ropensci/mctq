@@ -1,5 +1,7 @@
-# Source the file before running the functions
-# Don't forget to uncomment the `library` functions below
+# # Notes
+#
+# * Source the file before running the functions.
+# * Don't forget to uncomment the `library` functions below.
 
 # library(checkmate)
 # library(dplyr)
@@ -828,10 +830,12 @@ validate_std_mctq <- function(write = FALSE) {
                     TRUE ~ FALSE)) %>%
             dplyr::select(dummy)
 
-        std_mctq <- dplyr::bind_cols(std_mctq, test) %>%
-            dplyr::mutate(
-                dplyr::across(dplyr::ends_with(i),
-                              ~ dplyr::if_else(dummy, mctq:::na_as(.x), .x))) %>%
+        std_mctq <- std_mctq %>% 
+            dplyr::bind_cols(test) %>%
+            dplyr::mutate(dplyr::across(
+                dplyr::ends_with(i),
+                ~ dplyr::if_else(dummy, mctq:::na_as(.x), .x))
+            ) %>%
             dplyr::select(-dummy)
     }
 
@@ -914,13 +918,7 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
-    # Set values -----
-
-    std_mctq <- validate_std_mctq()
-
-    # Create computed variables -----
-
-    std_mctq <- std_mctq %>%
+    std_mctq <- validate_std_mctq() %>%
         dplyr::mutate(
             fd = fd(wd),
             so_w = so(sprep_w, slat_w),

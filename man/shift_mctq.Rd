@@ -5,8 +5,7 @@
 \alias{shift_mctq}
 \title{A fictional MCTQ\eqn{^{Shift}}{ Shift} dataset}
 \format{
-A tibble with 128 columns and
-50)` rows:
+A \code{\link[dplyr:reexports]{tibble}} with 128 columns and 50 rows:
 
 \describe{
 \item{id}{

@@ -5,8 +5,7 @@
 \alias{std_mctq}
 \title{A fictional standard MCTQ dataset}
 \format{
-A tibble with 37 columns and
-50)` rows:
+A \code{\link[dplyr:reexports]{tibble}} with 37 columns and 50 rows:
 
 \describe{
 \item{id}{

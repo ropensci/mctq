@@ -20,19 +20,25 @@ test_that("dialog_line() | general test", {
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
             read_line = function(...) TRUE,
-            dialog_line(1, combined_styles = "red", space_above = TRUE,
-                        space_below = TRUE))
+            dialog_line(1, space_above = TRUE, space_below = TRUE))
     }
 
     expect_equal(utils::capture.output(mock()), c("", "", "[1] TRUE"))
 })
 
 test_that("dialog_line() | error test", {
+    # "assert_has_length(list(...))"
     expect_error(dialog_line(), "Assertion on 'list\\(...\\)' failed")
+
+    # "checkmate::assert_flag(space_above)"
     expect_error(dialog_line(1, space_above = ""),
                  "Assertion on 'space_above' failed")
+
+    # "checkmate::assert_flag(space_below)"
     expect_error(dialog_line(1, space_below = ""),
                  "Assertion on 'space_below' failed")
+
+    # "checkmate::assert_flag(abort)"
     expect_error(dialog_line(1, abort = ""),
                  "Assertion on 'abort' failed")
 })

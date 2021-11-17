@@ -58,8 +58,7 @@
 #' If you prefer to view `Duration` objects as `hms` objects, run
 #' `pretty_mctq(std_mctq)`.
 #'
-#' @format A tibble with `r ncol(mctq::std_mctq)` columns and
-#'   `r nrow(mctq::std_mctq)` rows:
+#' @format A [`tibble`][dplyr::tibble()] with 37 columns and 50 rows:
 #'
 #' \describe{
 #'   \item{id}{

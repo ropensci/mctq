@@ -1,5 +1,7 @@
-# Source the file before running the functions
-# Don't forget to uncomment the `library` functions below
+# # Notes
+#
+# * Source the file before running the functions.
+# * Don't forget to uncomment the `library` functions below.
 
 # library(checkmate)
 # library(dplyr)
@@ -36,7 +38,8 @@
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::build_micro_mctq())
-#' }}
+#' }
+#' }
 build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Check arguments -----
 
@@ -296,16 +299,16 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
     invisible(micro_mctq)
 }
 
-#' Tidy [mctq::build_micro_mctq()] output
+#' Tidy `build_micro_mctq()` output
 #'
 #' @description
 #'
-#' `tidy_micro_mctq` tidy the output of [mctq::build_micro_mctq()]. See
-#' [mctq::micro_mctq] to learn more.
+#' `tidy_micro_mctq` tidy the output of `build_micro_mctq()`. See
+#' [micro_mctq][mctq::micro_mctq] to learn more.
 #'
 #' @details
 #'
-#' Here, the process of _tiding_ a dataset is understood as transforming it in
+#' Here the process of _tiding_ a dataset is understood as transforming it in
 #' input data, like described in Loo and Jonge (2018). It's a very similar
 #' process of tiding data described in the workflow proposed by Wickham and
 #' Grolemund (n.d.).
@@ -330,10 +333,10 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::tidy_micro_mctq())
-#' }}
+#' }
+#' }
 tidy_micro_mctq <- function(write = FALSE) {
     # Check arguments -----
 
@@ -411,7 +414,7 @@ tidy_micro_mctq <- function(write = FALSE) {
 #'
 #' Here, the process of _validating_ a dataset is understood as detecting
 #' invalid data, by checking whether data satisfies certain assumptions from
-#' domain knowledge, to them,  removing or, if possible, fixing them. You can
+#' domain knowledge, to then,  removing or, if possible, fixing them. You can
 #' find more about data validation and error location in Loo and Jonge (2018).
 #'
 #' This process can be considered as part of the process of transforming data,
@@ -430,7 +433,8 @@ tidy_micro_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::validate_micro_mctq())
-#' }}
+#' }
+#' }
 validate_micro_mctq <- function(write = FALSE) {
     # To do -----
     #
@@ -538,7 +542,8 @@ validate_micro_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::analyze_micro_mctq())
-#' }}
+#' }
+#' }
 analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     # Check arguments -----
 
