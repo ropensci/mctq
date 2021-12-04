@@ -4,8 +4,9 @@
 
 # mctq (development version)
 
-* The documentation were updated to add
+* The documentation was updated to add
 [CRAN](https://cran.r-project.org/package=mctq) installation instructions.
+* Some minor documentation issues were resolved.
 
 
 # mctq 0.1.0 (2021-11-04)
@@ -18,7 +19,7 @@ better to wait and see if the user community don't have any issues with the
 features.
 
 
-# mctq 0.0.0.9002
+# mctq 0.0.0.9002 (pre-release)
 
 * `mctq` is now a
 [peer-reviewed](https://github.com/ropensci/software-review/issues/434) package
@@ -28,7 +29,7 @@ links related to `mctq` have been changed. Old links have a redirect protocol to
 point to the new repository and new website.
 
 
-# mctq 0.0.0.9001
+# mctq 0.0.0.9001 (pre-release)
 
 * @jonkeane was added as a reviewer ('rev').
 * @leocadio-miguel was added as a reviewer ('rev').
@@ -97,6 +98,6 @@ other `mctq` functions maintain a strong naming resemblance with the original
 author's naming pattern.
 
 
-# mctq 0.0.0.9000
+# mctq 0.0.0.9000 (pre-release)
 
 * Added a `NEWS.md` file to track changes to the package.

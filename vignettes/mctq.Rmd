@@ -63,7 +63,7 @@ data <- readr::read_csv(mctq::raw_data("vignette_mctq.csv"),
 
 Due to the circular nature of time, we strongly recommend that you use appropriate temporal objects while dealing with date/time in R. That can help you get rid of several computation mistakes while trying to adapt your data from a base 10 to a system rooted in a base 12 numerical system.
 
-Teaching you how to parse/convert your data is outside the scope of this article. Please refer to the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) package documentation to learn more about them. These two are essential packages to deal with date/time data in R. We also recommend that you read the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html#time-spans) chapter from Wickham & Grolemund's book "R for Data Science".
+Teaching you how to parse/convert your data is outside the scope of this article. Please refer to the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) package documentation to learn more about them. These two are essential packages to deal with date/time data in R. We also recommend that you read the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html) chapter from Wickham & Grolemund's book "R for Data Science".
 
 Here we are interested in two types of time objects: `Duration` objects, to store time spans, such as sleep latency, and `hms` objects, to store local time values, such as bedtime.
 
@@ -75,7 +75,7 @@ data
 
 As you can see, our data came in different formats. For example, the column `bt_w` (local time of going to bed on workdays) is in `hours:minutes` format, while `slat_w` (sleep latency on workdays) is a duration expressed in minutes.
 
-Our fictional data will be parsed/converted with the code below. Please note that the `lubridate` and `hms` packages are equipped with easy tools and great documentation to help you with this task.
+Our fictional data will be parsed/converted with the code below. Please note that the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages are equipped with easy tools and great documentation to help you with this task.
 
 ```{r, warnings = FALSE, message = FALSE}
 library(dplyr)
@@ -83,7 +83,7 @@ library(hms)
 library(lubridate)
 
 data <- data %>% dplyr::mutate(
-  dplyr::across(dplyr::matches("^id$|^wd$"), as.integer),
+  dplyr::across(c("id", "wd"), as.integer),
   dplyr::across(dplyr::matches("^work$|^alarm_|^wake_|^reasons_f$"),
                 as.logical),
   dplyr::across(dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm),
@@ -124,6 +124,8 @@ data %>% dplyr::select(wd, fd)
 `so()` allows you to compute the local time of sleep onset for workdays (`so_w`) and work-free days (`so_f`). It takes two arguments: `sprep` (local time of preparing to sleep) and `slat` (sleep latency or time to fall asleep after preparing to sleep).
 
 The output must be the sum of `sprep` and `slat` in a circular time frame of 24 hours.
+
+What is a circular time frame of 24 hours? Run `?cycle_time` in your console or click in this [link](https://docs.ropensci.org/mctq/reference/cycle_time.html) for a detail explanation.
 
 ```{r, warnings = FALSE, message = FALSE}
 data$so_w <- so(data$sprep_w, data$slat_w)

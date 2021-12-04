@@ -78,9 +78,8 @@ Please refer to the [lubridate](https://lubridate.tidyverse.org/) and
 [hms](https://hms.tidyverse.org/) package documentation to learn more
 about them. These two are essential packages to deal with date/time data
 in R. We also recommend that you read the [Dates and
-times](https://r4ds.had.co.nz/dates-and-times.html#dates-and-times)
-chapter from Wickham & Grolemund’s book [R for Data
-Science](https://r4ds.had.co.nz/).
+times](https://r4ds.had.co.nz/dates-and-times.html) chapter from Wickham
+& Grolemund’s book [R for Data Science](https://r4ds.had.co.nz/).
 
 ## Installation
 
