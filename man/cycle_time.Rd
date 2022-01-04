@@ -53,7 +53,7 @@ in other contexts.
 In a "time of day" context, time will be linked to the rotation of the
 earth, "resetting" when a new rotation cycle starts. That brings a different
 kind of shape to time: a circular shape. With this shape the time value
-encounters the origin at the end of each cycle.\preformatted{               - <--- h ---> +
+encounters the origin at the beginning and end of each cycle.\preformatted{               - <--- h ---> +
                     origin
                 . . . 0 . . .
              .                 .
@@ -98,11 +98,11 @@ larger than \code{cycle}. A warning is given if this is detected.
 
 \subsection{Negative time cycling}{
 
-If \code{time} have a negative value and \code{reverse = FALSE}, \code{cycle_time()} will
+If \code{time} have a negative value and \code{reverse == FALSE}, \code{cycle_time()} will
 perform the cycle considering the absolute value of \code{time} and return the
 result with a negative signal.
 
-However, If \code{time} have a negative value and \code{reverse = TRUE} (default),
+However, If \code{time} have a negative value and \code{reverse == TRUE} (default),
 \code{cycle_time()} will perform the cycle in reverse, relative to its origin.
 
 Example: If you have a -30h time span in a reversed cycle of 24h, the result

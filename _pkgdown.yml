@@ -3,7 +3,6 @@ url: https://docs.ropensci.org/mctq
 template:
   package: rotemplate
   params:
-    ganalytics: G-R8X4QBKWTF
     mathjax: true
 
 navbar:

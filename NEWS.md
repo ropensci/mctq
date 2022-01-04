@@ -39,10 +39,8 @@ point to the new repository and new website.
 * `assign_date()` now returns only `Interval` objects.
 * `convert()` and all `convert_*()` functions were removed. See a dedicated note
 about this below.
-* The `ms()` function was renamed to `msl()`. See a dedicated note about this
-below.
-* The `sd()` function was renamed to `sdu()`. See a dedicated note about this
-below.
+* `ms()` was renamed to `msl()`. See a dedicated note about this below.
+* `sd()` was renamed to `sdu()`. See a dedicated note about this below.
 * `shortest_interval()` was renamed to `shorter_interval()`.
 * `shorter_interval()` and `longer_interval()` now returns only `Interval`
 objects.
@@ -90,9 +88,9 @@ are necessary in `mctq` for the time being). Hence, we decided to remove
 
 That was a tough, but necessary, call. Although we tried to preserve the
 original author's naming pattern for the MCTQ functions, the name `sd` provokes
-a dangerous name collision with the widely used `stats::sd` function (standard
+a dangerous name collision with the widely used `stats::sd()` function (standard
 deviation) and the name `ms` provokes a name collision with `lubridate::ms()`
-function (a function for parsing minutes and seconds components). That's why we
+(a function for parsing minutes and seconds components). That's why we
 decided to renamed them. `sdu()` and `msl()` are the only exceptions, all the
 other `mctq` functions maintain a strong naming resemblance with the original
 author's naming pattern.

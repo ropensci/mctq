@@ -38,7 +38,7 @@
 #' In a "time of day" context, time will be linked to the rotation of the
 #' earth, "resetting" when a new rotation cycle starts. That brings a different
 #' kind of shape to time: a circular shape. With this shape the time value
-#' encounters the origin at the end of each cycle.
+#' encounters the origin at the beginning and end of each cycle.
 #'
 #' ```
 #'                - <--- h ---> +
@@ -91,11 +91,11 @@
 #'
 #' ## Negative time cycling
 #'
-#' If `time` have a negative value and `reverse = FALSE`, `cycle_time()` will
+#' If `time` have a negative value and `reverse == FALSE`, `cycle_time()` will
 #' perform the cycle considering the absolute value of `time` and return the
 #' result with a negative signal.
 #'
-#' However, If `time` have a negative value and `reverse = TRUE` (default),
+#' However, If `time` have a negative value and `reverse == TRUE` (default),
 #' `cycle_time()` will perform the cycle in reverse, relative to its origin.
 #'
 #' Example: If you have a -30h time span in a reversed cycle of 24h, the result
