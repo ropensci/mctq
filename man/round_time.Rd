@@ -23,7 +23,7 @@ round_time(x)
 }
 \arguments{
 \item{x}{An object belonging to one of the following classes: \code{Duration},
-\code{Period}, \code{difftime}, \code{hms}, \code{POSIXct}, or \code{POSIXlt}.}
+\code{difftime}, \code{hms}, \code{POSIXct}, or \code{POSIXlt}.}
 }
 \value{
 An object of the same class of \code{x} rounded at the level of seconds.

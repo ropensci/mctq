@@ -33,7 +33,7 @@
 #' Wickham & Grolemund (n.d.).
 #'
 #' @param x An object belonging to one of the following classes: `Duration`,
-#'   `Period`, `difftime`, `hms`, `POSIXct`, or `POSIXlt`.
+#'   `difftime`, `hms`, `POSIXct`, or `POSIXlt`.
 #'
 #' @return An object of the same class of `x` rounded at the level of seconds.
 #'
