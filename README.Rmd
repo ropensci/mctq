@@ -140,18 +140,6 @@ citation("mctq")
 
 ## Contributing
 
-`mctq` is a community project, everyone is welcome to contribute. Take a moment to review our [Guidelines for Contributing](https://docs.ropensci.org/mctq/CONTRIBUTING.html).
+We welcome contributions, including bug reports. Take a moment to review our [Guidelines for Contributing](https://docs.ropensci.org/mctq/CONTRIBUTING.html).
 
 Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
-
-## Support `mctq`
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/danielvartan)
-
-Working with science in Brazil is a daily challenge. There are few funding opportunities available and their value is not enough to live on. Added to this, every day Brazilian science suffers from deep cuts in funding, which requires researchers to always look for other sources of income.
-
-If this package helps you in any way or you simply want to support the author's work, please consider donating or even creating a membership subscription (if you can!). Your support will help with the author's scientific pursuit and with the package maintenance.
-
-To make a donation click on the [Ko-fi](https://ko-fi.com/danielvartan) button above. Please indicate the `mctq` package in your donation message.
-
-Thank you!
