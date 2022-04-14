@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.1
+# CITATION file created with {cffr} R package, v0.2.2
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -329,7 +329,6 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=spelling
   version: '>= 2.2'
 - type: software
   title: stats

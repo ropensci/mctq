@@ -19,7 +19,7 @@ better to wait and see if the user community don't have any issues with the
 features.
 
 
-# mctq 0.0.0.9002 (pre-release)
+# mctq 0.0.0.9002 (prerelease)
 
 * `mctq` is now a
 [peer-reviewed](https://github.com/ropensci/software-review/issues/434) package
@@ -29,7 +29,7 @@ links related to `mctq` have been changed. Old links have a redirect protocol to
 point to the new repository and new website.
 
 
-# mctq 0.0.0.9001 (pre-release)
+# mctq 0.0.0.9001 (prerelease)
 
 * @jonkeane was added as a reviewer ('rev').
 * @leocadio-miguel was added as a reviewer ('rev').
@@ -96,6 +96,6 @@ other `mctq` functions maintain a strong naming resemblance with the original
 author's naming pattern.
 
 
-# mctq 0.0.0.9000 (pre-release)
+# mctq 0.0.0.9000 (prerelease)
 
 * Added a `NEWS.md` file to track changes to the package.
