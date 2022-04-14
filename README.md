@@ -37,6 +37,10 @@ presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 to facilitate the work of sleep and chronobiology scientists with MCTQ
 data while also helping with research reproducibility.
 
+`mctq` adheres to the [tidyverse
+principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
+integrates with the [tidyverse ecosystem](https://www.tidyverse.org/).
+
 Learn more about the MCTQ questionnaire at
 <https://www.thewep.org/documentations/mctq>.
 
