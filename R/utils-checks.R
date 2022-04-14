@@ -1,4 +1,6 @@
-test_length_one <- function(x) if (length(x) == 1) TRUE else FALSE
+# Sort by type or by alphabetical order.
+
+test_length_one <- function(x) length(x) == 1
 
 check_length_one <- function(x, name = deparse(substitute(x))) {
     if (!(test_length_one(x))) {
@@ -11,7 +13,7 @@ check_length_one <- function(x, name = deparse(substitute(x))) {
 
 assert_length_one <- checkmate::makeAssertionFunction(check_length_one)
 
-test_has_length <- function(x) if (length(x) >= 1) TRUE else FALSE
+test_has_length <- function(x) length(x) >= 1
 
 check_has_length <- function(x, any.missing = TRUE,
                              name = deparse(substitute(x))) {
@@ -64,7 +66,7 @@ check_numeric_ <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(single_quote_(name), " cannot have 'NULL' values")
+        paste0(single_quote_(name), " cannot be 'NULL'")
     } else if (checkmate::test_subset(class(x)[1], classes) &&
                !all(x >= lower, na.rm = TRUE)) {
         paste0("Element ", which(x < lower)[1], " is not >= ", lower)
@@ -108,7 +110,7 @@ check_duration <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(single_quote_(name), " cannot have 'NULL' values")
+        paste0(single_quote_(name), " cannot be 'NULL'")
     } else if (lubridate::is.duration(x) && !all(x >= lower, na.rm = TRUE)) {
         paste0("Element ", which(x < lower)[1], " is not >= ", lower)
     } else if (lubridate::is.duration(x) && !all(x <= upper, na.rm = TRUE)) {
@@ -150,7 +152,7 @@ check_hms <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(single_quote_(name), " cannot have 'NULL' values")
+        paste0(single_quote_(name), " cannot be 'NULL'")
     } else if (hms::is_hms(x) && !all(x >= lower, na.rm = TRUE)) {
         paste0("Element ", which(x < lower)[1], " is not >= ", lower)
     } else if (hms::is_hms(x) && !all(x <= upper, na.rm = TRUE)) {
@@ -192,7 +194,7 @@ check_posixt <- function(x, lower = - Inf, upper = Inf, any.missing = TRUE,
     } else if (any(is.na(x)) && isFALSE(any.missing)) {
         paste0(single_quote_(name), " cannot have missing values")
     } else if (is.null(x) && isFALSE(null.ok)) {
-        paste0(single_quote_(name), " cannot have 'NULL' values")
+        paste0(single_quote_(name), " cannot be 'NULL'")
     } else if (lubridate::is.POSIXt(x) && !all(x >= lower, na.rm = TRUE)) {
         paste0("Element ", which(x < lower)[1], " is not >= ", lower)
     } else if (lubridate::is.POSIXt(x) && !all(x <= upper, na.rm = TRUE)) {
@@ -240,7 +242,7 @@ assert_identical <- function(..., type = "value", any.missing = TRUE,
     } else if (any(is.na(unlist(out))) && isFALSE(any.missing)) {
         cli::cli_abort("{names} cannot have missing values.")
     } else if (any(is.null(unlist(out)), na.rm = TRUE) && isFALSE(null.ok)) {
-        cli::cli_abort("{names} cannot have 'NULL' values.")
+        cli::cli_abort("{names} cannot be 'NULL'")
     } else if (isFALSE(check)) {
         cli::cli_abort(error_message)
     } else {

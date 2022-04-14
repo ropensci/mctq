@@ -1,3 +1,5 @@
+# Sort by type or by alphabetical order.
+
 flat_posixt <- function(posixt, base = as.Date("1970-01-01"),
                         force_tz = TRUE, tz = "UTC") {
     assert_posixt(posixt, null.ok = FALSE)

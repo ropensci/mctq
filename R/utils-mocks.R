@@ -1,4 +1,5 @@
-## Used with the `mockr` package.
+# Sort by type or by alphabetical order.
+# Used with the `mockr` package.
 
 is_interactive <- function(...) {
     interactive()

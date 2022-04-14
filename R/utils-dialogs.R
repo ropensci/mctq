@@ -1,3 +1,5 @@
+# Sort by type or by alphabetical order.
+
 dialog_line <- function(..., space_above = TRUE, space_below = TRUE,
                         abort = FALSE) {
     assert_has_length(list(...))
