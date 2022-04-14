@@ -43,7 +43,7 @@ test_that("*_numeric_() | general test", {
     checkmate::expect_string(check_numeric_(c(1, NA), any.missing = FALSE),
                              "'c\\(1, NA\\)' cannot have missing values")
     checkmate::expect_string(check_numeric_(NULL, null.ok = FALSE),
-                             "'NULL' cannot have 'NULL' values")
+                             "'NULL' cannot be 'NULL'")
     checkmate::expect_string(check_numeric_(1, lower = 2),
                              "Element 1 is not <= ")
     checkmate::expect_string(check_numeric_(1, upper = 0),
@@ -78,7 +78,7 @@ test_that("*_duration() | general test", {
     checkmate::expect_string(check_duration(c(1, NA), any.missing = FALSE),
                              "'c\\(1, NA\\)' cannot have missing values")
     checkmate::expect_string(check_duration(NULL, null.ok = FALSE),
-                             "'NULL' cannot have 'NULL' values")
+                             "'NULL' cannot be 'NULL'")
     checkmate::expect_string(check_duration(lubridate::dhours(1),
                                             lower = lubridate::dhours(2)),
                              "Element 1 is not <= ")
@@ -118,7 +118,7 @@ test_that("*_hms() | general test", {
     checkmate::expect_string(check_hms(c(1, NA), any.missing = FALSE),
                              "'c\\(1, NA\\)' cannot have missing values")
     checkmate::expect_string(check_hms(NULL, null.ok = FALSE),
-                             "'NULL' cannot have 'NULL' values")
+                             "'NULL' cannot be 'NULL'")
     checkmate::expect_string(check_hms(hms::hms(1),
                                        lower = hms::hms(2)),
                              "Element 1 is not <= ")
@@ -158,7 +158,7 @@ test_that("*_posixt() | general test", {
     checkmate::expect_string(check_posixt(c(1, NA), any.missing = FALSE),
                              "'c\\(1, NA\\)' cannot have missing values")
     checkmate::expect_string(check_posixt(NULL, null.ok = FALSE),
-                             "'NULL' cannot have 'NULL' values")
+                             "'NULL' cannot be 'NULL'")
     checkmate::expect_string(check_posixt(lubridate::as_datetime(1),
                                           lower = lubridate::as_datetime(2)),
                              "Element 1 is not <= ")

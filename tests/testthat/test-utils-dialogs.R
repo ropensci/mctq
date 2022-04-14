@@ -2,7 +2,8 @@ test_that("dialog_line() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) FALSE,
-            dialog_line(1))
+            {dialog_line(1)}
+        )
     }
 
     expect_null(mock())
@@ -10,7 +11,8 @@ test_that("dialog_line() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             is_interactive = function(...) TRUE,
-            dialog_line(1, abort = TRUE))
+            {dialog_line(1, abort = TRUE)}
+        )
     }
 
     expect_null(mock())
@@ -20,7 +22,8 @@ test_that("dialog_line() | general test", {
             is_interactive = function(...) TRUE,
             require_namespace = function(...) TRUE,
             read_line = function(...) TRUE,
-            dialog_line(1, space_above = TRUE, space_below = TRUE))
+            {dialog_line(1, space_above = TRUE, space_below = TRUE)}
+        )
     }
 
     expect_equal(utils::capture.output(mock()), c("", "", "[1] TRUE"))

@@ -184,7 +184,8 @@ test_that("require_pkg() | general test", {
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
         mockr::with_mock(
             require_namespace = function(...) TRUE,
-            require_pkg("test"))
+            {require_pkg("test")}
+        )
     }
 
     # mock()
@@ -192,11 +193,14 @@ test_that("require_pkg() | general test", {
 })
 
 test_that("require_pkg() | error test", {
+    # lapply(out, checkmate::assert_string,
     expect_error(require_pkg(1), "Assertion on 'X\\[\\[i\\]\\]' failed")
     expect_error(require_pkg(".test"), "Assertion on 'X\\[\\[i\\]\\]' failed")
     expect_error(require_pkg("test."), "Assertion on 'X\\[\\[i\\]\\]' failed")
     expect_error(require_pkg("tes_t"), "Assertion on 'X\\[\\[i\\]\\]' failed")
     expect_error(require_pkg("tést"), "Assertion on 'X\\[\\[i\\]\\]' failed")
+
+    # (!identical(unique(unlist(out)), unlist(out)))
     expect_error(require_pkg("test", "test"),
                  "'...' cannot have duplicated values.")
 })
