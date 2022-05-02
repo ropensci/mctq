@@ -7,6 +7,7 @@
 * The documentation was updated to add
 [CRAN](https://cran.r-project.org/package=mctq) installation instructions.
 * Some minor documentation issues were resolved.
+* `sjl_sc()`, a function that allows the user to compute the Jankowski's social jet lag sleep-corrected proposal, was introduced.
 
 
 # mctq 0.1.0 (2021-11-04)

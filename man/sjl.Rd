@@ -3,11 +3,14 @@
 \name{sjl}
 \alias{sjl}
 \alias{sjl_rel}
+\alias{sjl_sc}
 \title{Compute MCTQ social jetlag}
 \usage{
 sjl(msw, msf, abs = TRUE, method = "shorter")
 
 sjl_rel(msw, msf, method = "shorter")
+
+sjl_sc(so_w, so_f, method = "shorter")
 }
 \arguments{
 \item{msw}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
@@ -24,6 +27,16 @@ return an absolute social jetlag (default: \code{TRUE}).}
 \item{method}{(optional) a string indicating which method the function must
 use to compute the social jetlag. See the Methods section to learn
 more (default: \code{"shorter"}).}
+
+\item{so_w}{A \code{hms} object corresponding to the \strong{local time of sleep onset
+on workdays} from a standard, micro, or shift version of the MCTQ
+questionnaire. You can use \code{\link[=so]{so()}} to compute it for the standard or
+shift version.}
+
+\item{so_f}{A \code{hms} object corresponding to the \strong{local time of sleep onset
+on work-free days} from a standard, micro, or shift version of the MCTQ
+questionnaire. You can use \code{\link[=so]{so()}} to compute it for the standard or
+shift version.}
 }
 \value{
 \itemize{
@@ -42,6 +55,10 @@ The output may also vary depending on the \code{method} used.
 micro, and shift versions of the Munich Chronotype Questionnaire (MCTQ).
 
 \code{sjl_rel()} it's just a wrapper for \code{sjl()} with \code{abs = FALSE}.
+
+\code{sjl_sc()} is a function to compute the Jankowski's (2017) social jetlag
+sleep-corrected proposal. It works exactly as \code{sjl()}, but with \code{so_w} as
+\code{msw} and \code{so_f} as \code{msf}. Learn more about it in the sections below.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -138,6 +155,61 @@ morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 }
 }
 
+\section{Jankowski's social jet lag sleep-corrected proposal}{
+
+
+In an article published in 2017, Konrad S. Jankowski argued that the original
+formula for computing the social jet lag (\eqn{SJL}) captures not only the
+misalignment between social and biological times, but also sleep debt
+resulting from sleep deprivation during workdays. Jankowski than proposed the
+following guideline for the \code{sjl_sc()} (\eqn{SJL_sc} computation.
+\subsection{Notes}{
+\itemize{
+\item The Jankowski's alternative is still disputed. We recommend seeing
+Roenneberg, Pilz, Zerbini, & Winnebeck (2019) discussion about it
+(see item 3.4.2).
+\item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
+each shift section of the questionnaire.
+\item Due to time arithmetic issues, \code{sjl()} does a slightly different
+computation by default than those proposed by the authors mentioned above.
+See \code{vignette("sjl-computation", package = "mctq")} for more details.
+\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
+have some trouble understanding the equations. If you want a better viewer,
+you can see this documentation on the package
+\href{https://docs.ropensci.org/mctq/reference/}{website}.
+}
+}
+
+\subsection{For standard and micro versions of the MCTQ}{
+
+\strong{\deqn{| SO_F - SO_W |}}
+
+Where:
+\itemize{
+\item \eqn{SO_F} = local time of sleep onset on workdays.
+\item \eqn{SO_W} = local time of sleep onset on work-free days.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+}
+
+\subsection{For the shift version of the MCTQ}{
+
+\strong{\deqn{| SO_F^{M/E/N} - SO_W^{M/E/N} |}}
+
+Where:
+\itemize{
+\item \eqn{SO_F^{M/E/N}} = local time of sleep onset between two days
+in a particular shift.
+\item \eqn{SO_W^{M/E/N}} = local time of sleep onset between two free
+days after a particular shift.
+}
+
+\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
+morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+}
+}
+
 \section{Methods for computing the social jetlag}{
 
 
@@ -148,12 +220,6 @@ approach" (\code{"shorter"}).
 The topics below provide a simple explanation of each method supported by
 \code{sjl()}. To get a detail understating of this methods, see
 \code{vignette("sjl-computation", package = "mctq")}.
-
-Please note that none of the approaches below are related to Jankowski's
-(2017) social jetlag sleep-corrected proposal. Since Jankowski's alternative
-is still disputed (Roenneberg, Pilz, Zerbini, & Winnebeck, 2019), the \code{mctq}
-package currently doesn't provide a function for it. Future versions of the
-package may include it.
 \itemize{
 \item \code{"difference"}
 }
@@ -206,23 +272,28 @@ more.
 \examples{
 ## Scalar example
 
-msw <- hms::parse_hm("03:30")
-msf <- hms::parse_hm("05:00")
+msw <- so_w <- hms::parse_hm("03:30")
+msf <- so_f <- hms::parse_hm("05:00")
+
 sjl(msw, msf)
 #> [1] "5400s (~1.5 hours)" # Expected
 sjl(msw, msf, abs = FALSE)
 #> [1] "5400s (~1.5 hours)" # Expected
 sjl_rel(msw, msf) # Wrapper function
 #> [1] "5400s (~1.5 hours)" # Expected
+sjl_sc(so_w, so_f) # Wrapper function
+#> [1] "5400s (~1.5 hours)" # Expected
 
-msw <- hms::parse_hm("04:30")
-msf <- hms::parse_hm("23:30")
+msw <- so_w <- hms::parse_hm("04:30")
+msf <- so_f <- hms::parse_hm("23:30")
 sjl(msw, msf)
 #> [1] "18000s (~5 hours)" # Expected
 sjl(msw, msf, abs = FALSE)
 #> [1] "18000s (~-5 hours)" # Expected
 sjl_rel(msw, msf) # Wrapper function
 #> [1] "18000s (~-5 hours)" # Expected
+sjl_sc(so_w, so_f)
+#> [1] "18000s (~5 hours)" # Expected
 
 msw <- hms::as_hms(NA)
 msf <- hms::parse_hm("05:15")
@@ -231,14 +302,16 @@ sjl(msw, msf)
 
 ## Vector example
 
-msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
-msf <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
+msw <- so_w <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
+msf <- so_f <- c(hms::parse_hm("23:05"), hms::parse_hm("04:05"))
 sjl(msw, msf)
 #> [1] "10800s (~3 hours)" "0s" # Expected
 sjl(msw, msf, abs = FALSE)
 #> [1] "-10800s (~-3 hours)" "0s" # Expected
 sjl_rel(msw, msf) # Wrapper function
 #> [1] "-10800s (~-3 hours)" "0s" # Expected
+sjl_sc(so_w, so_f)
+#> [1] "10800s (~3 hours)" "0s" # Expected
 
 ## Using different methods
 
@@ -246,7 +319,7 @@ msw <- hms::parse_hm("19:15")
 msf <- hms::parse_hm("02:30")
 sjl(msw, msf, abs = FALSE, method = "difference")
 #> [1] "-60300s (~-16.75 hours)" # Expected
-sjl(msw, msf, abs = FALSE, method = "shorter") # default method
+sjl(msw, msf, abs = FALSE, method = "shorter") # Default method
 #> [1] "26100s (~7.25 hours)" # Expected
 sjl(msw, msf, abs = FALSE, method = "longer")
 #> [1] "-60300s (~-16.75 hours)" # Expected
@@ -255,12 +328,12 @@ msw <- hms::parse_hm("02:45")
 msf <- hms::parse_hm("04:15")
 sjl(msw, msf, abs = FALSE, method = "difference")
 #> [1] "5400s (~1.5 hours)" # Expected
-sjl(msw, msf, abs = FALSE, method = "shorter") # default method
+sjl(msw, msf, abs = FALSE, method = "shorter") # Default method
 #> [1] "5400s (~1.5 hours)" # Expected
 sjl(msw, msf, abs = FALSE, method = "longer")
 #> [1] "-81000s (~-22.5 hours)" # Expected
 
-## Converting the output to `hms`
+## Converting the output to 'hms'
 
 msw <- hms::parse_hm("01:15")
 msf <- hms::parse_hm("03:25")
