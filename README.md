@@ -217,6 +217,10 @@ citation("mctq")
 #>   }
 ```
 
+`mctq` hex logo was based on an illustration created by [hilda design
+matters Zurich](https://hilda.ch/) for the [Daylight Academy
+(DLA)](https://daylight.academy/).
+
 ## Contributing
 
 We welcome contributions, including bug reports. Take a moment to review
