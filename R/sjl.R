@@ -598,7 +598,7 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #'   questionnaire (you can use [mctq::sjl()] to compute it). `sjl` elements and
 #'   values must be paired with `n` elements and values.
 #' @param n_w A [`list`][base::list()] object with
-#'   [integerish][checkmate::test_integerish()] [`integer`][base:integer()] or
+#'   [integerish][checkmate::test_integerish()] [`integer`][base::integer()] or
 #'   [`double`][base::double()] elements corresponding to the __number of days
 #'   worked in each shift within a shift cycle__ from a shift version of the
 #'   MCTQ questionnaire. `n` elements and values must be paired with `sjl`

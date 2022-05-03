@@ -3,8 +3,9 @@ title: "Social jetlag computation"
 output: rmarkdown::html_vignette
 description: >
   This article shows some notes about different approaches that can be used to
-  compute the social jetlag for the Munich Chronotype Questionnaire (MCTQ). It
-  also explains how the `method` argument from the `sjl()` function  works.
+  compute the social jetlag for the Munich Chronotype Questionnaire (MCTQ). It 
+  also explains how the 'method' argument from the 'sjl_rel()', 'sjl()', 
+  'sjl_sc_rel()', and 'sjl_sc()' functions works.
 vignette: >
   %\VignetteIndexEntry{Social jetlag computation}
   %\VignetteEngine{knitr::rmarkdown}
@@ -81,7 +82,9 @@ We call this the __two intervals problem__. It represents an unsolvable mathemat
 
 ## Methods for computing $SJL$
 
-The `sjl()` function provides an argument called `method` that allows you to choose three different methods to deal with the two intervals problem. Here's how they work.
+the `sjl_rel()`, `sjl()`, `sjl_sc_rel()`, and `sjl_sc()` functions provides an argument called `method` that allows you to choose three different methods to deal with the two intervals problem. Here's how they work.
+
+The `sjl()` function will be used in the examples, but the same logic apply to the other `sjl` functions.
 
 ### `method = "difference"`
 

@@ -36,7 +36,7 @@ Following this same line of thought, we can also say that:
 * `sd_week` (average weekly sleep duration) must be equal to `sd_f` (sleep duration on work-free days) since the respondent does not have workdays.
 * `sloss_week` (weekly sleep loss) must be equal to `0s` since there's no sleep debt.
 * `le_week` (average weekly light exposure) must be equal to `le_f` (light exposure on work-free days) since there are no workdays.
-* `sjl_rel` (relative social jet lag), `sjl` (absolute social jet lag), `sjl_sc_rel()` (Jankowski's relative sleep-corrected social jetlag), and `sjl_sc()` (Jankowski's sleep-corrected social jetlag) must be equal to `0s` since there's no discrepancy between social and biological time.
+* `sjl_rel` (relative social jet lag), `sjl` (absolute social jet lag), `sjl_sc_rel` (Jankowski's relative sleep-corrected social jetlag), and `sjl_sc` (Jankowski's sleep-corrected social jetlag) must be equal to `0s` since there's no discrepancy between social and biological time.
 
 Note that the [chronotype computation](https://www.thewep.org/documentations/mctq/item/mctq-variables) follows a similar line of thought.
 
