@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 This article takes a quick tour of the Munich Chronotype Questionnaire (MCTQ) main functions from the `mctq` package. Please see the function documentation and other articles/vignettes for more details.
 
-The same features presented here can also be used with $\mu$MCTQ. To make it easy for newcomers, some MCTQ$^{Shift}$ functions are not shown.
+The same features presented here can also be used with $\mu$MCTQ. To make it easy for newcomers, some MCTQ$^{Shift}$ functions and other special functions are not shown.
 
 We assume that you already have [R](https://www.r-project.org/) installed and have some familiarity with R and MCTQ data. We also strongly recommend using [RStudio](https://www.rstudio.com/) as your IDE (Integrated Development Environment).
 
@@ -33,7 +33,7 @@ Let's start with the basics. The first thing you must do to use `mctq` is to hav
 Install `mctq` with:
 
 ```{r, eval = FALSE}
-install.packages("mctq")
+install.packages("mctq", dependencies = TRUE)
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:
@@ -330,7 +330,7 @@ pretty_mctq(data, round = FALSE)
 
 ## Utilities
 
-Before we end, it's important to note that `mctq` also provides several utility tools to help with your MCTQ data. Here's a list of them.
+Before we end, it's important to note that `mctq` also provides several utility tools to help with your MCTQ data. Here's some of them.
 
 * `assign_date()`: Assign dates to two sequential hours.
 * `cycle_time()`: Cycle time objects.

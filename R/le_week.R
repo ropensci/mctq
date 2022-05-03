@@ -17,7 +17,6 @@
 #'
 #' * The average weekly light exposure is the weighted average of the light
 #' exposure on work and work-free days in a week.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package

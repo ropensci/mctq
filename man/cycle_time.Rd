@@ -13,12 +13,12 @@ cycle_time(time, cycle, reverse = TRUE)
 
 \item{cycle}{A \code{\link[base:numeric]{numeric}} or
 \code{\link[lubridate:duration]{Duration}} object of length \code{1}, equal or greater
-than \code{0}, indicating the cycle length in seconds (see the Details section
-to learn more).}
+than \code{0}, indicating the cycle length in seconds. See the Details section
+to learn more.}
 
 \item{reverse}{(optional) a \code{\link[=logical]{logical}} value indicating if the
-function must use a reverse cycle for negative values in \code{time} (see
-the Details section to learn more) (default: \code{TRUE}).}
+function must use a reverse cycle for negative values in \code{time}. See
+the Details section to learn more (default: \code{TRUE}).}
 }
 \value{
 The same type of object of \code{time} cycled with the \code{cycle} parameter.

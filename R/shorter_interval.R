@@ -156,13 +156,13 @@
 #' longer_duration(x, y)
 #' #> [1] "72000s (~20 hours)"   "63000s (~17.5 hours)" # Expected
 shorter_interval <- function(x, y) {
-    distance_interval(x, y, method = "shorter")
+    interval_build(x, y, method = "shorter")
 }
 
 #' @rdname shorter_interval
 #' @export
 longer_interval <- function(x, y) {
-    distance_interval(x, y, method = "longer")
+    interval_build(x, y, method = "longer")
 }
 
 #' @rdname shorter_interval
@@ -177,7 +177,7 @@ longer_duration <- function(x, y) {
     longer_interval(x, y) %>% lubridate::as.duration()
 }
 
-distance_interval <- function(x, y, method = "shorter") {
+interval_build <- function(x, y, method = "shorter") {
     method_choices <- c("shorter", "longer")
 
     checkmate::assert_multi_class(x, c("hms", "POSIXt"))

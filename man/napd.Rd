@@ -7,10 +7,10 @@
 napd(napo, nape)
 }
 \arguments{
-\item{napo}{A \code{hms} object corresponding to the \strong{local time of nap onset}
+\item{napo}{An \code{hms} object corresponding to the \strong{local time of nap onset}
 from the shift version of the MCTQ questionnaire.}
 
-\item{nape}{A \code{hms} object corresponding to the \strong{local time of nap end}
+\item{nape}{An \code{hms} object corresponding to the \strong{local time of nap end}
 from the shift version of the MCTQ questionnaire.}
 }
 \value{

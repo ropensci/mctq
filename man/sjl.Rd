@@ -14,7 +14,7 @@ sjl_rel(msw, msf, method = "shorter")
 mid-sleep on workdays} from a standard, micro, or shift version of the
 MCTQ questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
 
-\item{msf}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
+\item{msf}{An \code{hms} object corresponding to the \strong{local time of mid-sleep on
 work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
 

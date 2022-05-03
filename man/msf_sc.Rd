@@ -10,7 +10,7 @@ msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 }
 \arguments{
-\item{msf}{A \code{hms} object corresponding to the \strong{local time of mid-sleep on
+\item{msf}{An \code{hms} object corresponding to the \strong{local time of mid-sleep on
 work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
 
@@ -37,7 +37,7 @@ questionnaire considers only the work-free days when the respondent does
 not use an alarm.}
 }
 \value{
-A \code{hms} object corresponding to the MCTQ chronotype or corrected
+An \code{hms} object corresponding to the MCTQ chronotype or corrected
 local time of mid-sleep on work-free days.
 }
 \description{

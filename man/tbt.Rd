@@ -7,10 +7,10 @@
 tbt(bt, gu)
 }
 \arguments{
-\item{bt}{A \code{hms} object corresponding to the \strong{local time of going to bed}
+\item{bt}{An \code{hms} object corresponding to the \strong{local time of going to bed}
 from a standard or shift version of the MCTQ questionnaire.}
 
-\item{gu}{A \code{hms} object corresponding to the \strong{local time of getting out of
+\item{gu}{An \code{hms} object corresponding to the \strong{local time of getting out of
 bed} from a standard or shift version of the MCTQ questionnaire. You can
 use \code{\link[=gu]{gu()}} to compute it.}
 }

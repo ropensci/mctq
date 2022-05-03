@@ -144,11 +144,11 @@
 #'   [`difftime`][base::as.difftime()], or [`hms`][hms::hms()].
 #' @param cycle A [`numeric`][base::numeric()] or
 #'   [`Duration`][lubridate::duration()] object of length `1`, equal or greater
-#'   than `0`, indicating the cycle length in seconds (see the Details section
-#'   to learn more).
+#'   than `0`, indicating the cycle length in seconds. See the Details section
+#'   to learn more.
 #' @param reverse (optional) a [`logical`][logical()] value indicating if the
-#'   function must use a reverse cycle for negative values in `time` (see
-#'   the Details section to learn more) (default: `TRUE`).
+#'   function must use a reverse cycle for negative values in `time`. See
+#'   the Details section to learn more (default: `TRUE`).
 #'
 #' @return The same type of object of `time` cycled with the `cycle` parameter.
 #'

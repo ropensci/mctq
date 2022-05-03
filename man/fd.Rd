@@ -7,13 +7,15 @@
 fd(wd)
 }
 \arguments{
-\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
-an \code{integer} object corresponding to the \strong{number of workdays per week}
-from a standard or micro version of the MCTQ questionnaire.}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish}
+\code{\link[base:numeric]{numeric}} object or an \code{\link[base:integer]{integer}}
+object corresponding to the \strong{number of workdays per week} from a standard
+or micro version of the MCTQ questionnaire.}
 }
 \value{
-An \code{integer} object corresponding to the difference between the
-number of days in a week (7) and the number of workdays (\code{wd}).
+An \code{\link[base:integer]{integer}} object corresponding to the
+difference between the number of days in a week (7) and the number of
+workdays (\code{wd}).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}

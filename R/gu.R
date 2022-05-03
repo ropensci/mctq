@@ -17,11 +17,9 @@
 #'
 #' * The computation below must be applied to each section of the
 #' questionnaire.
-#'
 #' * MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
 #' \eqn{SI} (sleep inertia). For the purpose of this computation, both represent
 #' the same thing.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -56,14 +54,14 @@
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param se A `hms` object corresponding to the __local time of sleep end__
-#'   from a standard or shift version of the MCTQ questionnaire.
-#' @param si A `Duration` object corresponding to the __sleep inertia__ or
-#'   __time to get up__ from a standard or shift version of the MCTQ
-#'   questionnaire.
+#' @param se An [`hms`][hms::hms()] object corresponding to the __local time of
+#'   sleep end__ from a standard or shift version of the MCTQ questionnaire.
+#' @param si A [`Duration`][lubridate::duration()] object corresponding to the
+#'   "__sleep inertia__" or __time to get up__ from a standard or shift version
+#'   of the MCTQ questionnaire.
 #'
-#' @return A `hms` object corresponding to the vectorized sum of `se` and `si`
-#'   in a circular time frame of 24 hours.
+#' @return An [`hms`][hms::hms()] object corresponding to the vectorized sum of
+#'   `se` and `si` in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a

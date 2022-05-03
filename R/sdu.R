@@ -24,7 +24,6 @@
 #'
 #' * The computation below must be applied to each section of the
 #' questionnaire.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -59,10 +58,10 @@
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param so A `hms` object corresponding to the __local time of sleep onset__
+#' @param so An `hms` object corresponding to the __local time of sleep onset__
 #'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
 #'   use [mctq::so()] to compute it for the standard or shift version.
-#' @param se A `hms` object corresponding to the __local time of sleep end__
+#' @param se An `hms` object corresponding to the __local time of sleep end__
 #'   from a standard, micro, or shift version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the vectorized difference
@@ -123,7 +122,6 @@ sdu <- function(so, se) {
 #'
 #' * The computation below must be applied to each shift section of the
 #' questionnaire.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -146,9 +144,9 @@ sdu <- function(so, se) {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param napo A `hms` object corresponding to the __local time of nap onset__
+#' @param napo An `hms` object corresponding to the __local time of nap onset__
 #'   from the shift version of the MCTQ questionnaire.
-#' @param nape A `hms` object corresponding to the __local time of nap end__
+#' @param nape An `hms` object corresponding to the __local time of nap end__
 #'   from the shift version of the MCTQ questionnaire.
 #'
 #' @return A `Duration` object corresponding to the vectorized difference
@@ -209,11 +207,9 @@ napd <- function(napo, nape) {
 #'
 #' * The computation below must be applied to each shift section of the
 #' questionnaire.
-#'
 #' * If the respondent don't usually take a nap in a particular shift __or__
 #' between two free days after a particular shift, `sd24()` will return only
 #' \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N}.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -325,7 +321,6 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' * The average weekly sleep duration is the weighted average of the sleep
 #' durations on work and work-free days in a week.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -459,10 +454,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' authors, you need to compute three overall sleep duration (e.g.,
 #' \eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
 #' SD^N}{OSD_N}).
-#'
 #' * The overall sleep duration is the weighted average of the shift-specific
 #' mean sleep durations.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package

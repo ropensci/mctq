@@ -16,8 +16,8 @@ the MCTQ questionnaire. You can use \code{\link[=so]{so()}} to compute it for
 the standard or shift version.}
 
 \item{se_w}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time
-of sleep end/offset on workdays} from a standard, micro, or shift version
-of the MCTQ questionnaire.}
+of sleep end on workdays} from a standard, micro, or shift version of the
+MCTQ questionnaire.}
 
 \item{so_f}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time
 of sleep onset on work-free days} from a standard, micro, or shift version
@@ -25,8 +25,8 @@ of the MCTQ questionnaire. You can use \code{\link[=so]{so()}} to compute it
 for the standard or shift version.}
 
 \item{se_f}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time
-of sleep end/offset on work-free days} from a standard, micro, or shift
-version of the MCTQ questionnaire.}
+of sleep end on work-free days} from a standard, micro, or shift version
+of the MCTQ questionnaire.}
 
 \item{abs}{(optional) a \code{\link[base:logical]{logical}} object indicating if the
 function must return an absolute value (default: \code{TRUE}).}
@@ -94,7 +94,7 @@ only round your values after all computations are done. That way you avoid
 
 In an article published in 2017, Konrad S. Jankowski argued that the original
 formula for computing the social jetlag (\eqn{SJL}) captures not only the
-misalignment between social and biological times, but also the sleep debt
+misalignment between social and biological time, but also the sleep debt
 resulting from sleep deprivation during workdays. Jankowski than proposed the
 following guideline for the \code{sjl_sc()} (\eqn{SJL_{sc}}{SJL_sc}) computation.
 \subsection{Notes}{
@@ -123,9 +123,9 @@ SE_F - SE_W |}{If SD_W > SD_F & SE_W <= SE_F, | SE_F - SE_W |}}
 Where:
 \itemize{
 \item \eqn{SO_W} = local time of sleep onset on workdays.
-\item \eqn{SE_W} = local time of sleep end/offset on workdays.
+\item \eqn{SE_W} = local time of sleep end on workdays.
 \item \eqn{SO_F} = local time of sleep onset on work-free days.
-\item \eqn{SE_F} = local time of sleep end/offset on work-free days.
+\item \eqn{SE_F} = local time of sleep end on work-free days.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
@@ -144,12 +144,12 @@ Where:
 \itemize{
 \item \eqn{SO_W^{M/E/N}} = local time of sleep onset between two days in a
 particular shift.
-\item \eqn{SE_W^{M/E/N}} = local time of sleep end/offset between two days in a
+\item \eqn{SE_W^{M/E/N}} = local time of sleep end between two days in a
 particular shift.
 \item \eqn{SO_F^{M/E/N}} = local time of sleep onset between two free days after
 a particular shift.
-\item \eqn{SE_F^{M/E/N}} = local time of sleep end/offset between two free days
-after a particular shift.
+\item \eqn{SE_F^{M/E/N}} = local time of sleep end between two free days after a
+particular shift.
 }
 
 \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =

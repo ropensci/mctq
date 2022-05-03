@@ -7,16 +7,16 @@
 gu(se, si)
 }
 \arguments{
-\item{se}{A \code{hms} object corresponding to the \strong{local time of sleep end}
-from a standard or shift version of the MCTQ questionnaire.}
+\item{se}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
+sleep end} from a standard or shift version of the MCTQ questionnaire.}
 
-\item{si}{A \code{Duration} object corresponding to the \strong{sleep inertia} or
-\strong{time to get up} from a standard or shift version of the MCTQ
-questionnaire.}
+\item{si}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+"\strong{sleep inertia}" or \strong{time to get up} from a standard or shift version
+of the MCTQ questionnaire.}
 }
 \value{
-A \code{hms} object corresponding to the vectorized sum of \code{se} and \code{si}
-in a circular time frame of 24 hours.
+An \code{\link[hms:hms]{hms}} object corresponding to the vectorized sum of
+\code{se} and \code{si} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}

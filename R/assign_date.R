@@ -70,8 +70,8 @@
 #' @param start,end An [`hms`][hms::hms()] or [`POSIXt`][base::as.POSIXct()]
 #'   object indicating the start or end hour.
 #' @param ambiguity (optional) a [`numeric`][numeric()] or `NA` value to
-#'   instruct `assign_date()` on how to deal with ambiguities (see the Details
-#'   section to learn more) (default: `0`).
+#'   instruct `assign_date()` on how to deal with ambiguities. See the Details
+#'   section to learn more (default: `0`).
 #'
 #' @return A `start`--`end` [`Interval`][lubridate::interval()] object.
 #'

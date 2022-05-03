@@ -24,7 +24,6 @@
 #'
 #' * The computation below must be applied to each section of the
 #' questionnaire.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -135,26 +134,21 @@ msl <- function(so, sd) {
 #'
 #' * For all cases, \eqn{MSF_{sc}}{MSF_sc} cannot be computed if the participant
 #' wakes up with an alarm clock on work-free days (\eqn{Alarm_F}{Alarm_F}).
-#'
 #' * For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
 #' each shift section of the questionnaire.
-#'
 #' * \eqn{MSF_{sc}}{MSF_sc} is a proxy for the participant chronotype in
 #' standard and micro versions of the MCTQ.
-#'
 #' * The basis for estimating chronotype in shift-workers is the mid-sleep on
 #' work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
 #' schedules do not comprise evening shifts, Juda, Vetter, & Roenneberg (2013)
 #' propose to derive it from the \eqn{MSF_{sc}}{MSF_sc} of other shifts (e.g.,
 #' by using a linear model). Unfortunately, the `mctq` package can't help you
 #' with that, as it requires a closer look at your data.
-#'
 #' * \eqn{MSF_{sc}}{MSF_sc} depends on developmental and environmental
 #' conditions (e.g., age, light exposure). For epidemiological and genetic
 #' studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 #' populations of different age and sex compositions comparable (Roenneberg,
 #' Allebrandt, Merrow, & Vetter, 2012).
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -197,7 +191,7 @@ msl <- function(so, sd) {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param msf A `hms` object corresponding to the __local time of mid-sleep on
+#' @param msf An `hms` object corresponding to the __local time of mid-sleep on
 #'   work-free days__ from a standard, micro, or shift version of the MCTQ
 #'   questionnaire. You can use [mctq::msl()] to compute it.
 #' @param sd_w A `Duration` object corresponding to the __sleep duration on work
@@ -219,7 +213,7 @@ msl <- function(so, sd) {
 #'   questionnaire considers only the work-free days when the respondent does
 #'   not use an alarm.
 #'
-#' @return A `hms` object corresponding to the MCTQ chronotype or corrected
+#' @return An `hms` object corresponding to the MCTQ chronotype or corrected
 #'   local time of mid-sleep on work-free days.
 #'
 #' @template details_b

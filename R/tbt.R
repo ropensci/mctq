@@ -17,7 +17,6 @@
 #'
 #' * The computation below must be applied to each section of the
 #' questionnaire.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -53,11 +52,11 @@
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #'
-#' @param bt A `hms` object corresponding to the __local time of going to bed__
+#' @param bt An `hms` object corresponding to the __local time of going to bed__
 #'   from a standard or shift version of the MCTQ questionnaire.
-#' @param gu A `hms` object corresponding to the __local time of getting out of
+#' @param gu An `hms` object corresponding to the __local time of getting out of
 #'   bed__ from a standard or shift version of the MCTQ questionnaire. You can
-#'   use [mctq::gu()] to compute it.
+#'   use [`gu()`][mctq::gu()] to compute it.
 #'
 #' @return A `Duration` object corresponding to the vectorized difference
 #'   between `gu` and `bt` in a circular time frame of 24 hours.

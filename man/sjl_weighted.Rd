@@ -7,20 +7,22 @@
 sjl_weighted(sjl, n_w)
 }
 \arguments{
-\item{sjl}{A \code{list} object with \code{Duration} elements corresponding to the
+\item{sjl}{A \code{\link[base:list]{list}} object with
+\code{\link[lubridate:duration]{Duration}} elements corresponding to the
 \strong{absolute social jetlag in each shift} from a shift version of the MCTQ
 questionnaire (you can use \code{\link[=sjl]{sjl()}} to compute it). \code{sjl} elements and
 values must be paired with \code{n} elements and values.}
 
-\item{n_w}{A \code{list} object with \link[checkmate:checkIntegerish]{integerish}
-\code{integer} or \code{double} elements corresponding to the \strong{number of days worked
-in each shift within a shift cycle} from a shift version of the MCTQ
-questionnaire. \code{n} elements and values must be paired with \code{sjl} elements
-and values.}
+\item{n_w}{A \code{\link[base:list]{list}} object with
+\link[checkmate:checkIntegerish]{integerish} \code{\link[=base:integer]{integer}} or
+\code{\link[base:double]{double}} elements corresponding to the \strong{number of days
+worked in each shift within a shift cycle} from a shift version of the
+MCTQ questionnaire. \code{n} elements and values must be paired with \code{sjl}
+elements and values.}
 }
 \value{
-A \code{Duration} object corresponding to the vectorized weighted mean of
-\code{sjl} with \code{n_w} as weights.
+A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+vectorized weighted mean of \code{sjl} with \code{n_w} as weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}

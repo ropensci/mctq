@@ -15,9 +15,10 @@ can use \code{\link[=sdu]{sdu()}} to compute it.}
 work-free days} from a standard or micro version of the MCTQ
 questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
-\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
-an \code{integer} object corresponding to the \strong{number of workdays per week}
-from a standard or micro version of the MCTQ questionnaire.}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish}
+\code{\link[base:numeric]{numeric}} object or an \code{\link[base:integer]{integer}}
+object corresponding to the \strong{number of workdays per week} from a standard
+or micro version of the MCTQ questionnaire.}
 }
 \value{
 A \code{Duration} object corresponding to the weekly sleep loss.

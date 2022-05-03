@@ -20,7 +20,6 @@
 #'
 #' * The computation below must be applied to each section of the
 #' questionnaire.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -60,13 +59,13 @@
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
 #'
-#' @param sprep A `hms` object corresponding to the __local time of preparing to
-#'   sleep__ from a standard or shift version of the MCTQ questionnaire.
+#' @param sprep An `hms` object corresponding to the __local time of preparing
+#'   to sleep__ from a standard or shift version of the MCTQ questionnaire.
 #' @param slat A `Duration` object corresponding to the __sleep latency or time
 #'   to fall asleep after preparing to sleep__ from a standard or shift version
 #'   of the MCTQ questionnaire.
 #'
-#' @return A `hms` object corresponding to the vectorized sum of `sprep` and
+#' @return An `hms` object corresponding to the vectorized sum of `sprep` and
 #'   `slat` in a circular time frame of 24 hours.
 #'
 #' @template details_b

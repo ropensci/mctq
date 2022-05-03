@@ -7,15 +7,15 @@
 so(sprep, slat)
 }
 \arguments{
-\item{sprep}{A \code{hms} object corresponding to the \strong{local time of preparing to
-sleep} from a standard or shift version of the MCTQ questionnaire.}
+\item{sprep}{An \code{hms} object corresponding to the \strong{local time of preparing
+to sleep} from a standard or shift version of the MCTQ questionnaire.}
 
 \item{slat}{A \code{Duration} object corresponding to the \strong{sleep latency or time
 to fall asleep after preparing to sleep} from a standard or shift version
 of the MCTQ questionnaire.}
 }
 \value{
-A \code{hms} object corresponding to the vectorized sum of \code{sprep} and
+An \code{hms} object corresponding to the vectorized sum of \code{sprep} and
 \code{slat} in a circular time frame of 24 hours.
 }
 \description{

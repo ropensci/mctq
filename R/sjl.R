@@ -260,7 +260,7 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' In an article published in 2017, Konrad S. Jankowski argued that the original
 #' formula for computing the social jetlag (\eqn{SJL}) captures not only the
-#' misalignment between social and biological times, but also the sleep debt
+#' misalignment between social and biological time, but also the sleep debt
 #' resulting from sleep deprivation during workdays. Jankowski than proposed the
 #' following guideline for the `sjl_sc()` (\eqn{SJL_{sc}}{SJL_sc}) computation.
 #'
@@ -288,9 +288,9 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #' Where:
 #'
 #' * \eqn{SO_W} = local time of sleep onset on workdays.
-#' * \eqn{SE_W} = local time of sleep end/offset on workdays.
+#' * \eqn{SE_W} = local time of sleep end on workdays.
 #' * \eqn{SO_F} = local time of sleep onset on work-free days.
-#' * \eqn{SE_F} = local time of sleep end/offset on work-free days.
+#' * \eqn{SE_F} = local time of sleep end on work-free days.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
 #'
@@ -307,12 +307,12 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' * \eqn{SO_W^{M/E/N}} = local time of sleep onset between two days in a
 #' particular shift.
-#' * \eqn{SE_W^{M/E/N}} = local time of sleep end/offset between two days in a
+#' * \eqn{SE_W^{M/E/N}} = local time of sleep end between two days in a
 #' particular shift.
 #' * \eqn{SO_F^{M/E/N}} = local time of sleep onset between two free days after
 #' a particular shift.
-#' * \eqn{SE_F^{M/E/N}} = local time of sleep end/offset between two free days
-#' after a particular shift.
+#' * \eqn{SE_F^{M/E/N}} = local time of sleep end between two free days after a
+#' particular shift.
 #'
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
@@ -359,15 +359,15 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'   the MCTQ questionnaire. You can use [`so()`][mctq::so()] to compute it for
 #'   the standard or shift version.
 #' @param se_w An [`hms`][hms::hms()] object corresponding to the __local time
-#'   of sleep end/offset on workdays__ from a standard, micro, or shift version
-#'   of the MCTQ questionnaire.
+#'   of sleep end on workdays__ from a standard, micro, or shift version of the
+#'   MCTQ questionnaire.
 #' @param so_f An [`hms`][hms::hms()] object corresponding to the __local time
 #'   of sleep onset on work-free days__ from a standard, micro, or shift version
 #'   of the MCTQ questionnaire. You can use [`so()`][mctq::so()] to compute it
 #'   for the standard or shift version.
 #' @param se_f An [`hms`][hms::hms()] object corresponding to the __local time
-#'   of sleep end/offset on work-free days__ from a standard, micro, or shift
-#'   version of the MCTQ questionnaire.
+#'   of sleep end on work-free days__ from a standard, micro, or shift version
+#'   of the MCTQ questionnaire.
 #'
 #' @return
 #'
@@ -568,12 +568,10 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #' * The absolute social jetlag across all shifts (\eqn{\emptyset
 #' SJL_{weighted}}{OSJL_weighted}) is the weighted average of all absolute
 #' social jetlags.
-#'
 #' * The authors describe an equation for a three-shift schedule, but this may
 #' not be your case. That's why this function works a little bit differently
 #' (see the Operation section), allowing you to compute a weighted average with
 #' any shift combination.
-#'
 #' * If you are visualizing this documentation in plain text (`ASCII`), you may
 #' have some trouble understanding the equations. If you want a better viewer,
 #' you can see this documentation on the package
@@ -594,18 +592,20 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
 #' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
 #'
-#' @param sjl A `list` object with `Duration` elements corresponding to the
+#' @param sjl A [`list`][base::list()] object with
+#'   [`Duration`][lubridate::duration()] elements corresponding to the
 #'   __absolute social jetlag in each shift__ from a shift version of the MCTQ
 #'   questionnaire (you can use [mctq::sjl()] to compute it). `sjl` elements and
 #'   values must be paired with `n` elements and values.
-#' @param n_w A `list` object with [integerish][checkmate::test_integerish()]
-#'   `integer` or `double` elements corresponding to the __number of days worked
-#'   in each shift within a shift cycle__ from a shift version of the MCTQ
-#'   questionnaire. `n` elements and values must be paired with `sjl` elements
-#'   and values.
+#' @param n_w A [`list`][base::list()] object with
+#'   [integerish][checkmate::test_integerish()] [`integer`][base:integer()] or
+#'   [`double`][base::double()] elements corresponding to the __number of days
+#'   worked in each shift within a shift cycle__ from a shift version of the
+#'   MCTQ questionnaire. `n` elements and values must be paired with `sjl`
+#'   elements and values.
 #'
-#' @return A `Duration` object corresponding to the vectorized weighted mean of
-#'   `sjl` with `n_w` as weights.
+#' @return A [`Duration`][lubridate::duration()] object corresponding to the
+#'   vectorized weighted mean of `sjl` with `n_w` as weights.
 #'
 #' @template details_b
 #' @template references_a

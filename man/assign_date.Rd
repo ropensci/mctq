@@ -11,8 +11,8 @@ assign_date(start, end, ambiguity = 0)
 object indicating the start or end hour.}
 
 \item{ambiguity}{(optional) a \code{\link[=numeric]{numeric}} or \code{NA} value to
-instruct \code{assign_date()} on how to deal with ambiguities (see the Details
-section to learn more) (default: \code{0}).}
+instruct \code{assign_date()} on how to deal with ambiguities. See the Details
+section to learn more (default: \code{0}).}
 }
 \value{
 A \code{start}--\code{end} \code{\link[lubridate:interval]{Interval}} object.

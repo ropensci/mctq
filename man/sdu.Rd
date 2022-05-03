@@ -7,11 +7,11 @@
 sdu(so, se)
 }
 \arguments{
-\item{so}{A \code{hms} object corresponding to the \strong{local time of sleep onset}
+\item{so}{An \code{hms} object corresponding to the \strong{local time of sleep onset}
 from a standard, micro, or shift version of the MCTQ questionnaire. You can
 use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
 
-\item{se}{A \code{hms} object corresponding to the \strong{local time of sleep end}
+\item{se}{An \code{hms} object corresponding to the \strong{local time of sleep end}
 from a standard, micro, or shift version of the MCTQ questionnaire.}
 }
 \value{
