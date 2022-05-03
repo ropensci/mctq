@@ -6,6 +6,10 @@
 #' Questionnaire. _Journal of Biological Rhythms_, _35_(1), 98-110.
 #' \doi{10.1177/0748730419886986}.
 #'
+#' Jankowski K. S. (2017). Social jet lag: sleep-corrected formula.
+#' _Chronobiology International_, _34_(4), 531-535.
+#' \doi{10.1080/07420528.2017.1299162}.
+#'
 #' Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
 #' Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). _Journal of
 #' Biological Rhythms_, _28_(2), 130-140. \doi{10.1177/0748730412475041}.

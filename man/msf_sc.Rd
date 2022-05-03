@@ -3,7 +3,7 @@
 \name{msf_sc}
 \alias{msf_sc}
 \alias{chronotype}
-\title{Compute MCTQ corrected local time of mid-sleep on work-free days}
+\title{Compute MCTQ sleep-corrected local time of mid-sleep on work-free days}
 \usage{
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 
@@ -43,9 +43,9 @@ local time of mid-sleep on work-free days.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{msf_sc()} computes the \strong{chronotype or corrected local time of mid-sleep on
-work-free days} for standard, micro, and shift versions of the Munich
-Chronotype Questionnaire (MCTQ).
+\code{msf_sc()} computes the \strong{chronotype or sleep-corrected local time of
+mid-sleep on work-free days} for standard, micro, and shift versions of the
+Munich Chronotype Questionnaire (MCTQ).
 
 \code{chronotype()} is just a wrapper for \code{msf_sc()}.
 
@@ -274,6 +274,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sdu}()},
+\code{\link{sjl_sc}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

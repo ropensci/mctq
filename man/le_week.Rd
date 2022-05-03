@@ -210,6 +210,7 @@ Other MCTQ functions:
 \code{\link{sd_overall}()},
 \code{\link{sd_week}()},
 \code{\link{sdu}()},
+\code{\link{sjl_sc}()},
 \code{\link{sjl_weighted}()},
 \code{\link{sjl}()},
 \code{\link{so}()},

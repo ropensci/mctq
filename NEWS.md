@@ -7,7 +7,9 @@
 * The documentation was updated to add
 [CRAN](https://cran.r-project.org/package=mctq) installation instructions.
 * Some minor documentation issues were resolved.
-* `sjl_sc()`, a function that allows the user to compute the Jankowski's social jet lag sleep-corrected proposal, was introduced.
+* `shorter_interval()` now don't have the `inverse` argument. Use `longer_interval()` instead.
+* `shorter_duration()` and `longer_duration()`, two functions that return the shorter or the longer duration between two hours, were introduced.
+* `sjl_sc()`, a function that allows the user to compute Jankowski's social jet lag sleep-corrected, was introduced.
 
 
 # mctq 0.1.0 (2021-11-04)

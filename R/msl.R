@@ -109,15 +109,15 @@ msl <- function(so, sd) {
         hms::hms()
 }
 
-#' Compute MCTQ corrected local time of mid-sleep on work-free days
+#' Compute MCTQ sleep-corrected local time of mid-sleep on work-free days
 #'
 #' @description
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `msf_sc()` computes the __chronotype or corrected local time of mid-sleep on
-#' work-free days__ for standard, micro, and shift versions of the Munich
-#' Chronotype Questionnaire (MCTQ).
+#' `msf_sc()` computes the __chronotype or sleep-corrected local time of
+#' mid-sleep on work-free days__ for standard, micro, and shift versions of the
+#' Munich Chronotype Questionnaire (MCTQ).
 #'
 #' `chronotype()` is just a wrapper for `msf_sc()`.
 #'

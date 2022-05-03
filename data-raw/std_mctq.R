@@ -830,7 +830,7 @@ validate_std_mctq <- function(write = FALSE) {
                     TRUE ~ FALSE)) %>%
             dplyr::select(dummy)
 
-        std_mctq <- std_mctq %>% 
+        std_mctq <- std_mctq %>%
             dplyr::bind_cols(test) %>%
             dplyr::mutate(dplyr::across(
                 dplyr::ends_with(i),
@@ -936,9 +936,12 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             sd_week = sd_week(sd_w, sd_f, wd),
             msf_sc = msf_sc(msf, sd_w, sd_f, sd_week, alarm_f),
             sloss_week = sloss_week(sd_w, sd_f, wd),
+            le_week = le_week(le_w, le_f, wd),
             sjl_rel = sjl_rel(msw, msf),
             sjl = abs(sjl_rel),
-            le_week = le_week(le_w, le_f, wd)) %>%
+            sjl_sc_rel = sjl_sc_rel(so_w, se_w, so_f, se_f),
+            sjl_sc = abs(sjl_sc_rel)
+            ) %>%
         dplyr::relocate(
             id, work, wd, fd,
 
@@ -948,7 +951,9 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             bt_f, sprep_f, slat_f, so_f, se_f, si_f, gu_f, alarm_f,
             reasons_f, reasons_why_f, sd_f, tbt_f, le_f, msf,
 
-            sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl)
+            sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl, sjl_sc_rel,
+            sjl_sc
+            )
 
     # Fix missing sections -----
 
@@ -977,7 +982,8 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             dummy_7_b = count_na(
                 dplyr::c_across(dplyr::ends_with("_f"))) >= count_f,
             dummy_0 = dummy_0_a & dummy_0_b & dummy_0_c & dummy_7_b == FALSE,
-            dummy_7 = dummy_7_a & dummy_7_b & dummy_0_b == FALSE) %>%
+            dummy_7 = dummy_7_a & dummy_7_b & dummy_0_b == FALSE
+            ) %>%
         dplyr::ungroup() %>%
         dplyr::select(dummy_0, dummy_7)
 
@@ -986,16 +992,24 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             sd_week = dplyr::case_when(
                 dummy_0 == TRUE ~ sd_f,
                 dummy_7 == TRUE ~ sd_w,
-                TRUE ~ sd_week),
+                TRUE ~ sd_week
+                ),
             msf_sc = dplyr::if_else(dummy_0, msf, msf_sc),
-            sloss_week = dplyr::if_else(dummy_0, lubridate::dhours(0),
-                                        sloss_week),
-            sjl_rel = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_rel),
-            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl),
+            sloss_week = dplyr::if_else(
+                dummy_0, lubridate::dhours(0), sloss_week
+                ),
             le_week = dplyr::case_when(
                 dummy_0 == TRUE ~ le_f,
                 dummy_7 == TRUE ~ le_w,
-                TRUE ~ le_week)) %>%
+                TRUE ~ le_week
+                ),
+            sjl_rel = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_rel),
+            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl),
+            sjl_sc_rel = dplyr::if_else(
+                dummy_0, lubridate::dhours(0), sjl_sc_rel
+                ),
+            sjl_sc = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_sc)
+            ) %>%
         dplyr::select(-dummy_0, -dummy_7)
 
     # Make MCTQ pretty -----

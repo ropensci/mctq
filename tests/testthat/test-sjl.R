@@ -118,7 +118,7 @@ test_that("sjl() | wrappers", {
                          "shorter"),
                  lubridate::dhours(-0.5))
 
-    expect_equal(sjl_sc(hms::parse_hm("22:00"),
+    expect_equal(sjl_rel(hms::parse_hm("22:00"),
                         hms::parse_hm("03:00"),
                          "shorter"),
                  lubridate::dhours(5))

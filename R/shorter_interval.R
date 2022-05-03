@@ -1,4 +1,4 @@
-#' Find the shorter interval between two hours
+#' Find the shorter or longer interval between two hours
 #'
 #' @description
 #'
@@ -8,8 +8,11 @@
 #' `hms` or `POSIXt` object hours.
 #'
 #' `longer_interval()` do the inverse of `shorter_interval()`, i.e.,
-#' finds the longer interval between two hours. It's just a wrapper for
-#' `shorter_interval(x, y, inverse = TRUE)`.
+#' finds the longer interval between two hours.
+#'
+#' `shorter_duration()` and `longer_duration()` return the interval time span
+#' of `shorter_interval()` and `longer_interval()` as
+#' [`Duration`][lubridate::duration()] objects.
 #'
 #' @details
 #'
@@ -20,16 +23,16 @@
 #' below.
 #'
 #' To figure out what interval is the  shorter or the longer,
-#' `shorter_interval()` verify two scenarios: 1. When `x` comes before `y`; and
-#' 2. when `x` comes after `y`. This only works if `x` value is smaller than
-#' `y`, therefore, the function will make sure to swap `x` and `y` values if the
-#' latter assumption is not true.
+#' `shorter_interval()` and `longer_interval()` verify two scenarios: 1. When
+#' `x` comes before `y`; and 2. when `x` comes after `y`. This only works if `x`
+#' value is smaller than `y`, therefore, the function will make sure to swap `x`
+#' and `y` values if the latter assumption is not true.
 #'
 #' Because `shorter_interval()` objective is to find the shorter interval, if
 #' `x` and `y` are equal, the shorter interval will have a length of 0 hours,
-#' resulting in an interval from `x` to `x`. But, if `inverse = TRUE` or
-#' `longer_interval()` is used instead, the latter condition will return a
-#' interval with 24 hours of length (from `x` to `x` + 1 day).
+#' resulting in an interval from `x` to `x`. But, if `longer_interval()` is used
+#' instead, the latter condition will return a interval with 24 hours of length
+#' (from `x` to `x` + 1 day).
 #'
 #' In cases when `x` and `y` distance themselves by 12 hours, there will be no
 #' shorter or longer interval (they will have equal length). In those cases,
@@ -73,7 +76,7 @@
 #'
 #' ## Base date and timezone
 #'
-#' `shorter_interval()` uses the
+#' `shorter_interval()` and `longer_interval()` use the
 #' [Unix epoch](https://en.wikipedia.org/wiki/Unix_time) (1970-01-01) date as
 #' the start date for creating intervals.
 #'
@@ -90,19 +93,22 @@
 #'
 #' ## `NA` values
 #'
-#' `shorter_interval()` will return an `Interval` `NA`-`NA` if `x` or `y` are
-#' `NA`.
+#' `shorter_interval()` or `longer_interval()` will return an
+#' [`Interval`][lubridate::interval()] `NA`-`NA` if `x` or `y` are `NA`.
 #'
-#' @param x,y A `hms` or `POSIXt` object.
-#' @param inverse (optional) a `logical` value indicating if the function must
-#'   return an inverse output, i.e., the longer interval between `x` and `y`.
+#' `shorter_duration()` or `longer_duration()` will return a
+#' [`Duration`][lubridate::duration()] `NA`  if `x` or `y` are `NA`.
+#'
+#' @param x,y An [`hms`][hms::hms()] or [`POSIXt`][base::as.POSIXct()] object.
 #'
 #' @return
 #'
-#' * If `inverse = FALSE` (default), an `Interval` object with the shorter
+#' * For `shorter_interval()` or `longer_interval()`, an
+#' [`Interval`][lubridate::interval()] object with the shorter or longer
 #' interval between `x` and `y`.
-#' * If `inverse = TRUE`, an `Interval` object with the longer interval between
-#' `x` and `y`.
+#' * For `shorter_duration()` or `longer_duration()`, an
+#' [`Duration`][lubridate::duration()] object with the shorter or longer
+#' duration between `x` and `y`.
 #'
 #' @family utility functions
 #' @export
@@ -112,42 +118,76 @@
 #'
 #' x <- hms::parse_hm("23:00")
 #' y <- hms::parse_hm("01:00")
+#'
 #' shorter_interval(x, y)
 #' #> [1] 1970-01-01 23:00:00 UTC--1970-01-02 01:00:00 UTC # Expected
+#' shorter_duration(x, y)
+#' #> [1] "7200s (~2 hours)" # Expected
+#' longer_interval(x, y)
+#' #> [1] 1970-01-01 01:00:00 UTC--1970-01-01 23:00:00 UTC # Expected
+#' longer_duration(x, y)
+#' #> [1] "79200s (~22 hours)" # Expected
 #'
 #' x <- lubridate::as_datetime("1985-01-15 12:00:00")
 #' y <- lubridate::as_datetime("2020-09-10 12:00:00")
+#'
 #' shorter_interval(x, y)
 #' #> [1] 1970-01-01 12:00:00 UTC--1970-01-01 12:00:00 UTC # Expected
+#' shorter_duration(x, y)
+#' #> [1] "0s" # Expected
+#' longer_interval(x, y)
+#' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
+#' longer_duration(x, y)
+#' #> [1] "86400s (~1 days)" # Expected
 #'
 #' ## Vector example
 #'
 #' x <- c(hms::parse_hm("15:30"), hms::parse_hm("21:30"))
 #' y <- c(hms::parse_hm("19:30"), hms::parse_hm("04:00"))
+#'
 #' shorter_interval(x, y)
 #' #> [1] 1970-01-01 15:30:00 UTC--1970-01-01 19:30:00 UTC # Expected
 #' #> [2] 1970-01-01 21:30:00 UTC--1970-01-02 04:00:00 UTC # Expected
-#'
-#' ## Finding the longer interval between two hours
-#'
-#' x <- lubridate::parse_date_time("01:10:00", "HMS")
-#' y <- lubridate::parse_date_time("11:45:00", "HMS")
-#' shorter_interval(x, y, inverse = TRUE)
-#' #> [1] 1970-01-01 11:45:00 UTC--1970-01-02 01:10:00 UTC # Expected
-#'
-#' x <- lubridate::as_datetime("1915-02-14 05:00:00")
-#' y <- lubridate::as_datetime("1970-07-01 05:00:00")
+#' shorter_duration(x, y)
+#' #> [1] [1] "14400s (~4 hours)"   "23400s (~6.5 hours)" # Expected
 #' longer_interval(x, y)
-#' #> [1] 1970-01-01 05:00:00 UTC--1970-01-02 05:00:00 UTC # Expected
-shorter_interval <- function(x, y, inverse = FALSE) {
+#' #> [1] 1970-01-01 19:30:00 UTC--1970-01-02 15:30:00 UTC # Expected
+#' #> [2] 1970-01-01 04:00:00 UTC--1970-01-01 21:30:00 UTC # Expected
+#' longer_duration(x, y)
+#' #> [1] "72000s (~20 hours)"   "63000s (~17.5 hours)" # Expected
+shorter_interval <- function(x, y) {
+    distance_interval(x, y, method = "shorter")
+}
+
+#' @rdname shorter_interval
+#' @export
+longer_interval <- function(x, y) {
+    distance_interval(x, y, method = "longer")
+}
+
+#' @rdname shorter_interval
+#' @export
+shorter_duration <- function(x, y) {
+    shorter_interval(x, y) %>% lubridate::as.duration()
+}
+
+#' @rdname shorter_interval
+#' @export
+longer_duration <- function(x, y) {
+    longer_interval(x, y) %>% lubridate::as.duration()
+}
+
+distance_interval <- function(x, y, method = "shorter") {
+    method_choices <- c("shorter", "longer")
+
     checkmate::assert_multi_class(x, c("hms", "POSIXt"))
+    checkmate::assert_numeric(as.numeric(hms::as_hms(x)), lower = 0,
+                              upper = 86400)
     checkmate::assert_multi_class(y, c("hms", "POSIXt"))
+    checkmate::assert_numeric(as.numeric(hms::as_hms(y)), lower = 0,
+                              upper = 86400)
     assert_identical(x, y, type = "length")
-    checkmate::assert_numeric(as.numeric(hms::as_hms(x)),
-                              lower = 0, upper = 86400)
-    checkmate::assert_numeric(as.numeric(hms::as_hms(y)),
-                              lower = 0, upper = 86400)
-    checkmate::assert_flag(inverse)
+    checkmate::assert_choice(method, method_choices)
 
     x <- x %>%
         hms::as_hms() %>%
@@ -164,14 +204,14 @@ shorter_interval <- function(x, y, inverse = FALSE) {
     x1_y1_interval <- lubridate::interval(x, y)
     y1_x2_interval <- lubridate::interval(y, x + lubridate::days())
 
-    if (isFALSE(inverse)) {
+    if (method == "shorter") {
         out <- dplyr::case_when(
             is.na(x) | is.na(y) ~ lubridate::as.interval(NA),
             x == y ~ lubridate::as.interval(lubridate::hours(0), x),
             x1_y1_interval <= y1_x2_interval ~ x1_y1_interval,
             x1_y1_interval > y1_x2_interval ~ y1_x2_interval,
         )
-    } else {
+    } else if (method == "longer") {
         out <- dplyr::case_when(
             is.na(x) | is.na(y) ~ lubridate::as.interval(NA),
             x == y ~ lubridate::as.interval(lubridate::hours(24), x),
@@ -193,10 +233,4 @@ shorter_interval <- function(x, y, inverse = FALSE) {
     }
 
     out
-}
-
-#' @rdname shorter_interval
-#' @export
-longer_interval <- function(x, y) {
-    shorter_interval(x, y, inverse = TRUE)
 }

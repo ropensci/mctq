@@ -1436,27 +1436,27 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
         shift_mctq <- shift_mctq %>%
             dplyr::mutate(
                 !!as.symbol(paste0("so", i)) :=
-                    so(!!as.symbol(paste0("sprep", i)),
-                       !!as.symbol(paste0("slat", i))),
+                    mctq::so(!!as.symbol(paste0("sprep", i)),
+                             !!as.symbol(paste0("slat", i))),
                 !!as.symbol(paste0("gu", i)) :=
-                    gu(!!as.symbol(paste0("se", i)),
-                       !!as.symbol(paste0("tgu", i))),
+                    mctq::gu(!!as.symbol(paste0("se", i)),
+                             !!as.symbol(paste0("tgu", i))),
                 !!as.symbol(paste0("sd", i)) :=
-                    sdu(!!as.symbol(paste0("so", i)),
-                       !!as.symbol(paste0("se", i))),
+                    mctq::sdu(!!as.symbol(paste0("so", i)),
+                              !!as.symbol(paste0("se", i))),
                 !!as.symbol(paste0("tbt", i)) :=
-                    tbt(!!as.symbol(paste0("bt", i)),
-                        !!as.symbol(paste0("gu", i))),
+                    mctq::tbt(!!as.symbol(paste0("bt", i)),
+                              !!as.symbol(paste0("gu", i))),
                 !!as.symbol(ms) :=
-                    msl(!!as.symbol(paste0("so", i)),
-                       !!as.symbol(paste0("sd", i))),
+                    mctq::msl(!!as.symbol(paste0("so", i)),
+                              !!as.symbol(paste0("sd", i))),
                 !!as.symbol(paste0("napd", i)) :=
-                    napd(!!as.symbol(paste0("napo", i)),
-                         !!as.symbol(paste0("nape", i))),
+                    mctq::napd(!!as.symbol(paste0("napo", i)),
+                               !!as.symbol(paste0("nape", i))),
                 !!as.symbol(paste0("sd24", i)) :=
-                    sd24(!!as.symbol(paste0("sd", i)),
-                         !!as.symbol(paste0("napd", i)),
-                         !!as.symbol(paste0("nap", i)))
+                    mctq::sd24(!!as.symbol(paste0("sd", i)),
+                               !!as.symbol(paste0("napd", i)),
+                               !!as.symbol(paste0("nap", i)))
                 )
     }
 
@@ -1464,28 +1464,39 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
         shift_mctq <- shift_mctq %>%
             dplyr::mutate(
                 !!as.symbol(paste0("sd_overall", i)) :=
-                    sd_overall(!!as.symbol(paste0("sd_w", i)),
-                               !!as.symbol(paste0("sd_f", i)),
-                               !!as.symbol(paste0("n_w", i)),
-                               !!as.symbol(paste0("n_f", i))),
+                    mctq::sd_overall(!!as.symbol(paste0("sd_w", i)),
+                                     !!as.symbol(paste0("sd_f", i)),
+                                     !!as.symbol(paste0("n_w", i)),
+                                     !!as.symbol(paste0("n_f", i))),
                 !!as.symbol(paste0("msf_sc", i)) :=
-                    msf_sc(!!as.symbol(paste0("msf", i)),
-                           !!as.symbol(paste0("sd_w", i)),
-                           !!as.symbol(paste0("sd_f", i)),
-                           !!as.symbol(paste0("sd_overall", i)),
-                           !!as.symbol(paste0("alarm_f", i))),
+                    mctq::msf_sc(!!as.symbol(paste0("msf", i)),
+                                 !!as.symbol(paste0("sd_w", i)),
+                                 !!as.symbol(paste0("sd_f", i)),
+                                 !!as.symbol(paste0("sd_overall", i)),
+                                 !!as.symbol(paste0("alarm_f", i))),
                 !!as.symbol(paste0("sjl_rel", i)) :=
-                    sjl_rel(!!as.symbol(paste0("msw", i)),
-                            !!as.symbol(paste0("msf", i))),
+                    mctq::sjl_rel(!!as.symbol(paste0("msw", i)),
+                                  !!as.symbol(paste0("msf", i))),
                 !!as.symbol(paste0("sjl", i)) :=
-                    abs(!!as.symbol(paste0("sjl_rel", i)))
+                    abs(!!as.symbol(paste0("sjl_rel", i))),
+                !!as.symbol(paste0("sjl_sc_rel", i)) :=
+                    mctq::sjl_sc_rel(!!as.symbol(paste0("so_w", i)),
+                                     !!as.symbol(paste0("se_w", i)),
+                                     !!as.symbol(paste0("so_f", i)),
+                                     !!as.symbol(paste0("se_f", i))),
+                !!as.symbol(paste0("sjl_sc", i)) :=
+                    abs(!!as.symbol(paste0("sjl_sc_rel", i)))
             )
     }
 
     shift_mctq <- shift_mctq %>%
         dplyr::mutate(
-            sjl_weighted = sjl_weighted(
+            sjl_weighted = mctq::sjl_weighted(
                 sjl = list(sjl_m = sjl_m, sjl_e = sjl_e, sjl_n = sjl_n),
+                n = list(n_w_m = n_w_m, n_w_e = n_w_e, n_w_n = n_w_n)),
+            sjl_sc_weighted = mctq::sjl_weighted(
+                sjl = list(sjl_sc_m = sjl_sc_m, sjl_sc_e = sjl_sc_e,
+                           sjl_sc_n = sjl_sc_n),
                 n = list(n_w_m = n_w_m, n_w_e = n_w_e, n_w_n = n_w_n))
             ) %>%
         dplyr::relocate(
@@ -1499,7 +1510,7 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             gu_f_m, alarm_f_m, reasons_f_m, reasons_why_f_m, sd_f_m, tbt_f_m,
             msf_m, nap_f_m, napo_f_m, nape_f_m, napd_f_m, sd24_f_m,
 
-            sd_overall_m, msf_sc_m, sjl_rel_m, sjl_m,
+            sd_overall_m, msf_sc_m, sjl_rel_m, sjl_m, sjl_sc_rel_m, sjl_sc_m,
 
             n_w_e, bt_w_e, sprep_w_e, slat_w_e, so_w_e, se_w_e, tgu_w_e,
             gu_w_e, alarm_w_e, reasons_w_e, reasons_why_w_e, sd_w_e, tbt_w_e,
@@ -1509,7 +1520,7 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             gu_f_e, alarm_f_e, reasons_f_e, reasons_why_f_e, sd_f_e, tbt_f_e,
             msf_e, nap_f_e, napo_f_e, nape_f_e, napd_f_e, sd24_f_e,
 
-            sd_overall_e, msf_sc_e, sjl_rel_e, sjl_e,
+            sd_overall_e, msf_sc_e, sjl_rel_e, sjl_e, sjl_sc_rel_e, sjl_sc_e,
 
             n_w_n, bt_w_n, sprep_w_n, slat_w_n, so_w_n, se_w_n, tgu_w_n,
             gu_w_n, alarm_w_n, reasons_w_n, reasons_why_w_n, sd_w_n, tbt_w_n,
@@ -1519,9 +1530,9 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             gu_f_n, alarm_f_n, reasons_f_n, reasons_why_f_n, sd_f_n, tbt_f_n,
             msf_n, nap_f_n, napo_f_n, nape_f_n, napd_f_n, sd24_f_n,
 
-            sd_overall_n, msf_sc_n, sjl_rel_n, sjl_n,
+            sd_overall_n, msf_sc_n, sjl_rel_n, sjl_n, sjl_sc_rel_n, sjl_sc_n,
 
-            sjl_weighted
+            sjl_weighted, sjl_sc_weighted
             )
 
     # Apply corrections to `sjl_rel` and `sjl` -----
@@ -1535,13 +1546,23 @@ analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     shift_mctq <- shift_mctq %>%
         dplyr::rowwise() %>%
         dplyr::mutate(
-            sjl_rel_n = dplyr::if_else(.data$id %in% cases,
-                                       sjl_rel(.data$msw_n, .data$msf_n,
-                                               method = "longer"),
-                                       .data$sjl_rel_n)
-            ) %>%
+            sjl_rel_n = dplyr::if_else(
+                .data$id %in% cases,
+                sjl_rel(.data$msw_n, .data$msf_n, method = "longer"),
+                .data$sjl_rel_n
+            ),
+            sjl_sc_rel_n = dplyr::if_else(
+                .data$id %in% cases,
+                sjl_sc_rel(.data$so_w_n, .data$se_w_n, .data$so_f_n,
+                           .data$se_f_n, method = "longer"),
+                .data$sjl_sc_rel_n
+            )
+        ) %>%
         dplyr::ungroup() %>%
-        dplyr::mutate(sjl_n = abs(.data$sjl_rel_n))
+        dplyr::mutate(
+            sjl_n = abs(.data$sjl_rel_n),
+            sjl_sc_n = abs(.data$sjl_sc_rel_n)
+            )
 
     # Make MCTQ pretty -----
 

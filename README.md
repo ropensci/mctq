@@ -157,9 +157,11 @@ For computations combining workdays and work-free days, use:
     Shift).
 -   `sloss_week()`: compute MCTQ weekly sleep loss.
 -   `le_week()`: compute MCTQ average weekly light exposure.
--   `msf_sc()`: compute MCTQ chronotype or corrected local time of
+-   `msf_sc()`: compute MCTQ chronotype or sleep-corrected local time of
     mid-sleep on work-free days.
--   `sjl_rel()` and `sjl()`: compute MCTQ social jet lag.
+-   `sjl()` and `sjl_rel()`: compute MCTQ social jet lag.
+-   `sjl_sc()` and `sjl_sc_rel()`: compute Jankowski’s MCTQ
+    sleep-corrected social jetlag.
 -   `sjl_weighted()`: compute MCTQ absolute social jetlag across all
     shifts (only for MCTQ Shift).
 

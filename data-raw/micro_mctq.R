@@ -559,19 +559,23 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
     micro_mctq <- micro_mctq %>%
         dplyr::mutate(
-            fd = fd(wd),
+            fd = mctq::fd(wd),
 
-            sd_w = sdu(so_w, se_w),
-            msw = msl(so_w, sd_w),
+            sd_w = mctq::sdu(so_w, se_w),
+            msw = mctq::msl(so_w, sd_w),
 
-            sd_f = sdu(so_f, se_f),
-            msf = msl(so_f, sd_f),
+            sd_f = mctq::sdu(so_f, se_f),
+            msf = mctq::msl(so_f, sd_f),
 
-            sd_week = sd_week(sd_w, sd_f, wd),
-            msf_sc = msf_sc(msf, sd_w, sd_f, sd_week, rep(FALSE, length(id))),
-            sloss_week = sloss_week(sd_w, sd_f, wd),
-            sjl_rel = sjl_rel(msw, msf),
-            sjl = abs(sjl_rel)) %>%
+            sd_week = mctq::sd_week(sd_w, sd_f, wd),
+            msf_sc = mctq::msf_sc(msf, sd_w, sd_f, sd_week,
+                                  rep(FALSE, length(id))),
+            sloss_week = mctq::sloss_week(sd_w, sd_f, wd),
+            sjl_rel = mctq::sjl_rel(msw, msf),
+            sjl = abs(sjl_rel),
+            sjl_sc_rel = mctq::sjl_sc_rel(so_w, se_w, so_f, se_f),
+            sjl_sc = abs(sjl_sc_rel)
+            ) %>%
         dplyr::relocate(
             id, shift_work, wd, fd,
 
@@ -579,7 +583,7 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
             so_f, se_f, sd_f, msf,
 
-            sd_week, sloss_week, msf_sc, sjl_rel, sjl)
+            sd_week, sloss_week, msf_sc, sjl_rel, sjl, sjl_sc_rel, sjl_sc)
 
     # Fix missing sections -----
 
@@ -621,7 +625,11 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
             sloss_week = dplyr::if_else(dummy_0, lubridate::dhours(0),
                                         sloss_week),
             sjl_rel = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_rel),
-            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl)) %>%
+            sjl = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl),
+            sjl_sc_rel = dplyr::if_else(dummy_0, lubridate::dhours(0),
+                                        sjl_sc_rel),
+            sjl_sc = dplyr::if_else(dummy_0, lubridate::dhours(0), sjl_sc)
+            ) %>%
         dplyr::select(-dummy_0, -dummy_7)
 
     # Make MCTQ pretty -----

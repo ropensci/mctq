@@ -3,24 +3,29 @@
 \name{shorter_interval}
 \alias{shorter_interval}
 \alias{longer_interval}
-\title{Find the shorter interval between two hours}
+\alias{shorter_duration}
+\alias{longer_duration}
+\title{Find the shorter or longer interval between two hours}
 \usage{
-shorter_interval(x, y, inverse = FALSE)
+shorter_interval(x, y)
 
 longer_interval(x, y)
+
+shorter_duration(x, y)
+
+longer_duration(x, y)
 }
 \arguments{
-\item{x, y}{A \code{hms} or \code{POSIXt} object.}
-
-\item{inverse}{(optional) a \code{logical} value indicating if the function must
-return an inverse output, i.e., the longer interval between \code{x} and \code{y}.}
+\item{x, y}{An \code{\link[hms:hms]{hms}} or \code{\link[base:as.POSIXlt]{POSIXt}} object.}
 }
 \value{
 \itemize{
-\item If \code{inverse = FALSE} (default), an \code{Interval} object with the shorter
+\item For \code{shorter_interval()} or \code{longer_interval()}, an
+\code{\link[lubridate:interval]{Interval}} object with the shorter or longer
 interval between \code{x} and \code{y}.
-\item If \code{inverse = TRUE}, an \code{Interval} object with the longer interval between
-\code{x} and \code{y}.
+\item For \code{shorter_duration()} or \code{longer_duration()}, an
+\code{\link[lubridate:duration]{Duration}} object with the shorter or longer
+duration between \code{x} and \code{y}.
 }
 }
 \description{
@@ -30,8 +35,11 @@ interval between \code{x} and \code{y}.
 \code{hms} or \code{POSIXt} object hours.
 
 \code{longer_interval()} do the inverse of \code{shorter_interval()}, i.e.,
-finds the longer interval between two hours. It's just a wrapper for
-\code{shorter_interval(x, y, inverse = TRUE)}.
+finds the longer interval between two hours.
+
+\code{shorter_duration()} and \code{longer_duration()} return the interval time span
+of \code{shorter_interval()} and \code{longer_interval()} as
+\code{\link[lubridate:duration]{Duration}} objects.
 }
 \details{
 \subsection{The two intervals problem}{
@@ -41,16 +49,16 @@ there will be always two possible intervals between them, as illustrated
 below.
 
 To figure out what interval is the  shorter or the longer,
-\code{shorter_interval()} verify two scenarios: 1. When \code{x} comes before \code{y}; and
-2. when \code{x} comes after \code{y}. This only works if \code{x} value is smaller than
-\code{y}, therefore, the function will make sure to swap \code{x} and \code{y} values if the
-latter assumption is not true.
+\code{shorter_interval()} and \code{longer_interval()} verify two scenarios: 1. When
+\code{x} comes before \code{y}; and 2. when \code{x} comes after \code{y}. This only works if \code{x}
+value is smaller than \code{y}, therefore, the function will make sure to swap \code{x}
+and \code{y} values if the latter assumption is not true.
 
 Because \code{shorter_interval()} objective is to find the shorter interval, if
 \code{x} and \code{y} are equal, the shorter interval will have a length of 0 hours,
-resulting in an interval from \code{x} to \code{x}. But, if \code{inverse = TRUE} or
-\code{longer_interval()} is used instead, the latter condition will return a
-interval with 24 hours of length (from \code{x} to \code{x} + 1 day).
+resulting in an interval from \code{x} to \code{x}. But, if \code{longer_interval()} is used
+instead, the latter condition will return a interval with 24 hours of length
+(from \code{x} to \code{x} + 1 day).
 
 In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no
 shorter or longer interval (they will have equal length). In those cases,
@@ -93,7 +101,7 @@ and \link[lubridate:lubridate-package]{lubridate} package.
 
 \subsection{Base date and timezone}{
 
-\code{shorter_interval()} uses the
+\code{shorter_interval()} and \code{longer_interval()} use the
 \href{https://en.wikipedia.org/wiki/Unix_time}{Unix epoch} (1970-01-01) date as
 the start date for creating intervals.
 
@@ -112,8 +120,11 @@ Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 
 \subsection{\code{NA} values}{
 
-\code{shorter_interval()} will return an \code{Interval} \code{NA}-\code{NA} if \code{x} or \code{y} are
-\code{NA}.
+\code{shorter_interval()} or \code{longer_interval()} will return an
+\code{\link[lubridate:interval]{Interval}} \code{NA}-\code{NA} if \code{x} or \code{y} are \code{NA}.
+
+\code{shorter_duration()} or \code{longer_duration()} will return a
+\code{\link[lubridate:duration]{Duration}} \code{NA}  if \code{x} or \code{y} are \code{NA}.
 }
 }
 \examples{
@@ -121,33 +132,43 @@ Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
 
 x <- hms::parse_hm("23:00")
 y <- hms::parse_hm("01:00")
+
 shorter_interval(x, y)
 #> [1] 1970-01-01 23:00:00 UTC--1970-01-02 01:00:00 UTC # Expected
+shorter_duration(x, y)
+#> [1] "7200s (~2 hours)" # Expected
+longer_interval(x, y)
+#> [1] 1970-01-01 01:00:00 UTC--1970-01-01 23:00:00 UTC # Expected
+longer_duration(x, y)
+#> [1] "79200s (~22 hours)" # Expected
 
 x <- lubridate::as_datetime("1985-01-15 12:00:00")
 y <- lubridate::as_datetime("2020-09-10 12:00:00")
+
 shorter_interval(x, y)
 #> [1] 1970-01-01 12:00:00 UTC--1970-01-01 12:00:00 UTC # Expected
+shorter_duration(x, y)
+#> [1] "0s" # Expected
+longer_interval(x, y)
+#> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
+longer_duration(x, y)
+#> [1] "86400s (~1 days)" # Expected
 
 ## Vector example
 
 x <- c(hms::parse_hm("15:30"), hms::parse_hm("21:30"))
 y <- c(hms::parse_hm("19:30"), hms::parse_hm("04:00"))
+
 shorter_interval(x, y)
 #> [1] 1970-01-01 15:30:00 UTC--1970-01-01 19:30:00 UTC # Expected
 #> [2] 1970-01-01 21:30:00 UTC--1970-01-02 04:00:00 UTC # Expected
-
-## Finding the longer interval between two hours
-
-x <- lubridate::parse_date_time("01:10:00", "HMS")
-y <- lubridate::parse_date_time("11:45:00", "HMS")
-shorter_interval(x, y, inverse = TRUE)
-#> [1] 1970-01-01 11:45:00 UTC--1970-01-02 01:10:00 UTC # Expected
-
-x <- lubridate::as_datetime("1915-02-14 05:00:00")
-y <- lubridate::as_datetime("1970-07-01 05:00:00")
+shorter_duration(x, y)
+#> [1] [1] "14400s (~4 hours)"   "23400s (~6.5 hours)" # Expected
 longer_interval(x, y)
-#> [1] 1970-01-01 05:00:00 UTC--1970-01-02 05:00:00 UTC # Expected
+#> [1] 1970-01-01 19:30:00 UTC--1970-01-02 15:30:00 UTC # Expected
+#> [2] 1970-01-01 04:00:00 UTC--1970-01-01 21:30:00 UTC # Expected
+longer_duration(x, y)
+#> [1] "72000s (~20 hours)"   "63000s (~17.5 hours)" # Expected
 }
 \seealso{
 Other utility functions: 
