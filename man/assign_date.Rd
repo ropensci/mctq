@@ -7,15 +7,15 @@
 assign_date(start, end, ambiguity = 0)
 }
 \arguments{
-\item{start, end}{A \code{hms} or \code{POSIXt} object indicating the start or end
-hour.}
+\item{start, end}{An \code{\link[hms:hms]{hms}} or \code{\link[base:as.POSIXlt]{POSIXt}}
+object indicating the start or end hour.}
 
-\item{ambiguity}{(optional) a \code{numeric} or \code{NA} value to instruct
-\code{assign_date()} on how to deal with ambiguities (see Details) (default:
-\code{0}).}
+\item{ambiguity}{(optional) a \code{\link[=numeric]{numeric}} or \code{NA} value to
+instruct \code{assign_date()} on how to deal with ambiguities (see the Details
+section to learn more) (default: \code{0}).}
 }
 \value{
-A \code{start}--\code{end} \code{Interval} object.
+A \code{start}--\code{end} \code{\link[lubridate:interval]{Interval}} object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -66,7 +66,7 @@ hours, i.e., \code{start} and \code{end} distance themselves by one day.
 the start date for creating intervals.
 
 The output will always have \code{"UTC"} set as timezone. Learn more about
-time zones in \link[base:timezones]{base::timezone}.
+time zones in \code{\link[base:timezones]{?timezone}}.
 }
 
 \subsection{\code{POSIXt} objects}{
@@ -74,14 +74,15 @@ time zones in \link[base:timezones]{base::timezone}.
 \code{\link[base:as.POSIXlt]{POSIXt}} objects passed as argument to \code{start} or \code{end}
 will be stripped of their dates. Only the time will be considered.
 
-Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
-Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
+Both \code{\link[base:as.POSIXlt]{POSIXct}} and \code{\link[base:as.POSIXlt]{POSIXlt}} are
+objects that inherits the class \code{POSIXt}. Learn more about it in
+\code{\link[base:DateTimeClasses]{?DateTimeClasses}}.
 }
 
 \subsection{\code{NA} values}{
 
-\code{assign_date()} will return an \code{Interval} \code{NA}-\code{NA} if \code{start} or \code{end} are
-\code{NA}.
+\code{assign_date()} will return an \code{\link[lubridate:interval]{Interval}} \code{NA}-\code{NA}
+if \code{start} or \code{end} are \code{NA}.
 }
 }
 \examples{

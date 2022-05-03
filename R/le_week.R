@@ -50,7 +50,6 @@
 #'   `le_w` and `le_f` with `wd` and `fd(wd)` as weights.
 #'
 #' @template details_b
-#' @template section_a
 #' @template references_a
 #' @family MCTQ functions
 #' @export

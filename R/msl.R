@@ -223,7 +223,6 @@ msl <- function(so, sd) {
 #'   local time of mid-sleep on work-free days.
 #'
 #' @template details_b
-#' @template section_a
 #' @template references_a
 #' @family MCTQ functions
 #' @export

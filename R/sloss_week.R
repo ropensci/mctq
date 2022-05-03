@@ -42,7 +42,6 @@
 #'
 #' @inheritParams sd_week
 #' @template details_b
-#' @template section_a
 #' @template references_a
 #' @export
 #'

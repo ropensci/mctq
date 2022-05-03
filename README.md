@@ -35,7 +35,7 @@ and validated tool to assess chronotypes using peoples’ sleep behavior
 presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
 to facilitate the work of sleep and chronobiology scientists with MCTQ
-data while also helping with research reproducibility.
+data and help with research reproducibility.
 
 `mctq` adheres to the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
@@ -88,17 +88,17 @@ times](https://r4ds.had.co.nz/dates-and-times.html) chapter from Wickham
 ## Installation
 
 You can install the released version of `mctq` from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://CRAN.R-project.org/package=mctq) with:
 
 ``` r
-install.packages("mctq")
+install.packages("mctq", dependencies = TRUE)
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("ropensci/mctq")
+remotes::install_github("ropensci/mctq", dependencies = TRUE)
 ```
 
 ## Usage
@@ -111,7 +111,7 @@ this structure, you first need to convert your data to it. Please refer
 to those package documentations to learn more about them.
 
 Due to the circular nature of time, we strongly recommend that you use
-appropriate temporal objects while dealing with date/time in R. That can
+appropriate temporal objects while dealing with date/time in R. This can
 help you get rid of several computation mistakes while trying to adapt
 your data from a base 10 to a system rooted in a base 12 numerical
 system.
@@ -121,8 +121,8 @@ system.
 After your data is set to start, just use the `mctq` functions below to
 process it.
 
-Note that the `mctq` functions uses a similar naming pattern to that
-used in the MCTQ publications. That makes it easy to find and apply any
+Note that the `mctq` functions uses a similar naming pattern to those
+used in the MCTQ publications. This makes it easy to find and apply any
 computation necessary.
 
 -   `fd()`: compute MCTQ work-free days.

@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `cycle_time()` cycles time span objects in a predetermined cycle length,
-#' converting linear time objects to a circular time frame.
+#' adapting linear time objects into a circular time frame.
 #'
 #' @details
 #'
@@ -35,7 +35,7 @@
 #' But that's not the only possible "shape" of time, as it can also be measured
 #' in other contexts.
 #'
-#' In a "time of day" context, time will be linked to the rotation of the
+#' In a "time of day" context, the time will be linked to the rotation of the
 #' earth, "resetting" when a new rotation cycle starts. That brings a different
 #' kind of shape to time: a circular shape. With this shape the time value
 #' encounters the origin at the beginning and end of each cycle.
@@ -77,11 +77,12 @@
 #'
 #' ## Fractional time
 #'
-#' `cycle_time()` uses the `%%` operator to cycle values. Hence, it can be
-#' subject to catastrophic loss of accuracy if `time` is fractional and much
-#' larger than `cycle`. A warning is given if this is detected.
+#' `cycle_time()` uses the [`%%`][base::Arithmetic] operator to cycle values.
+#' Hence, it can be subject to catastrophic loss of accuracy if `time` is
+#' fractional and much larger than `cycle`. A warning is given if this is
+#' detected.
 #'
-#' `%%` is a `builtin` R function that operates like this:
+#' [`%%`][base::Arithmetic] is a `builtin` R function that operates like this:
 #'
 #' ```
 #' function(a, b) {
@@ -126,24 +127,28 @@
 #' [`Period`][lubridate::period()] objects are a special type of object
 #' developed by the [lubridate][lubridate::lubridate-package] team that
 #' represents "human units", ignoring possible timeline irregularities. That is
-#' to say that 1 day as `Period` can have different time spans, when looking to
-#' a timeline after a irregularity event.
+#' to say that 1 day as [`Period`][lubridate::period()] can have different time
+#' spans, when looking to a timeline after a irregularity event.
 #'
-#' Since the time span of a `Period` object can fluctuate, `cycle_time()` don't
-#' accept this kind of object. You can transform it to a `Duration` object and
-#' still use the function, but beware that this can produce errors.
+#' Since the time span of a [`Period`][lubridate::period()] object can
+#' fluctuate, `cycle_time()` don't accept this kind of object. You can transform
+#' it to a [`Duration`][lubridate::duration()] object and still use the
+#' function, but beware that this can produce errors.
 #'
-#' Learn more about `Period` objects in the [Dates and
+#' Learn more about [`Period`][lubridate::period()] objects in the [Dates and
 #' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
-#' Wickham & Grolemund (n.d.).
+#' Wickham & Grolemund book (n.d.).
 #'
-#' @param time An object belonging to one of the following classes: `numeric`,
-#' `Duration`, `difftime`, or `hms`.
-#' @param cycle A `numeric` or `Duration` object of length 1, equal or greater
-#'   than 0, indicating the cycle length in seconds (see Details to learn more).
-#' @param reverse (optional) A `logical` value indicating if the function must
-#'   use a reverse cycle for negative values in `time` (see Details to learn
-#'   more) (default: `TRUE`).
+#' @param time An object belonging to one of the following classes:
+#'   [`numeric`][base::numeric()], [`Duration`][lubridate::duration()],
+#'   [`difftime`][base::as.difftime()], or [`hms`][hms::hms()].
+#' @param cycle A [`numeric`][base::numeric()] or
+#'   [`Duration`][lubridate::duration()] object of length `1`, equal or greater
+#'   than `0`, indicating the cycle length in seconds (see the Details section
+#'   to learn more).
+#' @param reverse (optional) a [`logical`][logical()] value indicating if the
+#'   function must use a reverse cycle for negative values in `time` (see
+#'   the Details section to learn more) (default: `TRUE`).
 #'
 #' @return The same type of object of `time` cycled with the `cycle` parameter.
 #'

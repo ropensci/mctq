@@ -95,26 +95,6 @@ work ___ days per week").
 }
 }
 
-\section{Missing sections in standard and micro MCTQ versions}{
-
-
-Although the standard and micro versions of the MCTQ asks for respondents to
-complete the workdays and work-free days sections, even when they do not
-have a regular work schedule (\code{wd = 0}) or have a 7 day/week work schedule
-(\code{wd = 7}), some of them may still end skipping one of this parts of the
-questionnaire. In those cases, \code{sd_week()}, \code{sloss_week()}, \code{le_week()},
-\code{msf_sc()}, \code{sjl_rel()}, and \code{sjl()} will produce \code{NA} (Not Available) as
-output. That's because those computations combine workdays and work-free days
-variables.
-
-For those special standard and micro MCTQ cases, where one section is
-missing, a \code{NA} value is the correct output for the functions mentioned above
-when \code{wd} (number of workdays per week) are \code{wd > 0 & wd < 7}, but it may not
-be when \code{wd == 0} or \code{wd == 7}. There are different approaches to deal with
-this issue. See \code{vignette("missing-sections", package = "mctq")} to learn
-more.
-}
-
 \examples{
 ## Scalar example
 

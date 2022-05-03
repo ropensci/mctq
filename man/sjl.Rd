@@ -19,7 +19,7 @@ work-free days} from a standard, micro, or shift version of the MCTQ
 questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
 
 \item{abs}{(optional) a \code{\link[base:logical]{logical}} object indicating if the
-function must return an absolute social jetlag (default: \code{TRUE}).}
+function must return an absolute value (default: \code{TRUE}).}
 
 \item{method}{(optional) a string indicating which method the function must
 use to compute the social jetlag. See the Methods section to learn
@@ -172,7 +172,7 @@ The \code{"longer"} method uses the same logic of the \code{"shorter"} method, b
 instead of using the shorter interval between \eqn{MSW} and \eqn{MSF}, it
 uses the longer interval between the two, considering a two-day window.
 
-This method may help with special contexts, like when dealing with
+This method may help in special contexts, like when dealing with
 shift-workers that have a greater than 12 hours distance between their
 mid-sleep hours.
 }

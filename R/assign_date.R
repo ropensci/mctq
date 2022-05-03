@@ -51,28 +51,29 @@
 #' the start date for creating intervals.
 #'
 #' The output will always have `"UTC"` set as timezone. Learn more about
-#' time zones in [base::timezone].
+#' time zones in [`?timezone`][base::timezone].
 #'
 #' ## `POSIXt` objects
 #'
 #' [`POSIXt`][base::as.POSIXct()] objects passed as argument to `start` or `end`
 #' will be stripped of their dates. Only the time will be considered.
 #'
-#' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
-#' Learn more about it in [base::DateTimeClasses].
+#' Both [`POSIXct`][base::as.POSIXct()] and [`POSIXlt`][base::as.POSIXlt()] are
+#' objects that inherits the class `POSIXt`. Learn more about it in
+#' [`?DateTimeClasses`][base::DateTimeClasses].
 #'
 #' ## `NA` values
 #'
-#' `assign_date()` will return an `Interval` `NA`-`NA` if `start` or `end` are
-#' `NA`.
+#' `assign_date()` will return an [`Interval`][lubridate::interval()] `NA`-`NA`
+#' if `start` or `end` are `NA`.
 #'
-#' @param start,end A `hms` or `POSIXt` object indicating the start or end
-#'   hour.
-#' @param ambiguity (optional) a `numeric` or `NA` value to instruct
-#'   `assign_date()` on how to deal with ambiguities (see Details) (default:
-#'   `0`).
+#' @param start,end An [`hms`][hms::hms()] or [`POSIXt`][base::as.POSIXct()]
+#'   object indicating the start or end hour.
+#' @param ambiguity (optional) a [`numeric`][numeric()] or `NA` value to
+#'   instruct `assign_date()` on how to deal with ambiguities (see the Details
+#'   section to learn more) (default: `0`).
 #'
-#' @return A `start`--`end` `Interval` object.
+#' @return A `start`--`end` [`Interval`][lubridate::interval()] object.
 #'
 #' @family utility functions
 #' @export

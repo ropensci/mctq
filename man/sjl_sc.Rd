@@ -29,7 +29,7 @@ of sleep end/offset on work-free days} from a standard, micro, or shift
 version of the MCTQ questionnaire.}
 
 \item{abs}{(optional) a \code{\link[base:logical]{logical}} object indicating if the
-function must return an absolute social jetlag (default: \code{TRUE}).}
+function must return an absolute value (default: \code{TRUE}).}
 
 \item{method}{(optional) a string indicating which method the function must
 use to compute the social jetlag. See the Methods section to learn
@@ -48,8 +48,8 @@ The output may also vary depending on the \code{method} used.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{sjl_sc()} computes the \strong{Jankowski's (2017) sleep-corrected social jetlag
-proposal} for standard, micro, and shift versions of the Munich Chronotype
+\code{sjl_sc()} computes the \strong{Jankowski's (2017) sleep-corrected social jetlag}
+for standard, micro, and shift versions of the Munich Chronotype
 Questionnaire (MCTQ).
 
 \code{sjl_sc_rel()} it's just a wrapper for \code{sjl_sc()} with \code{abs = FALSE}. Please
@@ -94,12 +94,12 @@ only round your values after all computations are done. That way you avoid
 
 In an article published in 2017, Konrad S. Jankowski argued that the original
 formula for computing the social jetlag (\eqn{SJL}) captures not only the
-misalignment between social and biological times, but also sleep debt
+misalignment between social and biological times, but also the sleep debt
 resulting from sleep deprivation during workdays. Jankowski than proposed the
 following guideline for the \code{sjl_sc()} (\eqn{SJL_{sc}}{SJL_sc}) computation.
 \subsection{Notes}{
 \itemize{
-\item The Jankowski's alternative is still disputed. We recommend seeing
+\item The Jankowski's alternative is disputed. We recommend seeing
 Roenneberg, Pilz, Zerbini, & Winnebeck (2019) discussion about it
 (see item 3.4.2).
 \item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
@@ -123,7 +123,7 @@ SE_F - SE_W |}{If SD_W > SD_F & SE_W <= SE_F, | SE_F - SE_W |}}
 Where:
 \itemize{
 \item \eqn{SO_W} = local time of sleep onset on workdays.
-\item \eqn{SE_W} = local time of sleep end/offset on workdays..
+\item \eqn{SE_W} = local time of sleep end/offset on workdays.
 \item \eqn{SO_F} = local time of sleep onset on work-free days.
 \item \eqn{SE_F} = local time of sleep end/offset on work-free days.
 }
@@ -184,7 +184,7 @@ Guidelines section).
 
 This is the default method for \code{sjl_sc()}. It's based on the shorter interval
 between \eqn{SO_f}/\eqn{SE_f} and \eqn{SO_W}/\eqn{SE_W}, solving most of the
-issues relating to \eqn{SJL_sc} computation.
+issues relating to \eqn{SJL_{sc}}{SJL_sc} computation.
 \itemize{
 \item \code{"longer"}
 }
@@ -194,9 +194,9 @@ instead of using the shorter interval between \eqn{SO_f}/\eqn{SE_f} and
 \eqn{SO_W}/\eqn{SE_W}, it uses the longer interval between the two,
 considering a two-day window.
 
-This method may help with special contexts, like when dealing with
+This method may help in special contexts, like when dealing with
 shift-workers that have a greater than 12 hours distance between their
-mid-sleep hours.
+sleep hours.
 }
 
 \examples{

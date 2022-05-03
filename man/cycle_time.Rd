@@ -7,15 +7,18 @@
 cycle_time(time, cycle, reverse = TRUE)
 }
 \arguments{
-\item{time}{An object belonging to one of the following classes: \code{numeric},
-\code{Duration}, \code{difftime}, or \code{hms}.}
+\item{time}{An object belonging to one of the following classes:
+\code{\link[base:numeric]{numeric}}, \code{\link[lubridate:duration]{Duration}},
+\code{\link[base:difftime]{difftime}}, or \code{\link[hms:hms]{hms}}.}
 
-\item{cycle}{A \code{numeric} or \code{Duration} object of length 1, equal or greater
-than 0, indicating the cycle length in seconds (see Details to learn more).}
+\item{cycle}{A \code{\link[base:numeric]{numeric}} or
+\code{\link[lubridate:duration]{Duration}} object of length \code{1}, equal or greater
+than \code{0}, indicating the cycle length in seconds (see the Details section
+to learn more).}
 
-\item{reverse}{(optional) A \code{logical} value indicating if the function must
-use a reverse cycle for negative values in \code{time} (see Details to learn
-more) (default: \code{TRUE}).}
+\item{reverse}{(optional) a \code{\link[=logical]{logical}} value indicating if the
+function must use a reverse cycle for negative values in \code{time} (see
+the Details section to learn more) (default: \code{TRUE}).}
 }
 \value{
 The same type of object of \code{time} cycled with the \code{cycle} parameter.
@@ -24,7 +27,7 @@ The same type of object of \code{time} cycled with the \code{cycle} parameter.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{cycle_time()} cycles time span objects in a predetermined cycle length,
-converting linear time objects to a circular time frame.
+adapting linear time objects into a circular time frame.
 }
 \details{
 \subsection{Linear versus circular time}{
@@ -50,7 +53,7 @@ A + B = 10 + 5 = 15s
 But that's not the only possible "shape" of time, as it can also be measured
 in other contexts.
 
-In a "time of day" context, time will be linked to the rotation of the
+In a "time of day" context, the time will be linked to the rotation of the
 earth, "resetting" when a new rotation cycle starts. That brings a different
 kind of shape to time: a circular shape. With this shape the time value
 encounters the origin at the beginning and end of each cycle.\preformatted{               - <--- h ---> +
@@ -86,11 +89,12 @@ approach relative to the cycle length (e.g, \code{cycle = 86400} (1 day)).
 
 \subsection{Fractional time}{
 
-\code{cycle_time()} uses the \code{\%\%} operator to cycle values. Hence, it can be
-subject to catastrophic loss of accuracy if \code{time} is fractional and much
-larger than \code{cycle}. A warning is given if this is detected.
+\code{cycle_time()} uses the \code{\link[base:Arithmetic]{\%\%}} operator to cycle values.
+Hence, it can be subject to catastrophic loss of accuracy if \code{time} is
+fractional and much larger than \code{cycle}. A warning is given if this is
+detected.
 
-\code{\%\%} is a \code{builtin} R function that operates like this:\preformatted{function(a, b) \{
+\code{\link[base:Arithmetic]{\%\%}} is a \code{builtin} R function that operates like this:\preformatted{function(a, b) \{
     a - floor(a / b) * b
 \}
 }
@@ -131,15 +135,16 @@ and -6h relative to the origin will be 18h.\preformatted{               - <--- h
 \code{\link[lubridate:period]{Period}} objects are a special type of object
 developed by the \link[lubridate:lubridate-package]{lubridate} team that
 represents "human units", ignoring possible timeline irregularities. That is
-to say that 1 day as \code{Period} can have different time spans, when looking to
-a timeline after a irregularity event.
+to say that 1 day as \code{\link[lubridate:period]{Period}} can have different time
+spans, when looking to a timeline after a irregularity event.
 
-Since the time span of a \code{Period} object can fluctuate, \code{cycle_time()} don't
-accept this kind of object. You can transform it to a \code{Duration} object and
-still use the function, but beware that this can produce errors.
+Since the time span of a \code{\link[lubridate:period]{Period}} object can
+fluctuate, \code{cycle_time()} don't accept this kind of object. You can transform
+it to a \code{\link[lubridate:duration]{Duration}} object and still use the
+function, but beware that this can produce errors.
 
-Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
-Wickham & Grolemund (n.d.).
+Learn more about \code{\link[lubridate:period]{Period}} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Wickham & Grolemund book (n.d.).
 }
 }
 \examples{

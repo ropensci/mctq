@@ -358,7 +358,6 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' @inheritParams fd
 #' @template details_b
-#' @template section_a
 #' @template references_a
 #' @family MCTQ functions
 #' @export
