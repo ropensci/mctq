@@ -217,10 +217,6 @@ citation("mctq")
 #>   }
 ```
 
-`mctq` hex logo was based on an illustration created by [hilda design
-matters Zurich](https://hilda.ch/) for the [Daylight Academy
-(DLA)](https://daylight.academy/).
-
 ## Contributing
 
 We welcome contributions, including bug reports. Take a moment to review
@@ -230,3 +226,21 @@ Contributing](https://docs.ropensci.org/mctq/CONTRIBUTING.html).
 Please note that this package is released with a [Contributor Code of
 Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
 project, you agree to abide by its terms.
+
+## Acknowledgments
+
+`mctq` is supported by the [Interdisciplinary Sleep Research Group
+(GIPSO)](https://github.com/gipso) of [University of Sao Paulo
+(USP)](http://usp.br/).
+
+`mctq` hex logo was based on an illustration created by [hilda design
+matters Zurich](https://hilda.ch/) for the [Daylight Academy
+(DLA)](https://daylight.academy/).
+
+[![Buy Me A Coffee donate
+button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://ko-fi.com/danielvartan)
+
+Become an `mctq` supporter! To make a donation click on the button
+above.
+
+Please indicate the `mctq` package in your donation message.
