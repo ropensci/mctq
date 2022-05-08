@@ -9,22 +9,17 @@ A \code{\link[dplyr:reexports]{tibble}} with 19 columns and 50 rows:
 
 \describe{
 \item{id}{
-A unique \code{integer} value to identify each respondent in the dataset.
+A unique \code{\link[base:integer]{integer}} value to identify each respondent in
+the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
-R class: \code{\link[base:integer]{integer}}.}
+R class: \code{\link[base:integer]{integer}}.
+}
 
 \item{shift_work}{
-A \code{logical} value indicating if the respondent has been a shift- or
-night-worker in the past three months.
-\cr \cr
-Statement (\code{EN}): "I have been a shift- or night-worker in the past three
-months: Yes ( ___ ) No ( ___ )".
-\cr \cr
-Type: Basic.
-\cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+A \code{\link[base:logical]{logical}}\verb{ value indicating if the respondent has been a shift- or night-worker in the past three months. \\cr \\cr Statement (}EN\verb{): "I have been a shift- or night-worker in the past three months: Yes ( ___ ) No ( ___ )". \\cr \\cr Type: Basic. \\cr \\cr R class: [}logical`]\code{\link[base:logical]{base::logical()}}.
+}
 
 \item{wd}{
 Number of \strong{workdays} per week.
@@ -33,14 +28,16 @@ Statement (\code{EN}): "Normally, I work ___ days/week".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:integer]{integer}}.}
+R class: \code{\link[base:integer]{integer}}.
+}
 
 \item{fd}{
 Number of \strong{work-free days} per week.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[base:integer]{integer}}.}
+R class: \code{\link[base:integer]{integer}}.
+}
 
 \item{so_w}{
 Local time of sleep onset on \strong{workdays}.
@@ -51,7 +48,8 @@ asleep)".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{se_w}{
 Local time of sleep end on \strong{workdays}.
@@ -61,21 +59,24 @@ Statement (\code{EN}): "On WORKDAYS ... I normally wake up at ___ : ___ AM/PM
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sd_w}{
 Sleep duration on \strong{workdays}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{msw}{
 Local time of mid-sleep on \strong{workdays}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{so_f}{
 Local time of sleep onset on \strong{work-free days} when the respondent
@@ -87,7 +88,8 @@ but rather when you fall asleep)".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{se_f}{
 Local time of sleep end on \strong{work-free days} when the respondent
@@ -99,7 +101,8 @@ but rather when you wake up)".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sd_f}{
 Sleep duration on \strong{work-free days} when the respondent \strong{doesn't} use an
@@ -107,7 +110,8 @@ alarm clock to wake up.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{msf}{
 Local time of mid-sleep on \strong{work-free days} when the respondent
@@ -115,56 +119,64 @@ Local time of mid-sleep on \strong{work-free days} when the respondent
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sd_week}{
 Average weekly sleep duration.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sloss_week}{
 Weekly sleep loss.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{msf_sc}{
 Chronotype or corrected local time of mid-sleep on \strong{work-free days}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sjl_rel}{
 Relative social jetlag.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sjl}{
 Absolute social jetlag.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sjl_sc_rel}{
 Jankowski's relative sleep-corrected social jetlag.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sjl_sc}{
 Jankowski's sleep-corrected social jetlag.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 }
 }
 \source{
@@ -177,8 +189,8 @@ micro_mctq
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 A fictional dataset, \strong{for testing and learning purposes}, composed of
-basic/measurable and computed variables of the Munich Chronotype
-Questionnaire (MCTQ) micro version.
+basic/measurable and computed variables of the Munich ChronoType
+Questionnaire (MCTQ) micro (\eqn{\mu}) version.
 
 This data was created following the guidelines in Ghotbi et al. (2020), in
 addition to the guidelines in Roenneberg, Wirz-Justice, & Merrow (2003),
@@ -191,7 +203,7 @@ sections to learn more.
 \code{raw_data("micro_mctq.csv")}.
 \subsection{Guidelines}{
 
-To learn more about the Munich Chronotype Questionnaire (MCTQ),
+To learn more about the Munich ChronoType Questionnaire (MCTQ),
 see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
 Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 Zerbini, & Winnebeck (2019).

@@ -8,17 +8,19 @@ citEntry(
   author      = personList(as.person("Daniel Vartanian"),
                            as.person("Ana Amelia Benedito-Silva"),
                            as.person("Mario Pedrazzoli")),
-  year        = "2021",
+  year        = "2022",
   url         = paste0("https://docs.ropensci.org/",
                        "mctq/"),
   textVersion = paste0("Vartanian, D.", ", ",
                        "Benedito-Silva, A. A.", ", & ",
                        "Pedrazzoli, M.", " ",
-                       "(2021)",  ". ",
+                       "(2022)",  ". ",
                        "{mctq}:", " ",
                        "an R package for the Munich ChronoType", " ",
-                       "Questionnaire", ". ",
+                       "Questionnaire", " ",
+                       "(v. 0.2.0). ",
                        "https://docs.ropensci.org/",
                        "mctq/"),
-  note        = "Lifecycle: maturing"
+  note        = paste0("(v. 0.2.0). ",
+                       "Lifecycle: maturing")
 )

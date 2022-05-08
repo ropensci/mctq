@@ -23,7 +23,7 @@ midday_change <- function(time) {
     time <- flat_posixt(time)
 
     dplyr::case_when(
-        lubridate::hour(time) < 12 ~ change_day(time, 2),
+        lubridate::hour(time) < 12 ~ lubridate::`day<-`(time, 2),
         TRUE ~ time
     )
 }
@@ -58,47 +58,6 @@ extract_seconds <- function(x) {
     }
 }
 
-change_day <- function(x, day) {
-    classes <- c("Date", "POSIXct", "POSIXlt")
-
-    checkmate::assert_multi_class(x, classes, null.ok = FALSE)
-    checkmate::assert_number(day, lower = 1, upper = 31)
-
-    if (any(lubridate::month(x) %in% c(4, 6, 9, 11), na.rm = TRUE)
-        && day > 30) {
-        cli::cli_abort(paste0(
-            "You can't assign more than 30 days to April, June, ",
-            "September, or November."
-        ))
-    }
-
-    if (any(lubridate::month(x) == 2 & !lubridate::leap_year(x)) && day > 28) {
-        cli::cli_abort(paste0(
-            "You can't assign more than 28 days to February in ",
-            "non-leap years."
-        ))
-    }
-
-    if (any(lubridate::month(x) == 2 & lubridate::leap_year(x), na.rm = TRUE) &&
-        day > 29) {
-        cli::cli_abort(paste0(
-            "You can't assign more than 29 days to February in a leap year."
-        ))
-    }
-
-    lubridate::day(x) <- day
-
-    x
-}
-
-shush <- function(x, quiet = TRUE) {
-    if (isTRUE(quiet)) {
-        suppressMessages(suppressWarnings(x))
-    } else {
-        x
-    }
-}
-
 swap <- function(x, y, condition = TRUE) {
     assert_identical(x, y, type = "class")
     assert_identical(x, y, condition, type = "length")
@@ -113,18 +72,12 @@ swap <- function(x, y, condition = TRUE) {
     list(x = x, y = y)
 }
 
+class_collapse <- function(x) single_quote_(paste0(class(x), collapse = "/"))
+
 count_na <- function(x) {
     checkmate::assert_atomic(x)
 
     length(which(is.na(x)))
-}
-
-get_names <- function(...) {
-    out <- lapply(substitute(list(...))[-1], deparse) %>%
-        vapply(unlist, character(1)) %>%
-        noquote()
-
-    gsub("\\\"","", out)
 }
 
 get_class <- function(x) {
@@ -135,9 +88,16 @@ get_class <- function(x) {
     }
 }
 
+get_names <- function(...) {
+    out <- lapply(substitute(list(...))[-1], deparse) %>%
+        vapply(unlist, character(1)) %>%
+        noquote()
+
+    gsub("\\\"","", out)
+}
+
 single_quote_ <- function(x) paste0("'", x, "'")
 double_quote_ <- function(x) paste0("\"", x, "\"")
-class_collapse <- function(x) single_quote_(paste0(class(x), collapse = "/"))
 
 str_extract_ <- function(string, pattern, ignore_case = FALSE, perl = TRUE,
                          fixed = FALSE, use_bytes = FALSE, invert = FALSE) {
@@ -180,5 +140,13 @@ require_pkg <- function(...) {
              "install.packages(",
              "{paste(double_quote_(pkg), collapse = ', ')})"
             ))
+    }
+}
+
+shush <- function(x, quiet = TRUE) {
+    if (isTRUE(quiet)) {
+        suppressMessages(suppressWarnings(x))
+    } else {
+        x
     }
 }

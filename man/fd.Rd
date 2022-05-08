@@ -21,7 +21,7 @@ workdays (\code{wd}).
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{fd()} computes the \strong{number of work-free days per week} for standard
-and micro versions of the Munich Chronotype Questionnaire (MCTQ).
+and micro versions of the Munich ChronoType Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -48,7 +48,7 @@ as follows.
 
 Where:
 \itemize{
-\item \eqn{WD} = number of workdays ("I have a regular work schedule and work ___
+\item \eqn{WD} = Number of workdays ("I have a regular work schedule and work ___
 days per week").
 }
 }

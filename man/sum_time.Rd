@@ -10,27 +10,30 @@ sum_time(..., cycle = NULL, reverse = TRUE, na_rm = FALSE)
 vct_sum_time(..., cycle = NULL, reverse = TRUE, na_rm = FALSE)
 }
 \arguments{
-\item{...}{Objects belonging to one of the following classes: \code{Duration},
-\code{difftime}, \code{hms}, \code{POSIXct}, \code{POSIXlt}, or \code{Interval}.}
+\item{...}{Objects belonging to one of the following classes:
+\code{\link[lubridate:duration]{Duration}}, \code{\link[base:difftime]{difftime}}, or
+\code{\link[hms:hms]{hms}}, \code{\link[base:as.POSIXlt]{POSIXct}},
+\code{\link[base:as.POSIXlt]{POSIXlt}}, or \code{\link[lubridate:interval]{Interval}}.}
 
-\item{cycle}{(optional) A \code{numeric} or \code{Duration} object of length 1, equal
-or greater than 0, indicating the cycle length in seconds. If \code{NULL} the
-function will perform a linear sum (see Details to learn more) (default:
-\code{NULL}).}
+\item{cycle}{(optional) A \code{\link[base:numeric]{numeric}} or
+\code{\link[lubridate:duration]{Duration}} object of length 1, equal or greater
+than 0, indicating the cycle length in seconds. If \code{NULL} the function will
+perform a linear sum (see Details to learn more) (default: \code{NULL}).}
 
-\item{reverse}{(optional) A \code{logical} value indicating if the function must
-use a reverse cycle for negative sums (see Details to learn more) (default:
-\code{TRUE}).}
+\item{reverse}{(optional) A \code{\link[base:logical]{logical}} value indicating if
+the function must use a reverse cycle for negative sums (see Details to
+learn more) (default: \code{TRUE}).}
 
-\item{na_rm}{(optional) a \code{logical} value indicating if the function must
-remove \code{NA} values while performing the sum (default: \code{FALSE}).}
+\item{na_rm}{(optional) a \code{\link[base:logical]{logical}} value indicating if
+the function must remove \code{NA} values while performing the sum (default:
+\code{FALSE}).}
 }
 \value{
 \itemize{
-\item If \code{cycle = NULL}, a \code{Duration} object with a linear sum of the time from
-objects in \code{...}.
-\item If \code{cycle != NULL}, a \code{Duration} object with a circular sum of the time
-from objects in \code{...}.
+\item If \code{cycle = NULL}, a \code{\link[lubridate:duration]{Duration}} object with a
+linear sum of the time from objects in \code{...}.
+\item If \code{cycle != NULL}, a \code{\link[lubridate:duration]{Duration}} object with a
+circular sum of the time from objects in \code{...}.
 }
 }
 \description{
@@ -48,7 +51,7 @@ learn more).
 \details{
 \subsection{\code{sum_time()} versus \code{vct_sum_time()}}{
 
-\code{sum_time()} behaves similar to \code{\link[base:sum]{base::sum()}}, in the sense that it
+\code{sum_time()} behaves similar to \code{\link[base:sum]{sum()}}, in the sense that it
 aggregates the time lengths of values in \code{...} into a single data point. For
 example, \code{sum_time(c(x, y), z)} will have the same output as \code{sum_time(x, y, z)}.
 
@@ -120,11 +123,12 @@ the cycle length (e.g, \code{cycle = 86400} (1 day)).
 
 \subsection{Fractional time}{
 
-\code{sum_time()} uses the \code{\%\%} operator to cycle values. Hence, it can be subject
-to catastrophic loss of accuracy if values in \code{...} are fractional and much
-larger than \code{cycle}. A warning is given if this is detected.
+\code{sum_time()} uses the \code{\link[base:Arithmetic]{\%\%}} operator to cycle values.
+Hence, it can be subject to catastrophic loss of accuracy if values in \code{...}
+are fractional and much larger than \code{cycle}. A warning is given if this is
+detected.
 
-\code{\%\%} is a \code{builtin} R function that operates like this:\preformatted{function(a, b) \{
+\code{\link[base:Arithmetic]{\%\%}} is a \code{builtin} R function that operates like this:\preformatted{function(a, b) \{
     a - floor(a / b) * b
 \}
 }
@@ -164,28 +168,29 @@ get -6h (-30 + 24), and -6h relative to the origin will be 18h.\preformatted{   
 
 \subsection{\code{Period} objects}{
 
-\code{\link[lubridate:period]{Period}} objects are a special type of object
+\code{\link[lubridate:period]{Period}} objects are special type of objects
 developed by the \link[lubridate:lubridate-package]{lubridate} team that
 represents "human units", ignoring possible timeline irregularities. That is
 to say that 1 day as \code{Period} can have different time spans, when looking to
 a timeline after a irregularity event.
 
-Since the time span of a \code{Period} object can fluctuate, \code{sum_time()}
-and \code{vct_sum_time()} don't accept this kind of object. You can transform
-it to a \code{Duration} object and still use the functions, but beware that
-this can produce errors.
+Since the time span of a \code{\link[lubridate:period]{Period}} object can
+fluctuate, \code{sum_time()} and \code{vct_sum_time()} don't accept this kind of
+object. You can transform it to a \code{\link[lubridate:duration]{Duration}} object
+and still use the functions, but beware that this can produce errors.
 
-Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
-Wickham & Grolemund (n.d.).
+Learn more about \code{\link[lubridate:period]{Period}} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Wickham & Grolemund book (n.d.).
 }
 
 \subsection{\code{POSIXt} objects}{
 
-\code{\link[base:as.POSIXlt]{POSIXt}} objects in \code{...} will be stripped of their
+\code{\link[base:DateTimeClasses]{POSIXt}} objects in \code{...} will be stripped of their
 dates. Only the time will be considered.
 
-Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
-Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
+Both \code{\link[base:as.POSIXlt]{POSIXct}} and \code{\link[base:as.POSIXlt]{POSIXlt}} are
+objects that inherits the class \code{\link[base:DateTimeClasses]{POSIXt}}. Learn more
+about it in \code{\link[base:DateTimeClasses]{?DateTimeClasses}}.
 }
 
 \subsection{\code{Interval} objects}{
@@ -194,7 +199,7 @@ By using \code{\link[lubridate:interval]{Interval}} objects in \code{...}, \code
 and \code{vct_sum_time()} will consider only their time spans. That is, the
 amount of seconds of the intervals.
 
-Learn more about \code{Interval} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Learn more about \code{\link[lubridate:interval]{Interval}} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
 Wickham & Grolemund (n.d.).
 }
 

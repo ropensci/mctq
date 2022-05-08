@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `fd()` computes the __number of work-free days per week__ for standard
-#' and micro versions of the Munich Chronotype Questionnaire (MCTQ).
+#' and micro versions of the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
@@ -17,7 +17,7 @@
 #'
 #' Where:
 #'
-#' * \eqn{WD} = number of workdays ("I have a regular work schedule and work ___
+#' * \eqn{WD} = Number of workdays ("I have a regular work schedule and work ___
 #' days per week").
 #'
 #' @param wd An [integerish][checkmate::test_integerish()]

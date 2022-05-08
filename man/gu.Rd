@@ -22,7 +22,7 @@ An \code{\link[hms:hms]{hms}} object corresponding to the vectorized sum of
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{gu()} computes the \strong{local time of getting out of bed} for standard and
-shift versions of the Munich Chronotype Questionnaire (MCTQ).
+shift versions of the Munich ChronoType Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -50,7 +50,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -65,15 +65,13 @@ Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 (\eqn{GU}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each section of the
-questionnaire.
+\item This computation must be applied to each section of the questionnaire.
 \item MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
 \eqn{SI} (sleep inertia). For the purpose of this computation, both represent
 the same thing.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -83,13 +81,13 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work \strong{or} work-free
+\item \eqn{SE_{W/F}}{SE_W/F} = Local time of sleep end on work \strong{or} work-free
 days.
-\item \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work \strong{or} work-free days
+\item \eqn{SI_{W/F}}{SI_W/F} = Sleep inertia on work \strong{or} work-free days
 ("after ___ min, I get up").
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -98,16 +96,16 @@ days.
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = local time of sleep end between two
+\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = Local time of sleep end between two
 days in a particular shift \strong{or} between two free days after a particular
 shift.
-\item \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
+\item \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = Time to get up after sleep end
 between two days in a particular shift \strong{or} between two free days after a
 particular shift ("after ___ min, I get up").
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 

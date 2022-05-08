@@ -9,29 +9,33 @@
 msl(so, sd)
 }
 \arguments{
-\item{so}{A \code{hms} object corresponding to the \strong{local time of sleep onset}
-from a standard, micro, or shift version of the MCTQ questionnaire. You can
-use \code{\link[=so]{so()}} to compute it for the standard or shift version.}
+\item{so}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
+sleep onset} from a standard, micro, or shift version of the MCTQ
+questionnaire. You can use \code{\link[=so]{so()}} to compute it for the
+standard or shift version.}
 
-\item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} from a
-standard, micro, or shift version of the MCTQ questionnaire. You can use
-\code{\link[=sdu]{sdu()}} to compute it for any MCTQ version.}
+\item{sd}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration} from a standard, micro, or shift version of the MCTQ
+questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it for any
+MCTQ version.}
 }
 \value{
-A \code{hms} object corresponding to the vectorized sum of \code{so} and \code{(sd / 2)} in a circular time frame of 24 hours.
+An \code{\link[hms:hms]{hms}} object corresponding to the vectorized sum of
+\code{so} and \code{(sd / 2)} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{msl()} computes the \strong{local time of mid-sleep} for standard, micro, and
-shift versions of the Munich Chronotype Questionnaire (MCTQ).
+shift versions of the Munich ChronoType Questionnaire (MCTQ).
 
 Please note that, although we tried to preserve the original authors' naming
 pattern for the MCTQ functions, the name \code{ms} provokes a dangerous name
-collision with the \code{\link[lubridate:hms]{lubridate::ms()}} function (a function for parsing minutes
-and seconds components). That's why we named it \code{msl}. \code{msl()} and \code{\link[=sdu]{sdu()}}
-are the only exceptions, all the other \code{mctq} functions maintain a strong
-naming resemblance with the original authors' naming pattern.
+collision with the \code{\link[lubridate:hms]{ms()}} function (a function for parsing
+minutes and seconds components). That's why we named it \code{msl}. \code{msl()} and
+\code{\link[=sdu]{sdu()}} are the only exceptions, all the other \code{mctq}
+functions maintain a strong naming resemblance with the original authors'
+naming pattern.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -59,7 +63,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -74,12 +78,10 @@ Vetter, & Roenneberg (2013), and The Worldwide Experimental Platform (n.d.)
 guidelines for \code{msl()} (\eqn{MSW} or \eqn{MSF}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each section of the
-questionnaire.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item This computation must be applied to each section of the questionnaire.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -89,12 +91,12 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SO_{W/F}}{SO_W/F} = local time of sleep onset on work \strong{or} work-free
+\item \eqn{SO_{W/F}}{SO_W/F} = Local time of sleep onset on work \strong{or} work-free
 days.
-\item \eqn{SD_{W/F}}{SD_W/F} = sleep duration on work \strong{or} work-free days.
+\item \eqn{SD_{W/F}}{SD_W/F} = Sleep duration on work \strong{or} work-free days.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -104,15 +106,15 @@ SO_W/F_M/E/N + (SD_W/F_M/E/N / 2)}}
 
 Where:
 \itemize{
-\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = local time of sleep onset between
+\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = Local time of sleep onset between
 two days in a particular shift \strong{or} between two free days after a
 particular shift.
-\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = Sleep duration between two days in a
 particular shift \strong{or} between two free days after a particular shift.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 

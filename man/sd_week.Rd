@@ -7,13 +7,13 @@
 sd_week(sd_w, sd_f, wd)
 }
 \arguments{
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on
-workdays} from a standard or micro version of the MCTQ questionnaire. You
-can use \code{\link[=sdu]{sdu()}} to compute it.}
-
-\item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
-work-free days} from a standard or micro version of the MCTQ
+\item{sd_w}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration on workdays} from a standard or micro version of the MCTQ
 questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
+
+\item{sd_f}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration on work-free days} from a standard or micro version of
+the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
 \item{wd}{An \link[checkmate:checkIntegerish]{integerish}
 \code{\link[base:numeric]{numeric}} object or an \code{\link[base:integer]{integer}}
@@ -21,17 +21,18 @@ object corresponding to the \strong{number of workdays per week} from a standard
 or micro version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the vectorized weighted mean of
-\code{sd_w} and \code{sd_f} with \code{wd} and \code{fd(wd)} as weights.
+A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+vectorized weighted mean of \code{sd_w} and \code{sd_f} with \code{wd} and \code{fd(wd)} as
+weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sd_week()} computes the \strong{average weekly sleep duration} for the standard
-and micro versions of the Munich Chronotype Questionnaire (MCTQ).
+and micro versions of the Munich ChronoType Questionnaire (MCTQ).
 
-See \code{\link[=sd_overall]{sd_overall()}} to compute the overall sleep duration of a
-particular shift for the shift version of the MCTQ.
+See \code{\link[=sd_overall]{sd_overall()}} to compute the overall sleep
+duration of a particular shift for the shift version of the MCTQ.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -59,7 +60,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -76,10 +77,9 @@ The Worldwide Experimental Platform (n.d.) guidelines for \code{sd_week()}
 \itemize{
 \item The average weekly sleep duration is the weighted average of the sleep
 durations on work and work-free days in a week.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -90,14 +90,14 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SD_W} = sleep duration on workdays.
-\item \eqn{SD_F} = sleep duration on work-free days.
-\item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+\item \eqn{SD_W} = Sleep duration on workdays.
+\item \eqn{SD_F} = Sleep duration on work-free days.
+\item \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 work ___ days per week").
-\item \eqn{FD} = number of work-free days per week.
+\item \eqn{FD} = Number of work-free days per week.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 }
 
@@ -140,7 +140,7 @@ if (requireNamespace("stats", quietly = TRUE)) {
 }
 #> [1] "19620s (~5.45 hours)" # Expected
 
-## Converting the output to `hms`
+## Converting the output to 'hms'
 
 sd_w <- lubridate::dhours(5.45)
 sd_f <- lubridate::dhours(9.5)
@@ -156,10 +156,10 @@ hms::as_hms(as.numeric(x))
 sd_w <- lubridate::dhours(4.5)
 sd_f <- lubridate::dhours(7.8)
 wd <- 3
-x <- sd_week(sd_w, sd_f, wd)
-x
+sd_week(sd_w, sd_f, wd)
 #> [1] "22988.5714285714s (~6.39 hours)" # Expected
-round_time(x)
+
+round_time(sd_week(sd_w, sd_f, wd))
 #> [1] "22989s (~6.39 hours)" # Expected
 }
 \references{

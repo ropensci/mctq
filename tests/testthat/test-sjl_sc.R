@@ -133,10 +133,24 @@ test_that("sjl_sc() | error test", {
     "Assertion on 'so_w' failed"
     )
 
+    expect_error(sjl_sc(
+        so_w = hms::hms(-1), so_f = hms::hms(1), se_w = hms::hms(1),
+        se_f = hms::hms(1), abs = TRUE, method = "shorter"
+    ),
+    "Assertion on 'so_w' failed"
+    )
+
     # assert_hms(so_f, lower = hms::hms(0))
     expect_error(sjl_sc(
         so_w = hms::hms(1), so_f = 1, se_w = hms::hms(1), se_f = hms::hms(1),
         abs = TRUE, method = "shorter"
+    ),
+    "Assertion on 'so_f' failed"
+    )
+
+    expect_error(sjl_sc(
+        so_w = hms::hms(1), so_f = hms::hms(-1), se_w = hms::hms(1),
+        se_f = hms::hms(1), abs = TRUE, method = "shorter"
     ),
     "Assertion on 'so_f' failed"
     )
@@ -149,10 +163,24 @@ test_that("sjl_sc() | error test", {
     "Assertion on 'se_w' failed"
     )
 
+    expect_error(sjl_sc(
+        so_w = hms::hms(1), so_f = hms::hms(1), se_w = hms::hms(-1),
+        se_f = hms::hms(1), abs = TRUE, method = "shorter"
+    ),
+    "Assertion on 'se_w' failed"
+    )
+
     # assert_hms(se_f, lower = hms::hms(0))
     expect_error(sjl_sc(
         so_w = hms::hms(1), so_f = hms::hms(1), se_w = hms::hms(1), se_f = 1,
         abs = TRUE, method = "shorter"
+    ),
+    "Assertion on 'se_f' failed"
+    )
+
+    expect_error(sjl_sc(
+        so_w = hms::hms(1), so_f = hms::hms(1), se_w = hms::hms(1),
+        se_f = hms::hms(-1), abs = TRUE, method = "shorter"
     ),
     "Assertion on 'se_f' failed"
     )
@@ -181,7 +209,7 @@ test_that("sjl_sc() | error test", {
     )
 })
 
-test_that("sjl_sc_rel() | wrappers", {
+test_that("sjl_sc_rel() | general test", {
     expect_equal(sjl_sc_rel(
         so_w = hms::parse_hm("00:30"), se_w = hms::parse_hm("07:30"),
         so_f = hms::parse_hm("01:00"), se_f = hms::parse_hm("09:00")

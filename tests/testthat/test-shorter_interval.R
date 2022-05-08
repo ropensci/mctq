@@ -65,7 +65,13 @@ test_that("interval_build() | error test", {
     # checkmate::assert_numeric(as.numeric(hms::as_hms(x)), lower = 0,
     #                           upper = 86400)
     expect_error(interval_build(
-        x = - hms::hms(1), y = hms::hms(1), method = "shorter"
+        x = hms::hms(-1), y = hms::hms(1), method = "shorter"
+    ),
+    "Assertion on 'as.numeric\\(hms::as_hms\\(x\\)\\)' failed"
+    )
+
+    expect_error(interval_build(
+        x = - hms::hms(86401), y = hms::hms(1), method = "shorter"
     ),
     "Assertion on 'as.numeric\\(hms::as_hms\\(x\\)\\)' failed"
     )
@@ -80,7 +86,13 @@ test_that("interval_build() | error test", {
     # checkmate::assert_numeric(as.numeric(hms::as_hms(x)), lower = 0,
     #                           upper = 86400)
     expect_error(interval_build(
-        x = hms::hms(1), y = - hms::hms(1), method = "shorter"
+        x = hms::hms(1), y = hms::hms(-1), method = "shorter"
+    ),
+    "Assertion on 'as.numeric\\(hms::as_hms\\(y\\)\\)' failed"
+    )
+
+    expect_error(interval_build(
+        x = hms::hms(1), y = hms::hms(86401), method = "shorter"
     ),
     "Assertion on 'as.numeric\\(hms::as_hms\\(y\\)\\)' failed"
     )
@@ -100,7 +112,8 @@ test_that("interval_build() | error test", {
 
 test_that("interval_build() | warning test", {
     expect_message(interval_build(
-        x = hms::parse_hm("00:00"), y = hms::parse_hm("12:00")
+        x = hms::parse_hm("00:00"), y = hms::parse_hm("12:00"),
+        method = "shorter"
     ),
     "Element '1' of 'x' and 'y' have intervals equal to "
     )

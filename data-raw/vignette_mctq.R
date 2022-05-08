@@ -1,7 +1,7 @@
 # # Notes
 #
 # * Source the file before running the functions.
-# * Don't forget to uncomment the `library` functions below.
+# * Don't forget to uncomment the 'library' functions below.
 
 # library(checkmate)
 # library(dplyr)
@@ -14,16 +14,18 @@
 #'
 #' @description
 #'
-#' `build_vignette_std_mctq()` builds a fictional raw dataset composed of
-#' basic/measurable variables of the Munich Chronotype Questionnaire (MCTQ)
+#' `build_vignette_mctq()` builds a fictional raw dataset composed of
+#' basic/measurable variables of the Munich ChronoType Questionnaire (MCTQ)
 #' standard version to be used on vignette examples.
 #'
-#' The basis for this dataset is [mctq::std_mctq].
+#' The basis for this dataset is [`std_mctq`][mctq::std_mctq].
 #'
-#' @param write (optional) a `logical` value indicating if the function must
-#'   write a `vignette_std_mctq` file to `"./inst/extdata/"` (default: `FALSE`).
+#' @param write (optional) a [`logical`][base::logical()] value indicating if
+#'   the function must write a `vignette_mctq.csv` file to `"./inst/extdata/"`
+#'   (default: `FALSE`).
 #'
-#' @return An invisible `tibble` with a raw standard MCTQ dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a raw standard MCTQ
+#'   dataset.
 #'
 #' @family data functions
 #' @importFrom magrittr %>%
@@ -34,8 +36,9 @@
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(mctq::build_vignette_mctq())
-#' }}
-build_vignette_std_mctq <- function(write = FALSE) {
+#' }
+#' }
+build_vignette_mctq <- function(write = FALSE) {
     checkmate::assert_flag(write)
 
     vignette_mctq <- suppressMessages(
@@ -71,4 +74,4 @@ build_vignette_std_mctq <- function(write = FALSE) {
     invisible(vignette_mctq)
 }
 
-# raw <- build_vignette_std_mctq()
+# raw <- build_vignette_mctq()

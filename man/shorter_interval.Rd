@@ -16,14 +16,15 @@ shorter_duration(x, y)
 longer_duration(x, y)
 }
 \arguments{
-\item{x, y}{An \code{\link[hms:hms]{hms}} or \code{\link[base:as.POSIXlt]{POSIXt}} object.}
+\item{x, y}{An \code{\link[hms:hms]{hms}} or \code{\link[base:DateTimeClasses]{POSIXt}}
+object.}
 }
 \value{
 \itemize{
 \item For \code{shorter_interval()} or \code{longer_interval()}, an
 \code{\link[lubridate:interval]{Interval}} object with the shorter or longer
 interval between \code{x} and \code{y}.
-\item For \code{shorter_duration()} or \code{longer_duration()}, an
+\item For \code{shorter_duration()} or \code{longer_duration()}, a
 \code{\link[lubridate:duration]{Duration}} object with the shorter or longer
 duration between \code{x} and \code{y}.
 }
@@ -31,11 +32,11 @@ duration between \code{x} and \code{y}.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{shorter_interval()} finds and returns the shorter interval between two
-\code{hms} or \code{POSIXt} object hours.
+\code{shorter_interval()} returns the shorter interval between two
+\code{\link[hms:hms]{hms}} or \code{\link[base:DateTimeClasses]{POSIXt}} object hours.
 
-\code{longer_interval()} do the inverse of \code{shorter_interval()}, i.e.,
-finds the longer interval between two hours.
+\code{longer_interval()} do the inverse of \code{shorter_interval()}, i.e., returns the
+longer interval between two hours.
 
 \code{shorter_duration()} and \code{longer_duration()} return the interval time span
 of \code{shorter_interval()} and \code{longer_interval()} as
@@ -61,7 +62,7 @@ instead, the latter condition will return a interval with 24 hours of length
 (from \code{x} to \code{x} + 1 day).
 
 In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no
-shorter or longer interval (they will have equal length). In those cases,
+shorter or longer interval (they will have equal length). In these cases,
 \code{shorter_interval()} and \code{longer_interval()} will return the same value
 (an interval of 12 hours).\preformatted{             day 1                        day 2
      x                  y         x                  y
@@ -106,16 +107,17 @@ and \link[lubridate:lubridate-package]{lubridate} package.
 the start date for creating intervals.
 
 The output will always have \code{"UTC"} set as timezone. Learn more about
-time zones in \link[base:timezones]{base::timezone}.
+time zones in \code{\link[base:timezones]{?timezone}}.
 }
 
 \subsection{\code{POSIXt} objects}{
 
-\code{POSIXt} objects passed as argument to \code{x} or \code{y} will be stripped of their
-dates. Only the time will be considered.
+\code{\link[base:DateTimeClasses]{POSIXt}} objects passed as argument to \code{x} or \code{y}
+will be stripped of their dates. Only the time will be considered.
 
-Both \code{POSIXct} and \code{POSIXlt} are objects that inherits the class \code{POSIXt}.
-Learn more about it in \link[base:DateTimeClasses]{base::DateTimeClasses}.
+Both \code{\link[base:as.POSIXlt]{POSIXct}} and \code{\link[base:as.POSIXlt]{POSIXlt}} are
+objects that inherits the class \code{\link[base:DateTimeClasses]{POSIXt}}. Learn more
+about it in \code{\link[base:DateTimeClasses]{?DateTimeClasses}}.
 }
 
 \subsection{\code{NA} values}{

@@ -2,7 +2,7 @@
 title: "Introduction to mctq"
 output: rmarkdown::html_vignette
 description: >
-  This article takes a quick tour of all standard Munich Chronotype 
+  This article takes a quick tour of all standard Munich ChronoType 
   Questionnaire (MCTQ) main functions from the `mctq` package.
 vignette: >
   %\VignetteIndexEntry{Introduction to mctq}
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 
-This article takes a quick tour of the Munich Chronotype Questionnaire (MCTQ) main functions from the `mctq` package. Please see the function documentation and other articles/vignettes for more details.
+This article takes a quick tour of the Munich ChronoType Questionnaire (MCTQ) main functions from the `mctq` package. Please see the function documentation and other articles/vignettes for more details.
 
 The same features presented here can also be used with $\mu$MCTQ. To make it easy for newcomers, some MCTQ$^{Shift}$ functions and other special functions are not shown.
 
@@ -102,7 +102,7 @@ data
 
 ## Workdays and work-free days variables
 
-`mctq` provides a complete and consistent toolkit to process Munich Chronotype Questionnaire (MCTQ) data. To start this process, we must first compute some MCTQ variables related to each section of the questionnaire.
+`mctq` provides a complete and consistent toolkit to process Munich ChronoType Questionnaire (MCTQ) data. To start this process, we must first compute some MCTQ variables related to each section of the questionnaire.
 
 We're going to use direct assigning while computing the MCTQ variables, just because is more straightforward for the examples. But, we recommend assigning variables to your dataset by using the `mutate()` function, included in the  [dplyr](https://dplyr.tidyverse.org/) package.
 
@@ -244,7 +244,7 @@ data <- data %>% dplyr::mutate(le_week_rounded = mctq::round_time(le_week))
 data %>% dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
 ```
 
-### `msf_sc()`: Chronotype or corrected local time of mid-sleep on work-free days
+### `msf_sc()`: Chronotype or sleep-corrected local time of mid-sleep on work-free days
 
 `msf_sc()` allows you to compute the chronotype, or corrected local time of mid-sleep on work-free days. It takes five arguments: `msf` (local time of mid-sleep on work-free days), `sd_w` (sleep duration on workdays), `sd_f` (sleep duration on work-free days), `sd_week`(average weekly sleep duration), and `alarm_f` (a `logical` object indicating if the respondent uses an alarm clock to wake up on work-free days).
 

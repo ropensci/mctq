@@ -7,22 +7,23 @@
 so(sprep, slat)
 }
 \arguments{
-\item{sprep}{An \code{hms} object corresponding to the \strong{local time of preparing
-to sleep} from a standard or shift version of the MCTQ questionnaire.}
+\item{sprep}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time
+of preparing to sleep} from a standard or shift version of the MCTQ
+questionnaire.}
 
-\item{slat}{A \code{Duration} object corresponding to the \strong{sleep latency or time
-to fall asleep after preparing to sleep} from a standard or shift version
-of the MCTQ questionnaire.}
+\item{slat}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep latency or time to fall asleep after preparing to sleep} from a
+standard or shift version of the MCTQ questionnaire.}
 }
 \value{
-An \code{hms} object corresponding to the vectorized sum of \code{sprep} and
-\code{slat} in a circular time frame of 24 hours.
+An \code{\link[hms:hms]{hms}} object corresponding to the vectorized sum of
+\code{sprep} and \code{slat} in a circular time frame of 24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{so()} computes the \strong{local time of sleep onset} for standard and shift
-versions of the Munich Chronotype Questionnaire (MCTQ).
+versions of the Munich ChronoType Questionnaire (MCTQ).
 
 Note that this value is collected directly from the questionnaire if you're
 using the \eqn{\mu}MCTQ.
@@ -53,7 +54,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -68,12 +69,10 @@ Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 (\eqn{SO}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each section of the
-questionnaire.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item This computation must be applied to each section of the questionnaire.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -83,14 +82,14 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work
+\item \eqn{SPrep_{W/F}}{SPrep_W/F} = Local time of preparing to sleep on work
 \strong{or} work-free days ("I actually get ready to fall asleep at ___ o'clock").
-\item \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency or time to fall asleep after
+\item \eqn{SLat_{W/F}}{SLat_W/F} = Sleep latency or time to fall asleep after
 preparing to sleep on work \strong{or} work-free days ("I need ___ min to fall
 asleep").
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -100,18 +99,18 @@ SLat_W/F_M/E/N}}
 
 Where:
 \itemize{
-\item \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = local time of preparing to
+\item \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = Local time of preparing to
 sleep between two days in a particular shift \strong{or} between two free days
 after a particular shift ("I actually get ready to fall asleep at ___
 o'clock").
-\item \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency or time to fall
+\item \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = Sleep latency or time to fall
 asleep after preparing to sleep between two days in a particular shift \strong{or}
 between two free days after a particular shift ("I need ___ min to fall
 asleep").
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 

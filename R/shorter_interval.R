@@ -4,11 +4,11 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `shorter_interval()` finds and returns the shorter interval between two
-#' `hms` or `POSIXt` object hours.
+#' `shorter_interval()` returns the shorter interval between two
+#' [`hms`][hms::hms()] or [`POSIXt`][base::DateTimeClasses] object hours.
 #'
-#' `longer_interval()` do the inverse of `shorter_interval()`, i.e.,
-#' finds the longer interval between two hours.
+#' `longer_interval()` do the inverse of `shorter_interval()`, i.e., returns the
+#' longer interval between two hours.
 #'
 #' `shorter_duration()` and `longer_duration()` return the interval time span
 #' of `shorter_interval()` and `longer_interval()` as
@@ -35,7 +35,7 @@
 #' (from `x` to `x` + 1 day).
 #'
 #' In cases when `x` and `y` distance themselves by 12 hours, there will be no
-#' shorter or longer interval (they will have equal length). In those cases,
+#' shorter or longer interval (they will have equal length). In these cases,
 #' `shorter_interval()` and `longer_interval()` will return the same value
 #' (an interval of 12 hours).
 #'
@@ -81,15 +81,16 @@
 #' the start date for creating intervals.
 #'
 #' The output will always have `"UTC"` set as timezone. Learn more about
-#' time zones in [base::timezone].
+#' time zones in [`?timezone`][base::timezone].
 #'
 #' ## `POSIXt` objects
 #'
-#' `POSIXt` objects passed as argument to `x` or `y` will be stripped of their
-#' dates. Only the time will be considered.
+#' [`POSIXt`][base::DateTimeClasses] objects passed as argument to `x` or `y`
+#' will be stripped of their dates. Only the time will be considered.
 #'
-#' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
-#' Learn more about it in [base::DateTimeClasses].
+#' Both [`POSIXct`][base::as.POSIXct()] and [`POSIXlt`][base::as.POSIXlt()] are
+#' objects that inherits the class [`POSIXt`][base::DateTimeClasses]. Learn more
+#' about it in [`?DateTimeClasses`][base::DateTimeClasses].
 #'
 #' ## `NA` values
 #'
@@ -99,14 +100,15 @@
 #' `shorter_duration()` or `longer_duration()` will return a
 #' [`Duration`][lubridate::duration()] `NA`  if `x` or `y` are `NA`.
 #'
-#' @param x,y An [`hms`][hms::hms()] or [`POSIXt`][base::as.POSIXct()] object.
+#' @param x,y An [`hms`][hms::hms()] or [`POSIXt`][base::DateTimeClasses]
+#'   object.
 #'
 #' @return
 #'
 #' * For `shorter_interval()` or `longer_interval()`, an
 #' [`Interval`][lubridate::interval()] object with the shorter or longer
 #' interval between `x` and `y`.
-#' * For `shorter_duration()` or `longer_duration()`, an
+#' * For `shorter_duration()` or `longer_duration()`, a
 #' [`Duration`][lubridate::duration()] object with the shorter or longer
 #' duration between `x` and `y`.
 #'

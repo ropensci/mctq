@@ -10,42 +10,44 @@ msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 }
 \arguments{
-\item{msf}{An \code{hms} object corresponding to the \strong{local time of mid-sleep on
-work-free days} from a standard, micro, or shift version of the MCTQ
-questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
+\item{msf}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
+mid-sleep on work-free days} from a standard, micro, or shift version of
+the MCTQ questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
 
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration on work
-days} from a standard, micro, or shift version of the MCTQ questionnaire.
-You can use \code{\link[=sdu]{sdu()}} to compute it.}
+\item{sd_w}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration on work days} from a standard, micro, or shift version of
+the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
-\item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration on
-work-free days} from a standard, micro, or shift version of the MCTQ
-questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
+\item{sd_f}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration on work-free days} from a standard, micro, or shift
+version of the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}} to
+compute it.}
 
-\item{sd_week}{A \code{Duration} object corresponding to the \strong{average weekly
-sleep duration} from a standard or micro version of the MCTQ questionnaire
-(you can use \code{\link[=sd_week]{sd_week()}} to compute it) \strong{or} the \strong{overall sleep
-duration of a particular shift} from a shift version of the MCTQ
-questionnaire (you can use \code{\link[=sd_overall]{sd_overall()}} to compute it).}
+\item{sd_week}{A \code{\link[lubridate:duration]{Duration}} object corresponding to
+the \strong{average weekly sleep duration} from a standard or micro version of
+the MCTQ questionnaire (you can use \code{\link[=sd_week]{sd_week()}} to
+compute it) \strong{or} the \strong{overall sleep duration of a particular shift}
+from a shift version of the MCTQ questionnaire (you can use
+\code{\link[=sd_overall]{sd_overall()}} to compute it).}
 
-\item{alarm_f}{A \code{logical} object corresponding to the \strong{alarm clock use on
-work-free days} from a standard, micro, or shift version of the MCTQ
-questionnaire. Note that, if \code{alarm_f == TRUE}, \code{msf_sc} cannot be
-computed, \code{msf_sc()} will return \code{NA} for those cases. For the
-\eqn{\mu}MCTQ, this value must be set as \code{FALSE} all times, since the
-questionnaire considers only the work-free days when the respondent does
-not use an alarm.}
+\item{alarm_f}{A \code{\link[base:logical]{logical}} object corresponding to the
+\strong{alarm clock use on work-free days} from a standard, micro, or shift
+version of the MCTQ questionnaire. Note that, if \code{alarm_f == TRUE},
+\code{msf_sc} cannot be computed, \code{msf_sc()} will return \code{NA} for these cases.
+For the \eqn{\mu}MCTQ, this value must be set as \code{FALSE} all times, since
+the questionnaire considers only the work-free days when the respondent
+does not use an alarm (e.g., \code{alarm_f = rep(FALSE, length(msf))}).}
 }
 \value{
-An \code{hms} object corresponding to the MCTQ chronotype or corrected
-local time of mid-sleep on work-free days.
+An \code{\link[hms:hms]{hms}} object corresponding to the MCTQ chronotype or
+sleep-corrected local time of mid-sleep on work-free days.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{msf_sc()} computes the \strong{chronotype or sleep-corrected local time of
 mid-sleep on work-free days} for standard, micro, and shift versions of the
-Munich Chronotype Questionnaire (MCTQ).
+Munich ChronoType Questionnaire (MCTQ).
 
 \code{chronotype()} is just a wrapper for \code{msf_sc()}.
 
@@ -78,7 +80,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -98,7 +100,7 @@ follows.
 wakes up with an alarm clock on work-free days (\eqn{Alarm_F}{Alarm_F}).
 \item For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
 each shift section of the questionnaire.
-\item \eqn{MSF_{sc}}{MSF_sc} is a proxy for the participant chronotype in
+\item \eqn{MSF_{sc}}{MSF_sc} is a proxy for the subject chronotype in
 standard and micro versions of the MCTQ.
 \item The basis for estimating chronotype in shift-workers is the mid-sleep on
 work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
@@ -111,10 +113,9 @@ conditions (e.g., age, light exposure). For epidemiological and genetic
 studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 populations of different age and sex compositions comparable (Roenneberg,
 Allebrandt, Merrow, & Vetter, 2012).
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -126,13 +127,13 @@ If SD_F > SD_W, MSF - (SD_F - SD_week) / 2}}
 
 Where:
 \itemize{
-\item \eqn{MSF} = local time of mid-sleep on work-free days.
-\item \eqn{SD_W} = sleep duration on workdays.
-\item \eqn{SD_F} = sleep duration on work-free days.
-\item \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
+\item \eqn{MSF} = Local time of mid-sleep on work-free days.
+\item \eqn{SD_W} = Sleep duration on workdays.
+\item \eqn{SD_F} = Sleep duration on work-free days.
+\item \eqn{SD_{week}}{SD_week} = Average weekly sleep duration.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -145,18 +146,18 @@ MSF - (SD_F_M/E/N - OSD_M/E/N) / 2}}
 
 Where:
 \itemize{
-\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = local time of mid-sleep between two free
+\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
 days after a particular shift.
-\item \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = sleep duration between two days in a
+\item \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = Sleep duration between two days in a
 particular shift.
-\item \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days
+\item \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = Sleep duration between two free days
 after a particular shift.
-\item \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = overall sleep duration of a
+\item \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = Overall sleep duration of a
 particular shift.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 
@@ -198,7 +199,7 @@ msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 03:45:00 # Expected
 #> 04:21:00 # Expected
 
-## A wrapper for msf_sc()
+## chronotype(): A wrapper for msf_sc()
 
 msf <- hms::parse_hms("07:00:00")
 sd_w <- lubridate::dhours(6)
@@ -215,10 +216,10 @@ sd_w <- lubridate::dhours(5.43678)
 sd_f <- lubridate::dhours(9.345111)
 sd_week <- lubridate::dhours(7.5453)
 alarm_f <- FALSE
-x <- msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
-x
+msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 04:46:00.3402 # Expected
-round_time(x)
+
+round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
 #> 04:46:00 # Expected
 }
 \references{

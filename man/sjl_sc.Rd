@@ -49,12 +49,13 @@ The output may also vary depending on the \code{method} used.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sjl_sc()} computes the \strong{Jankowski's (2017) sleep-corrected social jetlag}
-for standard, micro, and shift versions of the Munich Chronotype
+for standard, micro, and shift versions of the Munich ChronoType
 Questionnaire (MCTQ).
 
-\code{sjl_sc_rel()} it's just a wrapper for \code{sjl_sc()} with \code{abs = FALSE}. Please
-note that the Jankowski (2017) did not proposed a "relative" sleep-corrected
-social jetlag, but the user may consider using it.
+\code{sjl_sc_rel()} is just a wrapper for \code{sjl_sc()} with \code{abs = FALSE}.
+
+Please note that the Jankowski (2017) did not proposed a "relative"
+sleep-corrected social jetlag, but the user may consider using it.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -82,7 +83,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -95,8 +96,9 @@ only round your values after all computations are done. That way you avoid
 In an article published in 2017, Konrad S. Jankowski argued that the original
 formula for computing the social jetlag (\eqn{SJL}) captures not only the
 misalignment between social and biological time, but also the sleep debt
-resulting from sleep deprivation during workdays. Jankowski than proposed the
-following guideline for the \code{sjl_sc()} (\eqn{SJL_{sc}}{SJL_sc}) computation.
+resulting from sleep deprivation during workdays. Jankowski then proposed the
+following guideline for a sleep-corrected social jetlag
+(\eqn{SJL_{sc}}{SJL_sc}) computation.
 \subsection{Notes}{
 \itemize{
 \item The Jankowski's alternative is disputed. We recommend seeing
@@ -107,10 +109,9 @@ each shift section of the questionnaire.
 \item Due to time arithmetic issues, \code{sjl_sc()} does a slightly different
 computation by default than those proposed by the author mentioned above.
 See \code{vignette("sjl-computation", package = "mctq")} for more details.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -122,13 +123,13 @@ SE_F - SE_W |}{If SD_W > SD_F & SE_W <= SE_F, | SE_F - SE_W |}}
 
 Where:
 \itemize{
-\item \eqn{SO_W} = local time of sleep onset on workdays.
-\item \eqn{SE_W} = local time of sleep end on workdays.
-\item \eqn{SO_F} = local time of sleep onset on work-free days.
-\item \eqn{SE_F} = local time of sleep end on work-free days.
+\item \eqn{SO_W} = Local time of sleep onset on workdays.
+\item \eqn{SE_W} = Local time of sleep end on workdays.
+\item \eqn{SO_F} = Local time of sleep onset on work-free days.
+\item \eqn{SE_F} = Local time of sleep end on work-free days.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -142,18 +143,18 @@ Else, | SO_F_M/E/N - SO_W_M/E/N |}}
 
 Where:
 \itemize{
-\item \eqn{SO_W^{M/E/N}} = local time of sleep onset between two days in a
+\item \eqn{SO_W^{M/E/N}} = Local time of sleep onset between two days in a
 particular shift.
-\item \eqn{SE_W^{M/E/N}} = local time of sleep end between two days in a
+\item \eqn{SE_W^{M/E/N}} = Local time of sleep end between two days in a
 particular shift.
-\item \eqn{SO_F^{M/E/N}} = local time of sleep onset between two free days after
+\item \eqn{SO_F^{M/E/N}} = Local time of sleep onset between two free days after
 a particular shift.
-\item \eqn{SE_F^{M/E/N}} = local time of sleep end between two free days after a
+\item \eqn{SE_F^{M/E/N}} = Local time of sleep end between two free days after a
 particular shift.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 
@@ -202,33 +203,19 @@ sleep hours.
 \examples{
 ## Scalar example
 
-so_w <- hms::parse_hm("00:00")
-se_w <- hms::parse_hm("08:00")
-so_f <- hms::parse_hm("01:00")
-se_f <- hms::parse_hm("09:00")
-
-sjl_sc(so_w, se_w, so_f, se_f)
-#> [1] "3600s (~1 hours)" # Expected
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE)
-#> [1] "3600s (~1 hours)" # Expected
-sjl_sc_rel(so_w, se_w, so_f, se_f) # Wrapper function
-#> [1] "3600s (~1 hours)" # Expected
-sjl(msl(so_w, sdu(so_w, se_w)), msl(so_f, sdu(so_f, se_f)))
-#> [1] "3600s (~1 hours)" # Expected
-
 so_w <- hms::parse_hm("02:00")
 se_w <- hms::parse_hm("10:00")
-so_f <- hms::parse_hm("00:00")
+so_f <- hms::parse_hm("01:00")
 se_f <- hms::parse_hm("08:00")
 
 sjl_sc(so_w, se_w, so_f, se_f)
-#> [1] "7200s (~2 hours)" # Expected
+#> [1] "3600s (~1 hours)" # Expected
 sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE)
-#> [1] "-7200s (~-2 hours)" # Expected (negative sjl_sc)
+#> [1] "-3600s (~-1 hours)" # Expected (negative sjl_sc)
 sjl_sc_rel(so_w, se_w, so_f, se_f) # Wrapper function
-#> [1] "-7200s (~-2 hours)" # Expected (negative sjl_sc)
+#> [1] "-3600s (~-1 hours)" # Expected (negative sjl_sc)
 sjl(msl(so_w, sdu(so_w, se_w)), msl(so_f, sdu(so_f, se_f)))
-#> [1] "7200s (~2 hours)" # Expected
+#> [1] "5400s (~1.5 hours)" # Expected
 
 so_w <- hms::parse_hm("22:00")
 se_w <- hms::parse_hm("06:00")
@@ -244,10 +231,7 @@ sjl_sc_rel(so_w, se_w, so_f, se_f) # Wrapper function
 sjl(msl(so_w, sdu(so_w, se_w)), msl(so_f, sdu(so_f, se_f)))
 #> [1] "5400s (~1.5 hours)" # Expected
 
-so_w <- hms::parse_hm("00:30")
-se_w <- hms::parse_hm("07:30")
 so_f <- hms::as_hms(NA)
-se_f <- hms::parse_hm("09:00")
 
 sjl_sc(so_w, se_w, so_f, se_f)
 #> [1] NA # Expected
@@ -268,57 +252,7 @@ sjl_sc_rel(so_w, se_w, so_f, se_f) # Wrapper function
 sjl(msl(so_w, sdu(so_w, se_w)), msl(so_f, sdu(so_f, se_f)))
 #> [1] "3600s (~1 hours)" "3600s (~1 hours)" # Expected
 
-## Using different methods
-
-so_w <- hms::parse_hm("22:00")
-se_w <- hms::parse_hm("00:00")
-so_f <- hms::parse_hm("00:00")
-se_f <- hms::parse_hm("08:00")
-
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = "difference")
-#> [1] "-79200s (~-22 hours)" # Expected
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = "shorter") # Default method
-#> [1] "7200s (~2 hours)" # Expected
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = "longer")
-#> [1] "-79200s (~-22 hours)" # Expected
-
-so_w <- hms::parse_hm("02:00")
-se_w <- hms::parse_hm("10:00")
-so_f <- hms::parse_hm("03:00")
-se_f <- hms::parse_hm("11:00")
-
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = "difference")
-#> [1] "3600s (~1 hours)" # Expected
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = "shorter") # Default method
-#> [1] "3600s (~1 hours)" # Expected
-sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = "longer")
-#> [1] "-82800s (~-23 hours)" # Expected
-
-## Converting the output to 'hms'
-
-so_w <- hms::parse_hm("22:00")
-se_w <- hms::parse_hm("06:00")
-so_f <- hms::parse_hm("00:00")
-se_f <- hms::parse_hm("08:00")
-
-x <- sjl_sc(so_w, se_w, so_f, se_f)
-x
-#> [1] "7200s (~2 hours)" # Expected
-hms::as_hms(as.numeric(x))
-#> 02:00:00 # Expected
-
-## Rounding the output at the seconds level
-
-so_w <- hms::parse_hms("22:00:00.1234")
-se_w <- hms::parse_hm("06:00")
-so_f <- hms::parse_hm("00:00")
-se_f <- hms::parse_hm("10:00")
-
-x <- sjl_sc(so_w, se_w, so_f, se_f)
-x
-#> [1] "7199.87660002708s (~2 hours)" # Expected
-round_time(x)
-#> [1] "7200s (~2 hours)" # Expected
+## See other examples in '?sjl()'
 }
 \references{
 Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,

@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `sloss_week()` computes the __weekly sleep loss__ for the standard and micro
-#' versions of the Munich Chronotype Questionnaire (MCTQ).
+#' versions of the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
@@ -15,10 +15,9 @@
 #'
 #' ## Notes
 #'
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## Computation
 #'
@@ -29,16 +28,17 @@
 #'
 #' Where:
 #'
-#' * \eqn{SD_W} = sleep duration on workdays.
-#' * \eqn{SD_F} = sleep duration on work-free days.
+#' * \eqn{SD_W} = Sleep duration on workdays.
+#' * \eqn{SD_F} = Sleep duration on work-free days.
 #' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
-#' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+#' * \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 #' work ___ days per week").
-#' * \eqn{FD} = number of work-free days per week.
+#' * \eqn{FD} = Number of work-free days per week.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
-#' @return A `Duration` object corresponding to the weekly sleep loss.
+#' @return A [`Duration`][lubridate::duration()] object corresponding to the
+#'   weekly sleep loss.
 #'
 #' @inheritParams sd_week
 #' @template details_b
@@ -74,15 +74,15 @@
 #' sloss_week(sd_w, sd_f, wd)
 #' #> [1] "2571.42857142857s (~42.86 minutes)" "0s" # Expected
 #'
-#' ## Converting the output to `hms`
+#' ## Converting the output to 'hms'
 #'
 #' sd_w <- lubridate::dhours(4)
 #' sd_f <- lubridate::dhours(5)
 #' wd <- 3
-#' x <- sloss_week(sd_w, sd_f, wd)
-#' x
+#' sloss_week(sd_w, sd_f, wd)
 #' #> [1] "6171.42857142858s (~1.71 hours)" # Expected
-#' hms::as_hms(as.numeric(x))
+#'
+#' hms::as_hms(as.numeric(sloss_week(sd_w, sd_f, wd)))
 #' #> 01:42:51.428571 # Expected
 #'
 #' ## Rounding the output at the seconds level
@@ -90,10 +90,10 @@
 #' sd_w <- lubridate::dhours(5.8743)
 #' sd_f <- lubridate::dhours(7.4324)
 #' wd <- 6
-#' x <- sloss_week(sd_w, sd_f, wd)
-#' x
+#' sloss_week(sd_w, sd_f, wd)
 #' #> [1] "4807.85142857144s (~1.34 hours)" # Expected
-#' round_time(x)
+#'
+#' round_time(sloss_week(sd_w, sd_f, wd))
 #' #> [1] "4808s (~1.34 hours)" # Expected
 sloss_week <- function(sd_w, sd_f, wd) {
     assert_duration(sd_w, lower = lubridate::duration(0))
@@ -102,8 +102,8 @@ sloss_week <- function(sd_w, sd_f, wd) {
     checkmate::assert_integerish(wd, lower = 0, upper = 7)
     assert_identical(sd_w, sd_f, wd, type = "length")
 
-    # `sum_1` and `sum_2` exists to remove unnecessary warnings of the
-    # {lubridate} package when subtracting objects of class `Duration`.
+    # 'sum_1' and 'sum_2' exist to remove unnecessary warnings of the
+    # {lubridate} package when subtracting objects of class 'Duration'.
 
     wd <- as.integer(wd)
     sd_week <- sd_week(sd_w, sd_f, wd)

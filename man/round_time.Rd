@@ -7,7 +7,7 @@
 \alias{round_time.hms}
 \alias{round_time.POSIXct}
 \alias{round_time.POSIXlt}
-\title{Round time values}
+\title{Round time objects}
 \usage{
 round_time(x)
 
@@ -22,17 +22,21 @@ round_time(x)
 \method{round_time}{POSIXlt}(x)
 }
 \arguments{
-\item{x}{An object belonging to one of the following classes: \code{Duration},
-\code{difftime}, \code{hms}, \code{POSIXct}, or \code{POSIXlt}.}
+\item{x}{An object belonging to one of the following classes:
+\code{\link[lubridate:duration]{Duration}}, \code{\link[base:difftime]{difftime}},
+\code{\link[hms:hms]{hms}}, \code{\link[base:as.POSIXlt]{POSIXct}}, or
+\code{\link[base:as.POSIXlt]{POSIXlt}}.}
 }
 \value{
-An object of the same class of \code{x} rounded at the level of seconds.
+An object of the same class of \code{x} rounded at the seconds level.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{round_time()} takes a \code{Duration}, \code{difftime}, \code{hms}, \code{POSIXct}, or
-\code{POSIXlt} object and round it at the level of seconds.
+\code{round_time()} takes a \code{\link[lubridate:duration]{Duration}},
+\code{\link[base:difftime]{difftime}}, \code{\link[hms:hms]{hms}},
+\code{\link[base:as.POSIXlt]{POSIXct}}, or \code{\link[base:as.POSIXlt]{POSIXlt}} object
+and round it at the seconds level.
 }
 \details{
 \subsection{Round standard}{
@@ -40,23 +44,24 @@ An object of the same class of \code{x} rounded at the level of seconds.
 \code{round_time()} uses \code{\link[base:Round]{base::round()}} for rounding. That is to say that
 \code{round_time()} uses the same IEC 60559 standard (\emph{"go to the even digit"})
 for rounding off a 5. Therefore, \code{round(0.5)} is equal to 0 and \code{round(-1.5)}
-is equal to -2. See \code{?round} to learn more.
+is equal to -2. See \code{\link[base:Round]{?round}} to learn more.
 }
 
 \subsection{\code{Period} objects}{
 
-\code{\link[lubridate:period]{Period}} objects are a special type of object
+\code{\link[lubridate:period]{Period}} objects are special type of objects
 developed by the \link[lubridate:lubridate-package]{lubridate} team that
 represents "human units", ignoring possible timeline irregularities. That is
 to say that 1 day as \code{Period} can have different time spans, when looking to
 a timeline after a irregularity event.
 
-Since the time span of a \code{Period} object can fluctuate, \code{round_time()} don't
-accept this kind of object. You can transform it to a \code{Duration} object and
-still use the function, but beware that this can produce errors.
+Since the time span of a \code{\link[lubridate:period]{Period}} object can
+fluctuate, \code{round_time()} don't accept this kind of object. You can transform
+it to a \code{\link[lubridate:duration]{Duration}} object and still use the
+function, but beware that this can produce errors.
 
-Learn more about \code{Period} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
-Wickham & Grolemund (n.d.).
+Learn more about \code{\link[lubridate:period]{Period}} objects in the \href{https://r4ds.had.co.nz/dates-and-times.html#periods}{Dates and times} chapter of
+Wickham & Grolemund book (n.d.).
 }
 }
 \examples{
@@ -88,10 +93,9 @@ as.numeric(round_time(lubridate::as_datetime(12345.6789, tz = "EST")))
 
 ## Vector example
 
-x <- c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))
-x
+c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))
 #> [1] "20515.32s (~5.7 hours)"    "9675.05544s (~2.69 hours)" # Expected
-round_time(x)
+round_time(c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154)))
 #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 }
 \references{
@@ -99,8 +103,9 @@ Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
 O'Reilly Media. \url{https://r4ds.had.co.nz}
 }
 \seealso{
-Other date-time rounding functions: \code{\link[hms:round_hms]{hms::round_hms()}}
-\code{\link[hms:round_hms]{hms::trunc_hms()}} \code{\link[lubridate:round_date]{lubridate::round_date()}}.
+Other date-time rounding functions:
+\code{\link[hms:round_hms]{round_hms()}} \code{\link[hms:round_hms]{trunc_hms()}}
+\code{\link[lubridate:round_date]{round_date()}}.
 
 Other utility functions: 
 \code{\link{assign_date}()},

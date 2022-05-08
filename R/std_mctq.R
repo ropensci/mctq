@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' A fictional dataset, __for testing and learning purposes__, composed of
-#' basic/measurable and computed variables of the Munich Chronotype
+#' basic/measurable and computed variables of the Munich ChronoType
 #' Questionnaire (MCTQ) standard version.
 #'
 #' This data was created following the guidelines in Roenneberg, Wirz-Justice, &
@@ -20,7 +20,7 @@
 #'
 #' ## Guidelines
 #'
-#' To learn more about the Munich Chronotype Questionnaire (MCTQ),
+#' To learn more about the Munich ChronoType Questionnaire (MCTQ),
 #' see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
 #' Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 #' Zerbini, & Winnebeck (2019).
@@ -71,7 +71,8 @@
 #'   \cr \cr
 #'   Type: Control.
 #'   \cr \cr
-#'   R class: [`integer`][base::integer()].}
+#'   R class: [`integer`][base::integer()].
+#'   }
 #'
 #'
 #'   \item{work}{
@@ -83,7 +84,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`logical`][base::logical()].}
+#'   R class: [`logical`][base::logical()].
+#'   }
 #'
 #'   \item{wd}{
 #'   Number of __workdays__ per week.
@@ -93,14 +95,16 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`integer`][base::integer()].}
+#'   R class: [`integer`][base::integer()].
+#'   }
 #'
 #'   \item{fd}{
 #'   Number of __work-free days__ per week.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`integer`][base::integer()].}
+#'   R class: [`integer`][base::integer()].
+#'   }
 #'
 #'
 #'   \item{bt_w}{
@@ -110,7 +114,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{sprep_w}{
 #'   Local time of preparing to sleep on __workdays__.
@@ -119,7 +124,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{slat_w}{
 #'   Sleep latency or time to fall asleep after preparing to sleep on
@@ -129,14 +135,16 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{so_w}{
 #'   Local time of sleep onset on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{se_w}{
 #'   Local time of sleep end on __workdays__.
@@ -145,7 +153,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{si_w}{
 #'   "Sleep inertia" on __workdays__.
@@ -157,14 +166,16 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{gu_w}{
 #'   Local time of getting out of bed on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{alarm_w}{
 #'   A [`logical`][base::logical()] value indicating if the respondent uses an
@@ -175,7 +186,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`logical`][base::logical()].}
+#'   R class: [`logical`][base::logical()].
+#'   }
 #'
 #'   \item{wake_before_w}{
 #'   A [`logical`][base::logical()] value indicating if the respondent regularly
@@ -186,21 +198,24 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`logical`][base::logical()].}
+#'   R class: [`logical`][base::logical()].
+#'   }
 #'
 #'   \item{sd_w}{
 #'   Sleep duration on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{tbt_w}{
 #'   Total time in bed on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{le_w}{
 #'   Light exposure on __workdays__.
@@ -210,14 +225,16 @@
 #'   \cr \cr
 #'   Type: Extra.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{msw}{
 #'   Local time of mid-sleep on __workdays__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'
 #'   \item{bt_f}{
@@ -227,7 +244,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{sprep_f}{
 #'   Local time of preparing to sleep on __work-free days__.
@@ -236,7 +254,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{slat_f}{
 #'   Sleep latency or time to fall asleep after preparing to sleep on
@@ -246,14 +265,16 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{so_f}{
 #'   Local time of sleep onset on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{se_f}{
 #'   Local time of sleep end on __work-free days__.
@@ -262,7 +283,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{si_f}{
 #'   "Sleep inertia" on __work-free days__.
@@ -274,14 +296,16 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{gu_f}{
 #'   Local time of getting out of bed on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{alarm_f}{
 #'   A [`logical`][base::logical()] value indicating if the respondent uses an
@@ -292,7 +316,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`logical`][base::logical()].}
+#'   R class: [`logical`][base::logical()].
+#'   }
 #'
 #'   \item{reasons_f}{
 #'   A [`logical`][base::logical()] value indicating if the respondent has any
@@ -304,7 +329,8 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: [`logical`][base::logical()].}
+#'   R class: [`logical`][base::logical()].
+#'   }
 #'
 #'   \item{reasons_why_f}{
 #'   Particular reasons for why the respondent cannot freely choose their sleep
@@ -315,21 +341,24 @@
 #'   \cr \cr
 #'   Type: Basic.
 #'   \cr \cr
-#'   R class: `character`.}
+#'   R class: `character`.
+#'   }
 #'
 #'   \item{sd_f}{
 #'   Sleep duration on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{tbt_f}{
 #'   Total time in bed on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{le_f}{
 #'   Light exposure on __work-free days__.
@@ -339,14 +368,16 @@
 #'   \cr \cr
 #'   Type: Extra.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{msf}{
 #'   Local time of mid-sleep on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'
 #'   \item{sd_week}{
@@ -354,56 +385,64 @@
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{sloss_week}{
 #'   Weekly sleep loss.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{le_week}{
 #'   Average weekly light exposure.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{msf_sc}{
 #'   Chronotype or corrected local time of mid-sleep on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`hms`][hms::hms()].}
+#'   R class: [`hms`][hms::hms()].
+#'   }
 #'
 #'   \item{sjl_rel}{
 #'   Relative social jetlag.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{sjl}{
 #'   Absolute social jetlag.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{sjl_sc_rel}{
 #'   Jankowski's relative sleep-corrected social jetlag.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #'
 #'   \item{sjl_sc}{
 #'   Jankowski's sleep-corrected social jetlag.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr
-#'   R class: [`Duration`][lubridate::duration()].}
+#'   R class: [`Duration`][lubridate::duration()].
+#'   }
 #' }
 #'
 #' @source Created by Daniel Vartanian (package author).

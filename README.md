@@ -29,10 +29,10 @@ button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](h
 
 ## Overview
 
-`mctq` is an R package that provides a complete and consistent toolkit
-to process the Munich ChronoType Questionnaire (MCTQ), a quantitative
-and validated tool to assess chronotypes using peoples’ sleep behavior
-presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
+`mctq` is an R package that provides a complete toolkit to process the
+Munich ChronoType Questionnaire (MCTQ), a quantitative and validated
+tool to assess chronotypes using peoples’ sleep behavior presented by
+Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
 to facilitate the work of sleep and chronobiology scientists with MCTQ
 data and help with research reproducibility.
@@ -202,18 +202,18 @@ citation("mctq")
 #> 
 #> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2021).
-#>   {mctq}: an R package for the Munich ChronoType Questionnaire.
-#>   https://docs.ropensci.org/mctq/
+#>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2022).
+#>   {mctq}: an R package for the Munich ChronoType Questionnaire (v.
+#>   0.2.0). https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
 #>     title = {{mctq}: an R package for the Munich ChronoType Questionnaire},
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
-#>     year = {2021},
+#>     year = {2022},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {Lifecycle: maturing},
+#>     note = {(v. 0.2.0). Lifecycle: maturing},
 #>   }
 ```
 
@@ -230,17 +230,16 @@ project, you agree to abide by its terms.
 ## Acknowledgments
 
 `mctq` is supported by the [Interdisciplinary Sleep Research Group
-(GIPSO)](https://github.com/gipso) of [University of Sao Paulo
+(GIPSO)](https://gipso.netlify.app/) of [University of Sao Paulo
 (USP)](http://usp.br/).
 
 `mctq` hex logo was based on an illustration created by [hilda design
 matters Zurich](https://hilda.ch/) for the [Daylight Academy
 (DLA)](https://daylight.academy/).
 
-[![Buy Me A Coffee donate
-button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://ko-fi.com/danielvartan)
+<br>
 
-Become an `mctq` supporter! To make a donation click on the button
-above.
+Become an `mctq` supporter!
 
-Please indicate the `mctq` package in your donation message.
+Click [here](https://ko-fi.com/danielvartan) to make a donation. Please
+indicate the `mctq` package in your donation message.

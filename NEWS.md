@@ -2,14 +2,12 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
-# mctq (development version)
+# mctq 0.2.0 (2022-05-08)
 
-* The documentation was updated to add
-[CRAN](https://cran.r-project.org/package=mctq) installation instructions.
 * Some minor documentation issues were resolved.
 * `shorter_interval()` now don't have the `inverse` argument. Use `longer_interval()` instead.
 * `shorter_duration()` and `longer_duration()`, two functions that return the shorter and the longer duration between two hours, were introduced.
-* `sjl_sc()` and `sjl_sc_rel()`, two functions that allows the user to compute Jankowski's MCTQ sleep-corrected social jet lag, were introduced.
+* `sjl_sc()` and `sjl_sc_rel()`, two functions that allow the user to compute Jankowski's MCTQ sleep-corrected social jet lag, were introduced.
 
 
 # mctq 0.1.0 (2021-11-04)

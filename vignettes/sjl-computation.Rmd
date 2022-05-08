@@ -3,7 +3,7 @@ title: "Social jetlag computation"
 output: rmarkdown::html_vignette
 description: >
   This article shows some notes about different approaches that can be used to
-  compute the social jetlag for the Munich Chronotype Questionnaire (MCTQ). It 
+  compute the social jetlag for the Munich ChronoType Questionnaire (MCTQ). It 
   also explains how the 'method' argument from the 'sjl_rel()', 'sjl()', 
   'sjl_sc_rel()', and 'sjl_sc()' functions works.
 vignette: >
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This article shows some notes about different approaches that can be used to compute the social jetlag ($SJL$) for the Munich Chronotype Questionnaire (MCTQ). It also explains how the `method` argument from the `sjl_rel()`, `sjl()`, `sjl_sc_rel()`, and `sjl_sc()` functions works.
+This article shows some notes about different approaches that can be used to compute the social jetlag ($SJL$) for the Munich ChronoType Questionnaire (MCTQ). It also explains how the `method` argument from the `sjl_rel()`, `sjl()`, `sjl_sc_rel()`, and `sjl_sc()` functions works.
 
 It's a good idea to have the standard MCTQ questionnaire and the guidelines for the standard MCTQ variable computation open while reading this article/vignette. That way you can have a better understanding of the data objects we are going to deal with. You can download a copy of the MCTQ full standard version  [here](https://www.thewep.org/documentations/mctq/item/english-mctq-full). Click [here](https://www.thewep.org/documentations/mctq/item/mctq-variables) to download a copy of the guidelines for the standard MCTQ variables.
 

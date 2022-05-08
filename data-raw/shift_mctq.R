@@ -1,7 +1,7 @@
 # # Notes
 #
 # * Source the file before running the functions.
-# * Don't forget to uncomment the `library` functions below.
+# * Don't forget to uncomment the 'library' functions below.
 
 # library(checkmate)
 # library(dplyr)
@@ -20,15 +20,18 @@
 #'
 #' `build_shift_mctq()` builds a fictional raw dataset, __for testing and
 #' learning purposes__, composed of basic/measurable variables of the Munich
-#' Chronotype Questionnaire (MCTQ) shift version. See [mctq::shift_mctq] to
-#' learn more.
+#' ChronoType Questionnaire (MCTQ) shift version. See
+#' [`?shift_mctq`][mctq::shift_mctq] to learn more.
 #'
-#' @param write (optional) a `logical` value indicating if the function must
-#'   write a `shift_mctq.csv` file to `"./inst/extdata/"` (default: `FALSE`).
-#' @param random_cases (optional) a `logical` value indicating if the function
-#'   must add random MCTQ cases besides the core ones.
+#' @param write (optional) a [`logical`][base::logical()] value indicating if
+#'   the function must write a `shift_mctq.csv` file to `"./inst/extdata/"`
+#'   (default: `FALSE`).
+#' @param random_cases (optional) a [`logical`][base::logical()] value
+#'   indicating if the function must add random MCTQ cases besides the core
+#'   ones.
 #'
-#' @return An invisible `tibble` with a raw MCTQ\eqn{^{Shift}}{ Shift} dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a raw
+#'   MCTQ\eqn{^{Shift}}{ Shift} dataset.
 #'
 #' @family data functions
 #' @importFrom magrittr %>%
@@ -38,8 +41,9 @@
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::build_shift_mctq())
-#' }}
+#'     utils::View(build_shift_mctq())
+#' }
+#' }
 build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
     # Check arguments -----
 
@@ -1069,12 +1073,12 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
     invisible(shift_mctq)
 }
 
-#' Tidy [mctq::build_shift_mctq()] output
+#' Tidy `build_shift_mctq()` output
 #'
 #' @description
 #'
-#' `tidy_shift_mctq` tidy the output of [mctq::build_shift_mctq()]. See
-#' [mctq::shift_mctq] to learn more.
+#' `tidy_shift_mctq` tidy the output of `build_shift_mctq()`. See
+#' [`?shift_mctq`][mctq::shift_mctq] to learn more.
 #'
 #' @details
 #'
@@ -1084,16 +1088,17 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' Grolemund (n.d.).
 #'
 #' Please note that input data is not the same as valid data. To get a valid
-#' `shift_mctq` data, run [mctq::validate_shift_mctq()].
+#' `shift_mctq` data, run `validate_shift_mctq()`.
 #'
 #' To learn more about the concept of tidy data, see Wickham (2014) and
 #' Wickham and Grolemund (n.d.).
 #'
-#' @param write (optional) a `logical` value indicating if the function must
-#'   write a `shift_mctq.rda` file to `"./data/"` (default: `FALSE`).
+#' @param write (optional) a [`logical`][base::logical()] value indicating if
+#'   the function must write a `shift_mctq.rda` file to `"./data/"` (default:
+#'   `FALSE`).
 #'
-#' @return An invisible `tibble` with a tidied, but not validated,
-#'   MCTQ\eqn{^{Shift}}{ Shift} dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a tidied, but not
+#'   validated, MCTQ\eqn{^{Shift}}{ Shift} dataset.
 #'
 #' @template references_e
 #' @family data functions
@@ -1105,8 +1110,9 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' \dontrun{
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::tidy_shift_mctq())
-#' }}
+#'     utils::View(tidy_shift_mctq())
+#' }
+#' }
 tidy_shift_mctq <- function(write = FALSE) {
     # Check arguments -----
 
@@ -1226,12 +1232,12 @@ tidy_shift_mctq <- function(write = FALSE) {
     invisible(shift_mctq)
 }
 
-#' Validate [mctq::tidy_shift_mctq()] output
+#' Validate `tidy_shift_mctq()` output
 #'
 #' @description
 #'
-#' `validate_shift_mctq()` validates the output of [mctq::tidy_shift_mctq()].
-#' See [mctq::shift_mctq] to learn more.
+#' `validate_shift_mctq()` validates the output of `tidy_shift_mctq()`.
+#' See [`?shift_mctq`][mctq::shift_mctq] to learn more.
 #'
 #' @details
 #'
@@ -1243,8 +1249,8 @@ tidy_shift_mctq <- function(write = FALSE) {
 #' This process can be considered as part of the process of transforming data,
 #' described in the workflow proposed by Wickham and Grolemund (n.d.).
 #'
-#' @return An invisible `tibble` with a validated MCTQ\eqn{^{Shift}}{ Shift}
-#'   dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a validated
+#'   MCTQ\eqn{^{Shift}}{ Shift} dataset.
 #'
 #' @inheritParams tidy_shift_mctq
 #' @template references_d
@@ -1256,8 +1262,9 @@ tidy_shift_mctq <- function(write = FALSE) {
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::validate_shift_mctq())
-#' }}
+#'     utils::View(validate_shift_mctq())
+#' }
+#' }
 validate_shift_mctq <- function(write = FALSE) {
     # To do -----
     #
@@ -1386,13 +1393,13 @@ validate_shift_mctq <- function(write = FALSE) {
     invisible(shift_mctq)
 }
 
-#' Analyze [mctq::validate_shift_mctq()] output
+#' Analyze `validate_shift_mctq()` output
 #'
 #' @description
 #'
 #' `analyse_shift_mctq()` computes and creates the non-measured MCTQ variables
-#' based on the output of [mctq::validate_shift_mctq()]. See [mctq::shift_mctq]
-#' to learn more.
+#' based on the output of `validate_shift_mctq()`. See
+#' [`?shift_mctq`][mctq::shift_mctq] to learn more.
 #'
 #' @details
 #'
@@ -1401,8 +1408,8 @@ validate_shift_mctq <- function(write = FALSE) {
 #' process of transforming data, described in the workflow proposed by Wickham
 #' and Grolemund (n.d.).
 #'
-#' @return An invisible `tibble` with all the variables proposed for a
-#'   MCTQ\eqn{^{Shift}}{ Shift} dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with all the variables
+#'   proposed for a MCTQ\eqn{^{Shift}}{ Shift} dataset.
 #'
 #' @inheritParams tidy_shift_mctq
 #' @inheritParams pretty_mctq
@@ -1415,8 +1422,9 @@ validate_shift_mctq <- function(write = FALSE) {
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::analyze_shift_mctq())
-#' }}
+#'     utils::View(analyze_shift_mctq())
+#' }
+#' }
 analyze_shift_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     # Check arguments -----
 

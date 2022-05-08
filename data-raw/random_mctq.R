@@ -1,7 +1,7 @@
 # # Notes
 #
 # * Source the file before running the functions.
-# * Don't forget to uncomment the `library` functions below.
+# * Don't forget to uncomment the 'library' functions below.
 
 # library(checkmate)
 # library(cli)
@@ -15,10 +15,10 @@
 #'
 #' @description
 #'
-#' `std_mctq_par()` computes and prints the Munich Chronotype Questionnaire
-#' (MCTQ) reference distribution parameters that is used on [mctq::random_mctq]
-#' for __standard__ and __micro__ versions of the questionnaire. See
-#' [mctq::random_mctq] to learn more.
+#' `std_mctq_par()` computes and prints the Munich ChronoType Questionnaire
+#' (MCTQ) reference distribution parameters that is used on
+#' [`random_mctq()`][mctq::random_mctq] for __standard__ and __micro__ versions
+#' of the questionnaire. See [`random_mctq()`][mctq::random_mctq] to learn more.
 #'
 #' @details
 #'
@@ -27,17 +27,15 @@
 #'
 #' We assume that all variables have normal distributions and that the minimal
 #' and maximum values are, respectively, __\eqn{-3 s}__ and __\eqn{+3 s}__ from
-#' the mean (where __\eqn{s}__ is the standard deviation of the sample).
+#' the mean, where __\eqn{s}__ is the standard deviation of the sample.
 #'
 #' Please note that:
 #'
 #' * This is just a rough approximation, it by no means represents the same
 #' distributions from the base article.
-#'
 #' * The distribution parameters from other variables not shown (like sleep
 #' latency) were created based on the experience of the package authors with
 #' MCTQ data.
-#'
 #' * These values are just for reference while building the random cases. If you
 #' group several random MCTQ cases, these numbers can have some variation.
 #'
@@ -164,15 +162,15 @@ std_mctq_par <- function() {
 #'
 #' @description
 #'
-#' `shift_mctq_par()` computes and prints the Munich Chronotype Questionnaire
-#' (MCTQ) reference distribution parameters that is used on [mctq::random_mctq]
-#' for the __shift__ version of the questionnaire. See [mctq::random_mctq] to
-#' learn more.
+#' `shift_mctq_par()` computes and prints the Munich ChronoType Questionnaire
+#' (MCTQ) reference distribution parameters that is used on
+#' [`random_mctq()`][mctq::random_mctq] for the __shift__ version of the
+#' questionnaire. See [`random_mctq()`][mctq::random_mctq] to learn more.
 #'
 #' @details
 #'
 #' The parameters were based on the distributions shown in Juda, Vetter, &
-#' Roenneberg (2013) (Table 2 and Table 3).
+#' Roenneberg (2013) (Table 2 and 3).
 #'
 #' We assume that all variables have normal distributions and that the minimal
 #' and maximum values are, respectively, __\eqn{-3 s}__ and __\eqn{+3 s}__ from
@@ -182,15 +180,12 @@ std_mctq_par <- function() {
 #'
 #' * This is just a rough approximation, it by no means represents the same
 #' distributions from the mentioned article.
-#'
 #' * This distribution values include those who indicated to be woken up
 #' involuntarily (by an alarm clock or other disturbances) on free days
 #' following any shift. This can shift these values down.
-#'
 #' * The distribution parameters from other variables not shown here (like
 #' bedtime) were created based on the experience of the package authors with
 #' MCTQ data.
-#'
 #' * These values are just for reference while building the random cases. If you
 #' group several random MCTQ cases, these numbers can have some variation.
 #'
@@ -413,23 +408,22 @@ shift_mctq_par <- function() {
     invisible(NULL)
 }
 
-#' Test the creation of [mctq::random_mctq] cases
+#' Test the creation of `random_mctq()` cases
 #'
 #' @description
 #'
-#' `force_random_mctq()` tests [mctq::random_mctq] ability to create cases
-#' by forcing it to produce a number of sequential cases.
+#' `force_random_mctq()` tests [`random_mctq()`][mctq::random_mctq] ability to
+#' create cases by forcing it to produce a number of sequential cases.
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"`.
-#' @param iterations An [integerish][checkmate::test_integerish()] `numeric`
-#'   object or an `integer` object, of length `1`, corresponding to the number
-#'   of iterations while running [mctq::random_mctq] (default: `100`).
-#' @param seed An [integerish][checkmate::test_integerish()] `numeric` object or
-#'   an `integer` object, of length `1`, corresponding to the seed number for
+#' @param iterations An integer number corresponding to the number of iterations
+#'   while running [`random_mctq()`][mctq::random_mctq] (default: `100`).
+#' @param seed An integer number corresponding to the seed number for
 #'   random generation (see [base::set.seed] to learn more) (default: `1`).
 #'
-#' @return An invisible `tibble` with rows representing each iteration.
+#' @return An invisible [`tibble`][dplyr::tibble()] with rows representing each
+#'   iteration.
 #'
 #' @family random_mctq functions
 #' @noRd
@@ -455,25 +449,26 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
     invisible(out)
 }
 
-#' Print a [mctq::random_mctq] raw case code
+#' Print a `random_mctq()` raw case code
 #'
 #' @description
 #'
-#' `random_mctq_raw_code()` prints a [mctq::random_mctq] raw case code to be
-#' used with `build_<model>_mctq`. Its purpose is to help programming special
-#' MCTQ cases for [mctq::std_mctq], [mctq::micro_mctq], and [mctq::shift_mctq]
+#' `random_mctq_raw_code()` prints a [`random_mctq()`][mctq::random_mctq] raw
+#' case code to be used with a `build_<model>_mctq()`function. Its purpose is to
+#' help programming special MCTQ cases for [`std_mctq`][mctq::std_mctq],
+#' [`micro_mctq`][mctq::micro_mctq], and [`shift_mctq`][mctq::shift_mctq]
 #' datasets.
 #'
 #' @details
 #'
 #' The seed used for random generation is the result of `sample(100:200, 1)`
-#' (see [base::set.seed] to learn more).
+#' (see [`?set.seed`][base::set.seed] to learn more).
 #'
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"`.
-#' @param clipboard A `logical` value indicating if the case code must be
-#'   transfered to the Windwos clipboard. See [utils::utils::writeClipboard] to
-#'   learn more (default: `TRUE`).
+#' @param clipboard A [`logical`][base::logical()] value indicating if the case
+#'   code must be transfered to the Windows clipboard. See
+#'   [`?writeClipboard`][utils::writeClipboard] to learn more (default: `TRUE`).
 #'
 #' @family random_mctq functions
 #' @noRd
@@ -482,7 +477,8 @@ force_random_mctq <- function(model, iterations = 100, seed = 1) {
 #' \dontrun{
 #' random_mctq_raw_code("standard")
 #' random_mctq_raw_code("micro")
-#' random_mctq_raw_code("shift")}
+#' random_mctq_raw_code("shift")
+#' }
 random_mctq_raw_code <- function(model, clipboard = TRUE) {
     checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
 

@@ -15,32 +15,35 @@ qplot_walk(
 )
 }
 \arguments{
-\item{data}{An \code{atomic} or \code{data.frame} object.}
+\item{data}{An \code{\link[base:is.recursive]{atomic}} or a
+\code{\link[base:data.frame]{data.frame}} object.}
 
 \item{...}{(optional) additional arguments to be passed to
-\code{\link[ggplot2:qplot]{ggplot2::qplot()}}.}
+\code{\link[ggplot2:qplot]{qplot()}}.}
 
-\item{cols}{(optional) (only for data frames) a \code{character} object indicating
-column names in \code{data} for plotting. If \code{NULL}, \code{qplot_walk()} will use
-all columns in \code{data}. This setting only works if \code{pattern = NULL}
-(default: \code{NULL}).}
+\item{cols}{(optional) (only for data frames) a
+\code{\link[base:character]{character}} object indicating column names in \code{data}
+for plotting. If \code{NULL}, \code{qplot_walk()} will use all columns in \code{data}.
+This setting only works if \code{pattern = NULL} (default: \code{NULL}).}
 
 \item{pattern}{(optional) (only for data frames) a string with a regular
 expression to select column names in \code{data} for plotting. This setting
 only works if \code{cols = NULL} (default: \code{NULL}).}
 
-\item{ignore}{(optional) (only for data frames) a \code{character} object
-indicating which object classes the function must ignore. This setting can
-be used with \code{cols} and \code{pattern}. Assign \code{NULL} to disable this behavior
-(default: \code{"character"}).}
+\item{ignore}{(optional) (only for data frames) a
+\code{\link[base:character]{character}} object indicating which object classes the
+function must ignore. This setting can be used with \code{cols} and \code{pattern}.
+Assign \code{NULL} to disable this behavior (default: \code{"character"}).}
 
-\item{remove_id}{(optional) (only for data frames) a logical value indicating
-if the function must ignore column names in \code{data} that match with the
-regular expression \code{"^id$|[\\\\._-]id$"} (default: \code{TRUE}).}
+\item{remove_id}{(optional) (only for data frames) a
+\code{\link[base:logical]{logical}} value indicating if the function must ignore
+column names in \code{data} that match with the regular expression
+\code{"^id$|[\\\\._-]id$"} (default: \code{TRUE}).}
 
-\item{midday_change}{(optional) a logical value indicating if the function
-must apply a midday change for \code{hms} variables with values greater than
-\code{22:00:00} (see Details section to learn more) (default: \code{TRUE}).}
+\item{midday_change}{(optional) a \code{\link[base:logical]{logical}} value
+indicating if the function must apply a midday change for
+\code{\link[hms:hms]{hms}} variables with values greater than \code{22:00:00} (see
+the Details section to learn more) (default: \code{TRUE}).}
 }
 \value{
 An invisible \code{NULL}. This function don't aim to return values.
@@ -48,58 +51,65 @@ An invisible \code{NULL}. This function don't aim to return values.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{qplot_walk()} helps you to visually assess the distribution of your data.
-It uses \code{\link[ggplot2:qplot]{ggplot2::qplot()}} to walk through each selected variable from a
-data frame.
+\code{qplot_walk()} helps you to visually assess the distribution of your data. It
+uses \code{\link[ggplot2:qplot]{qplot()}} to walk through each selected variable
+from a data frame.
 }
 \details{
 \subsection{Requirements}{
 
-This function requires the \code{\link[grDevices:grDevices-package]{grDevices}} and
-\code{\link[ggplot2:ggplot2-package]{ggplot2}} package and can only run in interactive
-mode. The \code{grDevices} package comes with a standard R installation and is
-typically loaded by default. Most people also run R interactively.
+This function requires the \code{\link[utils:utils-package]{utils}},
+\code{\link[grDevices:grDevices-package]{grDevices}}, and
+\code{\link[ggplot2:ggplot2-package]{ggplot2}} packages and can only run in
+interactive mode. The \code{\link[utils:utils-package]{utils}} and
+\code{\link[grDevices:grDevices-package]{grDevices}} packages comes with a standard R
+installation and is typically loaded by default. Most people also run R
+interactively.
 
-If you don't have any of the two packages mentioned above, you can install
-them with \code{install.packages("grDevices")} and \code{install.packages("ggplot2")}.
+If you don't have any or one of the packages mentioned above, you can install
+them with \code{install.packages("utils")}, \code{install.packages("grDevices")}, and
+\code{install.packages("ggplot2")}.
 }
 
 \subsection{Plot recover}{
 
-\code{qplot_walk()} erases all plots after it runs. For that reason, the function
+\code{qplot_walk()} clears all plots after it runs. For that reason, the function
 first emits a dialog message warning the user of this behavior before it
 runs. If you want to recover a single distribution plot, assign the variable
 vector to the \code{data} argument.
 }
 
-\subsection{Additional arguments to \code{\link[ggplot2:qplot]{ggplot2::qplot()}}}{
+\subsection{Additional arguments to \code{\link[ggplot2:qplot]{qplot()}}}{
 
-\code{qplot_walk()} uses ggplot2 \code{\link[ggplot2:qplot]{ggplot2::qplot()}} to generate plots. If you are
-familiar with \code{\link[ggplot2:qplot]{ggplot2::qplot()}}, you can pass additional arguments to the
-function using the ellipsis argument (\code{...}).
+\code{qplot_walk()} uses ggplot2 \code{\link[ggplot2:qplot]{qplot()}} to generate plots.
+If you are familiar with \code{\link[ggplot2:qplot]{qplot()}}, you can pass
+additional arguments to the function using the ellipsis argument (\code{...}).
 
 Note that \code{x}, \code{y}, and \code{data} arguments are reserved for \code{qplot_walk()}.
 }
 
 \subsection{\code{Duration}, \code{Period}, and \code{difftime} objects}{
 
-To help with the visualization, \code{qplot_walk()} automatically
-converts \code{Duration}, \code{Period}, and \code{difftime} objects to \code{hms}.
+To help with the visualization, \code{qplot_walk()} automatically converts
+\code{\link[lubridate:duration]{Duration}}, \code{\link[lubridate:period]{Period}}, and
+\code{\link[base:difftime]{difftime}} objects to \code{\link[hms:hms]{hms}}.
 }
 
 \subsection{Midday change}{
 
 Time variables with values greater than \code{22:00:00} will automatically be
-converted to \code{POSIXct} and be attached to a two-day timeline using the midday
-hour as a cutting point, i.e., all values with 12 hours or more will be
-placed on day 1, and all the rest will be placed on day 2.
+converted to \link[base:as.POSIXlt]{POSIXct`} and be attached to a two-day
+timeline using the midday hour as a cutting point, i.e., all values with 12
+hours or more will be placed on day 1, and all the rest will be placed on day
+2.
 
 This is made to better represent time vectors that cross the midnight hour.
 You can disable this behavior by using \code{midday_change = FALSE}.
 
 Example: Say you have a vector of time values that cross the midnight hour
-(e.g., an \code{hms} vector with \code{22:00}, \code{23:00}, \code{00:00}, \code{01:00} values). If
-you use \code{midday_change = FALSE}, your data will be represented linearly.\preformatted{00:00 01:00                                22:00 23:00
+(e.g., an \code{\link[hms:hms]{hms}} vector with \code{22:00}, \code{23:00}, \code{00:00}, \code{01:00}
+values). If you use \code{midday_change = FALSE}, your data will be represented
+linearly.\preformatted{00:00 01:00                                22:00 23:00
   |-----|------------------------------------|-----|------->
 }
 
@@ -113,7 +123,7 @@ to a circular time frame of 24 hours.\preformatted{             day 1           
 \subsection{\code{id} variables}{
 
 \code{qplot_walk()} will ignore any variable with the follow name pattern
-\code{"^id$|[\\\\._-]id$"}, i.e. any variable named \code{id} or that ends with
+\code{"^id$|[\\\\._-]id$"}, i.e., any variable named \code{id} or that ends with
 \code{.id}, \verb{_id}, or \code{-id}.
 
 You can disable this behavior using \code{remove_id = FALSE}.
@@ -122,19 +132,19 @@ You can disable this behavior using \code{remove_id = FALSE}.
 \examples{
 if (interactive()) {
 
-## Ploting a single column from `data`
+## Ploting a single column from 'data'
 
 qplot_walk(mctq::std_mctq$bt_w)
 
-## Ploting all columns from `data`
+## Ploting all columns from 'data'
 
 qplot_walk(mctq::std_mctq, ignore = NULL, remove_id = FALSE)
 
-## Ploting selected columns from `data`
+## Ploting selected columns from 'data'
 
 qplot_walk(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
 
-## Ploting selected columns from `data` using a name pattern
+## Ploting selected columns from 'data' using a name pattern
 
 qplot_walk(mctq::std_mctq, pattern = "_w$")
 
@@ -142,7 +152,6 @@ qplot_walk(mctq::std_mctq, pattern = "_w$")
 
 if (requireNamespace("datasets", quietly = TRUE)) {
     qplot_walk(datasets::iris)
-    qplot_walk(datasets::mtcars)
 }
 }
 }

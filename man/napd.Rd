@@ -7,21 +7,22 @@
 napd(napo, nape)
 }
 \arguments{
-\item{napo}{An \code{hms} object corresponding to the \strong{local time of nap onset}
-from the shift version of the MCTQ questionnaire.}
+\item{napo}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time
+of nap onset} from the shift version of the MCTQ questionnaire.}
 
-\item{nape}{An \code{hms} object corresponding to the \strong{local time of nap end}
-from the shift version of the MCTQ questionnaire.}
+\item{nape}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time
+of nap end} from the shift version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the vectorized difference
-between \code{nape} and \code{napo} in a circular time frame of 24 hours.
+A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+vectorized difference between \code{nape} and \code{napo} in a circular time frame of
+24 hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{napd()} computes the \strong{nap duration} for the shift version of the Munich
-Chronotype Questionnaire (MCTQ).
+ChronoType Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -49,7 +50,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -63,12 +64,10 @@ Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
 (n.d.) guidelines for \code{napd()} (\eqn{NapD}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each shift section of the
-questionnaire.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item This computation must be applied to each section of the questionnaire.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -79,16 +78,16 @@ NapE_W/F_M/E/N - NapO_W/F_M/E/N}}
 
 Where:
 \itemize{
-\item \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = local time of nap onset between
+\item \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = Local time of nap onset between
 two days in a particular shift \strong{or} between two free days after a
 particular shift ("I take a nap from ___ o'clock [...]").
-\item \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = local time of nap end between
+\item \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = Local time of nap end between
 two days in a particular shift \strong{or} between two free days after a
 particular shift ("[...] to ___ o'clock").
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 

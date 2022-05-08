@@ -5,14 +5,15 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `msl()` computes the __local time of mid-sleep__ for standard, micro, and
-#' shift versions of the Munich Chronotype Questionnaire (MCTQ).
+#' shift versions of the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' Please note that, although we tried to preserve the original authors' naming
 #' pattern for the MCTQ functions, the name `ms` provokes a dangerous name
-#' collision with the [lubridate::ms()] function (a function for parsing minutes
-#' and seconds components). That's why we named it `msl`. `msl()` and [sdu()]
-#' are the only exceptions, all the other `mctq` functions maintain a strong
-#' naming resemblance with the original authors' naming pattern.
+#' collision with the [`ms()`][lubridate::ms()] function (a function for parsing
+#' minutes and seconds components). That's why we named it `msl`. `msl()` and
+#' [`sdu()`][mctq::sdu()] are the only exceptions, all the other `mctq`
+#' functions maintain a strong naming resemblance with the original authors'
+#' naming pattern.
 #'
 #' @section Guidelines:
 #'
@@ -22,12 +23,10 @@
 #'
 #' ## Notes
 #'
-#' * The computation below must be applied to each section of the
-#' questionnaire.
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * This computation must be applied to each section of the questionnaire.
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
@@ -35,11 +34,11 @@
 #'
 #' Where:
 #'
-#' * \eqn{SO_{W/F}}{SO_W/F} = local time of sleep onset on work __or__ work-free
+#' * \eqn{SO_{W/F}}{SO_W/F} = Local time of sleep onset on work __or__ work-free
 #' days.
-#' * \eqn{SD_{W/F}}{SD_W/F} = sleep duration on work __or__ work-free days.
+#' * \eqn{SD_{W/F}}{SD_W/F} = Sleep duration on work __or__ work-free days.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
@@ -48,24 +47,26 @@
 #'
 #' Where:
 #'
-#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = local time of sleep onset between
+#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N} = Local time of sleep onset between
 #' two days in a particular shift __or__ between two free days after a
 #' particular shift.
-#' * \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+#' * \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = Sleep duration between two days in a
 #' particular shift __or__ between two free days after a particular shift.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+#' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 #'
-#' @param so A `hms` object corresponding to the __local time of sleep onset__
-#'   from a standard, micro, or shift version of the MCTQ questionnaire. You can
-#'   use [mctq::so()] to compute it for the standard or shift version.
-#' @param sd A `Duration` object corresponding to the __sleep duration__ from a
-#'   standard, micro, or shift version of the MCTQ questionnaire. You can use
-#'   [mctq::sdu()] to compute it for any MCTQ version.
+#' @param so An [`hms`][hms::hms()] object corresponding to the __local time of
+#'   sleep onset__ from a standard, micro, or shift version of the MCTQ
+#'   questionnaire. You can use [`so()`][mctq::so()] to compute it for the
+#'   standard or shift version.
+#' @param sd A [`Duration`][lubridate::duration()] object corresponding to the
+#'   __sleep duration__ from a standard, micro, or shift version of the MCTQ
+#'   questionnaire. You can use [`sdu()`][mctq::sdu()] to compute it for any
+#'   MCTQ version.
 #'
-#' @return A `hms` object corresponding to the vectorized sum of `so` and `(sd /
-#'   2)` in a circular time frame of 24 hours.
+#' @return An [`hms`][hms::hms()] object corresponding to the vectorized sum of
+#'   `so` and `(sd / 2)` in a circular time frame of 24 hours.
 #'
 #' @aliases msw msf
 #' @template details_b
@@ -116,7 +117,7 @@ msl <- function(so, sd) {
 #'
 #' `msf_sc()` computes the __chronotype or sleep-corrected local time of
 #' mid-sleep on work-free days__ for standard, micro, and shift versions of the
-#' Munich Chronotype Questionnaire (MCTQ).
+#' Munich ChronoType Questionnaire (MCTQ).
 #'
 #' `chronotype()` is just a wrapper for `msf_sc()`.
 #'
@@ -136,7 +137,7 @@ msl <- function(so, sd) {
 #' wakes up with an alarm clock on work-free days (\eqn{Alarm_F}{Alarm_F}).
 #' * For MCTQ\eqn{^{Shift}}{ Shift}, the computation below must be applied to
 #' each shift section of the questionnaire.
-#' * \eqn{MSF_{sc}}{MSF_sc} is a proxy for the participant chronotype in
+#' * \eqn{MSF_{sc}}{MSF_sc} is a proxy for the subject chronotype in
 #' standard and micro versions of the MCTQ.
 #' * The basis for estimating chronotype in shift-workers is the mid-sleep on
 #' work-free days after evening shifts (\eqn{MSF^E}{MSF_E}). In case work
@@ -149,10 +150,9 @@ msl <- function(so, sd) {
 #' studies, \eqn{MSF_{sc}}{MSF_sc} must be normalized for age and sex to make
 #' populations of different age and sex compositions comparable (Roenneberg,
 #' Allebrandt, Merrow, & Vetter, 2012).
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
@@ -162,12 +162,12 @@ msl <- function(so, sd) {
 #'
 #' Where:
 #'
-#' * \eqn{MSF} = local time of mid-sleep on work-free days.
-#' * \eqn{SD_W} = sleep duration on workdays.
-#' * \eqn{SD_F} = sleep duration on work-free days.
-#' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
+#' * \eqn{MSF} = Local time of mid-sleep on work-free days.
+#' * \eqn{SD_W} = Sleep duration on workdays.
+#' * \eqn{SD_F} = Sleep duration on work-free days.
+#' * \eqn{SD_{week}}{SD_week} = Average weekly sleep duration.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
@@ -179,42 +179,44 @@ msl <- function(so, sd) {
 #'
 #' Where:
 #'
-#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = local time of mid-sleep between two free
+#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
 #' days after a particular shift.
-#' * \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = sleep duration between two days in a
+#' * \eqn{SD_{W}^{M/E/N}}{SD_W_M/E/N} = Sleep duration between two days in a
 #' particular shift.
-#' * \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days
+#' * \eqn{SD_{F}^{M/E/N}}{SD_F_M/E/N} = Sleep duration between two free days
 #' after a particular shift.
-#' * \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = overall sleep duration of a
+#' * \eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N} = Overall sleep duration of a
 #' particular shift.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+#' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 #'
-#' @param msf An `hms` object corresponding to the __local time of mid-sleep on
-#'   work-free days__ from a standard, micro, or shift version of the MCTQ
-#'   questionnaire. You can use [mctq::msl()] to compute it.
-#' @param sd_w A `Duration` object corresponding to the __sleep duration on work
-#'   days__ from a standard, micro, or shift version of the MCTQ questionnaire.
-#'   You can use [mctq::sdu()] to compute it.
-#' @param sd_f A `Duration` object corresponding to the __sleep duration on
-#'   work-free days__ from a standard, micro, or shift version of the MCTQ
-#'   questionnaire. You can use [mctq::sdu()] to compute it.
-#' @param sd_week A `Duration` object corresponding to the __average weekly
-#'   sleep duration__ from a standard or micro version of the MCTQ questionnaire
-#'   (you can use [mctq::sd_week()] to compute it) __or__ the __overall sleep
-#'   duration of a particular shift__ from a shift version of the MCTQ
-#'   questionnaire (you can use [mctq::sd_overall()] to compute it).
-#' @param alarm_f A `logical` object corresponding to the __alarm clock use on
-#'   work-free days__ from a standard, micro, or shift version of the MCTQ
-#'   questionnaire. Note that, if `alarm_f == TRUE`, `msf_sc` cannot be
-#'   computed, `msf_sc()` will return `NA` for those cases. For the
-#'   \eqn{\mu}MCTQ, this value must be set as `FALSE` all times, since the
-#'   questionnaire considers only the work-free days when the respondent does
-#'   not use an alarm.
+#' @param msf An [`hms`][hms::hms()] object corresponding to the __local time of
+#'   mid-sleep on work-free days__ from a standard, micro, or shift version of
+#'   the MCTQ questionnaire. You can use [`msl()`][mctq::msl()] to compute it.
+#' @param sd_w A [`Duration`][lubridate::duration()] object corresponding to the
+#'   __sleep duration on work days__ from a standard, micro, or shift version of
+#'   the MCTQ questionnaire. You can use [`sdu()`][mctq::sdu()] to compute it.
+#' @param sd_f A [`Duration`][lubridate::duration()] object corresponding to the
+#'   __sleep duration on work-free days__ from a standard, micro, or shift
+#'   version of the MCTQ questionnaire. You can use [`sdu()`][mctq::sdu()] to
+#'   compute it.
+#' @param sd_week A [`Duration`][lubridate::duration()] object corresponding to
+#'   the __average weekly sleep duration__ from a standard or micro version of
+#'   the MCTQ questionnaire (you can use [`sd_week()`][mctq::sd_week()] to
+#'   compute it) __or__ the __overall sleep duration of a particular shift__
+#'   from a shift version of the MCTQ questionnaire (you can use
+#'   [`sd_overall()`][mctq::sd_overall()] to compute it).
+#' @param alarm_f A [`logical`][base::logical()] object corresponding to the
+#'   __alarm clock use on work-free days__ from a standard, micro, or shift
+#'   version of the MCTQ questionnaire. Note that, if `alarm_f == TRUE`,
+#'   `msf_sc` cannot be computed, `msf_sc()` will return `NA` for these cases.
+#'   For the \eqn{\mu}MCTQ, this value must be set as `FALSE` all times, since
+#'   the questionnaire considers only the work-free days when the respondent
+#'   does not use an alarm (e.g., `alarm_f = rep(FALSE, length(msf))`).
 #'
-#' @return An `hms` object corresponding to the MCTQ chronotype or corrected
-#'   local time of mid-sleep on work-free days.
+#' @return An [`hms`][hms::hms()] object corresponding to the MCTQ chronotype or
+#'   sleep-corrected local time of mid-sleep on work-free days.
 #'
 #' @template details_b
 #' @template references_a
@@ -259,7 +261,7 @@ msl <- function(so, sd) {
 #' #> 03:45:00 # Expected
 #' #> 04:21:00 # Expected
 #'
-#' ## A wrapper for msf_sc()
+#' ## chronotype(): A wrapper for msf_sc()
 #'
 #' msf <- hms::parse_hms("07:00:00")
 #' sd_w <- lubridate::dhours(6)
@@ -276,10 +278,10 @@ msl <- function(so, sd) {
 #' sd_f <- lubridate::dhours(9.345111)
 #' sd_week <- lubridate::dhours(7.5453)
 #' alarm_f <- FALSE
-#' x <- msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
-#' x
+#' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 04:46:00.3402 # Expected
-#' round_time(x)
+#'
+#' round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
 #' #> 04:46:00 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
     assert_hms(msf, lower = hms::hms(0))

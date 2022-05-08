@@ -12,11 +12,11 @@ sjl_rel(msw, msf, method = "shorter")
 \arguments{
 \item{msw}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
 mid-sleep on workdays} from a standard, micro, or shift version of the
-MCTQ questionnaire. You can use \code{\link[=ms]{ms()}} to compute it.}
+MCTQ questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
 
-\item{msf}{An \code{hms} object corresponding to the \strong{local time of mid-sleep on
-work-free days} from a standard, micro, or shift version of the MCTQ
-questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
+\item{msf}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
+mid-sleep on work-free days} from a standard, micro, or shift version of
+the MCTQ questionnaire. You can use \code{\link[=msl]{msl()}} to compute it.}
 
 \item{abs}{(optional) a \code{\link[base:logical]{logical}} object indicating if the
 function must return an absolute value (default: \code{TRUE}).}
@@ -39,9 +39,9 @@ The output may also vary depending on the \code{method} used.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sjl()} computes the \strong{relative or absolute social jetlag} for standard,
-micro, and shift versions of the Munich Chronotype Questionnaire (MCTQ).
+micro, and shift versions of the Munich ChronoType Questionnaire (MCTQ).
 
-\code{sjl_rel()} it's just a wrapper for \code{sjl()} with \code{abs = FALSE}.
+\code{sjl_rel()} is just a wrapper for \code{sjl()} with \code{abs = FALSE}.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -69,7 +69,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -89,10 +89,9 @@ each shift section of the questionnaire.
 \item Due to time arithmetic issues, \code{sjl()} does a slightly different
 computation by default than those proposed by the authors mentioned above.
 See \code{vignette("sjl-computation", package = "mctq")} for more details.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -108,11 +107,11 @@ Absolute social jetlag (\eqn{SJL}):
 
 Where:
 \itemize{
-\item \eqn{MSW} = local time of mid-sleep on workdays.
-\item \eqn{MSF} = local time of mid-sleep on work-free days.
+\item \eqn{MSW} = Local time of mid-sleep on workdays.
+\item \eqn{MSF} = Local time of mid-sleep on work-free days.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -127,14 +126,14 @@ Absolute social jetlag (\eqn{SJL}):
 
 Where:
 \itemize{
-\item \eqn{MSW^{M/E/N}}{MSW_M/E/N} = local time of mid-sleep between two days in
+\item \eqn{MSW^{M/E/N}}{MSW_M/E/N} = Local time of mid-sleep between two days in
 a particular shift.
-\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = local time of mid-sleep between two free
+\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
 days after a particular shift.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 
@@ -244,21 +243,20 @@ sjl(msw, msf, abs = FALSE, method = "longer")
 
 msw <- hms::parse_hm("01:15")
 msf <- hms::parse_hm("03:25")
-
-x <- sjl(msw, msf)
-x
+sjl(msw, msf)
 #> [1] "7800s (~2.17 hours)" # Expected
-hms::as_hms(as.numeric(x))
+
+hms::as_hms(as.numeric(sjl(msw, msf)))
 #> 02:10:00 # Expected
 
 ## Rounding the output at the seconds level
 
 msw <- hms::parse_hms("04:19:33.1234")
 msf <- hms::parse_hms("02:55:05")
-x <- sjl(msw, msf)
-x
+sjl(msw, msf)
 #> [1] "5068.12339997292s (~1.41 hours)" # Expected
-round_time(x)
+
+round_time(sjl(msw, msf))
 #> [1] "5068s (~1.41 hours)" # Expected
 }
 \references{

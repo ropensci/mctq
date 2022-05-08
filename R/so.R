@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `so()` computes the __local time of sleep onset__ for standard and shift
-#' versions of the Munich Chronotype Questionnaire (MCTQ).
+#' versions of the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' Note that this value is collected directly from the questionnaire if you're
 #' using the \eqn{\mu}MCTQ.
@@ -18,12 +18,10 @@
 #'
 #' ## Notes
 #'
-#' * The computation below must be applied to each section of the
-#' questionnaire.
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * This computation must be applied to each section of the questionnaire.
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
@@ -31,13 +29,13 @@
 #'
 #' Where:
 #'
-#' * \eqn{SPrep_{W/F}}{SPrep_W/F} = local time of preparing to sleep on work
+#' * \eqn{SPrep_{W/F}}{SPrep_W/F} = Local time of preparing to sleep on work
 #' __or__ work-free days ("I actually get ready to fall asleep at ___ o'clock").
-#' * \eqn{SLat_{W/F}}{SLat_W/F} = sleep latency or time to fall asleep after
+#' * \eqn{SLat_{W/F}}{SLat_W/F} = Sleep latency or time to fall asleep after
 #' preparing to sleep on work __or__ work-free days ("I need ___ min to fall
 #' asleep").
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
@@ -46,27 +44,28 @@
 #'
 #' Where:
 #'
-#' * \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = local time of preparing to
+#' * \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = Local time of preparing to
 #' sleep between two days in a particular shift __or__ between two free days
 #' after a particular shift ("I actually get ready to fall asleep at ___
 #' o'clock").
-#' * \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = sleep latency or time to fall
+#' * \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = Sleep latency or time to fall
 #' asleep after preparing to sleep between two days in a particular shift __or__
 #' between two free days after a particular shift ("I need ___ min to fall
 #' asleep").
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+#' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 #'
 #'
-#' @param sprep An `hms` object corresponding to the __local time of preparing
-#'   to sleep__ from a standard or shift version of the MCTQ questionnaire.
-#' @param slat A `Duration` object corresponding to the __sleep latency or time
-#'   to fall asleep after preparing to sleep__ from a standard or shift version
-#'   of the MCTQ questionnaire.
+#' @param sprep An [`hms`][hms::hms()] object corresponding to the __local time
+#'   of preparing to sleep__ from a standard or shift version of the MCTQ
+#'   questionnaire.
+#' @param slat A [`Duration`][lubridate::duration()] object corresponding to the
+#'   __sleep latency or time to fall asleep after preparing to sleep__ from a
+#'   standard or shift version of the MCTQ questionnaire.
 #'
-#' @return An `hms` object corresponding to the vectorized sum of `sprep` and
-#'   `slat` in a circular time frame of 24 hours.
+#' @return An [`hms`][hms::hms()] object corresponding to the vectorized sum of
+#'   `sprep` and `slat` in a circular time frame of 24 hours.
 #'
 #' @template details_b
 #' @template references_a

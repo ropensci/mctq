@@ -1,11 +1,13 @@
-#' Round time values
+#' Round time objects
 #'
 #' @description
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `round_time()` takes a `Duration`, `difftime`, `hms`, `POSIXct`, or
-#' `POSIXlt` object and round it at the level of seconds.
+#' `round_time()` takes a [`Duration`][lubridate::duration()],
+#' [`difftime`][base::as.difftime()], [`hms`][hms::hms()],
+#' [`POSIXct`][base::as.POSIXct()], or [`POSIXlt`][base::as.POSIXlt()] object
+#' and round it at the seconds level.
 #'
 #' @details
 #'
@@ -14,31 +16,35 @@
 #' `round_time()` uses [base::round()] for rounding. That is to say that
 #' `round_time()` uses the same IEC 60559 standard (_"go to the even digit"_)
 #' for rounding off a 5. Therefore, `round(0.5)` is equal to 0 and `round(-1.5)`
-#' is equal to -2. See `?round` to learn more.
+#' is equal to -2. See [`?round`][base::round()] to learn more.
 #'
 #' ## `Period` objects
 #'
-#' [`Period`][lubridate::period()] objects are a special type of object
+#' [`Period`][lubridate::period()] objects are special type of objects
 #' developed by the [lubridate][lubridate::lubridate-package] team that
 #' represents "human units", ignoring possible timeline irregularities. That is
 #' to say that 1 day as `Period` can have different time spans, when looking to
 #' a timeline after a irregularity event.
 #'
-#' Since the time span of a `Period` object can fluctuate, `round_time()` don't
-#' accept this kind of object. You can transform it to a `Duration` object and
-#' still use the function, but beware that this can produce errors.
+#' Since the time span of a [`Period`][lubridate::period()] object can
+#' fluctuate, `round_time()` don't accept this kind of object. You can transform
+#' it to a [`Duration`][lubridate::duration()] object and still use the
+#' function, but beware that this can produce errors.
 #'
-#' Learn more about `Period` objects in the [Dates and
+#' Learn more about [`Period`][lubridate::period()] objects in the [Dates and
 #' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
-#' Wickham & Grolemund (n.d.).
+#' Wickham & Grolemund book (n.d.).
 #'
-#' @param x An object belonging to one of the following classes: `Duration`,
-#'   `difftime`, `hms`, `POSIXct`, or `POSIXlt`.
+#' @param x An object belonging to one of the following classes:
+#'   [`Duration`][lubridate::duration()], [`difftime`][base::as.difftime()],
+#'   [`hms`][hms::hms()], [`POSIXct`][base::as.POSIXct()], or
+#'   [`POSIXlt`][base::as.POSIXlt()].
 #'
-#' @return An object of the same class of `x` rounded at the level of seconds.
+#' @return An object of the same class of `x` rounded at the seconds level.
 #'
-#' @seealso Other date-time rounding functions: [hms::round_hms()]
-#'   [hms::trunc_hms()] [lubridate::round_date()].
+#' @seealso Other date-time rounding functions:
+#'   [`round_hms()`][hms::round_hms()] [`trunc_hms()`][hms::trunc_hms()]
+#'   [`round_date()`][lubridate::round_date()].
 #'
 #' @family utility functions
 #' @template references_g
@@ -73,10 +79,9 @@
 #'
 #' ## Vector example
 #'
-#' x <- c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))
-#' x
+#' c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154))
 #' #> [1] "20515.32s (~5.7 hours)"    "9675.05544s (~2.69 hours)" # Expected
-#' round_time(x)
+#' round_time(c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154)))
 #' #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 round_time <- function(x) {
     classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt")

@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `le_week()` computes the __average weekly light exposure__ for the standard
-#' version of the Munich Chronotype Questionnaire (MCTQ).
+#' version of the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
@@ -17,36 +17,39 @@
 #'
 #' * The average weekly light exposure is the weighted average of the light
 #' exposure on work and work-free days in a week.
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## Computation
 #'
-#' __\deqn{\frac{LE_W \times WD + LE_F \times FD}{7}}{
-#' (LE_W * WD + LE_F * FD) / 7}__
+#' __\deqn{\frac{(LE_W \times WD) + (LE_F \times FD)}{7}}{
+#' ((LE_W * WD) + (LE_F * FD)) / 7}__
 #'
 #' Where:
 #'
-#' * \eqn{LE_W} = light exposure on workdays.
-#' * \eqn{LE_F} = light exposure on work-free days.
-#' * \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+#' * \eqn{LE_W} = Light exposure on workdays.
+#' * \eqn{LE_F} = Light exposure on work-free days.
+#' * \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 #' work ___ days per week").
-#' * \eqn{FD} = number of work-free days per week.
+#' * \eqn{FD} = Number of work-free days per week.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
-#' @param le_w A `Duration` object corresponding to the __light exposure on
-#'   workdays__ from a standard version of the MCTQ questionnaire.
-#' @param le_f A `Duration` object corresponding to the __light exposure on
-#'   work-free days__ from a standard version of the MCTQ questionnaire.
-#' @param wd An [integerish][checkmate::test_integerish()] `numeric` object or
-#'   an `integer` object corresponding to the __number of workdays per week__
-#'   from a standard version of the MCTQ questionnaire.
+#' @param le_w A [`Duration`][lubridate::duration()] object corresponding to the
+#'   __light exposure on workdays__ from a standard version of the MCTQ
+#'   questionnaire.
+#' @param le_f A [`Duration`][lubridate::duration()] object corresponding to the
+#'   __light exposure on work-free days__ from a standard version of the MCTQ
+#'   questionnaire.
+#' @param wd An [integerish][checkmate::test_integerish()]
+#'   [`numeric`][base::numeric()] object or an [`integer`][base::integer()]
+#'   object corresponding to the __number of workdays per week__ from a standard
+#'   version of the MCTQ questionnaire.
 #'
-#' @return A `Duration` object corresponding to the vectorized weighted mean of
-#'   `le_w` and `le_f` with `wd` and `fd(wd)` as weights.
+#' @return A [`Duration`][lubridate::duration()] object corresponding to the
+#'   vectorized weighted mean of `le_w` and `le_f` with `wd` and `fd(wd)` as
+#'   weights.
 #'
 #' @template details_b
 #' @template references_a
@@ -98,10 +101,10 @@
 #' le_w <- lubridate::dhours(1.25)
 #' le_f <- lubridate::dhours(6.23)
 #' wd <- 3
-#' x <- le_week(le_w, le_f, wd)
-#' x
+#' le_week(le_w, le_f, wd)
 #' #> [1] "14744.5714285714s (~4.1 hours)" # Expected
-#' hms::hms(as.numeric(x))
+#'
+#' hms::hms(as.numeric(le_week(le_w, le_f, wd)))
 #' #> 04:05:44.571429 # Expected
 #'
 #' ## Rounding the output at the seconds level
@@ -109,10 +112,10 @@
 #' le_w <- lubridate::dhours(3.4094)
 #' le_f <- lubridate::dhours(6.2345)
 #' wd <- 2
-#' x <- le_week(le_w, le_f, wd)
-#' x
+#' le_week(le_w, le_f, wd)
 #' #> [1] "19538.3828571429s (~5.43 hours)" # Expected
-#' round_time(x)
+#'
+#' round_time(le_week(le_w, le_f, wd))
 #' #> [1] "19538s (~5.43 hours)" # Expected
 le_week <- function(le_w, le_f, wd) {
     assert_duration(le_w, lower = lubridate::duration(0))

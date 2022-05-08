@@ -14,14 +14,16 @@ the dataset.
 \cr \cr
 Type: Control.
 \cr \cr
-R class: \code{\link[base:integer]{integer}}.}
+R class: \code{\link[base:integer]{integer}}.
+}
 
 \item{n_w_m}{
 Number of days \strong{worked in morning shifts} within a shift cycle.
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:integer]{integer}}.}
+R class: \code{\link[base:integer]{integer}}.
+}
 
 \item{bt_w_m}{
 Local time of going to bed on workdays \strong{between two morning shifts}.
@@ -30,7 +32,8 @@ Statement (\code{EN}): "I go to bed at ___ o'clock'".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sprep_w_m}{
 Local time of preparing to sleep on workdays \strong{between two morning
@@ -40,7 +43,8 @@ Statement (\code{EN}): "I actually get ready to fall asleep at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{slat_w_m}{
 Sleep latency or time to fall asleep after preparing to sleep on workdays
@@ -50,14 +54,16 @@ Statement (\code{EN}): "I need ___ minutes to fall asleep".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{so_w_m}{
 Local time of sleep onset on workdays \strong{between two morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{se_w_m}{
 Local time of sleep end on workdays \strong{between two morning shifts}.
@@ -66,7 +72,8 @@ Statement (\code{EN}): "I wake up at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{tgu_w_m}{
 Time to get up on workdays \strong{between two morning shifts}.
@@ -75,7 +82,8 @@ Statement (\code{EN}): "I get up after ___ minutes".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{gu_w_m}{
 Local time of getting out of bed on workdays \strong{between two morning
@@ -83,7 +91,8 @@ shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{alarm_w_m}{
 A \code{\link[base:logical]{logical}} value indicating if the respondent uses an
@@ -94,7 +103,8 @@ without alarm".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+R class: \code{\link[base:logical]{logical}}.
+}
 
 \item{reasons_w_m}{
 A \code{\link[base:logical]{logical}} value indicating if the respondent has any
@@ -106,7 +116,8 @@ choose my sleep times on morning shifts: Yes ( ___ ) No ( ___ )".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+R class: \code{\link[base:logical]{logical}}.
+}
 
 \item{reasons_why_w_m}{
 Particular reasons for why the respondent cannot freely choose their sleep
@@ -117,28 +128,32 @@ Others, for example: ___".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:character]{character}}.}
+R class: \code{\link[base:character]{character}}.
+}
 
 \item{sd_w_m}{
 Sleep duration on workdays \strong{between two morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{tbt_w_m}{
 Total time in bed on workdays \strong{between two morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{msw_m}{
 Local time of mid-sleep on workdays \strong{between two morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{nap_w_m}{
 A \code{\link[base:logical]{logical}} value indicating if the respondent usually
@@ -148,7 +163,8 @@ Statement (\code{EN}): "I usually take a nap: Yes ( ___ ) No ( ___ )".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+R class: \code{\link[base:logical]{logical}}.
+}
 
 \item{napo_w_m}{
 Local time of nap onset on workdays \strong{between two morning shifts}.
@@ -157,7 +173,8 @@ Statement (\code{EN}): "If "Yes": I take a nap from ___ o'clock to ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{nape_w_m}{
 Local time of nap end on workdays \strong{between two morning shifts}.
@@ -166,14 +183,16 @@ Statement (\code{EN}): "If "Yes": I take a nap from ___ o'clock to ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{napd_w_m}{
 Nap duration on workdays \strong{between two morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sd24_w_m}{
 24 hours sleep duration (sleep duration + nap duration) on workdays
@@ -181,7 +200,8 @@ R class: \code{\link[lubridate:duration]{Duration}}.}
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{n_f_m}{
 Number of free days \strong{after working in morning shifts} within a shift
@@ -189,7 +209,8 @@ cycle.
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:integer]{integer}}.}
+R class: \code{\link[base:integer]{integer}}.
+}
 
 \item{bt_f_m}{
 Local time of going to bed on work-free days \strong{between two free days after
@@ -199,7 +220,8 @@ Statement (\code{EN}): "I go to bed at ___ o'clock'".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sprep_f_m}{
 Local time of preparing to sleep on work-free days \strong{between two free days
@@ -209,7 +231,8 @@ Statement (\code{EN}): "I actually get ready to fall asleep at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{slat_f_m}{
 Sleep latency or time to fall asleep after preparing to sleep on work-free
@@ -219,7 +242,8 @@ Statement (\code{EN}): "I need ___ minutes to fall asleep".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{so_f_m}{
 Local time of sleep onset on work-free days \strong{between two free days after
@@ -227,7 +251,8 @@ morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{se_f_m}{
 Local time of sleep end on work-free days \strong{between two free days after
@@ -237,7 +262,8 @@ Statement (\code{EN}): "I wake up at ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{tgu_f_m}{
 Time to get up on work-free days \strong{between two free days after morning
@@ -247,7 +273,8 @@ Statement (\code{EN}): "I get up after ___ minutes".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{gu_f_m}{
 Local time of getting out of bed on work-free days \strong{between two free days
@@ -255,7 +282,8 @@ after morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{alarm_f_m}{
 A \code{\link[base:logical]{logical}} value indicating if the respondent uses an
@@ -267,7 +295,8 @@ without alarm".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+R class: \code{\link[base:logical]{logical}}.
+}
 
 \item{reasons_f_m}{
 A \code{\link[base:logical]{logical}} value indicating if the respondent has any
@@ -279,7 +308,8 @@ choose my sleep times on morning shifts: Yes ( ___ ) No ( ___ )".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+R class: \code{\link[base:logical]{logical}}.
+}
 
 \item{reasons_why_f_m}{
 Particular reasons for why the respondent cannot freely choose their sleep
@@ -290,7 +320,8 @@ Others, for example: ___".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:character]{character}}.}
+R class: \code{\link[base:character]{character}}.
+}
 
 \item{sd_f_m}{
 Sleep duration on work-free days \strong{between two free days after morning
@@ -298,7 +329,8 @@ shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{tbt_f_m}{
 Total time in bed on work-free days \strong{between two free days after morning
@@ -306,7 +338,8 @@ shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{msf_m}{
 Local time of mid-sleep on work-free days \strong{between two free days after
@@ -314,7 +347,8 @@ morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{nap_f_m}{
 A \code{\link[base:logical]{logical}} value indicating if the respondent usually
@@ -325,7 +359,8 @@ Statement (\code{EN}): "I usually take a nap: Yes ( ___ ) No ( ___ )".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[base:logical]{logical}}.}
+R class: \code{\link[base:logical]{logical}}.
+}
 
 \item{napo_f_m}{
 Local time of nap onset on work-free days \strong{between two free days after
@@ -335,7 +370,8 @@ Statement (\code{EN}): "If "Yes": I take a nap from ___ o'clock to ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{nape_f_m}{
 Local time of nap end on work-free days \strong{between two free days after
@@ -345,7 +381,8 @@ Statement (\code{EN}): "If "Yes": I take a nap from ___ o'clock to ___ o'clock".
 \cr \cr
 Type: Basic.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{napd_f_m}{
 Nap duration on work-free days \strong{between two free days after morning
@@ -353,7 +390,8 @@ shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sd24_f_m}{
 24 hours sleep duration (sleep duration + nap duration) on work-free days
@@ -361,7 +399,8 @@ R class: \code{\link[lubridate:duration]{Duration}}.}
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sd_overall_m}{
 Overall sleep duration considering workdays \strong{between two morning shifts}
@@ -369,7 +408,8 @@ and work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{msf_sc_m}{
 Corrected local time of mid-sleep on work-free days \strong{between two free days
@@ -377,7 +417,8 @@ after morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[hms:hms]{hms}}.}
+R class: \code{\link[hms:hms]{hms}}.
+}
 
 \item{sjl_rel_m}{
 Relative social jetlag considering workdays \strong{between two morning shifts}
@@ -385,7 +426,8 @@ and work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sjl_m}{
 Absolute social jetlag considering workdays \strong{between two morning shifts}
@@ -393,7 +435,8 @@ and work-free days \strong{between two free days after morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sjl_sc_rel_m}{
 Jankowski's relative sleep-corrected social jetlag considering workdays
@@ -402,7 +445,8 @@ after morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{sjl_sc_m}{
 Jankowski's sleep-corrected social jetlag considering workdays \strong{between
@@ -411,7 +455,8 @@ morning shifts}.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 \item{...}{
 For brevity, the subsequent variables, except for \strong{sjl_weighted} and
@@ -424,14 +469,16 @@ Absolute social jetlag across all shifts.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 
 #'   \item{sjl_sc_weighted}{
 Jankowski's sleep-corrected social jetlag across all shifts.
 \cr \cr
 Type: Computed.
 \cr \cr
-R class: \code{\link[lubridate:duration]{Duration}}.}
+R class: \code{\link[lubridate:duration]{Duration}}.
+}
 }
 }
 \source{
@@ -444,7 +491,7 @@ shift_mctq
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 A fictional dataset, for \strong{testing and learning purposes}, composed of
-basic/measurable and computed variables of the Munich Chronotype
+basic/measurable and computed variables of the Munich ChronoType
 Questionnaire (MCTQ) shift version.
 
 This data was created following the guidelines in Juda, Vetter, & Roenneberg
@@ -458,7 +505,7 @@ and Details sections to learn more.
 \code{raw_data("shift_mctq.csv")}.
 \subsection{Guidelines}{
 
-To learn more about the Munich Chronotype Questionnaire (MCTQ),
+To learn more about the Munich ChronoType Questionnaire (MCTQ),
 see Roenneberg, Wirz-Justice, & Merrow (2003), Roenneberg, Allebrandt,
 Merrow, & Vetter (2012), Roenneberg et al. (2015), and Roenneberg, Pilz,
 Zerbini, & Winnebeck (2019).

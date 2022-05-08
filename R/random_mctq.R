@@ -4,7 +4,7 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `random_mctq` builds a fictional Munich Chronotype Questionnaire (MCTQ) case
+#' `random_mctq` builds a fictional Munich ChronoType Questionnaire (MCTQ) case
 #' composed of MCTQ basic/measurable variables.
 #'
 #' This function is __for testing and learning purposes only__. Please don't
@@ -13,8 +13,9 @@
 #' @details
 #'
 #' The case structure (variable names and classes) are the same as the datasets
-#' provided by the `mctq` package. See [mctq::std_mctq], [mctq::micro_mctq] and
-#' [mctq::shift_mctq] to learn more.
+#' provided by the `mctq` package. See [`?std_mctq`][mctq::std_mctq],
+#' [`?micro_mctq`][mctq::micro_mctq] and [`?shift_mctq`][mctq::shift_mctq] to
+#' learn more.
 #'
 #' ## Requirements
 #'
@@ -42,8 +43,8 @@
 #' @param model A string indicating the data model to return. Valid values are:
 #'   `"standard"`, "`shift"`, and `"micro"` (default: `"standard"`).
 #'
-#' @return A named `list` with elements representing each MCTQ basic/measurable
-#'   variable of the model indicated in the `model` argument.
+#' @return A named [`list`][base::list()] with elements representing each MCTQ
+#'   basic/measurable variable of the model indicated in the `model` argument.
 #'
 #' @template references_f
 #' @family utility functions
@@ -828,10 +829,10 @@ normalize <- function(min, max, mean, ambiguity = 24) {
     classes <- c("Duration", "difftime", "hms")
 
     checkmate::assert_multi_class(min, classes)
-    checkmate::assert_multi_class(max, classes)
-    checkmate::assert_multi_class(mean, classes)
     assert_length_one(min)
+    checkmate::assert_multi_class(max, classes)
     assert_length_one(max)
+    checkmate::assert_multi_class(mean, classes)
     assert_length_one(mean)
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
 
@@ -871,10 +872,10 @@ sample_time <- function(min = hms::parse_hms("00:00:00"),
     classes <- c("Duration", "Period", "hms", "integer", "numeric")
 
     checkmate::assert_multi_class(min, classes)
-    checkmate::assert_multi_class(max, classes)
-    checkmate::assert_multi_class(by, classes)
     assert_length_one(min)
+    checkmate::assert_multi_class(max, classes)
     assert_length_one(max)
+    checkmate::assert_multi_class(by, classes)
     assert_length_one(by)
     checkmate::assert_flag(replace)
     checkmate::assert_number(size, lower = 0)

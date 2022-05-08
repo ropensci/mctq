@@ -7,22 +7,23 @@
 tbt(bt, gu)
 }
 \arguments{
-\item{bt}{An \code{hms} object corresponding to the \strong{local time of going to bed}
-from a standard or shift version of the MCTQ questionnaire.}
+\item{bt}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
+going to bed} from a standard or shift version of the MCTQ questionnaire.}
 
-\item{gu}{An \code{hms} object corresponding to the \strong{local time of getting out of
-bed} from a standard or shift version of the MCTQ questionnaire. You can
-use \code{\link[=gu]{gu()}} to compute it.}
+\item{gu}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
+getting out of bed} from a standard or shift version of the MCTQ
+questionnaire. You can use \code{\link[=gu]{gu()}} to compute it.}
 }
 \value{
-A \code{Duration} object corresponding to the vectorized difference
-between \code{gu} and \code{bt} in a circular time frame of 24 hours.
+A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+vectorized difference between \code{gu} and \code{bt} in a circular time frame of 24
+hours.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{tbt()} computes the \strong{total time in bed} for standard and shift versions of
-the Munich Chronotype Questionnaire (MCTQ).
+the Munich ChronoType Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -50,7 +51,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -65,12 +66,10 @@ Roenneberg, Allebrandt, Merrow, & Vetter (2012), Juda, Vetter, & Roenneberg
 (\eqn{TBT}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each section of the
-questionnaire.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item This computation must be applied to each section of the questionnaire.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -80,13 +79,13 @@ you can see this documentation on the package
 
 Where:
 \itemize{
-\item \eqn{BT_{W/F}}{BT_W/F} = local time of going to bed on work \strong{or}
+\item \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work \strong{or}
 work-free days ("I go to bed at ___ o'clock").
-\item \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work \strong{or}
+\item \eqn{GU_{W/F}}{GU_W/F} = Local time of getting out of bed on work \strong{or}
 work-free days.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 
 \subsection{For the shift version of the MCTQ}{
@@ -95,16 +94,16 @@ work-free days.
 
 Where:
 \itemize{
-\item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = local time of going to bed between
+\item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
 two days in a particular shift \strong{or} between two free days after a
 particular shift  ("I go to bed at ___ o'clock").
-\item \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
+\item \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = Local time of getting out of bed
 between two days in a particular shift \strong{or} between two free days after a
 particular shift.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 

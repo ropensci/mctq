@@ -17,7 +17,7 @@
 #'
 #' ## `sum_time()` versus `vct_sum_time()`
 #'
-#' `sum_time()` behaves similar to [base::sum()], in the sense that it
+#' `sum_time()` behaves similar to [`sum()`][base::sum()], in the sense that it
 #' aggregates the time lengths of values in `...` into a single data point. For
 #' example, `sum_time(c(x, y), z)` will have the same output as `sum_time(x, y,
 #' z)`.
@@ -98,11 +98,12 @@
 #'
 #' ## Fractional time
 #'
-#' `sum_time()` uses the `%%` operator to cycle values. Hence, it can be subject
-#' to catastrophic loss of accuracy if values in `...` are fractional and much
-#' larger than `cycle`. A warning is given if this is detected.
+#' `sum_time()` uses the [`%%`][base::Arithmetic] operator to cycle values.
+#' Hence, it can be subject to catastrophic loss of accuracy if values in `...`
+#' are fractional and much larger than `cycle`. A warning is given if this is
+#' detected.
 #'
-#' `%%` is a `builtin` R function that operates like this:
+#' [`%%`][base::Arithmetic] is a `builtin` R function that operates like this:
 #'
 #' ```
 #' function(a, b) {
@@ -146,28 +147,29 @@
 #'
 #' ## `Period` objects
 #'
-#' [`Period`][lubridate::period()] objects are a special type of object
+#' [`Period`][lubridate::period()] objects are special type of objects
 #' developed by the [lubridate][lubridate::lubridate-package] team that
 #' represents "human units", ignoring possible timeline irregularities. That is
 #' to say that 1 day as `Period` can have different time spans, when looking to
 #' a timeline after a irregularity event.
 #'
-#' Since the time span of a `Period` object can fluctuate, `sum_time()`
-#' and `vct_sum_time()` don't accept this kind of object. You can transform
-#' it to a `Duration` object and still use the functions, but beware that
-#' this can produce errors.
+#' Since the time span of a [`Period`][lubridate::period()] object can
+#' fluctuate, `sum_time()` and `vct_sum_time()` don't accept this kind of
+#' object. You can transform it to a [`Duration`][lubridate::duration()] object
+#' and still use the functions, but beware that this can produce errors.
 #'
-#' Learn more about `Period` objects in the [Dates and
+#' Learn more about [`Period`][lubridate::period()] objects in the [Dates and
 #' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
-#' Wickham & Grolemund (n.d.).
+#' Wickham & Grolemund book (n.d.).
 #'
 #' ## `POSIXt` objects
 #'
-#' [`POSIXt`][base::as.POSIXct()] objects in `...` will be stripped of their
+#' [`POSIXt`][base::DateTimeClasses] objects in `...` will be stripped of their
 #' dates. Only the time will be considered.
 #'
-#' Both `POSIXct` and `POSIXlt` are objects that inherits the class `POSIXt`.
-#' Learn more about it in [base::DateTimeClasses].
+#' Both [`POSIXct`][base::as.POSIXct()] and [`POSIXlt`][base::as.POSIXlt()] are
+#' objects that inherits the class [`POSIXt`][base::DateTimeClasses]. Learn more
+#' about it in [`?DateTimeClasses`][base::DateTimeClasses].
 #'
 #' ## `Interval` objects
 #'
@@ -175,8 +177,8 @@
 #' and `vct_sum_time()` will consider only their time spans. That is, the
 #' amount of seconds of the intervals.
 #'
-#' Learn more about `Interval` objects in the [Dates and
-#' times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
+#' Learn more about [`Interval`][lubridate::interval()] objects in the [Dates
+#' and times](https://r4ds.had.co.nz/dates-and-times.html#periods) chapter of
 #' Wickham & Grolemund (n.d.).
 #'
 #' ## Timeline irregularities
@@ -185,24 +187,27 @@
 #' leap years, DST, leap seconds). This may not be an issue for most people, but
 #' it must be considered when doing time arithmetic.
 #'
-#' @param ... Objects belonging to one of the following classes: `Duration`,
-#'   `difftime`, `hms`, `POSIXct`, `POSIXlt`, or `Interval`.
-#' @param cycle (optional) A `numeric` or `Duration` object of length 1, equal
-#'   or greater than 0, indicating the cycle length in seconds. If `NULL` the
-#'   function will perform a linear sum (see Details to learn more) (default:
-#'   `NULL`).
-#' @param reverse (optional) A `logical` value indicating if the function must
-#'   use a reverse cycle for negative sums (see Details to learn more) (default:
-#'   `TRUE`).
-#' @param na_rm (optional) a `logical` value indicating if the function must
-#'   remove `NA` values while performing the sum (default: `FALSE`).
+#' @param ... Objects belonging to one of the following classes:
+#'   [`Duration`][lubridate::duration()], [`difftime`][base::as.difftime()], or
+#'   [`hms`][hms::hms()], [`POSIXct`][base::as.POSIXct()],
+#'   [`POSIXlt`][base::as.POSIXlt()], or [`Interval`][lubridate::interval()].
+#' @param cycle (optional) A [`numeric`][base::numeric()] or
+#'   [`Duration`][lubridate::duration()] object of length 1, equal or greater
+#'   than 0, indicating the cycle length in seconds. If `NULL` the function will
+#'   perform a linear sum (see Details to learn more) (default: `NULL`).
+#' @param reverse (optional) A [`logical`][base::logical()] value indicating if
+#'   the function must use a reverse cycle for negative sums (see Details to
+#'   learn more) (default: `TRUE`).
+#' @param na_rm (optional) a [`logical`][base::logical()] value indicating if
+#'   the function must remove `NA` values while performing the sum (default:
+#'   `FALSE`).
 #'
 #' @return
 #'
-#' * If `cycle = NULL`, a `Duration` object with a linear sum of the time from
-#' objects in `...`.
-#' * If `cycle != NULL`, a `Duration` object with a circular sum of the time
-#' from objects in `...`.
+#' * If `cycle = NULL`, a [`Duration`][lubridate::duration()] object with a
+#' linear sum of the time from objects in `...`.
+#' * If `cycle != NULL`, a [`Duration`][lubridate::duration()] object with a
+#' circular sum of the time from objects in `...`.
 #'
 #' @family utility functions
 #' @template references_g
@@ -281,12 +286,13 @@ sum_time_build <- function(..., vectorize = FALSE, cycle = NULL,
     classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt",
                  "Interval")
 
+    lapply(out, checkmate::assert_multi_class, classes)
     checkmate::assert_flag(vectorize)
     checkmate::assert_multi_class(cycle, c("numeric", "Duration"),
                                   null.ok = TRUE)
     checkmate::assert_number(cycle, lower = 0, null.ok = TRUE)
+    checkmate::assert_flag(reverse)
     checkmate::assert_flag(na_rm)
-    lapply(out, checkmate::assert_multi_class, classes)
 
     if (isTRUE(vectorize) &&
         !(length(unique(vapply(out, length, integer(1)))) == 1)) {

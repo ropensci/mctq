@@ -7,29 +7,32 @@
 sd24(sd, napd, nap)
 }
 \arguments{
-\item{sd}{A \code{Duration} object corresponding to the \strong{sleep duration} from
-the shift version of the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}} to
-compute it.}
+\item{sd}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration} from the shift version of the MCTQ questionnaire. You
+can use \code{\link[=sdu]{sdu()}} to compute it.}
 
-\item{napd}{A \code{Duration} object corresponding to the \strong{nap duration} from
-the shift version of the MCTQ questionnaire. You can use \code{\link[=napd]{napd()}} to
-compute it.}
+\item{napd}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{nap duration} from the shift version of the MCTQ questionnaire. You can
+use \code{\link[=napd]{napd()}} to compute it.}
 
-\item{nap}{A \code{logical} value corresponding to the \strong{"I usually take a nap"}
-from the shift version of the MCTQ questionnaire.}
+\item{nap}{A \code{\link[base:logical]{logical}} value corresponding to the \strong{"I
+usually take a nap"} response from the shift version of the MCTQ
+questionnaire.}
 }
 \value{
 \itemize{
-\item If \code{nap == TRUE}, a \code{Duration} object corresponding to the vectorized sum
-of \code{sd} and \code{napd} in a circular time frame of 24 hours.
-\item If \code{nap == FALSE}, a \code{Duration} object equal to \code{sd}.
+\item If \code{nap == TRUE}, a \code{\link[lubridate:duration]{Duration}} object
+corresponding to the vectorized sum of \code{sd} and \code{napd} in a circular time
+frame of 24 hours.
+\item If \code{nap == FALSE}, a \code{\link[lubridate:duration]{Duration}} object equal to
+\code{sd}.
 }
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sd24()} computes the \strong{24 hours sleep duration} for the shift version of
-the Munich Chronotype Questionnaire (MCTQ).
+the Munich ChronoType Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -57,7 +60,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -71,15 +74,13 @@ Juda, Vetter & Roenneberg (2013) and The Worldwide Experimental Platform
 (n.d.) guidelines for \code{sd24()} (\eqn{SD24}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each shift section of the
-questionnaire.
+\item This computation must be applied to each section of the questionnaire.
 \item If the respondent don't usually take a nap in a particular shift \strong{or}
 between two free days after a particular shift, \code{sd24()} will return only
 \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N}.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -90,14 +91,14 @@ SD_W/F_M/E/N + NapD_W/F_M/E/N}}
 
 Where:
 \itemize{
-\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = sleep duration between two days in a
+\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = Sleep duration between two days in a
 particular shift \strong{or} between two free days after a particular shift.
-\item \eqn{NapD_{W/F}^{M/E/N}}{NapD_W/F_M/E/N} = nap duration between two days in
+\item \eqn{NapD_{W/F}^{M/E/N}}{NapD_W/F_M/E/N} = Nap duration between two days in
 a particular shift \strong{or} between two free days after a particular shift.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 

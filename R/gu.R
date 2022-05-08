@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `gu()` computes the __local time of getting out of bed__ for standard and
-#' shift versions of the Munich Chronotype Questionnaire (MCTQ).
+#' shift versions of the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
@@ -15,15 +15,13 @@
 #'
 #' ## Notes
 #'
-#' * The computation below must be applied to each section of the
-#' questionnaire.
+#' * This computation must be applied to each section of the questionnaire.
 #' * MCTQ\eqn{^{Shift}}{ Shift} uses \eqn{TGU} (time to get up) instead of
 #' \eqn{SI} (sleep inertia). For the purpose of this computation, both represent
 #' the same thing.
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
@@ -31,12 +29,12 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = local time of sleep end on work __or__ work-free
+#' * \eqn{SE_{W/F}}{SE_W/F} = Local time of sleep end on work __or__ work-free
 #' days.
-#' * \eqn{SI_{W/F}}{SI_W/F} = sleep inertia on work __or__ work-free days
+#' * \eqn{SI_{W/F}}{SI_W/F} = Sleep inertia on work __or__ work-free days
 #' ("after ___ min, I get up").
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
@@ -44,15 +42,15 @@
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = local time of sleep end between two
+#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = Local time of sleep end between two
 #' days in a particular shift __or__ between two free days after a particular
 #' shift.
-#' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = time to get up after sleep end
+#' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = Time to get up after sleep end
 #' between two days in a particular shift __or__ between two free days after a
 #' particular shift ("after ___ min, I get up").
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+#' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 #'
 #' @param se An [`hms`][hms::hms()] object corresponding to the __local time of
 #'   sleep end__ from a standard or shift version of the MCTQ questionnaire.

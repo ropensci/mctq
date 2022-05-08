@@ -7,36 +7,38 @@
 sd_overall(sd_w, sd_f, n_w, n_f)
 }
 \arguments{
-\item{sd_w}{A \code{Duration} object corresponding to the \strong{sleep duration between
-two days in a particular shift} from a shift version of the MCTQ
-questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
+\item{sd_w}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration between two days in a particular shift} from a shift
+version of the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
 
-\item{sd_f}{A \code{Duration} object corresponding to the \strong{sleep duration between
-two free days after a particular shift} from a shift version of the MCTQ
-questionnaire. You can use \code{\link[=sdu]{sdu()}} to compute it.}
+\item{sd_f}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{sleep duration between two free days after a particular shift} from a
+shift version of the MCTQ questionnaire. You can use \code{\link[=sdu]{sdu()}}
+to compute it.}
 
-\item{n_w}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
-an \code{integer} object corresponding to the \strong{number of days worked in a
-particular shift within a shift cycle} from a shift version of the MCTQ
-questionnaire.}
+\item{n_w}{An \link[checkmate:checkIntegerish]{integerish}
+\code{\link[base:numeric]{numeric}} object or an \code{\link[base:integer]{integer}}
+object corresponding to the \strong{number of days worked in a particular shift
+within a shift cycle} from a shift version of the MCTQ questionnaire.}
 
-\item{n_f}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
-an \code{integer} object corresponding to the \strong{number of free days after a
-particular shift within a shift cycle} from a shift version of the MCTQ
-questionnaire.}
+\item{n_f}{An \link[checkmate:checkIntegerish]{integerish}
+\code{\link[base:numeric]{numeric}} object or an \code{\link[base:integer]{integer}}
+object corresponding to the \strong{number of free days after a particular shift
+within a shift cycle} from a shift version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the vectorized weighted mean of
-\code{sd_w} and \code{sd_f} with \code{n_w} and \code{n_f} as weights.
+A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+vectorized weighted mean of \code{sd_w} and \code{sd_f} with \code{n_w} and \code{n_f} as
+weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{sd_overall()} computes the \strong{overall sleep duration in a particular shift}
-for the shift version of the Munich Chronotype Questionnaire (MCTQ).
+for the shift version of the Munich ChronoType Questionnaire (MCTQ).
 
-See \code{\link[=sd_week]{sd_week()}} to compute the average weekly sleep duration for the
-standard and micro versions of the MCTQ.
+See \code{\link[=sd_week]{sd_week()}} to compute the average weekly sleep
+duration for the standard and micro versions of the MCTQ.
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -64,7 +66,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -79,17 +81,15 @@ Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
 computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The computation below must be applied to each shift section of the
-questionnaire. If you're using the three-shift design proposed by the
-authors, you need to compute three overall sleep duration (e.g.,
-\eqn{\emptyset SD^M}{OSD_M}; \eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset
-SD^N}{OSD_N}).
+\item This computation must be applied to each section of the questionnaire. If
+you're using the three-shift design proposed by the MCTQ authors, you need to
+compute three overall sleep duration (e.g., \eqn{\emptyset SD^M}{OSD_M};
+\eqn{\emptyset SD^E}{OSD_E}; \eqn{\emptyset SD^N}{OSD_N}).
 \item The overall sleep duration is the weighted average of the shift-specific
 mean sleep durations.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
@@ -101,18 +101,18 @@ SD_F_M/E/N * n_F_M/E/N) / (n_W_M/E/N + n_F_M/E/N)}}
 
 Where:
 \itemize{
-\item \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = sleep duration between two days in a
+\item \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = Sleep duration between two days in a
 particular shift.
-\item \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = sleep duration between two free days after
+\item \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = Sleep duration between two free days after
 a particular shift.
-\item \eqn{n_W^{M/E/N}}{n_W_M/E/N} = number of days worked in a particular shift
+\item \eqn{n_W^{M/E/N}}{n_W_M/E/N} = Number of days worked in a particular shift
 within a shift cycle.
-\item \eqn{n_F^{M/E/N}}{n_F_M/E/N} = number of free days after a particular shift
+\item \eqn{n_F^{M/E/N}}{n_F_M/E/N} = Number of free days after a particular shift
 within a shift cycle.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 }
 }
 
@@ -159,16 +159,16 @@ if (requireNamespace("stats", quietly = TRUE)) {
 }
 #> [1] "28800s (~8 hours)" # Expected
 
-## Converting the output to `hms`
+## Converting the output to 'hms'
 
 sd_w <- lubridate::dhours(4.75)
 sd_f <- lubridate::dhours(10)
 n_w <- 5
 n_f <- 2
-x <- sd_overall(sd_w, sd_f, n_w, n_f)
-x
+sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] "22500s (~6.25 hours)" # Expected
-hms::as_hms(as.numeric(x))
+
+hms::as_hms(as.numeric(sd_overall(sd_w, sd_f, n_w, n_f)))
 #> 06:15:00 # Expected
 
 ## Rounding the output at the seconds level
@@ -177,10 +177,10 @@ sd_w <- lubridate::dhours(5.9874)
 sd_f <- lubridate::dhours(9.3)
 n_w <- 3
 n_f <- 2
-x <- sd_overall(sd_w, sd_f, n_w, n_f)
-x
+sd_overall(sd_w, sd_f, n_w, n_f)
 #> [1] "26324.784s (~7.31 hours)" # Expected
-round_time(x)
+
+round_time(sd_overall(sd_w, sd_f, n_w, n_f))
 #> [1] "26325s (~7.31 hours)" # Expected
 }
 \references{

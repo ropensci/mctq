@@ -11,13 +11,13 @@ random_mctq(model = "standard")
 \code{"standard"}, "\verb{shift"}, and \code{"micro"} (default: \code{"standard"}).}
 }
 \value{
-A named \code{list} with elements representing each MCTQ basic/measurable
-variable of the model indicated in the \code{model} argument.
+A named \code{\link[base:list]{list}} with elements representing each MCTQ
+basic/measurable variable of the model indicated in the \code{model} argument.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{random_mctq} builds a fictional Munich Chronotype Questionnaire (MCTQ) case
+\code{random_mctq} builds a fictional Munich ChronoType Questionnaire (MCTQ) case
 composed of MCTQ basic/measurable variables.
 
 This function is \strong{for testing and learning purposes only}. Please don't
@@ -25,8 +25,9 @@ misuse it.
 }
 \details{
 The case structure (variable names and classes) are the same as the datasets
-provided by the \code{mctq} package. See \link{std_mctq}, \link{micro_mctq} and
-\link{shift_mctq} to learn more.
+provided by the \code{mctq} package. See \code{\link[=std_mctq]{?std_mctq}},
+\code{\link[=micro_mctq]{?micro_mctq}} and \code{\link[=shift_mctq]{?shift_mctq}} to
+learn more.
 \subsection{Requirements}{
 
 This function requires the \code{\link[stats:stats-package]{stats}} package. This

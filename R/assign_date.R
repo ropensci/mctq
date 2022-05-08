@@ -112,12 +112,12 @@
 #' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
 assign_date <- function(start, end, ambiguity = 0) {
     checkmate::assert_multi_class(start, c("hms", "POSIXt"))
-    checkmate::assert_multi_class(end, c("hms", "POSIXt"))
-    assert_identical(start, end, type = "length")
     checkmate::assert_numeric(as.numeric(hms::as_hms(start)),
                               lower = 0, upper = 86400)
+    checkmate::assert_multi_class(end, c("hms", "POSIXt"))
     checkmate::assert_numeric(as.numeric(hms::as_hms(end)),
                               lower = 0, upper = 86400)
+    assert_identical(start, end, type = "length")
     checkmate::assert_choice(ambiguity, c(0, 24 , NA))
 
     start <- start %>%

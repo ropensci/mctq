@@ -5,7 +5,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `tbt()` computes the __total time in bed__ for standard and shift versions of
-#' the Munich Chronotype Questionnaire (MCTQ).
+#' the Munich ChronoType Questionnaire (MCTQ).
 #'
 #' @section Guidelines:
 #'
@@ -15,12 +15,10 @@
 #'
 #' ## Notes
 #'
-#' * The computation below must be applied to each section of the
-#' questionnaire.
-#' * If you are visualizing this documentation in plain text (`ASCII`), you may
-#' have some trouble understanding the equations. If you want a better viewer,
-#' you can see this documentation on the package
-#' [website](https://docs.ropensci.org/mctq/reference/).
+#' * This computation must be applied to each section of the questionnaire.
+#' * If you are visualizing this documentation in plain text, you may have some
+#' trouble understanding the equations. You can see this documentation on the
+#' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
@@ -28,12 +26,12 @@
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}}{BT_W/F} = local time of going to bed on work __or__
+#' * \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work __or__
 #' work-free days ("I go to bed at ___ o'clock").
-#' * \eqn{GU_{W/F}}{GU_W/F} = local time of getting out of bed on work __or__
+#' * \eqn{GU_{W/F}}{GU_W/F} = Local time of getting out of bed on work __or__
 #' work-free days.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
@@ -41,25 +39,26 @@
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = local time of going to bed between
+#' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
 #' two days in a particular shift __or__ between two free days after a
 #' particular shift  ("I go to bed at ___ o'clock").
-#' * \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = local time of getting out of bed
+#' * \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = Local time of getting out of bed
 #' between two days in a particular shift __or__ between two free days after a
 #' particular shift.
 #'
-#' \strong{*} \eqn{W} = workdays; \eqn{F} = work-free days, \eqn{M} =
-#' morning shift; \eqn{E} = evening shift; \eqn{N} = night shift.
+#' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
+#' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 #'
 #'
-#' @param bt An `hms` object corresponding to the __local time of going to bed__
-#'   from a standard or shift version of the MCTQ questionnaire.
-#' @param gu An `hms` object corresponding to the __local time of getting out of
-#'   bed__ from a standard or shift version of the MCTQ questionnaire. You can
-#'   use [`gu()`][mctq::gu()] to compute it.
+#' @param bt An [`hms`][hms::hms()] object corresponding to the __local time of
+#'   going to bed__ from a standard or shift version of the MCTQ questionnaire.
+#' @param gu An [`hms`][hms::hms()] object corresponding to the __local time of
+#'   getting out of bed__ from a standard or shift version of the MCTQ
+#'   questionnaire. You can use [`gu()`][mctq::gu()] to compute it.
 #'
-#' @return A `Duration` object corresponding to the vectorized difference
-#'   between `gu` and `bt` in a circular time frame of 24 hours.
+#' @return A [`Duration`][lubridate::duration()] object corresponding to the
+#'   vectorized difference between `gu` and `bt` in a circular time frame of 24
+#'   hours.
 #'
 #' @template details_b
 #' @template references_a

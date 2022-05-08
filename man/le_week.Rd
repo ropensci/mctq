@@ -7,25 +7,29 @@
 le_week(le_w, le_f, wd)
 }
 \arguments{
-\item{le_w}{A \code{Duration} object corresponding to the \strong{light exposure on
-workdays} from a standard version of the MCTQ questionnaire.}
+\item{le_w}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{light exposure on workdays} from a standard version of the MCTQ
+questionnaire.}
 
-\item{le_f}{A \code{Duration} object corresponding to the \strong{light exposure on
-work-free days} from a standard version of the MCTQ questionnaire.}
+\item{le_f}{A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+\strong{light exposure on work-free days} from a standard version of the MCTQ
+questionnaire.}
 
-\item{wd}{An \link[checkmate:checkIntegerish]{integerish} \code{numeric} object or
-an \code{integer} object corresponding to the \strong{number of workdays per week}
-from a standard version of the MCTQ questionnaire.}
+\item{wd}{An \link[checkmate:checkIntegerish]{integerish}
+\code{\link[base:numeric]{numeric}} object or an \code{\link[base:integer]{integer}}
+object corresponding to the \strong{number of workdays per week} from a standard
+version of the MCTQ questionnaire.}
 }
 \value{
-A \code{Duration} object corresponding to the vectorized weighted mean of
-\code{le_w} and \code{le_f} with \code{wd} and \code{fd(wd)} as weights.
+A \code{\link[lubridate:duration]{Duration}} object corresponding to the
+vectorized weighted mean of \code{le_w} and \code{le_f} with \code{wd} and \code{fd(wd)} as
+weights.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
 \code{le_week()} computes the \strong{average weekly light exposure} for the standard
-version of the Munich Chronotype Questionnaire (MCTQ).
+version of the Munich ChronoType Questionnaire (MCTQ).
 }
 \details{
 \strong{Standard MCTQ} functions were created following the guidelines in
@@ -53,7 +57,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \link[=round_time]{round_time()}.
+can round it with \code{\link[=round_time]{round_time()}}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -70,28 +74,27 @@ Experimental Platform (n.d.) guidelines for \code{le_week()}
 \itemize{
 \item The average weekly light exposure is the weighted average of the light
 exposure on work and work-free days in a week.
-\item If you are visualizing this documentation in plain text (\code{ASCII}), you may
-have some trouble understanding the equations. If you want a better viewer,
-you can see this documentation on the package
-\href{https://docs.ropensci.org/mctq/reference/}{website}.
+\item If you are visualizing this documentation in plain text, you may have some
+trouble understanding the equations. You can see this documentation on the
+package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 }
 }
 
 \subsection{Computation}{
 
-\strong{\deqn{\frac{LE_W \times WD + LE_F \times FD}{7}}{
-(LE_W * WD + LE_F * FD) / 7}}
+\strong{\deqn{\frac{(LE_W \times WD) + (LE_F \times FD)}{7}}{
+((LE_W * WD) + (LE_F * FD)) / 7}}
 
 Where:
 \itemize{
-\item \eqn{LE_W} = light exposure on workdays.
-\item \eqn{LE_F} = light exposure on work-free days.
-\item \eqn{WD} = number of workdays per week ("I have a regular work schedule and
+\item \eqn{LE_W} = Light exposure on workdays.
+\item \eqn{LE_F} = Light exposure on work-free days.
+\item \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 work ___ days per week").
-\item \eqn{FD} = number of work-free days per week.
+\item \eqn{FD} = Number of work-free days per week.
 }
 
-\strong{*} \eqn{W} = workdays; \eqn{F} = work-free days.
+\strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 }
 }
 
@@ -140,10 +143,10 @@ if (requireNamespace("stats", quietly = TRUE)) {
 le_w <- lubridate::dhours(1.25)
 le_f <- lubridate::dhours(6.23)
 wd <- 3
-x <- le_week(le_w, le_f, wd)
-x
+le_week(le_w, le_f, wd)
 #> [1] "14744.5714285714s (~4.1 hours)" # Expected
-hms::hms(as.numeric(x))
+
+hms::hms(as.numeric(le_week(le_w, le_f, wd)))
 #> 04:05:44.571429 # Expected
 
 ## Rounding the output at the seconds level
@@ -151,10 +154,10 @@ hms::hms(as.numeric(x))
 le_w <- lubridate::dhours(3.4094)
 le_f <- lubridate::dhours(6.2345)
 wd <- 2
-x <- le_week(le_w, le_f, wd)
-x
+le_week(le_w, le_f, wd)
 #> [1] "19538.3828571429s (~5.43 hours)" # Expected
-round_time(x)
+
+round_time(le_week(le_w, le_f, wd))
 #> [1] "19538s (~5.43 hours)" # Expected
 }
 \references{

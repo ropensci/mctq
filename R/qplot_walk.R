@@ -4,55 +4,62 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `qplot_walk()` helps you to visually assess the distribution of your data.
-#' It uses [ggplot2::qplot()] to walk through each selected variable from a
-#' data frame.
+#' `qplot_walk()` helps you to visually assess the distribution of your data. It
+#' uses [`qplot()`][ggplot2::qplot()] to walk through each selected variable
+#' from a data frame.
 #'
 #' @details
 #'
 #' ## Requirements
 #'
-#' This function requires the [`grDevices`][grDevices::grDevices-package] and
-#' [`ggplot2`][ggplot2::ggplot2-package] package and can only run in interactive
-#' mode. The `grDevices` package comes with a standard R installation and is
-#' typically loaded by default. Most people also run R interactively.
+#' This function requires the [`utils`][utils::utils-package],
+#' [`grDevices`][grDevices::grDevices-package], and
+#' [`ggplot2`][ggplot2::ggplot2-package] packages and can only run in
+#' interactive mode. The [`utils`][utils::utils-package] and
+#' [`grDevices`][grDevices::grDevices-package] packages comes with a standard R
+#' installation and is typically loaded by default. Most people also run R
+#' interactively.
 #'
-#' If you don't have any of the two packages mentioned above, you can install
-#' them with `install.packages("grDevices")` and `install.packages("ggplot2")`.
+#' If you don't have any or one of the packages mentioned above, you can install
+#' them with `install.packages("utils")`, `install.packages("grDevices")`, and
+#' `install.packages("ggplot2")`.
 #'
 #' ## Plot recover
 #'
-#' `qplot_walk()` erases all plots after it runs. For that reason, the function
+#' `qplot_walk()` clears all plots after it runs. For that reason, the function
 #' first emits a dialog message warning the user of this behavior before it
 #' runs. If you want to recover a single distribution plot, assign the variable
 #' vector to the `data` argument.
 #'
-#' ## Additional arguments to [ggplot2::qplot()]
+#' ## Additional arguments to [`qplot()`][ggplot2::qplot()]
 #'
-#' `qplot_walk()` uses ggplot2 [ggplot2::qplot()] to generate plots. If you are
-#' familiar with [ggplot2::qplot()], you can pass additional arguments to the
-#' function using the ellipsis argument (`...`).
+#' `qplot_walk()` uses ggplot2 [`qplot()`][ggplot2::qplot()] to generate plots.
+#' If you are familiar with [`qplot()`][ggplot2::qplot()], you can pass
+#' additional arguments to the function using the ellipsis argument (`...`).
 #'
 #' Note that `x`, `y`, and `data` arguments are reserved for `qplot_walk()`.
 #'
 #' ## `Duration`, `Period`, and `difftime` objects
 #'
-#' To help with the visualization, `qplot_walk()` automatically
-#' converts `Duration`, `Period`, and `difftime` objects to `hms`.
+#' To help with the visualization, `qplot_walk()` automatically converts
+#' [`Duration`][lubridate::duration()], [`Period`][lubridate::period()], and
+#' [`difftime`][base::as.difftime()] objects to [`hms`][hms::hms()].
 #'
 #' ## Midday change
 #'
 #' Time variables with values greater than `22:00:00` will automatically be
-#' converted to `POSIXct` and be attached to a two-day timeline using the midday
-#' hour as a cutting point, i.e., all values with 12 hours or more will be
-#' placed on day 1, and all the rest will be placed on day 2.
+#' converted to [POSIXct`][base::as.POSIXct()] and be attached to a two-day
+#' timeline using the midday hour as a cutting point, i.e., all values with 12
+#' hours or more will be placed on day 1, and all the rest will be placed on day
+#' 2.
 #'
 #' This is made to better represent time vectors that cross the midnight hour.
 #' You can disable this behavior by using `midday_change = FALSE`.
 #'
 #' Example: Say you have a vector of time values that cross the midnight hour
-#' (e.g., an `hms` vector with `22:00`, `23:00`, `00:00`, `01:00` values). If
-#' you use `midday_change = FALSE`, your data will be represented linearly.
+#' (e.g., an [`hms`][hms::hms()] vector with `22:00`, `23:00`, `00:00`, `01:00`
+#' values). If you use `midday_change = FALSE`, your data will be represented
+#' linearly.
 #'
 #' ```
 #' 00:00 01:00                                22:00 23:00
@@ -71,31 +78,34 @@
 #' ## `id` variables
 #'
 #' `qplot_walk()` will ignore any variable with the follow name pattern
-#' `"^id$|[\\._-]id$"`, i.e. any variable named `id` or that ends with
+#' `"^id$|[\\._-]id$"`, i.e., any variable named `id` or that ends with
 #' `.id`, `_id`, or `-id`.
 #'
 #' You can disable this behavior using `remove_id = FALSE`.
 #'
-#' @param data An `atomic` or `data.frame` object.
+#' @param data An [`atomic`][base::is.atomic()] or a
+#'   [`data.frame`][base::data.frame()] object.
 #' @param ... (optional) additional arguments to be passed to
-#'   [ggplot2::qplot()].
-#' @param cols (optional) (only for data frames) a `character` object indicating
-#'   column names in `data` for plotting. If `NULL`, `qplot_walk()` will use
-#'   all columns in `data`. This setting only works if `pattern = NULL`
-#'   (default: `NULL`).
+#'   [`qplot()`][ggplot2::qplot()].
+#' @param cols (optional) (only for data frames) a
+#'   [`character`][base::character()] object indicating column names in `data`
+#'   for plotting. If `NULL`, `qplot_walk()` will use all columns in `data`.
+#'   This setting only works if `pattern = NULL` (default: `NULL`).
 #' @param pattern (optional) (only for data frames) a string with a regular
 #'   expression to select column names in `data` for plotting. This setting
 #'   only works if `cols = NULL` (default: `NULL`).
-#' @param ignore (optional) (only for data frames) a `character` object
-#'   indicating which object classes the function must ignore. This setting can
-#'   be used with `cols` and `pattern`. Assign `NULL` to disable this behavior
-#'   (default: `"character"`).
-#' @param remove_id (optional) (only for data frames) a logical value indicating
-#'   if the function must ignore column names in `data` that match with the
-#'   regular expression `"^id$|[\\._-]id$"` (default: `TRUE`).
-#' @param midday_change (optional) a logical value indicating if the function
-#'   must apply a midday change for `hms` variables with values greater than
-#'   `22:00:00` (see Details section to learn more) (default: `TRUE`).
+#' @param ignore (optional) (only for data frames) a
+#'   [`character`][base::character()] object indicating which object classes the
+#'   function must ignore. This setting can be used with `cols` and `pattern`.
+#'   Assign `NULL` to disable this behavior (default: `"character"`).
+#' @param remove_id (optional) (only for data frames) a
+#'   [`logical`][base::logical()] value indicating if the function must ignore
+#'   column names in `data` that match with the regular expression
+#'   `"^id$|[\\._-]id$"` (default: `TRUE`).
+#' @param midday_change (optional) a [`logical`][base::logical()] value
+#'   indicating if the function must apply a midday change for
+#'   [`hms`][hms::hms()] variables with values greater than `22:00:00` (see
+#'   the Details section to learn more) (default: `TRUE`).
 #'
 #' @return An invisible `NULL`. This function don't aim to return values.
 #'
@@ -105,19 +115,19 @@
 #' @examples
 #' if (interactive()) {
 #'
-#' ## Ploting a single column from `data`
+#' ## Ploting a single column from 'data'
 #'
 #' qplot_walk(mctq::std_mctq$bt_w)
 #'
-#' ## Ploting all columns from `data`
+#' ## Ploting all columns from 'data'
 #'
 #' qplot_walk(mctq::std_mctq, ignore = NULL, remove_id = FALSE)
 #'
-#' ## Ploting selected columns from `data`
+#' ## Ploting selected columns from 'data'
 #'
 #' qplot_walk(mctq::std_mctq, cols = c("bt_w", "msf_sc"))
 #'
-#' ## Ploting selected columns from `data` using a name pattern
+#' ## Ploting selected columns from 'data' using a name pattern
 #'
 #' qplot_walk(mctq::std_mctq, pattern = "_w$")
 #'
@@ -125,7 +135,6 @@
 #'
 #' if (requireNamespace("datasets", quietly = TRUE)) {
 #'     qplot_walk(datasets::iris)
-#'     qplot_walk(datasets::mtcars)
 #' }
 #' }
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
@@ -185,7 +194,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
 
         cli::cli_alert_warning(paste0(
             "'data' is 'atomic'. All other arguments, except '...' and ",
-            "'midday_change', was ignored."
+            "'midday_change', were ignored."
         ))
 
         x <- transform(data, midday_change)
@@ -214,7 +223,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         if (all(unique(get_class(data[cols])) %in% ignore)) {
             cli::cli_abort(paste0(
                 "You can't ignore all variables in 'cols' or in 'data'. ",
-                "Note that `qplot_walk()` is set by default to ignore ",
+                "Note that 'qplot_walk()' is set by default to ignore ",
                 "'character' objects. Please check your settings."
             ))
         }

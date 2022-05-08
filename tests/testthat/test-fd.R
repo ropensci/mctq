@@ -17,11 +17,14 @@ test_that("fd() | vector test", {
 })
 
 test_that("fd() | error test", {
+    # assert_numeric_(wd)
     expect_error(fd("test"), "Assertion on 'wd' failed")
+    expect_error(fd(lubridate::dhours(1)), "Assertion on 'wd' failed")
+    expect_error(fd(lubridate::minutes(1)), "Assertion on 'wd' failed")
+
+    # checkmate::assert_integerish(wd, lower = 0, upper = 7)
     expect_error(fd(1.5), "Assertion on 'wd' failed")
     expect_error(fd(10), "Assertion on 'wd' failed")
     expect_error(fd(-1), "Assertion on 'wd' failed")
     expect_error(fd(c(1, 10)), "Assertion on 'wd' failed")
-    expect_error(fd(lubridate::dhours(1)), "Assertion on 'wd' failed")
-    expect_error(fd(lubridate::minutes(1)), "Assertion on 'wd' failed")
 })

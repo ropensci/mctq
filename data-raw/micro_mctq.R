@@ -1,7 +1,7 @@
 # # Notes
 #
 # * Source the file before running the functions.
-# * Don't forget to uncomment the `library` functions below.
+# * Don't forget to uncomment the 'library' functions below.
 
 # library(checkmate)
 # library(dplyr)
@@ -19,15 +19,18 @@
 #'
 #' `build_micro_mctq()` builds a fictional raw dataset, __for testing and
 #' learning purposes__, composed of basic/measurable variables of the Munich
-#' Chronotype Questionnaire (MCTQ) standard version. See [mctq::micro_mctq] to
-#' learn more.
+#' ChronoType Questionnaire (MCTQ) standard version. See
+#' [`?micro_mctq`][mctq::micro_mctq] to learn more.
 #'
-#' @param write (optional) a `logical` value indicating if the function must
-#'   write a `micro_mctq.csv` file to `"./inst/extdata/"` (default: `FALSE`).
-#' @param random_cases (optional) a `logical` value indicating if the function
-#'   must add random MCTQ cases besides the core ones.
+#' @param write (optional) a [`logical`][base::logical()] value indicating if
+#'   the function must write a `micro_mctq.csv` file to `"./inst/extdata/"`
+#'   (default: `FALSE`).
+#' @param random_cases (optional) a [`logical`][base::logical()] value
+#'   indicating if the function must add random MCTQ cases besides the core
+#'   ones.
 #'
-#' @return An invisible `tibble` with a raw micro MCTQ dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a raw micro MCTQ
+#'   dataset.
 #'
 #' @family data functions
 #' @importFrom magrittr %>%
@@ -37,7 +40,7 @@
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::build_micro_mctq())
+#'     utils::View(build_micro_mctq())
 #' }
 #' }
 build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
@@ -70,7 +73,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
         `F SLEEP END` = "12:00 PM" # hms | IMp [0-12h]
     )
 
-    ## Random cases
+    ## Add random cases
 
     format_logical <- function(x) {
         dplyr::case_when(
@@ -304,7 +307,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' @description
 #'
 #' `tidy_micro_mctq` tidy the output of `build_micro_mctq()`. See
-#' [micro_mctq][mctq::micro_mctq] to learn more.
+#' [`?micro_mctq`][mctq::micro_mctq] to learn more.
 #'
 #' @details
 #'
@@ -314,16 +317,17 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' Grolemund (n.d.).
 #'
 #' Please note that input data is not the same as valid data. To get a valid
-#' `micro_mctq` data, run [mctq::validate_micro_mctq()].
+#' `micro_mctq` data, run `validate_micro_mctq()`.
 #'
 #' To learn more about the concept of tidy data, see Wickham (2014) and
 #' Wickham and Grolemund (n.d.).
 #'
-#' @param write (optional) a `logical` value indicating if the function must
-#'   write a `micro_mctq.rda` file to `"./data/"` (default: `FALSE`).
+#' @param write (optional) a [`logical`][base::logical()] value indicating if
+#'   the function must write a `micro_mctq.rda` file to `"./data/"` (default:
+#'   `FALSE`).
 #'
-#' @return An invisible `tibble` with a tidied, but not validated, micro MCTQ
-#'   dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a tidied, but not
+#'   validated, micro MCTQ dataset.
 #'
 #' @template references_e
 #' @family data functions
@@ -334,7 +338,7 @@ build_micro_mctq <- function(write = FALSE, random_cases = TRUE) {
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::tidy_micro_mctq())
+#'     utils::View(tidy_micro_mctq())
 #' }
 #' }
 tidy_micro_mctq <- function(write = FALSE) {
@@ -407,8 +411,8 @@ tidy_micro_mctq <- function(write = FALSE) {
 #'
 #' @description
 #'
-#' `validate_micro_mctq()` validates the output of [mctq::tidy_micro_mctq()].
-#' See [mctq::micro_mctq] to learn more.
+#' `validate_micro_mctq()` validates the output of `tidy_micro_mctq()`.
+#' See [`?micro_mctq`][mctq::micro_mctq] to learn more.
 #'
 #' @details
 #'
@@ -420,7 +424,8 @@ tidy_micro_mctq <- function(write = FALSE) {
 #' This process can be considered as part of the process of transforming data,
 #' described in the workflow proposed by Wickham and Grolemund (n.d.).
 #'
-#' @return An invisible `tibble` with a validated micro MCTQ dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with a validated micro MCTQ
+#'   dataset.
 #'
 #' @inheritParams tidy_micro_mctq
 #' @template references_d
@@ -432,7 +437,7 @@ tidy_micro_mctq <- function(write = FALSE) {
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::validate_micro_mctq())
+#'     utils::View(validate_micro_mctq())
 #' }
 #' }
 validate_micro_mctq <- function(write = FALSE) {
@@ -512,13 +517,13 @@ validate_micro_mctq <- function(write = FALSE) {
     invisible(micro_mctq)
 }
 
-#' Analyze [mctq::validate_micro_mctq()] output
+#' Analyze `validate_micro_mctq()` output
 #'
 #' @description
 #'
 #' `analyse_micro_mctq()` computes and creates the non-measured MCTQ variables
-#' based on the output of [mctq::validate_micro_mctq()]. See [mctq::micro_mctq]
-#' to learn more.
+#' based on the output of `validate_micro_mctq()`. See
+#' [`?micro_mctq`][mctq::micro_mctq] to learn more.
 #'
 #' @details
 #'
@@ -527,8 +532,8 @@ validate_micro_mctq <- function(write = FALSE) {
 #' process of transforming data, described in the workflow proposed by Wickham
 #' and Grolemund (n.d.).
 #'
-#' @return An invisible `tibble` with all the variables proposed for a micro
-#'   MCTQ dataset.
+#' @return An invisible [`tibble`][dplyr::tibble()] with all the variables
+#'   proposed for a micro MCTQ dataset.
 #'
 #' @inheritParams tidy_micro_mctq
 #' @inheritParams pretty_mctq
@@ -541,7 +546,7 @@ validate_micro_mctq <- function(write = FALSE) {
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
-#'     utils::View(mctq::analyze_micro_mctq())
+#'     utils::View(analyze_micro_mctq())
 #' }
 #' }
 analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
