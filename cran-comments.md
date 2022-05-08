@@ -7,8 +7,9 @@
 * Local: Windows 10 (v. 21H2), R 4.1.3
 * GitHub Actions: macOS (latest), R 4.2.0
 * GitHub Actions: Windows (latest), R 4.2.0
-* GitHub Actions: Ubuntu 18.04, R-devel, R 4.2.0, R 4.1.3, R 4.1.2, R 4.1.1, R 4.0.0
-* Win-builder: R-devel
+* GitHub Actions: Ubuntu 18.04, R-devel, R 4.2.0, R 4.1.3, R 4.0.5, R 4.0.0
+* R-hub: R-devel, R 4.2.0, R 4.1.3
+* Win-builder: R-devel, R 4.2.0, R 4.1.3
 
 ## R CMD check results
 
