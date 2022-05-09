@@ -4,6 +4,7 @@
 ^_pkgdown\.yml$
 ^CITATION\.cff$
 ^CODE_OF_CONDUCT\.md$
+^CRAN-SUBMISSION$
 ^codecov\.yml$
 ^codemeta\.json$
 ^cran-comments\.md$

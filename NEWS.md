@@ -2,6 +2,9 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
+# mctq (development version)
+
+
 # mctq 0.2.0 (2022-05-08)
 
 * Some minor documentation issues were resolved.
