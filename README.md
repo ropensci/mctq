@@ -110,11 +110,11 @@ to deal with date/time values in R. If your dataset does not conform to
 this structure, you first need to convert your data to it. Please refer
 to those package documentations to learn more about them.
 
-Due to the circular nature of time, we strongly recommend that you use
-appropriate temporal objects while dealing with date/time in R. This can
-help you get rid of several computation mistakes while trying to adapt
-your data from a base 10 to a system rooted in a base 12 numerical
-system.
+Due to the [circular nature of time](https://youtu.be/eelVqfm8vVc), we
+strongly recommend that you use appropriate temporal objects while
+dealing with date/time in R. This can help you get rid of several
+computation mistakes while trying to adapt your data from a base 10 to a
+system rooted in a base 12 numerical system.
 
 ### Workdays and work-free days variables
 

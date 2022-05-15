@@ -60,7 +60,7 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
-    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
+    # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
     where <- NULL
 
     if (isTRUE(round)) {

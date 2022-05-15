@@ -71,7 +71,7 @@ random_mctq <- function(model = "standard") {
 }
 
 random_std_mctq <- function() {
-    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
+    # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
 
     work <- wd <- NULL
     bt_w <- sprep_w <- slat_w <- se_w <- si_w <- alarm_w <- NULL
@@ -263,7 +263,7 @@ random_std_mctq <- function() {
 }
 
 random_micro_mctq <- function() {
-    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
+    # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
 
     shift_work <- wd <- so_w <- se_w <- so_f <- se_f <- NULL
 
@@ -352,7 +352,7 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     checkmate::assert_integerish(n_w, lower = 0, any.missing = FALSE, len = 3)
     checkmate::assert_integerish(n_f, lower = 0, any.missing = FALSE, len = 3)
 
-    # R CMD Check variable bindings fix (see: http://bit.ly/3bliuam) -----
+    # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
 
     n_w_m <- bt_w_m <- sprep_w_m <- slat_w_m <- se_w_m <- alarm_w_m <- NULL
     tgu_w_m <- nap_w_m <- napo_w_m <- nape_w_m <- reasons_w_m <- NULL

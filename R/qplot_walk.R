@@ -12,17 +12,16 @@
 #'
 #' ## Requirements
 #'
-#' This function requires the [`utils`][utils::utils-package],
+#' This function requires the [`ggplot2`][ggplot2::ggplot2-package],
 #' [`grDevices`][grDevices::grDevices-package], and
-#' [`ggplot2`][ggplot2::ggplot2-package] packages and can only run in
+#' [`utils`][utils::utils-package] packages and can only run in
 #' interactive mode. The [`utils`][utils::utils-package] and
 #' [`grDevices`][grDevices::grDevices-package] packages comes with a standard R
 #' installation and is typically loaded by default. Most people also run R
 #' interactively.
 #'
 #' If you don't have any or one of the packages mentioned above, you can install
-#' them with `install.packages("utils")`, `install.packages("grDevices")`, and
-#' `install.packages("ggplot2")`.
+#' them with `install.packages("ggplot2", "grDevices", "utils")`.
 #'
 #' ## Plot recover
 #'

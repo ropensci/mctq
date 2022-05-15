@@ -58,17 +58,16 @@ from a data frame.
 \details{
 \subsection{Requirements}{
 
-This function requires the \code{\link[utils:utils-package]{utils}},
+This function requires the \code{\link[ggplot2:ggplot2-package]{ggplot2}},
 \code{\link[grDevices:grDevices-package]{grDevices}}, and
-\code{\link[ggplot2:ggplot2-package]{ggplot2}} packages and can only run in
+\code{\link[utils:utils-package]{utils}} packages and can only run in
 interactive mode. The \code{\link[utils:utils-package]{utils}} and
 \code{\link[grDevices:grDevices-package]{grDevices}} packages comes with a standard R
 installation and is typically loaded by default. Most people also run R
 interactively.
 
 If you don't have any or one of the packages mentioned above, you can install
-them with \code{install.packages("utils")}, \code{install.packages("grDevices")}, and
-\code{install.packages("ggplot2")}.
+them with \code{install.packages("ggplot2", "grDevices", "utils")}.
 }
 
 \subsection{Plot recover}{

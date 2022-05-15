@@ -249,6 +249,16 @@ test_that("*_hms() | general test", {
     )
 })
 
+test_that("*_hms() | error test", {
+    # checkmate::assert_flag(any.missing)
+    expect_error(test_hms(hms::hms(1), any.missing = 1))
+    expect_error(check_hms(hms::hms(1), any.missing = 1))
+
+    # checkmate::assert_flag(null.ok)
+    expect_error(test_hms(hms::hms(1), null.ok = 1))
+    expect_error(check_hms(hms::hms(1), null.ok = 1))
+})
+
 test_that("*_posixt() | general test", {
     expect_true(test_posixt(x = lubridate::as_datetime(1)))
     expect_true(test_posixt(x = as.POSIXlt(lubridate::as_datetime(1))))
