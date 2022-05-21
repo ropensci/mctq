@@ -145,6 +145,7 @@ Note that, since:
 
 Where:
 \itemize{
+\item \eqn{MSF} = Local time of mid-sleep on work-free days.
 \item \eqn{SO_{F}} = Local time of sleep onset on work-free days.
 \item \eqn{SD_{F}} = Sleep duration on work-free days.
 }
@@ -165,8 +166,7 @@ simplified to:
 \textrm{Not Available (NA)}}}
 \strong{\deqn{\textrm{Else if } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \;
 MSF_{sc}^{M/E/N} = MSF^{M/E/N}}}
-\strong{\deqn{\textrm{Else } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \;
-MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
+\strong{\deqn{\textrm{Else } \; , \; MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
 \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}}
 
 Where:
@@ -195,6 +195,8 @@ Note that, since:
 
 Where:
 \itemize{
+\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
+days after a particular shift.
 \item \eqn{SO_{F}^{M/E/N}} = Local time of sleep onset between two free days
 after a particular shift.
 \item \eqn{SD_{F}^{M/E/N}} = Sleep duration between two free days after a

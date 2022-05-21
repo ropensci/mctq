@@ -182,6 +182,7 @@ msl <- function(so, sd) {
 #'
 #' Where:
 #'
+#' * \eqn{MSF} = Local time of mid-sleep on work-free days.
 #' * \eqn{SO_{F}} = Local time of sleep onset on work-free days.
 #' * \eqn{SD_{F}} = Sleep duration on work-free days.
 #'
@@ -200,8 +201,7 @@ msl <- function(so, sd) {
 #' \textrm{Not Available (NA)}}__
 #' __\deqn{\textrm{Else if } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \;
 #' MSF_{sc}^{M/E/N} = MSF^{M/E/N}}__
-#' __\deqn{\textrm{Else } SD_{F}^{M/E/N} > SD_{W}^{M/E/N} \; , \;
-#' MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
+#' __\deqn{\textrm{Else } \; , \; MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
 #' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}__
 #'
 #' Where:
@@ -229,6 +229,8 @@ msl <- function(so, sd) {
 #'
 #' Where:
 #'
+#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
+#' days after a particular shift.
 #' * \eqn{SO_{F}^{M/E/N}} = Local time of sleep onset between two free days
 #' after a particular shift.
 #' * \eqn{SD_{F}^{M/E/N}} = Sleep duration between two free days after a
