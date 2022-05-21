@@ -15,19 +15,19 @@
 #'
 #' ## Notes
 #'
-#' * The average weekly light exposure is the weighted average of the light
-#' exposure on work and work-free days in a week.
+#' * The average weekly light exposure (\eqn{LE_{week}}{LE_week}) is the
+#' weighted average of the light exposure on work and work-free days in a week.
 #' * If you are visualizing this documentation in plain text, you may have some
 #' trouble understanding the equations. You can see this documentation on the
 #' package [website](https://docs.ropensci.org/mctq/reference/).
 #'
 #' ## Computation
 #'
-#' __\deqn{\frac{(LE_W \times WD) + (LE_F \times FD)}{7}}{
-#' ((LE_W * WD) + (LE_F * FD)) / 7}__
+#' __\deqn{LE_{week} = \frac{(LE_W \times WD) + (LE_F \times FD)}{7}}__
 #'
 #' Where:
 #'
+#' * \eqn{LE_{week}} = Average weekly light exposure.
 #' * \eqn{LE_W} = Light exposure on workdays.
 #' * \eqn{LE_F} = Light exposure on work-free days.
 #' * \eqn{WD} = Number of workdays per week ("I have a regular work schedule and

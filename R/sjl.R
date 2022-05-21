@@ -28,16 +28,13 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' Relative social jetlag (\eqn{SJL_{rel}}{SJL_rel}):
-#'
-#' __\deqn{MSF - MSW}__
-#'
-#' Absolute social jetlag (\eqn{SJL}):
-#'
-#' __\deqn{| MSF - MSW |}__
+#' __\deqn{SJL_{rel} = MSF - MSW}__
+#' __\deqn{SJL = | MSF - MSW |}__
 #'
 #' Where:
 #'
+#' * \eqn{SJL_{rel}} = Relative social jetlag.
+#' * \eqn{SJL} = Absolute social jetlag.
 #' * \eqn{MSW} = Local time of mid-sleep on workdays.
 #' * \eqn{MSF} = Local time of mid-sleep on work-free days.
 #'
@@ -45,20 +42,17 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' Relative social jetlag (\eqn{SJL_{rel}}{SJL_rel}):
-#'
-#' __\deqn{MSF^{M/E/N} - MSW^{M/E/N}}{MSF_M/E/N - MSW_M/E/N}__
-#'
-#' Absolute social jetlag (\eqn{SJL}):
-#'
-#' __\deqn{| MSF^{M/E/N} - MSW^{M/E/N} |}{| MSF_M/E/N - MSW_M/E/N |}__
+#' __\deqn{SJL_{rel}^{M/E/N} = MSF^{M/E/N} - MSW^{M/E/N}}__
+#' __\deqn{SJL^{M/E/N} = | MSF^{M/E/N} - MSW^{M/E/N} |}__
 #'
 #' Where:
 #'
-#' * \eqn{MSW^{M/E/N}}{MSW_M/E/N} = Local time of mid-sleep between two days in
-#' a particular shift.
-#' * \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
-#' days after a particular shift.
+#' * \eqn{SJL_{rel}^{M/E/N}} = Relative social jetlag in a particular shift.
+#' * \eqn{SJL^{M/E/N}} = Absolute social jetlag in a particular shift.
+#' * \eqn{MSW^{M/E/N}} = Local time of mid-sleep between two days in a
+#' particular shift.
+#' * \eqn{MSF^{M/E/N}} = Local time of mid-sleep between two free days after a
+#' particular shift.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
@@ -280,30 +274,32 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{\textrm{If } SD_W > SD_F \; \& \; SE_W \leq SE_F \; , \; |
-#' SE_F - SE_W |}{If SD_W > SD_F & SE_W <= SE_F, | SE_F - SE_W |}__
-#' __\deqn{\textrm{Else } \; , \; | SO_F - SO_W |}{Else, | SO_F - SO_W |}__
+#' __\deqn{\textrm{If } SD_{W} > SD_{F} \; \& \; SE_{W} \leq SE_{F} \; , \;
+#' SJL_{sc} = | SE_{F} - SE_{W} |}__
+#' __\deqn{\textrm{Else } \; , \; SJL_{sc} = | SO_{F} - SO_{W} |}__
 #'
 #' Where:
 #'
-#' * \eqn{SO_W} = Local time of sleep onset on workdays.
-#' * \eqn{SE_W} = Local time of sleep end on workdays.
-#' * \eqn{SO_F} = Local time of sleep onset on work-free days.
-#' * \eqn{SE_F} = Local time of sleep end on work-free days.
+#' * \eqn{SJL_{sc}} = Jankowski's sleep-corrected social jetlag.
+#' * \eqn{SO_{W}} = Local time of sleep onset on workdays.
+#' * \eqn{SE_{W}} = Local time of sleep end on workdays.
+#' * \eqn{SO_{F}} = Local time of sleep onset on work-free days.
+#' * \eqn{SE_{F}} = Local time of sleep end on work-free days.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
 #' __\deqn{\textrm{If } SD_W^{M/E/N} > SD_F^{M/E/N} \; \& \; SE_W^{M/E/N}
-#' \leq SE_F^{M/E/N} \; , \; | SE_F^{M/E/N} - SE_W^{M/E/N} |}{
-#' If SD_W_M/E/N > SD_F_M/E/N & SE_W_M/E/N <= SE_F_M/E/N, | SE_F_M/E/N -
-#' SE_W_M/E/N |}__
-#' __\deqn{\textrm{Else } \; , \; | SO_F^{M/E/N} - SO_W^{M/E/N} |}{
-#' Else, | SO_F_M/E/N - SO_W_M/E/N |}__
+#' \leq SE_F^{M/E/N} \; , \; SJL_{sc}^{M/E/N} = | SE_F^{M/E/N} -
+#' SE_W^{M/E/N} |}__
+#' __\deqn{\textrm{Else } \; , \; | SJL_{sc}^{M/E/N} = SO_F^{M/E/N} -
+#' SO_W^{M/E/N} |}__
 #'
 #' Where:
 #'
+#' * \eqn{SJL_{sc}^{M/E/N}} = Jankowski's sleep-corrected social jetlag in a
+#' particular shift.
 #' * \eqn{SO_W^{M/E/N}} = Local time of sleep onset between two days in a
 #' particular shift.
 #' * \eqn{SE_W^{M/E/N}} = Local time of sleep end between two days in a
@@ -510,15 +506,16 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #'
 #' ## Computation
 #'
-#' __\deqn{\frac{| SJL^M | \times n_W^M + | SJL^E | \times n_W^E + | SJL^N |
-#' \times n_W^N}{n_W^M + n_W^E + n_W^N}}{(| SJL_M | * n_W_M + | SJL_E | *
-#' n_W_E + | SJL_N | * n_W_N) / (n_W_M + n_W_E + n_W_N)}__
+#' __\deqn{\emptyset SJL_{weighted} = \frac{(| SJL^{M} | \times n_{W}^{M}) +
+#' (| SJL^{E} | \times n_{W}^{E}) + (| SJL^{N} | \times n_{W}^{N})}{n_{W}^{M} +
+#' n_{W}^{E} + n_{W}^{N}}}__
 #'
 #' Where:
 #'
-#' * \eqn{SJL^{M/E/N}}{SJL_M/E/N} = Absolute social jetlag in each shift.
-#' * \eqn{n_W^{M/E/N}}{n_W_M/E/N} = Number of days worked in each shift within a
-#' shift cycle.
+#' * \eqn{\emptyset SJL_{weighted}} = Absolute social jetlag across all shifts.
+#' * \eqn{SJL^{M/E/N}} = Absolute social jetlag in each shift.
+#' * \eqn{n_{W}^{M/E/N}} = Number of days worked in each shift within a shift
+#' cycle.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.

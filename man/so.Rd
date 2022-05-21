@@ -78,15 +78,15 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{SPrep_{W/F} + SLat_{W/F}}{SPrep_W/F + SLat_W/F}}
+\strong{\deqn{SO_{W/F} = SPrep_{W/F} + SLat_{W/F}}}
 
 Where:
 \itemize{
-\item \eqn{SPrep_{W/F}}{SPrep_W/F} = Local time of preparing to sleep on work
-\strong{or} work-free days ("I actually get ready to fall asleep at ___ o'clock").
-\item \eqn{SLat_{W/F}}{SLat_W/F} = Sleep latency or time to fall asleep after
-preparing to sleep on work \strong{or} work-free days ("I need ___ min to fall
-asleep").
+\item \eqn{SO_{W/F}} = Local time of sleep onset on work \strong{or} work-free days.
+\item \eqn{SPrep_{W/F}} = Local time of preparing to sleep on work \strong{or}
+work-free days ("I actually get ready to fall asleep at ___ o'clock").
+\item \eqn{SLat_{W/F}} = Sleep latency or time to fall asleep after preparing to
+sleep on work \strong{or} work-free days ("I need ___ min to fall asleep").
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
@@ -94,19 +94,18 @@ asleep").
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N +
-SLat_W/F_M/E/N}}
+\strong{\deqn{SO_{W/F}^{M/E/N} = SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}}
 
 Where:
 \itemize{
-\item \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = Local time of preparing to
-sleep between two days in a particular shift \strong{or} between two free days
-after a particular shift ("I actually get ready to fall asleep at ___
-o'clock").
-\item \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = Sleep latency or time to fall
-asleep after preparing to sleep between two days in a particular shift \strong{or}
-between two free days after a particular shift ("I need ___ min to fall
-asleep").
+\item \eqn{SO_{W/F}^{M/E/N}} = Local time of sleep onset between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SPrep_{W/F}^{M/E/N}} = Local time of preparing to sleep between two
+days in a particular shift \strong{or} between two free days after a particular
+shift ("I actually get ready to fall asleep at ___ o'clock").
+\item \eqn{SLat_{W/F}^{M/E/N}} = Sleep latency or time to fall asleep after
+preparing to sleep between two days in a particular shift \strong{or} between two
+free days after a particular shift ("I need ___ min to fall asleep").
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

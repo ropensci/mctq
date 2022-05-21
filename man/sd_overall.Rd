@@ -77,8 +77,8 @@ only round your values after all computations are done. That way you avoid
 
 
 Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
-(n.d.) guidelines for \code{sd_overall()} (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N})
-computation are as follows.
+(n.d.) guidelines for \code{sd_overall()} (\eqn{\emptyset SD}{OSD}) computation
+are as follows.
 \subsection{Notes}{
 \itemize{
 \item This computation must be applied to each section of the questionnaire. If
@@ -95,20 +95,19 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\frac{SD_W^{M/E/N} \times n_W^{M/E/N} + SD_F^{M/E/N} \times
-n_F^{M/E/N}}{n_W^{M/E/N} + n_F^{M/E/N}}}{(SD_W_M/E/N * n_W_M/E/N +
-SD_F_M/E/N * n_F_M/E/N) / (n_W_M/E/N + n_F_M/E/N)}}
+\strong{\deqn{\emptyset SD^{M/E/N} = \frac{(SD_{W}^{M/E/N} \times n_{W}^{M/E/N}) +
+(SD_{F}^{M/E/N} \times n_{F}^{M/E/N})}{n_W^{M/E/N} + n_{F}^{M/E/N}}}}
 
 Where:
 \itemize{
-\item \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = Sleep duration between two days in a
+\item \eqn{\emptyset SD^{M/E/N}} = Overall sleep duration in a particular shift.
+\item \eqn{SD_W^{M/E/N}} = Sleep duration between two days in a particular shift.
+\item \eqn{SD_F^{M/E/N}} = Sleep duration between two free days after a
 particular shift.
-\item \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = Sleep duration between two free days after
-a particular shift.
-\item \eqn{n_W^{M/E/N}}{n_W_M/E/N} = Number of days worked in a particular shift
-within a shift cycle.
-\item \eqn{n_F^{M/E/N}}{n_F_M/E/N} = Number of free days after a particular shift
-within a shift cycle.
+\item \eqn{n_W^{M/E/N}} = Number of days worked in a particular shift within a
+shift cycle.
+\item \eqn{n_F^{M/E/N}} = Number of free days after a particular shift within a
+shift cycle.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

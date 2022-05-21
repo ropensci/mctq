@@ -97,16 +97,13 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-Relative social jetlag (\eqn{SJL_{rel}}{SJL_rel}):
-
-\strong{\deqn{MSF - MSW}}
-
-Absolute social jetlag (\eqn{SJL}):
-
-\strong{\deqn{| MSF - MSW |}}
+\strong{\deqn{SJL_{rel} = MSF - MSW}}
+\strong{\deqn{SJL = | MSF - MSW |}}
 
 Where:
 \itemize{
+\item \eqn{SJL_{rel}} = Relative social jetlag.
+\item \eqn{SJL} = Absolute social jetlag.
 \item \eqn{MSW} = Local time of mid-sleep on workdays.
 \item \eqn{MSF} = Local time of mid-sleep on work-free days.
 }
@@ -116,20 +113,17 @@ Where:
 
 \subsection{For the shift version of the MCTQ}{
 
-Relative social jetlag (\eqn{SJL_{rel}}{SJL_rel}):
-
-\strong{\deqn{MSF^{M/E/N} - MSW^{M/E/N}}{MSF_M/E/N - MSW_M/E/N}}
-
-Absolute social jetlag (\eqn{SJL}):
-
-\strong{\deqn{| MSF^{M/E/N} - MSW^{M/E/N} |}{| MSF_M/E/N - MSW_M/E/N |}}
+\strong{\deqn{SJL_{rel}^{M/E/N} = MSF^{M/E/N} - MSW^{M/E/N}}}
+\strong{\deqn{SJL^{M/E/N} = | MSF^{M/E/N} - MSW^{M/E/N} |}}
 
 Where:
 \itemize{
-\item \eqn{MSW^{M/E/N}}{MSW_M/E/N} = Local time of mid-sleep between two days in
-a particular shift.
-\item \eqn{MSF^{M/E/N}}{MSF_M/E/N} = Local time of mid-sleep between two free
-days after a particular shift.
+\item \eqn{SJL_{rel}^{M/E/N}} = Relative social jetlag in a particular shift.
+\item \eqn{SJL^{M/E/N}} = Absolute social jetlag in a particular shift.
+\item \eqn{MSW^{M/E/N}} = Local time of mid-sleep between two days in a
+particular shift.
+\item \eqn{MSF^{M/E/N}} = Local time of mid-sleep between two free days after a
+particular shift.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

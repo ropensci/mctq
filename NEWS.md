@@ -4,6 +4,8 @@
 
 # mctq (development version)
 
+* Some minor documentation issues were resolved.
+
 
 # mctq 0.2.0 (2022-05-08)
 

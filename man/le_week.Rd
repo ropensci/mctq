@@ -72,8 +72,8 @@ Experimental Platform (n.d.) guidelines for \code{le_week()}
 (\eqn{LE_{week}}{LE_week}) computation are as follows.
 \subsection{Notes}{
 \itemize{
-\item The average weekly light exposure is the weighted average of the light
-exposure on work and work-free days in a week.
+\item The average weekly light exposure (\eqn{LE_{week}}{LE_week}) is the
+weighted average of the light exposure on work and work-free days in a week.
 \item If you are visualizing this documentation in plain text, you may have some
 trouble understanding the equations. You can see this documentation on the
 package \href{https://docs.ropensci.org/mctq/reference/}{website}.
@@ -82,11 +82,11 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\frac{(LE_W \times WD) + (LE_F \times FD)}{7}}{
-((LE_W * WD) + (LE_F * FD)) / 7}}
+\strong{\deqn{LE_{week} = \frac{(LE_W \times WD) + (LE_F \times FD)}{7}}}
 
 Where:
 \itemize{
+\item \eqn{LE_{week}} = Average weekly light exposure.
 \item \eqn{LE_W} = Light exposure on workdays.
 \item \eqn{LE_F} = Light exposure on work-free days.
 \item \eqn{WD} = Number of workdays per week ("I have a regular work schedule and

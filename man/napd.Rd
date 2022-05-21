@@ -73,17 +73,19 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}{
-NapE_W/F_M/E/N - NapO_W/F_M/E/N}}
+\strong{\deqn{NapD_{W/F}^{M/E/N} = NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}}
 
 Where:
 \itemize{
-\item \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = Local time of nap onset between
-two days in a particular shift \strong{or} between two free days after a
-particular shift ("I take a nap from ___ o'clock [...]").
-\item \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = Local time of nap end between
-two days in a particular shift \strong{or} between two free days after a
-particular shift ("[...] to ___ o'clock").
+\item \eqn{NapD_{W/F}^{M/E/N}} = Nap duration between two days in a particular
+shift \strong{or} between two free days after a particular shift ("I take a nap
+from ___ o'clock [...]").
+\item \eqn{NapO_{W/F}^{M/E/N}} = Local time of nap onset between two days in a
+particular shift \strong{or} between two free days after a particular shift ("I
+take a nap from ___ o'clock [...]").
+\item \eqn{NapE_{W/F}^{M/E/N}} = Local time of nap end between two days in a
+particular shift \strong{or} between two free days after a particular shift
+("[...] to ___ o'clock").
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

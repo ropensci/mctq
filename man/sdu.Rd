@@ -84,14 +84,13 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{SE_{W/F} - SO_{W/F}}{SE_W/F - SO_W/F}}
+\strong{\deqn{SD_{W/F} = SE_{W/F} - SO_{W/F}}}
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}}{SE_W/F} = Local time of sleep end on work \strong{or} work-free
-days.
-\item \eqn{SO_{W/F}}{SO_W/F}  = Local time of sleep onset on work \strong{or}
-work-free days.
+\item \eqn{SD_{W/F}} = Sleep duration on work \strong{or} work-free days.
+\item \eqn{SE_{W/F}} = Local time of sleep end on work \strong{or} work-free days.
+\item \eqn{SO_{W/F}}  = Local time of sleep onset on work \strong{or} work-free days.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
@@ -99,16 +98,16 @@ work-free days.
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}{SE_W/F_M/E/N - SO_W/F_M/E/N}}
+\strong{\deqn{SD_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}}
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = Local time of sleep end between two
-days in a particular shift \strong{or} between two free days after a particular
-shift.
-\item \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = Local time of sleep onset between
-two days in a particular shift \strong{or} between two free days after a
-particular shift.
+\item \eqn{SD_{W/F}^{M/E/N}} = Sleep duration between two days in a particular
+shift \strong{or} between two free days after a particular shift.
+\item \eqn{SE_{W/F}^{M/E/N}} = Local time of sleep end between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SO_{W/F}^{M/E/N}} = Local time of sleep onset between two days in a
+particular shift \strong{or} between two free days after a particular shift.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

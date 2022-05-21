@@ -25,29 +25,32 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{SE_{W/F} + SI_{W/F}}{SE_W/F + SI_W/F}__
+#' __\deqn{GU_{W/F} = SE_{W/F} + SI_{W/F}}__
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = Local time of sleep end on work __or__ work-free
+#' * \eqn{GU_{W/F}} = Local time of getting out of bed on work __or__ work-free
 #' days.
-#' * \eqn{SI_{W/F}}{SI_W/F} = Sleep inertia on work __or__ work-free days
+#' * \eqn{SE_{W/F}} = Local time of sleep end on work __or__ work-free
+#' days.
+#' * \eqn{SI_{W/F}} = Sleep inertia on work __or__ work-free days
 #' ("after ___ min, I get up").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}{SE_W/F_M/E/N + TGU_W/F_M/E/N}__
+#' __\deqn{GU_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}__
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = Local time of sleep end between two
-#' days in a particular shift __or__ between two free days after a particular
-#' shift.
-#' * \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = Time to get up after sleep end
-#' between two days in a particular shift __or__ between two free days after a
-#' particular shift ("after ___ min, I get up").
+#' * \eqn{GU_{W/F}^{M/E/N}} = Local time of getting out of bed between two days
+#' in a particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SE_{W/F}^{M/E/N}} = Local time of sleep end between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{TGU_{W/F}^{M/E/N}} = Time to get up after sleep end between two days
+#' in a particular shift __or__ between two free days after a particular shift
+#' ("after ___ min, I get up").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.

@@ -86,15 +86,16 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}{
-SD_W/F_M/E/N + NapD_W/F_M/E/N}}
+\strong{\deqn{SD24_{W/F}^{M/E/N} = SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}}
 
 Where:
 \itemize{
-\item \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = Sleep duration between two days in a
+\item \eqn{SD24_{W/F}^{M/E/N}} = 24 hours sleep duration between two days in a
 particular shift \strong{or} between two free days after a particular shift.
-\item \eqn{NapD_{W/F}^{M/E/N}}{NapD_W/F_M/E/N} = Nap duration between two days in
-a particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SD_{W/F}^{M/E/N}} = Sleep duration between two days in a particular
+shift \strong{or} between two free days after a particular shift.
+\item \eqn{NapD_{W/F}^{M/E/N}} = Nap duration between two days in a particular
+shift \strong{or} between two free days after a particular shift.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

@@ -44,12 +44,13 @@ Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
 Experimental Platform (n.d.) guidelines for \code{fd()} (\eqn{FD}) computation are
 as follows.
 
-\strong{\deqn{7 - WD}}
+\strong{\deqn{FD = 7 - WD}}
 
 Where:
 \itemize{
-\item \eqn{WD} = Number of workdays ("I have a regular work schedule and work ___
-days per week").
+\item \eqn{FD} = Number of work-free days per week.
+\item \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
+work ___ days per week").
 }
 }
 

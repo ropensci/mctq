@@ -29,29 +29,28 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{SE_{W/F} - SO_{W/F}}{SE_W/F - SO_W/F}__
+#' __\deqn{SD_{W/F} = SE_{W/F} - SO_{W/F}}__
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}}{SE_W/F} = Local time of sleep end on work __or__ work-free
-#' days.
-#' * \eqn{SO_{W/F}}{SO_W/F}  = Local time of sleep onset on work __or__
-#' work-free days.
+#' * \eqn{SD_{W/F}} = Sleep duration on work __or__ work-free days.
+#' * \eqn{SE_{W/F}} = Local time of sleep end on work __or__ work-free days.
+#' * \eqn{SO_{W/F}}  = Local time of sleep onset on work __or__ work-free days.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}{SE_W/F_M/E/N - SO_W/F_M/E/N}__
+#' __\deqn{SD_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}__
 #'
 #' Where:
 #'
-#' * \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = Local time of sleep end between two
-#' days in a particular shift __or__ between two free days after a particular
-#' shift.
-#' * \eqn{SO_{W/F}^{M/E/N}}{SO_W/F_M/E/N}  = Local time of sleep onset between
-#' two days in a particular shift __or__ between two free days after a
-#' particular shift.
+#' * \eqn{SD_{W/F}^{M/E/N}} = Sleep duration between two days in a particular
+#' shift __or__ between two free days after a particular shift.
+#' * \eqn{SE_{W/F}^{M/E/N}} = Local time of sleep end between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SO_{W/F}^{M/E/N}} = Local time of sleep onset between two days in a
+#' particular shift __or__ between two free days after a particular shift.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
@@ -128,17 +127,19 @@ sdu <- function(so, se) {
 #'
 #' ## Computation
 #'
-#' __\deqn{NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}{
-#' NapE_W/F_M/E/N - NapO_W/F_M/E/N}__
+#' __\deqn{NapD_{W/F}^{M/E/N} = NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}__
 #'
 #' Where:
 #'
-#' * \eqn{NapO_{W/F}^{M/E/N}}{NapO_W/F_M/E/N} = Local time of nap onset between
-#' two days in a particular shift __or__ between two free days after a
-#' particular shift ("I take a nap from ___ o'clock \[...\]").
-#' * \eqn{NapE_{W/F}^{M/E/N}}{NapE_W/F_M/E/N} = Local time of nap end between
-#' two days in a particular shift __or__ between two free days after a
-#' particular shift ("\[...\] to ___ o'clock").
+#' * \eqn{NapD_{W/F}^{M/E/N}} = Nap duration between two days in a particular
+#' shift __or__ between two free days after a particular shift ("I take a nap
+#' from ___ o'clock \[...\]").
+#' * \eqn{NapO_{W/F}^{M/E/N}} = Local time of nap onset between two days in a
+#' particular shift __or__ between two free days after a particular shift ("I
+#' take a nap from ___ o'clock \[...\]").
+#' * \eqn{NapE_{W/F}^{M/E/N}} = Local time of nap end between two days in a
+#' particular shift __or__ between two free days after a particular shift
+#' ("\[...\] to ___ o'clock").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
@@ -215,15 +216,16 @@ napd <- function(napo, nape) {
 #'
 #' ## Computation
 #'
-#' __\deqn{SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}{
-#' SD_W/F_M/E/N + NapD_W/F_M/E/N}__
+#' __\deqn{SD24_{W/F}^{M/E/N} = SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}__
 #'
 #' Where:
 #'
-#' * \eqn{SD_{W/F}^{M/E/N}}{SD_W/F_M/E/N} = Sleep duration between two days in a
+#' * \eqn{SD24_{W/F}^{M/E/N}} = 24 hours sleep duration between two days in a
 #' particular shift __or__ between two free days after a particular shift.
-#' * \eqn{NapD_{W/F}^{M/E/N}}{NapD_W/F_M/E/N} = Nap duration between two days in
-#' a particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SD_{W/F}^{M/E/N}} = Sleep duration between two days in a particular
+#' shift __or__ between two free days after a particular shift.
+#' * \eqn{NapD_{W/F}^{M/E/N}} = Nap duration between two days in a particular
+#' shift __or__ between two free days after a particular shift.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
@@ -328,13 +330,13 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' ## Computation
 #'
-#' __\deqn{\frac{SD_W \times WD + SD_F \times FD}{7}}{
-#' (SD_W * WD + SD_F * FD) / 7}__
+#' __\deqn{SD_{week} = \frac{(SD_{W} \times WD) + (SD_{F} \times FD)}{7}}__
 #'
 #' Where:
 #'
-#' * \eqn{SD_W} = Sleep duration on workdays.
-#' * \eqn{SD_F} = Sleep duration on work-free days.
+#' * \eqn{SD_{week}} = Average weekly sleep duration.
+#' * \eqn{SD_{W}} = Sleep duration on workdays.
+#' * \eqn{SD_{F}} = Sleep duration on work-free days.
 #' * \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 #' work ___ days per week").
 #' * \eqn{FD} = Number of work-free days per week.
@@ -445,8 +447,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' @section Guidelines:
 #'
 #' Juda, Vetter, & Roenneberg (2013) and The Worldwide Experimental Platform
-#' (n.d.) guidelines for `sd_overall()` (\eqn{\emptyset SD^{M/E/N}}{OSD_M/E/N})
-#' computation are as follows.
+#' (n.d.) guidelines for `sd_overall()` (\eqn{\emptyset SD}{OSD}) computation
+#' are as follows.
 #'
 #' ## Notes
 #'
@@ -462,20 +464,19 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' ## Computation
 #'
-#' __\deqn{\frac{SD_W^{M/E/N} \times n_W^{M/E/N} + SD_F^{M/E/N} \times
-#' n_F^{M/E/N}}{n_W^{M/E/N} + n_F^{M/E/N}}}{(SD_W_M/E/N * n_W_M/E/N +
-#' SD_F_M/E/N * n_F_M/E/N) / (n_W_M/E/N + n_F_M/E/N)}__
+#' __\deqn{\emptyset SD^{M/E/N} = \frac{(SD_{W}^{M/E/N} \times n_{W}^{M/E/N}) +
+#' (SD_{F}^{M/E/N} \times n_{F}^{M/E/N})}{n_W^{M/E/N} + n_{F}^{M/E/N}}}__
 #'
 #' Where:
 #'
-#' * \eqn{SD_W^{M/E/N}}{SD_W_M/E/N} = Sleep duration between two days in a
+#' * \eqn{\emptyset SD^{M/E/N}} = Overall sleep duration in a particular shift.
+#' * \eqn{SD_W^{M/E/N}} = Sleep duration between two days in a particular shift.
+#' * \eqn{SD_F^{M/E/N}} = Sleep duration between two free days after a
 #' particular shift.
-#' * \eqn{SD_F^{M/E/N}}{SD_F_M/E/N} = Sleep duration between two free days after
-#' a particular shift.
-#' * \eqn{n_W^{M/E/N}}{n_W_M/E/N} = Number of days worked in a particular shift
-#' within a shift cycle.
-#' * \eqn{n_F^{M/E/N}}{n_F_M/E/N} = Number of free days after a particular shift
-#' within a shift cycle.
+#' * \eqn{n_W^{M/E/N}} = Number of days worked in a particular shift within a
+#' shift cycle.
+#' * \eqn{n_F^{M/E/N}} = Number of free days after a particular shift within a
+#' shift cycle.
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.

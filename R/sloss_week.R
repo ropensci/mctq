@@ -21,16 +21,16 @@
 #'
 #' ## Computation
 #'
-#' __\deqn{\textrm{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
-#' If SD_week > SD_W, (SD_week - SD_W) * WD}__
-#' __\deqn{\textrm{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
-#' FD}{If SD_week <= SD_W, (SD_week - SD_F) * FD}__
+#' __\deqn{\textrm{If } SD_{week} > SD_W \; , \; SLoss_{week} =
+#' (SD_{week} - SD_W) \times WD}__
+#' __\deqn{\textrm{Else } \; , \; SLoss_{week} = (SD_{week} - SD_F) \times FD}__
 #'
 #' Where:
 #'
+#' * \eqn{SLoss_{week}}: Weekly sleep loss.
 #' * \eqn{SD_W} = Sleep duration on workdays.
 #' * \eqn{SD_F} = Sleep duration on work-free days.
-#' * \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
+#' * \eqn{SD_{week}} = Average weekly sleep duration.
 #' * \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 #' work ___ days per week").
 #' * \eqn{FD} = Number of work-free days per week.

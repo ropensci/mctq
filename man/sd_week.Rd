@@ -85,13 +85,13 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\frac{SD_W \times WD + SD_F \times FD}{7}}{
-(SD_W * WD + SD_F * FD) / 7}}
+\strong{\deqn{SD_{week} = \frac{(SD_{W} \times WD) + (SD_{F} \times FD)}{7}}}
 
 Where:
 \itemize{
-\item \eqn{SD_W} = Sleep duration on workdays.
-\item \eqn{SD_F} = Sleep duration on work-free days.
+\item \eqn{SD_{week}} = Average weekly sleep duration.
+\item \eqn{SD_{W}} = Sleep duration on workdays.
+\item \eqn{SD_{F}} = Sleep duration on work-free days.
 \item \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 work ___ days per week").
 \item \eqn{FD} = Number of work-free days per week.

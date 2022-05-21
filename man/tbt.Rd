@@ -75,14 +75,15 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{GU_{W/F} - BT_{W/F}}{GU_W/F - BT_W/F}}
+\strong{\deqn{TBT_{W/F} = GU_{W/F} - BT_{W/F}}}
 
 Where:
 \itemize{
-\item \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work \strong{or}
-work-free days ("I go to bed at ___ o'clock").
-\item \eqn{GU_{W/F}}{GU_W/F} = Local time of getting out of bed on work \strong{or}
-work-free days.
+\item \eqn{TBT_{W/F}} = Total time in bed on work \strong{or} work-free days.
+\item \eqn{GU_{W/F}} = Local time of getting out of bed on work \strong{or} work-free
+days.
+\item \eqn{BT_{W/F}} = Local time of going to bed on work \strong{or} work-free days
+("I go to bed at ___ o'clock").
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
@@ -90,16 +91,17 @@ work-free days.
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}{GU_W/F_M/E/N - BT_W/F_M/E/N}}
+\strong{\deqn{TBT_{W/F}^{M/E/N} = GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}}
 
 Where:
 \itemize{
-\item \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
-two days in a particular shift \strong{or} between two free days after a
-particular shift  ("I go to bed at ___ o'clock").
-\item \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = Local time of getting out of bed
-between two days in a particular shift \strong{or} between two free days after a
-particular shift.
+\item \eqn{TBT_{W/F}^{M/E/N}} = Total time in bed between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{GU_{W/F}^{M/E/N}} = Local time of getting out of bed between two days
+in a particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{BT_{W/F}^{M/E/N}} = Local time of going to bed between two days in a
+particular shift \strong{or} between two free days after a particular shift  ("I
+go to bed at ___ o'clock").
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

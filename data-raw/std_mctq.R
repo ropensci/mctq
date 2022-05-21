@@ -4,6 +4,7 @@
 # * Don't forget to uncomment the 'library' functions below.
 
 # library(checkmate)
+# library(cli)
 # library(dplyr)
 # library(hms)
 # library(lubridate)
@@ -48,6 +49,8 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     checkmate::assert_flag(write)
     checkmate::assert_flag(random_cases)
+
+    cli::cli_progress_step("Building MCTQ data")
 
     # Set IDs -----
 
@@ -107,7 +110,7 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 
     if (isTRUE(random_cases)) {
         for (i in id) {
-            random_case <- random_mctq(model = "standard") %>%
+            random_case <- mctq::random_mctq(model = "standard") %>%
                 dplyr::as_tibble() %>%
                 dplyr::transmute(
                     `ID` = as.character(i),
@@ -584,7 +587,6 @@ build_std_mctq <- function(write = FALSE, random_cases = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(tidy_std_mctq())
 #' }
@@ -593,6 +595,8 @@ tidy_std_mctq <- function(write = FALSE) {
     # Check arguments -----
 
     checkmate::assert_flag(write)
+
+    cli::cli_progress_step("Tyding MCTQ data")
 
     # Set values -----
 
@@ -749,7 +753,8 @@ tidy_std_mctq <- function(write = FALSE) {
 #' \dontrun{
 #' if (requireNamespace("utils", quietly = TRUE)) {
 #'     utils::View(validate_std_mctq())
-#' }}
+#' }
+#' }
 validate_std_mctq <- function(write = FALSE) {
     # To do -----
     #
@@ -759,6 +764,8 @@ validate_std_mctq <- function(write = FALSE) {
 
     checkmate::assert_flag(write)
 
+    cli::cli_progress_step("Validating MCTQ data")
+
     # Set values -----
 
     set.seed(1)
@@ -767,40 +774,42 @@ validate_std_mctq <- function(write = FALSE) {
 
     # Do univariate validation -----
 
-    hms_0 <- hms::parse_hm("00:00")
-    hms_24 <- hms::parse_hm("24:00")
-    duration_0 <- lubridate::dhours(0)
-    duration_6 <- lubridate::dhours(6)
-    duration_24 <- lubridate::dhours(24)
-
-    validate_hms <- function(x) {
-        dplyr::case_when(
-            x == hms_24 ~ hms_0,
-            x >= hms_0 & x < hms_24 ~ x)
-    }
-
-    validate_duration_1 <- function(x) {
-        dplyr::case_when(
-            validate::in_range(x, min = duration_0, max = duration_6) ~ x
-        )
-    }
-
-    validate_duration_2 <- function(x) {
-        dplyr::case_when(
-            validate::in_range(x, min = duration_0, max = duration_24) ~ x)
-    }
-
-    cols_1 <- c("bt_w", "sprep_w", "se_w", "bt_f", "sprep_f", "se_f")
-    cols_2 <- c("slat_w", "si_w", "slat_f", "si_f")
-    cols_3 <- c("le_w", "le_f")
-
-    std_mctq <- std_mctq %>% dplyr::mutate(
-        wd = dplyr::case_when(
-            validate::in_range(wd, min = 0, max = 7) ~ wd)) %>%
+    std_mctq <- std_mctq %>%
         dplyr::mutate(
-            dplyr::across(dplyr::all_of(cols_1), validate_hms),
-            dplyr::across(dplyr::all_of(cols_2), validate_duration_1),
-            dplyr::across(dplyr::all_of(cols_3), validate_duration_2))
+            wd = dplyr::case_when(
+                validate::in_range(wd, min = 0, max = 7) ~ wd
+            )
+        ) %>%
+        dplyr::mutate(
+            dplyr::across(
+                dplyr::matches("^bt_|^sprep_|^se_"),
+                ~ dplyr::case_when(
+                    .x == hms::parse_hm("24:00") ~ hms::parse_hm("00:00"),
+                    .x >= hms::parse_hm("00:00") &
+                        .x < hms::parse_hm("24:00") ~ .x
+                )
+            ),
+            dplyr::across(
+                dplyr::matches("^slat_|^si_"),
+                ~ dplyr::case_when(
+                    validate::in_range(
+                        .x,
+                        min = lubridate::dhours(0),
+                        max = lubridate::dhours(6)
+                    ) ~ .x
+                )
+            ),
+            dplyr::across(
+                dplyr::matches("^le_"),
+                ~ dplyr::case_when(
+                    validate::in_range(
+                        .x,
+                        min = lubridate::dhours(0),
+                        max = lubridate::dhours(24)
+                    ) ~ .x
+                )
+            )
+        )
 
     # Do multivariate validation -----
 
@@ -911,7 +920,6 @@ validate_std_mctq <- function(write = FALSE) {
 #' @template references_d
 #' @family data functions
 #' @importFrom magrittr %>%
-#' @importFrom rlang .data := !!
 #' @noRd
 #'
 #' @examples
@@ -927,30 +935,34 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
     checkmate::assert_flag(round)
     checkmate::assert_flag(hms)
 
+    cli::cli_progress_step("Analyzing MCTQ data")
+
+    # Compute variables -----
+
     std_mctq <- validate_std_mctq() %>%
         dplyr::mutate(
-            fd = fd(wd),
-            so_w = so(sprep_w, slat_w),
-            gu_w = gu(se_w, si_w),
-            sd_w = sdu(so_w, se_w),
-            tbt_w = tbt(bt_w, gu_w),
-            msw = msl(so_w, sd_w),
+            fd = mctq::fd(wd),
+            so_w = mctq::so(sprep_w, slat_w),
+            gu_w = mctq::gu(se_w, si_w),
+            sd_w = mctq::sdu(so_w, se_w),
+            tbt_w = mctq::tbt(bt_w, gu_w),
+            msw = mctq::msl(so_w, sd_w),
 
-            so_f = so(sprep_f, slat_f),
-            gu_f = gu(se_f, si_f),
-            sd_f = sdu(so_f, se_f),
-            tbt_f = tbt(bt_f, gu_f),
-            msf = msl(so_f, sd_f),
+            so_f = mctq::so(sprep_f, slat_f),
+            gu_f = mctq::gu(se_f, si_f),
+            sd_f = mctq::sdu(so_f, se_f),
+            tbt_f = mctq::tbt(bt_f, gu_f),
+            msf = mctq::msl(so_f, sd_f),
 
-            sd_week = sd_week(sd_w, sd_f, wd),
-            msf_sc = msf_sc(msf, sd_w, sd_f, sd_week, alarm_f),
-            sloss_week = sloss_week(sd_w, sd_f, wd),
-            le_week = le_week(le_w, le_f, wd),
-            sjl_rel = sjl_rel(msw, msf),
+            sd_week = mctq::sd_week(sd_w, sd_f, wd),
+            msf_sc = mctq::msf_sc(msf, sd_w, sd_f, sd_week, alarm_f),
+            sloss_week = mctq::sloss_week(sd_w, sd_f, wd),
+            le_week = mctq::le_week(le_w, le_f, wd),
+            sjl_rel = mctq::sjl_rel(msw, msf),
             sjl = abs(sjl_rel),
-            sjl_sc_rel = sjl_sc_rel(so_w, se_w, so_f, se_f),
+            sjl_sc_rel = mctq::sjl_sc_rel(so_w, se_w, so_f, se_f),
             sjl_sc = abs(sjl_sc_rel)
-            ) %>%
+        ) %>%
         dplyr::relocate(
             id, work, wd, fd,
 

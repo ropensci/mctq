@@ -13,12 +13,13 @@
 #' Experimental Platform (n.d.) guidelines for `fd()` (\eqn{FD}) computation are
 #' as follows.
 #'
-#' __\deqn{7 - WD}__
+#' __\deqn{FD = 7 - WD}__
 #'
 #' Where:
 #'
-#' * \eqn{WD} = Number of workdays ("I have a regular work schedule and work ___
-#' days per week").
+#' * \eqn{FD} = Number of work-free days per week.
+#' * \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
+#' work ___ days per week").
 #'
 #' @param wd An [integerish][checkmate::test_integerish()]
 #'   [`numeric`][base::numeric()] object or an [`integer`][base::integer()]

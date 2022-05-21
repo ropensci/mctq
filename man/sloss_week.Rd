@@ -79,16 +79,16 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\textrm{If } SD_{week} > SD_W \; , \; (SD_{week} - SD_W) \times WD}{
-If SD_week > SD_W, (SD_week - SD_W) * WD}}
-\strong{\deqn{\textrm{If } SD_{week} \leq SD_W \; , \; (SD_{week} - SD_F) \times
-FD}{If SD_week <= SD_W, (SD_week - SD_F) * FD}}
+\strong{\deqn{\textrm{If } SD_{week} > SD_W \; , \; SLoss_{week} =
+(SD_{week} - SD_W) \times WD}}
+\strong{\deqn{\textrm{Else } \; , \; SLoss_{week} = (SD_{week} - SD_F) \times FD}}
 
 Where:
 \itemize{
+\item \eqn{SLoss_{week}}: Weekly sleep loss.
 \item \eqn{SD_W} = Sleep duration on workdays.
 \item \eqn{SD_F} = Sleep duration on work-free days.
-\item \eqn{SD_{week}}{SD_week} = average weekly sleep duration.
+\item \eqn{SD_{week}} = Average weekly sleep duration.
 \item \eqn{WD} = Number of workdays per week ("I have a regular work schedule and
 work ___ days per week").
 \item \eqn{FD} = Number of work-free days per week.

@@ -25,37 +25,35 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{SPrep_{W/F} + SLat_{W/F}}{SPrep_W/F + SLat_W/F}__
+#' __\deqn{SO_{W/F} = SPrep_{W/F} + SLat_{W/F}}__
 #'
 #' Where:
 #'
-#' * \eqn{SPrep_{W/F}}{SPrep_W/F} = Local time of preparing to sleep on work
-#' __or__ work-free days ("I actually get ready to fall asleep at ___ o'clock").
-#' * \eqn{SLat_{W/F}}{SLat_W/F} = Sleep latency or time to fall asleep after
-#' preparing to sleep on work __or__ work-free days ("I need ___ min to fall
-#' asleep").
+#' * \eqn{SO_{W/F}} = Local time of sleep onset on work __or__ work-free days.
+#' * \eqn{SPrep_{W/F}} = Local time of preparing to sleep on work __or__
+#' work-free days ("I actually get ready to fall asleep at ___ o'clock").
+#' * \eqn{SLat_{W/F}} = Sleep latency or time to fall asleep after preparing to
+#' sleep on work __or__ work-free days ("I need ___ min to fall asleep").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N +
-#' SLat_W/F_M/E/N}__
+#' __\deqn{SO_{W/F}^{M/E/N} = SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}__
 #'
 #' Where:
 #'
-#' * \eqn{SPrep_{W/F}^{M/E/N}}{SPrep_W/F_M/E/N} = Local time of preparing to
-#' sleep between two days in a particular shift __or__ between two free days
-#' after a particular shift ("I actually get ready to fall asleep at ___
-#' o'clock").
-#' * \eqn{SLat_{W/F}^{M/E/N}}{SLat_W/F_M/E/N} = Sleep latency or time to fall
-#' asleep after preparing to sleep between two days in a particular shift __or__
-#' between two free days after a particular shift ("I need ___ min to fall
-#' asleep").
+#' * \eqn{SO_{W/F}^{M/E/N}} = Local time of sleep onset between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{SPrep_{W/F}^{M/E/N}} = Local time of preparing to sleep between two
+#' days in a particular shift __or__ between two free days after a particular
+#' shift ("I actually get ready to fall asleep at ___ o'clock").
+#' * \eqn{SLat_{W/F}^{M/E/N}} = Sleep latency or time to fall asleep after
+#' preparing to sleep between two days in a particular shift __or__ between two
+#' free days after a particular shift ("I need ___ min to fall asleep").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
-#'
 #'
 #' @param sprep An [`hms`][hms::hms()] object corresponding to the __local time
 #'   of preparing to sleep__ from a standard or shift version of the MCTQ

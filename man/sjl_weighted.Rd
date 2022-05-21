@@ -102,15 +102,16 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\frac{| SJL^M | \times n_W^M + | SJL^E | \times n_W^E + | SJL^N |
-\times n_W^N}{n_W^M + n_W^E + n_W^N}}{(| SJL_M | * n_W_M + | SJL_E | *
-n_W_E + | SJL_N | * n_W_N) / (n_W_M + n_W_E + n_W_N)}}
+\strong{\deqn{\emptyset SJL_{weighted} = \frac{(| SJL^{M} | \times n_{W}^{M}) +
+(| SJL^{E} | \times n_{W}^{E}) + (| SJL^{N} | \times n_{W}^{N})}{n_{W}^{M} +
+n_{W}^{E} + n_{W}^{N}}}}
 
 Where:
 \itemize{
-\item \eqn{SJL^{M/E/N}}{SJL_M/E/N} = Absolute social jetlag in each shift.
-\item \eqn{n_W^{M/E/N}}{n_W_M/E/N} = Number of days worked in each shift within a
-shift cycle.
+\item \eqn{\emptyset SJL_{weighted}} = Absolute social jetlag across all shifts.
+\item \eqn{SJL^{M/E/N}} = Absolute social jetlag in each shift.
+\item \eqn{n_{W}^{M/E/N}} = Number of days worked in each shift within a shift
+cycle.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =

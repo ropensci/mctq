@@ -22,33 +22,34 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{GU_{W/F} - BT_{W/F}}{GU_W/F - BT_W/F}__
+#' __\deqn{TBT_{W/F} = GU_{W/F} - BT_{W/F}}__
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}}{BT_W/F} = Local time of going to bed on work __or__
-#' work-free days ("I go to bed at ___ o'clock").
-#' * \eqn{GU_{W/F}}{GU_W/F} = Local time of getting out of bed on work __or__
-#' work-free days.
+#' * \eqn{TBT_{W/F}} = Total time in bed on work __or__ work-free days.
+#' * \eqn{GU_{W/F}} = Local time of getting out of bed on work __or__ work-free
+#' days.
+#' * \eqn{BT_{W/F}} = Local time of going to bed on work __or__ work-free days
+#' ("I go to bed at ___ o'clock").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}{GU_W/F_M/E/N - BT_W/F_M/E/N}__
+#' __\deqn{TBT_{W/F}^{M/E/N} = GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}__
 #'
 #' Where:
 #'
-#' * \eqn{BT_{W/F}^{M/E/N}}{BT_W/F_M/E/N} = Local time of going to bed between
-#' two days in a particular shift __or__ between two free days after a
-#' particular shift  ("I go to bed at ___ o'clock").
-#' * \eqn{GU_{W/F}^{M/E/N}}{GU_W/F_M/E/N} = Local time of getting out of bed
-#' between two days in a particular shift __or__ between two free days after a
-#' particular shift.
+#' * \eqn{TBT_{W/F}^{M/E/N}} = Total time in bed between two days in a
+#' particular shift __or__ between two free days after a particular shift.
+#' * \eqn{GU_{W/F}^{M/E/N}} = Local time of getting out of bed between two days
+#' in a particular shift __or__ between two free days after a particular shift.
+#' * \eqn{BT_{W/F}^{M/E/N}} = Local time of going to bed between two days in a
+#' particular shift __or__ between two free days after a particular shift  ("I
+#' go to bed at ___ o'clock").
 #'
 #' \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
 #' Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
-#'
 #'
 #' @param bt An [`hms`][hms::hms()] object corresponding to the __local time of
 #'   going to bed__ from a standard or shift version of the MCTQ questionnaire.

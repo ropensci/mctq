@@ -117,16 +117,17 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{\textrm{If } SD_W > SD_F \; \& \; SE_W \leq SE_F \; , \; |
-SE_F - SE_W |}{If SD_W > SD_F & SE_W <= SE_F, | SE_F - SE_W |}}
-\strong{\deqn{\textrm{Else } \; , \; | SO_F - SO_W |}{Else, | SO_F - SO_W |}}
+\strong{\deqn{\textrm{If } SD_{W} > SD_{F} \; \& \; SE_{W} \leq SE_{F} \; , \;
+SJL_{sc} = | SE_{F} - SE_{W} |}}
+\strong{\deqn{\textrm{Else } \; , \; SJL_{sc} = | SO_{F} - SO_{W} |}}
 
 Where:
 \itemize{
-\item \eqn{SO_W} = Local time of sleep onset on workdays.
-\item \eqn{SE_W} = Local time of sleep end on workdays.
-\item \eqn{SO_F} = Local time of sleep onset on work-free days.
-\item \eqn{SE_F} = Local time of sleep end on work-free days.
+\item \eqn{SJL_{sc}} = Jankowski's sleep-corrected social jetlag.
+\item \eqn{SO_{W}} = Local time of sleep onset on workdays.
+\item \eqn{SE_{W}} = Local time of sleep end on workdays.
+\item \eqn{SO_{F}} = Local time of sleep onset on work-free days.
+\item \eqn{SE_{F}} = Local time of sleep end on work-free days.
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days.
@@ -135,14 +136,15 @@ Where:
 \subsection{For the shift version of the MCTQ}{
 
 \strong{\deqn{\textrm{If } SD_W^{M/E/N} > SD_F^{M/E/N} \; \& \; SE_W^{M/E/N}
-\leq SE_F^{M/E/N} \; , \; | SE_F^{M/E/N} - SE_W^{M/E/N} |}{
-If SD_W_M/E/N > SD_F_M/E/N & SE_W_M/E/N <= SE_F_M/E/N, | SE_F_M/E/N -
-SE_W_M/E/N |}}
-\strong{\deqn{\textrm{Else } \; , \; | SO_F^{M/E/N} - SO_W^{M/E/N} |}{
-Else, | SO_F_M/E/N - SO_W_M/E/N |}}
+\leq SE_F^{M/E/N} \; , \; SJL_{sc}^{M/E/N} = | SE_F^{M/E/N} -
+SE_W^{M/E/N} |}}
+\strong{\deqn{\textrm{Else } \; , \; | SJL_{sc}^{M/E/N} = SO_F^{M/E/N} -
+SO_W^{M/E/N} |}}
 
 Where:
 \itemize{
+\item \eqn{SJL_{sc}^{M/E/N}} = Jankowski's sleep-corrected social jetlag in a
+particular shift.
 \item \eqn{SO_W^{M/E/N}} = Local time of sleep onset between two days in a
 particular shift.
 \item \eqn{SE_W^{M/E/N}} = Local time of sleep end between two days in a

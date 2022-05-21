@@ -77,13 +77,15 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{SE_{W/F} + SI_{W/F}}{SE_W/F + SI_W/F}}
+\strong{\deqn{GU_{W/F} = SE_{W/F} + SI_{W/F}}}
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}}{SE_W/F} = Local time of sleep end on work \strong{or} work-free
+\item \eqn{GU_{W/F}} = Local time of getting out of bed on work \strong{or} work-free
 days.
-\item \eqn{SI_{W/F}}{SI_W/F} = Sleep inertia on work \strong{or} work-free days
+\item \eqn{SE_{W/F}} = Local time of sleep end on work \strong{or} work-free
+days.
+\item \eqn{SI_{W/F}} = Sleep inertia on work \strong{or} work-free days
 ("after ___ min, I get up").
 }
 
@@ -92,16 +94,17 @@ days.
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}{SE_W/F_M/E/N + TGU_W/F_M/E/N}}
+\strong{\deqn{GU_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}}
 
 Where:
 \itemize{
-\item \eqn{SE_{W/F}^{M/E/N}}{SE_W/F_M/E/N} = Local time of sleep end between two
-days in a particular shift \strong{or} between two free days after a particular
-shift.
-\item \eqn{TGU_{W/F}^{M/E/N}}{TGU_W/F_M/E/N} = Time to get up after sleep end
-between two days in a particular shift \strong{or} between two free days after a
-particular shift ("after ___ min, I get up").
+\item \eqn{GU_{W/F}^{M/E/N}} = Local time of getting out of bed between two days
+in a particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{SE_{W/F}^{M/E/N}} = Local time of sleep end between two days in a
+particular shift \strong{or} between two free days after a particular shift.
+\item \eqn{TGU_{W/F}^{M/E/N}} = Time to get up after sleep end between two days
+in a particular shift \strong{or} between two free days after a particular shift
+("after ___ min, I get up").
 }
 
 \strong{*} \eqn{W} = Workdays; \eqn{F} = Work-free days, \eqn{M} =
