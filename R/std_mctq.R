@@ -405,7 +405,7 @@
 #'   }
 #'
 #'   \item{msf_sc}{
-#'   Chronotype or corrected local time of mid-sleep on __work-free days__.
+#'   Sleep-corrected local time of mid-sleep on __work-free days__.
 #'   \cr \cr
 #'   Type: Computed.
 #'   \cr \cr

@@ -178,7 +178,3 @@ test_that("msf_sc() | error test", {
         alarm_f = c(TRUE, FALSE))
     )
 })
-
-test_that("msf_sc() | wrappers", {
-    expect_equal(msf_sc, chronotype)
-})

@@ -2,12 +2,9 @@
 % Please edit documentation in R/msl.R
 \name{msf_sc}
 \alias{msf_sc}
-\alias{chronotype}
 \title{Compute MCTQ sleep-corrected local time of mid-sleep on work-free days}
 \usage{
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
-
-chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
 }
 \arguments{
 \item{msf}{An \code{\link[hms:hms]{hms}} object corresponding to the \strong{local time of
@@ -45,11 +42,9 @@ sleep-corrected local time of mid-sleep on work-free days.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 
-\code{msf_sc()} computes the \strong{chronotype or sleep-corrected local time of
-mid-sleep on work-free days} for standard, micro, and shift versions of the
-Munich ChronoType Questionnaire (MCTQ).
-
-\code{chronotype()} is just a wrapper for \code{msf_sc()}.
+\code{msf_sc()} computes the \strong{sleep-corrected local time of mid-sleep on
+work-free days} for standard, micro, and shift versions of the Munich
+ChronoType Questionnaire (MCTQ).
 
 When using the shift version of the MCTQ, replace the value of \code{sd_week} to
 \code{sd_overall}, as instructed in the Arguments section.
@@ -251,16 +246,6 @@ alarm_f <- c(FALSE, FALSE)
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 03:45:00 # Expected
 #> 04:21:00 # Expected
-
-## chronotype(): A wrapper for msf_sc()
-
-msf <- hms::parse_hms("07:00:00")
-sd_w <- lubridate::dhours(6)
-sd_f <- lubridate::dhours(12)
-sd_week <- lubridate::dhours(9.45)
-alarm_f <- FALSE
-chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
-#> 05:43:30 # Expected
 
 ## Rounding the output at the seconds level
 

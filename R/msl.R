@@ -118,11 +118,9 @@ msl <- function(so, sd) {
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' `msf_sc()` computes the __chronotype or sleep-corrected local time of
-#' mid-sleep on work-free days__ for standard, micro, and shift versions of the
-#' Munich ChronoType Questionnaire (MCTQ).
-#'
-#' `chronotype()` is just a wrapper for `msf_sc()`.
+#' `msf_sc()` computes the __sleep-corrected local time of mid-sleep on
+#' work-free days__ for standard, micro, and shift versions of the Munich
+#' ChronoType Questionnaire (MCTQ).
 #'
 #' When using the shift version of the MCTQ, replace the value of `sd_week` to
 #' `sd_overall`, as instructed in the Arguments section.
@@ -315,16 +313,6 @@ msl <- function(so, sd) {
 #' #> 03:45:00 # Expected
 #' #> 04:21:00 # Expected
 #'
-#' ## chronotype(): A wrapper for msf_sc()
-#'
-#' msf <- hms::parse_hms("07:00:00")
-#' sd_w <- lubridate::dhours(6)
-#' sd_f <- lubridate::dhours(12)
-#' sd_week <- lubridate::dhours(9.45)
-#' alarm_f <- FALSE
-#' chronotype(msf, sd_w, sd_f, sd_week, alarm_f)
-#' #> 05:43:30 # Expected
-#'
 #' ## Rounding the output at the seconds level
 #'
 #' msf <- hms::parse_hms("05:40:00")
@@ -358,7 +346,3 @@ msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
             vct_sum_time(msf, - sc, cycle = lubridate::ddays())))
     )
 }
-
-#' @rdname msf_sc
-#' @export
-chronotype <- msf_sc

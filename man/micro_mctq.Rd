@@ -139,7 +139,7 @@ R class: \code{\link[lubridate:duration]{Duration}}.
 }
 
 \item{msf_sc}{
-Chronotype or corrected local time of mid-sleep on \strong{work-free days}.
+Sleep-corrected local time of mid-sleep on \strong{work-free days}.
 \cr \cr
 Type: Computed.
 \cr \cr
