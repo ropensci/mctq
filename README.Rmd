@@ -29,7 +29,6 @@ library(hms)
 [![R-CMD-check](https://github.com/ropensci/mctq/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/mctq/actions)
 [![Codecov test coverage](https://codecov.io/gh/ropensci/mctq/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/mctq?branch=main)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
-[![Buy Me A Coffee donate button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://ko-fi.com/danielvartan)
 <!-- badges: end -->
 
 ## Overview
@@ -158,4 +157,4 @@ Please note that this package is released with a [Contributor Code of Conduct](h
 
 Become an `mctq` supporter!
 
-Click [here](https://ko-fi.com/danielvartan) to make a donation. Please indicate the `mctq` package in your donation message.
+Click [here](https://github.com/sponsors/danielvartan) to make a donation. Please indicate the `mctq` package in your donation message.

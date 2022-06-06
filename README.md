@@ -23,8 +23,6 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lif
 coverage](https://codecov.io/gh/ropensci/mctq/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/mctq?branch=main)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
-[![Buy Me A Coffee donate
-button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://ko-fi.com/danielvartan)
 <!-- badges: end -->
 
 ## Overview
@@ -241,5 +239,5 @@ matters Zurich](https://hilda.ch/) for the [Daylight Academy
 
 Become an `mctq` supporter!
 
-Click [here](https://ko-fi.com/danielvartan) to make a donation. Please
-indicate the `mctq` package in your donation message.
+Click [here](https://github.com/sponsors/danielvartan) to make a
+donation. Please indicate the `mctq` package in your donation message.
