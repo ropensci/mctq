@@ -5,6 +5,8 @@
 # mctq (development version)
 
 * Some minor documentation issues were resolved.
+* `mctq` have been self-certified on the [OpenSSF Best Practices Badge
+Program](https://bestpractices.coreinfrastructure.org/en).
 * `chronotype()`, a wrapper function for `msf_sc()`, was removed.
 
 # mctq 0.2.0 (2022-05-08)

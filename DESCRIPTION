@@ -4,7 +4,7 @@ Version: 0.2.0.9000
 Authors@R: 
     c(person(given = "Daniel",
              family = "Vartanian",
-             role = c("aut", "cph", "cre"),
+             role = c("aut", "cre", "ccp", "cph"),
              email = "danvartan@gmail.com",
              comment = c(ORCID = "0000-0001-7782-759X")),
       person(given = "Ana Amelia",
