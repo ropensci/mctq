@@ -23,6 +23,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lif
 coverage](https://codecov.io/gh/ropensci/mctq/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/mctq?branch=main)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
+[![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
 [![CII Best
 Practices](https://bestpractices.coreinfrastructure.org/projects/6244/badge)](https://bestpractices.coreinfrastructure.org/projects/6244)
 <!-- badges: end -->
