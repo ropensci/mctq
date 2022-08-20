@@ -97,8 +97,8 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{SJL_{rel} = MSF - MSW}}
-\strong{\deqn{SJL = | MSF - MSW |}}
+\deqn{SJL_{rel} = MSF - MSW}
+\deqn{SJL = | MSF - MSW |}
 
 Where:
 \itemize{
@@ -113,8 +113,8 @@ Where:
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{SJL_{rel}^{M/E/N} = MSF^{M/E/N} - MSW^{M/E/N}}}
-\strong{\deqn{SJL^{M/E/N} = | MSF^{M/E/N} - MSW^{M/E/N} |}}
+\deqn{SJL_{rel}^{M/E/N} = MSF^{M/E/N} - MSW^{M/E/N}}
+\deqn{SJL^{M/E/N} = | MSF^{M/E/N} - MSW^{M/E/N} |}
 
 Where:
 \itemize{

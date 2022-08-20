@@ -117,9 +117,9 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{\textrm{If } SD_{W} > SD_{F} \; \& \; SE_{W} \leq SE_{F} \; , \;
-SJL_{sc} = | SE_{F} - SE_{W} |}}
-\strong{\deqn{\textrm{Else } \; , \; SJL_{sc} = | SO_{F} - SO_{W} |}}
+\deqn{\textrm{If } SD_{W} > SD_{F} \; \& \; SE_{W} \leq SE_{F} \; , \;
+SJL_{sc} = | SE_{F} - SE_{W} |}
+\deqn{\textrm{Else } \; , \; SJL_{sc} = | SO_{F} - SO_{W} |}
 
 Where:
 \itemize{
@@ -135,11 +135,11 @@ Where:
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{\textrm{If } SD_W^{M/E/N} > SD_F^{M/E/N} \; \& \; SE_W^{M/E/N}
+\deqn{\textrm{If } SD_W^{M/E/N} > SD_F^{M/E/N} \; \& \; SE_W^{M/E/N}
 \leq SE_F^{M/E/N} \; , \; SJL_{sc}^{M/E/N} = | SE_F^{M/E/N} -
-SE_W^{M/E/N} |}}
-\strong{\deqn{\textrm{Else } \; , \; | SJL_{sc}^{M/E/N} = SO_F^{M/E/N} -
-SO_W^{M/E/N} |}}
+SE_W^{M/E/N} |}
+\deqn{\textrm{Else } \; , \; | SJL_{sc}^{M/E/N} = SO_F^{M/E/N} -
+SO_W^{M/E/N} |}
 
 Where:
 \itemize{

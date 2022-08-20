@@ -44,7 +44,7 @@ Roenneberg, Allebrandt, Merrow, & Vetter (2012) and The Worldwide
 Experimental Platform (n.d.) guidelines for \code{fd()} (\eqn{FD}) computation are
 as follows.
 
-\strong{\deqn{FD = 7 - WD}}
+\deqn{FD = 7 - WD}
 
 Where:
 \itemize{

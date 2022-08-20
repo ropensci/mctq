@@ -75,7 +75,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{TBT_{W/F} = GU_{W/F} - BT_{W/F}}}
+\deqn{TBT_{W/F} = GU_{W/F} - BT_{W/F}}
 
 Where:
 \itemize{
@@ -91,7 +91,7 @@ days.
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{TBT_{W/F}^{M/E/N} = GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}}
+\deqn{TBT_{W/F}^{M/E/N} = GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}
 
 Where:
 \itemize{

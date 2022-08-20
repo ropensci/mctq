@@ -95,8 +95,8 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\emptyset SD^{M/E/N} = \frac{(SD_{W}^{M/E/N} \times n_{W}^{M/E/N}) +
-(SD_{F}^{M/E/N} \times n_{F}^{M/E/N})}{n_W^{M/E/N} + n_{F}^{M/E/N}}}}
+\deqn{\emptyset SD^{M/E/N} = \frac{(SD_{W}^{M/E/N} \times n_{W}^{M/E/N}) +
+(SD_{F}^{M/E/N} \times n_{F}^{M/E/N})}{n_W^{M/E/N} + n_{F}^{M/E/N}}}
 
 Where:
 \itemize{

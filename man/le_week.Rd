@@ -82,7 +82,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{LE_{week} = \frac{(LE_W \times WD) + (LE_F \times FD)}{7}}}
+\deqn{LE_{week} = \frac{(LE_W \times WD) + (LE_F \times FD)}{7}}
 
 Where:
 \itemize{

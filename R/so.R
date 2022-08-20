@@ -25,7 +25,7 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{SO_{W/F} = SPrep_{W/F} + SLat_{W/F}}__
+#' \deqn{SO_{W/F} = SPrep_{W/F} + SLat_{W/F}}
 #'
 #' Where:
 #'
@@ -39,7 +39,7 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{SO_{W/F}^{M/E/N} = SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}__
+#' \deqn{SO_{W/F}^{M/E/N} = SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}
 #'
 #' Where:
 #'

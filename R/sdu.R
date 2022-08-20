@@ -29,7 +29,7 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{SD_{W/F} = SE_{W/F} - SO_{W/F}}__
+#' \deqn{SD_{W/F} = SE_{W/F} - SO_{W/F}}
 #'
 #' Where:
 #'
@@ -41,7 +41,7 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{SD_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}__
+#' \deqn{SD_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}
 #'
 #' Where:
 #'
@@ -127,7 +127,7 @@ sdu <- function(so, se) {
 #'
 #' ## Computation
 #'
-#' __\deqn{NapD_{W/F}^{M/E/N} = NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}__
+#' \deqn{NapD_{W/F}^{M/E/N} = NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}
 #'
 #' Where:
 #'
@@ -216,7 +216,7 @@ napd <- function(napo, nape) {
 #'
 #' ## Computation
 #'
-#' __\deqn{SD24_{W/F}^{M/E/N} = SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}__
+#' \deqn{SD24_{W/F}^{M/E/N} = SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}
 #'
 #' Where:
 #'
@@ -330,7 +330,7 @@ sd24 <- function(sd, napd, nap) {
 #'
 #' ## Computation
 #'
-#' __\deqn{SD_{week} = \frac{(SD_{W} \times WD) + (SD_{F} \times FD)}{7}}__
+#' \deqn{SD_{week} = \frac{(SD_{W} \times WD) + (SD_{F} \times FD)}{7}}
 #'
 #' Where:
 #'
@@ -464,8 +464,8 @@ sd_week <- function(sd_w, sd_f, wd) {
 #'
 #' ## Computation
 #'
-#' __\deqn{\emptyset SD^{M/E/N} = \frac{(SD_{W}^{M/E/N} \times n_{W}^{M/E/N}) +
-#' (SD_{F}^{M/E/N} \times n_{F}^{M/E/N})}{n_W^{M/E/N} + n_{F}^{M/E/N}}}__
+#' \deqn{\emptyset SD^{M/E/N} = \frac{(SD_{W}^{M/E/N} \times n_{W}^{M/E/N}) +
+#' (SD_{F}^{M/E/N} \times n_{F}^{M/E/N})}{n_W^{M/E/N} + n_{F}^{M/E/N}}}
 #'
 #' Where:
 #'

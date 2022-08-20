@@ -28,8 +28,8 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{SJL_{rel} = MSF - MSW}__
-#' __\deqn{SJL = | MSF - MSW |}__
+#' \deqn{SJL_{rel} = MSF - MSW}
+#' \deqn{SJL = | MSF - MSW |}
 #'
 #' Where:
 #'
@@ -42,8 +42,8 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{SJL_{rel}^{M/E/N} = MSF^{M/E/N} - MSW^{M/E/N}}__
-#' __\deqn{SJL^{M/E/N} = | MSF^{M/E/N} - MSW^{M/E/N} |}__
+#' \deqn{SJL_{rel}^{M/E/N} = MSF^{M/E/N} - MSW^{M/E/N}}
+#' \deqn{SJL^{M/E/N} = | MSF^{M/E/N} - MSW^{M/E/N} |}
 #'
 #' Where:
 #'
@@ -274,9 +274,9 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{\textrm{If } SD_{W} > SD_{F} \; \& \; SE_{W} \leq SE_{F} \; , \;
-#' SJL_{sc} = | SE_{F} - SE_{W} |}__
-#' __\deqn{\textrm{Else } \; , \; SJL_{sc} = | SO_{F} - SO_{W} |}__
+#' \deqn{\textrm{If } SD_{W} > SD_{F} \; \& \; SE_{W} \leq SE_{F} \; , \;
+#' SJL_{sc} = | SE_{F} - SE_{W} |}
+#' \deqn{\textrm{Else } \; , \; SJL_{sc} = | SO_{F} - SO_{W} |}
 #'
 #' Where:
 #'
@@ -290,11 +290,11 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{\textrm{If } SD_W^{M/E/N} > SD_F^{M/E/N} \; \& \; SE_W^{M/E/N}
+#' \deqn{\textrm{If } SD_W^{M/E/N} > SD_F^{M/E/N} \; \& \; SE_W^{M/E/N}
 #' \leq SE_F^{M/E/N} \; , \; SJL_{sc}^{M/E/N} = | SE_F^{M/E/N} -
-#' SE_W^{M/E/N} |}__
-#' __\deqn{\textrm{Else } \; , \; | SJL_{sc}^{M/E/N} = SO_F^{M/E/N} -
-#' SO_W^{M/E/N} |}__
+#' SE_W^{M/E/N} |}
+#' \deqn{\textrm{Else } \; , \; | SJL_{sc}^{M/E/N} = SO_F^{M/E/N} -
+#' SO_W^{M/E/N} |}
 #'
 #' Where:
 #'
@@ -506,9 +506,9 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #'
 #' ## Computation
 #'
-#' __\deqn{\emptyset SJL_{weighted} = \frac{(| SJL^{M} | \times n_{W}^{M}) +
+#' \deqn{\emptyset SJL_{weighted} = \frac{(| SJL^{M} | \times n_{W}^{M}) +
 #' (| SJL^{E} | \times n_{W}^{E}) + (| SJL^{N} | \times n_{W}^{N})}{n_{W}^{M} +
-#' n_{W}^{E} + n_{W}^{N}}}__
+#' n_{W}^{E} + n_{W}^{N}}}
 #'
 #' Where:
 #'

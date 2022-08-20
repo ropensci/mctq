@@ -30,7 +30,7 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{MS_{W/F} = SO_{W/F} + \frac{SD_{W/F}}{2}}__
+#' \deqn{MS_{W/F} = SO_{W/F} + \frac{SD_{W/F}}{2}}
 #'
 #' Where:
 #'
@@ -43,7 +43,7 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{MS_{W/F}^{M/E/N} = SO_{W/F}^{M/E/N} + \frac{SD_{W/F}^{M/E/N}}{2}}__
+#' \deqn{MS_{W/F}^{M/E/N} = SO_{W/F}^{M/E/N} + \frac{SD_{W/F}^{M/E/N}}{2}}
 #'
 #' Where:
 #'
@@ -157,10 +157,10 @@ msl <- function(so, sd) {
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{\textrm{If } Alarm_{F} = True \; , \; MSF_{sc} =
-#' \textrm{Not Available (NA)}}__
-#' __\deqn{\textrm{Else if } SD_F \leq SD_W \; , \; MSF_{sc} = MSF}__
-#' __\deqn{\textrm{Else } \; , \; MSF_{sc} = MSF - \frac{SD_F - SD_{week}}{2}}__
+#' \deqn{\textrm{If } Alarm_{F} = True \; , \; MSF_{sc} =
+#' \textrm{Not Available (NA)}}
+#' \deqn{\textrm{Else if } SD_F \leq SD_W \; , \; MSF_{sc} = MSF}
+#' \deqn{\textrm{Else } \; , \; MSF_{sc} = MSF - \frac{SD_F - SD_{week}}{2}}
 #'
 #' Where:
 #'
@@ -176,7 +176,7 @@ msl <- function(so, sd) {
 #'
 #' Note that, since:
 #'
-#' __\deqn{MSF = SO_{F} + \frac{SD_{F}}{2}}__
+#' \deqn{MSF = SO_{F} + \frac{SD_{F}}{2}}
 #'
 #' Where:
 #'
@@ -187,20 +187,20 @@ msl <- function(so, sd) {
 #' The last condition of the \eqn{MSF_{sc}}{MSF_sc} computation can be
 #' simplified to:
 #'
-#' __\deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} -
-#' \frac{SD_{F} - SD_{week}}{2}}__
-#' __\deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} - \frac{SD_{F}}{2} +
-#' \frac{SD_{week}}{2}}__
-#' __\deqn{MSF_{sc} = SO_{F} + \frac{SD_{week}}{2}}__
+#' \deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} -
+#' \frac{SD_{F} - SD_{week}}{2}}
+#' \deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} - \frac{SD_{F}}{2} +
+#' \frac{SD_{week}}{2}}
+#' \deqn{MSF_{sc} = SO_{F} + \frac{SD_{week}}{2}}
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{\textrm{If } Alarm_{F}^{M/E/N} = True \; , \; MSF_{sc}^{M/E/N} =
-#' \textrm{Not Available (NA)}}__
-#' __\deqn{\textrm{Else if } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \;
-#' MSF_{sc}^{M/E/N} = MSF^{M/E/N}}__
-#' __\deqn{\textrm{Else } \; , \; MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
-#' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}__
+#' \deqn{\textrm{If } Alarm_{F}^{M/E/N} = True \; , \; MSF_{sc}^{M/E/N} =
+#' \textrm{Not Available (NA)}}
+#' \deqn{\textrm{Else if } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \;
+#' MSF_{sc}^{M/E/N} = MSF^{M/E/N}}
+#' \deqn{\textrm{Else } \; , \; MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
+#' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}
 #'
 #' Where:
 #'
@@ -223,7 +223,7 @@ msl <- function(so, sd) {
 #'
 #' Note that, since:
 #'
-#' __\deqn{MSF^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2}}__
+#' \deqn{MSF^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2}}
 #'
 #' Where:
 #'
@@ -237,11 +237,11 @@ msl <- function(so, sd) {
 #' The last condition of the \eqn{MSF_{sc}^{M/E/N}}{MSF_sc_M/E/N} computation
 #' can be simplified to:
 #'
-#' __\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
-#' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}__
-#' __\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
-#' \frac{SD_{F}^{M/E/N}}{2} + \frac{\emptyset SD^{M/E/N}}{2}}__
-#' __\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{\emptyset SD^{M/E/N}}{2}}__
+#' \deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
+#' \frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}
+#' \deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
+#' \frac{SD_{F}^{M/E/N}}{2} + \frac{\emptyset SD^{M/E/N}}{2}}
+#' \deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{\emptyset SD^{M/E/N}}{2}}
 #'
 #' @param msf An [`hms`][hms::hms()] object corresponding to the __local time of
 #'   mid-sleep on work-free days__ from a standard, micro, or shift version of

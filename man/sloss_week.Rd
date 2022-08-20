@@ -79,9 +79,9 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\textrm{If } SD_{week} > SD_W \; , \; SLoss_{week} =
-(SD_{week} - SD_W) \times WD}}
-\strong{\deqn{\textrm{Else } \; , \; SLoss_{week} = (SD_{week} - SD_F) \times FD}}
+\deqn{\textrm{If } SD_{week} > SD_W \; , \; SLoss_{week} =
+(SD_{week} - SD_W) \times WD}
+\deqn{\textrm{Else } \; , \; SLoss_{week} = (SD_{week} - SD_F) \times FD}
 
 Where:
 \itemize{

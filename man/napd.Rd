@@ -73,7 +73,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{NapD_{W/F}^{M/E/N} = NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}}
+\deqn{NapD_{W/F}^{M/E/N} = NapE_{W/F}^{M/E/N} - NapO_{W/F}^{M/E/N}}
 
 Where:
 \itemize{

@@ -85,7 +85,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{SD_{week} = \frac{(SD_{W} \times WD) + (SD_{F} \times FD)}{7}}}
+\deqn{SD_{week} = \frac{(SD_{W} \times WD) + (SD_{F} \times FD)}{7}}
 
 Where:
 \itemize{

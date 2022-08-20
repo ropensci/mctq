@@ -87,7 +87,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{MS_{W/F} = SO_{W/F} + \frac{SD_{W/F}}{2}}}
+\deqn{MS_{W/F} = SO_{W/F} + \frac{SD_{W/F}}{2}}
 
 Where:
 \itemize{
@@ -102,7 +102,7 @@ days.
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{MS_{W/F}^{M/E/N} = SO_{W/F}^{M/E/N} + \frac{SD_{W/F}^{M/E/N}}{2}}}
+\deqn{MS_{W/F}^{M/E/N} = SO_{W/F}^{M/E/N} + \frac{SD_{W/F}^{M/E/N}}{2}}
 
 Where:
 \itemize{

@@ -78,7 +78,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{SO_{W/F} = SPrep_{W/F} + SLat_{W/F}}}
+\deqn{SO_{W/F} = SPrep_{W/F} + SLat_{W/F}}
 
 Where:
 \itemize{
@@ -94,7 +94,7 @@ sleep on work \strong{or} work-free days ("I need ___ min to fall asleep").
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{SO_{W/F}^{M/E/N} = SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}}
+\deqn{SO_{W/F}^{M/E/N} = SPrep_{W/F}^{M/E/N} + SLat_{W/F}^{M/E/N}}
 
 Where:
 \itemize{

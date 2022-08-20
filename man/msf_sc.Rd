@@ -116,10 +116,10 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{\textrm{If } Alarm_{F} = True \; , \; MSF_{sc} =
-\textrm{Not Available (NA)}}}
-\strong{\deqn{\textrm{Else if } SD_F \leq SD_W \; , \; MSF_{sc} = MSF}}
-\strong{\deqn{\textrm{Else } \; , \; MSF_{sc} = MSF - \frac{SD_F - SD_{week}}{2}}}
+\deqn{\textrm{If } Alarm_{F} = True \; , \; MSF_{sc} =
+\textrm{Not Available (NA)}}
+\deqn{\textrm{Else if } SD_F \leq SD_W \; , \; MSF_{sc} = MSF}
+\deqn{\textrm{Else } \; , \; MSF_{sc} = MSF - \frac{SD_F - SD_{week}}{2}}
 
 Where:
 \itemize{
@@ -136,7 +136,7 @@ respondent uses an alarm clock to wake up on work-free days.
 
 Note that, since:
 
-\strong{\deqn{MSF = SO_{F} + \frac{SD_{F}}{2}}}
+\deqn{MSF = SO_{F} + \frac{SD_{F}}{2}}
 
 Where:
 \itemize{
@@ -148,21 +148,21 @@ Where:
 The last condition of the \eqn{MSF_{sc}}{MSF_sc} computation can be
 simplified to:
 
-\strong{\deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} -
-\frac{SD_{F} - SD_{week}}{2}}}
-\strong{\deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} - \frac{SD_{F}}{2} +
-\frac{SD_{week}}{2}}}
-\strong{\deqn{MSF_{sc} = SO_{F} + \frac{SD_{week}}{2}}}
+\deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} -
+\frac{SD_{F} - SD_{week}}{2}}
+\deqn{MSF_{sc} = SO_{F} + \frac{SD_{F}}{2} - \frac{SD_{F}}{2} +
+\frac{SD_{week}}{2}}
+\deqn{MSF_{sc} = SO_{F} + \frac{SD_{week}}{2}}
 }
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{\textrm{If } Alarm_{F}^{M/E/N} = True \; , \; MSF_{sc}^{M/E/N} =
-\textrm{Not Available (NA)}}}
-\strong{\deqn{\textrm{Else if } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \;
-MSF_{sc}^{M/E/N} = MSF^{M/E/N}}}
-\strong{\deqn{\textrm{Else } \; , \; MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
-\frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}}
+\deqn{\textrm{If } Alarm_{F}^{M/E/N} = True \; , \; MSF_{sc}^{M/E/N} =
+\textrm{Not Available (NA)}}
+\deqn{\textrm{Else if } SD_{F}^{M/E/N} \leq SD_{W}^{M/E/N} \; , \;
+MSF_{sc}^{M/E/N} = MSF^{M/E/N}}
+\deqn{\textrm{Else } \; , \; MSF_{sc}^{M/E/N} = MSF^{M/E/N} -
+\frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}
 
 Where:
 \itemize{
@@ -186,7 +186,7 @@ Morning shift; \eqn{E} = Evening shift; \eqn{N} = Night shift.
 
 Note that, since:
 
-\strong{\deqn{MSF^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2}}}
+\deqn{MSF^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2}}
 
 Where:
 \itemize{
@@ -201,11 +201,11 @@ particular shift.
 The last condition of the \eqn{MSF_{sc}^{M/E/N}}{MSF_sc_M/E/N} computation
 can be simplified to:
 
-\strong{\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
-\frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}}
-\strong{\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
-\frac{SD_{F}^{M/E/N}}{2} + \frac{\emptyset SD^{M/E/N}}{2}}}
-\strong{\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{\emptyset SD^{M/E/N}}{2}}}
+\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
+\frac{SD_{F}^{M/E/N} - \emptyset SD^{M/E/N}}{2}}
+\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{SD_{F}^{M/E/N}}{2} -
+\frac{SD_{F}^{M/E/N}}{2} + \frac{\emptyset SD^{M/E/N}}{2}}
+\deqn{MSF_{sc}^{M/E/N} = SO_{F}^{M/E/N} + \frac{\emptyset SD^{M/E/N}}{2}}
 }
 }
 

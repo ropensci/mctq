@@ -86,7 +86,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{SD24_{W/F}^{M/E/N} = SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}}
+\deqn{SD24_{W/F}^{M/E/N} = SD_{W/F}^{M/E/N} + NapD_{W/F}^{M/E/N}}
 
 Where:
 \itemize{

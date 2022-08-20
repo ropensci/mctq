@@ -13,7 +13,7 @@
 #' Experimental Platform (n.d.) guidelines for `fd()` (\eqn{FD}) computation are
 #' as follows.
 #'
-#' __\deqn{FD = 7 - WD}__
+#' \deqn{FD = 7 - WD}
 #'
 #' Where:
 #'

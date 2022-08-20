@@ -25,7 +25,7 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{GU_{W/F} = SE_{W/F} + SI_{W/F}}__
+#' \deqn{GU_{W/F} = SE_{W/F} + SI_{W/F}}
 #'
 #' Where:
 #'
@@ -40,7 +40,7 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{GU_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}__
+#' \deqn{GU_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}
 #'
 #' Where:
 #'

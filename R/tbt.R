@@ -22,7 +22,7 @@
 #'
 #' ## For standard and micro versions of the MCTQ
 #'
-#' __\deqn{TBT_{W/F} = GU_{W/F} - BT_{W/F}}__
+#' \deqn{TBT_{W/F} = GU_{W/F} - BT_{W/F}}
 #'
 #' Where:
 #'
@@ -36,7 +36,7 @@
 #'
 #' ## For the shift version of the MCTQ
 #'
-#' __\deqn{TBT_{W/F}^{M/E/N} = GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}__
+#' \deqn{TBT_{W/F}^{M/E/N} = GU_{W/F}^{M/E/N} - BT_{W/F}^{M/E/N}}
 #'
 #' Where:
 #'

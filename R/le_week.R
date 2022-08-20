@@ -23,7 +23,7 @@
 #'
 #' ## Computation
 #'
-#' __\deqn{LE_{week} = \frac{(LE_W \times WD) + (LE_F \times FD)}{7}}__
+#' \deqn{LE_{week} = \frac{(LE_W \times WD) + (LE_F \times FD)}{7}}
 #'
 #' Where:
 #'

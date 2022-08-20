@@ -102,9 +102,9 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{Computation}{
 
-\strong{\deqn{\emptyset SJL_{weighted} = \frac{(| SJL^{M} | \times n_{W}^{M}) +
+\deqn{\emptyset SJL_{weighted} = \frac{(| SJL^{M} | \times n_{W}^{M}) +
 (| SJL^{E} | \times n_{W}^{E}) + (| SJL^{N} | \times n_{W}^{N})}{n_{W}^{M} +
-n_{W}^{E} + n_{W}^{N}}}}
+n_{W}^{E} + n_{W}^{N}}}
 
 Where:
 \itemize{

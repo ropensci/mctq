@@ -77,7 +77,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{GU_{W/F} = SE_{W/F} + SI_{W/F}}}
+\deqn{GU_{W/F} = SE_{W/F} + SI_{W/F}}
 
 Where:
 \itemize{
@@ -94,7 +94,7 @@ days.
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{GU_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}}
+\deqn{GU_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} + TGU_{W/F}^{M/E/N}}
 
 Where:
 \itemize{

@@ -84,7 +84,7 @@ package \href{https://docs.ropensci.org/mctq/reference/}{website}.
 
 \subsection{For standard and micro versions of the MCTQ}{
 
-\strong{\deqn{SD_{W/F} = SE_{W/F} - SO_{W/F}}}
+\deqn{SD_{W/F} = SE_{W/F} - SO_{W/F}}
 
 Where:
 \itemize{
@@ -98,7 +98,7 @@ Where:
 
 \subsection{For the shift version of the MCTQ}{
 
-\strong{\deqn{SD_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}}
+\deqn{SD_{W/F}^{M/E/N} = SE_{W/F}^{M/E/N} - SO_{W/F}^{M/E/N}}
 
 Where:
 \itemize{
