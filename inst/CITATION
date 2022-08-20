@@ -18,9 +18,9 @@ citEntry(
                        "{mctq}:", " ",
                        "an R package for the Munich ChronoType", " ",
                        "Questionnaire", " ",
-                       "(v. 0.2.0). ",
+                       "(v. 0.3.0). ",
                        "https://docs.ropensci.org/",
                        "mctq/"),
-  note        = paste0("(v. 0.2.0). ",
+  note        = paste0("(v. 0.3.0). ",
                        "Lifecycle: maturing")
 )

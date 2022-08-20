@@ -64,7 +64,9 @@ instead, the latter condition will return a interval with 24 hours of length
 In cases when \code{x} and \code{y} distance themselves by 12 hours, there will be no
 shorter or longer interval (they will have equal length). In these cases,
 \code{shorter_interval()} and \code{longer_interval()} will return the same value
-(an interval of 12 hours).\preformatted{             day 1                        day 2
+(an interval of 12 hours).
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{             day 1                        day 2
      x                  y         x                  y
    06:00              22:00     06:00              22:00
 -----|------------------|---------|------------------|----->
@@ -90,7 +92,7 @@ shorter or longer interval (they will have equal length). In these cases,
    12:00           00:00           12:00           00:00
 -----|---------------|---------------|---------------|----->
             12h             12h             12h
-}
+}\if{html}{\out{</div>}}
 }
 
 \subsection{Class requirements}{

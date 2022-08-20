@@ -205,7 +205,7 @@ citation("mctq")
 #> 
 #>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2022).
 #>   {mctq}: an R package for the Munich ChronoType Questionnaire (v.
-#>   0.2.0). https://docs.ropensci.org/mctq/
+#>   0.3.0). https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -214,7 +214,7 @@ citation("mctq")
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2022},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {(v. 0.2.0). Lifecycle: maturing},
+#>     note = {(v. 0.3.0). Lifecycle: maturing},
 #>   }
 ```
 

@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ropensci/mctq/",
   "issueTracker": "https://github.com/ropensci/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.3 (2022-03-10)",
+  "runtimePlatform": "R version 4.2.1 (2022-06-23 ucrt)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -167,7 +167,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">= 2.14",
+      "version": ">= 2.15",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -180,7 +180,7 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.2",
+      "version": ">= 2.2.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -212,7 +212,7 @@
       "@type": "SoftwareApplication",
       "identifier": "usethis",
       "name": "usethis",
-      "version": ">= 2.1.5",
+      "version": ">= 2.1.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -278,7 +278,7 @@
       "@type": "SoftwareApplication",
       "identifier": "hms",
       "name": "hms",
-      "version": ">= 1.1.1",
+      "version": ">= 1.1.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -315,7 +315,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "728.485KB",
+  "fileSize": "736.085KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -339,7 +339,7 @@
       ],
       "name": "{mctq}: an R package for the Munich ChronoType Questionnaire",
       "url": "https://docs.ropensci.org/mctq/",
-      "description": "(v. 0.2.0). Lifecycle: maturing"
+      "description": "(v. 0.3.0). Lifecycle: maturing"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/mctq/blob/master/NEWS.md",
@@ -351,5 +351,5 @@
     "url": "https://github.com/ropensci/software-review/issues/434",
     "provider": "https://ropensci.org"
   },
-  "keywords": ["chronobiology", "mctq", "sleep", "r-package", "peer-reviewed", "r", "rstats"]
+  "keywords": ["chronobiology", "mctq", "sleep", "r-package", "peer-reviewed", "r", "rstats", "chronotype"]
 }

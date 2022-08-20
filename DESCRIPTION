@@ -1,6 +1,6 @@
 Package: mctq
 Title: Tools to Process the Munich ChronoType Questionnaire (MCTQ)
-Version: 0.2.0.9000
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Daniel",
              family = "Vartanian",
@@ -58,11 +58,11 @@ Suggests:
     mockr (>= 0.2.0),
     readr (>= 2.1.2),
     rlang (>= 1.0.2),
-    rmarkdown (>= 2.14),
-    spelling (>= 2.2),
+    rmarkdown (>= 2.15),
+    spelling (>= 2.2.0),
     stats (>= 4.0.0),
     testthat (>= 3.1.4),
-    usethis (>= 2.1.5),
+    usethis (>= 2.1.6),
     utils (>= 4.0.0)
 VignetteBuilder: 
     knitr
@@ -71,4 +71,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

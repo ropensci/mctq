@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.2
+# CITATION file created with {cffr} R package, v0.2.3
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -8,7 +8,7 @@ message: 'To cite package "mctq" in publications use:'
 type: software
 license: MIT
 title: 'mctq: Tools to Process the Munich ChronoType Questionnaire (MCTQ)'
-version: 0.2.0
+version: 0.3.0
 abstract: A complete toolkit to process the Munich ChronoType Questionnaire (MCTQ)
   for its three versions (standard, micro, and shift). MCTQ is a quantitative and
   validated tool to assess chronotypes using peoples' sleep behavior, originally presented
@@ -44,7 +44,7 @@ preferred-citation:
     orcid: https://orcid.org/0000-0002-5257-591X
   year: '2022'
   url: https://docs.ropensci.org/mctq/
-  notes: '(v. 0.2.0). Lifecycle: maturing'
+  notes: '(v. 0.3.0). Lifecycle: maturing'
 repository: https://bioconductor.org/
 repository-code: https://github.com/ropensci/mctq/issues/
 url: https://docs.ropensci.org/mctq/
@@ -116,10 +116,11 @@ references:
   authors:
   - family-names: Müller
     given-names: Kirill
-    email: krlmlr+r@mailbox.org
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
   year: '2022'
   url: https://CRAN.R-project.org/package=hms
-  version: '>= 1.1.1'
+  version: '>= 1.1.2'
 - type: software
   title: lifecycle
   abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
@@ -315,7 +316,7 @@ references:
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2022'
   url: https://CRAN.R-project.org/package=rmarkdown
-  version: '>= 2.14'
+  version: '>= 2.15'
 - type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
@@ -329,7 +330,7 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2022'
-  version: '>= 2.2'
+  version: '>= 2.2.1'
 - type: software
   title: stats
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -373,7 +374,7 @@ references:
     orcid: https://orcid.org/0000-0003-0299-5825
   year: '2022'
   url: https://CRAN.R-project.org/package=usethis
-  version: '>= 2.1.5'
+  version: '>= 2.1.6'
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'

@@ -14,10 +14,4 @@ assignees: ''
 
 ## Instructions
 
-## Materials
-
-## Checklist
-
-* [ ] `placeholder`.
-
-## Other references
+## References

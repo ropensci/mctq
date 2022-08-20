@@ -38,7 +38,9 @@ If the objective is to measure the duration (time span) of an event, time is
 usually measured considering a linear frame, with a fixed point of
 \href{https://en.wikipedia.org/wiki/Origin_(mathematics)}{origin}. In this
 context, the time value distance itself to infinity in relation to the
-origin.\preformatted{                                   B
+origin.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{                                   B
                              |----------|
                                         A
                              |---------------------|
@@ -48,7 +50,7 @@ origin.\preformatted{                                   B
                            origin
 
 A + B = 10 + 5 = 15s
-}
+}\if{html}{\out{</div>}}
 
 But that's not the only possible "shape" of time, as it can also be measured
 in other contexts.
@@ -56,7 +58,9 @@ in other contexts.
 In a "time of day" context, the time will be linked to the rotation of the
 earth, "resetting" when a new rotation cycle starts. That brings a different
 kind of shape to time: a circular shape. With this shape the time value
-encounters the origin at the beginning and end of each cycle.\preformatted{               - <--- h ---> +
+encounters the origin at the beginning and end of each cycle.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{               - <--- h ---> +
                     origin
                 . . . 0 . . .
              .                 .
@@ -73,13 +77,15 @@ encounters the origin at the beginning and end of each cycle.\preformatted{     
                 . . . 12 . . .
 
 18 + 6 = 0h
-}
+}\if{html}{\out{</div>}}
 
 If we transpose this circular time frame to a linear one, it would look like
-this:\preformatted{<----|---------------|---------------|---------------|----->
+this:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{<----|---------------|---------------|---------------|----->
     0h              12h              0h             12h
   origin                           origin
-}
+}\if{html}{\out{</div>}}
 
 Note that now the origin is not fix, but cyclical.
 
@@ -94,10 +100,12 @@ Hence, it can be subject to catastrophic loss of accuracy if \code{time} is
 fractional and much larger than \code{cycle}. A warning is given if this is
 detected.
 
-\code{\link[base:Arithmetic]{\%\%}} is a \code{builtin} R function that operates like this:\preformatted{function(a, b) \{
+\code{\link[base:Arithmetic]{\%\%}} is a \code{builtin} R function that operates like this:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{function(a, b) \{
     a - floor(a / b) * b
 \}
-}
+}\if{html}{\out{</div>}}
 }
 
 \subsection{Negative time cycling}{
@@ -111,7 +119,9 @@ However, If \code{time} have a negative value and \code{reverse == TRUE} (defaul
 
 Example: If you have a -30h time span in a reversed cycle of 24h, the result
 will be 18h. By removing the full cycles of -30h you will get -6h (-30 + 24),
-and -6h relative to the origin will be 18h.\preformatted{               - <--- h ---> +
+and -6h relative to the origin will be 18h.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{               - <--- h ---> +
                     origin
                 . . . 0 . . .
               .                 .
@@ -127,7 +137,7 @@ and -6h relative to the origin will be 18h.\preformatted{               - <--- h
              .                 .
                 . . . 12 . . .
                     (-12)
-}
+}\if{html}{\out{</div>}}
 }
 
 \subsection{\code{Period} objects}{

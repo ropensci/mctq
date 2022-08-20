@@ -39,13 +39,15 @@ them.
 In cases when \code{start} is equal to \code{end}, there are two possibilities of
 intervals between the two hours (ambiguity). That's because \code{start} and \code{end}
 can be at the same point in time or they can distance themselves by one day,
-considering a two-day timeline.\preformatted{ start,end       start,end       start,end       start,end
+considering a two-day timeline.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ start,end       start,end       start,end       start,end
    start            end            start            end
    10:00           10:00           10:00           10:00
 -----|---------------|---------------|---------------|----->
     0h              0h              0h              0h
             24h             24h             24h
-}
+}\if{html}{\out{</div>}}
 
 You must instruct \code{assign_date()} on how to deal with this problem if it
 occurs. There are three options to choose.
