@@ -3,6 +3,10 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
+# mctq (development version)
+
+
+
 # mctq 0.3.0 (2022-08-20)
 
 * Re-rendered documentation for compatibility with R-devel.

@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/ropensci/mctq/",
   "issueTracker": "https://github.com/ropensci/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.0",
+  "version": "0.3.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -180,7 +180,7 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.2.1",
+      "version": ">= 2.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -278,7 +278,7 @@
       "@type": "SoftwareApplication",
       "identifier": "hms",
       "name": "hms",
-      "version": ">= 1.1.2",
+      "version": ">= 1.1.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -315,7 +315,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "736.085KB",
+  "fileSize": "735.659KB",
   "citation": [
     {
       "@type": "CreativeWork",
