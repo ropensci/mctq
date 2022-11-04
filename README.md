@@ -36,7 +36,7 @@ tool to assess chronotypes using peoples’ sleep behavior presented by
 Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
 to facilitate the work of sleep and chronobiology scientists with MCTQ
-data and help with research reproducibility.
+data and to help with research reproducibility.
 
 `mctq` adheres to the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
@@ -205,7 +205,7 @@ citation("mctq")
 #> 
 #>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2022).
 #>   {mctq}: an R package for the Munich ChronoType Questionnaire (v.
-#>   0.3.0). https://docs.ropensci.org/mctq/
+#>   0.3.1). https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -214,7 +214,7 @@ citation("mctq")
 #>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
 #>     year = {2022},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {(v. 0.3.0). Lifecycle: maturing},
+#>     note = {(v. 0.3.1). Lifecycle: maturing},
 #>   }
 ```
 

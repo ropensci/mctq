@@ -35,7 +35,7 @@ library(hms)
 
 ## Overview
 
-`mctq` is an R package that provides a complete toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data and help with research reproducibility.
+`mctq` is an R package that provides a complete toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data and to help with research reproducibility.
 
 `mctq` adheres to the [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates with the [tidyverse ecosystem](https://www.tidyverse.org/).

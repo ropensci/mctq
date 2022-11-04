@@ -7,9 +7,9 @@ https://cran.r-project.org/web/checks/check_results_mctq.html were fixed.
 ## Test environments
 
 * Local: Windows 10 install (v. 21H2), R-devel, R 4.2.2
-* GitHub Actions: Windows (latest), __R 4.2.2__
-* GitHub Actions: macOS (latest), __R 4.2.2__
-* GitHub Actions: Ubuntu 18.04, __R-devel__, __R 4.2.2__, __R 4.2.1__
+* GitHub Actions: Windows (latest), R 4.2.2
+* GitHub Actions: macOS (latest), R 4.2.2
+* GitHub Actions: Ubuntu 18.04, R-devel, R 4.2.2, R 4.2.1
 * R-hub: Windows Server 2022 (64 bit), R-devel
 * R-hub: Fedora Linux (clang, gfortran), R-devel
 * R-hub: Ubuntu Linux 20.04.1 LTS (GCC), R 4.2.2
@@ -79,7 +79,7 @@ checking CRAN incoming feasibility ... [73s] NOTE
         	schannel: next InitializeSecurityContext failed: SEC_E_ILLEGAL_MESSAGE (0x80090326) - This error usually occurs when a fatal SSL/TLS alert is received (e.g. handshake failed). More detail may be available in the Windows System event log.
 ```
 
-These could be due to a temporary failure in the web servers and can likely be ignored.
+These could be due to a temporary failure in the web servers and can likely be ignored. I checked all the links and they are working normally.
 
 * Note 2
 
@@ -102,11 +102,11 @@ Possibly mis-spelled words in DESCRIPTION:
   chronotypes (36:57)
 ```
 
-These are not mis-spelled words.
+These are not misspelled words.
 
 ## revdepcheck results
 
-There were no reverse depensdencies.
+There were no reverse dependencies.
 
 ```
 We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
