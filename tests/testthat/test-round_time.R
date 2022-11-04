@@ -25,8 +25,8 @@ test_that("round_time() | scalar test", {
     object <- as.POSIXlt(lubridate::as_datetime(12345.6789, tz = "EST"))
     object$sec <- 70.6789
     expect_equal(
-        round_time(object),
-        as.POSIXlt(lubridate::as_datetime(12371, tz = "EST"))
+        round_time(object)$sec,
+        as.POSIXlt(lubridate::as_datetime(12371, tz = "EST"))$sec
     )
 })
 

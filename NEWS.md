@@ -3,9 +3,10 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
-# mctq (development version)
+# mctq 0.3.1 (2022-11-03)
 
-
+* Patch changes were made to adapt the package to R-devel.
+* The dependencies versions were updated.
 
 # mctq 0.3.0 (2022-08-20)
 

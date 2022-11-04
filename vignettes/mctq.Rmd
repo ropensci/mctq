@@ -22,7 +22,7 @@ This article takes a quick tour of the Munich ChronoType Questionnaire (MCTQ) ma
 
 The same features presented here can also be used with $\mu$MCTQ. To make it easy for newcomers, some MCTQ$^{Shift}$ functions and other special functions are not shown.
 
-We assume that you already have [R](https://www.r-project.org/) installed and have some familiarity with R and MCTQ data. We also strongly recommend using [RStudio](https://www.rstudio.com/) as your IDE (Integrated Development Environment).
+We assume that you already have [R](https://www.r-project.org/) installed and have some familiarity with R and MCTQ data. We also strongly recommend using [RStudio](https://posit.co/products/open-source/rstudio/) as your IDE (Integrated Development Environment).
 
 It's a good idea to have the standard MCTQ questionnaire open while reading this introduction. That way you can have a better understanding of the data objects we are going to deal with. You can download a copy of the MCTQ full standard version  [here](https://www.thewep.org/documentations/mctq/item/english-mctq-full).
 
@@ -67,7 +67,7 @@ Teaching you how to parse/convert your data is outside the scope of this article
 
 Here we are interested in two types of time objects: `Duration` objects, to store time spans, such as sleep latency, and `hms` objects, to store local time values, such as bedtime.
 
-But first, let's take a look at the data, shall we? If you're using [RStudio](https://www.rstudio.com/), you can run the code above and then type `View(data)` in the console to explore it.
+But first, let's take a look at the data, shall we? If you're using [RStudio](https://posit.co/products/open-source/rstudio/), you can run the code above and then type `View(data)` in the console to explore it.
 
 ```{r}
 data
@@ -320,7 +320,7 @@ And our final dataset is ...
 data
 ```
 
-If you're using [RStudio](https://www.rstudio.com/), you can run all the code showed above and then type `View(data)` in the console to explore the final result.
+If you're using [RStudio](https://posit.co/products/open-source/rstudio/), you can run all the code showed above and then type `View(data)` in the console to explore the final result.
 
 If you don't feel comfortable with the way `Duration` objects are printed, `mctq` provides a utility function to help you. Just use `pretty_mctq()` to get a better view.
 
