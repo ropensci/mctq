@@ -126,15 +126,14 @@ Note that the `mctq` functions uses a similar naming pattern to those
 used in the MCTQ publications. This makes it easy to find and apply any
 computation necessary.
 
--   `fd()`: compute MCTQ work-free days.
--   `so()`: compute MCTQ local time of sleep onset.
--   `gu()`: compute MCTQ local time of getting out of bed.
--   `sdu()`: compute MCTQ sleep duration.
--   `tbt()`: compute MCTQ total time in bed.
--   `msl()`: compute MCTQ local time of mid-sleep.
--   `napd()`: compute MCTQ nap duration (only for MCTQ Shift).
--   `sd24()`: compute MCTQ 24 hours sleep duration (only for MCTQ
-    Shift).
+- `fd()`: compute MCTQ work-free days.
+- `so()`: compute MCTQ local time of sleep onset.
+- `gu()`: compute MCTQ local time of getting out of bed.
+- `sdu()`: compute MCTQ sleep duration.
+- `tbt()`: compute MCTQ total time in bed.
+- `msl()`: compute MCTQ local time of mid-sleep.
+- `napd()`: compute MCTQ nap duration (only for MCTQ Shift).
+- `sd24()`: compute MCTQ 24 hours sleep duration (only for MCTQ Shift).
 
 Example:
 
@@ -153,18 +152,18 @@ so(sprep_w, slat_w)
 
 For computations combining workdays and work-free days, use:
 
--   `sd_week()`: compute MCTQ average weekly sleep duration.
--   `sd_overall()`: compute MCTQ overall sleep duration (only for MCTQ
-    Shift).
--   `sloss_week()`: compute MCTQ weekly sleep loss.
--   `le_week()`: compute MCTQ average weekly light exposure.
--   `msf_sc()`: compute MCTQ chronotype or sleep-corrected local time of
-    mid-sleep on work-free days.
--   `sjl()` and `sjl_rel()`: compute MCTQ social jet lag.
--   `sjl_sc()` and `sjl_sc_rel()`: compute Jankowski’s MCTQ
-    sleep-corrected social jetlag.
--   `sjl_weighted()`: compute MCTQ absolute social jetlag across all
-    shifts (only for MCTQ Shift).
+- `sd_week()`: compute MCTQ average weekly sleep duration.
+- `sd_overall()`: compute MCTQ overall sleep duration (only for MCTQ
+  Shift).
+- `sloss_week()`: compute MCTQ weekly sleep loss.
+- `le_week()`: compute MCTQ average weekly light exposure.
+- `msf_sc()`: compute MCTQ chronotype or sleep-corrected local time of
+  mid-sleep on work-free days.
+- `sjl()` and `sjl_rel()`: compute MCTQ social jet lag.
+- `sjl_sc()` and `sjl_sc_rel()`: compute Jankowski’s MCTQ
+  sleep-corrected social jetlag.
+- `sjl_weighted()`: compute MCTQ absolute social jetlag across all
+  shifts (only for MCTQ Shift).
 
 Example:
 
@@ -203,18 +202,18 @@ citation("mctq")
 #> 
 #> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2022).
-#>   {mctq}: an R package for the Munich ChronoType Questionnaire (v.
-#>   0.3.1). https://docs.ropensci.org/mctq/
+#>   Vartanian, D., & Benedito-Silva, A. A. (2023). {mctq}: an R package
+#>   for the Munich ChronoType Questionnaire (v. 0.3.1.9000).
+#>   https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
 #>     title = {{mctq}: an R package for the Munich ChronoType Questionnaire},
-#>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
-#>     year = {2022},
+#>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva},
+#>     year = {2023},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {(v. 0.3.1). Lifecycle: maturing},
+#>     note = {(v. 0.3.1.9000). Lifecycle: maturing},
 #>   }
 ```
 
@@ -230,9 +229,8 @@ project, you agree to abide by its terms.
 
 ## Acknowledgments
 
-`mctq` is supported by the [Interdisciplinary Sleep Research Group
-(GIPSO)](https://gipso.netlify.app/) of [University of Sao Paulo
-(USP)](http://usp.br/).
+The initial development of `mctq` was supported by a scholarship
+provided by the [University of Sao Paulo (USP)](http://usp.br/) (❤️).
 
 `mctq` hex logo was based on an illustration created by [hilda design
 matters Zurich](https://hilda.ch/) for the [Daylight Academy

@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ropensci/mctq/",
   "issueTracker": "https://github.com/ropensci/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.1",
+  "version": "0.3.1.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R Under development (unstable) (2022-10-11 r83083 ucrt)",
+  "runtimePlatform": "R version 4.2.2 (2022-10-31 ucrt)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -35,13 +35,6 @@
       "familyName": "Benedito-Silva",
       "email": "aamelia@usp.br",
       "@id": "https://orcid.org/0000-0003-4976-2623"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Mario",
-      "familyName": "Pedrazzoli",
-      "email": "pedrazzo@usp.br",
-      "@id": "https://orcid.org/0000-0002-5257-591X"
     }
   ],
   "copyrightHolder": [
@@ -54,10 +47,6 @@
     }
   ],
   "funder": [
-    {
-      "@type": "Organization",
-      "name": "Interdisciplinary Sleep Research Group (GIPSO)"
-    },
     {
       "@type": "Organization",
       "name": "University of Sao Paulo (USP)"
@@ -315,11 +304,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "735.858KB",
+  "fileSize": "736.105KB",
   "citation": [
     {
       "@type": "CreativeWork",
-      "datePublished": "2022",
+      "datePublished": "2023",
       "author": [
         {
           "@type": "Person",
@@ -330,16 +319,11 @@
           "@type": "Person",
           "givenName": ["Ana", "Amelia"],
           "familyName": "Benedito-Silva"
-        },
-        {
-          "@type": "Person",
-          "givenName": "Mario",
-          "familyName": "Pedrazzoli"
         }
       ],
       "name": "{mctq}: an R package for the Munich ChronoType Questionnaire",
       "url": "https://docs.ropensci.org/mctq/",
-      "description": "(v. 0.3.0). Lifecycle: maturing"
+      "description": "(v. 0.3.1.9000). Lifecycle: maturing"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/mctq/blob/master/NEWS.md",

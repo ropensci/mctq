@@ -5,7 +5,14 @@
 
 # mctq (development version)
 
-
+* Mario Pedrazzoli and the Interdisciplinary Sleep Research Group (GIPSO) were 
+removed as author and funder, respectively. The former was a scientific advisor 
+that helped with the initial `mctq` development. Due to a moral harassment 
+against the main author, creator, and copyright owner (Daniel) he is no 
+longer part of this project. The latter is a research group that Mario and 
+Daniel built together. Due to the aforementioned incident, the main author is 
+no longer part of this group. GIPSO never supported this project and was only
+mentioned in a symbolic way.
 
 # mctq 0.3.1 (2022-11-03)
 
