@@ -92,14 +92,14 @@ You can install the released version of `mctq` from
 [CRAN](https://CRAN.R-project.org/package=mctq) with:
 
 ``` r
-install.packages("mctq", dependencies = TRUE)
+install.packages("mctq")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("ropensci/mctq", dependencies = TRUE)
+remotes::install_github("ropensci/mctq")
 ```
 
 ## Usage
@@ -202,30 +202,27 @@ citation("mctq")
 #> 
 #> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D., & Benedito-Silva, A. A. (2023). {mctq}: an R package
-#>   for the Munich ChronoType Questionnaire (v. 0.3.1.9000).
-#>   https://docs.ropensci.org/mctq/
+#>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2022).
+#>   {mctq}: an R package for the Munich ChronoType Questionnaire (v.
+#>   0.3.1). https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
 #>     title = {{mctq}: an R package for the Munich ChronoType Questionnaire},
-#>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva},
-#>     year = {2023},
+#>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
+#>     year = {2022},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {(v. 0.3.1.9000). Lifecycle: maturing},
+#>     note = {(v. 0.3.1). Lifecycle: maturing},
 #>   }
 ```
 
 ## Contributing
 
-We welcome contributions, including bug reports. Take a moment to review
-our [Guidelines for
-Contributing](https://docs.ropensci.org/mctq/CONTRIBUTING.html).
+We welcome contributions, including bug reports.
 
-Please note that this package is released with a [Contributor Code of
-Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
-project, you agree to abide by its terms.
+Take a moment to review our [Guidelines for
+Contributing](https://docs.ropensci.org/mctq/CONTRIBUTING.html).
 
 ## Acknowledgments
 
