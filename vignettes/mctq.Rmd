@@ -33,7 +33,7 @@ Let's start with the basics. The first thing you must do to use `mctq` is to hav
 Install `mctq` with:
 
 ```{r, eval = FALSE}
-install.packages("mctq", dependencies = TRUE)
+install.packages("mctq")
 ```
 
 Great! We now must load the package to memory to start using it. Do this with:

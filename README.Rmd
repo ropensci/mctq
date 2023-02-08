@@ -61,14 +61,14 @@ Please refer to the [lubridate](https://lubridate.tidyverse.org/) and [hms](http
 You can install the released version of `mctq` from [CRAN](https://CRAN.R-project.org/package=mctq) with:
 
 ```{r, eval = FALSE}
-install.packages("mctq", dependencies = TRUE)
+install.packages("mctq")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` {r, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("ropensci/mctq", dependencies = TRUE)
+remotes::install_github("ropensci/mctq")
 ```
 
 ## Usage
