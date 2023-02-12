@@ -8,6 +8,15 @@ test_that("qplot_walk() | general test", {
     }
 
     expect_equal(shush(mock()), NULL)
+    
+    mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
+        mockr::with_mock(
+            is_interactive = function(...) TRUE,
+            {qplot_walk(data = c(rep("A", 5), rep("B", 4), rep("C", 3)))}
+        )
+    }
+    
+    expect_equal(shush(mock()), NULL)
 
     # "if ("xlab" %in% names(list(...)))"
     mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
