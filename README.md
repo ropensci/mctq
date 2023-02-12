@@ -202,18 +202,17 @@ citation("mctq")
 #> 
 #> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D., Benedito-Silva, A. A., & Pedrazzoli, M. (2022).
-#>   {mctq}: an R package for the Munich ChronoType Questionnaire (v.
-#>   0.3.1). https://docs.ropensci.org/mctq/
+#>   Vartanian, D. (2023). {mctq}: an R package for the Munich ChronoType
+#>   Questionnaire (v. 0.3.1.9000). https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
 #>     title = {{mctq}: an R package for the Munich ChronoType Questionnaire},
-#>     author = {Daniel Vartanian and Ana Amelia Benedito-Silva and Mario Pedrazzoli},
-#>     year = {2022},
+#>     author = {Daniel Vartanian},
+#>     year = {2023},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {(v. 0.3.1). Lifecycle: maturing},
+#>     note = {(v. 0.3.1.9000). Lifecycle: maturing},
 #>   }
 ```
 

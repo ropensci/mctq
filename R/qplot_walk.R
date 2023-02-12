@@ -5,7 +5,9 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' `qplot_walk()` helps you to visually assess the distribution of your data. It
-#' uses [`qplot()`][ggplot2::qplot()] to walk through each selected variable
+#' uses [`geom_bar()`][ggplot2::geom_bar()] (for non [`double`][base::double()]
+#' variables) or [`geom_histogram()`][ggplot2::geom_histogram()] (for
+#' [`double`][base::double()] variables) to walk through each selected variable
 #' from a data frame.
 #'
 #' @details
@@ -30,11 +32,14 @@
 #' runs. If you want to recover a single distribution plot, assign the variable
 #' vector to the `data` argument.
 #'
-#' ## Additional arguments to [`qplot()`][ggplot2::qplot()]
+#' ## Additional arguments to `geom_bar()` or `geom_histogram()`
 #'
-#' `qplot_walk()` uses ggplot2 [`qplot()`][ggplot2::qplot()] to generate plots.
-#' If you are familiar with [`qplot()`][ggplot2::qplot()], you can pass
-#' additional arguments to the function using the ellipsis argument (`...`).
+#' `qplot_walk()` uses [`ggplot2`][ggplot2::ggplot2-package]
+#' [`geom_bar()`][ggplot2::geom_bar()] (for non [`double`][base::double()]
+#' variables) or [`geom_histogram()`][ggplot2::geom_histogram()] (for
+#' [`double`][base::double()] variables) to generate plots. If you are familiar
+#' with these functions, you can pass additional arguments to the them using
+#' the ellipsis argument (`...`).
 #'
 #' Note that `x`, `y`, and `data` arguments are reserved for `qplot_walk()`.
 #'
@@ -85,7 +90,9 @@
 #' @param data An [`atomic`][base::is.atomic()] or a
 #'   [`data.frame`][base::data.frame()] object.
 #' @param ... (optional) additional arguments to be passed to
-#'   [`qplot()`][ggplot2::qplot()].
+#'   [`geom_bar()`][ggplot2::geom_bar()] (for non [`double`][base::double()]
+#'   variables) or [`geom_histogram()`][ggplot2::geom_histogram()] (for
+#'   [`double`][base::double()] variables).
 #' @param cols (optional) (only for data frames) a
 #'   [`character`][base::character()] object indicating column names in `data`
 #'   for plotting. If `NULL`, `qplot_walk()` will use all columns in `data`.
@@ -120,7 +127,7 @@
 #'
 #' ## Ploting all columns from 'data'
 #'
-#' qplot_walk(mctq::std_mctq, ignore = NULL, remove_id = FALSE)
+#' qplot_walk(mctq::std_mctq)
 #'
 #' ## Ploting selected columns from 'data'
 #'
@@ -142,16 +149,16 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     if (!is_interactive()) {
         cli::cli_abort("This function can only be used in interactive mode.")
     }
-
+    
     require_pkg("utils", "grDevices", "ggplot2")
-
+    
     if (any(c("x", "y", "data") %in% names(list(...)))) {
         cli::cli_abort(paste0(
             "'x', 'y' and `data` are reserved arguments for ",
             "'qplot_walk()'."
         ))
     }
-
+    
     if (is.data.frame(data)) {
         checkmate::assert_data_frame(data, all.missing = FALSE, min.rows = 1,
                                      min.cols = 1)
@@ -168,16 +175,20 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             ))
         }
     }
-
+    
     checkmate::assert_flag(midday_change)
-
+    
     if (!is.atomic(data) && !is.data.frame(data)) {
         cli::cli_abort("'data' must be an 'atomic' object or a data frame.")
     }
-
+    
+    lifecycle::deprecate_warn(
+        when = "0.3.2", what = "qplot_walk()", always = TRUE
+    )
+    
     transform <- function(x, midday_change = TRUE) {
         classes <- c("Duration", "Period", "difftime")
-
+        
         if (hms::is_hms(x) && isTRUE(midday_change) &&
             any(x > hms::parse_hm("22:00"), na.rm = TRUE)) {
             midday_change(x)
@@ -187,7 +198,7 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             x
         }
     }
-
+    
     if (is.atomic(data)) {
         assert_has_length(data)
 
@@ -195,29 +206,32 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
             "'data' is 'atomic'. All other arguments, except '...' and ",
             "'midday_change', were ignored."
         ))
-
+        
         x <- transform(data, midday_change)
         xlab <- deparse(substitute(data))
-
-        if ("xlab" %in% names(list(...))) {
-            plot <- ggplot2::qplot(x, ...)
-            return(shush(print(plot)))
+        plot <- ggplot2::ggplot(mapping = ggplot2::aes(x)) + 
+            ggplot2::labs(x = xlab, y = "Frequency")
+        
+        if (is.double(x)) {
+            plot <- plot + ggplot2::geom_histogram()
         } else {
-            plot <- ggplot2::qplot(x, xlab = xlab, ...)
-            return(shush(print(plot)))
+            plot <- plot + ggplot2::geom_bar()
         }
+        
+        shush(print(plot))
+        return(invisible(NULL))
     }
-
+    
     if (is.null(cols) && is.null(pattern)) cols <- names(data)
-
+    
     if (!is.null(pattern)) {
         cols <- grep(pattern, names(data), value = TRUE)
-
+        
         if (length(cols) == 0) {
             cli::cli_abort("None match was found in 'names(data)'.")
         }
     }
-
+    
     if (!is.null(ignore)) {
         if (all(unique(get_class(data[cols])) %in% ignore)) {
             cli::cli_abort(paste0(
@@ -226,24 +240,24 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                 "'character' objects. Please check your settings."
             ))
         }
-
+        
         if (any(ignore %in% get_class(data[cols]))) {
             match <- names(data[cols])[get_class(data[cols]) %in% ignore]
-
+            
             cli::cli_alert_warning(paste0(
                 "{single_quote_(match)} will be ignored due to the ",
                 "settings in the 'ignore' argument."
             ))
         }
-
+        
         cols <- names(data[cols])[!(get_class(data[cols]) %in% ignore)]
 
     }
-
+    
     if (isTRUE(remove_id)) {
         cols <- cols[!grepl("^id$|[\\._-]id$", cols, ignore.case = TRUE)]
     }
-
+    
     cli::cat_line()
     cli::cli_alert_warning(paste0(
         "'qplot_walk()' clears all plots from your system ",
@@ -251,26 +265,30 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
         "exit."
         ))
     cli::cat_line()
-
+    
     dialog <- dialog_line(
         "Press 'esc' to exit or 'enter' to continue >",
         space_above = FALSE, space_below = FALSE)
 
     for (i in cols) {
         x <- transform(data[[i]], midday_change)
-
-        if ("xlab" %in% names(list(...))) {
-            shush(print(ggplot2::qplot(x, ...)))
+        plot <- ggplot2::ggplot(mapping = ggplot2::aes(x)) + 
+            ggplot2::labs(x = i, y = "Frequency")
+        
+        if (is.double(x)) {
+            plot <- plot + ggplot2::geom_histogram(...)
         } else {
-            shush(print(ggplot2::qplot(x, xlab = i, ...)))
+            plot <- plot + ggplot2::geom_bar(...)
         }
-
+        
+        shush(print(plot))
+        
         dialog <- dialog_line(
             "Press 'esc' to exit or 'enter' to continue >",
             space_above = FALSE, space_below = FALSE)
-
+        
         grDevices::dev.off()
     }
-
+    
     invisible(NULL)
 }

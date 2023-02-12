@@ -5,14 +5,21 @@
 
 # mctq (development version)
 
-* Mario Pedrazzoli and the Interdisciplinary Sleep Research Group (GIPSO) were 
-removed as author and funder, respectively. The former was a scientific advisor 
-that helped with the initial `mctq` development. Due to a moral harassment 
-against the main author, creator, and copyright owner (Daniel) he is no 
-longer part of this project. The latter is a research group that Mario and 
-Daniel built together. Due to the aforementioned incident, the main author is 
-no longer part of this group. GIPSO never supported this project and was only
-mentioned in a symbolic way.
+* Patch changes were made to `random_mctq()` to avoid warning messages due
+to [`lubridate`](https://github.com/tidyverse/lubridate) package updates.
+* The utility function `qplot_walk()` is now deprecated. This function will be
+removed in the next `mctq` version. You can still find it on
+[`gutils`](https://github.com/giperbio/gutils).
+* `qplot_walk()` now uses `ggplot2::geom_bar()` or `ggplot2::geom_histogram()`
+to generate plots. It used `ggplot2::qplot()` before, now deprecated.
+* `The ggplot2` package was added as an import. It's needed while `qplot_walk()`
+remains in the package and will be removed from imports in next `mctq` version.
+* Mario Pedrazzoli and Ana Amelia Benedito-Silva were removed as authors. They
+were Scientific Advisers that helped with the initial `mctq` development.
+* The Interdisciplinary Sleep Research Group (GIPSO) was removed as funder.
+GIPSO is a research group that Mario and Daniel Vartanian have built together. 
+Daniel (the main author and copyright holder of `mctq`) is no longer part of 
+this group. The "funder" status was always symbolic.
 
 # mctq 0.3.1 (2022-11-03)
 

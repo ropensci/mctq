@@ -847,8 +847,10 @@ normalize <- function(min, max, mean, ambiguity = 24) {
     min <- hms::as_hms(lubridate::int_start(interval))
     max <- hms::as_hms(as.numeric(min) + as.numeric(interval))
 
-    check_1 <- lubridate::as_datetime(mean) %within% interval
-    check_2 <- lubridate::as_datetime(as.numeric(mean + lubridate::ddays()))
+    check_1 <- lubridate::as_datetime(mean, tz = "UTC") %within% interval
+    check_2 <- lubridate::as_datetime(
+        as.numeric(mean + lubridate::ddays()), tz = "UTC"
+        )
     check_2 <- check_2 %within% interval
 
     if (check_1) {

@@ -28,13 +28,6 @@
       "familyName": "Vartanian",
       "email": "danvartan@gmail.com",
       "@id": "https://orcid.org/0000-0001-7782-759X"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Ana Amelia",
-      "familyName": "Benedito-Silva",
-      "email": "aamelia@usp.br",
-      "@id": "https://orcid.org/0000-0003-4976-2623"
     }
   ],
   "copyrightHolder": [
@@ -79,32 +72,19 @@
       "@type": "SoftwareApplication",
       "identifier": "datasets",
       "name": "datasets",
-      "version": ">= 4.0.0"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "ggplot2",
-      "name": "ggplot2",
-      "version": ">= 3.3.6",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+      "version": ">= 4.1.0"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "grDevices",
       "name": "grDevices",
-      "version": ">= 4.0.0"
+      "version": ">= 4.1.0"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">= 1.40",
+      "version": ">= 1.42",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -117,7 +97,7 @@
       "@type": "SoftwareApplication",
       "identifier": "mockr",
       "name": "mockr",
-      "version": ">= 0.2.0",
+      "version": ">= 0.2.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -130,7 +110,7 @@
       "@type": "SoftwareApplication",
       "identifier": "readr",
       "name": "readr",
-      "version": ">= 2.1.3",
+      "version": ">= 2.1.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -156,7 +136,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">= 2.17",
+      "version": ">= 2.20",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -182,13 +162,13 @@
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats",
-      "version": ">= 4.0.0"
+      "version": ">= 4.1.0"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.1.5",
+      "version": ">= 3.1.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -214,7 +194,7 @@
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils",
-      "version": ">= 4.0.0"
+      "version": ">= 4.1.0"
     }
   ],
   "softwareRequirements": {
@@ -222,7 +202,7 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 4.0"
+      "version": ">= 4.1"
     },
     "2": {
       "@type": "SoftwareApplication",
@@ -241,7 +221,7 @@
       "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
-      "version": ">= 3.4.1",
+      "version": ">= 3.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -254,7 +234,7 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": ">= 1.0.10",
+      "version": ">= 1.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -264,6 +244,19 @@
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
     "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "version": ">= 3.4.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "hms",
       "name": "hms",
@@ -276,7 +269,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=hms"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
@@ -289,11 +282,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
-      "version": ">= 1.8.0",
+      "version": ">= 1.9.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -304,7 +297,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "736.105KB",
+  "fileSize": "751.571KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -314,11 +307,6 @@
           "@type": "Person",
           "givenName": "Daniel",
           "familyName": "Vartanian"
-        },
-        {
-          "@type": "Person",
-          "givenName": ["Ana", "Amelia"],
-          "familyName": "Benedito-Silva"
         }
       ],
       "name": "{mctq}: an R package for the Munich ChronoType Questionnaire",

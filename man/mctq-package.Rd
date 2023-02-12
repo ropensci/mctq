@@ -22,13 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Daniel Vartanian \email{danvartan@gmail.com} (\href{https://orcid.org/0000-0001-7782-759X}{ORCID}) [conceptor, copyright holder]
 
-Authors:
-\itemize{
-  \item Ana Amelia Benedito-Silva \email{aamelia@usp.br} (\href{https://orcid.org/0000-0003-4976-2623}{ORCID}) [scientific advisor]
-}
-
 Other contributors:
 \itemize{
+  \item Ana Amelia Benedito-Silva \email{aamelia@usp.br} (\href{https://orcid.org/0000-0003-4976-2623}{ORCID}) [scientific advisor]
+  \item Mario Pedrazzoli \email{pedrazzo@usp.br} (\href{https://orcid.org/0000-0002-5257-591X}{ORCID}) [scientific advisor]
   \item Jonathan Keane \email{jkeane@gmail.com} (\href{https://orcid.org/0000-0001-7087-9776}{ORCID}) [reviewer]
   \item Mario Andre Leocadio-Miguel \email{miguel.ml.mario@gmail.com} (\href{https://orcid.org/0000-0002-7248-3529}{ORCID}) [reviewer]
   \item University of Sao Paulo (USP) [funder]
