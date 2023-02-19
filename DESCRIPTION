@@ -2,42 +2,42 @@ Package: mctq
 Title: Tools to Process the Munich ChronoType Questionnaire (MCTQ)
 Version: 0.3.2
 Authors@R: c(
-        utils::person(
+        person(
             given = "Daniel",
             family = "Vartanian",
             role = c("aut", "cre", "ccp", "cph"),
             email = "danvartan@gmail.com",
             comment = c(ORCID = "0000-0001-7782-759X")
             ),
-        utils::person(
+        person(
             given = "Ana Amelia",
             family = "Benedito-Silva",
             role = "sad",
             email = "aamelia@usp.br",
             comment = c(ORCID = "0000-0003-4976-2623")
             ),
-        utils::person(
+        person(
             given = "Mario",
             family = "Pedrazzoli",
             role = "sad",
             email = "pedrazzo@usp.br",
             comment = c(ORCID = "0000-0002-5257-591X")
             ),
-        utils::person(
+        person(
             given = "Jonathan",
             family = "Keane",
             role = "rev",
             email = "jkeane@gmail.com",
             comment = c(ORCID = "0000-0001-7087-9776")
             ),
-        utils::person(
+        person(
             given = "Mario Andre",
             family = "Leocadio-Miguel",
             role = "rev",
             email = "miguel.ml.mario@gmail.com",
             comment = c(ORCID = "0000-0002-7248-3529")
             ),
-        utils::person(
+        person(
             given = "University of Sao Paulo (USP)",
             role = "fnd"
             )

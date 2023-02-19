@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 This article takes a quick tour of the Munich ChronoType Questionnaire (MCTQ) main functions from the `mctq` package. Please see the function documentation and other articles/vignettes for more details.
 
 The same features presented here can also be used with $\mu$MCTQ. To make it easy for newcomers, some MCTQ$^{Shift}$ functions and other special functions are not shown.
@@ -290,7 +289,6 @@ data$sjl <- abs(data$sjl_rel)
 # Comparing the result
 data %>% dplyr::select(sjl_rel, sjl)
 ```
-
 
 ## Success!
 
