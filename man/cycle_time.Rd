@@ -2,9 +2,21 @@
 % Please edit documentation in R/cycle_time.R
 \name{cycle_time}
 \alias{cycle_time}
+\alias{cycle_time.numeric}
+\alias{cycle_time.Duration}
+\alias{cycle_time.difftime}
+\alias{cycle_time.hms}
 \title{Cycle time objects}
 \usage{
 cycle_time(time, cycle, reverse = TRUE)
+
+\method{cycle_time}{numeric}(time, cycle, reverse = TRUE)
+
+\method{cycle_time}{Duration}(time, cycle, reverse = TRUE)
+
+\method{cycle_time}{difftime}(time, cycle, reverse = TRUE)
+
+\method{cycle_time}{hms}(time, cycle, reverse = TRUE)
 }
 \arguments{
 \item{time}{An object belonging to one of the following classes:
@@ -24,7 +36,10 @@ the Details section to learn more (default: \code{TRUE}).}
 The same type of object of \code{time} cycled with the \code{cycle} parameter.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function will be removed on the next \code{mctq} version. You can still find
+it in the \href{https://github.com/giperbio/lubritime}{\code{lubritime}} package.
 
 \code{cycle_time()} cycles time span objects in a predetermined cycle length,
 adapting linear time objects into a circular time frame.
@@ -197,18 +212,6 @@ cycle_time(time, cycle, reverse)
 #> [1] "0s"                       "28927800s (~47.83 weeks)" # Expected
 }
 \references{
-Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
-O'Reilly Media. \url{https://r4ds.had.co.nz}
+Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. (n.p.).
+\url{https://r4ds.had.co.nz}
 }
-\seealso{
-Other utility functions: 
-\code{\link{assign_date}()},
-\code{\link{pretty_mctq}()},
-\code{\link{qplot_walk}()},
-\code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{round_time}()},
-\code{\link{shorter_interval}()},
-\code{\link{sum_time}()}
-}
-\concept{utility functions}

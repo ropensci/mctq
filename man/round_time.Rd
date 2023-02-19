@@ -31,7 +31,10 @@ round_time(x)
 An object of the same class of \code{x} rounded at the seconds level.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function will be removed on the next \code{mctq} version. You can still find
+it in the \href{https://github.com/giperbio/lubritime}{\code{lubritime}} package.
 
 \code{round_time()} takes a \code{\link[lubridate:duration]{Duration}},
 \code{\link[base:difftime]{difftime}}, \code{\link[hms:hms]{hms}},
@@ -99,22 +102,11 @@ round_time(c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154)))
 #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 }
 \references{
-Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
-O'Reilly Media. \url{https://r4ds.had.co.nz}
+Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. (n.p.).
+\url{https://r4ds.had.co.nz}
 }
 \seealso{
 Other date-time rounding functions:
 \code{\link[hms:round_hms]{round_hms()}} \code{\link[hms:round_hms]{trunc_hms()}}
 \code{\link[lubridate:round_date]{round_date()}}.
-
-Other utility functions: 
-\code{\link{assign_date}()},
-\code{\link{cycle_time}()},
-\code{\link{pretty_mctq}()},
-\code{\link{qplot_walk}()},
-\code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{shorter_interval}()},
-\code{\link{sum_time}()}
 }
-\concept{utility functions}

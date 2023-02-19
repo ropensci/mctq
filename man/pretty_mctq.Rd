@@ -41,10 +41,10 @@ like in graphical representations. You can also round values to facilitate
 data exporting to text formats (like \code{.csv}), but note that this will come
 with a precision cost.
 
-Note also that \code{pretty_mctq()} uses \code{\link[=round_time]{round_time()}} for
-rounding. \code{round_time()} is based on \code{\link[base:Round]{round()}}, which uses
-the IEC 60559 standard. For more information see the
-\code{\link[=round_time]{round_time()}} documentation.
+Note also that \code{pretty_mctq()} uses \code{\link[base:Round]{round()}} for rounding,
+which uses uses the IEC 60559 standard (\emph{"go to the even digit"}) for
+rounding off a 5. Therefore, \code{round(0.5)} is equal to 0 and \code{round(-1.5)} is
+equal to -2. See \code{\link[base:Round]{?round}} to learn more.
 }
 }
 \examples{
@@ -64,13 +64,7 @@ pretty_mctq(data, round = FALSE, hms = TRUE)
 }
 \seealso{
 Other utility functions: 
-\code{\link{assign_date}()},
-\code{\link{cycle_time}()},
-\code{\link{qplot_walk}()},
 \code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{round_time}()},
-\code{\link{shorter_interval}()},
-\code{\link{sum_time}()}
+\code{\link{raw_data}()}
 }
 \concept{utility functions}

@@ -330,17 +330,10 @@ pretty_mctq(data, round = FALSE)
 
 ## Utilities
 
-Before we end, it's important to note that `mctq` also provides several utility tools to help with your MCTQ data. Here's some of them.
+Before we end, it's important to note that `mctq` also provides some utility tools to help with your MCTQ data. Here are some of them.
 
-* `assign_date()`: Assign dates to two sequential hours.
-* `cycle_time()`: Cycle time objects.
 * `pretty_mctq()`: Make a MCTQ dataset more presentable.
-* `qplot_walk()`: Walk through distribution plots.
 * `random_mctq()`: Build a random MCTQ case.
-* `raw_data()`: Get paths to `mctq` raw datasets.
-* `round_time()`: Round time values.
-* `shorter_interval()`: Find the shorter interval between two hours.
-* `sum_time()`: Sum time objects.
 
 `mctq` also provides fictional datasets of the standard, micro, and shift versions for testing and learning purposes.
 

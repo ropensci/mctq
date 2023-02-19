@@ -1,4 +1,6 @@
 test_that("assign_date() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(assign_date(
         hms::parse_hm("02:10"), hms::parse_hm("05:30")
     ),
@@ -10,6 +12,8 @@ test_that("assign_date() | scalar test", {
 })
 
 test_that("assign_date() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(assign_date(
         c(hms::parse_hm("05:40"), hms::parse_hm("21:30")),
         c(hms::parse_hm("18:05"), hms::parse_hm("10:30"))
@@ -26,6 +30,8 @@ test_that("assign_date() | vector test", {
 })
 
 test_that("assign_date() | `ambiguity` test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(assign_date(
         lubridate::as_datetime("1985-01-15 12:00:00"),
         lubridate::as_datetime("2020-09-10 12:00:00"),
@@ -58,6 +64,8 @@ test_that("assign_date() | `ambiguity` test", {
 })
 
 test_that("assign_date() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # checkmate::assert_multi_class(start, c("hms", "POSIXt"))
     expect_error(assign_date(
         start = 1, end = hms::hms(1), ambiguity = 0

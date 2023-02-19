@@ -2,7 +2,11 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("deprecated")`
+#'
+#' These functions will be removed on the next `mctq` version. You can still
+#' find them in the [`lubritime`](https://github.com/giperbio/lubritime)
+#' package.
 #'
 #' `shorter_interval()` returns the shorter interval between two
 #' [`hms`][hms::hms()] or [`POSIXt`][base::DateTimeClasses] object hours.
@@ -112,7 +116,6 @@
 #' [`Duration`][lubridate::duration()] object with the shorter or longer
 #' duration between `x` and `y`.
 #'
-#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -158,24 +161,32 @@
 #' longer_duration(x, y)
 #' #> [1] "72000s (~20 hours)"   "63000s (~17.5 hours)" # Expected
 shorter_interval <- function(x, y) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "shorter_interval()")
+    
     interval_build(x, y, method = "shorter")
 }
 
 #' @rdname shorter_interval
 #' @export
 longer_interval <- function(x, y) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "longer_interval()")
+    
     interval_build(x, y, method = "longer")
 }
 
 #' @rdname shorter_interval
 #' @export
 shorter_duration <- function(x, y) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "shorter_duration()")
+    
     shorter_interval(x, y) %>% lubridate::as.duration()
 }
 
 #' @rdname shorter_interval
 #' @export
 longer_duration <- function(x, y) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "longer_duration()")
+    
     longer_interval(x, y) %>% lubridate::as.duration()
 }
 

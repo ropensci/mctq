@@ -3,23 +3,33 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
-# mctq (development version)
+# mctq 0.3.2 (2023-02-19)
 
+* As of this version, a decoupling process related to some `mctq` utility
+  functions will begin. Please pay attention to the deprecation warnings listed
+  below.
 * Patch changes were made to `random_mctq()` to avoid warning messages due
-to [`lubridate`](https://github.com/tidyverse/lubridate) package updates.
+  to [`lubridate`](https://github.com/tidyverse/lubridate) package updates.
+* The utility functions `assign_date()`, `cycle_time()`, `round_time()`,
+  `shorter_interval()`, `longer_interval()`, `shorter_duration()`, 
+  `longer_duration()`, `sum_time()`, and `vct_sum_time()` are now deprecated. 
+  These functions will be removed on the next `mctq` version. You can still find 
+  them in the [`lubritime`](https://github.com/giperbio/lubritime) package.
 * The utility function `qplot_walk()` is now deprecated. This function will be
-removed in the next `mctq` version. You can still find it on
-[`gutils`](https://github.com/giperbio/gutils).
+  removed on the next `mctq` version. You can still find it in the
+  [`gutils`](https://github.com/giperbio/gutils) package.
 * `qplot_walk()` now uses `ggplot2::geom_bar()` or `ggplot2::geom_histogram()`
-to generate plots. It used `ggplot2::qplot()` before, now deprecated.
-* `The ggplot2` package was added as an import. It's needed while `qplot_walk()`
-remains in the package and will be removed from imports in next `mctq` version.
+  to generate plots. It used `ggplot2::qplot()` before, now deprecated.
+* The `ggplot2` package was added as an import. It's needed while `qplot_walk()`
+  remains on the package and will be removed from imports in the next `mctq`
+  version.
 * Mario Pedrazzoli and Ana Amelia Benedito-Silva were removed as authors. They
-were Scientific Advisers that helped with the initial `mctq` development.
+  were Scientific Advisers that helped with the initial `mctq` development, but
+  are not part of the `mctq` project anymore.
 * The Interdisciplinary Sleep Research Group (GIPSO) was removed as funder.
-GIPSO is a research group that Mario and Daniel Vartanian have built together. 
-Daniel (the main author and copyright holder of `mctq`) is no longer part of 
-this group. The "funder" status was always symbolic.
+  GIPSO is a research group that Mario and Daniel Vartanian have built together. 
+  Daniel (the main author and copyright holder of `mctq`) is no longer part of 
+  this group. The "funder" status was always symbolic.
 
 # mctq 0.3.1 (2022-11-03)
 
@@ -40,9 +50,9 @@ this group. The "funder" status was always symbolic.
 * `shorter_interval()` now don't have the `inverse` argument. Use 
   `longer_interval()` instead.
 * `shorter_duration()` and `longer_duration()`, two functions that return the 
-   shorter and the longer duration between two hours, were introduced.
+  shorter and the longer duration between two hours, were introduced.
 * `sjl_sc()` and `sjl_sc_rel()`, two functions that allow the user to compute 
-   Jankowski's MCTQ sleep-corrected social jet lag, were introduced.
+  Jankowski's MCTQ sleep-corrected social jet lag, were introduced.
 
 # mctq 0.1.0 (2021-11-04)
 

@@ -1,4 +1,6 @@
 test_that("round_time() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(
         round_time(lubridate::dmilliseconds(123456789)),
         lubridate::duration(123457)
@@ -31,6 +33,8 @@ test_that("round_time() | scalar test", {
 })
 
 test_that("round_time() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(round_time(
         c(hms::hms(12345.6789), hms::as_hms(98765.4321))
     ),
@@ -39,6 +43,8 @@ test_that("round_time() | vector test", {
 })
 
 test_that("round_time() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # checkmate::assert_multi_class(x, classes)
     expect_error(round_time(1), "Assertion on 'x' failed")
 })

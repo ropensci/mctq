@@ -1,4 +1,6 @@
 test_that("napd() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(napd(
         napo = hms::parse_hm("14:00"), nape = hms::parse_hm("17:30")
     ),
@@ -19,6 +21,8 @@ test_that("napd() | scalar test", {
 })
 
 test_that("napd() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(napd(
         napo = c(hms::parse_hm("03:30"), hms::parse_hm("22:00")),
         nape = c(hms::parse_hm("04:00"), hms::parse_hm("01:00"))
@@ -28,6 +32,8 @@ test_that("napd() | vector test", {
 })
 
 test_that("napd() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_hms(napo, lower = hms::hms(0))
     expect_error(napd(
         napo = 1, nape = hms::hms(1)

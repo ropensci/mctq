@@ -2,7 +2,10 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function will be removed on the next `mctq` version. You can still find
+#' it in the [`gutils`](https://github.com/giperbio/gutils) package.
 #'
 #' `qplot_walk()` helps you to visually assess the distribution of your data. It
 #' uses [`geom_bar()`][ggplot2::geom_bar()] (for non [`double`][base::double()]
@@ -115,7 +118,6 @@
 #'
 #' @return An invisible `NULL`. This function don't aim to return values.
 #'
-#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -146,6 +148,8 @@
 qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
                        ignore = "character", remove_id = TRUE,
                        midday_change = TRUE) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "qplot_walk()")
+    
     if (!is_interactive()) {
         cli::cli_abort("This function can only be used in interactive mode.")
     }
@@ -181,10 +185,6 @@ qplot_walk <- function(data, ..., cols = NULL, pattern = NULL,
     if (!is.atomic(data) && !is.data.frame(data)) {
         cli::cli_abort("'data' must be an 'atomic' object or a data frame.")
     }
-    
-    lifecycle::deprecate_warn(
-        when = "0.3.2", what = "qplot_walk()", always = TRUE
-    )
     
     transform <- function(x, midday_change = TRUE) {
         classes <- c("Duration", "Period", "difftime")

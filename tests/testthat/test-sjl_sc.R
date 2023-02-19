@@ -1,4 +1,6 @@
 test_that("sjl_sc() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl_sc(
         so_w = hms::parse_hm("00:00"), se_w = hms::parse_hm("08:00"),
         so_f = hms::parse_hm("01:00"), se_f = hms::parse_hm("09:00"),
@@ -59,6 +61,8 @@ test_that("sjl_sc() | scalar test", {
 })
 
 test_that("sjl_sc() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl_sc(
         so_w = c(hms::parse_hm("00:00"), hms::parse_hm("01:00")),
         se_w = c(hms::parse_hm("08:00"), hms::parse_hm("07:00")),
@@ -71,6 +75,8 @@ test_that("sjl_sc() | vector test", {
 })
 
 test_that("sjl_sc() | method test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     so_w <- hms::parse_hm("22:00")
     se_w <- hms::parse_hm("00:00")
     so_f <- hms::parse_hm("00:00")
@@ -125,6 +131,8 @@ test_that("sjl_sc() | method test", {
 })
 
 test_that("sjl_sc() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_hms(so_w, lower = hms::hms(0))
     expect_error(sjl_sc(
         so_w = 1, so_f = hms::hms(1), se_w = hms::hms(1), se_f = hms::hms(1),
@@ -210,6 +218,8 @@ test_that("sjl_sc() | error test", {
 })
 
 test_that("sjl_sc_rel() | general test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl_sc_rel(
         so_w = hms::parse_hm("00:30"), se_w = hms::parse_hm("07:30"),
         so_f = hms::parse_hm("01:00"), se_f = hms::parse_hm("09:00")

@@ -2,7 +2,10 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function will be removed on the next `mctq` version. You can still find
+#' it in the [`lubritime`](https://github.com/giperbio/lubritime) package.
 #'
 #' `cycle_time()` cycles time span objects in a predetermined cycle length,
 #' adapting linear time objects into a circular time frame.
@@ -152,7 +155,6 @@
 #'
 #' @return The same type of object of `time` cycled with the `cycle` parameter.
 #'
-#' @family utility functions
 #' @template references_g
 #' @export
 #'
@@ -195,14 +197,18 @@
 #' cycle_time(time, cycle, reverse)
 #' #> [1] "0s"                       "28927800s (~47.83 weeks)" # Expected
 cycle_time <- function(time, cycle, reverse = TRUE) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "cycle_time()")
+    
     UseMethod("cycle_time")
 }
 
+#' @rdname cycle_time
 #' @export
 cycle_time.numeric <- function(time, cycle, reverse = TRUE) {
     time %>% cycle_time_build(cycle, reverse)
 }
 
+#' @rdname cycle_time
 #' @export
 cycle_time.Duration <- function(time, cycle, reverse = TRUE) {
     time %>%
@@ -210,6 +216,7 @@ cycle_time.Duration <- function(time, cycle, reverse = TRUE) {
         lubridate::dseconds()
 }
 
+#' @rdname cycle_time
 #' @export
 cycle_time.difftime <- function(time, cycle, reverse = TRUE) {
     out <- time
@@ -224,6 +231,7 @@ cycle_time.difftime <- function(time, cycle, reverse = TRUE) {
     out
 }
 
+#' @rdname cycle_time
 #' @export
 cycle_time.hms <- function(time, cycle, reverse = TRUE) {
     time %>%

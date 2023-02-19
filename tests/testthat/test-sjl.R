@@ -1,4 +1,6 @@
 test_that("sjl() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl(
         msw = hms::parse_hm("02:30"), msf = hms::parse_hm("04:30"),
         abs = TRUE, method = "shorter"
@@ -29,6 +31,8 @@ test_that("sjl() | scalar test", {
 })
 
 test_that("sjl() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl(
         msw = c(hms::parse_hm("11:00"), hms::parse_hm("22:00")),
         msf = c(hms::parse_hm("18:30"), hms::parse_hm("17:30")),
@@ -39,6 +43,8 @@ test_that("sjl() | vector test", {
 })
 
 test_that("sjl() | `method` test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl(
         msw = hms::parse_hm("08:00"), msf = hms::parse_hm("12:00"),
         abs = FALSE, method = "difference"
@@ -125,6 +131,8 @@ test_that("sjl() | `method` test", {
 })
 
 test_that("sjl() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_hms(msw, lower = hms::hms(0))
     expect_error(sjl(
         msw = 1, msf = hms::hms(1), abs = TRUE, method = "shorter"
@@ -174,6 +182,8 @@ test_that("sjl() | error test", {
 })
 
 test_that("sjl_rel() | general test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl_rel(
         msw = hms::parse_hm("10:00"), msf = hms::parse_hm("12:00"),
         method = "shorter"

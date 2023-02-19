@@ -51,7 +51,10 @@ the Details section to learn more) (default: \code{TRUE}).}
 An invisible \code{NULL}. This function don't aim to return values.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function will be removed on the next \code{mctq} version. You can still find
+it in the \href{https://github.com/giperbio/gutils}{\code{gutils}} package.
 
 \code{qplot_walk()} helps you to visually assess the distribution of your data. It
 uses \code{\link[ggplot2:geom_bar]{geom_bar()}} (for non \code{\link[base:double]{double}}
@@ -165,15 +168,3 @@ if (requireNamespace("datasets", quietly = TRUE)) {
 }
 }
 }
-\seealso{
-Other utility functions: 
-\code{\link{assign_date}()},
-\code{\link{cycle_time}()},
-\code{\link{pretty_mctq}()},
-\code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{round_time}()},
-\code{\link{shorter_interval}()},
-\code{\link{sum_time}()}
-}
-\concept{utility functions}

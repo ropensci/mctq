@@ -1,4 +1,6 @@
 test_that("sd_overall() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sd_overall(
         sd_w = lubridate::dhours(6.5), sd_f = lubridate::dhours(11), n_w = 4,
         n_f = 2
@@ -26,6 +28,8 @@ test_that("sd_overall() | scalar test", {
 })
 
 test_that("sd_overall() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sd_overall(
         sd_w = c(lubridate::dhours(3.9), sd_f = lubridate::dhours(5)),
         c(lubridate::dhours(12), lubridate::dhours(NA)),
@@ -53,6 +57,8 @@ test_that("sd_overall() | vector test", {
 })
 
 test_that("sd_overall() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_duration(sd_w, lower = lubridate::duration(0))
     expect_error(sd_overall(
         sd_w = 1, sd_f = lubridate::duration(1), n_w = 1, n_f = 1

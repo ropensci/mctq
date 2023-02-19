@@ -2,7 +2,10 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function will be removed on the next `mctq` version. You can still find
+#' it in the [`lubritime`](https://github.com/giperbio/lubritime) package.
 #'
 #' `assign_date()` assign dates to two sequential hours. It can facilitate
 #' time arithmetic by locating time values without a date reference on a
@@ -75,7 +78,6 @@
 #'
 #' @return A `start`--`end` [`Interval`][lubridate::interval()] object.
 #'
-#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -111,6 +113,8 @@
 #' assign_date(start, end, ambiguity = 24)
 #' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
 assign_date <- function(start, end, ambiguity = 0) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "assign_date()")
+    
     checkmate::assert_multi_class(start, c("hms", "POSIXt"))
     checkmate::assert_numeric(as.numeric(hms::as_hms(start)),
                               lower = 0, upper = 86400)

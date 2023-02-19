@@ -22,10 +22,10 @@
 #' data exporting to text formats (like `.csv`), but note that this will come
 #' with a precision cost.
 #'
-#' Note also that `pretty_mctq()` uses [`round_time()`][mctq::round_time()] for
-#' rounding. `round_time()` is based on [`round()`][base::round()], which uses
-#' the IEC 60559 standard. For more information see the
-#' [`round_time()`][mctq::round_time()] documentation.
+#' Note also that `pretty_mctq()` uses [`round()`][base::round()] for rounding,
+#' which uses uses the IEC 60559 standard (_"go to the even digit"_) for
+#' rounding off a 5. Therefore, `round(0.5)` is equal to 0 and `round(-1.5)` is
+#' equal to -2. See [`?round`][base::round()] to learn more.
 #'
 #' @param data A [`data.frame`][base::data.frame()] object.
 #' @param round (optional) a [`logical`][base::logical()] value indicating if
@@ -80,8 +80,9 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
         }
 
         data <- data %>%
-            dplyr::mutate(dplyr::across(where(check),
-                                        ~ hms::hms(extract_seconds(.x))))
+            dplyr::mutate(
+                dplyr::across(where(check), ~ hms::hms(extract_seconds(.x)))
+                )
     }
 
     data

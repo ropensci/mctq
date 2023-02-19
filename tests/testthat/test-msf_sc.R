@@ -1,4 +1,6 @@
 test_that("msf_sc() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(msf_sc(
         msf = hms::parse_hm("04:00"), sd_w = lubridate::dhours(6),
         sd_f = lubridate::dhours(8),
@@ -63,6 +65,8 @@ test_that("msf_sc() | scalar test", {
 })
 
 test_that("msf_sc() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(msf_sc(
         msf = c(hms::parse_hm("03:45"), hms::parse_hm("22:30")),
         sd_w = c(lubridate::dhours(6), lubridate::dhours(5.5)),
@@ -98,6 +102,8 @@ test_that("msf_sc() | vector test", {
 })
 
 test_that("msf_sc() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_hms(msf, lower = hms::hms(0))
     expect_error(msf_sc(
         msf = 1, sd_w = lubridate::duration(1), sd_f = lubridate::duration(1),

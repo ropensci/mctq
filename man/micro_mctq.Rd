@@ -254,32 +254,32 @@ Ghotbi, N., Pilz, L. K., Winnebeck, E. C., Vetter, C., Zerbini, G., Lenssen,
 D., Frighetto, G., Salamanca, M., Costa, R., Montagnese, S., & Roenneberg, T.
 (2020). The \eqn{\mu}MCTQ: an ultra-short version of the Munich ChronoType
 Questionnaire. \emph{Journal of Biological Rhythms}, \emph{35}(1), 98-110.
-\doi{10.1177/0748730419886986}.
+\doi{10.1177/0748730419886986}
 
 Jankowski K. S. (2017). Social jet lag: sleep-corrected formula.
 \emph{Chronobiology International}, \emph{34}(4), 531-535.
-\doi{10.1080/07420528.2017.1299162}.
+\doi{10.1080/07420528.2017.1299162}
 
 Juda, M., Vetter, C., & Roenneberg, T. (2013). The Munich ChronoType
 Questionnaire for shift-workers (MCTQ\eqn{^{Shift}}{ Shift}). \emph{Journal of
-Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}.
+Biological Rhythms}, \emph{28}(2), 130-140. \doi{10.1177/0748730412475041}
 
 Roenneberg T., Allebrandt K. V., Merrow M., & Vetter C. (2012). Social jetlag
 and obesity. \emph{Current Biology}, \emph{22}(10), 939-43.
-\doi{10.1016/j.cub.2012.03.038}.
+\doi{10.1016/j.cub.2012.03.038}
 
 Roenneberg, T., Keller, L. K., Fischer, D., Matera, J. L., Vetter, C., &
 Winnebeck, E. C. (2015). Human activity and rest in situ. In A. Sehgal (Ed.),
-\emph{Methods in Enzymology} (Vol. 552, pp. 257-283). London, UK: Academic Press.
-\doi{10.1016/bs.mie.2014.11.028}.
+\emph{Methods in Enzymology} (Vol. 552, pp. 257-283). Academic Press.
+\doi{10.1016/bs.mie.2014.11.028}
 
 Roenneberg, T., Pilz, L. K., Zerbini, G., & Winnebeck, E. C. (2019).
 Chronotype and social jetlag: a (self-) critical review. \emph{Biology}, \emph{8}(3),
-54. \doi{10.3390/biology8030054}.
+54. \doi{10.3390/biology8030054}
 
 Roenneberg, T., Wirz-Justice, A., & Merrow, M. (2003). Life between clocks:
 daily temporal patterns of human chronotypes. \emph{Journal of Biological
-Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}.
+Rhythms}, \emph{18}(1), 80-90. \doi{10.1177/0748730402239679}
 
 The Worldwide Experimental Platform (n.d.). MCTQ.
 \url{https://www.thewep.org/documentations/mctq/}

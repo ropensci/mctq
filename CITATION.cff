@@ -8,7 +8,7 @@ message: 'To cite package "mctq" in publications use:'
 type: software
 license: MIT
 title: 'mctq: Tools to Process the Munich ChronoType Questionnaire (MCTQ)'
-version: 0.3.1.9000
+version: 0.3.2
 abstract: A complete toolkit to process the Munich ChronoType Questionnaire (MCTQ)
   for its three versions (standard, micro, and shift). MCTQ is a quantitative and
   validated tool to assess chronotypes using peoples' sleep behavior, originally presented
@@ -20,7 +20,7 @@ authors:
   orcid: https://orcid.org/0000-0001-7782-759X
 preferred-citation:
   type: unpublished
-  title: 'mctq: an R package for the Munich ChronoType Questionnaire'
+  title: 'mctq: tools to process the Munich ChronoType Questionnaire (MCTQ)'
   authors:
   - family-names: Vartanian
     given-names: Daniel
@@ -28,7 +28,7 @@ preferred-citation:
     orcid: https://orcid.org/0000-0001-7782-759X
   year: '2023'
   url: https://docs.ropensci.org/mctq/
-  notes: '(v. 0.3.1.9000). Lifecycle: maturing'
+  notes: R package version 0.3.2
 repository: https://bioconductor.org/
 repository-code: https://github.com/ropensci/mctq/issues/
 url: https://docs.ropensci.org/mctq/

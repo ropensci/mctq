@@ -1,4 +1,6 @@
 test_that("pretty_mctq() | general test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     data <- data.frame(
         a = 1,
         b = lubridate::duration(1.12345),
@@ -17,6 +19,8 @@ test_that("pretty_mctq() | general test", {
 })
 
 test_that("pretty_mctq() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # checkmate::assert_data_frame(data)
     expect_error(pretty_mctq(
         data = 1, round = TRUE, hms = TRUE

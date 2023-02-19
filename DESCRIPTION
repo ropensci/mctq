@@ -1,34 +1,47 @@
 Package: mctq
 Title: Tools to Process the Munich ChronoType Questionnaire (MCTQ)
-Version: 0.3.1.9000
-Authors@R: 
-    c(person(given = "Daniel",
-             family = "Vartanian",
-             role = c("aut", "cre", "ccp", "cph"),
-             email = "danvartan@gmail.com",
-             comment = c(ORCID = "0000-0001-7782-759X")),
-      person(given = "Ana Amelia",
-             family = "Benedito-Silva",
-             role = "sad",
-             email = "aamelia@usp.br",
-             comment = c(ORCID = "0000-0003-4976-2623")),
-      person(given = "Mario",
-             family = "Pedrazzoli",
-             role = "sad",
-             email = "pedrazzo@usp.br",
-             comment = c(ORCID = "0000-0002-5257-591X")),
-      person(given = "Jonathan",
-             family = "Keane",
-             role = "rev",
-             email = "jkeane@gmail.com",
-             comment = c(ORCID = "0000-0001-7087-9776")),
-      person(given = "Mario Andre",
-             family = "Leocadio-Miguel",
-             role = "rev",
-             email = "miguel.ml.mario@gmail.com",
-             comment = c(ORCID = "0000-0002-7248-3529")),
-      person(given = "University of Sao Paulo (USP)",
-             role = "fnd"))
+Version: 0.3.2
+Authors@R: c(
+        utils::person(
+            given = "Daniel",
+            family = "Vartanian",
+            role = c("aut", "cre", "ccp", "cph"),
+            email = "danvartan@gmail.com",
+            comment = c(ORCID = "0000-0001-7782-759X")
+            ),
+        utils::person(
+            given = "Ana Amelia",
+            family = "Benedito-Silva",
+            role = "sad",
+            email = "aamelia@usp.br",
+            comment = c(ORCID = "0000-0003-4976-2623")
+            ),
+        utils::person(
+            given = "Mario",
+            family = "Pedrazzoli",
+            role = "sad",
+            email = "pedrazzo@usp.br",
+            comment = c(ORCID = "0000-0002-5257-591X")
+            ),
+        utils::person(
+            given = "Jonathan",
+            family = "Keane",
+            role = "rev",
+            email = "jkeane@gmail.com",
+            comment = c(ORCID = "0000-0001-7087-9776")
+            ),
+        utils::person(
+            given = "Mario Andre",
+            family = "Leocadio-Miguel",
+            role = "rev",
+            email = "miguel.ml.mario@gmail.com",
+            comment = c(ORCID = "0000-0002-7248-3529")
+            ),
+        utils::person(
+            given = "University of Sao Paulo (USP)",
+            role = "fnd"
+            )
+    )
 Description: A complete toolkit to process the Munich ChronoType 
     Questionnaire (MCTQ) for its three versions (standard, micro, and shift). 
     MCTQ is a quantitative and validated tool to assess chronotypes using 

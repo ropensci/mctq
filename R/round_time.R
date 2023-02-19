@@ -2,7 +2,10 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function will be removed on the next `mctq` version. You can still find
+#' it in the [`lubritime`](https://github.com/giperbio/lubritime) package.
 #'
 #' `round_time()` takes a [`Duration`][lubridate::duration()],
 #' [`difftime`][base::as.difftime()], [`hms`][hms::hms()],
@@ -46,7 +49,6 @@
 #'   [`round_hms()`][hms::round_hms()] [`trunc_hms()`][hms::trunc_hms()]
 #'   [`round_date()`][lubridate::round_date()].
 #'
-#' @family utility functions
 #' @template references_g
 #' @export
 #'
@@ -84,6 +86,8 @@
 #' round_time(c(lubridate::dhours(5.6987), lubridate::dhours(2.6875154)))
 #' #> [1] "20515s (~5.7 hours)" "9675s (~2.69 hours)" # Expected
 round_time <- function(x) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "round_time()")
+    
     classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt")
     checkmate::assert_multi_class(x, classes)
 

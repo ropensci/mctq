@@ -37,7 +37,11 @@ circular sum of the time from objects in \code{...}.
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+These functions will be removed on the next \code{mctq} version. You can still
+find them in the \href{https://github.com/giperbio/lubritime}{\code{lubritime}}
+package.
 
 \code{sum_time()} returns the sum of the time from different kinds of date/time
 objects.
@@ -57,8 +61,8 @@ example, \code{sum_time(c(x, y), z)} will have the same output as \code{sum_time
 
 \code{vct_sum_time()} performs a different type of sum (a vectorized one). Instead
 of aggregating the time lengths, the function perform a paired sum between
-elements. For example, \code{sum_time(c(x, y), c(w, z))} will return a vector like
-\code{c(sum_time(x, w), sum_time(y, z))}. Because of that, \code{vct_sum_time()}
+elements. For example, \code{vct_sum_time(c(x, y), c(w, z))} will return a vector
+like \code{c(sum_time(x, w), sum_time(y, z))}. Because of that, \code{vct_sum_time()}
 requires that all objects in \code{...} have the same length.
 }
 
@@ -277,18 +281,6 @@ vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
 #> [1] "82800s (~23 hours)" "64800s (~18 hours)" # Expected
 }
 \references{
-Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. Sebastopol, CA:
-O'Reilly Media. \url{https://r4ds.had.co.nz}
+Wickham, H., & Grolemund, G. (n.d.). \emph{R for data science}. (n.p.).
+\url{https://r4ds.had.co.nz}
 }
-\seealso{
-Other utility functions: 
-\code{\link{assign_date}()},
-\code{\link{cycle_time}()},
-\code{\link{pretty_mctq}()},
-\code{\link{qplot_walk}()},
-\code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{round_time}()},
-\code{\link{shorter_interval}()}
-}
-\concept{utility functions}

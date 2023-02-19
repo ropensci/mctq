@@ -30,7 +30,11 @@ duration between \code{x} and \code{y}.
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+These functions will be removed on the next \code{mctq} version. You can still
+find them in the \href{https://github.com/giperbio/lubritime}{\code{lubritime}}
+package.
 
 \code{shorter_interval()} returns the shorter interval between two
 \code{\link[hms:hms]{hms}} or \code{\link[base:DateTimeClasses]{POSIXt}} object hours.
@@ -174,15 +178,3 @@ longer_interval(x, y)
 longer_duration(x, y)
 #> [1] "72000s (~20 hours)"   "63000s (~17.5 hours)" # Expected
 }
-\seealso{
-Other utility functions: 
-\code{\link{assign_date}()},
-\code{\link{cycle_time}()},
-\code{\link{pretty_mctq}()},
-\code{\link{qplot_walk}()},
-\code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{round_time}()},
-\code{\link{sum_time}()}
-}
-\concept{utility functions}

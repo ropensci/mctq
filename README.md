@@ -26,6 +26,8 @@ MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
 [![CII Best
 Practices](https://bestpractices.coreinfrastructure.org/projects/6244/badge)](https://bestpractices.coreinfrastructure.org/projects/6244)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
 <!-- badges: end -->
 
 ## Overview
@@ -36,7 +38,7 @@ tool to assess chronotypes using peoples’ sleep behavior presented by
 Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
 [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
 to facilitate the work of sleep and chronobiology scientists with MCTQ
-data and to help with research reproducibility.
+data and to improve reproducibility in research.
 
 `mctq` adheres to the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
@@ -182,12 +184,12 @@ See a quick tour of all MCTQ main functions
 
 ### Utilities
 
-`mctq` is also equipped with many utility functions. The package also
-provides fictional datasets of the standard, micro, and shift MCTQ
-versions for testing and learning purposes.
+`mctq` is also equipped with some utility tools to help with your MCTQ
+data. The package also provides fictional datasets of the standard,
+micro, and shift MCTQ versions for testing and learning purposes.
 
-All functions are well documented, showing all the guidelines behind the
-computations. Click
+All functions are properly documented, showing all the guidelines behind
+the computations. Click
 [here](https://docs.ropensci.org/mctq/reference/index.html) to see a
 list of them.
 
@@ -202,17 +204,18 @@ citation("mctq")
 #> 
 #> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D. (2023). {mctq}: an R package for the Munich ChronoType
-#>   Questionnaire (v. 0.3.1.9000). https://docs.ropensci.org/mctq/
+#>   Vartanian, D. (2023). {mctq}: tools to process the Munich ChronoType
+#>   Questionnaire (MCTQ). R package version 0.3.2.
+#>   https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Unpublished{,
-#>     title = {{mctq}: an R package for the Munich ChronoType Questionnaire},
+#>     title = {{mctq}: tools to process the Munich ChronoType Questionnaire (MCTQ)},
 #>     author = {Daniel Vartanian},
 #>     year = {2023},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {(v. 0.3.1.9000). Lifecycle: maturing},
+#>     note = {R package version 0.3.2},
 #>   }
 ```
 

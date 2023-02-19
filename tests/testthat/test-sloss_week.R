@@ -1,4 +1,6 @@
 test_that("sloss_week() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sloss_week(
         sd_w = lubridate::dhours(5.5), sd_f = lubridate::dhours(9), wd = 5
     ),
@@ -20,6 +22,8 @@ test_that("sloss_week() | scalar test", {
 })
 
 test_that("sloss_week() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sloss_week(
         sd_w = c(lubridate::dhours(9), lubridate::dhours(10.5)),
         sd_f = c(lubridate::dhours(12), lubridate::dhours(8.5)),
@@ -40,6 +44,8 @@ test_that("sloss_week() | vector test", {
 })
 
 test_that("sloss_week() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_duration(sd_w, lower = lubridate::duration(0))
     expect_error(sloss_week(
         sd_w = 1, sd_f = lubridate::duration(1), wd = 1

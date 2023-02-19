@@ -31,11 +31,12 @@ library(hms)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6244/badge)](https://bestpractices.coreinfrastructure.org/projects/6244)
+[![CRAN status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
 <!-- badges: end -->
 
 ## Overview
 
-`mctq` is an R package that provides a complete toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data and to help with research reproducibility.
+`mctq` is an R package that provides a complete toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data and to improve reproducibility in research.
 
 `mctq` adheres to the [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates with the [tidyverse ecosystem](https://www.tidyverse.org/).
@@ -131,9 +132,9 @@ See a quick tour of all MCTQ main functions [here](https://docs.ropensci.org/mct
 
 ### Utilities
 
-`mctq` is also equipped with many utility functions. The package also provides fictional datasets of the standard, micro, and shift MCTQ versions for testing and learning purposes.
+`mctq` is also equipped with some utility tools to help with your MCTQ data. The package also provides fictional datasets of the standard, micro, and shift MCTQ versions for testing and learning purposes.
 
-All functions are well documented, showing all the guidelines behind the computations. Click [here](https://docs.ropensci.org/mctq/reference/index.html) to see a list of them.
+All functions are properly documented, showing all the guidelines behind the computations. Click [here](https://docs.ropensci.org/mctq/reference/index.html) to see a list of them.
 
 ## Citation
 

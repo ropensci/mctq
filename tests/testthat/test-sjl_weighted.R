@@ -1,4 +1,6 @@
 test_that("sjl_weighted() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl_weighted(
         sjl = list(
             sjl_m = lubridate::dhours(0.5),
@@ -30,6 +32,8 @@ test_that("sjl_weighted() | scalar test", {
 })
 
 test_that("sjl_weighted() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(sjl_weighted(
         sjl = list(
             sjl_m = c(lubridate::dhours(8), lubridate::dhours(1.78)),
@@ -47,6 +51,8 @@ test_that("sjl_weighted() | vector test", {
 })
 
 test_that("sjl_weighted() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # checkmate::assert_list(sjl, len = length(n_w))
     expect_error(sjl_weighted(
         sjl = 1, n_w = list(n_w_m = 1)

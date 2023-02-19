@@ -2,7 +2,11 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("maturing")`
+#' `r lifecycle::badge("deprecated")`
+#'
+#' These functions will be removed on the next `mctq` version. You can still
+#' find them in the [`lubritime`](https://github.com/giperbio/lubritime)
+#' package.
 #'
 #' `sum_time()` returns the sum of the time from different kinds of date/time
 #' objects.
@@ -24,8 +28,8 @@
 #'
 #' `vct_sum_time()` performs a different type of sum (a vectorized one). Instead
 #' of aggregating the time lengths, the function perform a paired sum between
-#' elements. For example, `sum_time(c(x, y), c(w, z))` will return a vector like
-#' `c(sum_time(x, w), sum_time(y, z))`. Because of that, `vct_sum_time()`
+#' elements. For example, `vct_sum_time(c(x, y), c(w, z))` will return a vector
+#' like `c(sum_time(x, w), sum_time(y, z))`. Because of that, `vct_sum_time()`
 #' requires that all objects in `...` have the same length.
 #'
 #' ## Linear versus circular time
@@ -209,7 +213,6 @@
 #' * If `cycle != NULL`, a [`Duration`][lubridate::duration()] object with a
 #' circular sum of the time from objects in `...`.
 #'
-#' @family utility functions
 #' @template references_g
 #' @export
 #'
@@ -269,6 +272,8 @@
 #' vct_sum_time(x, y, cycle = lubridate::ddays(), reverse = TRUE)
 #' #> [1] "82800s (~23 hours)" "64800s (~18 hours)" # Expected
 sum_time <- function(..., cycle = NULL, reverse = TRUE, na_rm = FALSE) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "sum_time()")
+    
     sum_time_build(..., vectorize = FALSE, cycle = cycle, reverse = reverse,
                    na_rm = na_rm)
 }
@@ -276,6 +281,8 @@ sum_time <- function(..., cycle = NULL, reverse = TRUE, na_rm = FALSE) {
 #' @rdname sum_time
 #' @export
 vct_sum_time <- function(..., cycle = NULL, reverse = TRUE, na_rm = FALSE) {
+    lifecycle::deprecate_soft(when = "0.3.2", what = "vct_sum_time()")
+    
     sum_time_build(..., vectorize = TRUE, cycle = cycle, reverse = reverse,
                    na_rm = na_rm)
 }

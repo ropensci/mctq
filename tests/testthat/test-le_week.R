@@ -1,4 +1,6 @@
 test_that("le_week() | scalar test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(le_week(
         le_w = lubridate::dhours(2.3), le_f = lubridate::dhours(4.5), wd = 5
     ),
@@ -25,6 +27,8 @@ test_that("le_week() | scalar test", {
 })
 
 test_that("le_week() | vector test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     expect_equal(le_week(
         le_w = c(lubridate::dhours(2.4), lubridate::dhours(0.5)),
         le_f = c(lubridate::dhours(2.4), lubridate::dhours(NA)),
@@ -51,6 +55,8 @@ test_that("le_week() | vector test", {
 })
 
 test_that("le_week() | error test", {
+    rlang::local_options(lifecycle_verbosity = "quiet")
+    
     # assert_duration(le_w, lower = lubridate::duration(0))
     expect_error(le_week(
         le_w = 1, le_f = lubridate::duration(1), wd = 1

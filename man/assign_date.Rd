@@ -18,7 +18,10 @@ section to learn more (default: \code{0}).}
 A \code{start}--\code{end} \code{\link[lubridate:interval]{Interval}} object.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function will be removed on the next \code{mctq} version. You can still find
+it in the \href{https://github.com/giperbio/lubritime}{\code{lubritime}} package.
 
 \code{assign_date()} assign dates to two sequential hours. It can facilitate
 time arithmetic by locating time values without a date reference on a
@@ -120,15 +123,3 @@ end <- lubridate::as_datetime("2020-09-10 12:00:00")
 assign_date(start, end, ambiguity = 24)
 #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
 }
-\seealso{
-Other utility functions: 
-\code{\link{cycle_time}()},
-\code{\link{pretty_mctq}()},
-\code{\link{qplot_walk}()},
-\code{\link{random_mctq}()},
-\code{\link{raw_data}()},
-\code{\link{round_time}()},
-\code{\link{shorter_interval}()},
-\code{\link{sum_time}()}
-}
-\concept{utility functions}
