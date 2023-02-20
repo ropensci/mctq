@@ -1,6 +1,4 @@
 test_that("sdu() | scalar test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(
         sdu(so = hms::parse_hm("23:30"), se = hms::parse_hm("07:30")),
         lubridate::dhours(8)
@@ -18,8 +16,6 @@ test_that("sdu() | scalar test", {
 })
 
 test_that("sdu() | vector test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(sdu(
         so = c(hms::parse_hm("21:00"), hms::parse_hm("02:00")),
         se = c(hms::parse_hm("05:00"), hms::parse_hm("11:00"))
@@ -29,8 +25,6 @@ test_that("sdu() | vector test", {
 })
 
 test_that("sdu() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # assert_hms(so, lower = hms::hms(0))
     expect_error(sdu(so = 1, se = hms::hms(1)), "Assertion on 'so' failed")
 

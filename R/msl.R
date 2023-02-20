@@ -323,7 +323,7 @@ msl <- function(so, sd) {
 #' msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #' #> 04:46:00.3402 # Expected
 #'
-#' round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
+#' mctq:::round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
 #' #> 04:46:00 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
     assert_hms(msf, lower = hms::hms(0))

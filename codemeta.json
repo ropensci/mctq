@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/ropensci/mctq/",
   "issueTracker": "https://github.com/ropensci/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.2",
+  "version": "0.3.2.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -72,12 +72,6 @@
       "@type": "SoftwareApplication",
       "identifier": "datasets",
       "name": "datasets",
-      "version": ">= 4.1.0"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "grDevices",
-      "name": "grDevices",
       "version": ">= 4.1.0"
     },
     {
@@ -245,19 +239,6 @@
     },
     "5": {
       "@type": "SoftwareApplication",
-      "identifier": "ggplot2",
-      "name": "ggplot2",
-      "version": ">= 3.4.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
-    },
-    "6": {
-      "@type": "SoftwareApplication",
       "identifier": "hms",
       "name": "hms",
       "version": ">= 1.1.2",
@@ -269,7 +250,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=hms"
     },
-    "7": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
@@ -282,7 +263,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
-    "8": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
@@ -297,7 +278,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "752.464KB",
+  "fileSize": "650.713KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -313,7 +294,7 @@
       ],
       "name": "{mctq}: tools to process the Munich ChronoType Questionnaire (MCTQ)",
       "url": "https://docs.ropensci.org/mctq/",
-      "description": "R package version 0.3.2"
+      "description": "R package version 0.3.2.9000"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/mctq/blob/master/NEWS.md",

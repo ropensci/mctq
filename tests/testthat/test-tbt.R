@@ -1,6 +1,4 @@
 test_that("tbt() | scalar test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(tbt(
         bt = hms::parse_hm("22:00"), gu = hms::parse_hm("07:00")
     ),
@@ -21,8 +19,6 @@ test_that("tbt() | scalar test", {
 })
 
 test_that("tbt() | vector test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(tbt(
         bt = c(hms::parse_hm("23:30"), hms::parse_hm("03:15")),
         gu = c(hms::parse_hm("12:00"), hms::parse_hm("10:45"))
@@ -32,8 +28,6 @@ test_that("tbt() | vector test", {
 })
 
 test_that("tbt() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # assert_hms(bt, lower = hms::hms(0))
     expect_error(tbt(
         bt = 1, gu = hms::hms(1)

@@ -60,7 +60,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with \code{mctq:::round_time()}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -159,7 +159,7 @@ wd <- 3
 sd_week(sd_w, sd_f, wd)
 #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 
-round_time(sd_week(sd_w, sd_f, wd))
+mctq:::round_time(sd_week(sd_w, sd_f, wd))
 #> [1] "22989s (~6.39 hours)" # Expected
 }
 \references{

@@ -1,6 +1,4 @@
 test_that("sum_time() | linear test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(sum_time(
         c(lubridate::dhours(1), lubridate::dminutes(30)),
         lubridate::dhours(1),
@@ -46,8 +44,6 @@ test_that("sum_time() | linear test", {
 })
 
 test_that("sum_time() | circular test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(sum_time(
         c(lubridate::dhours(1), lubridate::dminutes(30)),
         lubridate::dhours(1),
@@ -94,8 +90,6 @@ test_that("sum_time() | circular test", {
 })
 
 test_that("vct_sum_time()| linear test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(vct_sum_time(
         c(lubridate::dhours(1), lubridate::dminutes(30)),
         c(lubridate::dhours(1), lubridate::dhours(1)),
@@ -162,8 +156,6 @@ test_that("vct_sum_time()| linear test", {
 })
 
 test_that("vct_sum_time()| circular test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(vct_sum_time(
         c(lubridate::dhours(1), lubridate::dminutes(30)),
         c(lubridate::dhours(1), lubridate::dhours(1)),
@@ -225,8 +217,6 @@ test_that("vct_sum_time()| circular test", {
 })
 
 test_that("sum_time_build() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # lapply(out, checkmate::assert_multi_class, classes)
     expect_error(sum_time_build(
         1, vectorize = FALSE, cycle = NULL, reverse = TRUE, na_rm = FALSE

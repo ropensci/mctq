@@ -1,6 +1,6 @@
 Package: mctq
 Title: Tools to Process the Munich ChronoType Questionnaire (MCTQ)
-Version: 0.3.2
+Version: 0.3.2.9000
 Authors@R: c(
         person(
             given = "Daniel",
@@ -57,14 +57,12 @@ Imports:
     checkmate (>= 2.1.0),
     cli (>= 3.6.0),
     dplyr (>= 1.1.0),
-    ggplot2 (>= 3.4.1),
     hms (>= 1.1.2),
     lifecycle (>= 1.0.3),
     lubridate (>= 1.9.2)
 Suggests:
     covr (>= 3.6.1),
     datasets (>= 4.1.0),
-    grDevices (>= 4.1.0),
     knitr (>= 1.42),
     mockr (>= 0.2.1),
     readr (>= 2.1.4),

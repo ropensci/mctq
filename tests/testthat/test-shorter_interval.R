@@ -1,6 +1,4 @@
 test_that("interval_build() | scalar test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(interval_build(
         x = hms::parse_hm("23:00"), y = hms::parse_hm("01:00"),
         method = "shorter"
@@ -41,8 +39,6 @@ test_that("interval_build() | scalar test", {
 })
 
 test_that("interval_build() | vector test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(interval_build(
         x = c(hms::parse_hm("22:45"), hms::parse_hm("12:00")),
         y = c(hms::parse_hm("04:15"), hms::parse_hm("09:00")),
@@ -59,8 +55,6 @@ test_that("interval_build() | vector test", {
 })
 
 test_that("interval_build() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # checkmate::assert_multi_class(x, c("hms", "POSIXt"))
     expect_error(interval_build(
         x = 1, y = hms::hms(1), method = "shorter"
@@ -117,8 +111,6 @@ test_that("interval_build() | error test", {
 })
 
 test_that("interval_build() | warning test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_message(interval_build(
         x = hms::parse_hm("00:00"), y = hms::parse_hm("12:00"),
         method = "shorter"
@@ -128,8 +120,6 @@ test_that("interval_build() | warning test", {
 })
 
 test_that("shorter_interval() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(shorter_interval(
         x = lubridate::parse_date_time("01:10:00", "HMS"),
         y = lubridate::parse_date_time("11:45:00", "HMS")
@@ -151,8 +141,6 @@ test_that("shorter_interval() | general test", {
 })
 
 test_that("shorter_duration() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(shorter_duration(
         x = lubridate::parse_date_time("01:10:00", "HMS"),
         y = lubridate::parse_date_time("11:45:00", "HMS")
@@ -164,8 +152,6 @@ test_that("shorter_duration() | general test", {
 })
 
 test_that("longer_interval() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(longer_interval(
         x = lubridate::parse_date_time("01:10:00", "HMS"),
         y = lubridate::parse_date_time("11:45:00", "HMS")
@@ -187,8 +173,6 @@ test_that("longer_interval() | general test", {
 })
 
 test_that("longer_duration() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(longer_duration(
         x = lubridate::parse_date_time("01:10:00", "HMS"),
         y = lubridate::parse_date_time("11:45:00", "HMS")

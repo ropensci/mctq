@@ -195,7 +195,7 @@
 #' sjl(msw, msf)
 #' #> [1] "5068.12339997292s (~1.41 hours)" # Expected
 #'
-#' round_time(sjl(msw, msf))
+#' mctq:::round_time(sjl(msw, msf))
 #' #> [1] "5068s (~1.41 hours)" # Expected
 sjl <- function(msw, msf, abs = TRUE, method = "shorter") {
     method_choices <- c("difference", "shorter", "longer")
@@ -591,10 +591,10 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #'
 #' ## Rounding the output at the seconds level
 #'
-#' round_time(sjl_weighted(sjl, n_w))
+#' mctq:::round_time(sjl_weighted(sjl, n_w))
 #' #> [1] "3970s (~1.1 hours)" # Expected
 #'
-#' round_time(hms::as_hms(as.numeric(sjl_weighted(sjl, n_w))))
+#' mctq:::round_time(hms::as_hms(as.numeric(sjl_weighted(sjl, n_w))))
 #' #> 01:06:10 # Expected
 sjl_weighted <- function(sjl, n_w) {
     checkmate::assert_list(sjl, len = length(n_w))

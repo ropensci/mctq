@@ -418,7 +418,7 @@ sd24 <- function(sd, napd, nap) {
 #' sd_week(sd_w, sd_f, wd)
 #' #> [1] "22988.5714285714s (~6.39 hours)" # Expected
 #'
-#' round_time(sd_week(sd_w, sd_f, wd))
+#' mctq:::round_time(sd_week(sd_w, sd_f, wd))
 #' #> [1] "22989s (~6.39 hours)" # Expected
 sd_week <- function(sd_w, sd_f, wd) {
     assert_duration(sd_w, lower = lubridate::duration(0))
@@ -570,7 +570,7 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' sd_overall(sd_w, sd_f, n_w, n_f)
 #' #> [1] "26324.784s (~7.31 hours)" # Expected
 #'
-#' round_time(sd_overall(sd_w, sd_f, n_w, n_f))
+#' mctq:::round_time(sd_overall(sd_w, sd_f, n_w, n_f))
 #' #> [1] "26325s (~7.31 hours)" # Expected
 sd_overall <- function(sd_w, sd_f, n_w, n_f) {
     assert_duration(sd_w, lower = lubridate::duration(0))

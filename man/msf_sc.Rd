@@ -75,7 +75,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with \code{mctq:::round_time()}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -257,7 +257,7 @@ alarm_f <- FALSE
 msf_sc(msf, sd_w, sd_f, sd_week, alarm_f)
 #> 04:46:00.3402 # Expected
 
-round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
+mctq:::round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
 #> 04:46:00 # Expected
 }
 \references{

@@ -3,6 +3,19 @@
 <!--- https://style.tidyverse.org/news.html -->
 <!--- https://semver.org/ -->
 
+# mctq (development version)
+
+* The utility functions `assign_date()`, `cycle_time()`, `round_time()`,
+  `shorter_interval()`, `longer_interval()`, `shorter_duration()`, 
+  `longer_duration()`, `sum_time()`, and `vct_sum_time()` were deprecated on 
+  `mctq` 0.3.2. These functions were removed from the package. You can still 
+  find them in the [`lubritime`](https://github.com/giperbio/lubritime) package.
+* The utility function `qplot_walk()` were deprecated on `mctq` 0.3.2. This
+  function was removed from the package. You can still find it in the
+  [`gutils`](https://github.com/giperbio/gutils) package.
+* The `ggplot2` package was removed as an import. It was only needed for
+  `qplot_walk()`.
+
 # mctq 0.3.2 (2023-02-19)
 
 * As of this version, a decoupling process related to some `mctq` utility
@@ -13,7 +26,7 @@
 * The utility functions `assign_date()`, `cycle_time()`, `round_time()`,
   `shorter_interval()`, `longer_interval()`, `shorter_duration()`, 
   `longer_duration()`, `sum_time()`, and `vct_sum_time()` are now deprecated. 
-  These functions will be removed on the next `mctq` version. You can still find 
+  These functions will be removed on the next `mctq` version. You can still find
   them in the [`lubritime`](https://github.com/giperbio/lubritime) package.
 * The utility function `qplot_walk()` is now deprecated. This function will be
   removed on the next `mctq` version. You can still find it in the
@@ -27,7 +40,7 @@
   were Scientific Advisers that helped with the initial `mctq` development, but
   are not part of the `mctq` project anymore.
 * The Interdisciplinary Sleep Research Group (GIPSO) was removed as funder.
-  GIPSO is a research group that Mario and Daniel Vartanian have built together. 
+  GIPSO is a research group that Mario and Daniel Vartanian have built together.
   Daniel (the main author and copyright holder of `mctq`) is no longer part of 
   this group. The "funder" status was always symbolic.
 
@@ -56,7 +69,7 @@
 
 # mctq 0.1.0 (2021-11-04)
 
-* Initial [CRAN](https://cran.r-project.org/package=mctq) release. 🎉
+* First [CRAN](https://cran.r-project.org/package=mctq) release. 🎉
 * You can now install `mctq` with `install.packages("mctq")`.
 * We decided to wait for a little while before releasing a `1.0.0` (stable) 
   `mctq` version. We don't intend to make any breaking changes, but we think is

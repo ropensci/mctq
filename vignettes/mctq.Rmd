@@ -208,7 +208,7 @@ The output must be the weighted mean of `sd_w` and `sd_f`, with `wd` and `fd(wd)
 data$sd_week <- sd_week(data$sd_w, data$sd_f, data$wd)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(sd_week_rounded = mctq::round_time(sd_week))
+data <- data %>% dplyr::mutate(sd_week_rounded = mctq:::round_time(sd_week))
 data %>% dplyr::select(wd, sd_w, fd, sd_f, sd_week_rounded)
 ```
 
@@ -223,7 +223,7 @@ data$sloss_week <- sloss_week(data$sd_w, data$sd_f, data$wd)
 
 # Comparing the result
 data <- data %>% dplyr::mutate(
-  sloss_week_rounded = mctq::round_time(sloss_week))
+  sloss_week_rounded = mctq:::round_time(sloss_week))
 data %>% dplyr::select(wd, sd_w, fd, sd_f, sloss_week_rounded)
 ```
 
@@ -239,7 +239,7 @@ Please note that light exposure is measured only with the full version of the st
 data$le_week <- le_week(data$le_w, data$le_f, data$wd)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(le_week_rounded = mctq::round_time(le_week))
+data <- data %>% dplyr::mutate(le_week_rounded = mctq:::round_time(le_week))
 data %>% dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
 ```
 
@@ -256,7 +256,7 @@ data$msf_sc <- msf_sc(data$msf, data$sd_w, data$sd_f, data$sd_week,
                       data$alarm_f)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(msf_sc_rounded = mctq::round_time(msf_sc))
+data <- data %>% dplyr::mutate(msf_sc_rounded = mctq:::round_time(msf_sc))
 data %>% dplyr::select(msf, msf_sc_rounded)
 ```
 

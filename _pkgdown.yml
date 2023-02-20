@@ -43,15 +43,9 @@ reference:
 
 - title: Utilities
   contents:
-  - assign_date
-  - cycle_time
   - pretty_mctq
-  - qplot_walk
   - random_mctq
   - raw_data
-  - round_time
-  - shorter_interval
-  - sum_time
 
 articles:
 - title: Get started
@@ -69,6 +63,10 @@ articles:
 authors:
   Daniel Vartanian:
     href: https://github.com/danielvartan
+  Jonathan Keane:
+    href: https://github.com/jonkeane
+  Mario Andre Leocadio-Miguel:
+    href: https://github.com/leocadio-miguel
   University of Sao Paulo (USP):
     href: http://usp.br
 

@@ -1,6 +1,4 @@
 test_that("so() | scalar test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(so(
         sprep = hms::parse_hm("23:15"), slat = lubridate::dminutes(30)
     ),
@@ -21,8 +19,6 @@ test_that("so() | scalar test", {
 })
 
 test_that("so() | vector test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(so(
         sprep = c(hms::parse_hm("21:45"), hms::parse_hm("01:30")),
         slat = c(lubridate::dminutes(20), lubridate::dminutes(50))
@@ -32,8 +28,6 @@ test_that("so() | vector test", {
 })
 
 test_that("so() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # assert_hms(sprep, lower = hms::hms(0))
     expect_error(so(
         sprep = 1, slat = lubridate::duration(1)

@@ -93,7 +93,7 @@
 #' sloss_week(sd_w, sd_f, wd)
 #' #> [1] "4807.85142857144s (~1.34 hours)" # Expected
 #'
-#' round_time(sloss_week(sd_w, sd_f, wd))
+#' mctq:::round_time(sloss_week(sd_w, sd_f, wd))
 #' #> [1] "4808s (~1.34 hours)" # Expected
 sloss_week <- function(sd_w, sd_f, wd) {
     assert_duration(sd_w, lower = lubridate::duration(0))

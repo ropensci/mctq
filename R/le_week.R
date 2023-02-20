@@ -115,7 +115,7 @@
 #' le_week(le_w, le_f, wd)
 #' #> [1] "19538.3828571429s (~5.43 hours)" # Expected
 #'
-#' round_time(le_week(le_w, le_f, wd))
+#' mctq:::round_time(le_week(le_w, le_f, wd))
 #' #> [1] "19538s (~5.43 hours)" # Expected
 le_week <- function(le_w, le_f, wd) {
     assert_duration(le_w, lower = lubridate::duration(0))

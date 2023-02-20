@@ -8,7 +8,7 @@ message: 'To cite package "mctq" in publications use:'
 type: software
 license: MIT
 title: 'mctq: Tools to Process the Munich ChronoType Questionnaire (MCTQ)'
-version: 0.3.2
+version: 0.3.2.9000
 abstract: A complete toolkit to process the Munich ChronoType Questionnaire (MCTQ)
   for its three versions (standard, micro, and shift). MCTQ is a quantitative and
   validated tool to assess chronotypes using peoples' sleep behavior, originally presented
@@ -28,7 +28,7 @@ preferred-citation:
     orcid: https://orcid.org/0000-0001-7782-759X
   year: '2023'
   url: https://docs.ropensci.org/mctq/
-  notes: R package version 0.3.2
+  notes: R package version 0.3.2.9000
 repository: https://bioconductor.org/
 repository-code: https://github.com/ropensci/mctq/issues/
 url: https://docs.ropensci.org/mctq/
@@ -101,42 +101,6 @@ references:
   year: '2023'
   version: '>= 1.1.0'
 - type: software
-  title: ggplot2
-  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
-  notes: Imports
-  url: https://ggplot2.tidyverse.org
-  repository: https://CRAN.R-project.org/package=ggplot2
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-    orcid: https://orcid.org/0000-0003-4757-117X
-  - family-names: Chang
-    given-names: Winston
-    orcid: https://orcid.org/0000-0002-1576-2126
-  - family-names: Henry
-    given-names: Lionel
-  - family-names: Pedersen
-    given-names: Thomas Lin
-    email: thomas.pedersen@posit.co
-    orcid: https://orcid.org/0000-0002-5147-4711
-  - family-names: Takahashi
-    given-names: Kohske
-  - family-names: Wilke
-    given-names: Claus
-    orcid: https://orcid.org/0000-0002-7470-9261
-  - family-names: Woo
-    given-names: Kara
-    orcid: https://orcid.org/0000-0002-5125-4188
-  - family-names: Yutani
-    given-names: Hiroaki
-    orcid: https://orcid.org/0000-0002-3385-7233
-  - family-names: Dunnington
-    given-names: Dewey
-    orcid: https://orcid.org/0000-0002-9415-4582
-  year: '2023'
-  version: '>= 3.4.1'
-- type: software
   title: hms
   abstract: 'hms: Pretty Time of Day'
   notes: Imports
@@ -195,18 +159,6 @@ references:
   version: '>= 3.6.1'
 - type: software
   title: datasets
-  abstract: 'R: A Language and Environment for Statistical Computing'
-  notes: Suggests
-  authors:
-  - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2023'
-  institution:
-    name: R Foundation for Statistical Computing
-  version: '>= 4.1.0'
-- type: software
-  title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Suggests
   authors:

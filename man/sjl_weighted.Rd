@@ -56,7 +56,7 @@ them.
 
 Some operations may produce an output with fractional time (e.g.,
 \code{"19538.3828571429s (~5.43 hours)"}, \code{01:15:44.505}). If you want, you
-can round it with \code{\link[=round_time]{round_time()}}.
+can round it with \code{mctq:::round_time()}.
 
 Our recommendation is to avoid rounding, but, if you do, make sure that you
 only round your values after all computations are done. That way you avoid
@@ -170,10 +170,10 @@ hms::as_hms(as.numeric(sjl_weighted(sjl, n_w)))
 
 ## Rounding the output at the seconds level
 
-round_time(sjl_weighted(sjl, n_w))
+mctq:::round_time(sjl_weighted(sjl, n_w))
 #> [1] "3970s (~1.1 hours)" # Expected
 
-round_time(hms::as_hms(as.numeric(sjl_weighted(sjl, n_w))))
+mctq:::round_time(hms::as_hms(as.numeric(sjl_weighted(sjl, n_w))))
 #> 01:06:10 # Expected
 }
 \references{

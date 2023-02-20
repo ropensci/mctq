@@ -1,192 +1,19 @@
-#' Find the shorter or longer interval between two hours
-#'
-#' @description
-#'
-#' `r lifecycle::badge("deprecated")`
-#'
-#' These functions will be removed on the next `mctq` version. You can still
-#' find them in the [`lubritime`](https://github.com/giperbio/lubritime)
-#' package.
-#'
-#' `shorter_interval()` returns the shorter interval between two
-#' [`hms`][hms::hms()] or [`POSIXt`][base::DateTimeClasses] object hours.
-#'
-#' `longer_interval()` do the inverse of `shorter_interval()`, i.e., returns the
-#' longer interval between two hours.
-#'
-#' `shorter_duration()` and `longer_duration()` return the interval time span
-#' of `shorter_interval()` and `longer_interval()` as
-#' [`Duration`][lubridate::duration()] objects.
-#'
-#' @details
-#'
-#' ## The two intervals problem
-#'
-#' Given two hours, `x` and `y`, in a two-day timeline, without date references,
-#' there will be always two possible intervals between them, as illustrated
-#' below.
-#'
-#' To figure out what interval is the  shorter or the longer,
-#' `shorter_interval()` and `longer_interval()` verify two scenarios: 1. When
-#' `x` comes before `y`; and 2. when `x` comes after `y`. This only works if `x`
-#' value is smaller than `y`, therefore, the function will make sure to swap `x`
-#' and `y` values if the latter assumption is not true.
-#'
-#' Because `shorter_interval()` objective is to find the shorter interval, if
-#' `x` and `y` are equal, the shorter interval will have a length of 0 hours,
-#' resulting in an interval from `x` to `x`. But, if `longer_interval()` is used
-#' instead, the latter condition will return a interval with 24 hours of length
-#' (from `x` to `x` + 1 day).
-#'
-#' In cases when `x` and `y` distance themselves by 12 hours, there will be no
-#' shorter or longer interval (they will have equal length). In these cases,
-#' `shorter_interval()` and `longer_interval()` will return the same value
-#' (an interval of 12 hours).
-#'
-#' ```
-#'              day 1                        day 2
-#'      x                  y         x                  y
-#'    06:00              22:00     06:00              22:00
-#' -----|------------------|---------|------------------|----->
-#'               16h           8h             16h
-#'           longer int.  shorter int.   longer int.
-#'
-#'               day 1                      day 2
-#'      y                   x       y                   x
-#'    13:00               08:00   13:00               08:00
-#' -----|-------------------|-------|-------------------|----->
-#'               19h           5h            19h
-#'           longer int.  shorter int.  longer int.
-#'
-#'     x,y             x,y             x,y             x,y
-#'      x               y               x               y
-#'    10:00           10:00           10:00           10:00
-#' -----|---------------|---------------|---------------|----->
-#'     0h              0h              0h              0h
-#'             24h             24h             24h
-#'
-#'               day 1                      day 2
-#'      y               x               y               x
-#'    12:00           00:00           12:00           00:00
-#' -----|---------------|---------------|---------------|----->
-#'             12h             12h             12h
-#' ```
-#'
-#' ## Class requirements
-#'
-#' The `mctq` package works with a set of object classes specially created to
-#' hold time values. These classes can be found in the [hms][hms::hms-package]
-#' and [lubridate][lubridate::lubridate-package] package.
-#'
-#' ## Base date and timezone
-#'
-#' `shorter_interval()` and `longer_interval()` use the
-#' [Unix epoch](https://en.wikipedia.org/wiki/Unix_time) (1970-01-01) date as
-#' the start date for creating intervals.
-#'
-#' The output will always have `"UTC"` set as timezone. Learn more about
-#' time zones in [`?timezone`][base::timezone].
-#'
-#' ## `POSIXt` objects
-#'
-#' [`POSIXt`][base::DateTimeClasses] objects passed as argument to `x` or `y`
-#' will be stripped of their dates. Only the time will be considered.
-#'
-#' Both [`POSIXct`][base::as.POSIXct()] and [`POSIXlt`][base::as.POSIXlt()] are
-#' objects that inherits the class [`POSIXt`][base::DateTimeClasses]. Learn more
-#' about it in [`?DateTimeClasses`][base::DateTimeClasses].
-#'
-#' ## `NA` values
-#'
-#' `shorter_interval()` or `longer_interval()` will return an
-#' [`Interval`][lubridate::interval()] `NA`-`NA` if `x` or `y` are `NA`.
-#'
-#' `shorter_duration()` or `longer_duration()` will return a
-#' [`Duration`][lubridate::duration()] `NA`  if `x` or `y` are `NA`.
-#'
-#' @param x,y An [`hms`][hms::hms()] or [`POSIXt`][base::DateTimeClasses]
-#'   object.
-#'
-#' @return
-#'
-#' * For `shorter_interval()` or `longer_interval()`, an
-#' [`Interval`][lubridate::interval()] object with the shorter or longer
-#' interval between `x` and `y`.
-#' * For `shorter_duration()` or `longer_duration()`, a
-#' [`Duration`][lubridate::duration()] object with the shorter or longer
-#' duration between `x` and `y`.
-#'
-#' @export
-#'
-#' @examples
-#' ## Scalar example
-#'
-#' x <- hms::parse_hm("23:00")
-#' y <- hms::parse_hm("01:00")
-#'
-#' shorter_interval(x, y)
-#' #> [1] 1970-01-01 23:00:00 UTC--1970-01-02 01:00:00 UTC # Expected
-#' shorter_duration(x, y)
-#' #> [1] "7200s (~2 hours)" # Expected
-#' longer_interval(x, y)
-#' #> [1] 1970-01-01 01:00:00 UTC--1970-01-01 23:00:00 UTC # Expected
-#' longer_duration(x, y)
-#' #> [1] "79200s (~22 hours)" # Expected
-#'
-#' x <- lubridate::as_datetime("1985-01-15 12:00:00")
-#' y <- lubridate::as_datetime("2020-09-10 12:00:00")
-#'
-#' shorter_interval(x, y)
-#' #> [1] 1970-01-01 12:00:00 UTC--1970-01-01 12:00:00 UTC # Expected
-#' shorter_duration(x, y)
-#' #> [1] "0s" # Expected
-#' longer_interval(x, y)
-#' #> [1] 1970-01-01 12:00:00 UTC--1970-01-02 12:00:00 UTC # Expected
-#' longer_duration(x, y)
-#' #> [1] "86400s (~1 days)" # Expected
-#'
-#' ## Vector example
-#'
-#' x <- c(hms::parse_hm("15:30"), hms::parse_hm("21:30"))
-#' y <- c(hms::parse_hm("19:30"), hms::parse_hm("04:00"))
-#'
-#' shorter_interval(x, y)
-#' #> [1] 1970-01-01 15:30:00 UTC--1970-01-01 19:30:00 UTC # Expected
-#' #> [2] 1970-01-01 21:30:00 UTC--1970-01-02 04:00:00 UTC # Expected
-#' shorter_duration(x, y)
-#' #> [1] [1] "14400s (~4 hours)"   "23400s (~6.5 hours)" # Expected
-#' longer_interval(x, y)
-#' #> [1] 1970-01-01 19:30:00 UTC--1970-01-02 15:30:00 UTC # Expected
-#' #> [2] 1970-01-01 04:00:00 UTC--1970-01-01 21:30:00 UTC # Expected
-#' longer_duration(x, y)
-#' #> [1] "72000s (~20 hours)"   "63000s (~17.5 hours)" # Expected
+## This function is now in the 
+## [`lubritime`](https://github.com/giperbio/lubritime) package.
+
 shorter_interval <- function(x, y) {
-    lifecycle::deprecate_soft(when = "0.3.2", what = "shorter_interval()")
-    
     interval_build(x, y, method = "shorter")
 }
 
-#' @rdname shorter_interval
-#' @export
 longer_interval <- function(x, y) {
-    lifecycle::deprecate_soft(when = "0.3.2", what = "longer_interval()")
-    
     interval_build(x, y, method = "longer")
 }
 
-#' @rdname shorter_interval
-#' @export
 shorter_duration <- function(x, y) {
-    lifecycle::deprecate_soft(when = "0.3.2", what = "shorter_duration()")
-    
     shorter_interval(x, y) %>% lubridate::as.duration()
 }
 
-#' @rdname shorter_interval
-#' @export
 longer_duration <- function(x, y) {
-    lifecycle::deprecate_soft(when = "0.3.2", what = "longer_duration()")
-    
     longer_interval(x, y) %>% lubridate::as.duration()
 }
 

@@ -1,6 +1,4 @@
 test_that("random_mctq() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     set.seed(1)
     checkmate::expect_list(shush(random_mctq(model = "standard")))
     checkmate::expect_list(shush(random_mctq(model = "micro")))
@@ -23,15 +21,11 @@ test_that("random_mctq() | general test", {
 })
 
 test_that("random_mctq() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # checkmate::assert_choice(model, c("std", "standard", "shift", "micro"))
     expect_error(random_mctq(model = 1), "Assertion on 'model' failed")
 })
 
 test_that("random_std_mctq() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # # Finder
     #
     # for (i in seq_len(100)) {
@@ -62,16 +56,12 @@ test_that("random_std_mctq() | general test", {
 })
 
 test_that("random_micro_mctq() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     set.seed(1)
     x <- random_micro_mctq()
     expect_true(x$se_f > x$se_w)
 })
 
 test_that("random_shift_mctq() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # # Finder
     #
     # for (i in seq_len(100)) {
@@ -123,8 +113,6 @@ test_that("random_shift_mctq() | general test", {
 })
 
 test_that("normalize() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # else if (check_2)
     object <- normalize(
         min = hms::parse_hm("22:00") + lubridate::ddays(1),
@@ -207,8 +195,6 @@ test_that("normalize() | general test", {
 })
 
 test_that("sample_time() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     checkmate::expect_numeric(
         as.numeric(sample_time()),
         lower = as.numeric(hms::parse_hms("00:00:00")),
@@ -268,8 +254,6 @@ test_that("sample_time() | general test", {
 })
 
 test_that("sampler_1() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     set.seed(1)
     envir <- new.env()
     sampler_1(
@@ -330,8 +314,6 @@ test_that("sampler_1() | general test", {
 })
 
 test_that("sampler_2() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     set.seed(1)
     envir <- new.env()
     envir$a_w <- hms::parse_hm("10:00")
@@ -392,8 +374,6 @@ test_that("sampler_2() | general test", {
 })
 
 test_that("sampler_3() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     set.seed(1)
     envir <- new.env()
     envir$a_w <- hms::parse_hm("10:00")
@@ -482,8 +462,6 @@ test_that("sampler_3() | general test", {
 })
 
 test_that("sampler_4() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     set.seed(1)
     envir <- new.env()
     envir$a_w <- lubridate::dhours(24)

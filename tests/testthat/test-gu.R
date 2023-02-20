@@ -1,6 +1,4 @@
 test_that("gu() | scalar test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(gu(
         hms::parse_hm("08:00"), lubridate::dminutes(10)
     ),
@@ -21,8 +19,6 @@ test_that("gu() | scalar test", {
 })
 
 test_that("gu() | vector test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(gu(
         c(hms::parse_hm("12:30"), hms::parse_hm("23:45")),
         c(lubridate::dminutes(10), lubridate::dminutes(70))
@@ -32,8 +28,6 @@ test_that("gu() | vector test", {
 })
 
 test_that("gu() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # assert_hms(se, lower = hms::hms(0))
     expect_error(gu(
         se = 1, si = lubridate::duration(1)

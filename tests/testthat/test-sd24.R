@@ -1,6 +1,4 @@
 test_that("sd24() | scalar test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(sd24(
         sd = lubridate::dhours(5.5), napd = lubridate::dhours(2),
         nap = TRUE
@@ -31,8 +29,6 @@ test_that("sd24() | scalar test", {
 })
 
 test_that("sd24() | vector test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(sd24(
         sd = c(lubridate::dhours(7.5), lubridate::dhours(3)),
         napd = c(lubridate::dhours(3.4), lubridate::dhours(2.5)),
@@ -43,8 +39,6 @@ test_that("sd24() | vector test", {
 })
 
 test_that("sd24() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # assert_duration(sd, lower = lubridate::duration(0))
     expect_error(sd24(
         sd = 1, napd = lubridate::as.duration(1), nap = TRUE

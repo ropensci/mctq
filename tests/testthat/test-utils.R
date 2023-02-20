@@ -98,8 +98,6 @@ test_that("midday_change() | error test", {
 })
 
 test_that("interval_mean() | general test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     expect_equal(interval_mean(
         start = hms::parse_hm("22:00"), end = hms::parse_hm("06:00"),
         ambiguity = 24
@@ -116,8 +114,6 @@ test_that("interval_mean() | general test", {
 })
 
 test_that("interval_mean() | error test", {
-    rlang::local_options(lifecycle_verbosity = "quiet")
-    
     # checkmate::assert_multi_class(start, classes)
     expect_error(interval_mean(
         start = 1, end = hms::hms(1), ambiguity = 24
