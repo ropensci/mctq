@@ -43,9 +43,15 @@ reference:
 
 - title: Utilities
   contents:
+  - assign_date
+  - cycle_time
   - pretty_mctq
+  - qplot_walk
   - random_mctq
   - raw_data
+  - round_time
+  - shorter_interval
+  - sum_time
 
 articles:
 - title: Get started
