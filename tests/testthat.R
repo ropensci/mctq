@@ -22,7 +22,7 @@ testthat::test_check("mctq")
 # rversions::r_oldrel()
 # devtools::check_rhub(platforms = c(
 #     "windows-x86_64-devel", "windows-x86_64-release",
-#     "windows-x86_64-oldrel", "macos-highsierra-release-cran", 
+#     "windows-x86_64-oldrel", "macos-highsierra-release-cran",
 #     "ubuntu-gcc-devel", "ubuntu-gcc-release"
 # ))
 # devtools::check_win_devel()
@@ -36,6 +36,8 @@ testthat::test_check("mctq")
 # devtools:test()
 # dlstats::cran_stats(c("mctq", "nparACT"))
 # goodpractice::gp()
+# lintr::use_lintr(type = "tidyverse")
+# lintr::lint_package()
 # normalizePath(readClipboard(), "/", mustWork = FALSE)
 # template <- list(package = "rotemplate")
 # pkgdown::build_article("mctq", override = list(template = template))
@@ -48,8 +50,7 @@ testthat::test_check("mctq")
 # urlchecker::url_check()
 # usethis::use_coverage()
 # usethis::use_dev_version()
-# usethis::use_github_action("check-pak")
-# usethis::use_github_action("test-coverage-pak")
+# usethis::use_github_action("check-standard")
 # usethis::use_logo(file.choose())
 # usethis::use_release_issue("#.#.#")
 # usethis::use_dev_version()

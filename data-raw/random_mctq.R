@@ -710,7 +710,7 @@ min_max <- function(mean, sd) {
 }
 
 format_logical <- function(x) {
-    if(is.na(x)) {
+    if (is.na(x)) {
         as.character("")
     } else {
         dplyr::case_when(
@@ -721,7 +721,7 @@ format_logical <- function(x) {
 }
 
 format_hms <- function(x) {
-    if(is.na(x)) {
+    if (is.na(x)) {
         as.character("")
     } else {
         format <- c(1, 5)
@@ -731,7 +731,7 @@ format_hms <- function(x) {
 }
 
 format_hms_imp <- function(x) {
-    if(is.na(x)) {
+    if (is.na(x)) {
         as.character("")
     } else {
         if (lubridate::hour(x) == 12) {
@@ -752,7 +752,7 @@ format_hms_imp <- function(x) {
 }
 
 format_duration <- function(x) {
-    if(is.na(x)) {
+    if (is.na(x)) {
         as.character("")
     } else {
         as.character(as.numeric(x) / 60)
@@ -760,7 +760,7 @@ format_duration <- function(x) {
 }
 
 format_na <- function(x) {
-    if(is.na(x)) {
+    if (is.na(x)) {
         as.character("")
     } else {
         as.character(x)
@@ -775,7 +775,7 @@ clipboard <- function(..., space_above = TRUE, n_minus = TRUE, quiet = FALSE) {
     utils::writeClipboard(as.character(unlist(list(...), use.names = FALSE)))
 
     if (isFALSE(quiet)) {
-        if(isTRUE(space_above)) cli::cat_line()
+        if (isTRUE(space_above)) cli::cat_line()
         cli::cli_inform("{cli::col_silver('[Copied to clipboard]')}")
     }
 }

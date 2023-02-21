@@ -45,7 +45,7 @@ build_vignette_mctq <- function(write = FALSE) {
         readr::read_csv(mctq::raw_data("std_mctq.csv"))) %>%
         dplyr::slice(2, 3, 8, 11, 38)
 
-    vignette_mctq$ID <- seq(nrow(vignette_mctq))
+    vignette_mctq$ID <- seq_len(nrow(vignette_mctq))
 
     names(vignette_mctq) <- c("id", "work", "wd", "bt_w", "sprep_w", "slat_w",
                               "se_w", "si_w", "alarm_w", "wake_before_w",
@@ -74,4 +74,4 @@ build_vignette_mctq <- function(write = FALSE) {
     invisible(vignette_mctq)
 }
 
-# raw <- build_vignette_mctq()
+raw <- build_vignette_mctq()

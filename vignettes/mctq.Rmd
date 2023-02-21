@@ -88,7 +88,7 @@ data <- data %>% dplyr::mutate(
   dplyr::across(dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm),
   dplyr::across(dplyr::matches("^slat_|^si_"),
                 ~ lubridate::dminutes(as.numeric(.x))),
-  dplyr::across(dplyr::matches("^le_"), 
+  dplyr::across(dplyr::matches("^le_"),
                 ~ lubridate::as.duration(hms::parse_hm(.x)))
   )
 ```
@@ -252,8 +252,9 @@ If `sd_f` is less or equal than `sd_w`, the output must be `msf`. Else, it must 
 `msf_sc` applies a correction to `msf`, removing an estimation of the effect from accumulated sleep debt on workdays that usually is compensated on work-free days. See `?msf_sc` to learn more.
 
 ```{r, warnings = FALSE, message = FALSE}
-data$msf_sc <- msf_sc(data$msf, data$sd_w, data$sd_f, data$sd_week, 
-                      data$alarm_f)
+data$msf_sc <- msf_sc(
+    data$msf, data$sd_w, data$sd_f, data$sd_week, data$alarm_f
+    )
 
 # Comparing the result
 data <- data %>% dplyr::mutate(msf_sc_rounded = mctq:::round_time(msf_sc))

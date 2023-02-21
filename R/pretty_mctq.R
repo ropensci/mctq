@@ -61,7 +61,9 @@ pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
     checkmate::assert_flag(hms)
 
     # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
+    # nolint start: object_usage_linter.
     where <- NULL
+    # nolint end
 
     if (isTRUE(round)) {
         check <- function(x) {

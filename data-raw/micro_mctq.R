@@ -375,9 +375,6 @@ tidy_micro_mctq <- function(write = FALSE) {
 
     # Convert columns -----
 
-    pattern_1 <- "^[0-1]\\d(:)?[0-5]\\d((:)?[0-5]\\d)?( )?(AM|PM)$" # IMp, IMSp
-    pattern_2 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?$" # HM, HMS
-    pattern_3 <- "(AM|PM)$"
     orders <- c("IMp", "IMSp", "HM", "HMS")
 
     micro_mctq <- micro_mctq %>%
@@ -597,8 +594,8 @@ analyze_micro_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
     count_w <- length(names(micro_mctq)[grepl("_w$", names(micro_mctq))])
     count_f <- length(names(micro_mctq)[grepl("_f$", names(micro_mctq))])
-    count_w <- count_w * 2/3
-    count_f <- count_f * 2/3
+    count_w <- count_w * (2 / 3)
+    count_f <- count_f * (2 / 3)
 
     count_na <- function(x) {
         checkmate::assert_atomic(x)

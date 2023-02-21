@@ -5,7 +5,7 @@ test_that("sum_time() | linear test", {
         c(as.difftime(1, units = "hours"), as.difftime(30, units = "mins")),
         c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
         lubridate::as_datetime("1970-01-01 20:00:00"),
-        as.POSIXlt(lubridate::as_datetime( "1970-01-01 01:00:00")),
+        as.POSIXlt(lubridate::as_datetime("1970-01-01 01:00:00")),
         lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01")),
         cycle = NULL, reverse = FALSE, na_rm = FALSE
     ),
@@ -19,7 +19,7 @@ test_that("sum_time() | linear test", {
         c(as.difftime(1, units = "hours"), as.difftime(30, units = "mins")),
         c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
         lubridate::as_datetime("1970-01-01 20:00:00"),
-        as.POSIXlt(lubridate::as_datetime( "1970-01-01 01:00:00")),
+        as.POSIXlt(lubridate::as_datetime("1970-01-01 01:00:00")),
         lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01")),
         cycle = NULL, reverse = FALSE,
         na_rm = FALSE # !
@@ -34,7 +34,7 @@ test_that("sum_time() | linear test", {
         c(as.difftime(1, units = "hours"), as.difftime(30, units = "mins")),
         c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
         lubridate::as_datetime("1970-01-01 20:00:00"),
-        as.POSIXlt(lubridate::as_datetime( "1970-01-01 01:00:00")),
+        as.POSIXlt(lubridate::as_datetime("1970-01-01 01:00:00")),
         lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01")),
         cycle = NULL, reverse = FALSE,
         na_rm = TRUE # !
@@ -50,7 +50,7 @@ test_that("sum_time() | circular test", {
         c(as.difftime(1, units = "hours"), as.difftime(30, units = "mins")),
         c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
         lubridate::as_datetime("1970-01-01 20:00:00"),
-        as.POSIXlt(lubridate::as_datetime( "1970-01-01 01:00:00")),
+        as.POSIXlt(lubridate::as_datetime("1970-01-01 01:00:00")),
         lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01")),
         cycle = lubridate::ddays(), # !
         reverse = FALSE, na_rm = FALSE
@@ -65,7 +65,7 @@ test_that("sum_time() | circular test", {
         c(as.difftime(1, units = "hours"), as.difftime(30, units = "mins")),
         c(hms::parse_hm("02:00"), hms::parse_hm("02:00")),
         lubridate::as_datetime("1970-01-01 20:00:00"),
-        as.POSIXlt(lubridate::as_datetime( "1970-01-01 01:00:00")),
+        as.POSIXlt(lubridate::as_datetime("1970-01-01 01:00:00")),
         lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01")),
         cycle = lubridate::ddays(), reverse = FALSE, na_rm = TRUE
     ),
@@ -188,7 +188,7 @@ test_that("vct_sum_time()| circular test", {
         ),
         as.POSIXlt(
             c(lubridate::as_datetime("1970-01-01 01:00:00"),
-              lubridate::as_datetime( "1970-01-01 02:00:00"))
+              lubridate::as_datetime("1970-01-01 02:00:00"))
         ),
         c(lubridate::as.interval(lubridate::dhours(4), as.Date("1970-01-01")),
           lubridate::as.interval(lubridate::dhours(1), as.Date("1970-01-01"))

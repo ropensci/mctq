@@ -36,7 +36,7 @@ library(hms)
 
 ## Overview
 
-`mctq` is an R package that provides a complete toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is to facilitate the work of sleep and chronobiology scientists with MCTQ data and to improve reproducibility in research.
+`mctq` is an R package that provides a complete toolkit to process the Munich ChronoType Questionnaire (MCTQ), a quantitative and validated tool to assess chronotypes using peoples' sleep behavior presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in [2003](https://doi.org/10.1177/0748730402239679). Its aim is to facilitate the work of sleep and chronobiology scientists with MCTQ data and to improve reproducibility in research.
 
 `mctq` adheres to the [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates with the [tidyverse ecosystem](https://www.tidyverse.org/).
@@ -53,7 +53,7 @@ Although it may look like a simple questionnaire, MCTQ requires a lot of date/ti
 
 You need to have some familiarity with the [R programming language](https://www.r-project.org/) and with the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages from [tidyverse](https://www.tidyverse.org/) to use `mctq` main functions.
 
-In case you don't feel comfortable with R, we strongly recommend checking Hadley Wickham and Garrett Grolemund free and online book [R for Data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for audit students).
+In case you don't feel comfortable with R, we strongly recommend checking Hadley Wickham and Garrett Grolemund's free and online book [R for Data Science](https://r4ds.had.co.nz/) and the Coursera course from John Hopkins University [Data Science: Foundations using R](https://www.coursera.org/specializations/data-science-foundations-r) (free for audit students).
 
 Please refer to the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) package documentation to learn more about them. These two are essential packages to deal with date/time data in R. We also recommend that you read the [Dates and times](https://r4ds.had.co.nz/dates-and-times.html) chapter from Wickham & Grolemund's book [R for Data Science](https://r4ds.had.co.nz/).
 

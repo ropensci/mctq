@@ -17,6 +17,9 @@ navbar:
 
 reference:
 - title: MCTQ
+  desc: >
+    A complete toolkit to process the Munich ChronoType Questionnaire (MCTQ) 
+    for its three versions (standard, micro, and shift).
   contents:
   - fd
   - so
@@ -36,12 +39,16 @@ reference:
   - sjl_weighted
 
 - title: Data
+  desc: >
+    Fictional datasets for testing and learning purposes.
   contents:
   - std_mctq
   - micro_mctq
   - shift_mctq
 
 - title: Utilities
+  desc: >
+    Other functions to help with MCTQ data manipulation.
   contents:
   - pretty_mctq
   - random_mctq

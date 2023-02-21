@@ -1,6 +1,3 @@
-## This function is now in the 
-## [`lubritime`](https://github.com/giperbio/lubritime) package.
-
 sum_time <- function(..., cycle = NULL, reverse = TRUE, na_rm = FALSE) {
     sum_time_build(..., vectorize = FALSE, cycle = cycle, reverse = reverse,
                    na_rm = na_rm)

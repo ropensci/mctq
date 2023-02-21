@@ -1,6 +1,3 @@
-## This function is now in the 
-## [`lubritime`](https://github.com/giperbio/lubritime) package.
-
 cycle_time <- function(time, cycle, reverse = TRUE) {
     UseMethod("cycle_time")
 }

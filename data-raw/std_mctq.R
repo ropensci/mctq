@@ -627,14 +627,9 @@ tidy_std_mctq <- function(write = FALSE) {
 
     # Convert columns -----
 
-    pattern_1 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_2 <- "^\\d{1,3}$"
-    pattern_3 <- "[^A-Za-z]$"
-    pattern_4 <- "^([-+])?(2[4-9]|[3-9]\\d|\\d{3,})(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_5 <- "^([-+])?\\d+(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_6 <- "^[0-1][0-2](:)?[0-5]\\d(AM|PM)"
-    pattern_7 <- "(AM|PM)$"
-    pattern_8 <- "^\\-"
+    pattern_1 <- "^\\d{1,3}$"
+    pattern_2 <- "^([-+])?(2[4-9]|[3-9]\\d|\\d{3,})(:)?[0-5]\\d((:)?[0-5]\\d)?"
+    pattern_3 <- "^\\-"
 
     std_mctq <- std_mctq %>% dplyr::transmute(
         id = as.integer(.data$`ID`),
@@ -646,7 +641,7 @@ tidy_std_mctq <- function(write = FALSE) {
         wd = as.integer(.data$`WORK DAYS`),
 
         bt_w = dplyr::case_when(
-            grepl(pattern_4, .data$`W BEDTIME`, perl = TRUE) ~
+            grepl(pattern_2, .data$`W BEDTIME`, perl = TRUE) ~
                 mctq:::shush(hms::as_hms(
                     lubridate::parse_date_time(.data$`W BEDTIME`, "HM"))),
             TRUE ~ mctq:::shush(hms::as_hms(
@@ -656,7 +651,7 @@ tidy_std_mctq <- function(write = FALSE) {
             lubridate::parse_date_time(.data$`W SLEEP PREP`,
                                        c("HMS", "HM", "H")))),
         slat_w = dplyr::case_when(
-            grepl(pattern_2, .data$`W SLEEP LAT`, perl = TRUE) ~
+            grepl(pattern_1, .data$`W SLEEP LAT`, perl = TRUE) ~
                 mctq:::shush(lubridate::dminutes(as.numeric(
                     .data$`W SLEEP LAT`))),
             TRUE ~ mctq:::shush(lubridate::as.duration(hms::as_hms(
@@ -678,7 +673,7 @@ tidy_std_mctq <- function(write = FALSE) {
                                        c("HMS", "HM", "H"))))),
 
         bt_f = dplyr::case_when(
-            grepl(pattern_4, .data$`F BEDTIME`, perl = TRUE) ~
+            grepl(pattern_2, .data$`F BEDTIME`, perl = TRUE) ~
                 mctq:::shush(hms::as_hms(
                     lubridate::parse_date_time(.data$`F BEDTIME`, "HM"))),
             TRUE ~ mctq:::shush(hms::as_hms(
@@ -693,7 +688,7 @@ tidy_std_mctq <- function(write = FALSE) {
             lubridate::parse_date_time(.data$`F SLEEP END`,
                                        c("HMS", "HM", "H")))),
         si_f = dplyr::case_when(
-            grepl(pattern_2, .data$`F SLEEP INERTIA`) ~
+            grepl(pattern_1, .data$`F SLEEP INERTIA`) ~
                 mctq:::shush(lubridate::dminutes(as.numeric(
                     .data$`F SLEEP INERTIA`))),
             TRUE ~ mctq:::shush(lubridate::as.duration(hms::as_hms(
@@ -707,7 +702,7 @@ tidy_std_mctq <- function(write = FALSE) {
             tolower(.data$`F REASONS`) == "no" ~ FALSE),
         reasons_why_f = .data$`F REASONS WHY`,
         le_f = dplyr::case_when(
-            grepl(pattern_8, .data$`F LIGHT EXPOSURE`) ~
+            grepl(pattern_3, .data$`F LIGHT EXPOSURE`) ~
                 mctq:::shush(- lubridate::as.duration(hms::as_hms(
                     lubridate::parse_date_time(.data$`F LIGHT EXPOSURE`,
                                                "HM")))),
@@ -983,8 +978,8 @@ analyze_std_mctq <- function(write = FALSE, round = TRUE, hms = FALSE) {
 
     count_w <- length(names(std_mctq)[grepl("_w$", names(std_mctq))])
     count_f <- length(names(std_mctq)[grepl("_f$", names(std_mctq))])
-    count_w <- count_w * 2/3
-    count_f <- count_f * 2/3
+    count_w <- count_w * (2 / 3)
+    count_f <- count_f * (2 / 3)
 
     count_na <- function(x) {
         checkmate::assert_atomic(x)

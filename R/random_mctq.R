@@ -72,12 +72,13 @@ random_mctq <- function(model = "standard") {
 
 random_std_mctq <- function() {
     # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
-
+    # nolint start: object_usage_linter.
     work <- wd <- NULL
     bt_w <- sprep_w <- slat_w <- se_w <- si_w <- alarm_w <- NULL
     wake_before_w <- le_w <- NULL
     bt_f <- sprep_f <- slat_f <- se_f <- si_f <- alarm_f <- NULL
     reasons_f <- reasons_why_f <- le_f <- NULL
+    # nolint end
 
     # Set values -----
 
@@ -264,8 +265,9 @@ random_std_mctq <- function() {
 
 random_micro_mctq <- function() {
     # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
-
+    # nolint start: object_usage_linter.
     shift_work <- wd <- so_w <- se_w <- so_f <- se_f <- NULL
+    # nolint end
 
     # Set values -----
 
@@ -353,7 +355,7 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     checkmate::assert_integerish(n_f, lower = 0, any.missing = FALSE, len = 3)
 
     # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
-
+    # nolint start: object_usage_linter.
     n_w_m <- bt_w_m <- sprep_w_m <- slat_w_m <- se_w_m <- alarm_w_m <- NULL
     tgu_w_m <- nap_w_m <- napo_w_m <- nape_w_m <- reasons_w_m <- NULL
     reasons_why_w_m <- NULL
@@ -372,6 +374,7 @@ random_shift_mctq <- function(n_w = c(n_w_m = 6, n_w_e = 4, n_w_n = 6),
     n_f_n <- bt_f_n <- sprep_f_n <- slat_f_n <- se_f_n <- alarm_f_n <- NULL
     tgu_f_n <- nap_f_n <- napo_f_n <- nape_f_n <- reasons_f_n <- NULL
     reasons_why_f_n <- NULL
+    # nolint end
 
     # Set values -----
 
@@ -834,7 +837,7 @@ normalize <- function(min, max, mean, ambiguity = 24) {
     assert_length_one(max)
     checkmate::assert_multi_class(mean, classes)
     assert_length_one(mean)
-    checkmate::assert_choice(ambiguity, c(0, 24 , NA))
+    checkmate::assert_choice(ambiguity, c(0, 24, NA))
 
     min <- cycle_time(hms::as_hms(as.numeric(min)),
                       cycle = lubridate::ddays())

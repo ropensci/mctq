@@ -46,8 +46,6 @@
 #' }
 #' }
 build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
-    # Check arguments -----
-
     checkmate::assert_flag(write)
     checkmate::assert_flag(random_cases)
 
@@ -180,6 +178,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
                 dplyr::mutate(`ID` = as.character(i)) %>%
                 dplyr::relocate(.data$`ID`, .before = .data$n_w_m)
 
+            ## nolint start: object_name_linter.
             for (i in values) {
                 random_case <- random_case %>%
                     dplyr::mutate(
@@ -211,6 +210,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
                     ) %>%
                     dplyr::select(-dplyr::ends_with(i[2]))
             }
+            # nolint end
 
             shift_mctq <- dplyr::bind_rows(shift_mctq, random_case)
         }
@@ -1147,13 +1147,7 @@ tidy_shift_mctq <- function(write = FALSE) {
 
     # Convert columns -----
 
-    pattern_1 <- "^([0-1]\\d|2[0-3])(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_2 <- "^\\d{1,3}$"
-    pattern_3 <- "[^A-Za-z]$"
-    pattern_4 <- "^([-+])?(2[4-9]|[3-9]\\d|\\d{3,})(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_5 <- "^([-+])?\\d+(:)?[0-5]\\d((:)?[0-5]\\d)?"
-    pattern_6 <- "^[0-1][0-2](:)?[0-5]\\d(AM|PM)"
-    pattern_7 <- "(AM|PM)$"
+    pattern_1 <- "^([-+])?(2[4-9]|[3-9]\\d|\\d{3,})(:)?[0-5]\\d((:)?[0-5]\\d)?"
 
     values <- list(
         w_m = c("W M", "_w_m"),
@@ -1179,7 +1173,7 @@ tidy_shift_mctq <- function(write = FALSE) {
                         .data[[paste(i[1], "BEDTIME")]], c("HM", "IMp")))),
                 !!as.symbol(paste0("sprep", i[2])) :=
                     dplyr::case_when(
-                        grepl(pattern_4, .data[[paste(i[1], "SLEEP PREP")]],
+                        grepl(pattern_1, .data[[paste(i[1], "SLEEP PREP")]],
                               perl = TRUE) ~ mctq:::shush(hms::as_hms(
                                   lubridate::parse_date_time(
                                       .data[[paste(i[1], "SLEEP PREP")]],
@@ -1193,7 +1187,7 @@ tidy_shift_mctq <- function(write = FALSE) {
                         .data[[paste(i[1], "SLEEP LAT")]]))),
                 !!as.symbol(paste0("se", i[2])) :=
                     dplyr::case_when(
-                        grepl(pattern_4, .data[[paste(i[1], "SLEEP END")]],
+                        grepl(pattern_1, .data[[paste(i[1], "SLEEP END")]],
                               perl = TRUE) ~ mctq:::shush(hms::as_hms(
                                   lubridate::parse_date_time(
                                       .data[[paste(i[1], "SLEEP END")]],
@@ -1267,7 +1261,7 @@ tidy_shift_mctq <- function(write = FALSE) {
 #' }
 #' }
 validate_shift_mctq <- function(write = FALSE) {
-    # To do -----
+    # TODO -----
     #
     # * Adapt this process by using `errorlocate` package with `validate`.
 
@@ -1362,7 +1356,7 @@ validate_shift_mctq <- function(write = FALSE) {
     ## Cases: "Suspicious values" and "Repeated workdays and work-free days
     ## values (possible carryover effect)"
 
-    invalid <- c(reserved_id[7], reserved_id[10])
+    invalid <- c(reserved_id[7], reserved_id[10]) # nolint
 
     shift_mctq <- shift_mctq %>%
         dplyr::rowwise() %>%

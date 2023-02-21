@@ -107,7 +107,7 @@ test_that("assign_date() | error test", {
 
     # checkmate::assert_choice(ambiguity, c(0, 24 , NA))
     expect_error(assign_date(
-        start = hms::hms(1), end = hms::hms(1) , ambiguity = "x"
+        start = hms::hms(1), end = hms::hms(1), ambiguity = "x"
     ),
     "Assertion on 'ambiguity' failed"
     )
