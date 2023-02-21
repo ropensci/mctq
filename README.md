@@ -26,8 +26,6 @@ MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
 [![CII Best
 Practices](https://bestpractices.coreinfrastructure.org/projects/6244/badge)](https://bestpractices.coreinfrastructure.org/projects/6244)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/package=mctq)
 <!-- badges: end -->
 
 ## Overview
@@ -36,9 +34,9 @@ status](https://www.r-pkg.org/badges/version/mctq)](https://CRAN.R-project.org/p
 Munich ChronoType Questionnaire (MCTQ), a quantitative and validated
 tool to assess chronotypes using peoples’ sleep behavior presented by
 Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in
-[2003](https://doi.org/10.1177/0748730402239679). The aim of `mctq` is
-to facilitate the work of sleep and chronobiology scientists with MCTQ
-data and to improve reproducibility in research.
+[2003](https://doi.org/10.1177/0748730402239679). Its aim is to
+facilitate the work of sleep and chronobiology scientists with MCTQ data
+and to improve reproducibility in research.
 
 `mctq` adheres to the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
@@ -75,7 +73,7 @@ language](https://www.r-project.org/) and with the
 [tidyverse](https://www.tidyverse.org/) to use `mctq` main functions.
 
 In case you don’t feel comfortable with R, we strongly recommend
-checking Hadley Wickham and Garrett Grolemund free and online book [R
+checking Hadley Wickham and Garrett Grolemund’s free and online book [R
 for Data Science](https://r4ds.had.co.nz/) and the Coursera course from
 John Hopkins University [Data Science: Foundations using
 R](https://www.coursera.org/specializations/data-science-foundations-r)
@@ -205,7 +203,7 @@ citation("mctq")
 #> To cite {mctq} in publications use:
 #> 
 #>   Vartanian, D. (2023). {mctq}: tools to process the Munich ChronoType
-#>   Questionnaire (MCTQ). R package version 0.3.2.
+#>   Questionnaire (MCTQ). R package version 0.3.2.9000.
 #>   https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -215,7 +213,7 @@ citation("mctq")
 #>     author = {Daniel Vartanian},
 #>     year = {2023},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {R package version 0.3.2},
+#>     note = {R package version 0.3.2.9000},
 #>   }
 ```
 
