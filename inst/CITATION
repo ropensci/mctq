@@ -4,7 +4,7 @@ utils::bibentry(
     title = paste0(
         "{mctq}:", " ",
         "tools to process the Munich ChronoType Questionnaire (MCTQ)"
-    ),
+        ),
     author = c(
         utils::person(
             given = "Daniel",
@@ -12,13 +12,13 @@ utils::bibentry(
             role = c("aut", "cre", "ccp", "cph"),
             email = "danvartan@gmail.com",
             comment = c(ORCID = "0000-0001-7782-759X")
-        )
-    ),
+            )
+        ),
     year = "2023",
     url = paste0(
         "https://docs.ropensci.org/",
         "mctq/"
-    ),
+        ),
     note = "R package version 0.3.2.9000",
     textVersion = paste0(
         "Vartanian, D.", " ",
