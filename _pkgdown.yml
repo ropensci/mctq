@@ -4,6 +4,7 @@ template:
   package: rotemplate
   params:
     mathjax: true
+    noindex: false
 
 navbar:
   structure:
