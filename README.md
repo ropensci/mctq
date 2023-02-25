@@ -72,10 +72,10 @@ language](https://www.r-project.org/) and with the
 [hms](https://hms.tidyverse.org/) packages from
 [tidyverse](https://www.tidyverse.org/) to use `mctq` main functions.
 
-In case you don’t feel comfortable with R, we strongly recommend
-checking Hadley Wickham and Garrett Grolemund’s free and online book [R
-for Data Science](https://r4ds.had.co.nz/) and the Coursera course from
-John Hopkins University [Data Science: Foundations using
+If you don’t feel comfortable with R, we strongly recommend checking
+Hadley Wickham and Garrett Grolemund’s free and online book [R for Data
+Science](https://r4ds.had.co.nz/) and the Coursera course from John
+Hopkins University [Data Science: Foundations using
 R](https://www.coursera.org/specializations/data-science-foundations-r)
 (free for audit students).
 
@@ -195,7 +195,7 @@ list of them.
 
 If you use `mctq` in your research, please consider citing it. We put a
 lot of work to build and maintain a free and open-source R package. You
-can find the `mctq` citation below.
+can find the citation below.
 
 ``` r
 citation("mctq")

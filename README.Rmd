@@ -137,7 +137,7 @@ All functions are properly documented, showing all the guidelines behind the com
 
 ## Citation
 
-If you use `mctq` in your research, please consider citing it. We put a lot of work to build and maintain a free and open-source R package. You can find the `mctq` citation below.
+If you use `mctq` in your research, please consider citing it. We put a lot of work to build and maintain a free and open-source R package. You can find the citation below.
 
 ```{r}
 citation("mctq")
