@@ -56,36 +56,38 @@
 #'
 #' pretty_mctq(data, round = FALSE, hms = TRUE)
 pretty_mctq <- function(data, round = TRUE, hms = TRUE) {
-    checkmate::assert_data_frame(data)
-    checkmate::assert_flag(round)
-    checkmate::assert_flag(hms)
+  checkmate::assert_data_frame(data)
+  checkmate::assert_flag(round)
+  checkmate::assert_flag(hms)
 
-    # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
-    # nolint start: object_usage_linter.
-    where <- NULL
-    # nolint end
+  # R CMD Check variable bindings fix (see: https://bit.ly/3z24hbU)
+  # nolint start: object_usage_linter.
+  where <- NULL
+  # nolint end
 
-    if (isTRUE(round)) {
-        check <- function(x) {
-            classes <- c("Duration", "hms")
-            checkmate::test_multi_class(x, classes)
-        }
-
-        data <- data %>%
-            dplyr::mutate(dplyr::across(where(check), round_time))
+  if (isTRUE(round)) {
+    check <- function(x) {
+      classes <- c("Duration", "hms")
+      checkmate::test_multi_class(x, classes)
     }
 
-    if (isTRUE(hms)) {
-        check <- function(x) {
-            classes <- c("Duration", "difftime")
-            checkmate::test_multi_class(x, classes)
-        }
+    data <-
+      data |>
+      dplyr::mutate(dplyr::across(where(check), round_time))
+  }
 
-        data <- data %>%
-            dplyr::mutate(
-                dplyr::across(where(check), ~ hms::hms(extract_seconds(.x)))
-                )
+  if (isTRUE(hms)) {
+    check <- function(x) {
+      classes <- c("Duration", "difftime")
+      checkmate::test_multi_class(x, classes)
     }
 
-    data
+    data <-
+      data |>
+      dplyr::mutate(
+        dplyr::across(where(check), ~ hms::hms(extract_seconds(.x)))
+      )
+  }
+
+  data
 }

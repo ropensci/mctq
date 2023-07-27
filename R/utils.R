@@ -2,98 +2,98 @@
 
 flat_posixt <- function(posixt, base = as.Date("1970-01-01"),
                         force_tz = TRUE, tz = "UTC") {
-    assert_posixt(posixt, null.ok = FALSE)
-    checkmate::assert_date(base, len = 1, all.missing = FALSE)
-    checkmate::assert_flag(force_tz)
-    checkmate::assert_choice(tz, OlsonNames())
+  assert_posixt(posixt, null.ok = FALSE)
+  checkmate::assert_date(base, len = 1, all.missing = FALSE)
+  checkmate::assert_flag(force_tz)
+  checkmate::assert_choice(tz, OlsonNames())
 
-    lubridate::date(posixt) <- base
+  lubridate::date(posixt) <- base
 
-    if (isTRUE(force_tz)) {
-        lubridate::force_tz(posixt, tz)
-    } else {
-        posixt
-    }
+  if (isTRUE(force_tz)) {
+    lubridate::force_tz(posixt, tz)
+  } else {
+    posixt
+  }
 }
 
 midday_change <- function(time) {
-    checkmate::assert_multi_class(time, c("hms", "POSIXct", "POSIXlt"))
+  checkmate::assert_multi_class(time, c("hms", "POSIXct", "POSIXlt"))
 
-    if (hms::is_hms(time)) time <- as.POSIXct(time)
-    time <- flat_posixt(time)
+  if (hms::is_hms(time)) time <- as.POSIXct(time)
+  time <- flat_posixt(time)
 
-    dplyr::case_when(
-        lubridate::hour(time) < 12 ~ lubridate::`day<-`(time, 2),
-        TRUE ~ time
-    )
+  dplyr::case_when(
+    lubridate::hour(time) < 12 ~ lubridate::`day<-`(time, 2),
+    TRUE ~ time
+  )
 }
 
 interval_mean <- function(start, end, ambiguity = 24) {
-    classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt")
+  classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt")
 
-    checkmate::assert_multi_class(start, classes)
-    checkmate::assert_multi_class(end, classes)
-    checkmate::assert_choice(ambiguity, c(0, 24, NA))
+  checkmate::assert_multi_class(start, classes)
+  checkmate::assert_multi_class(end, classes)
+  checkmate::assert_choice(ambiguity, c(0, 24, NA))
 
-    start <- cycle_time(hms::hms(extract_seconds(start)),
-                        cycle = lubridate::ddays())
-    end <- cycle_time(hms::hms(extract_seconds(end)),
+  start <- cycle_time(hms::hms(extract_seconds(start)),
                       cycle = lubridate::ddays())
-    interval <- shush(assign_date(start, end, ambiguity = ambiguity))
-    mean <- as.numeric(start) + (as.numeric(interval) / 2)
+  end <- cycle_time(hms::hms(extract_seconds(end)),
+                    cycle = lubridate::ddays())
+  interval <- shush(assign_date(start, end, ambiguity = ambiguity))
+  mean <- as.numeric(start) + (as.numeric(interval) / 2)
 
-    hms::hms(mean)
+  hms::hms(mean)
 }
 
 extract_seconds <- function(x) {
-    classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt",
-                 "Interval")
+  classes <- c("Duration", "difftime", "hms", "POSIXct", "POSIXlt",
+               "Interval")
 
-    checkmate::assert_multi_class(x, classes)
+  checkmate::assert_multi_class(x, classes)
 
-    if (lubridate::is.POSIXt(x) || lubridate::is.difftime(x)) {
-        as.numeric(hms::as_hms(x))
-    } else {
-        as.numeric(x)
-    }
+  if (lubridate::is.POSIXt(x) || lubridate::is.difftime(x)) {
+    as.numeric(hms::as_hms(x))
+  } else {
+    as.numeric(x)
+  }
 }
 
 swap <- function(x, y, condition = TRUE) {
-    assert_identical(x, y, type = "class")
-    assert_identical(x, y, condition, type = "length")
-    checkmate::assert_logical(condition)
+  assert_identical(x, y, type = "class")
+  assert_identical(x, y, condition, type = "length")
+  checkmate::assert_logical(condition)
 
-    first_arg <- x
-    second_arg <- y
+  first_arg <- x
+  second_arg <- y
 
-    x <- dplyr::if_else(condition, second_arg, first_arg)
-    y <- dplyr::if_else(condition, first_arg, second_arg)
+  x <- dplyr::if_else(condition, second_arg, first_arg)
+  y <- dplyr::if_else(condition, first_arg, second_arg)
 
-    list(x = x, y = y)
+  list(x = x, y = y)
 }
 
 class_collapse <- function(x) single_quote_(paste0(class(x), collapse = "/"))
 
 count_na <- function(x) {
-    checkmate::assert_atomic(x)
+  checkmate::assert_atomic(x)
 
-    length(which(is.na(x)))
+  length(which(is.na(x)))
 }
 
 get_class <- function(x) {
-    if (is.list(x)) {
-        vapply(x, function(x) class(x)[1], character(1))
-    } else {
-        class(x)[1]
-    }
+  if (is.list(x)) {
+    vapply(x, function(x) class(x)[1], character(1))
+  } else {
+    class(x)[1]
+  }
 }
 
 get_names <- function(...) {
-    out <- lapply(substitute(list(...))[-1], deparse) %>%
-        vapply(unlist, character(1)) %>%
-        noquote()
+  out <- lapply(substitute(list(...))[-1], deparse) |>
+    vapply(unlist, character(1)) |>
+    noquote()
 
-    gsub("\\\"", "", out)
+  gsub("\\\"", "", out)
 }
 
 single_quote_ <- function(x) paste0("'", x, "'")
@@ -101,52 +101,52 @@ double_quote_ <- function(x) paste0("\"", x, "\"")
 
 str_extract_ <- function(string, pattern, ignore_case = FALSE, perl = TRUE,
                          fixed = FALSE, use_bytes = FALSE, invert = FALSE) {
-    checkmate::assert_string(pattern)
-    checkmate::assert_flag(ignore_case)
-    checkmate::assert_flag(perl)
-    checkmate::assert_flag(fixed)
-    checkmate::assert_flag(use_bytes)
-    checkmate::assert_flag(invert)
+  checkmate::assert_string(pattern)
+  checkmate::assert_flag(ignore_case)
+  checkmate::assert_flag(perl)
+  checkmate::assert_flag(fixed)
+  checkmate::assert_flag(use_bytes)
+  checkmate::assert_flag(invert)
 
-    match <- regexpr(pattern, string, ignore.case = ignore_case, perl = perl,
-                     fixed = fixed, useBytes = use_bytes)
-    out <- rep(NA, length(string))
-    out[match != -1 & !is.na(match)] <- regmatches(string, match,
-                                                   invert = invert)
-    out
+  match <- regexpr(pattern, string, ignore.case = ignore_case, perl = perl,
+                   fixed = fixed, useBytes = use_bytes)
+  out <- rep(NA, length(string))
+  out[match != -1 & !is.na(match)] <- regmatches(string, match,
+                                                 invert = invert)
+  out
 }
 
 require_pkg <- function(...) {
-    out <- list(...)
+  out <- list(...)
 
-    lapply(out, checkmate::assert_string,
-           pattern = "^[A-Za-z][A-Za-z0-9.]+[A-Za-z0-9]$")
+  lapply(out, checkmate::assert_string,
+         pattern = "^[A-Za-z][A-Za-z0-9.]+[A-Za-z0-9]$")
 
-    if (!identical(unique(unlist(out)), unlist(out))) {
-        cli::cli_abort("'...' cannot have duplicated values.")
-    }
+  if (!identical(unique(unlist(out)), unlist(out))) {
+    cli::cli_abort("'...' cannot have duplicated values.")
+  }
 
-    pkg <- unlist(out)
-    namespace <- vapply(pkg, require_namespace, logical(1),
-                        quietly = TRUE, USE.NAMES = FALSE)
-    pkg <- pkg[!namespace]
+  pkg <- unlist(out)
+  namespace <- vapply(pkg, require_namespace, logical(1),
+                      quietly = TRUE, USE.NAMES = FALSE)
+  pkg <- pkg[!namespace]
 
-    if (length(pkg) == 0) {
-        invisible(NULL)
-    } else {
-        cli::cli_abort(paste0(
-            "This function requires the {single_quote_(pkg)} package{?s} ",
-             "to run. You can install {?it/them} by running:", "\n\n",
-             "install.packages(",
-             "{paste(double_quote_(pkg), collapse = ', ')})"
-            ))
-    }
+  if (length(pkg) == 0) {
+    invisible(NULL)
+  } else {
+    cli::cli_abort(paste0(
+      "This function requires the {single_quote_(pkg)} package{?s} ",
+      "to run. You can install {?it/them} by running:", "\n\n",
+      "install.packages(",
+      "{paste(double_quote_(pkg), collapse = ', ')})"
+    ))
+  }
 }
 
 shush <- function(x, quiet = TRUE) {
-    if (isTRUE(quiet)) {
-        suppressMessages(suppressWarnings(x))
-    } else {
-        x
-    }
+  if (isTRUE(quiet)) {
+    suppressMessages(suppressWarnings(x))
+  } else {
+    x
+  }
 }

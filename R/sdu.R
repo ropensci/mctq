@@ -97,11 +97,11 @@
 #' sdu(so, se)
 #' #> [1] "37080s (~10.3 hours)" "23100s (~6.42 hours)" # Expected
 sdu <- function(so, se) {
-    assert_hms(so, lower = hms::hms(0))
-    assert_hms(se, lower = hms::hms(0))
-    assert_identical(so, se, type = "length")
+  assert_hms(so, lower = hms::hms(0))
+  assert_hms(se, lower = hms::hms(0))
+  assert_identical(so, se, type = "length")
 
-    vct_sum_time(se, - so, cycle = lubridate::ddays())
+  vct_sum_time(se, - so, cycle = lubridate::ddays())
 }
 
 #' Compute MCTQ nap duration (only for MCTQ\eqn{^{Shift}}{ Shift})
@@ -183,11 +183,11 @@ sdu <- function(so, se) {
 #' napd(napo, nape)
 #' #> [1] "6300s (~1.75 hours)" "4800s (~1.33 hours)"  # Expected
 napd <- function(napo, nape) {
-    assert_hms(napo, lower = hms::hms(0))
-    assert_hms(nape, lower = hms::hms(0))
-    assert_identical(napo, nape, type = "length")
+  assert_hms(napo, lower = hms::hms(0))
+  assert_hms(nape, lower = hms::hms(0))
+  assert_identical(napo, nape, type = "length")
 
-    vct_sum_time(nape, - napo, cycle = lubridate::ddays())
+  vct_sum_time(nape, - napo, cycle = lubridate::ddays())
 }
 
 #' Compute MCTQ 24 hours sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})
@@ -288,18 +288,18 @@ napd <- function(napo, nape) {
 #' sd24(sd, napd, nap)
 #' #> [1] "29700s (~8.25 hours)" "32400s (~9 hours)" # Expected
 sd24 <- function(sd, napd, nap) {
-    assert_duration(sd, lower = lubridate::duration(0))
-    assert_duration(napd, lower = lubridate::duration(0))
-    checkmate::assert_logical(nap)
-    assert_identical(sd, napd, nap, type = "length")
+  assert_duration(sd, lower = lubridate::duration(0))
+  assert_duration(napd, lower = lubridate::duration(0))
+  checkmate::assert_logical(nap)
+  assert_identical(sd, napd, nap, type = "length")
 
-    # `case_when` is used here to to ensure that the function returns a
-    # result when `nap` is `FALSE`.
+  # `case_when` is used here to to ensure that the function returns a
+  # result when `nap` is `FALSE`.
 
-    dplyr::case_when(
-        nap == FALSE ~ sd,
-        TRUE ~ vct_sum_time(sd, napd)
-    )
+  dplyr::case_when(
+    nap == FALSE ~ sd,
+    TRUE ~ vct_sum_time(sd, napd)
+  )
 }
 
 #' Compute MCTQ average weekly sleep duration
@@ -421,15 +421,15 @@ sd24 <- function(sd, napd, nap) {
 #' mctq:::round_time(sd_week(sd_w, sd_f, wd))
 #' #> [1] "22989s (~6.39 hours)" # Expected
 sd_week <- function(sd_w, sd_f, wd) {
-    assert_duration(sd_w, lower = lubridate::duration(0))
-    assert_duration(sd_f, lower = lubridate::duration(0))
-    assert_numeric_(wd)
-    checkmate::assert_integerish(wd, lower = 0, upper = 7)
-    assert_identical(sd_w, sd_f, wd, type = "length")
+  assert_duration(sd_w, lower = lubridate::duration(0))
+  assert_duration(sd_f, lower = lubridate::duration(0))
+  assert_numeric_(wd)
+  checkmate::assert_integerish(wd, lower = 0, upper = 7)
+  assert_identical(sd_w, sd_f, wd, type = "length")
 
-    wd <- as.integer(wd)
+  wd <- as.integer(wd)
 
-    ((sd_w * wd) + (sd_f * fd(wd))) / 7
+  ((sd_w * wd) + (sd_f * fd(wd))) / 7
 }
 
 #' Compute MCTQ overall sleep duration (only for MCTQ\eqn{^{Shift}}{ Shift})
@@ -573,16 +573,16 @@ sd_week <- function(sd_w, sd_f, wd) {
 #' mctq:::round_time(sd_overall(sd_w, sd_f, n_w, n_f))
 #' #> [1] "26325s (~7.31 hours)" # Expected
 sd_overall <- function(sd_w, sd_f, n_w, n_f) {
-    assert_duration(sd_w, lower = lubridate::duration(0))
-    assert_duration(sd_f, lower = lubridate::duration(0))
-    assert_numeric_(n_w)
-    checkmate::assert_integerish(n_w, lower = 0)
-    assert_numeric_(n_f)
-    checkmate::assert_integerish(n_f, lower = 0)
-    assert_identical(sd_w, sd_f, n_w, n_f, type = "length")
+  assert_duration(sd_w, lower = lubridate::duration(0))
+  assert_duration(sd_f, lower = lubridate::duration(0))
+  assert_numeric_(n_w)
+  checkmate::assert_integerish(n_w, lower = 0)
+  assert_numeric_(n_f)
+  checkmate::assert_integerish(n_f, lower = 0)
+  assert_identical(sd_w, sd_f, n_w, n_f, type = "length")
 
-    n_w <- as.integer(n_w)
-    n_f <- as.integer(n_f)
+  n_w <- as.integer(n_w)
+  n_f <- as.integer(n_f)
 
-    ((sd_w * n_w) + (sd_f * n_f)) / (n_w + n_f)
+  ((sd_w * n_w) + (sd_f * n_f)) / (n_w + n_f)
 }

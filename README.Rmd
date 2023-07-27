@@ -46,7 +46,7 @@ Learn more about the MCTQ questionnaire at <https://www.thewep.org/documentation
 
 Although it may look like a simple questionnaire, MCTQ requires a lot of date/time manipulation. This poses a challenge for many scientists, being that most people have difficulties with date/time data, especially when dealing with an extensive dataset. The `mctq` package comes to address this issue.
 
-`mctq` can handle the processing tasks for the three MCTQ versions (standard, micro, and shift) with few dependencies, relying much of its applications on the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages from [tidyverse](https://www.tidyverse.org/). We also designed `mctq` with the user experience in mind, by creating an interface that resembles the way the questionnaire data is shown in MCTQ publications, and by providing extensive and detailed documentation about each computation proposed by the MCTQ authors. The package also includes several utility tools, along with fictional datasets for testing and learning purposes.
+`mctq` can handle the processing tasks for the three MCTQ versions (standard, micro, and shift) with few dependencies, relying much of its applications on the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages from [tidyverse](https://www.tidyverse.org/). We also designed `mctq` with the user experience in mind, by creating an interface that resembles the way the questionnaire data is shown in MCTQ publications, and by providing extensive and detailed documentation about each computation proposed by the MCTQ authors. The package also includes fictional datasets for testing and learning purposes.
 
 ## Prerequisites
 
@@ -76,6 +76,8 @@ remotes::install_github("ropensci/mctq")
 `mctq` makes use of the [lubridate](https://lubridate.tidyverse.org/) and [hms](https://hms.tidyverse.org/) packages from [tidyverse](https://www.tidyverse.org/), which provide special objects to deal with date/time values in R. If your dataset does not conform to this structure, you first need to convert your data to it. Please refer to those package documentations to learn more about them.
 
 Due to the [circular nature of time](https://youtu.be/eelVqfm8vVc), we strongly recommend that you use appropriate temporal objects while dealing with date/time in R. This can help you get rid of several computation mistakes while trying to adapt your data from a base 10 to a system rooted in a base 12 numerical system.
+
+For a more detailed explanation of the `mctq` usage, go to our [Get started guide](https://docs.ropensci.org/mctq/articles/mctq.html).
 
 ### Workdays and work-free days variables
 
@@ -126,8 +128,6 @@ msf <- c(hms::parse_hm("23:05"), hms::parse_hm("08:30"))
 # Relative social jetlag
 sjl_rel(msw, msf)
 ```
-
-See a quick tour of all MCTQ main functions [here](https://docs.ropensci.org/mctq/articles/mctq.html).
 
 ### Utilities
 

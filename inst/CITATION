@@ -24,8 +24,9 @@ utils::bibentry(
         "Vartanian, D.", " ",
         "(2023)",  ". ",
         "{mctq}:", " ",
-        "tools to process the Munich ChronoType Questionnaire (MCTQ)", ". ",
-        "R package version 0.3.2.9000", ". ",
+        "tools to process the Munich ChronoType Questionnaire (MCTQ)", " ",
+        "(Version 0.3.2.9000) [Computer software - R package]", ". ",
+        "CRAN; rOpenSci", ". ",
         "https://docs.ropensci.org/",
         "mctq/"
         )

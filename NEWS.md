@@ -7,14 +7,17 @@
 
 * The utility functions `assign_date()`, `cycle_time()`, `round_time()`,
   `shorter_interval()`, `longer_interval()`, `shorter_duration()`, 
-  `longer_duration()`, `sum_time()`, and `vct_sum_time()` were deprecated on 
-  `mctq` 0.3.2. These functions were removed from the package. You can still 
+  `longer_duration()`, `sum_time()`, and `vct_sum_time()` were removed. 
+  These functions were deprecated on `mctq` 0.3.2. You can still 
   find them in the [`lubritime`](https://github.com/giperbio/lubritime) package.
-* The utility function `qplot_walk()` were deprecated on `mctq` 0.3.2. This
-  function was removed from the package. You can still find it in the
+* The utility function `qplot_walk()` was removed. This function was deprecated 
+  on `mctq` 0.3.2. You can still find it in the 
   [`gutils`](https://github.com/giperbio/gutils) package.
 * The `ggplot2` package was removed as an import. It was only needed for
   `qplot_walk()`.
+* The dependencies versions were updated.
+* Code indentation was changed to 2 spaces (it was 4 spaces).
+* `magrittr` pipe (`%>%`) was changed to the native R pipe (`|>`) when possible.
 
 # mctq 0.3.2 (2023-02-19)
 
@@ -43,6 +46,7 @@
   GIPSO is a research group that Mario and Daniel Vartanian have built together.
   Daniel (the main author and copyright holder of `mctq`) is no longer part of 
   this group. The "funder" status was always symbolic.
+* The dependencies versions were updated.
 
 # mctq 0.3.1 (2022-11-03)
 

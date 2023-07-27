@@ -52,9 +52,9 @@
 #' fd(c(1, NA))
 #' #> [1]  6 NA # Expected
 fd <- function(wd) {
-    assert_numeric_(wd)
-    checkmate::assert_integerish(wd, lower = 0, upper = 7)
+  assert_numeric_(wd)
+  checkmate::assert_integerish(wd, lower = 0, upper = 7)
 
-    wd <- as.integer(wd)
-    as.integer(7 - wd)
+  wd <- as.integer(wd)
+  as.integer(7 - wd)
 }

@@ -198,40 +198,40 @@
 #' mctq:::round_time(sjl(msw, msf))
 #' #> [1] "5068s (~1.41 hours)" # Expected
 sjl <- function(msw, msf, abs = TRUE, method = "shorter") {
-    method_choices <- c("difference", "shorter", "longer")
+  method_choices <- c("difference", "shorter", "longer")
 
-    assert_hms(msw, lower = hms::hms(0))
-    assert_hms(msf, lower = hms::hms(0))
-    assert_identical(msw, msf, type = "length")
-    checkmate::assert_flag(abs)
-    checkmate::assert_choice(method, method_choices)
+  assert_hms(msw, lower = hms::hms(0))
+  assert_hms(msf, lower = hms::hms(0))
+  assert_identical(msw, msf, type = "length")
+  checkmate::assert_flag(abs)
+  checkmate::assert_choice(method, method_choices)
 
-    if (method == "difference") {
-        out <- vct_sum_time(msf, - msw)
-    } else {
-        if (method == "shorter") {
-            interval <- shush(shorter_interval(msw, msf))
-        } else if (method == "longer") {
-            interval <- shush(longer_interval(msw, msf))
-        }
-
-        int_start <- hms::as_hms(lubridate::int_start(interval))
-        out <- lubridate::as.duration(interval)
-
-        out <- dplyr::case_when(
-            msw == msf ~ out,
-            int_start == msw ~ out,
-            int_start == msf ~ - out
-        )
+  if (method == "difference") {
+    out <- vct_sum_time(msf, - msw)
+  } else {
+    if (method == "shorter") {
+      interval <- shush(shorter_int(msw, msf))
+    } else if (method == "longer") {
+      interval <- shush(longer_int(msw, msf))
     }
 
-    if (isTRUE(abs)) abs(out) else out
+    int_start <- hms::as_hms(lubridate::int_start(interval))
+    out <- lubridate::as.duration(interval)
+
+    out <- dplyr::case_when(
+      msw == msf ~ out,
+      int_start == msw ~ out,
+      int_start == msf ~ - out
+    )
+  }
+
+  if (isTRUE(abs)) abs(out) else out
 }
 
 #' @rdname sjl
 #' @export
 sjl_rel <- function(msw, msf, method = "shorter") {
-    sjl(msw, msf, abs = FALSE, method = method)
+  sjl(msw, msf, abs = FALSE, method = method)
 }
 
 #' Compute Jankowski's MCTQ sleep-corrected social jetlag
@@ -433,33 +433,33 @@ sjl_rel <- function(msw, msf, method = "shorter") {
 #'
 #' ## See other examples in '?sjl()'
 sjl_sc <- function(so_w, se_w, so_f, se_f, abs = TRUE, method = "shorter") {
-    method_choices <- c("difference", "shorter", "longer")
+  method_choices <- c("difference", "shorter", "longer")
 
-    assert_hms(so_w, lower = hms::hms(0))
-    assert_hms(se_w, lower = hms::hms(0))
-    assert_hms(so_f, lower = hms::hms(0))
-    assert_hms(se_f, lower = hms::hms(0))
-    assert_identical(so_w, se_w, so_f, se_f, type = "length")
-    checkmate::assert_flag(abs)
-    checkmate::assert_choice(method, method_choices)
+  assert_hms(so_w, lower = hms::hms(0))
+  assert_hms(se_w, lower = hms::hms(0))
+  assert_hms(so_f, lower = hms::hms(0))
+  assert_hms(se_f, lower = hms::hms(0))
+  assert_identical(so_w, se_w, so_f, se_f, type = "length")
+  checkmate::assert_flag(abs)
+  checkmate::assert_choice(method, method_choices)
 
-    sd_w <- sdu(so_w, se_w)
-    sd_f <- sdu(so_f, se_f)
+  sd_w <- sdu(so_w, se_w)
+  sd_f <- sdu(so_f, se_f)
 
-    # (diff >= 0) == (se_w <= se_f)
-    diff <- sjl(se_w, se_f, abs = FALSE, method = method)
+  # (diff >= 0) == (se_w <= se_f)
+  diff <- sjl(se_w, se_f, abs = FALSE, method = method)
 
-    dplyr::case_when(
-        sd_w > sd_f & diff >= 0 ~
-            sjl(se_w, se_f, abs = abs, method = method),
-        TRUE ~ sjl(so_w, so_f, abs = abs, method = method)
-    )
+  dplyr::case_when(
+    sd_w > sd_f & diff >= 0 ~
+      sjl(se_w, se_f, abs = abs, method = method),
+    TRUE ~ sjl(so_w, so_f, abs = abs, method = method)
+  )
 }
 
 #' @rdname sjl_sc
 #' @export
 sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
-    sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = method)
+  sjl_sc(so_w, se_w, so_f, se_f, abs = FALSE, method = method)
 }
 
 #' Compute MCTQ absolute social jetlag across all shifts
@@ -597,23 +597,23 @@ sjl_sc_rel <- function(so_w, se_w, so_f, se_f, method = "shorter") {
 #' mctq:::round_time(hms::as_hms(as.numeric(sjl_weighted(sjl, n_w))))
 #' #> 01:06:10 # Expected
 sjl_weighted <- function(sjl, n_w) {
-    checkmate::assert_list(sjl, len = length(n_w))
-    checkmate::assert_list(n_w, len = length(sjl))
-    lapply(sjl, assert_duration)
-    lapply(n_w, checkmate::assert_integerish, lower = 0)
-    mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
+  checkmate::assert_list(sjl, len = length(n_w))
+  checkmate::assert_list(n_w, len = length(sjl))
+  lapply(sjl, assert_duration)
+  lapply(n_w, checkmate::assert_integerish, lower = 0)
+  mapply(assert_identical, sjl, n_w, MoreArgs = list(type = "length"))
 
-    sjl <- lapply(sjl, abs)
-    n_w <- lapply(n_w, as.integer)
+  sjl <- lapply(sjl, abs)
+  n_w <- lapply(n_w, as.integer)
 
-    reduce <- function(x, y) {
-        out <- Reduce("*", list(x, y))
-        lubridate::as.duration(out)
-    }
+  reduce <- function(x, y) {
+    out <- Reduce("*", list(x, y))
+    lubridate::as.duration(out)
+  }
 
-    sjl <- mapply(reduce, n_w, sjl, SIMPLIFY = FALSE)
-    sjl <- Reduce("+", sjl)
-    n_w <- Reduce("+", n_w)
+  sjl <- mapply(reduce, n_w, sjl, SIMPLIFY = FALSE)
+  sjl <- Reduce("+", sjl)
+  n_w <- Reduce("+", n_w)
 
-    sjl / n_w
+  sjl / n_w
 }

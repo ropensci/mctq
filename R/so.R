@@ -96,11 +96,11 @@
 #' #> 22:15:00 # Expected
 #' #> 22:20:00 # Expected
 so <- function(sprep, slat) {
-    assert_hms(sprep, lower = hms::hms(0))
-    assert_duration(slat, lower = lubridate::duration(0))
-    assert_identical(sprep, slat, type = "length")
+  assert_hms(sprep, lower = hms::hms(0))
+  assert_duration(slat, lower = lubridate::duration(0))
+  assert_identical(sprep, slat, type = "length")
 
-    vct_sum_time(sprep, slat, cycle = lubridate::ddays()) %>%
-        as.numeric() %>%
-        hms::hms()
+  vct_sum_time(sprep, slat, cycle = lubridate::ddays()) |>
+    as.numeric() |>
+    hms::hms()
 }

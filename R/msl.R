@@ -103,13 +103,13 @@
 #' #> [1] 04:47:30 # Expected
 #' #> [1] 03:58:30 # Expected
 msl <- function(so, sd) {
-    assert_hms(so, lower = hms::hms(0))
-    assert_duration(sd, lower = lubridate::duration(0))
-    assert_identical(so, sd, type = "length")
+  assert_hms(so, lower = hms::hms(0))
+  assert_duration(sd, lower = lubridate::duration(0))
+  assert_identical(so, sd, type = "length")
 
-    vct_sum_time(so, (sd / 2), cycle = lubridate::ddays()) %>%
-        as.numeric() %>%
-        hms::hms()
+  vct_sum_time(so, (sd / 2), cycle = lubridate::ddays()) %>%
+    as.numeric() %>%
+    hms::hms()
 }
 
 #' Compute MCTQ sleep-corrected local time of mid-sleep on work-free days
@@ -326,23 +326,24 @@ msl <- function(so, sd) {
 #' mctq:::round_time(msf_sc(msf, sd_w, sd_f, sd_week, alarm_f))
 #' #> 04:46:00 # Expected
 msf_sc <- function(msf, sd_w, sd_f, sd_week, alarm_f) {
-    assert_hms(msf, lower = hms::hms(0))
-    assert_duration(sd_w, lower = lubridate::duration(0))
-    assert_duration(sd_f, lower = lubridate::duration(0))
-    assert_duration(sd_week, lower = lubridate::duration(0))
-    checkmate::assert_logical(alarm_f)
-    assert_identical(msf, sd_w, sd_f, sd_week, alarm_f, type = "length")
+  assert_hms(msf, lower = hms::hms(0))
+  assert_duration(sd_w, lower = lubridate::duration(0))
+  assert_duration(sd_f, lower = lubridate::duration(0))
+  assert_duration(sd_week, lower = lubridate::duration(0))
+  checkmate::assert_logical(alarm_f)
+  assert_identical(msf, sd_w, sd_f, sd_week, alarm_f, type = "length")
 
-    ## `sc` exists to remove unnecessary warnings of the {lubridate} package
-    ## when subtracting objects of class `Duration`.
+  ## `sc` exists to remove unnecessary warnings of the {lubridate} package
+  ## when subtracting objects of class `Duration`.
 
-    sc <- vct_sum_time(sd_f, - sd_week, cycle = lubridate::ddays())
-    sc <- sc / 2
+  sc <- vct_sum_time(sd_f, - sd_week, cycle = lubridate::ddays())
+  sc <- sc / 2
 
-    dplyr::case_when(
-        alarm_f == TRUE ~ hms::as_hms(NA),
-        sd_f <= sd_w ~ msf,
-        sd_f > sd_w ~ hms::hms(as.numeric(
-            vct_sum_time(msf, - sc, cycle = lubridate::ddays())))
-    )
+  dplyr::case_when(
+    alarm_f == TRUE ~ hms::as_hms(NA),
+    sd_f <= sd_w ~ msf,
+    sd_f > sd_w ~ hms::hms(as.numeric(
+      vct_sum_time(msf, - sc, cycle = lubridate::ddays())
+    ))
+  )
 }

@@ -2,13 +2,13 @@
 # Sort by type or alphabetical order.
 
 is_interactive <- function(...) {
-    interactive()
+  interactive()
 }
 
 require_namespace <- function(x, ..., quietly = TRUE) {
-    requireNamespace(x, ..., quietly = quietly)
+  requireNamespace(x, ..., quietly = quietly)
 }
 
 read_line <- function(prompt, ...) {
-    readline(prompt)
+  readline(prompt)
 }

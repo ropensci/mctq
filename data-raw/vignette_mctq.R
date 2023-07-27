@@ -39,39 +39,45 @@
 #' }
 #' }
 build_vignette_mctq <- function(write = FALSE) {
-    checkmate::assert_flag(write)
+  checkmate::assert_flag(write)
 
-    vignette_mctq <- suppressMessages(
-        readr::read_csv(mctq::raw_data("std_mctq.csv"))) %>%
-        dplyr::slice(2, 3, 8, 11, 38)
+  vignette_mctq <-
+    suppressMessages(
+      readr::read_csv(mctq::raw_data("std_mctq.csv"))
+    ) |>
+    dplyr::slice(2, 3, 8, 11, 38)
 
-    vignette_mctq$ID <- seq_len(nrow(vignette_mctq))
+  vignette_mctq$ID <- seq_len(nrow(vignette_mctq))
 
-    names(vignette_mctq) <- c("id", "work", "wd", "bt_w", "sprep_w", "slat_w",
-                              "se_w", "si_w", "alarm_w", "wake_before_w",
-                              "le_w", "bt_f", "sprep_f", "slat_f", "se_f",
-                              "si_f", "alarm_f", "reasons_f", "reasons_why_f",
-                              "le_f")
+  names(vignette_mctq) <- c("id", "work", "wd", "bt_w", "sprep_w", "slat_w",
+                            "se_w", "si_w", "alarm_w", "wake_before_w",
+                            "le_w", "bt_f", "sprep_f", "slat_f", "se_f",
+                            "si_f", "alarm_f", "reasons_f", "reasons_why_f",
+                            "le_f")
 
-    for (i in c("work", "alarm_w", "wake_before_w", "reasons_f", "alarm_f")) {
-        vignette_mctq <- vignette_mctq %>%
-            dplyr::mutate(
-                !!as.symbol(i) := dplyr::case_when(
-                    tolower(!!as.symbol(i)) == "yes" ~ TRUE,
-                    tolower(!!as.symbol(i)) == "no" ~ FALSE)
-            )
-    }
+  for (i in c("work", "alarm_w", "wake_before_w", "reasons_f", "alarm_f")) {
+    vignette_mctq <-
+      vignette_mctq |>
+      dplyr::mutate(
+        !!as.symbol(i) := dplyr::case_when(
+          tolower(!!as.symbol(i)) == "yes" ~ TRUE,
+          tolower(!!as.symbol(i)) == "no" ~ FALSE
+        )
+      )
+  }
 
-    if (isTRUE(write)) {
-        if (!(dir.exists("./inst/extdata/"))) dir.create("./inst/extdata/")
+  if (isTRUE(write)) {
+    if (!(dir.exists("./inst/extdata/"))) dir.create("./inst/extdata/")
 
-        vignette_mctq %>%
-            utils::write.csv(paste0("./inst/extdata/", "vignette_mctq", ".csv"),
-                             row.names = FALSE,
-                             quote = FALSE)
-    }
+    vignette_mctq |>
+      utils::write.csv(
+        paste0("./inst/extdata/", "vignette_mctq", ".csv"),
+        row.names = FALSE,
+        quote = FALSE
+      )
+  }
 
-    invisible(vignette_mctq)
+  invisible(vignette_mctq)
 }
 
 raw <- build_vignette_mctq()

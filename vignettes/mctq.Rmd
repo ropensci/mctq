@@ -52,8 +52,10 @@ Our fictional MCTQ data will be loaded with the code below. The naming of the va
 ```{r, warning = FALSE, message = FALSE}
 library(readr)
 
-data <- readr::read_csv(mctq::raw_data("vignette_mctq.csv"),
-                        col_types = readr::cols(.default = "c"))
+data <- readr::read_csv(
+  mctq::raw_data("vignette_mctq.csv"),
+  col_types = readr::cols(.default = "c")
+)
 ```
 
 ## Converting your data
@@ -81,15 +83,23 @@ library(dplyr)
 library(hms)
 library(lubridate)
 
-data <- data %>% dplyr::mutate(
-  dplyr::across(c("id", "wd"), as.integer),
-  dplyr::across(dplyr::matches("^work$|^alarm_|^wake_|^reasons_f$"),
-                as.logical),
-  dplyr::across(dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm),
-  dplyr::across(dplyr::matches("^slat_|^si_"),
-                ~ lubridate::dminutes(as.numeric(.x))),
-  dplyr::across(dplyr::matches("^le_"),
-                ~ lubridate::as.duration(hms::parse_hm(.x)))
+data <-
+  data |>
+  dplyr::mutate(
+    dplyr::across(c("id", "wd"), as.integer),
+    dplyr::across(
+      dplyr::matches("^work$|^alarm_|^wake_|^reasons_f$"),
+      as.logical
+    ),
+    dplyr::across(dplyr::matches("^bt_|^sprep_|^se_"), hms::parse_hm),
+    dplyr::across(
+      dplyr::matches("^slat_|^si_"),
+      ~ lubridate::dminutes(as.numeric(.x))
+    ),
+    dplyr::across(
+      dplyr::matches("^le_"),
+      ~ lubridate::as.duration(hms::parse_hm(.x))
+    )
   )
 ```
 
@@ -115,7 +125,7 @@ The output must be the total of free days a respondent has in a week.
 data$fd <- fd(data$wd)
 
 # Comparing the result
-data %>% dplyr::select(wd, fd)
+data |> dplyr::select(wd, fd)
 ```
 
 ### `so()`: Local time of sleep onset
@@ -131,7 +141,7 @@ data$so_w <- so(data$sprep_w, data$slat_w)
 data$so_f <- so(data$sprep_f, data$slat_f)
 
 # Comparing the result
-data %>% dplyr::select(sprep_w, slat_w, so_w, sprep_f, slat_f, so_f)
+data |> dplyr::select(sprep_w, slat_w, so_w, sprep_f, slat_f, so_f)
 ```
 
 ### `gu()`: Local time of getting out of bed
@@ -147,7 +157,7 @@ data$gu_w <- gu(data$se_w, data$si_w)
 data$gu_f <- gu(data$se_f, data$si_f)
 
 # Comparing the result
-data %>% dplyr::select(se_w, si_w, gu_w, se_f, si_f, gu_f)
+data |> dplyr::select(se_w, si_w, gu_w, se_f, si_f, gu_f)
 ```
 
 ### `sdu()`: Sleep duration
@@ -163,7 +173,7 @@ data$sd_w <- sdu(data$so_w, data$se_w)
 data$sd_f <- sdu(data$so_f, data$se_f)
 
 # Comparing the result
-data %>% dplyr::select(so_w, se_w, sd_w, so_f, se_f, sd_f)
+data |> dplyr::select(so_w, se_w, sd_w, so_f, se_f, sd_f)
 ```
 
 ### `tbt()`: Total time in bed
@@ -177,7 +187,7 @@ data$tbt_w <- tbt(data$bt_w, data$gu_w)
 data$tbt_f <- tbt(data$bt_f, data$gu_f)
 
 # Comparing the result
-data %>% dplyr::select(bt_w, gu_w, tbt_w, bt_f, gu_f, tbt_f)
+data |> dplyr::select(bt_w, gu_w, tbt_w, bt_f, gu_f, tbt_f)
 ```
 
 ### `msl()`: Local time of mid-sleep
@@ -191,7 +201,7 @@ data$msw <- msl(data$so_w, data$sd_w)
 data$msf <- msl(data$so_f, data$sd_f)
 
 # Comparing the result
-data %>% dplyr::select(so_w, sd_w, msw, so_f, sd_f, msf)
+data |> dplyr::select(so_w, sd_w, msw, so_f, sd_f, msf)
 ```
 
 ## Combining workdays and work-free days variables
@@ -208,8 +218,11 @@ The output must be the weighted mean of `sd_w` and `sd_f`, with `wd` and `fd(wd)
 data$sd_week <- sd_week(data$sd_w, data$sd_f, data$wd)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(sd_week_rounded = mctq:::round_time(sd_week))
-data %>% dplyr::select(wd, sd_w, fd, sd_f, sd_week_rounded)
+data <-
+  data |>
+  dplyr::mutate(sd_week_rounded = mctq:::round_time(sd_week))
+
+data |> dplyr::select(wd, sd_w, fd, sd_f, sd_week_rounded)
 ```
 
 ### `sloss_week()`: Weekly sleep loss
@@ -222,9 +235,13 @@ If `sd_week`(average weekly sleep duration) is greater than `sd_w`, the output m
 data$sloss_week <- sloss_week(data$sd_w, data$sd_f, data$wd)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(
-  sloss_week_rounded = mctq:::round_time(sloss_week))
-data %>% dplyr::select(wd, sd_w, fd, sd_f, sloss_week_rounded)
+data <-
+  data |>
+  dplyr::mutate(
+    sloss_week_rounded = mctq:::round_time(sloss_week)
+  )
+
+data |> dplyr::select(wd, sd_w, fd, sd_f, sloss_week_rounded)
 ```
 
 ### `le_week()`: Average weekly light exposure
@@ -239,8 +256,11 @@ Please note that light exposure is measured only with the full version of the st
 data$le_week <- le_week(data$le_w, data$le_f, data$wd)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(le_week_rounded = mctq:::round_time(le_week))
-data %>% dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
+data <-
+  data |>
+  dplyr::mutate(le_week_rounded = mctq:::round_time(le_week))
+
+data |> dplyr::select(wd, le_w, fd, le_f, le_week_rounded)
 ```
 
 ### `msf_sc()`: Chronotype or sleep-corrected local time of mid-sleep on work-free days
@@ -253,12 +273,15 @@ If `sd_f` is less or equal than `sd_w`, the output must be `msf`. Else, it must 
 
 ```{r, warnings = FALSE, message = FALSE}
 data$msf_sc <- msf_sc(
-    data$msf, data$sd_w, data$sd_f, data$sd_week, data$alarm_f
-    )
+  data$msf, data$sd_w, data$sd_f, data$sd_week, data$alarm_f
+)
 
 # Comparing the result
-data <- data %>% dplyr::mutate(msf_sc_rounded = mctq:::round_time(msf_sc))
-data %>% dplyr::select(msf, msf_sc_rounded)
+data <-
+  data |>
+  dplyr::mutate(msf_sc_rounded = mctq:::round_time(msf_sc))
+
+data |> dplyr::select(msf, msf_sc_rounded)
 ```
 
 ### `sjl_rel()`: Relative social jetlag
@@ -275,7 +298,7 @@ The difference described above may seem trivial or easy to compute, but it's not
 data$sjl_rel <- sjl_rel(data$msw, data$msf)
 
 # Comparing the result
-data %>% dplyr::select(msw, msf, sjl_rel)
+data |> dplyr::select(msw, msf, sjl_rel)
 ```
 
 ### `sjl()`: Absolute social jetlag
@@ -288,7 +311,7 @@ If you already have `sjl_rel` computed, you don't really need to compute it twic
 data$sjl <- abs(data$sjl_rel)
 
 # Comparing the result
-data %>% dplyr::select(sjl_rel, sjl)
+data |> dplyr::select(sjl_rel, sjl)
 ```
 
 ## Success!
@@ -298,18 +321,19 @@ We have now processed all the MCTQ standard variables proposed by the MCTQ autho
 Before we look at the final data, let's first reorder the columns to a nice logical order and remove some `*_rounded` variables that we created just for show.
 
 ```{r}
-data <- data %>%
+data <-
+  data |>
   dplyr::relocate(
-            id, work, wd, fd,
+    id, work, wd, fd,
 
-            bt_w, sprep_w, slat_w, so_w, se_w, si_w, gu_w, alarm_w,
-            wake_before_w, sd_w, tbt_w, le_w, msw,
+    bt_w, sprep_w, slat_w, so_w, se_w, si_w, gu_w, alarm_w, wake_before_w,
+    sd_w, tbt_w, le_w, msw,
 
-            bt_f, sprep_f, slat_f, so_f, se_f, si_f, gu_f, alarm_f,
-            reasons_f, reasons_why_f, sd_f, tbt_f, le_f, msf,
+    bt_f, sprep_f, slat_f, so_f, se_f, si_f, gu_f, alarm_f, reasons_f,
+    reasons_why_f, sd_f, tbt_f, le_f, msf,
 
-            sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl
-            ) %>%
+    sd_week, sloss_week, le_week, msf_sc, sjl_rel, sjl
+  ) |>
   dplyr::select(-dplyr::ends_with("_rounded"))
 ```
 
@@ -324,7 +348,7 @@ If you're using [RStudio](https://posit.co/products/open-source/rstudio/), you c
 If you don't feel comfortable with the way `Duration` objects are printed, `mctq` provides a utility function to help you. Just use `pretty_mctq()` to get a better view.
 
 ```{r}
-pretty_mctq(data, round = FALSE)
+data |> pretty_mctq(round = FALSE)
 ```
 
 ## Utilities

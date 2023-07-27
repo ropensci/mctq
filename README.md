@@ -61,8 +61,8 @@ applications on the [lubridate](https://lubridate.tidyverse.org/) and
 the user experience in mind, by creating an interface that resembles the
 way the questionnaire data is shown in MCTQ publications, and by
 providing extensive and detailed documentation about each computation
-proposed by the MCTQ authors. The package also includes several utility
-tools, along with fictional datasets for testing and learning purposes.
+proposed by the MCTQ authors. The package also includes fictional
+datasets for testing and learning purposes.
 
 ## Prerequisites
 
@@ -116,6 +116,9 @@ strongly recommend that you use appropriate temporal objects while
 dealing with date/time in R. This can help you get rid of several
 computation mistakes while trying to adapt your data from a base 10 to a
 system rooted in a base 12 numerical system.
+
+For a more detailed explanation of the `mctq` usage, go to our [Get
+started guide](https://docs.ropensci.org/mctq/articles/mctq.html).
 
 ### Workdays and work-free days variables
 
@@ -177,9 +180,6 @@ sjl_rel(msw, msf)
 #> [1] "-10800s (~-3 hours)"  "15900s (~4.42 hours)"
 ```
 
-See a quick tour of all MCTQ main functions
-[here](https://docs.ropensci.org/mctq/articles/mctq.html).
-
 ### Utilities
 
 `mctq` is also equipped with some utility tools to help with your MCTQ
@@ -199,11 +199,10 @@ can find the citation below.
 
 ``` r
 citation("mctq")
-#> 
 #> To cite {mctq} in publications use:
 #> 
 #>   Vartanian, D. (2023). {mctq}: tools to process the Munich ChronoType
-#>   Questionnaire (MCTQ). R package version 0.3.2.9000.
+#>   Questionnaire (MCTQ). R package version 0.3.2.
 #>   https://docs.ropensci.org/mctq/
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -213,7 +212,7 @@ citation("mctq")
 #>     author = {Daniel Vartanian},
 #>     year = {2023},
 #>     url = {https://docs.ropensci.org/mctq/},
-#>     note = {R package version 0.3.2.9000},
+#>     note = {R package version 0.3.2},
 #>   }
 ```
 

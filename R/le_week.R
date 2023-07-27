@@ -118,13 +118,13 @@
 #' mctq:::round_time(le_week(le_w, le_f, wd))
 #' #> [1] "19538s (~5.43 hours)" # Expected
 le_week <- function(le_w, le_f, wd) {
-    assert_duration(le_w, lower = lubridate::duration(0))
-    assert_duration(le_f, lower = lubridate::duration(0))
-    assert_numeric_(wd)
-    checkmate::assert_integerish(wd, lower = 0, upper = 7)
-    assert_identical(le_w, le_f, wd, type = "length")
+  assert_duration(le_w, lower = lubridate::duration(0))
+  assert_duration(le_f, lower = lubridate::duration(0))
+  assert_numeric_(wd)
+  checkmate::assert_integerish(wd, lower = 0, upper = 7)
+  assert_identical(le_w, le_f, wd, type = "length")
 
-    wd <- as.integer(wd)
+  wd <- as.integer(wd)
 
-    ((le_w * wd) + (le_f * fd(wd))) / 7
+  ((le_w * wd) + (le_f * fd(wd))) / 7
 }

@@ -96,22 +96,22 @@
 #' mctq:::round_time(sloss_week(sd_w, sd_f, wd))
 #' #> [1] "4808s (~1.34 hours)" # Expected
 sloss_week <- function(sd_w, sd_f, wd) {
-    assert_duration(sd_w, lower = lubridate::duration(0))
-    assert_duration(sd_f, lower = lubridate::duration(0))
-    assert_numeric_(wd)
-    checkmate::assert_integerish(wd, lower = 0, upper = 7)
-    assert_identical(sd_w, sd_f, wd, type = "length")
+  assert_duration(sd_w, lower = lubridate::duration(0))
+  assert_duration(sd_f, lower = lubridate::duration(0))
+  assert_numeric_(wd)
+  checkmate::assert_integerish(wd, lower = 0, upper = 7)
+  assert_identical(sd_w, sd_f, wd, type = "length")
 
-    # 'sum_1' and 'sum_2' exist to remove unnecessary warnings of the
-    # {lubridate} package when subtracting objects of class 'Duration'.
+  # 'sum_1' and 'sum_2' exist to remove unnecessary warnings of the
+  # {lubridate} package when subtracting objects of class 'Duration'.
 
-    wd <- as.integer(wd)
-    sd_week <- sd_week(sd_w, sd_f, wd)
-    sum_1 <- vct_sum_time(sd_week, - sd_w)
-    sum_2 <- vct_sum_time(sd_week, - sd_f)
+  wd <- as.integer(wd)
+  sd_week <- sd_week(sd_w, sd_f, wd)
+  sum_1 <- vct_sum_time(sd_week, - sd_w)
+  sum_2 <- vct_sum_time(sd_week, - sd_f)
 
-    dplyr::case_when(
-        sd_week > sd_w ~ sum_1 * wd,
-        sd_week <= sd_w ~ sum_2 * fd(wd)
-    )
+  dplyr::case_when(
+    sd_week > sd_w ~ sum_1 * wd,
+    sd_week <= sd_w ~ sum_2 * fd(wd)
+  )
 }

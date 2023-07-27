@@ -27,11 +27,11 @@
 #'
 #' raw_data("std_mctq.csv")}
 raw_data <- function(file = NULL) {
-    checkmate::assert_character(file, any.missing = FALSE, null.ok = TRUE)
+  checkmate::assert_character(file, any.missing = FALSE, null.ok = TRUE)
 
-    if (is.null(file)) {
-        list.files(system.file("extdata", package = "mctq"))
-    } else {
-        system.file("extdata", file, package = "mctq", mustWork = TRUE)
-    }
+  if (is.null(file)) {
+    list.files(system.file("extdata", package = "mctq"))
+  } else {
+    system.file("extdata", file, package = "mctq", mustWork = TRUE)
+  }
 }

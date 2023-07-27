@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.4.1
+# CITATION file created with {cffr} R package, v0.5.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -49,7 +49,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 4.1'
+  version: '>= 4.2'
 - type: software
   title: checkmate
   abstract: 'checkmate: Fast and Versatile Argument Checks'
@@ -62,7 +62,7 @@ references:
     email: michellang@gmail.com
     orcid: https://orcid.org/0000-0001-9754-0393
   year: '2023'
-  version: '>= 2.1.0'
+  version: '>= 2.2.0'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -74,7 +74,7 @@ references:
     given-names: Gábor
     email: csardi.gabor@gmail.com
   year: '2023'
-  version: '>= 3.6.0'
+  version: '>= 3.6.1'
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
@@ -99,7 +99,7 @@ references:
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2023'
-  version: '>= 1.1.0'
+  version: '>= 1.1.2'
 - type: software
   title: hms
   abstract: 'hms: Pretty Time of Day'
@@ -112,7 +112,7 @@ references:
     email: kirill@cynkra.com
     orcid: https://orcid.org/0000-0002-1416-3412
   year: '2023'
-  version: '>= 1.1.2'
+  version: '>= 1.1.3'
 - type: software
   title: lifecycle
   abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
@@ -156,7 +156,7 @@ references:
     given-names: Jim
     email: james.f.hester@gmail.com
   year: '2023'
-  version: '>= 3.6.1'
+  version: '>= 3.6.2'
 - type: software
   title: datasets
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -168,7 +168,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 4.1.0'
+  version: '>= 4.2.0'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -181,7 +181,7 @@ references:
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2023'
-  version: '>= 1.42'
+  version: '>= 1.43'
 - type: software
   title: mockr
   abstract: 'mockr: Mocking in R'
@@ -221,12 +221,12 @@ references:
   authors:
   - family-names: Henry
     given-names: Lionel
-    email: lionel@rstudio.com
+    email: lionel@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2023'
-  version: '>= 1.0.6'
+  version: '>= 1.1.1'
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -236,38 +236,41 @@ references:
   authors:
   - family-names: Allaire
     given-names: JJ
-    email: jj@rstudio.com
+    email: jj@posit.co
   - family-names: Xie
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
   - family-names: McPherson
     given-names: Jonathan
-    email: jonathan@rstudio.com
+    email: jonathan@posit.co
   - family-names: Luraschi
     given-names: Javier
-    email: javier@rstudio.com
   - family-names: Ushey
     given-names: Kevin
-    email: kevin@rstudio.com
+    email: kevin@posit.co
   - family-names: Atkins
     given-names: Aron
-    email: aron@rstudio.com
+    email: aron@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   - family-names: Cheng
     given-names: Joe
-    email: joe@rstudio.com
+    email: joe@posit.co
   - family-names: Chang
     given-names: Winston
-    email: winston@rstudio.com
+    email: winston@posit.co
   - family-names: Iannone
     given-names: Richard
-    email: rich@rstudio.com
+    email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2023'
-  version: '>= 2.20'
+  version: '>= 2.23'
 - type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
@@ -283,7 +286,7 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2023'
-  version: '>= 2.2'
+  version: '>= 2.2.1'
 - type: software
   title: stats
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -295,7 +298,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 4.1.0'
+  version: '>= 4.2.0'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -305,9 +308,9 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2023'
-  version: '>= 3.1.6'
+  version: '>= 3.1.10'
 - type: software
   title: usethis
   abstract: 'usethis: Automate Package and Project Setup'
@@ -317,18 +320,22 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
   - family-names: Bryan
     given-names: Jennifer
-    email: jenny@rstudio.com
+    email: jenny@posit.co
     orcid: https://orcid.org/0000-0002-6983-2759
   - family-names: Barrett
     given-names: Malcolm
     email: malcolmbarrett@gmail.com
     orcid: https://orcid.org/0000-0003-0299-5825
+  - family-names: Teucher
+    given-names: Andy
+    email: andy.teucher@posit.co
+    orcid: https://orcid.org/0000-0002-7840-692X
   year: '2023'
-  version: '>= 2.1.6'
+  version: '>= 2.2.2'
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -340,7 +347,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 4.1.0'
+  version: '>= 4.2.0'
 identifiers:
 - type: url
   value: https://github.com/ropensci/mctq/
