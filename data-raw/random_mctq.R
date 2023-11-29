@@ -50,14 +50,14 @@ std_mctq_par <- function() {
 
   values <- list( # Extracted from the base article
     w = list(
-      suffix = "W", #nolint
+      suffix = "W", # nolint
       title = "Workdays (W)",
       sd_mean = hms::parse_hms("07:22:00"),
       sd_sd = hms::parse_hms("01:09:00"),
       ms_mean = hms::parse_hms("03:10:00"),
       ms_sd = hms::parse_hms("00:50:00")),
     f = list(
-      suffix = "F", #nolint
+      suffix = "F", # nolint
       title = "Work-free days (F)",
       sd_mean = hms::parse_hms("08:27:00"),
       sd_sd = hms::parse_hms("01:32:00"),

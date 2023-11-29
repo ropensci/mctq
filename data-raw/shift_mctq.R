@@ -181,7 +181,7 @@ build_shift_mctq <- function(write = FALSE, random_cases = TRUE) {
         dplyr::mutate(`ID` = as.character(i)) %>% # Don't change the pipe.
         dplyr::relocate(.data$`ID`, .before = .data$n_w_m)
 
-      ## nolint start: object_name_linter.
+      # nolint start: object_name_linter.
       for (i in values) {
         random_case <-
           random_case %>% # Don't change the pipe.

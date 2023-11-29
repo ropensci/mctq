@@ -392,7 +392,7 @@ tidy_micro_mctq <- function(write = FALSE) {
       id = as.integer(.data$`ID`),
 
       shift_work = dplyr::case_when(
-        tolower(.data$`SHIFT WORK`) == "yes" ~ TRUE, #nolint
+        tolower(.data$`SHIFT WORK`) == "yes" ~ TRUE, # nolint
         tolower(.data$`SHIFT WORK`) == "false" ~ FALSE,
         tolower(.data$`SHIFT WORK`) == "no" ~ FALSE),
       wd = as.integer(.data$`WORK DAYS`),
