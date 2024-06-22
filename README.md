@@ -192,17 +192,18 @@ open-source R package. Find the citation below.
 citation("mctq")
 #> To cite {mctq} in publications use:
 #> 
-#>   Vartanian, D. (2023). {mctq}: Munich ChronoType Questionnaire tools
+#>   Vartanian, D. (2024). {mctq}: Munich ChronoType Questionnaire tools
 #>   (Version 0.3.2.9001) [Computer software - R package]. CRAN; rOpenSci.
-#>   https://docs.ropensci.org/mctq/
+#>   https://doi.org/10.32614/CRAN.package.mctq
 #> 
-#> Uma entrada BibTeX para usuários(as) de LaTeX é
+#> A BibTeX entry for LaTeX users is
 #> 
-#>   @Unpublished{,
+#>   @Misc{,
 #>     title = {{mctq}: Munich ChronoType Questionnaire tools},
 #>     author = {Daniel Vartanian},
 #>     year = {2024},
-#>     url = {https://docs.ropensci.org/mctq/},
+#>     publisher = {CRAN; rOpenSci},
+#>     doi = {10.32614/CRAN.package.mctq},
 #>     note = {R package version 0.3.2.9001},
 #>   }
 ```
