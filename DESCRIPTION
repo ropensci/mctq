@@ -1,52 +1,53 @@
 Package: mctq
-Title: Tools to Process the Munich ChronoType Questionnaire (MCTQ)
-Version: 0.3.2.9000
+Title: Munich ChronoType Questionnaire Tools
+Version: 0.3.2.9001
 Authors@R: c(
-        person(
-            given = "Daniel",
-            family = "Vartanian",
-            role = c("aut", "cre", "ccp", "cph"),
-            email = "danvartan@gmail.com",
-            comment = c(ORCID = "0000-0001-7782-759X")
-            ),
-        person(
-            given = "Ana Amelia",
-            family = "Benedito Silva",
-            role = c("sad"),
-            email = "aamelia@usp.br",
-            comment = c(ORCID = "0000-0003-4976-2623")
-            ),
-        person(
-            given = "Mario",
-            family = "Pedrazzoli",
-            role = c("sad"),
-            email = "pedrazzo@usp.br",
-            comment = c(ORCID = "0000-0002-5257-591X")
-            ),
-        person(
-            given = "Jonathan",
-            family = "Keane",
-            role = c("rev"),
-            email = "jkeane@gmail.com",
-            comment = c(ORCID = "0000-0001-7087-9776")
-            ),
-        person(
-            given = "Mario Andre",
-            family = "Leocadio-Miguel",
-            role = c("rev"),
-            email = "miguel.ml.mario@gmail.com",
-            comment = c(ORCID = "0000-0002-7248-3529")
-            ),
-        person(
-            given = "University of Sao Paulo (USP)",
-            role = c("fnd")
-            )
+    person(
+      given = "Daniel",
+      family = "Vartanian",
+      role = c("aut", "cre", "ccp", "cph"),
+      email = "danvartan@gmail.com",
+      comment = c(ORCID = "0000-0001-7782-759X")
+    ),
+    person(
+      given = "Ana Amelia",
+      family = "Benedito Silva",
+      role = c("sad"),
+      email = "aamelia@usp.br",
+      comment = c(ORCID = "0000-0003-4976-2623")
+    ),
+    person(
+      given = "Mario",
+      family = "Pedrazzoli",
+      role = c("sad"),
+      email = "pedrazzo@usp.br",
+      comment = c(ORCID = "0000-0002-5257-591X")
+    ),
+    person(
+      given = "Jonathan",
+      family = "Keane",
+      role = c("rev"),
+      email = "jkeane@gmail.com",
+      comment = c(ORCID = "0000-0001-7087-9776")
+    ),
+    person(
+      given = "Mario Andre",
+      family = "Leocadio-Miguel",
+      role = c("rev"),
+      email = "miguel.ml.mario@gmail.com",
+      comment = c(ORCID = "0000-0002-7248-3529")
+    ),
+    person(
+      given = "University of Sao Paulo (USP)",
+      role = c("fnd")
     )
-Description: A complete toolkit to process the Munich ChronoType 
-    Questionnaire (MCTQ) for its three versions (standard, micro, and shift). 
-    MCTQ is a quantitative and validated tool to assess chronotypes using 
-    peoples' sleep behavior, originally presented by Till Roenneberg, Anna 
-    Wirz-Justice, and Martha Merrow (2003, <doi:10.1177/0748730402239679>).
+  )
+Description: A complete toolkit for processing the Munich ChronoType 
+    Questionnaire (MCTQ) in its three versions: standard, micro, and shift. 
+    The MCTQ is a quantitative and validated tool used to assess chronotypes 
+    based on individuals' sleep behavior. It was originally presented by Till 
+    Roenneberg, Anna Wirz-Justice, and Martha Merrow in 2003 
+    (2003, <doi:10.1177/0748730402239679>).
 biocViews: Infrastructure, Preprocessing, Visualization
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/mctq/, https://github.com/ropensci/mctq/
@@ -80,4 +81,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

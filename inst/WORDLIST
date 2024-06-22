@@ -9,6 +9,7 @@ Codecov
 Costa
 Coursera
 DLA
+DOI
 Enzymology
 Frighetto
 GIPSO
@@ -35,6 +36,7 @@ OpenSSF
 Paulo
 Pilz
 RStudio
+Repo
 Roenneberg
 SJL
 Salamanca
@@ -59,11 +61,11 @@ eu
 funder
 hilda
 hms
+individuals’
 jetlag
 jetlags
 lubridate
 midsleep
-peoples’
 prerelease
 rOpenSci
 readr
@@ -77,4 +79,5 @@ sjl
 theWeP
 tidyverse
 vectorized
+’s
 ️

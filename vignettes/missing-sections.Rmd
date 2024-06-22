@@ -1,5 +1,5 @@
 ---
-title: "Missing sections"
+title: "Dealing with missing sections"
 output: rmarkdown::html_vignette
 description: >
   This article shows a possible workaround to deal with missing sections when
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 This article shows a possible workaround to a common problem encountered when dealing with a __standard__ Munich ChronoType Questionnaire (MCTQ) and __$\mu$MCTQ__ data.
 
-It's a good idea to have the standard MCTQ questionnaire and the guidelines for the standard MCTQ variable computation open while reading this article/vignette. That way you can have a better understanding of the data objects we are going to deal with. You can download a copy of the MCTQ full standard version  [here](https://www.thewep.org/documentations/mctq/item/english-mctq-full). Click [here](https://www.thewep.org/documentations/mctq/item/mctq-variables) to download a copy of the guidelines for the standard MCTQ variables.
+It's helpful to have the standard MCTQ questionnaire and the guidelines for standard MCTQ variable computation open while reading this article. This will enhance your understanding of the data objects discussed. You can download the MCTQ full standard version [here](https://www.thewep.org/documentations/mctq/item/english-mctq-full) and the guidelines for standard MCTQ variables [here](https://www.thewep.org/documentations/mctq/item/mctq-variables).
 
 ## Working around missing sections
 

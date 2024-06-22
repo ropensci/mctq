@@ -55,6 +55,6 @@ po/*~
 # End of https://www.toptal.com/developers/gitignore/api/r
 
 # Others
-.archive/
-pkgdown/
-revdep/
+/.archive/
+/pkgdown/
+/revdep/

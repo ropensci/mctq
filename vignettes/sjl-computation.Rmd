@@ -1,11 +1,11 @@
 ---
-title: "Social jetlag computation"
+title: "The social jetlag computation"
 output: rmarkdown::html_vignette
 description: >
-  This article shows some notes about different approaches that can be used to
-  compute the social jetlag for the Munich ChronoType Questionnaire (MCTQ). It 
-  also explains how the 'method' argument from the 'sjl_rel()', 'sjl()', 
-  'sjl_sc_rel()', and 'sjl_sc()' functions works.
+  This article provides notes on different approaches to computing social jetlag
+  for the Munich ChronoType Questionnaire (MCTQ). It also explains how the 
+  'method' argument in the 'sjl_rel()', 'sjl()', 'sjl_sc_rel()', and 'sjl_sc()' 
+  functions works.
 vignette: >
   %\VignetteIndexEntry{Social jetlag computation}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,19 +19,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-This article shows some notes about different approaches that can be used to compute the social jetlag ($SJL$) for the Munich ChronoType Questionnaire (MCTQ). It also explains how the `method` argument from the `sjl_rel()`, `sjl()`, `sjl_sc_rel()`, and `sjl_sc()` functions work.
+This article provides notes on different approaches to computing social jetlag ($SJL$) for the Munich ChronoType Questionnaire (MCTQ). It also explains how the `method` argument in the `sjl_rel()`, `sjl()`, `sjl_sc_rel()`, and `sjl_sc()` functions works.
 
-It's a good idea to have the standard MCTQ questionnaire and the guidelines for the standard MCTQ variable computation open while reading this article/vignette. That way you can have a better understanding of the data objects we are going to deal with. You can download a copy of the MCTQ full standard version  [here](https://www.thewep.org/documentations/mctq/item/english-mctq-full). Click [here](https://www.thewep.org/documentations/mctq/item/mctq-variables) to download a copy of the guidelines for the standard MCTQ variables.
+It's helpful to have the standard MCTQ questionnaire and the guidelines for standard MCTQ variable computation open while reading this article. This will enhance your understanding of the data objects discussed. You can download the MCTQ full standard version [here](https://www.thewep.org/documentations/mctq/item/english-mctq-full) and the guidelines for standard MCTQ variables [here](https://www.thewep.org/documentations/mctq/item/mctq-variables).
 
 ## The two intervals problem
 
-According to Roenneberg et al. ([2012](https://doi.org/10.1016/j.cub.2012.03.038)) supplemental materials, the relative social jetlag ($SJL_{ rel}$), i.e., the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
+According to Roenneberg et al. ([2012](https://doi.org/10.1016/j.cub.2012.03.038)), the relative social jetlag ($SJL_{ rel}$), i.e., the discrepancy between social and biological time, must be computed as the difference between $MSF$ (local time of mid-sleep on work-free days) and $MSW$ (local time of mid-sleep on workdays).
 
 $$SJL_{rel} = MSF - MSW$$
 
-This simple equation may seem trivial until you take into account that you're are dealing with two time values detached from a timeline. In other words, $MSW$ and $MSF$ represent two moments in two different contexts (one on workdays and the other on work-free days).
+This simple equation seems trivial until you consider that it deals with two time values detached from a timeline. In other words, $MSW$ and $MSF$ represent two moments in different contexts (workdays and work-free days).
 
 If you dive into the MCTQ articles, you can see that this computation have two objectives:
+
+1. Represent the distance between $MSW$ and $MSF$ (i.e., the discrepancy).
+2. Establish what value comes before or after the other, representing that with a $+/-$ signal. That is, when $MSW$ comes before $MSF$, $SJL_{rel}$ must be positive, and when $MSW$ comes after $MSF$, $SJL_{rel}$ must be negative.
 
 1. To represent the distance between $MSW$ and $MSF$ (i.e., the discrepancy).
 2. To establish what value comes before or after the other, representing that with a $+/-$ signal. That is, when $MSW$ comes before $MSF$, $SJL_{rel}$ must be positive, and when $MSW$ comes after $MSF$, $SJL_{rel}$ must be negative.

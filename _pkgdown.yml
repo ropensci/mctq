@@ -19,8 +19,8 @@ navbar:
 reference:
 - title: MCTQ
   desc: >
-    A complete toolkit to process the Munich ChronoType Questionnaire (MCTQ) 
-    for its three versions (standard, micro, and shift).
+    A complete toolkit for processing the Munich ChronoType Questionnaire
+    (MCTQ) in its three versions: standard, micro, and shift.
   contents:
   - fd
   - so
@@ -49,7 +49,7 @@ reference:
 
 - title: Utilities
   desc: >
-    Other functions to help with MCTQ data manipulation.
+    Other functions to help with MCTQ data.
   contents:
   - pretty_mctq
   - random_mctq
@@ -64,7 +64,6 @@ articles:
 - title: Notes
   navbar: ~
   contents:
-  - time-span-objects
   - missing-sections
   - sjl-computation
 

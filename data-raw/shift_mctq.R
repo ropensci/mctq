@@ -5,7 +5,7 @@
 
 # library(checkmate)
 # library(dplyr)
-# library(gutils) # https://github.com/giperbio/gutils
+# library(rutils) # https://github.com/danielvartan/rutils
 # library(hms)
 # library(lubridate)
 # library(mctq)
@@ -1381,7 +1381,7 @@ validate_shift_mctq <- function(write = FALSE) {
       dplyr::mutate(
         dplyr::across(
           dplyr::ends_with(i),
-          ~ dplyr::if_else(dummy, gutils:::na_as(.x), .x)
+          ~ dplyr::if_else(dummy, rutils:::na_as(.x), .x)
         )
       ) |>
       dplyr::select(-dummy)
@@ -1400,7 +1400,7 @@ validate_shift_mctq <- function(write = FALSE) {
     dplyr::mutate(
       dplyr::across(
         -.data$id,
-        .fns = ~ dplyr::if_else(.data$id %in% invalid, gutils:::na_as(.x), .x)
+        .fns = ~ dplyr::if_else(.data$id %in% invalid, rutils:::na_as(.x), .x)
       )
     ) |>
     dplyr::ungroup()

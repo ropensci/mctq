@@ -3,7 +3,7 @@ utils::bibentry(
     bibtype  = "Unpublished",
     title = paste0(
         "{mctq}:", " ",
-        "tools to process the Munich ChronoType Questionnaire (MCTQ)"
+        "Munich ChronoType Questionnaire tools"
         ),
     author = c(
         utils::person(
@@ -14,18 +14,18 @@ utils::bibentry(
             comment = c(ORCID = "0000-0001-7782-759X")
             )
         ),
-    year = "2023",
+    year = "2024",
     url = paste0(
         "https://docs.ropensci.org/",
         "mctq/"
         ),
-    note = "R package version 0.3.2.9000",
+    note = "R package version 0.3.2.9001",
     textVersion = paste0(
         "Vartanian, D.", " ",
         "(2023)",  ". ",
         "{mctq}:", " ",
-        "tools to process the Munich ChronoType Questionnaire (MCTQ)", " ",
-        "(Version 0.3.2.9000) [Computer software - R package]", ". ",
+        "Munich ChronoType Questionnaire tools", " ",
+        "(Version 0.3.2.9001) [Computer software - R package]", ". ",
         "CRAN; rOpenSci", ". ",
         "https://docs.ropensci.org/",
         "mctq/"

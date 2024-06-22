@@ -9,15 +9,17 @@
   `shorter_interval()`, `longer_interval()`, `shorter_duration()`, 
   `longer_duration()`, `sum_time()`, and `vct_sum_time()` were removed. 
   These functions were deprecated on `mctq` 0.3.2. You can still 
-  find them in the [`lubritime`](https://github.com/giperbio/lubritime) package.
+  find them in the [`lubritime`](https://github.com/danielvartan/lubritime) package.
 * The utility function `qplot_walk()` was removed. This function was deprecated 
   on `mctq` 0.3.2. You can still find it in the 
-  [`gutils`](https://github.com/giperbio/gutils) package.
+  [`rutils`](https://github.com/danielvartan/rutils) package.
 * The `ggplot2` package was removed as an import. It was only needed for
   `qplot_walk()`.
 * The dependencies versions were updated.
 * Code indentation was changed to 2 spaces (it was 4 spaces).
 * `magrittr` pipe (`%>%`) was changed to the native R pipe (`|>`) when possible.
+* MCTQ now has a CRAN DOI: [10.32614/CRAN.package.mctq](https://doi.org/10.32614/CRAN.package.mctq).
+* The vignette "Why Duration and not Period?" was removed.
 
 # mctq 0.3.2 (2023-02-19)
 
@@ -30,10 +32,10 @@
   `shorter_interval()`, `longer_interval()`, `shorter_duration()`, 
   `longer_duration()`, `sum_time()`, and `vct_sum_time()` are now deprecated. 
   These functions will be removed on the next `mctq` version. You can still find
-  them in the [`lubritime`](https://github.com/giperbio/lubritime) package.
+  them in the [`lubritime`](https://github.com/danielvartan/lubritime) package.
 * The utility function `qplot_walk()` is now deprecated. This function will be
   removed on the next `mctq` version. You can still find it in the
-  [`gutils`](https://github.com/giperbio/gutils) package.
+  [`rutils`](https://github.com/danielvartan/rutils) package.
 * `qplot_walk()` now uses `ggplot2::geom_bar()` or `ggplot2::geom_histogram()`
   to generate plots. It used `ggplot2::qplot()` before, now deprecated.
 * The `ggplot2` package was added as an import. It's needed while `qplot_walk()`

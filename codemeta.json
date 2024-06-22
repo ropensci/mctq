@@ -2,19 +2,19 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "mctq",
-  "description": "A complete toolkit to process the Munich ChronoType Questionnaire (MCTQ) for its three versions (standard, micro, and shift). MCTQ is a quantitative and validated tool to assess chronotypes using peoples' sleep behavior, originally presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow (2003, <doi:10.1177/0748730402239679>).",
-  "name": "mctq: Tools to Process the Munich ChronoType Questionnaire (MCTQ)",
+  "description": "A complete toolkit for processing the Munich ChronoType Questionnaire (MCTQ) in its three versions: standard, micro, and shift. The MCTQ is a quantitative and validated tool used to assess chronotypes based on individuals' sleep behavior. It was originally presented by Till Roenneberg, Anna Wirz-Justice, and Martha Merrow in 2003 (2003, <doi:10.1177/0748730402239679>).",
+  "name": "mctq: Munich ChronoType Questionnaire Tools",
   "relatedLink": ["https://docs.ropensci.org/mctq/", "https://CRAN.R-project.org/package=mctq"],
   "codeRepository": "https://github.com/ropensci/mctq/",
   "issueTracker": "https://github.com/ropensci/mctq/issues/",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.2.9000",
+  "version": "0.3.2.9001",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.0 (2023-04-21 ucrt)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14 ucrt)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -278,11 +278,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "633.813KB",
+  "fileSize": "628.069KB",
   "citation": [
     {
       "@type": "CreativeWork",
-      "datePublished": "2023",
+      "datePublished": "2024",
       "author": [
         {
           "@type": "Person",
@@ -292,9 +292,9 @@
           "@id": "https://orcid.org/0000-0001-7782-759X"
         }
       ],
-      "name": "{mctq}: tools to process the Munich ChronoType Questionnaire (MCTQ)",
+      "name": "{mctq}: Munich ChronoType Questionnaire tools",
       "url": "https://docs.ropensci.org/mctq/",
-      "description": "R package version 0.3.2.9000"
+      "description": "R package version 0.3.2.9001"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/mctq/blob/master/NEWS.md",
