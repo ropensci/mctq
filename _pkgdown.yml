@@ -16,8 +16,8 @@ navbar:
     - news
     right: 
     - search
-    - github
     - lightswitch
+    - github
 
 reference:
 - title: MCTQ
