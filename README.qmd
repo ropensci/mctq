@@ -1,16 +1,11 @@
 ---
-output: github_document
+editor: source
+format: gfm
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
+```{r}
+#| label: setup
+#| include: false
 
 library(mctq)
 library(lubridate)
@@ -61,13 +56,17 @@ Please refer to the [lubridate](https://lubridate.tidyverse.org/) and [hms](http
 
 You can install the released version of `mctq` from [CRAN](https://CRAN.R-project.org/package=mctq) with:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
+
 install.packages("mctq")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` {r, eval = FALSE}
+``` {r}
+#| eval: false
+
 # install.packages("remotes")
 remotes::install_github("ropensci/mctq")
 ```
@@ -95,7 +94,9 @@ After preparing your data, use the following `mctq` functions to process it. The
 
 Example:
 
-```{r, message = FALSE}
+```{r}
+#| warning: false
+
 # Local time of preparing to sleep on workdays
 sprep_w <- c(hms::parse_hm("23:45"), hms::parse_hm("02:15"))
 # Sleep latency or time to fall asleep after preparing to sleep on workdays
@@ -119,7 +120,9 @@ For computations combining workdays and work-free days, use:
 
 Example:
 
-```{r, message = FALSE}
+```{r}
+#| warning: false
+
 # Local time of mid-sleep on workdays
 msw <- c(hms::parse_hm("02:05"), hms::parse_hm("04:05"))
 # Local time of mid-sleep on work-free days

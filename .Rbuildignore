@@ -17,5 +17,5 @@
 ^mctq\.Rproj$
 ^Meta$
 ^pkgdown$
-^README\.Rmd$
+^README\.qmd$
 ^revdep$
