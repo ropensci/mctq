@@ -1,6 +1,7 @@
 ^\.github$
 ^\.lintr$
 ^\.Rproj\.user$
+^_quarto\.yml$
 ^_pkgdown\.yml$
 ^CITATION\.cff$
 ^CODE_OF_CONDUCT\.md$
@@ -17,5 +18,6 @@
 ^mctq\.Rproj$
 ^Meta$
 ^pkgdown$
+^R/\.post-render\.R$
 ^README\.qmd$
 ^revdep$

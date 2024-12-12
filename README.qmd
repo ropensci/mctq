@@ -1,15 +1,18 @@
----
-editor: source
-format: gfm
----
-
 ```{r}
 #| label: setup
 #| include: false
 
+library(beepr)
+library(cffr)
+library(codemetar)
 library(mctq)
-library(lubridate)
+library(groomr) # https://github.com/danielvartan/groomr
+library(here)
 library(hms)
+library(lubridate)
+library(readr)
+library(rutils) # https://github.com/danielvartan/rutils
+library(stringr)
 ```
 
 # mctq <a href = "https://docs.ropensci.org/mctq/"><img src = "man/figures/logo.png" align="right" height="139" /></a>
